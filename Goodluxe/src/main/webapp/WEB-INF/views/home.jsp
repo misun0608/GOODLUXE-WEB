@@ -12,7 +12,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <br /><br /><a href="#">진_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="#">지예_만들고자 하는 페이지를 연결합시다</a>
+<br /><br /><a href="admin_product_register.do">지예_만들고자 하는 페이지를 연결합시다</a>
 <br /><br /><a href="#">민지_만들고자 하는 페이지를 연결합시다</a>
 <br /><br /><a href="#">미선_만들고자 하는 페이지를 연결합시다</a>
 <br /><br /><a href="#">재진_만들고자 하는 페이지를 연결합시다</a>
