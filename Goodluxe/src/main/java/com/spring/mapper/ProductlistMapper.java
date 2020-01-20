@@ -1,8 +1,8 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jy.ProductVO;
+import com.spring.goodluxe.jy.PurchaseProductVO;
 
 public interface ProductlistMapper {
 
-	int insertProduct(ProductVO productVO);
+	int insertPurcProduct(PurchaseProductVO purcVO);
 }

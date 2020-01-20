@@ -1,18 +1,19 @@
 package com.spring.goodluxe.jy;
 
+//쓰레기이이이이이이이!!!!!!!!!!!!!!
 public class ProductVO {
 
-	private String brand_name;					//브랜드명
-	private String product_name;				//제품명
-	private String product_grade;				//상품등급
-	private int selling_price;					//판매가격
-	private String product_detail;				//상품 상세
-	private String selling_status;				//판매상태
-	private String onboard_status;				//게시상태
-	private String product_main_img_original; 	//대표이미지 원본이름
-	private String product_main_img_stored; 	//대표이미지 UUID이름
-	private String product_detail_img_original; //상세이미지 원본이름
-	private String product_detail_img_stored;	//상세이미지 UUID이름
+	private String brand_name;					//釉뚮옖�뱶紐�
+	private String product_name;				//�젣�뭹紐�
+	private String product_grade;				//�긽�뭹�벑湲�
+	private int selling_price;					//�뙋留ㅺ�寃�
+	private String product_detail;				//�긽�뭹 �긽�꽭
+	private String selling_status;				//�뙋留ㅼ긽�깭
+	private String onboard_status;				//寃뚯떆�긽�깭
+	private String product_main_img_original; 	//���몴�씠誘몄� �썝蹂몄씠由�
+	private String product_main_img_stored; 	//���몴�씠誘몄� UUID�씠由�
+	private String product_detail_img_original; //�긽�꽭�씠誘몄� �썝蹂몄씠由�
+	private String product_detail_img_stored;	//�긽�꽭�씠誘몄� UUID�씠由�
 	public String getBrand_name() {
 		return brand_name;
 	}

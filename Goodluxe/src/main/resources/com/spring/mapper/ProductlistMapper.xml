@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.spring.mapper.ProductlistMapper">
+
+	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.jy.PurchaseProductVO">
+		<result property = "entity_number" column = "entity_number" />
+		<result property = "purc_name" column = "purc_name" />
+		<result property = "purc_brand_number" column = "purc_brand_number" />
+		<result property = "purc_category" column = "purc_category" />
+		<result property = "purc_class" column = "purc_class" />
+		<result property = "purc_sale_price" column = "purc_sale_price" />
+		<result property = "purc_buying_price" column = "purc_buying_price" />
+		<result property = "purc_commission" column = "purc_commission" />
+		<result property = "purc_date" column = "purc_date" />
+		<result property = "purc_appraise_exist" column = "purc_appraise_exist" />
+		<result property = "purc_component" column = "purc_component" />
+		<result property = "member_id" column = "member_id" />
+	</resultMap>
+	   
+	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.jy.PurchaseProductVO"> 
+		insert into gl_purchase(entity_number, purc_name, purc_brand_number, purc_category,
+			purc_class, purc_sale_price, purc_buying_price, purc_commission, purc_date
+			purc_appraise_exist, purc_component, member_id)	
+			values( #{entity_number},#{purc_name},#{purc_brand_number},
+			#{purc_category},#{purc_class},#{purc_sale_price},#{purc_buying_price},
+			#{purc_commission},#{purc_date},#{purc_appraise_exist},
+			#{purc_component},#{member_id})
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
