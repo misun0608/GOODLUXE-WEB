@@ -7,9 +7,12 @@
 <meta http-equiv="imagetoolbar" content="no">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <title>관리자메인</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-1.8.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.menu.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.8.3.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.menu.js"></script>
 </head>
 <body>
 
@@ -27,14 +30,17 @@
 		<div id="hd_top">
 			<button type="button" id="btn_gnb" class="btn_gnb_close btn_gnb_open"></button>
 			<div id="logo">
-				<a href="./adminMain.html"><img src="${pageContext.request.contextPath}/resources/img/admin_menu/logo.png"
+				<a href="./adminMain.html"><img
+					src="${pageContext.request.contextPath}/resources/img/admin_menu/logo.png"
 					alt="이건어디서바꾸나 관리자"></a>
 			</div>
 
 			<div id="tnb">
 				<ul>
 					<li class="tnb_li"><a href="#" class="tnb_service"
-						target="_blank"><img src="${pageContext.request.contextPath}/resources/img/admin_menu/home.png" width="25px"></a></li>
+						target="_blank"><img
+							src="${pageContext.request.contextPath}/resources/img/admin_menu/home.png"
+							width="25px"></a></li>
 				</ul>
 
 			</div>
@@ -140,112 +146,114 @@
 
 			<h1 id="container_title">위탁상품 등록 페이지</h1>
 			<div class="container_wr">
-				<form name = "input_form" action= "./purc_regi_action.do" method = "post" ><!-- onsubmit="메소드();" -->
+				<form name="input_form" action="./consRegiAction.do" method="post">
 
 					<br> <br>
 					<h3>▶ 기본 정보 입력</h3>
 					<br>
 					<table class="impormation" border="1">
-        <tr>
-            <td class="td1">상품개체번호(개체고유번호)</td>
-            <td class="td2"><input type = "text" name="entity_number" class="text1"></td>
-        </tr>
-        <tr>
-          <td class="td1">상품명</td>
-          <td class="td2"><input type = "text" name="cons_name" class="text1"></td>
-        </tr>   
-        <tr>
-         <td class="td1">브랜드번호</td>
-         <td class="td2">
-             <select name = "cons_brand_number" class = "search">
-                 <option value = "CA0120"> Cartier </option>
-                 <option value = "DI7303"> Dior </option>
-                 <option value = "ET5253"> Etro </option>
-                 <option value = "GI5208"> Givenchy </option>
-                 <option value = "Gu6925"> Gucci </option>
-                 <option value = "He8629"> Hermes </option>
-                 <option value = "JI9004"> Jimmy Choo </option>
-                 <option value = "LO1425"> Louis Vuittin </option>
-                 <option value = "OM5552"> OMEGA </option>
-                 <option value = "PR0899"> Prada </option>
-                 <option value = "RO5747"> Rolex </option>
-                 <option value = "TI5241"> Tiffany </option>
-                 <option value = "VI8521"> Vivienne Westwodd </option>
-             </select>
-         </td>
-        </tr>
-        <tr>
-            <td class="td1">카테고리 번호</td>
-            <td class="td2">
-                <select name = "cons_category_number" class = "search">
-                    <option value = ""> CLOTHES </option>
-                    <option value = ""> JEWELRY </option>
-                    <option value = ""> WATCH </option>
-                    <option value = ""> BAG </option>
-                    <option value = ""> WALLET </option>
-                    <option value = ""> GLASSES </option>
-                    <option value = ""> SHOES </option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-          <td class="td1">상품 등급</td>
-          <td class="td2">
-            <select name = "cons_class" class = "search">
-                <option value = "none">등급 선택</option>
-                <option value = "NS"> NS </option>
-                <option value = "A"> A </option>
-                <option value = "B"> B </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-            <td class="td1">판매가격</td>
-            <td class="td2"><input type = "text" name="cons_sale_price" class="text1"></td>
-        </tr>
-        <tr>
-            <td class="td1">수수료</td>
-            <td class="td2"><input type = "text"  name="cons_commission" class="text1"></td>
-        </tr>
-        <tr>
-            <td class="td1">위탁기간</td>
-            <td class="td2">
-                <input type = "date" name="cons_start_date" class="search">&nbsp;&nbsp;&nbsp;&nbsp; ~ &nbsp;
-                <input type = "date" name="cons_end_date" class="search">
-            </td>
-        </tr>
-        <tr>
-            <td class="td1">판매상태</td>
-            <td class="td2">
-                &nbsp;&nbsp;&nbsp;<input type = "radio" name  = "cons_sale_status" value = "onready"> 판매준비&nbsp;&nbsp;&nbsp;
-                <input type = "radio" name  = "cons_sale_status" value = "onsale"> 판매중&nbsp;&nbsp;&nbsp;
-                <input type = "radio" name  = "cons_sale_status" value = "sold"> 판매완료&nbsp;&nbsp;&nbsp;
-                <input type = "radio" name  = "cons_sale_status" value = "payed"> 대금지불완료&nbsp;&nbsp;&nbsp;
-        </tr>
-        <tr>
-            <td class="td1">감정서 유무</td>
-            <td class="td2">
-                &nbsp;&nbsp;&nbsp;<input type = "radio" name  = "cons_appraise_exist" value = "O"> &nbsp;유&nbsp;&nbsp;&nbsp;
-                <input type = "radio" name  = "cons_appraise_exist" value = "X"> &nbsp;무&nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="td1">제품 구성품</td>
-            <td class="td2"><input type = "text" name="cons_component" class="text1"></td>
-        </tr>
-        <tr>
-            <td class="td1">판매자 아이디</td>
-            <td class="td2"><input type = "text" name="member_id" class="text1"></td>
-        </tr>
-      </table>
+						<tr>
+							<td class="td1">상품개체번호(개체고유번호)</td>
+							<td class="td2"><input type="text" name="entity_number"
+								class="text1"></td>
+						</tr>
+						<tr>
+							<td class="td1">상품명</td>
+							<td class="td2"><input type="text" name="pd_name"
+								class="text1"></td>
+						</tr>
+						<tr>
+							<td class="td1">브랜드번호</td>
+							<td class="td2"><select name="brand_number"
+								class="search">
+									<option value="CA0120">Cartier</option>
+									<option value="DI7303">Dior</option>
+									<option value="ET5253">Etro</option>
+									<option value="GI5208">Givenchy</option>
+									<option value="Gu6925">Gucci</option>
+									<option value="He8629">Hermes</option>
+									<option value="JI9004">Jimmy Choo</option>
+									<option value="LO1425">Louis Vuittin</option>
+									<option value="OM5552">OMEGA</option>
+									<option value="PR0899">Prada</option>
+									<option value="RO5747">Rolex</option>
+									<option value="TI5241">Tiffany</option>
+									<option value="VI8521">Vivienne Westwodd</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="td1">카테고리 번호</td>
+							<td class="td2"><select name="category" class="search">
+									<option value="cl1234">CLOTHES</option>
+									<option value="je1234">JEWELRY</option>
+									<option value="wa1234">WATCH</option>
+									<option value="ba1234">BAG</option>
+									<option value="wa1234">WALLET</option>
+									<option value="gl1234">GLASSES</option>
+									<option value="sh1234">SHOES</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="td1">상품 등급</td>
+							<td class="td2"><select name="quality_grade" class="search">
+									<option value="none">등급 선택</option>
+									<option value="NS">NS</option>
+									<option value="A">A</option>
+									<option value="B">B</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="td1">판매가격</td>
+							<td class="td2"><input type="text" name="sale_price"
+								class="text1"></td>
+						</tr>
+						<tr>
+							<td class="td1">수수료</td>
+							<td class="td2"><input type="text" name="commission"
+								class="text1"></td>
+						</tr>
+						<tr>
+							<td class="td1">위탁기간</td>
+							<td class="td2">
+								<input type="date" name="start_date_text" class="search">&nbsp;&nbsp;&nbsp;&nbsp;
+								~ &nbsp; 
+								<input type="date" name="end_date_text" class="search"></td>
+						</tr>
+						<tr>
+							<td class="td1">판매상태</td>
+							<td class="td2">&nbsp;&nbsp;&nbsp;
+								<input type="radio" name=" sale_status" value="onready">판매준비&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="onsale">판매중&nbsp;&nbsp;&nbsp; 
+								<input type="radio"name="sale_status" value="sold">판매완료&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="payed">대금지불완료&nbsp;&nbsp;&nbsp;
+						</tr>
+						<tr>
+							<td class="td1">감정서 유무</td>
+							<td class="td2">&nbsp;&nbsp;&nbsp;<input type="radio"
+								name="appraise_exist" value="O">
+								&nbsp;유&nbsp;&nbsp;&nbsp; <input type="radio"
+								name="appraise_exist" value="X"> &nbsp;무&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td class="td1">제품 구성품</td>
+							<td class="td2"><input type="text" name="pd_component"
+								class="text1"></td>
+						</tr>
+						<tr>
+							<td class="td1">판매자 아이디</td>
+							<td class="td2"><input type="text" name="member_id"
+								class="text1"></td>
+						</tr>
+					</table>
 					<br> <br>
 					<div align="center">
-						<button type="button" class="btn3" name="reset">취소</button>
-						<button type="button" class="btn4">등록</button>
+						<input type="reset" class="btn3" name="reset" value = "취소"/>
+						<input type="submit" class="btn4" name = "submit" value = "등록"/>
 						<br> <br> <br> <br>
 					</div>
 				</form>
-			</div>	
+			</div>
 		</div>
 
 		<footer class="container-fluid">

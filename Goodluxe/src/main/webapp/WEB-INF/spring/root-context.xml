@@ -24,6 +24,11 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
+	
+	
+	
+	
+	
 	<mybatis-spring:scan base-package="com.spring.mapper" />
 	
 </beans>
