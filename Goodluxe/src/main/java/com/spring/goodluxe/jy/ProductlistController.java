@@ -2,7 +2,9 @@ package com.spring.goodluxe.jy;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -79,10 +82,9 @@ public class ProductlistController {
 	@RequestMapping(value = "postUploadAction.do")
 	public String postUploadAction(SellingBoardVO sellboVO, Model model, MultipartHttpServletRequest m_request) throws Exception {
 		
-		System.out.println("뭐하는....1");
 		MultipartFile mf_main = m_request.getFile("pb_main_img");
 		MultipartFile mf_detail = m_request.getFile("pb_detail_img");
-		System.out.println("뭐하는....2");
+
 		String uploadPath = "C:\\Project138\\upload\\";
 		
 		/*메인 이미지 처리부분*/
@@ -102,15 +104,61 @@ public class ProductlistController {
 		}
 		sellboVO.setPb_detail_img_original(mf_detail.getOriginalFilename());
 		sellboVO.setPb_detail_img_stored(storedFileName_detail);
-		System.out.println("뭐하는....3");
-		
-		
+	
 		int res = productlistService.uploadProductBoard(sellboVO);	
 		
 		return "admin_post_upload";
 	}
 	
-	
+	//제품리스트 페이지 이동
+		@RequestMapping(value = "itemList.do")
+		public String itemList( Model model, HttpServletRequest request
+				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
+				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum ) throws Exception {
+			
+			String il_search_brand = request.getParameter("il_search_brand");
+			String il_search_category =request.getParameter("il_search_category");
+			String il_search_grade =request.getParameter("il_search_grade");
+			String il_search_price =request.getParameter("il_search_price");
+			
+			if(pageNum<=0) { //첫페이지
+				System.out.println("pageNum = "+pageNum);
+				pageNum = 1;
+			}
+			if(pageNum>pageCount) {//끝페이지
+				System.out.println("pageNum = "+pageNum);
+				pageNum = pageCount;
+			}
+			int pageSize = 12;
+			int currentPage = pageNum;
+			int startRow = (currentPage-1) * pageSize +1;
+			int endRow = startRow + pageSize - 1;
+			int count = 0;
+			int number = 0;
+		
+			//HashMap<String,Object>  productHM = new HashMap <String, Object>();
+			ArrayList<HashMap<String, Object>> productList = new ArrayList<HashMap<String, Object>>();
+			count = productlistService.getSellingBoardCount();
+			
+			if (count < startRow) {
+				currentPage = currentPage - 1;
+				startRow = (currentPage - 1) * pageSize + 1;
+				endRow = startRow + pageSize - 1;
+			}
+			if (count > 0) {
+				productList = productlistService.getSellingBoardProduct(startRow, endRow);
+				number = count - (currentPage - 1) * pageSize;
+			}
+			
+			System.out.println("리스트" + productList);
+			model.addAttribute("productList",productList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("count", count);
+			model.addAttribute("number", number);
+			model.addAttribute("pageSize", pageSize);
+			
+			return "item_list";
+		}
 	
 	
 	

@@ -1,0 +1,511 @@
+/* 초기화 */  
+* {margin:0px; padding:0px;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+  #container {
+    width: 1080px;
+    margin: 0 auto;
+
+  }
+  .container{
+    position: relative;
+  }
+  .mypage_app_box {
+    display: inline-block;
+  }
+
+  .fontpart{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .selectbc{
+    position: relative;
+    width: 1080px;
+    /* border: 1px solid black;  */
+    display: inline-block; 
+    font-size: 13px;
+  }
+
+  section > .container > p{
+    font-size: 15px;
+  }
+
+  .multi{
+    width: 300px;
+    height: 250px;
+    /* z-index: 30; */
+  }
+
+  .selecttable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 330px;
+    width: 1070px;
+    font-size: 13px;
+  }
+
+  .applytable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 250px;
+    width: 410px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 35px;
+  }
+
+  .titletd{
+    width: 90px;
+  }
+
+  .photoarticle{
+    font-size: 11px;
+    color: darkgray;
+  }
+
+  .inputarea{
+    width: 200px;
+  }
+
+  .listtable{
+    position: relative;
+    width: 1080px;
+    border: 0.9px solid black;
+    font-size: 14px;
+    /* padding: 5px 5px 5px 5px; */
+    /* height: 250px; */
+  }
+
+  .listtable > thead > tr > td{
+    text-align: center;
+  }
+
+  .listtable > tbody > tr > td{
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .select{
+    position: relative;
+    float: left;
+    padding-left: 15px;
+  }
+
+  .selectcate{
+    padding-right: 15px;
+  }
+
+  .btnpart{
+    float: right;
+    margin-right: 3px;
+    margin-top: 10px;
+  }
+
+  .buttonpart{
+    margin-top: 10px;
+  }
+
+  .total{
+    float: right;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+/* 
+  .applyform{
+    position: relative;
+    margin-top: 20px;
+  } */
+  
+  /* 버튼 */
+  .addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .deletebtn{
+    width: 50px;
+  }
+
+  .addbtn2{
+    margin-right: 22px;
+  }
+
+  .mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  label{
+    position: relative;
+    top: 0px;
+    font-size: 13px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  .done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .cover{
+    position: relative;
+    width: 1080px;
+    height: 500px;
+  }
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+  #container {
+    width: 1080px;
+    margin: 0 auto;
+
+  }
+  .container{
+    position: relative;
+  }
+  .mypage_app_box {
+    display: inline-block;
+  }
+
+  .fontpart{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .selectbc{
+    position: relative;
+    width: 1080px;
+    /* border: 1px solid black;  */
+    display: inline-block; 
+    font-size: 13px;
+  }
+
+  section > .container > p{
+    font-size: 15px;
+  }
+
+  .multi{
+    width: 300px;
+    height: 250px;
+    /* z-index: 30; */
+  }
+
+  .selecttable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 330px;
+    width: 1070px;
+    font-size: 13px;
+  }
+
+  .applytable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 250px;
+    width: 410px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 35px;
+  }
+
+  .titletd{
+    width: 90px;
+  }
+
+  .photoarticle{
+    font-size: 11px;
+    color: darkgray;
+  }
+
+  .inputarea{
+    width: 200px;
+  }
+
+  .listtable{
+    position: relative;
+    width: 1080px;
+    border: 0.9px solid black;
+    font-size: 14px;
+    /* padding: 5px 5px 5px 5px; */
+    /* height: 250px; */
+  }
+
+  .listtable > thead > tr > td{
+    text-align: center;
+  }
+
+  .listtable > tbody > tr > td{
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .select{
+    position: relative;
+    float: left;
+    padding-left: 15px;
+  }
+
+  .selectcate{
+    padding-right: 15px;
+  }
+
+  .btnpart{
+    float: right;
+    margin-right: 3px;
+    margin-top: 10px;
+  }
+
+  .buttonpart{
+    margin-top: 10px;
+  }
+
+  .total{
+    float: right;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+/* 
+  .applyform{
+    position: relative;
+    margin-top: 20px;
+  } */
+  
+  /* 버튼 */
+  .addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .deletebtn{
+    width: 50px;
+  }
+
+  .addbtn2{
+    margin-right: 22px;
+  }
+
+  .mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  label{
+    position: relative;
+    top: 0px;
+    font-size: 13px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  .done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .cover{
+    position: relative;
+    width: 1080px;
+    height: 500px;
+  }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+  #container {
+    width: 1080px;
+    margin: 0 auto;
+
+  }
+  .container{
+    position: relative;
+  }
+  .mypage_app_box {
+    display: inline-block;
+  }
+
+  .fontpart{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .selectbc{
+    position: relative;
+    width: 1080px;
+    /* border: 1px solid black;  */
+    display: inline-block; 
+    font-size: 13px;
+  }
+
+  section > .container > p{
+    font-size: 15px;
+  }
+
+  .multi{
+    width: 300px;
+    height: 250px;
+    /* z-index: 30; */
+  }
+
+  .selecttable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 330px;
+    width: 1070px;
+    font-size: 13px;
+  }
+
+  .applytable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 250px;
+    width: 410px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 35px;
+  }
+
+  .titletd{
+    width: 90px;
+  }
+
+  .photoarticle{
+    font-size: 11px;
+    color: darkgray;
+  }
+
+  .inputarea{
+    width: 200px;
+  }
+
+  .listtable{
+    position: relative;
+    width: 1080px;
+    border: 0.9px solid black;
+    font-size: 14px;
+    /* padding: 5px 5px 5px 5px; */
+    /* height: 250px; */
+  }
+
+  .listtable > thead > tr > td{
+    text-align: center;
+
+  }
+
+  .listtable > tbody > tr > td{
+    text-align: center;
+    font-size: 12px;
+    background-color: #f9fcfc;
+  }
+
+  .select{
+    position: relative;
+    float: left;
+    padding-left: 15px;
+  }
+
+  .selectcate{
+    padding-right: 15px;
+  }
+
+  .btnpart{
+    float: right;
+    margin-right: 3px;
+    margin-top: 10px;
+  }
+
+  .buttonpart{
+    margin-top: 10px;
+  }
+
+  .total{
+    float: right;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+/* 
+  .applyform{
+    position: relative;
+    margin-top: 20px;
+  } */
+  
+  /* 버튼 */
+  .addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .deletebtn{
+    width: 50px;
+  }
+
+  .addbtn2{
+    margin-right: 22px;
+  }
+
+  .mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  label{
+    position: relative;
+    top: 0px;
+    font-size: 13px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  .done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .cover{
+    position: relative;
+    width: 1080px;
+    height: 500px;
+  }
+}
+

@@ -1,0 +1,206 @@
+/* PC와 태블릿일 경우 사용하는 css */
+/* 모바일의 경우 해당 로그인 버튼 클릭 불가 */
+
+/* 폰트 */
+@font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+/* 초기화 */
+* {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 배경 흐리게 */
+.login_bg {
+    display: none;
+    top:0; left: 0;
+    position: fixed;
+    width:100%; height:100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 20;
+}
+
+/* 로그인 영역 */
+.login_outline {
+    width: 400px; height: 430px;
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-top: -215px;
+    margin-left: -200px;
+    display: block;
+}
+/* 로그인 클릭시 나타나는 선 */
+.login_top {
+    position: absolute;
+    top: 0; left: 0;
+    width:0%; height:3px;
+    background: #fff;
+}
+.login_right {
+    position: absolute;
+    top:0; right: 0;
+    width: 3px; height: 0%;
+    background: #fff;
+}
+.login_bottom {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 0%; height: 3px;
+    background: #fff;
+}
+.login_left {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 3px; height: 0%;
+    background: #fff;
+}
+/* 로그인 요소 */
+.login_area {
+    width: 400px; height: 430px;
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-top: -215px;
+    margin-left: -200px;
+    background: #fff;
+    display: none;
+    z-index: 9;
+}
+.login_title {
+    text-align: center;
+    margin: 20px 0 0 0;
+    font: 30px/1.2 'EBSHMJESaeronRA','Nanum Gothic', sans-serif;
+}
+/* 닫기 버튼 */
+.login_close {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 20px; height: 20px;
+}
+
+.group { 
+    position: relative; 
+    width : 280px;
+    margin-bottom: 10px; 
+    left: 50%; margin-left: -150px;
+}
+/* 입력상자 css */
+.input_login {
+    height : 50px; 
+    width : 280px;
+    padding : 3px 10px;
+    border-width: 0px;
+    font-size: 18px;
+    background: #fff;
+    border-bottom: 0.8px solid #999;
+}
+.input_login:focus {
+    /* border: 0px; */
+    outline: none;
+}
+.input_login:focus ~ .highlight {
+    animation: inputHighlighter 0.3s ease;
+}
+ /* 라벨 Highlight */
+label {
+    color: #999; 
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 14px;
+    top: 14px;
+    transition: all 0.2s ease;
+}
+label.color {
+    top: 2px;
+    transform: scale(.75); left: 2px;
+    color: #DFB1AB;
+}
+
+.input_login:focus ~ label{
+    top: 2px;
+    transform: scale(.75);
+    left: 2px;
+    color: #DFB1AB;
+}
+
+.find_login_data {
+    position: absolute;
+    right: 35px;
+    color: #999;
+    font-size: 12px;
+    margin: 5px 2px;
+}
+.login_btn {
+    position: absolute;
+    width: 300px; height: 30px;
+    left: 50%; margin-left: -150px;
+    margin-top: 35px;
+    background: #F0D2CF;
+    border-radius: 5px;
+    border-width: 0px;
+    color:#fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.login_line {
+    position: relative;
+    width: 323px; height: 20px;
+    left: 50%; margin-left: -161px;
+    top: 80px;
+}
+.login_line>* {
+    float: left;
+}
+.login_line>span {
+    margin: 0 5px;
+    font-size: 15px;
+    color: #999;
+}
+.login_line>hr {
+    position: relative;
+    width:145px;
+    border: 0.5px solid #999;
+    top: 50%
+}
+.login_icons {
+    position: relative;
+    width: 170px; height: 25px;
+    left: 50%; margin-left: -85px;
+    top: 100px;
+}
+.login_icons>a:first-child {
+    position: absolute;
+    left: 0;
+    width: 25px; height: 25px;
+}
+.login_icons>a:nth-child(2) {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 25px; height: 25px;
+}
+.login_icons>a:last-child {
+    position: absolute;
+    right: 0;
+    width: 25px; height: 25px;
+}
+.login_icon {
+    width: 100%; height:100%;
+}
+
+.anonymous {
+    position: relative;
+    width: 323px; height: 20px;
+    left: 50%; margin-left: -161px;
+    top: 120px;
+    text-align: center;
+}
+.anonymous>span {
+    font-size: 12px;
+}
+.anonymous>a {
+    font-size: 14px;
+    font-weight: bolder;
+    color: #DFB1AB;
+}

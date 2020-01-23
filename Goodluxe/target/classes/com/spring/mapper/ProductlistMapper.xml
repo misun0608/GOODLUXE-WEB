@@ -8,8 +8,8 @@
 	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.jy.PurchaseProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
-		<result property = "brand_number" column = "brand_number" />
-		<result property = "category" column = "category" />
+		<result property = "pd_brand" column = "pd_brand" />
+		<result property = "pd_category" column = "pd_category" />
 		<result property = "quality_grade" column = "quality_grade" />
 		<result property = "sale_price" column = "sale_price" />
 		<result property = "buying_price" column = "buying_price" />
@@ -22,10 +22,10 @@
 	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.jy.ConsignProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
-		<result property = "brand_number" column = "brand_number" />
-		<result property = "category" column = "category" />
+		<result property = "pd_brand" column = "pd_brand" />
+		<result property = "pd_category" column = "pd_category" />
 		<result property = "quality_grade" column = "quality_grade" />
-		<result property = "expected_price" column = "expected_price" />
+		<result property = "sale_price" column = "sale_price" />
 		<result property = "commission" column = "commission" />
 		<result property = "start_date" column = "start_date" />
 		<result property = "end_date" column = "end_date" />
@@ -49,27 +49,37 @@
 		<result property = "pb_detail_img_stored" column = "pb_detail_img_stored"/>
 		<result property = "pb_view_count" column = "pb_view_count"/>
 		<result property = "pb_like" column = "pb_like"/>
-		<result property = "entitiy_number" column = "entitiy_number"/>
-		</resultMap>
-	   
+		<result property = "entity_number" column = "entitiy_number"/>
+	</resultMap>
+	
+	<!-- 리스트 반환용 HashMap -->
+	<resultMap id = "listHashmapVO" type = "java.util.HashMap" >
+		<result property = "sale_status" column = "sale_status"/>
+		<result property = "post_status" column = "post_status"/>
+		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
+		<result property = "pb_md_name" column = "pb_md_name"/>
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "entity_number" column = "entity_number"/>
+	</resultMap>
 	   
 	<!-- 매입 상품 등록 -->
 	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.jy.PurchaseProductVO"> 
-		insert into gl_purchase(entity_number, pd_name, brand_number, category,
+		insert into gl_purchase(entity_number, pd_name, pd_brand, pd_category,
 			quality_grade, sale_price, buying_price, purc_date,
 			appraise_exist, pd_component, member_id)	
-			values( #{entity_number},#{pd_name},#{brand_number},
-			#{category},#{quality_grade},#{sale_price},#{buying_price},
+			values( gl_product_seq.nextval,#{pd_name},#{pd_brand},
+			#{pd_category},#{quality_grade},#{sale_price},#{buying_price},
 			#{purc_date},#{appraise_exist},#{pd_component},#{member_id})
 	</insert>
 
 	<!-- 위탁상품 등록 -->
 	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.jy.ConsignProductVO"> 
-		insert into gl_consignment(entity_number, pd_name, brand_number, category,
-			quality_grade, expected_price, commission, start_date, end_date,
+		insert into gl_consignment(entity_number, pd_name, pd_brand, pd_category,
+			quality_grade, sale_price, commission, start_date, end_date,
 			sale_status, appraise_exist, pd_component, member_id)	
-			values( #{entity_number},#{pd_name,jdbcType=VARCHAR},#{brand_number},#{category},
-			#{quality_grade},#{expected_price},#{commission}, #{start_date},#{end_date},
+			values( gl_product_seq.nextval,#{pd_name,jdbcType=VARCHAR},#{pd_brand},#{pd_category},
+			#{quality_grade},#{sale_price},#{commission}, #{start_date},#{end_date},
 			#{sale_status,jdbcType=VARCHAR},#{appraise_exist},#{pd_component},#{member_id})
 	</insert>
 
@@ -87,6 +97,28 @@
 			
 	</insert>
 
+	<!-- 게시물 갯수 확인 -->
+	<select id = "getSellingBoardCount" resultType = "int">
+		select count(*) from (select * from gl_SellingBoard where pb_sale_status != 'sold' and pb_post_status = 'onboard')
+	</select>
+
+	<!-- 게시물 리스트 가져오기 -->
+	<select id = "SellingBoardProduct" parameterType = "hashmap" resultMap = "listHashmapVO">
+		SELECT * FROM (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_sellingboard.entity_number
+						from gl_purchase, gl_sellingboard
+						where gl_purchase.entity_number = gl_sellingboard.entity_number
+						UNION
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_sellingboard.entity_number
+						from gl_consignment, gl_sellingboard
+						where gl_consignment.entity_number = gl_sellingboard.entity_number)
+					ORDER BY PB_DATE DESC)
+				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'
+			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
+	</select>
 
 
 

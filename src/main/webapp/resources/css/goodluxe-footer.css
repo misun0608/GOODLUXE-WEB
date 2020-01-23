@@ -1,0 +1,163 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+html, body {height: 100%;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 푸터 */
+#container {
+    min-height: 100%;
+}
+#main {
+    overflow: auto;
+    padding-bottom: 230px;
+}
+#footer {
+    position: relative;
+    height: 230px;
+    margin-top: -230px;
+    clear: both;
+}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    .footer_bg{
+        background-color: rgb(187, 157, 150);
+    }
+    .footer_area{
+        width: 1080px;
+        height: 230px;
+        margin: 0 auto;
+        color: #000;
+    }
+    .footer_title{
+        padding: 30px 0px 15px 20px;
+        font-size: 18px;
+        /* background: lavender; */
+    }
+    .footer_context{
+        padding: 0 10px;
+        font-size: 13px;
+        width: 100%;
+        /* background: lemonchiffon; */
+        line-height: 23px;
+    }
+    .footer_context>ul:first-child {
+        float: right;
+        text-align: right;
+        margin-right: 20px;
+    }
+    .footer_context>ul:nth-child(2)>li:nth-child(1) {
+        float: left;
+        margin-right: 20px;
+    }
+    .footer_context>ul:last-child {
+        margin: 10px 0;
+    }
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    .footer_bg{
+        background-color: #080424;
+        /* line-height: 20px; 행간 조절(줄과 줄 사이) */
+    }
+
+    .footer_area{
+        width: 768px;
+        height: 230px;
+        margin: 0 auto;
+        background-color: #080424;
+        /* background-color: red; */
+        color: white;
+    }
+
+    .footer_sub_area {
+        width: 700px;
+        margin: 0 auto;
+        /* background: greenyellow; */
+    }
+
+    .footer_bar_area {
+        position: relative;
+    }
+    .footer_bar {
+        position: absolute;
+        top:11px; left:50%;
+        margin-left: -350px;
+        width: 700px;
+        border: 1px solid #E7CA63;
+    }
+
+    .footer_title{
+        padding: 30px 0px 15px 20px;
+        font-size: 18px;
+        /* background: lavender; */
+    }
+
+    .footer_context{
+        padding: 0 10px;
+        font-size: 13px;
+        width: 100%;
+        /* background: lemonchiffon; */
+        line-height: 23px;
+    }
+    .footer_context>ul>li {
+        float: left;
+        margin-right: 30px;
+    }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    .footer_bg{
+        background-color: #080424;
+        /* line-height: 20px; 행간 조절(줄과 줄 사이) */
+    }
+
+    .footer_area{
+        width: 320px;
+        height: 230px;
+        margin: 0 auto;
+        background-color: #080424;
+        /* background-color: red; */
+        color: white;
+    }
+
+    .footer_sub_area {
+        width: 320px;
+        margin: 0 auto;
+        /* background: greenyellow; */
+    }
+
+    .footer_bar_area {
+        position: relative;
+    }
+    .footer_bar {
+        position: absolute;
+        /* position: relative; */
+        top:15px; left:50%;
+        margin-left: -160px;
+        width: 320px;
+        border: 1px solid #E7CA63;
+    }
+
+    .footer_title{
+        padding: 25px 0px 10px 20px;
+        font-size: 15px;
+        /* background: lavender; */
+    }
+
+    .footer_context{
+        padding: 0 10px;
+        font-size: 9px;
+        width: 100%;
+        /* background: lemonchiffon; */
+        line-height: 15px;
+    }
+    .footer_context>ul:last-child {
+        margin: 10px 0;
+    }
+    
+}

@@ -1,0 +1,188 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    /* 본문 영역 */
+    .mp_section_area {
+        width: 1080px;
+        /* margin: 0 auto; */
+        left: 50%; margin-left: -540px;
+        position: relative;
+    }
+
+    /* 동영상 */
+    .mp_1st {
+        width: 100%; height: 400px;
+        overflow: hidden;
+    }
+    .main_video {
+        position: relative;
+        width: 100%;
+        top: 50%; transform: translateY(-50%);
+    }
+    
+    /* 마우스 오버하면 바뀌는 사진들 */
+    .mp_2nd {
+        width: 1080px; height: 540px;
+        margin: 20px auto;
+    }
+    .main_images {
+        width: 100%; height: 100%;
+    }
+    .main_images>div {
+        float: left;
+    }
+    .main_image_right {
+        position: absolute;
+        top: 0px; left: 540px;
+        width: 540px; height: 540px;
+    }
+    .main_image_area1 {
+        position: absolute;
+        top: 0px; left: 0px;
+        width: 270px; height: 270px;
+    }
+    .main_image_area2 {
+        position: absolute;
+        top: 0px; left: 270px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area3 {
+        position: absolute;
+        top: 0px; left: 405px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area4{
+        position: absolute;
+        top: 135px; left: 270px;
+        width: 270px; height: 135px;
+        overflow: hidden;
+    }
+    .main_image_area5{
+        position: absolute;
+        top: 270px; left: 0px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area6{
+        position: absolute;
+        top: 270px; left: 135px;
+        width: 135px; height: 270px;
+        overflow: hidden;
+    }
+    .main_image_area7{
+        position: absolute;
+        top: 270px; left: 270px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area8{
+        position: absolute;
+        top: 270px; left: 405px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area9{
+        position: absolute;
+        top: 405px; left: 0px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area10{
+        position: absolute;
+        top: 405px; left: 270px;
+        width: 135px; height: 135px;
+    }
+    .main_image_area11{
+        position: absolute;
+        top: 405px; left: 405px;
+        width: 135px; height: 135px;
+    }
+    .main_image {
+        width: 100%; height: 100%;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .main_image_area4>a>img {
+        width: 100%; height: 200%;
+        top: 20%;
+    }
+    .main_image_area6>a>img {
+        width: 200%; height: 100%;
+    }
+
+    /* 제품 이미지 */
+    .mp_3rd {
+        width: 1080px;
+        /* background: red; */
+        margin: 50px auto;
+    }
+    .mp_3rd>a {
+        float: left;
+        width: 228px; height: 330px;
+        /* background: orange; */
+        margin-left: 56px;
+        margin-bottom: 50px;
+        box-shadow: 1px 1px 5px gray;
+        opacity: 0;
+        transition: 1s;
+        transform: translateY(100px);
+    }
+    .mp_3rd>a:nth-of-type(4n-3) {transition-delay: 0s;}
+    .mp_3rd>a:nth-of-type(4n-2) {transition-delay: 0.1s;}
+    .mp_3rd>a:nth-of-type(4n-1) {transition-delay: 0.2s;}
+    .mp_3rd>a:nth-of-type(4n) {transition-delay: 0.3s;}
+    .mp_3rd>a.on {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    .mp_3rd:after {
+        clear: both;
+        content:'';
+        display:block;
+    }
+    .mp_3rd>a:nth-child(4n+1) {
+        margin-left: 0px;
+    }
+    .mp_md_img {
+        position: relative;
+        display: inline-block;
+        width: 220px; height: 220px;
+        top: 10px; left: 50%;
+        margin-left: -110px;
+        margin-bottom: 10px;
+    }
+    .mp_md_img_path {
+        width: 80%; height: 80%;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        position: relative;
+    }
+    .mp_md_brand {
+        text-align: center;
+        margin: 10px auto;
+        font: 17px/1.2 arial ;
+    }
+    .mp_md_name {
+        text-align: center;
+        margin: 8px auto;
+        font: 12px/1.2 arial ;
+    }
+    .mp_md_price {
+        text-align: center;
+        margin: 4px auto;
+        font: 14px/1.2 arial ;
+    }
+    
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    /* 360, 마진 15 */
+}
