@@ -13,6 +13,53 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.menu.js"></script>
 <title>Insert title here</title>
+<script>
+	function submitCheck(){
+		
+		if(document.input_form.entity_number.value==""){
+			alert(document.input_form.entity_number.value);
+			alert("상품개체번호를 입력하세요.");
+			return false;
+		}
+	
+		if(document.input_form.pb_md_name.value==""){
+			alert("제품이름을 입력하세요.");
+			return false;
+		}
+		
+		if(document.input_form.pb_sale_status.value==""){
+			alert("판매상태를 입력하세요.");
+			return false;
+		}
+		
+		if(document.input_form.pb_post_status.value==""){
+			alert("게시상태를 입력하세요.");
+			return false;
+		}
+		
+		if(document.input_form.pb_main_img.value==""){
+			alert("메인이미지를 입력하세요.");
+			return false;
+		}
+		
+		if( document.input_form.pb_detail_img1.value==""){
+			alert("상세이미지를 입력하세요.");
+			return false;
+		}
+		if( document.input_form.pb_detail_img2.value==""){
+			alert("상세이미지를 입력하세요.");
+			return false;
+		}
+		if( document.input_form.pb_detail_img3.value==""){
+			alert("상세이미지를 입력하세요.");
+			return false;
+		}
+		
+		
+		return true;
+	}
+</script>
+
 </head>
 <body>
 	<header id="hd">
@@ -133,7 +180,7 @@
 			<h1 id="container_title">관리자 판매 페이지</h1>
 			<div class="container_wr">
 
-				<form name="input_form" action="./postUploadAction.do" method="post" enctype ="multipart/form-data">
+				<form name="input_form" action="./postUploadAction.do" method="post" enctype ="multipart/form-data" onsubmit = "return submitCheck()">
 					<br> <br>
 					<h3>▶ 기본 정보 입력</h3>
 					<br>
@@ -186,22 +233,42 @@
 						<tr>
 							<td class="td1">대표 이미지</td>
 							<td class="td2">
-								<div class="form-group" align="right">
-									<input type="file" name = "pb_detail_img" class="form-control-file"
+								<div class="form-group" align="left">
+									<input type="file" name = "pb_main_img" class="form-control-file"
 										id="exampleInputFile" aria-describedby="fileHelp">
 								</div>
 							</td>
 	
 						</tr>
 						<tr>
-							<td class="td1">상세 이미지</td>
+							<td class="td1">상세 이미지1</td>
 							<td class="td2">
-								<div class="form-group" align="right">
-									<input type="file" name = "pb_main_img" class="form-control-file"
+								<div class="form-group" align="left">
+									<input type="file" name = "pb_detail_img1" class="form-control-file"
 										id="exampleInputFile" aria-describedby="fileHelp">
 								</div>
 							</td>
 						</tr> 
+						<tr>
+							<td class="td1">상세 이미지2</td>
+							<td class="td2">
+								<div class="form-group" align="left">
+									<input type="file" name = "pb_detail_img2" class="form-control-file"
+										id="exampleInputFile" aria-describedby="fileHelp">
+								</div>
+							</td>
+						</tr> 
+						<tr>
+							<td class="td1">상세 이미지3</td>
+							<td class="td2">
+								<div class="form-group" align="left">
+									<input type="file" name = "pb_detail_img3" class="form-control-file"
+										id="exampleInputFile" aria-describedby="fileHelp">
+								</div>
+							</td>
+						</tr> 
+						
+						
 					</table>
 	
 					<br> <br> <br> <br> <br> <br>

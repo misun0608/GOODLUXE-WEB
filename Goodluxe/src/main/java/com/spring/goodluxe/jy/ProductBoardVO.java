@@ -13,8 +13,12 @@ import java.util.Date;
     pb_detail varchar2(3000),
     pb_main_img_original varchar2(1000),
     pb_main_img_stored varchar2(1000),
-    pb_detail_img_original varchar2(1000),
-    pb_detail_img_stored varchar2(1000),
+    pb_detail_img1_original varchar2(1000),
+    pb_detail_img1_stored varchar2(1000),
+    pb_detail_img2_original varchar2(1000),
+    pb_detail_img2_stored varchar2(1000),
+    pb_detail_img3_original varchar2(1000),
+    pb_detail_img3_stored varchar2(1000),
     pb_view_count number,
     pb_like number,
     entity_number varchar(30)
@@ -26,7 +30,7 @@ create sequence sellingBoard_seq
     maxvalue 10000000;
  */
 
-public class SellingBoardVO { 
+public class ProductBoardVO { 
 	private String pb_number;				//글번호 (시퀀스)
 	private String pb_division; 			//게시글 분류
 	private String pb_md_name;   			//제품이름
@@ -36,13 +40,15 @@ public class SellingBoardVO {
 	private String pb_detail;    			//상품 상세설명
 	private String pb_main_img_original;   	//메인 사진
 	private String pb_main_img_stored;   
-	private String pb_detail_img_original;  //디테일 사진
-	private String pb_detail_img_stored;  
+	private String pb_detail_img1_original;  //디테일 사진1
+	private String pb_detail_img1_stored;  
+	private String pb_detail_img2_original;  //디테일 사진2
+	private String pb_detail_img2_stored;  
+	private String pb_detail_img3_original;  //디테일 사진3
+	private String pb_detail_img3_stored;  
 	private int pb_view_count;  			//조회수
 	private int pb_like;  					//좋아요
-	private String entity_number;   
-	
-	
+	private String entity_number;
 	public String getPb_number() {
 		return pb_number;
 	}
@@ -97,17 +103,41 @@ public class SellingBoardVO {
 	public void setPb_main_img_stored(String pb_main_img_stored) {
 		this.pb_main_img_stored = pb_main_img_stored;
 	}
-	public String getPb_detail_img_original() {
-		return pb_detail_img_original;
+	public String getPb_detail_img1_original() {
+		return pb_detail_img1_original;
 	}
-	public void setPb_detail_img_original(String pb_detail_img_original) {
-		this.pb_detail_img_original = pb_detail_img_original;
+	public void setPb_detail_img1_original(String pb_detail_img1_original) {
+		this.pb_detail_img1_original = pb_detail_img1_original;
 	}
-	public String getPb_detail_img_stored() {
-		return pb_detail_img_stored;
+	public String getPb_detail_img1_stored() {
+		return pb_detail_img1_stored;
 	}
-	public void setPb_detail_img_stored(String pb_detail_img_stored) {
-		this.pb_detail_img_stored = pb_detail_img_stored;
+	public void setPb_detail_img1_stored(String pb_detail_img1_stored) {
+		this.pb_detail_img1_stored = pb_detail_img1_stored;
+	}
+	public String getPb_detail_img2_original() {
+		return pb_detail_img2_original;
+	}
+	public void setPb_detail_img2_original(String pb_detail_img2_original) {
+		this.pb_detail_img2_original = pb_detail_img2_original;
+	}
+	public String getPb_detail_img2_stored() {
+		return pb_detail_img2_stored;
+	}
+	public void setPb_detail_img2_stored(String pb_detail_img2_stored) {
+		this.pb_detail_img2_stored = pb_detail_img2_stored;
+	}
+	public String getPb_detail_img3_original() {
+		return pb_detail_img3_original;
+	}
+	public void setPb_detail_img3_original(String pb_detail_img3_original) {
+		this.pb_detail_img3_original = pb_detail_img3_original;
+	}
+	public String getPb_detail_img3_stored() {
+		return pb_detail_img3_stored;
+	}
+	public void setPb_detail_img3_stored(String pb_detail_img3_stored) {
+		this.pb_detail_img3_stored = pb_detail_img3_stored;
 	}
 	public int getPb_view_count() {
 		return pb_view_count;
@@ -126,8 +156,7 @@ public class SellingBoardVO {
 	}
 	public void setEntity_number(String entity_number) {
 		this.entity_number = entity_number;
-	}
-
-
+	}   
 	
+
 }

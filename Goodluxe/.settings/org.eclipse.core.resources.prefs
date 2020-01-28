@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/spring/goodluxe/jy/ProductlistController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+encoding//src/main/webapp/resources/css/goodluxe-search_result.css=UTF-8
 encoding//src/main/webapp/resources/css/item_list.css=UTF-8
+encoding//src/main/webapp/resources/css/md_detail.css=UTF-8

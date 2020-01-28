@@ -14,7 +14,70 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script>
+	function submitCheck(){
+		
+		/*상품명 입력체크*/
+		if(document.input_form.pd_name.value==""){
+			alert("상품명을 입력하세요.");
+			document.input_form.pd_name.focus();
+			return false;
+		}
+		
+		/*브랜드 입력체크*/
+		if(document.input_form.pd_brand.value=="none"){
+			alert("브랜드명을 입력하세요.");
+			document.input_form.pd_brand.focus();
+			return false;
+		}
+		
+		/*카테고리 입력체크*/
+		if(document.input_form.pd_category.value=="none"){
+			alert("카테고리를 입력하세요.");
+			return false;
+		}
+		
+		/*상품 등급 입력체크*/
+		if(document.input_form.quality_grade.value=="none"){
+			alert("상품등급을 입력하세요.");
+			return false;
+		}
+		
+		/*판매가격 입력체크*/
+		if(document.input_form.sale_price.value==""){
+			alert("판매가격을 입력하세요.");
+			return false;
+		}
+		
+		/*매입가격 입력체크*/
+		if(document.input_form.buying_price.value==""){
+			alert("매입가격을 입력하세요.");
+			return false;
+		}
+		
+		/*매입날짜 입력체크*/
+		if( document.input_form.purc_date_text.value==""){
+			alert("매입일을 입력하세요.");
+			return false;
+		}
+		/*감정서 유무 입력체크*/
+		if(document.input_form.appraise_exist.value==""){
+			alert("감정서유무를 입력하세요.");
+			return false;
+		}
+		/*제품 구성품 체크*/
+		if(document.input_form.pd_component.value==""){
+			document.input_form.pd_component.value = "없음"
+		}
+		/*판매자 아이디 체크*/
+		if(document.input_form.member_id.value==""){
+			document.input_form.member_id.value = "불명"
+		}
+		
+		
+		return true;
+	}
+</script>
 
 </head>
 <body>
@@ -147,7 +210,7 @@
 
 			<h1 id="container_title">매입상품 등록 페이지</h1>
 			<div class="container_wr">
-				<form name="input_form" action="./purcRegiAction.do" method="post">
+				<form name="input_form" action="./purcRegiAction.do" method="post" onsubmit = "return submitCheck()">
 					<!-- onsubmit="메소드();" -->
 
 					<br> <br>
@@ -169,6 +232,7 @@
 							<td class="td1">브랜드번호</td>
 							<td class="td2"><select name="pd_brand"
 								class="search">
+									<option value="none">브랜드 선택</option>
 									<option value="Cartier">Cartier</option>
 									<option value="Dior">Dior</option>
 									<option value="Etro">Etro</option>
@@ -188,6 +252,7 @@
 							<td class="td1">카테고리 번호</td>
 							<td class="td2"><select name="pd_category"
 								class="search">
+									<option value="none">카테고리 선택</option>
 									<option value="CLOTHES">CLOTHES</option>
 									<option value="JEWELRY">JEWELRY</option>
 									<option value="WATCH">WATCH</option>

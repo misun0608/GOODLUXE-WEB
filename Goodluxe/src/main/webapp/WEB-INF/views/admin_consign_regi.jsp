@@ -13,6 +13,84 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.8.3.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.menu.js"></script>
+	
+	<script>
+	function submitCheck(){
+		
+		/*상품명 입력체크*/
+		if(document.input_form.pd_name.value==""){
+			alert("상품명을 입력하세요.");
+			document.input_form.pd_name.focus();
+			return false;
+		}
+		
+		/*브랜드 입력체크*/
+		if(document.input_form.pd_brand.value=="none"){
+			alert("브랜드명을 입력하세요.");
+			document.input_form.pd_brand.focus();
+			return false;
+		}
+		
+		/*카테고리 입력체크*/
+		if(document.input_form.pd_category.value=="none"){
+			alert("카테고리를 입력하세요.");
+			return false;
+		}
+		
+		/*상품 등급 입력체크*/
+		if(document.input_form.quality_grade.value=="none"){
+			alert("상품등급을 입력하세요.");
+			return false;
+		}
+		
+		/*판매가격 입력체크*/
+		if(document.input_form.sale_price.value==""){
+			alert("판매가격을 입력하세요.");
+			return false;
+		}
+		
+		/*수수료 입력체크*/
+		if(document.input_form.commission.value==""){
+			alert("수수료 입력하세요.");
+			return false;
+		}
+		
+		/*위탁기간 1 입력체크*/
+		if(document.input_form.start_date_text.value==""){
+			alert("위탁일을 입력하세요.");
+			return false;
+		}
+		
+		/*위탁기간2 입력체크*/
+		if( document.input_form.end_date_text.value==""){
+			alert("위탁일을 입력하세요.");
+			return false;
+		}
+		/*판매상태 입력체크*/
+		if(document.input_form.sale_status.value==""){
+			alert("판매상태를 입력하세요.");
+			return false;
+		}
+		/*감정서 유무 입력체크*/
+		if(document.input_form.appraise_exist.value==""){
+			alert("감정서유무를 입력하세요.");
+			return false;
+		}
+		/*제품 구성품 체크*/
+		if(document.input_form.pd_component.value==""){
+			document.input_form.pd_component.value = "없음"
+		}
+		/*판매자 아이디 체크*/
+		if(document.input_form.member_id.value==""){
+			alert("위탁자 아이디를 입력하세요.");
+			return false;
+		}
+		
+		
+		return true;
+	}
+</script>
+	
 </head>
 <body>
 
@@ -146,7 +224,7 @@
 
 			<h1 id="container_title">위탁상품 등록 페이지</h1>
 			<div class="container_wr">
-				<form name="input_form" action="./consRegiAction.do" method="post">
+				<form name="input_form" action="./consRegiAction.do" method="post" onsubmit = "return submitCheck()">
 
 					<br> <br>
 					<h3>▶ 기본 정보 입력</h3>
@@ -167,6 +245,7 @@
 							<td class="td1">브랜드번호</td>
 							<td class="td2"><select name="pd_brand"
 								class="search">
+									<option value="none">브랜드선택</option>
 									<option value="Cartier">Cartier</option>
 									<option value="Dior">Dior</option>
 									<option value="Etro">Etro</option>
@@ -185,6 +264,7 @@
 						<tr>
 							<td class="td1">카테고리 번호</td>
 							<td class="td2"><select name="pd_category" class="search">
+									<option value="none">카테고리선택</option>
 									<option value="CLOTHES">CLOTHES</option>
 									<option value="JEWELRY">JEWELRY</option>
 									<option value="WATCH">WATCH</option>

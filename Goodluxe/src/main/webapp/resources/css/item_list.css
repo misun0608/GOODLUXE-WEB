@@ -1,11 +1,11 @@
-/* 珥덇린�솕 */
+/* 초기화 */
 * {margin:0px; padding:0px;}
 html, body {height: 100%;}
 ul,ol,li {list-style:none;}
 a {text-decoration:none; outline:0; color:#000;}
 img {vertical-align:top;}
 
-/* �뜲�뒪�겕�넲 */
+/* 데스크톱 */
 @media screen and (min-width: 960px) {
     .il_area {
         width: 1080px;
@@ -13,7 +13,7 @@ img {vertical-align:top;}
         /* background: slateblue; */
     }
 
-    /* 寃��깋 遺꾨쪟 �꽑�깮李� */
+    /* 검색 분류 선택창 */
     .il_1st {
         border: 0.5px solid #67B49C;
         padding: 5px;
@@ -32,7 +32,7 @@ img {vertical-align:top;}
         border-radius: 2px;
     }
 
-    /* �젣�뭹 由ъ뒪�듃 */
+    /* 제품 리스트 */
     .il_2nd {
         width: 1080px;
         /* background: red; */
@@ -95,34 +95,31 @@ img {vertical-align:top;}
 
     .il_3rd {
         position: relative;
-        width: 240px;
-        margin : 0px auto 50px auto;
+        width: 600px;
+        left: 50%;
+        margin-bottom: 50px;
+        margin-left: -300px;
+        text-align: center;
     }
-    .il_paging{
-    	width : 400px;
+    .il_paging {
+        width: 100%;
     }
-     .il_paging tbody tr td .page_edge {
+    .page_edge {
         width: 100px;
-        font-size : 12px: 
-    .il_paging tbody tr td .page_normal {
-        width: 40px;
     }
-    .il_now_page {
-        color: rgb(139, 35, 21);
-        font-weight: bold;
+    .page_arrow {
+        width: 50px;
     }
-    .il_paging>tbody>tr>td>a:hover {
-        font-weight: bold;
-    }
+
 
 }
 
-/* �깭釉붾┸ PC */
+/* 태블릿 PC */
 @media screen and (min-width: 768px) and (max-width: 959px) {
     
 }
 
-/* �뒪留덊듃�룿 */
+/* 스마트폰 */
 @media screen and (max-width: 767px) {
     
 }
