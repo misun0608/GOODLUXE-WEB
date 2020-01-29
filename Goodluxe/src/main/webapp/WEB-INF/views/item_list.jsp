@@ -484,9 +484,9 @@
 					
 				</article>
 	 			<article class="il_3rd">
-					<table class="il_paging">
-						<tbody>
-							<tr>
+	 				 <center>
+                        <div class="liked_goods_page">
+                            <ul class="pagination modal">
 						<%	
 							if(count>0){
 								int pageCount = ((count-1)/pageSize)+1;
@@ -498,29 +498,30 @@
 								else
 									startPage = currentPage-4;
 								int pageBlock = 5;
-								
-							%>
-								<td class="page_edge"><a href="itemList.do?pageNum=1&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="page_first" >첫페이지</a></td>
-								<td class="page_arrow"><a href="itemList.do?pageNum=<%=startPage-5%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="arrow left" >&lt;&lt;</a></td>
+						
+						%>
+                                <li><a href="itemList.do?pageNum=1&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="page_first">처음 페이지</a></li>
+                                <li><a href="itemList.do?pageNum=<%=startPage-5%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="arrow left">&lt;&lt;</a></li>
 							<% 	
 								for(i = startPage; (i<=startPage+4)&&(i<=pageCount);i++){
-							%>	
-								<td class="page_normal">
-									<a href="itemList.do?pageNum=<%=i%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>"class="il_now_page" class="num" ><%= i%></a>
-								</td>
-							<%
-								}
-								
 							%>
-								<td class="page_arrow"><a href="itemList.do?pageNum=<%=startPage+5%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="arrow right" >&gt;&gt;</a></td>
-								<td class="page_edge"><a href="itemList.do?pageNum=<%=pageCount%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>" class="page_last" >끝페이지</a></td>
-							<%
-								
+                                <li><a href="itemList.do?pageNum=<%=i%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>"class="il_now_page"
+                                	<% if(i==currentPage){%> 
+                                			class = "active"
+                                	<%}else{%>
+                                			class="active num"
+                                	<%}%> ><%= i%></a></li>
+								<%
+									}
+								%>  
+                                <li><a href="#" class="arrow right">&gt;&gt;</a></li>
+                                <li><a href="#" class="page_last">끝 페이지</a></li>
+						<%
 							}
 						%>
-							</tr>
-						</tbody>
-					</table>
+                            </ul>
+                        </div>
+                     </center>
 				</article>
 	
 			</div>
