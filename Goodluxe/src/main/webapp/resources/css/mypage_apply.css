@@ -9,45 +9,52 @@ img {vertical-align:top;}
 /* 데스크톱 */
 @media screen and (min-width: 960px) {
   #container {
-    width: 1080px;
+    width: 900px;
     margin: 0 auto;
-
   }
-  .container{
+  .mypage_app_box_container{
     position: relative;
   }
   .mypage_app_box {
     display: inline-block;
+    width: 900px;
   }
 
-  .fontpart{
+  .p_announce{
+    /* display: block; */
+    width: 900px;
+    line-height: 170%;
+    /* font-size: 14px; */
+    /* background-color: aqua; */
+  }
+
+  .apply_fontpart{
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  .selectbc{
+  .apply_selectbc{
     position: relative;
-    width: 1080px;
+    width: 900px;
     /* border: 1px solid black;  */
     display: inline-block; 
     font-size: 13px;
   }
 
-  section > .container > p{
+  section > .mypage_app_box_container > p{
     font-size: 15px;
   }
 
-  .multi{
-    width: 300px;
+  .apply_multi{
+    width: 250px;
     height: 250px;
-    /* z-index: 30; */
   }
 
   .selecttable{
     position: relative;
     border: 0.9px solid black;
     height: 330px;
-    width: 1070px;
+    width: 890px;
     font-size: 13px;
   }
 
@@ -55,13 +62,13 @@ img {vertical-align:top;}
     position: relative;
     border: 0.9px solid black;
     height: 250px;
-    width: 410px;
+    width: 330px;
     padding: 5px 5px 5px 5px;
     margin-top: 35px;
   }
 
   .titletd{
-    width: 90px;
+    width: 70px;
   }
 
   .photoarticle{
@@ -69,49 +76,61 @@ img {vertical-align:top;}
     color: darkgray;
   }
 
-  .inputarea{
+  .apply_inputarea{
     width: 200px;
   }
 
-  .listtable{
+  .apply_listtable{
     position: relative;
-    width: 1080px;
-    border: 0.9px solid black;
+    width: 900px;
+    /* border: 0.9px solid black; */
     font-size: 14px;
     /* padding: 5px 5px 5px 5px; */
     /* height: 250px; */
+    border-collapse: collapse;
   }
 
-  .listtable > thead > tr > td{
+  .apply_listtable > thead > tr > td{
     text-align: center;
+    padding: 5px;
+    background-color: #F9E7E5;
   }
 
-  .listtable > tbody > tr > td{
+  .apply_listtable > tbody > tr > td{
     text-align: center;
     font-size: 12px;
+    padding: 5px;
   }
 
-  .select{
+  .apply_select{
     position: relative;
     float: left;
     padding-left: 15px;
   }
 
-  .selectcate{
+  .apply_selectcate{
     padding-right: 15px;
   }
 
-  .btnpart{
+  .apply_middle_btnpart{
     float: right;
     margin-right: 3px;
     margin-top: 10px;
+    /* width: 900px; */
   }
 
-  .buttonpart{
-    margin-top: 10px;
+  .apply_bottom_btnpart{
+/*     width: 900px; */
+    width:200px;
+/*     margin-top: 10px; */
+    margin: 10px auto 0 auto;
+    position: relative;
+/*     left: 50%;
+    margin-left: -450px; */
+    text-align: center;
   }
 
-  .total{
+  .apply_total{
     float: right;
     font-size: 13px;
     margin-bottom: 5px;
@@ -124,7 +143,7 @@ img {vertical-align:top;}
   } */
   
   /* 버튼 */
-  .addbtn{
+  .apply_addbtn{
     width: 80px;
     text-align: center;
     background-color: white;
@@ -136,22 +155,22 @@ img {vertical-align:top;}
     /* margin-top: 30px; */
   }
 
-  .deletebtn{
+  .apply_deletebtn{
     width: 50px;
   }
 
-  .addbtn2{
+  .apply_addbtn2{
     margin-right: 22px;
   }
 
-  .mainbtn{
+  .apply_mainbtn{
     width: 100px;
     padding-top: 5px;
     padding-bottom: 5px;
     /* font-size: 13px; */
   }
   
-  label{
+  .apply_label{
     position: relative;
     top: 0px;
     font-size: 13px;
@@ -159,16 +178,16 @@ img {vertical-align:top;}
     margin-right: 20px;
   }
 
-  .done{
+  .apply_done{
     position: absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%)
   }
 
-  .cover{
+  .apply_done_cover{
     position: relative;
-    width: 1080px;
+    width: 900px;
     height: 500px;
   }
 }
@@ -176,45 +195,52 @@ img {vertical-align:top;}
 /* 태블릿 PC */
 @media screen and (min-width: 768px) and (max-width: 959px) {
   #container {
-    width: 1080px;
+    width: 700px;
     margin: 0 auto;
-
   }
-  .container{
+  .mypage_app_box_container{
     position: relative;
   }
   .mypage_app_box {
     display: inline-block;
+    width: 700px;
   }
 
-  .fontpart{
+  .p_announce{
+    /* display: block; */
+    width: 700px;
+    line-height: 170%;
+    font-size: 14px;
+    /* background-color: aqua; */
+  }
+
+  .apply_fontpart{
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  .selectbc{
+  .apply_selectbc{
     position: relative;
-    width: 1080px;
+    width: 700px;
     /* border: 1px solid black;  */
     display: inline-block; 
     font-size: 13px;
   }
 
-  section > .container > p{
+  section > .mypage_app_box_container > p{
     font-size: 15px;
   }
 
-  .multi{
-    width: 300px;
+  .apply_multi{
+    width: 160px;
     height: 250px;
-    /* z-index: 30; */
   }
 
   .selecttable{
     position: relative;
     border: 0.9px solid black;
     height: 330px;
-    width: 1070px;
+    width: 890px;
     font-size: 13px;
   }
 
@@ -222,13 +248,13 @@ img {vertical-align:top;}
     position: relative;
     border: 0.9px solid black;
     height: 250px;
-    width: 410px;
+    width: 330px;
     padding: 5px 5px 5px 5px;
     margin-top: 35px;
   }
 
   .titletd{
-    width: 90px;
+    width: 70px;
   }
 
   .photoarticle{
@@ -236,49 +262,61 @@ img {vertical-align:top;}
     color: darkgray;
   }
 
-  .inputarea{
+  .apply_inputarea{
     width: 200px;
   }
 
-  .listtable{
+  .apply_listtable{
     position: relative;
-    width: 1080px;
-    border: 0.9px solid black;
+    width: 900px;
+    /* border: 0.9px solid black; */
     font-size: 14px;
     /* padding: 5px 5px 5px 5px; */
     /* height: 250px; */
+    border-collapse: collapse;
   }
 
-  .listtable > thead > tr > td{
+  .apply_listtable > thead > tr > td{
     text-align: center;
+    padding: 5px;
+    background-color: #F9E7E5;
   }
 
-  .listtable > tbody > tr > td{
+  .apply_listtable > tbody > tr > td{
     text-align: center;
     font-size: 12px;
+    padding: 5px;
   }
 
-  .select{
+  .apply_select{
     position: relative;
     float: left;
     padding-left: 15px;
   }
 
-  .selectcate{
+  .apply_selectcate{
     padding-right: 15px;
   }
 
-  .btnpart{
+  .apply_middle_btnpart{
     float: right;
     margin-right: 3px;
     margin-top: 10px;
+    /* width: 900px; */
   }
 
-  .buttonpart{
-    margin-top: 10px;
+  .apply_bottom_btnpart{
+/*     width: 900px; */
+    width:200px;
+/*     margin-top: 10px; */
+    margin: 10px auto 0 auto;
+    position: relative;
+/*     left: 50%;
+    margin-left: -450px; */
+    text-align: center;
   }
 
-  .total{
+  .apply_total{
     float: right;
     font-size: 13px;
     margin-bottom: 5px;
@@ -291,7 +329,7 @@ img {vertical-align:top;}
   } */
   
   /* 버튼 */
-  .addbtn{
+  .apply_addbtn{
     width: 80px;
     text-align: center;
     background-color: white;
@@ -303,22 +341,22 @@ img {vertical-align:top;}
     /* margin-top: 30px; */
   }
 
-  .deletebtn{
+  .apply_deletebtn{
     width: 50px;
   }
 
-  .addbtn2{
+  .apply_addbtn2{
     margin-right: 22px;
   }
 
-  .mainbtn{
+  .apply_mainbtn{
     width: 100px;
     padding-top: 5px;
     padding-bottom: 5px;
     /* font-size: 13px; */
   }
   
-  label{
+  .apply_label{
     position: relative;
     top: 0px;
     font-size: 13px;
@@ -326,16 +364,16 @@ img {vertical-align:top;}
     margin-right: 20px;
   }
 
-  .done{
+  .apply_done{
     position: absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%)
   }
 
-  .cover{
+  .apply_done_cover{
     position: relative;
-    width: 1080px;
+    width: 900px;
     height: 500px;
   }
 }
@@ -343,45 +381,52 @@ img {vertical-align:top;}
 /* 스마트폰 */
 @media screen and (max-width: 767px) {
   #container {
-    width: 1080px;
+    width: 900px;
     margin: 0 auto;
-
   }
-  .container{
+  .mypage_app_box_container{
     position: relative;
   }
   .mypage_app_box {
     display: inline-block;
+    width: 900px;
   }
 
-  .fontpart{
+  .p_announce{
+    /* display: block; */
+    width: 900px;
+    line-height: 170%;
+    /* font-size: 14px; */
+    /* background-color: aqua; */
+  }
+
+  .apply_fontpart{
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  .selectbc{
+  .apply_selectbc{
     position: relative;
-    width: 1080px;
+    width: 900px;
     /* border: 1px solid black;  */
     display: inline-block; 
     font-size: 13px;
   }
 
-  section > .container > p{
+  section > .mypage_app_box_container > p{
     font-size: 15px;
   }
 
-  .multi{
-    width: 300px;
+  .apply_multi{
+    width: 250px;
     height: 250px;
-    /* z-index: 30; */
   }
 
   .selecttable{
     position: relative;
     border: 0.9px solid black;
     height: 330px;
-    width: 1070px;
+    width: 890px;
     font-size: 13px;
   }
 
@@ -389,13 +434,13 @@ img {vertical-align:top;}
     position: relative;
     border: 0.9px solid black;
     height: 250px;
-    width: 410px;
+    width: 330px;
     padding: 5px 5px 5px 5px;
     margin-top: 35px;
   }
 
   .titletd{
-    width: 90px;
+    width: 70px;
   }
 
   .photoarticle{
@@ -403,51 +448,61 @@ img {vertical-align:top;}
     color: darkgray;
   }
 
-  .inputarea{
+  .apply_inputarea{
     width: 200px;
   }
 
-  .listtable{
+  .apply_listtable{
     position: relative;
-    width: 1080px;
-    border: 0.9px solid black;
+    width: 900px;
+    /* border: 0.9px solid black; */
     font-size: 14px;
     /* padding: 5px 5px 5px 5px; */
     /* height: 250px; */
+    border-collapse: collapse;
   }
 
-  .listtable > thead > tr > td{
+  .apply_listtable > thead > tr > td{
     text-align: center;
-
+    padding: 5px;
+    background-color: #F9E7E5;
   }
 
-  .listtable > tbody > tr > td{
+  .apply_listtable > tbody > tr > td{
     text-align: center;
     font-size: 12px;
-    background-color: #f9fcfc;
+    padding: 5px;
   }
 
-  .select{
+  .apply_select{
     position: relative;
     float: left;
     padding-left: 15px;
   }
 
-  .selectcate{
+  .apply_selectcate{
     padding-right: 15px;
   }
 
-  .btnpart{
+  .apply_middle_btnpart{
     float: right;
     margin-right: 3px;
     margin-top: 10px;
+    /* width: 900px; */
   }
 
-  .buttonpart{
-    margin-top: 10px;
+  .apply_bottom_btnpart{
+/*     width: 900px; */
+    width:200px;
+/*     margin-top: 10px; */
+    margin: 10px auto 0 auto;
+    position: relative;
+/*     left: 50%;
+    margin-left: -450px; */
+    text-align: center;
   }
 
-  .total{
+  .apply_total{
     float: right;
     font-size: 13px;
     margin-bottom: 5px;
@@ -460,7 +515,7 @@ img {vertical-align:top;}
   } */
   
   /* 버튼 */
-  .addbtn{
+  .apply_addbtn{
     width: 80px;
     text-align: center;
     background-color: white;
@@ -472,22 +527,22 @@ img {vertical-align:top;}
     /* margin-top: 30px; */
   }
 
-  .deletebtn{
+  .apply_deletebtn{
     width: 50px;
   }
 
-  .addbtn2{
+  .apply_addbtn2{
     margin-right: 22px;
   }
 
-  .mainbtn{
+  .apply_mainbtn{
     width: 100px;
     padding-top: 5px;
     padding-bottom: 5px;
     /* font-size: 13px; */
   }
   
-  label{
+  .apply_label{
     position: relative;
     top: 0px;
     font-size: 13px;
@@ -495,16 +550,16 @@ img {vertical-align:top;}
     margin-right: 20px;
   }
 
-  .done{
+  .apply_done{
     position: absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%)
   }
 
-  .cover{
+  .apply_done_cover{
     position: relative;
-    width: 1080px;
+    width: 900px;
     height: 500px;
   }
 }

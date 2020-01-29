@@ -29,7 +29,6 @@ body{
     height: 300px;
     left: 50%;
     margin-left: -450px;
-    z-index: 20;
 }
 .mypage_title{
     position: relative;

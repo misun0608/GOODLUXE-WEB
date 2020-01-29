@@ -1,10 +1,10 @@
-/* 珥덇린�솕 */
+/* 초기화 */
 * {margin:0px; padding:0px;}
 ul,ol,li {list-style:none;}
 a {text-decoration:none; outline:0; color:#000;}
 img {vertical-align:top;}
 
-/* �뜲�뒪�겕�넲 */
+/* 데스크톱 */
 @media screen and (min-width: 960px) {
     .md_detail_cover{
         position: relative;
@@ -13,7 +13,7 @@ img {vertical-align:top;}
         /* background: red; */
     }
 
-    /* �궗吏� 遺�遺� */
+    /* 사진 부분 */
     #md_detail_photoarea{
         position: relative;
         width: 400px;
@@ -22,30 +22,26 @@ img {vertical-align:top;}
         padding: 0 50px;
         /* background: orange; */
     }
-/* �겙 �씠誘몄� */
+/* 큰 이미지 */
     .md_detail_main_image{
         width: 400px;
-        height : 380px;
         margin-bottom: 3px;
     }
-/* �옉�� �씠誘몄� */
+/* 작은 이미지 */
     .md_detail_thumbnail_images{
         display: flex;
         width: 400px;
-        
     }
     .md_detail_thumbnail_image{
         /* margin-left: 1px; */
         width: 97px;
-        height : 97px;
         margin-right: 4px;
-        
     }
     .detail_main_image_left{
         flex: 1;
     }
 
-    /* �뀓�뒪�듃 遺�遺� */
+    /* 텍스트 부분 */
     #md_detail_textarea{
         float: right;
         /* background-color: green; */
@@ -95,10 +91,10 @@ img {vertical-align:top;}
         font-size: 13px;
         color: #555555;
         width: 20%;
-        /* span width �쟻�슜�븯湲� �쐞�빐 異붽�*/
+        /* span width 적용하기 위해 추가*/
         display: inline-block;
     }
-    /*踰꾪듉*/
+    /*버튼*/
     .md_detail_btnpart{
         margin-top: 30px;
     }
@@ -113,7 +109,7 @@ img {vertical-align:top;}
         border: 0px;
         outline: none;
     }
-    /* �뙎湲� 踰꾪듉 �샇踰�(�븯硫� 議곗옟�빐蹂댁씠�뒗 寃� 媛숆린�룄�븳�뜲 踰꾪듉�씠 留롮븘�꽌 �뼱�뒓 踰꾪듉 �꽑�깮�븯�뒗吏� 援щ텇�씠 �븘�슂�븷 寃� 媛숆린�룄 �빐�꽌 �씪�떒 �빐�몺) */
+    /* 댓글 버튼 호버(하면 조잡해보이는 것 같기도한데 버튼이 많아서 어느 버튼 선택하는지 구분이 필요할 것 같기도 해서 일단 해둠) */
     .buybtn:hover{ 
         background-color: #DFB1AB;
         border-color: #DFB1AB;
@@ -134,19 +130,19 @@ img {vertical-align:top;}
         color: #555555;
     }
 
-    /* �븯�떒遺�遺� */
+    /* 하단부분 */
     .md_detail_bottom {
         display:table;
         width: 1080px;
         /* background: gray; */
     }
-    /* �젣�뭹 �긽�꽭 �꽕紐� */
+    /* 제품 상세 설명 */
     .md_detail_explanation {
         /* background: hotpink; */
         width: 950px;
         margin: 50px auto;
     }
-    /* �뿰愿� �젣�뭹 */
+    /* 연관 제품 */
     .related_item_area {
         position: relative;
         /* background: lawngreen; */
@@ -181,14 +177,14 @@ img {vertical-align:top;}
 
 }
 
-/* �깭釉붾┸ PC */
+/* 태블릿 PC */
 @media screen and (min-width: 768px) and (max-width: 959px) {
     .sr_section_area {
         width:700px;
         margin : 0 auto;
     }
 
-    /* 泥ル쾲吏� article */
+    /* 첫번째 article */
     .sr_first>span {
         margin: 0 5px;
     }
@@ -200,7 +196,7 @@ img {vertical-align:top;}
         color:gray;
     }
 
-    /* �몢踰덉㎏ article */
+    /* 두번째 article */
     .sr_second>ul {
         display: inline-block;
     }
@@ -222,7 +218,7 @@ img {vertical-align:top;}
         cursor: default;
     }
 
-    /* �꽭踰덉㎏ article */
+    /* 세번째 article */
     .sr_third {
         width: 100%;
         /* background: orange; */
@@ -283,14 +279,14 @@ img {vertical-align:top;}
     }
 }
 
-/* �뒪留덊듃�룿 */
+/* 스마트폰 */
 @media screen and (max-width: 767px) {
     .sr_section_area {
         width:320px;
         margin : 0 auto;
     }
 
-    /* 泥ル쾲吏� article */
+    /* 첫번째 article */
     .sr_first>span {
         display: block;
         margin: 5px 5px;
@@ -303,7 +299,7 @@ img {vertical-align:top;}
         color:gray;
     }
 
-    /* �몢踰덉㎏ article */
+    /* 두번째 article */
     .sr_second>ul {
         display: inline-block;
     }
@@ -325,7 +321,7 @@ img {vertical-align:top;}
         cursor: default;
     }
 
-    /* �꽭踰덉㎏ article */
+    /* 세번째 article */
     .sr_third {
         width: 100%;
         /* background: orange; */
