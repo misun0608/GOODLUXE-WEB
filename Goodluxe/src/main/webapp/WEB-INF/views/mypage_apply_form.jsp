@@ -32,7 +32,8 @@
 		});
 	</script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_onlymenu.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_apply.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_apply_form.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_apply_form.js"></script>
 
 </head>
 
@@ -49,17 +50,17 @@
             <article class="arti_menu" id="mypage_menu"></article>
 
             <!-- 판매/매입 신청 -->
-            <div class="mypage_app_box_container mypage_app_box">
-                <P class="p_announce">
-                    - 상품 상세정보를 빈칸에 입력한 후 상품 추가 버튼을 클릭하시면 다량으로 등록하실 수 있으며, 배송 방법을 선택한 후 아래 확인 버튼을
-                    누르셔야 접수가 완료됩니다.
-                </P>
-                <br />
-                <div class="apply_selecttable">
-                    <div class="apply_selectbc">
-                        <div class="apply_select apply_selectbrand">
-                            <div class="apply_fontpart">브랜드</div>
-                            <select multiple class="apply_multi">
+            <article class="ap_1st arti_box">
+                <div class="apply_manual">
+                    - 상품 상세정보를 입력 후 아래 확인 버튼을 누르시면 접수가 완료됩니다.<br/><br/>
+                </div>
+            </article>
+            <article class="ap_2nd arti_box">
+                <form name="write_form" action="">
+                    <div class="info_area">
+                        <div class="select_brand_area">
+                            <div>브랜드</div>
+                            <select multiple name="selected_brand">
                                 <option value="Armani">Armani</option>
                                 <option value="Balenciaga">Balenciaga</option>
                                 <option value="Bally">Bally</option>
@@ -149,140 +150,77 @@
                                 <option value="etc">그 외 브랜드</option>
                             </select>
                         </div>
-                        <div class="apply_select apply_selectcate">
-                            <div class="apply_fontpart">카테고리</div>
-                            <select multiple class="apply_multi">
-	                            <option value="CLOTHES">CLOTHES</option>
-	                            <option value="JEWELRY">JEWELRY</option>
-	                            <option value="WATCH">WATCH</option>
-	                            <option value="BAG">BAG</option>
-	                            <option value="WALLET">WALLET</option>
-	                            <option value="GLASSES">GLASSES</option>
-	                            <option value="SHOES">SHOES</option>
+                        <div class="select_category_area">
+                            <div>카테고리</div>
+                            <select multiple name="selected_category">
+                                <option value="CLOTHES">Clothes</option>
+                                <option value="JEWELRY">Jewelry</option>
+                                <option value="WATCH">Watch</option>
+                                <option value="BAG">Bag</option>
+                                <option value="WALLET">Wallet</option>
+                                <option value="GLASSES">Glasses</option>
+                                <option value="SHOES">Shoes</option>
                             </select>
                         </div>
-
-                        <form>
-                            <div class="applyform">
-                                <table class="applytable">
-
-                                    <tr>
-                                        <td class="titletd">상품명</td>
-                                        <td><input type="text" class="apply_inputarea" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">판매희망가</td>
-                                        <td><input type="text" class="apply_inputarea" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">구매연도</td>
-                                        <td><input type="text" class="apply_inputarea" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">구매가격</td>
-                                        <td><input type="text" class="apply_inputarea" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">구매매장</td>
-                                        <td><input type="text" class="apply_inputarea" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">사진</td>
-                                        <td><input type="button" class="apply_addbtn" value="사진 첨부" required>&nbsp;
-                                            <span class="photoarticle">최소 3장 이상 업로드해주세요.</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">판매방법</td>
-                                        <td>
-                                            <input type="radio" name="smethod" id="apply_combtn" checked><label
-                                                for="combtn" class="apply_label">위탁판매</label>&nbsp;
-                                            <input type="radio" name="smethod" id="apply_sellbtn"><label
-                                                for="sellbtn" class="apply_label">판매</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="titletd">배송방법</td>
-                                        <td>
-                                            <input type="radio" name="dmethod" id="parcel" checked><label
-                                                for="parcel" class="apply_label">우체국
-                                                택배</label>&nbsp;
-                                            <input type="radio" name="dmethod" id="visit"><label for="visit" class="apply_label">직접 매장
-                                                방문</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="apply_middle_btnpart">
-                                <input type="reset" class="apply_addbtn" value="초기화">
-                                <input type="submit" class="apply_addbtn apply_addbtn2" value="상품 추가">
-                            </div>
+                        <div class="write_info_area">
+                            <table class="applytable">
+                                <tr>
+                                    <td class="titletd">상품명</td>
+                                    <td><input type="text" class="apply_inputarea" name="ap_md_name" required></td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">판매희망가</td>
+                                    <td><input type="text" class="apply_inputarea" name="ap_hope_price" required></td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">구매연도</td>
+                                    <td><input type="text" class="apply_inputarea" name="ap_buy_year" required></td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">구매가격</td>
+                                    <td><input type="text" class="apply_inputarea" name="ap_buy_price" required></td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">구매매장</td>
+                                    <td><input type="text" class="apply_inputarea" name="ap_buy_store" required></td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">사진</td>
+                                    <td><input type="file" name="ap_md_pictures" multiple required>&nbsp;
+                                        <span class="photo_manual">최소 3장 이상 업로드해주세요.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">판매방법</td>
+                                    <td>
+                                        <input type="radio" name="smethod" id="apply_combtn">
+                                        <label for="apply_combtn" class="apply_label">위탁판매</label>
+                                        &nbsp;
+                                        <input type="radio" name="smethod" id="apply_sellbtn">
+                                        <label for="apply_sellbtn" class="apply_label">판매</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="titletd">배송방법</td>
+                                    <td>
+                                        <input type="radio" name="dmethod" id="parcel">
+                                        <label for="parcel" class="apply_label">우체국 택배</label>
+                                        &nbsp;
+                                        <input type="radio" name="dmethod" id="visit">
+                                        <label for="visit" class="apply_label">직접 매장 방문</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    </form>
-
-                </div>
-
-                <br />
-                <!-- 아래 표-->
-                <div class="apply_total">
-                    총 1건
-                </div>
-                <table class="apply_listtable" border="1">
-                    <thead>
-                        <tr>
-                            <td>번호</td>
-                            <td>브랜드</td>
-                            <td>대분류</td>
-                            <td>상품명</td>
-                            <td>판매희망가</td>
-                            <td>구매연도</td>
-                            <td>구매가격</td>
-                            <td>구매매장</td>
-                            <td>판매방법</td>
-                            <td>관리</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                Dolce&Gabbana
-                            </td>
-                            <td>
-                                Accessary
-                            </td>
-                            <td>
-                                돌체앤가바나 시계밴드
-                            </td>
-                            <td>
-                                2,000,000원
-                            </td>
-                            <td>
-                                2019
-                            </td>
-                            <td>
-                                3,000,000원
-                            </td>
-                            <td>
-                                신세계 강남점
-                            </td>
-                            <td>
-                                우체국택배
-                            </td>
-
-                            <td>
-                                <button class="apply_addbtn apply_deletebtn">삭제</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="apply_bottom_btnpart">
-                    <input type="button" class="apply_addbtn" value="확인">
-                    <input type="button" class="apply_addbtn" value="취소">
-                </div>
+                    <div class="btn_area">
+                        <div class="ap_2nd_btn_box">
+                            <input type="button" class="ap_2nd_btn" value="확인" onClick="add_list();">
+                            <input type="reset" class="ap_2nd_btn" value="취소">
+                        </div>
+                    </div>
+                </form>
+            </article>
 
             </div>
             <br /><br />

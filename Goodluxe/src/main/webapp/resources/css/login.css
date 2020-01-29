@@ -101,7 +101,7 @@ img {vertical-align:top;}
     animation: inputHighlighter 0.3s ease;
 }
  /* 라벨 Highlight */
-label {
+.group>label {
     color: #999; 
     font-size: 18px;
     font-weight: normal;
@@ -111,7 +111,7 @@ label {
     top: 14px;
     transition: all 0.2s ease;
 }
-label.color {
+.group>label.color {
     top: 2px;
     transform: scale(.75); left: 2px;
     color: #DFB1AB;
