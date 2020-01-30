@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.MemberMapper">
+	<!-- property 값이 키 값이 됨 -->
+	<resultMap type="java.util.HashMap" id="hashMapVO">
+		<result property="member_id" column="member_id"/>
+		<result property="member_pw" column="member_pw"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_zipcode" column="member_zipcode"/>
+		<result property="member_addr1" column="member_addr1"/>
+		<result property="member_addr2" column="member_addr2"/>
+		<result property="member_phone" column="member_phone"/>
+		<result property="member_email" column="member_email"/>
+		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의입니다...크흠 -->
+		<result property="member_like_brand" column="member_like_brand"/>
+		<result property="member_like_category" column="member_like_category"/>
+		<result property="member_join_date" column="member_join_date"/>
+		<result property="member_class" column="member_class"/>
+		<result property="member_point" column="member_point"/>
+		<result property="member_isadmin" column="member_isadmin"/>
+	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.mj.MemberVO" id="memberResult">
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_pw" column="member_pw"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_zipcode" column="member_zipcode"/>
+		<result property="member_addr1" column="member_addr1"/>
+		<result property="member_addr2" column="member_addr2"/>
+		<result property="member_phone" column="member_phone"/>
+		<result property="member_email" column="member_email"/>
+		<result property="member_email_receive" column="member_email_receive"/>
+		<result property="member_like_brand" column="member_like_brand"/>
+		<result property="member_like_category" column="member_like_category"/>
+		<result property="member_join_date" column="member_join_date"/>
+		<result property="member_class" column="member_class"/>
+		<result property="member_point" column="member_point"/>
+		<result property="member_isadmin" column="member_isadmin"/>
+	</resultMap>
+	
+	
+	<select id="userChk" parameterType="com.spring.goodluxe.mj.MemberVO" resultMap="memberResult">
+		select * 
+		from gl_member 
+		where member_id=#{member_id} and member_pw=#{member_pw}
+	</select>
+	
+	<select id="member_status_chk" resultType="String">
+      select member_class
+      from gl_member 
+      where member_id = #{member_id}
+   </select>
+   
+	<select id="admin_status_chk" resultType="String">
+      select member_isadmin
+      from gl_member 
+      where member_id = #{member_id}
+   </select>
+	
+</mapper>
