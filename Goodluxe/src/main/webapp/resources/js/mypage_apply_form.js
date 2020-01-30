@@ -14,6 +14,7 @@ function add_list(){
     if(b) { b = check_amp(); }
     if(b) { b = check_smethod(); }
     if(b) { b = check_dmethod(); }
+    if(b) { b = check_info(); }
     if(b) { document.write_form.submit(); }
     
 }
@@ -120,3 +121,17 @@ function check_dmethod(){
     return true;
 }
 
+function check_info(){
+    var info = "브랜드 : " + document.write_form.selected_brand.value
+                + "\n카테고리 : " + document.write_form.selected_category.value
+                + "\n상품명 : " + document.write_form.ap_buy_store.value
+                + "\n판매희망가 : " + document.write_form.ap_hope_price.value
+                + "\n구매연도 : " + document.write_form.ap_buy_year.value
+                + "\n구매가격 : " + document.write_form.ap_buy_price.value
+                + "\n구매매장 : " + document.write_form.ap_buy_store.value
+                + "\n판매방법 : " + document.write_form.smethod.value
+                + "\n배송방법 : " + document.write_form.dmethod.value
+                + "\n\n위의 정보로 판매신청을 하시겠습니까?"
+    var c = confirm(info);
+    return c;
+}

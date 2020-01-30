@@ -193,20 +193,20 @@
                                 <tr>
                                     <td class="titletd">판매방법</td>
                                     <td>
-                                        <input type="radio" name="smethod" id="apply_combtn">
+                                        <input type="radio" name="smethod" id="apply_combtn" value="위탁판매">
                                         <label for="apply_combtn" class="apply_label">위탁판매</label>
                                         &nbsp;
-                                        <input type="radio" name="smethod" id="apply_sellbtn">
+                                        <input type="radio" name="smethod" id="apply_sellbtn" value="판매">
                                         <label for="apply_sellbtn" class="apply_label">판매</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="titletd">배송방법</td>
                                     <td>
-                                        <input type="radio" name="dmethod" id="parcel">
+                                        <input type="radio" name="dmethod" id="parcel" value="우체국 택배">
                                         <label for="parcel" class="apply_label">우체국 택배</label>
                                         &nbsp;
-                                        <input type="radio" name="dmethod" id="visit">
+                                        <input type="radio" name="dmethod" id="visit" value="직접 매장 방문">
                                         <label for="visit" class="apply_label">직접 매장 방문</label>
                                     </td>
                                 </tr>
