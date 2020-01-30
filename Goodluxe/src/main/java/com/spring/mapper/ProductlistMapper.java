@@ -24,6 +24,7 @@ public interface ProductlistMapper {
 	ArrayList<HashMap<String, Object>> getSearchBoardList(HashMap<String, Object> map);
 	
 	HashMap<String,Object>getTheProduct(HashMap<String,String>map);
+	int viewCountPlus(HashMap<String, String>map);
 	HashMap<String, String> getRecommandtheme(HashMap<String,String> map);
 	ArrayList<HashMap<String, Object>> getRecommandList(HashMap<String,String> map);
 	

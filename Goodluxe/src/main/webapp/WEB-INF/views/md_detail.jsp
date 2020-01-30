@@ -72,7 +72,6 @@
 		 		
 		 		
 		 		function setBtnColor(){
-		 			alert("와아아아아");
 		 			$.ajax({   
 		 				url:'/goodluxe/checkAlreadyLiked.do?entity_number=<%=entity_number%>',
 		 				type:'POST',
@@ -96,27 +95,24 @@
 		 
 		 		
 		 		$('#likebtn').on('click',function(event){
-		 			alert("일단 들어옴");
 		 			jQuery.ajax({
 			 			url:$(this).attr("href"),
 			 			type:'GET',
 			 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
 			 			success: function (data) {
-			 				alert(data);
 			 				if (data==1){
 		 						//좋아요 눌러짐
-		 						alert('aa');
-		 						//$('#heartImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/heart2.png");		
+		 						$('#heartImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/heart2.png");		
 		 					} else if(data==0){
-		 						alert('bb');
 		 						//좋아요 취소됨
-		 						//$('#heartImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/heart.png");
+		 						$('#heartImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/heart.png");
 		 					}
 			 			},
 			 			error:function() {
 	  	                 	alert("리스트 ajax통신 실패!!!");
 	 	                }
 		 			});
+		 			event.preventDefault(); //디폴트 이벤트 해제
 		 		});
 		 		
 		 		setBtnColor();
@@ -209,7 +205,7 @@
 								</div></a>
 								<a href="mdDetailLike.do?entity_number=<%=entity_number%>" id="likebtn" >
 									<div class="likebtn" >
-										<img id="heartImg"  alt="ㅎ" width="16px">&nbsp;&nbsp;좋아요
+										<img id="heartImg"  alt="좋아요" width="16px">&nbsp;&nbsp;좋아요
 									</div>
 								</a>
 							</div>

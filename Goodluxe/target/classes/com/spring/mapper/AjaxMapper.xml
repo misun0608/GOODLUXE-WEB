@@ -18,9 +18,17 @@
 	</delete>
 	
 	
+	<update id = "increaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like+1
+		  where entity_number = '40'
+	</update>
 	
-	
-	
+	<update id = "decreaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like-1
+		  where entity_number='40'
+	</update>
 	
 	
 	

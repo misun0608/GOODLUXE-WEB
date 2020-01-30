@@ -22,12 +22,7 @@ public class ProductlistServiceImpl implements ProductlistService{
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 			
 			int res = productlistMapper.insertPurcProduct(purcVO);
-			if(res == 1) {
-				System.out.println("���Ի�ǰ �Է� ����");
-			}
-			else {
-				System.out.println("���Ի�ǰ �Է� ����");
-			}
+			
 			return res;
 		}catch(Exception e) {
 			System.out.println("�޼���" + e.getMessage());
@@ -46,12 +41,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 		
 			int res = productlistMapper.insertConsProduct(consVO);
 		
-			if(res == 1) {
-				System.out.println("��Ź��ǰ �Է� ����");
-			}
-			else {
-				System.out.println("��Ź��ǰ �Է� ����");
-			}
 			return res;
 		}catch(Exception e) {
 			System.out.println("�޼���" + e.getMessage());
@@ -71,12 +60,7 @@ public class ProductlistServiceImpl implements ProductlistService{
 			sellboVO.setPb_like(0);
 			
 			int res = productlistMapper.insertSellingBoard(sellboVO);
-			if(res == 1) {
-				System.out.println("�Խù� �Է� ����");
-			}
-			else {
-				System.out.println("�Խù� �Է� ����");
-			}
+		
 			return res;
 		}catch(Exception e) {
 			System.out.println("�޼���" + e.getMessage());
@@ -248,7 +232,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 			ArrayList<HashMap<String, Object>> searchbolist_view = null;
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
-			System.out.println("row�� ??"+ startRow + endRow);
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
 			map.put("content",search_content);
@@ -256,7 +239,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			searchbolist_view = productlistMapper.getSearchBoardList(map);
 			
-			System.out.println("��ġ����Ʈ"+ searchbolist_view);
 		
 			return searchbolist_view;
 		
@@ -283,6 +265,7 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			map.put("entityNo", entity_number);			
 			theProduct = productlistMapper.getTheProduct(map);
+			productlistMapper.viewCountPlus(map);
 			
 			return theProduct;
 			

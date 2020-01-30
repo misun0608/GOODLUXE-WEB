@@ -306,6 +306,9 @@
 			where gl_consignment.entity_number = gl_productboard.entity_number
 		)where entity_number = #{entityNo}
 	</select>
+	<update id = "viewCountPlus">
+		update gl_productboard set pb_view_count = pb_view_count +1 where entity_number = #{entityNo}
+	</update>
 	
 	<select id = "getRecommandtheme" parameterType = "hashmap" resultMap ="RecommandthemeVO">
 	

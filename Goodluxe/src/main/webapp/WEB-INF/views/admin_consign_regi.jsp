@@ -144,6 +144,22 @@
 					</div>
 				</li>
 				<li class="gnb_li">
+					<button type="button" class="btn_op menu-900 menu-order-9"
+						title="상품관리">상품관리</button>
+					<div class="gnb_oparea_wr">
+						<div class="gnb_oparea">
+							<h3>게시판관리</h3>
+							<ul>
+								<li data-menu="300100"><a href="./purcRegiAction.do"
+									class="gnb_2da  ">매입상품등록</a></li>
+								<li data-menu="300200"><a href="./consRegiAction.do"
+									class="gnb_2da  ">위탁 상품 등록</a></li>
+								
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="gnb_li">
 					<button type="button" class="btn_op menu-300 menu-order-3"
 						title="게시판관리">게시판관리</button>
 					<div class="gnb_oparea_wr">
@@ -153,7 +169,7 @@
 								<li data-menu="300100"><a href="./adminpostmanagement.html"
 									class="gnb_2da  ">게시판관리</a></li>
 								<li data-menu="300200"><a href="./adminvksao.html"
-									class="gnb_2da  ">게시판 판매 등록</a></li>
+									class="gnb_2da  ">게시판 판매 등록</a></li>ㄴ
 								<li data-menu="300250"><a href="./adminrudao.html"
 									class="gnb_2da  ">게시판 경매 등록</a></li>
 								<li data-menu="300500"><a href="#"

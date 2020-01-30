@@ -1,6 +1,7 @@
 package com.spring.goodluxe.jy;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +77,7 @@ public class ProductlistController {
 			
 			int res = productlistService.registerProduct(purcVO);	
 			
+		
 			return "admin_purc_regi";
 		}
 		

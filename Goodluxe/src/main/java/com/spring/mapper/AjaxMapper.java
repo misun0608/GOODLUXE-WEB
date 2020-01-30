@@ -8,5 +8,10 @@ public interface AjaxMapper {
 	int insertLikedUser(HashMap<String, String> map);
 
 	int deleteLikedUser(HashMap<String, String> map);
+	
+	int increaseLike(HashMap<String, String>map);
+	
+	int decreaseLike(HashMap<String, String>map);
+	
 }
      
