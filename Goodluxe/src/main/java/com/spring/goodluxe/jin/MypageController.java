@@ -55,7 +55,7 @@ public class MypageController {
 		try {
 			ArrayList<HashMap<String, Object>> oaslist = null;
 			ArrayList<HashMap<String, Object>> cancellist = null;
-			// 로그인된 ID 정보가 session 객체에 online_id 로 저장된다고 가정
+			// 濡쒓렇�씤�맂 ID �젙蹂닿� session 媛앹껜�뿉 online_id 濡� ���옣�맂�떎怨� 媛��젙
 //			String online_id = (String) session.getAttribute("online_id");
 			String online_id = "test0123";
 			oaslist = mypageService.getOasData(online_id);
@@ -69,7 +69,7 @@ public class MypageController {
 		}
 		return mav;
 	}
-	// order_and_shipping : 제품 구매 취소(결제 전)
+	// order_and_shipping : �젣�뭹 援щℓ 痍⑥냼(寃곗젣 �쟾)
 	@RequestMapping(value = "orderCancel.do", method = RequestMethod.GET)
 	public ModelAndView orderCancel(String order_number) {
 		ModelAndView mav = new ModelAndView();
@@ -82,7 +82,7 @@ public class MypageController {
 		}
 		return mav;
 	}
-	// order_and_shipping : 제품 환불 신청(결제 후)
+	// order_and_shipping : �젣�뭹 �솚遺� �떊泥�(寃곗젣 �썑)
 	@RequestMapping(value = "orderRefund.do", method = RequestMethod.GET)
 	public ModelAndView orderRefund(String order_number) {
 		ModelAndView mav = new ModelAndView();
@@ -96,20 +96,20 @@ public class MypageController {
 		return mav;
 	}
 	
-	// md_detail
-	@RequestMapping(value = "mdDetail.do", method = RequestMethod.GET)
-	public ModelAndView mdDetail() {
-		ModelAndView mav = new ModelAndView();
-		try {
-			mav.setViewName("md_detail");
-		} catch(Exception e) {
-			System.out.println("Controller ERROR(mdDetail) : " + e.getMessage());
-			mav.setViewName("redirect:/");
-		}
-		return mav;
-	}
+//	// md_detail
+//	@RequestMapping(value = "mdDetail.do", method = RequestMethod.GET)
+//	public ModelAndView mdDetail() {
+//		ModelAndView mav = new ModelAndView();
+//		try {
+//			mav.setViewName("md_detail");
+//		} catch(Exception e) {
+//			System.out.println("Controller ERROR(mdDetail) : " + e.getMessage());
+//			mav.setViewName("redirect:/");
+//		}
+//		return mav;
+//	}
 	
-	// order_detail : 주문 상세
+	// order_detail : 二쇰Ц �긽�꽭
 	@RequestMapping(value = "orderDetail.do", method = RequestMethod.GET)
 	public ModelAndView orderDetail(String order_number) {
 		ModelAndView mav = new ModelAndView();

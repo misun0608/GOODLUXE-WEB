@@ -23,16 +23,16 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			int res = productlistMapper.insertPurcProduct(purcVO);
 			if(res == 1) {
-				System.out.println("¸ÅÀÔ»óÇ° ÀÔ·Â ¼º°ø");
+				System.out.println("ï¿½ï¿½ï¿½Ô»ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			else {
-				System.out.println("¸ÅÀÔ»óÇ° ÀÔ·Â ½ÇÆĞ");
+				System.out.println("ï¿½ï¿½ï¿½Ô»ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			return res;
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("¸ÅÀÔ»óÇ° ÀÔ·Â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ï¿½Ô»ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -47,16 +47,16 @@ public class ProductlistServiceImpl implements ProductlistService{
 			int res = productlistMapper.insertConsProduct(consVO);
 		
 			if(res == 1) {
-				System.out.println("À§Å¹»óÇ° ÀÔ·Â ¼º°ø");
+				System.out.println("ï¿½ï¿½Å¹ï¿½ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			else {
-				System.out.println("À§Å¹»óÇ° ÀÔ·Â ½ÇÆĞ");
+				System.out.println("ï¿½ï¿½Å¹ï¿½ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			return res;
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("À§Å¹»óÇ° ÀÔ·Â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½Å¹ï¿½ï¿½Ç° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -72,23 +72,23 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			int res = productlistMapper.insertSellingBoard(sellboVO);
 			if(res == 1) {
-				System.out.println("°Ô½Ã¹° ÀÔ·Â ¼º°ø");
+				System.out.println("ï¿½Ô½Ã¹ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			else {
-				System.out.println("°Ô½Ã¹° ÀÔ·Â ½ÇÆĞ");
+				System.out.println("ï¿½Ô½Ã¹ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 			return res;
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("°Ô½Ã¹° µî·Ï ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
 	
 	
 	
-	//°Ô½Ã¹° °¹¼ö È®ÀÎ
+	//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int getSellingBoardCount(int startRow, int endRow ,String il_search_brand 
 			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception{
 		try {
@@ -107,9 +107,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			return count;
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("±Û °¹¼ö È®ÀÎ ºÒ°¡");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½");
 		}
 	}
 
@@ -137,9 +137,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return sellbo_list;
 			
 		}catch(Exception e){
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("¾ÆÀÌÅÛ »çÁø°ú ÀÌ¸§ ºÒ·¯¿À±â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}	
 	}
 
@@ -166,12 +166,12 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return sellbo_list;
 			
 		}catch(Exception e){
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("¾ÆÀÌÅÛ »çÁø°ú ÀÌ¸§ ºÒ·¯¿À±â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}	
 	}
-	//¾Æ·¡¿¡ ¸®½ºÆ® ºÎºĞ
+	//ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îºï¿½
 	public ArrayList<HashMap<String, Object>> getMainPageItem() throws Exception{
 		
 		
@@ -182,21 +182,21 @@ public class ProductlistServiceImpl implements ProductlistService{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", 1); 
-			map.put("endRow", 12); //¸ŞÀÎ ÆäÀÌÁö¿¡ ³ÖÀ» ¾ÆÀÌÅÛ °¹¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.
+			map.put("endRow", 12); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.
 		
 			mainbolist = productlistMapper.getMainPageItem(map);
 			
 			return mainbolist;
 			
 		}catch(Exception e){
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("¸ŞÀÎ ¾ÆÀÌÅÛ ºÒ·¯¿À±â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}	
 
 		
 	}
-	//ÈÖ¸®¸¯ °Å¸®´Â ºÎºĞ
+	//ï¿½Ö¸ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Îºï¿½
 	public ArrayList<HashMap<String, Object>> getMainPageItem_view() throws Exception{
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
@@ -212,9 +212,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return mainbolist_view;
 			
 		}catch(Exception e){
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("¸ŞÀÎ ÈÖ¸®¸¯ ¾ÆÀÌÅÛ ºÒ·¯¿À±â ½ÇÆĞ");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}	
 		
 	}
@@ -229,12 +229,12 @@ public class ProductlistServiceImpl implements ProductlistService{
 		
 	
 			int count = productlistMapper.getSearchBoardCount(map);
-			System.out.println("¼­Ä¡±Û°¹¼ö"+count);
+			System.out.println("ï¿½ï¿½Ä¡ï¿½Û°ï¿½ï¿½ï¿½"+count);
 			return count;
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("°Ë»ö °á°ú ±Û °¹¼ö È®ÀÎ ºÒ°¡");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½");
 		}
 	}
 
@@ -248,7 +248,7 @@ public class ProductlistServiceImpl implements ProductlistService{
 			ArrayList<HashMap<String, Object>> searchbolist_view = null;
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
-			System.out.println("row´Â ??"+ startRow + endRow);
+			System.out.println("rowï¿½ï¿½ ??"+ startRow + endRow);
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
 			map.put("content",search_content);
@@ -256,15 +256,15 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			searchbolist_view = productlistMapper.getSearchBoardList(map);
 			
-			System.out.println("¼­Ä¡¸®½ºÆ®"+ searchbolist_view);
+			System.out.println("ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Æ®"+ searchbolist_view);
 		
 			return searchbolist_view;
 		
 		
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("°Ë»ö °á°ú ³»¿ë È®ÀÎ ºÒ°¡");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½");
 		}
 		
 		
@@ -287,11 +287,51 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return theProduct;
 			
 		}catch(Exception e) {
-			System.out.println("¸Ş¼¼Áö" + e.getMessage());
-			System.out.println("½ºÅÃ" + e.getStackTrace());
-			throw new Exception("°Ë»ö °á°ú ³»¿ë È®ÀÎ ºÒ°¡");
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½");
 		}
 		
+	}
+
+
+
+	public ArrayList<HashMap<String, Object>> getRecommand(String entity_number) throws Exception {
+		
+		try {
+			
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		
+			ArrayList<HashMap<String, Object>> recommandList = null;
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("entity", entity_number);	
+			System.out.println("ì—”í‹°í‹°"+entity_number);
+			HashMap<String, String> theme = null;
+			System.out.println("serviceImpl ë‘˜");
+			theme = productlistMapper.getRecommandtheme(map);
+			
+//			String brand = "";
+//			String category = "";
+//			
+//			brand = theme.get("pd_brand");
+//			
+//			category= theme.get("pd_category");
+//			
+			
+			
+			recommandList = productlistMapper.getRecommandList(theme);
+			
+			System.out.println("ì‘???"+recommandList);
+			
+			return recommandList;
+		}catch(Exception e) {
+			System.out.println("ï¿½Ş¼ï¿½ï¿½ï¿½" + e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½" + e.getStackTrace());
+			throw new Exception("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ò°ï¿½");
+		}
+		
+	
 	}
 	
 

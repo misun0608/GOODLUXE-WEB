@@ -24,19 +24,19 @@ public class ProductlistController {
 	@Autowired
 	private ProductlistServiceImpl productlistService; 
 	
-	//매입상품 입력 페이지 이동
+		//
 		@RequestMapping(value = "adminProductRegisterPurchase.do")
 		public String adminProductRegisterPurchase() {
 			
 			return "admin_purc_regi";
 		}
-		//위탁상품 입력 페이지 이동
+		//
 		@RequestMapping(value = "adminProductRegisterConsign.do")
 		public String adminProductRegisterConsign() {
 			
 			return "admin_consign_regi";
 		}
-		//게시물 작성 페이지 이동
+		//
 		@RequestMapping(value = "adminPostUpload.do")
 		public String adminPostUpload() {
 			
@@ -47,7 +47,7 @@ public class ProductlistController {
 		
 		
 		
-		//메인 페이지 이동
+		//
 		@RequestMapping(value = "mainPage.do")
 		public String mainPage( Model model ) throws Exception {
 			
@@ -65,7 +65,7 @@ public class ProductlistController {
 			return "main_page";
 		}
 		
-		//매입상품 입력 액션
+		//
 		@RequestMapping(value = "purcRegiAction.do")
 		public String purcRegiAction(PurchaseProductVO purcVO, HttpServletRequest request) throws Exception {
 			
@@ -106,7 +106,7 @@ public class ProductlistController {
 
 			String uploadPath = "C:\\Project138\\upload\\";
 			
-			/*메인 이미지 처리부분*/
+		
 			String originalFileExtension_main = mf_main.getOriginalFilename().substring(mf_main.getOriginalFilename().lastIndexOf("."));
 			String storedFileName_main = UUID.randomUUID().toString().replaceAll("-", "")+originalFileExtension_main;
 			if(mf_main.getSize()!=0) { 
@@ -115,7 +115,7 @@ public class ProductlistController {
 			sellboVO.setPb_main_img_original(mf_main.getOriginalFilename());
 			sellboVO.setPb_main_img_stored(storedFileName_main);
 			
-			/*디테일 이미지 처리부분1*/
+			
 			String originalFileExtension_detail1 = mf_detail1.getOriginalFilename().substring(mf_detail1.getOriginalFilename().lastIndexOf("."));
 			String storedFileName_detail1 = UUID.randomUUID().toString().replaceAll("-", "")+originalFileExtension_detail1;
 			if(mf_detail1.getSize()!=0) { 
@@ -124,7 +124,7 @@ public class ProductlistController {
 			sellboVO.setPb_detail_img1_original(mf_detail1.getOriginalFilename());
 			sellboVO.setPb_detail_img1_stored(storedFileName_detail1);
 		
-			/*디테일 이미지 처리부분2*/
+			
 			String originalFileExtension_detail2 = mf_detail2.getOriginalFilename().substring(mf_detail2.getOriginalFilename().lastIndexOf("."));
 			String storedFileName_detail2 = UUID.randomUUID().toString().replaceAll("-", "")+originalFileExtension_detail2;
 			if(mf_detail2.getSize()!=0) { 
@@ -133,7 +133,7 @@ public class ProductlistController {
 			sellboVO.setPb_detail_img2_original(mf_detail1.getOriginalFilename());
 			sellboVO.setPb_detail_img2_stored(storedFileName_detail2);
 			
-			/*디테일 이미지 처리부분3*/
+			
 			String originalFileExtension_detail3 = mf_detail3.getOriginalFilename().substring(mf_detail3.getOriginalFilename().lastIndexOf("."));
 			String storedFileName_detail3 = UUID.randomUUID().toString().replaceAll("-", "")+originalFileExtension_detail3;
 			if(mf_detail3.getSize()!=0) { 
@@ -146,7 +146,7 @@ public class ProductlistController {
 			return "admin_post_upload";
 		}
 		
-		//제품리스트 페이지 이동
+
 		@RequestMapping(value = "itemList.do")
 		public String itemList( Model model, HttpServletRequest request
 				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
@@ -157,10 +157,10 @@ public class ProductlistController {
 				,@RequestParam(value = "il_search_price", required = false, defaultValue = "all") String il_search_price
 				)throws Exception {
 			
-			if(pageNum<=0) { //첫페이지
+			if(pageNum<=0) {
 				pageNum = 1;
 			}
-			if(pageNum>pageCount) {//끝페이지
+			if(pageNum>pageCount) {
 				pageNum = pageCount;
 			}
 			int pageSize = 3;
@@ -199,19 +199,19 @@ public class ProductlistController {
 			return "item_list";
 		}
 
-		//검색결과
+
 		@RequestMapping(value = "searchResult.do")
 		public String searchResult(Model model, HttpServletRequest request
 				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
 				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum 
-				,@RequestParam(value = "search_content", required = false) String search_content
+				,@RequestParam(value = "search_content", required = false, defaultValue="") String search_content
 				,@RequestParam(value = "orderbywhat", required = false, defaultValue = "recently") String orderbywhat
 				)throws Exception {
 			
-			if(pageNum<=0) { //첫페이지
+			if(pageNum<=0) { 
 				pageNum = 1;
 			}
-			if(pageNum>pageCount) {//끝페이지
+			if(pageNum>pageCount) {
 				pageNum = pageCount;
 			}
 			int pageSize = 3;
@@ -251,17 +251,22 @@ public class ProductlistController {
 			return "search_result";
 		}
 		
-		//메인 페이지 이동
+	
 		@RequestMapping(value = "mdDetail.do")
 		public String mdDetail( Model model,HttpServletRequest request
-				,@RequestParam(value = "entity_number", required = false) String entity_number
+				,@RequestParam(value = "entity_number", required = false, defaultValue = "40" ) String entity_number
 				 ) throws Exception {
-			
-			System.out.println("entity_number = "+entity_number);
 			HashMap<String,Object>theProduct = new HashMap<String,Object>();
+			ArrayList<HashMap<String, Object>> recommandList = new ArrayList<HashMap<String, Object>>();
 			
 			theProduct = productlistService.getTheProduct(entity_number);
 			
+			System.out.println("엔티티 프로덕트 찾고 그다음");
+			
+			recommandList = productlistService.getRecommand(entity_number); 
+			System.out.println("컨트롤 "+recommandList);
+			
+			model.addAttribute("recommandList",recommandList);
 			model.addAttribute("theProduct",theProduct);
 			return "md_detail";
 		}

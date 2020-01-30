@@ -80,6 +80,12 @@
 		<result property = "pb_detail" column = "pb_detail"/>
 		<result property = "entity_number" column = "entity_number"/>	
 	</resultMap>
+	
+	<!-- 추천 상품 주제 -->
+	<resultMap id = "RecommandthemeVO" type = "java.util.HashMap">
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "pd_category" column = "pd_category"/>
+	</resultMap>
 	   
 	<!-- 매입 상품 등록 -->
 	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.jy.PurchaseProductVO"> 
@@ -301,5 +307,41 @@
 		)where entity_number = #{entityNo}
 	</select>
 	
+	<select id = "getRecommandtheme" parameterType = "hashmap" resultMap ="RecommandthemeVO">
+	
+			select pd_brand, pd_category from(
+				SELECT * FROM (
+					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+					from gl_purchase, gl_productboard
+					where gl_purchase.entity_number = gl_productboard.entity_number
+					UNION
+					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+					from gl_consignment, gl_productboard
+					where gl_consignment.entity_number = gl_productboard.entity_number
+				)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+			)where entity_number = #{entity}
+	
+	</select>
+	<select id = "getRecommandList" parameterType = "hashmap" resultMap ="listHashmapVO">
+	
+		
+			select * from (
+				SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date, entity_number , pd_category
+				 FROM (
+						select * from(
+							SELECT * FROM (
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								from gl_purchase, gl_productboard
+								where gl_purchase.entity_number = gl_productboard.entity_number
+								UNION
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								from gl_consignment, gl_productboard
+								where gl_consignment.entity_number = gl_productboard.entity_number
+							)
+						)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category}
+			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
+	</select>
 
+	
 </mapper>

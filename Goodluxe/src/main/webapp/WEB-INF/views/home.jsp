@@ -12,10 +12,13 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <br /><br /><a href="mypageOAS.do">진_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="#">지예_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="#">민지_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="#">미선_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="#">재진_만들고자 하는 페이지를 연결합시다</a>
+<br /><br /><a href="adminProductRegisterPurchase.do">지예_매입 등록</a>
+<br /><br /><a href="adminProductRegisterConsign.do">지예_위탁등록</a>
+<br /><br /><a href="adminPostUpload.do">지예_게시물등록</a>
+<br /><br /><a href="itemList.do">지예_리스트</a>
+<br /><br /><a href="mainPage.do">지예_메인페이지</a>
+<br /><br /><a href="searchResult.do?search_content=">지예_검색결과</a>
+<br /><br /><a href="mdDetail.do?entity_number=40">지예_상품상세</a>
 
 <br /><br />
 css, js, img를 가져다가 사용하고 싶다면...<br>

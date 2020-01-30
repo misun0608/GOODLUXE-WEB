@@ -35,7 +35,7 @@
         margin-left: 15px;
     }
 
-    .page_fisrt:hover, .last:hover, .left:hover, .right:hover{
+    .page_fisrt:hover, .last:hover, .left:hover, .right:hover, .page_last:hover{
         color: #DFB1AB;
     }
 

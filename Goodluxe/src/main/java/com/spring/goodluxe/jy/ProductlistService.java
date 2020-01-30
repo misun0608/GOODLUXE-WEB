@@ -7,25 +7,25 @@ import java.util.List;
 public interface ProductlistService {
 
 
-	int registerProduct(PurchaseProductVO purcVO) throws Exception; // ¸ÅÀÔ »óÇ° µî·Ï
-	int registerProduct(ConsignProductVO consVO) throws Exception;  //À§Å¹ »óÇ° µî·Ï
-	int uploadProductBoard(ProductBoardVO sellboVO) throws Exception; // °Ô½Ã¹° µî·Ï
+	int registerProduct(PurchaseProductVO purcVO) throws Exception; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
+	int registerProduct(ConsignProductVO consVO) throws Exception;  //ï¿½ï¿½Å¹ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
+	int uploadProductBoard(ProductBoardVO sellboVO) throws Exception; // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½
 	
-	//¾ÆÀÌÅÛ¸®½ºÆ®
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½Æ®
 	int getSellingBoardCount(int startRow, int endRow ,String il_search_brand 
-			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception; // °Ô½Ã¹° °¹¼ö È®ÀÎ
+			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception; // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	ArrayList<HashMap<String, Object>> getSellingBoardProduct(int startRow, int endRow ,String il_search_brand 
-			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception;//°Ô½ÃÁßÀÎ ¾ÆÀÌÅÛ ¸®½ºÆ®(»çÁø, ÀÌ¸§)
+			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception;//ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®(ï¿½ï¿½ï¿½ï¿½, ï¿½Ì¸ï¿½)
 	
 	
-	//¸ÞÀÎÆäÀÌÁö ¾ÆÀÌÅÛ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ArrayList<HashMap<String, Object>> getMainPageItem() throws Exception;
 	ArrayList<HashMap<String, Object>> getMainPageItem_view() throws Exception;
 	
-	//°Ë»ö°á°ú
+	//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½
 	int getSearchBoardCount(String search_content,String orderbywhat)throws Exception;
 	ArrayList<HashMap<String, Object>> getSearchBoardProduct(int startRow, int endRow, String search_content ,String orderbywhat)throws Exception;
 
 	HashMap<String, Object> getTheProduct(String entity_number) throws Exception;
-
+	ArrayList<HashMap<String, Object>> getRecommand(String entity_number)throws Exception;
 }

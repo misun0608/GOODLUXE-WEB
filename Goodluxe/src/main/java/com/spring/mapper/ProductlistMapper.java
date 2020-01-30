@@ -15,7 +15,7 @@ public interface ProductlistMapper {
 	
 	int getSellingBoardCount(HashMap<String,Object> map);
 	ArrayList<HashMap<String, Object>> SellingBoardProduct(HashMap<String,Object> map);
-	//(+¿©±â¼­ Àá±ñ!!)ArrayList´Â Ä¿Áü.
+	//(+ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½!!)ArrayListï¿½ï¿½ Ä¿ï¿½ï¿½.
 
 	ArrayList<HashMap<String, Object>> getMainPageItem(HashMap<String,Object> map);
 	ArrayList<HashMap<String, Object>> getMainPageItemView(HashMap<String,Object> map);
@@ -24,5 +24,7 @@ public interface ProductlistMapper {
 	ArrayList<HashMap<String, Object>> getSearchBoardList(HashMap<String, Object> map);
 	
 	HashMap<String,Object>getTheProduct(HashMap<String,String>map);
+	HashMap<String, String> getRecommandtheme(HashMap<String,String> map);
+	ArrayList<HashMap<String, Object>> getRecommandList(HashMap<String,String> map);
 	
 }
