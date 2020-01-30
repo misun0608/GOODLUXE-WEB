@@ -1,0 +1,64 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+html, body {height: 100%;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    .ep_1st {
+        /* width: 1080px; */
+        width: 100%;
+        margin: 0px 0 25px 0;
+    }
+
+    /* .ep_1st>a>img {
+        width: 100%;
+    } */
+    .ep_1st>a>.panel {
+        width: 100%;
+        height: 600px;
+        /* height: 90%; */
+    }
+    /* .ep_1st>a:nth-of-type(1)>.panel {
+        background: url(../img/event_img/event05.jpg) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(2)>.panel {
+        background: url(../img/event_img/event06.jpg) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(3)>.panel {
+        background: url(../img/event_img/event07.jpg) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(4)>.panel {
+        background: url(../img/event_img/event08.png) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(5)>.panel {
+        background: url(../img/event_img/event09.jpg) no-repeat center/cover fixed;
+    } */
+    .ep_1st>a:nth-of-type(1)>.panel {
+        background: url(../img/event_img/sky_text01.png) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(2)>.panel {
+        background: url(../img/event_img/sky_text02.png) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(3)>.panel {
+        background: url(../img/event_img/sky_text03.png) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(4)>.panel {
+        background: url(../img/event_img/sky_text04.png) no-repeat center/cover fixed;
+    }
+    .ep_1st>a:nth-of-type(5)>.panel {
+        background: url(../img/event_img/sky_text05.png) no-repeat center/cover fixed;
+    }
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    
+}

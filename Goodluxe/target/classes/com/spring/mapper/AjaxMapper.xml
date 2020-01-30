@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.AjaxMapper">
+	
+	<select id = "isAlreadyLiked" parameterType = "hashmap" resultType = "int">
+		select count(*) from gl_liked
+		 where member_id=#{id} and entity_number=#{entity}
+	</select>
+	
+	<insert id = "insertLikedUser" parameterType = "hashmap">
+		insert into gl_liked(member_id, entity_number) values(#{id}, #{entity})
+	</insert>
+	
+	<delete id = "deleteLikedUser" parameterType = "hashmap">
+		delete from gl_liked  where member_id=#{id} and entity_number=#{entity}
+	</delete>
+	
+	
+	<update id = "increaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like+1
+		  where entity_number = '40'
+	</update>
+	
+	<update id = "decreaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like-1
+		  where entity_number='40'
+	</update>
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

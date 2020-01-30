@@ -1,0 +1,446 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    body{
+        font-size: 13px;
+    }
+
+    /* 고객센터, 문의 글쓰기 section */
+    .container{ 
+        width: 850px;
+        margin: 0 auto;
+        padding-bottom: 13px;
+    }
+    .text_head{
+        width: 80%;
+        text-align: left;
+        margin: 5% 0 0.2% 2%;/* 위쪽 오른쪽 아래쪽 왼쪽*/
+    }
+    .text_write{
+        margin: 0 0 0 1%;
+    }
+
+    /* 글쓰기 테이블 section */
+    .container2{
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    /*체크박스 목록, 삭제, 수정 버튼 section*/
+    .container3{
+        width: 1060px;
+        margin: auto;
+        padding: 12px 0 12px 0;
+        text-align: left;
+    }
+
+    /*글쓰기 테이블*/
+    .write_table{
+        text-align: center;
+        width: 850px;
+        border-top: 5px;
+        margin: 0 auto;
+        /* border-top: 1px solid #d7d7d7; */
+        border-collapse: collapse;
+    }
+    tr{
+        border-top: 0px solid #dddddd;
+    }
+    .tr_title{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .tr_content{
+        text-align: start;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_title{
+        text-align: center;
+        width: 130px;
+        background: rgb(255, 244, 243);
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_content{
+        /* text-align: center;
+        background: #DEDEE9; */
+        height: 250px;
+    }
+    .text_title{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        border: 0px;
+        padding-left: 7px;
+    }
+    .table_content{
+        padding: 7px;
+        text-align: left;
+        line-height: 1.6em;
+    }
+    .text_content{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        height: 250px;
+        padding: 0.5em;
+    }
+
+    /* 버튼 */
+    .btn{
+        width: 110px;
+        height: 35px;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        margin: 1em 0.3em 1em 0.3em;
+        outline: 0px;
+    }
+
+    /* 댓글 달기 */
+    .text_comment{
+        width:760px; 
+        height: 28px;
+        margin: 0.3em 0 1em 0;
+        border-color: 1px solid rgb(248, 248, 248);
+    }
+
+    .btn_comment{
+        font-size: 12px;
+        width: 75px;
+        height: 34px;
+        color: white;
+        border: 1px solid rgb(223, 168, 165);
+        border-radius: 5px;
+        background-color: rgb(223, 169, 165);
+        margin: 0px 0px 0px 0.4em;
+        outline: 0px;
+    }
+
+    .btn_re_comment{
+        font-size: 12px;
+        width: 73px;
+        height: 30px;
+        /* color: white;
+        border: 1px solid white; */
+        color: black;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        /* background-color: rgb(223, 169, 165); */
+        background-color: white;
+        margin: 0px 0px 0.2em 1.5em;
+        outline: 0px;
+    }
+
+    /* 댓글 버튼 호버(하면 조잡해보이는 것 같기도한데 버튼이 많아서 어느 버튼 선택하는지 구분이 필요할 것 같기도 해서 일단 해둠) */
+    .btn_re_comment:hover{ 
+        /* background-color: rgb(248, 237, 236); */
+        background-color: #DFB1AB;
+        border-color: #DFB1AB;
+        color: white;
+    }
+
+    .table_comment{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+}
+
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    body{
+        font-size: 13px;
+    }
+
+    /* 고객센터, 문의 글쓰기 section */
+    .container{ 
+        width: 850px;
+        margin: 0 auto;
+        padding-bottom: 13px;
+    }
+    .text_head{
+        width: 80%;
+        text-align: left;
+        margin: 5% 0 0.2% 2%;/* 위쪽 오른쪽 아래쪽 왼쪽*/
+    }
+    .text_write{
+        margin: 0 0 0 1%;
+    }
+
+    /* 글쓰기 테이블 section */
+    .container2{
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /*체크박스 목록, 삭제, 수정 버튼 section*/
+    .container3{
+        width: 1060px;
+        margin: auto;
+        padding: 12px 0 12px 0;
+        text-align: left;
+    }
+
+    /*글쓰기 테이블*/
+    .write_table{
+        text-align: center;
+        width: 850px;
+        border-top: 5px;
+        margin: 0 auto;
+        /* border-top: 1px solid #d7d7d7; */
+        border-collapse: collapse;
+    }
+    tr{
+        border-top: 0px solid #dddddd;
+    }
+    .tr_title{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .tr_content{
+        text-align: start;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_title{
+        text-align: center;
+        width: 130px;
+        /* background: #DEDEE9; */
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_content{
+        text-align: center;
+        /* background: #DEDEE9; */
+        height: 250px;
+    }
+    .text_title{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        border: 0px;
+        padding-left: 7px;
+    }
+    .table_content{
+        padding: 7px;
+        text-align: left;
+        line-height: 1.6em;
+    }
+    .text_content{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        height: 250px;
+        border: 0px; 
+        padding: 0.5em;
+    }
+
+    /* 버튼 */
+    .btn{
+        width: 100px;
+        height: 32px;
+        border: 1px solid #9BA2BB;
+        border-radius: 5px;
+        margin: 1em 0.3em 1em 0.3em;
+        outline: 0px;
+    }
+
+    /* 댓글 달기 */
+    .text_comment{
+        width:760px; 
+        height: 28px;
+        margin: 0.3em 0 1em 0;
+        border-color: 1px solid rgb(248, 248, 248);
+    }
+
+    .btn_comment{
+        font-size: 12px;
+        width: 75px;
+        height: 34px;
+        color: white;
+        border: 1px solid rgb(223, 168, 165);
+        border-radius: 5px;
+        background-color: rgb(223, 169, 165);
+        margin: 0px 0px 0px 0.4em;
+        outline: 0px;
+    }
+
+    .btn_re_comment{
+        font-size: 12px;
+        width: 75px;
+        height: 34px;
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: rgb(223, 169, 165);
+        margin: 0px 0px 0px 0.4em;
+        outline: 0px;
+    }
+
+    .table_comment{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    body{
+        font-size: 13px;
+    }
+
+    /* 고객센터, 문의 글쓰기 section */
+    .container{ 
+        width: 850px;
+        margin: 0 auto;
+        padding-bottom: 13px;
+    }
+    .text_head{
+        width: 80%;
+        text-align: left;
+        margin: 5% 0 0.2% 2%;/* 위쪽 오른쪽 아래쪽 왼쪽*/
+    }
+    .text_write{
+        margin: 0 0 0 1%;
+    }
+
+    /* 글쓰기 테이블 section */
+    .container2{
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /*체크박스 목록, 삭제, 수정 버튼 section*/
+    .container3{
+        width: 1060px;
+        margin: auto;
+        padding: 12px 0 12px 0;
+        text-align: left;
+    }
+
+    /*글쓰기 테이블*/
+    .write_table{
+        text-align: center;
+        width: 850px;
+        border-top: 5px;
+        margin: 0 auto;
+        /* border-top: 1px solid #d7d7d7; */
+        border-collapse: collapse;
+    }
+    tr{
+        border-top: 0px solid #dddddd;
+    }
+    .tr_title{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .tr_content{
+        text-align: start;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_title{
+        text-align: center;
+        width: 130px;
+        background:  rgb(255, 244, 243);
+        border-collapse: collapse;
+        height: 30px;
+    }
+    .td_content{
+        text-align: center;
+        background:  rgb(255, 244, 243);
+        height: 250px;
+    }
+    .text_title{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        border: 0px;
+        padding-left: 7px;
+    }
+    .table_content{
+        padding: 7px;
+        text-align: left;
+        line-height: 1.6em;
+    }
+    .text_content{
+        resize: none;
+        outline: 0px;
+        width: 98%;
+        height: 250px;
+        border: 0px; 
+        padding: 0.5em;
+    }
+
+    /* 버튼 */
+    .btn{
+        width: 100px;
+        height: 32px;
+        border: 1px solid rgb(223, 168, 165);
+        border-radius: 5px;
+        margin: 1em 0.3em 1em 0.3em;
+        outline: 0px;
+    }
+
+    /* 댓글 달기 */
+    .text_comment{
+        width:760px; 
+        height: 28px;
+        margin: 0.3em 0 1em 0;
+        border-color: 1px solid rgb(248, 248, 248);
+    }
+
+    .btn_comment{
+        font-size: 12px;
+        width: 75px;
+        height: 34px;
+        color: white;
+        border: 1px solid rgb(223, 168, 165);
+        border-radius: 5px;
+        background-color: rgb(223, 169, 165);
+        margin: 0px 0px 0px 0.4em;
+        outline: 0px;
+    }
+
+    .btn_re_comment{
+        font-size: 12px;
+        width: 75px;
+        height: 34px;
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: rgb(223, 169, 165);
+        margin: 0px 0px 0px 0.4em;
+        outline: 0px;
+    }
+
+    .table_comment{
+        text-align: left;
+        border: 1px solid #d7d7d7;
+        border-collapse: collapse;
+        height: 30px;
+    }
+}

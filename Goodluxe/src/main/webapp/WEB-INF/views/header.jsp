@@ -62,7 +62,7 @@
                 <!-- <img src="${pageContext.request.contextPath}/resources/img/icons/list-menu_gold.png" alt="mobile_menu"> -->
                 <img src="${pageContext.request.contextPath}/resources/img/icons/list-menu_white.png" alt="mobile_menu">
             </div>
-            <div class="logo"><a href="main_page.html">GOODLUXE</a></div>
+            <div class="logo"><a href="./mainPage.do">GOODLUXE</a></div>
         </div>
     </div>
 </div>
