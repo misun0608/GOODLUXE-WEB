@@ -46,12 +46,14 @@
 		where member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
 	
+	<!-- 로그인시 회원 등급 체크 -->
 	<select id="member_status_chk" resultType="String">
       select member_class
       from gl_member 
       where member_id = #{member_id}
    </select>
    
+   <!-- 로그인시 어드민인지 아닌지 체크 -->
 	<select id="admin_status_chk" resultType="String">
       select member_isadmin
       from gl_member 
