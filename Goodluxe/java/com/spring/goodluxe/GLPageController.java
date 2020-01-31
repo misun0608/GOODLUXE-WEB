@@ -80,7 +80,7 @@ public class GLPageController {
 			mav.addObject("cancellist", cancellist);
 			mav.setViewName("order_and_shipping");
 		} catch(Exception e) {
-			System.out.println("Controller ERROR(mypageOAS) : " + e.getMessage());
+			System.out.println("ERROR(GLPageController/mypageOAS) : " + e.getMessage());
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -94,7 +94,7 @@ public class GLPageController {
 			gls.orderCancel(order_number);
 			mav.setViewName("redirect:mypageOAS.do");
 		} catch(Exception e) {
-			System.out.println("Controller ERROR(orderCancel) : " + e.getMessage());
+			System.out.println("ERROR(GLPageController/orderCancel) : " + e.getMessage());
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -108,7 +108,7 @@ public class GLPageController {
 			gls.orderRefund(order_number);
 			mav.setViewName("redirect:mypageOAS.do");
 		} catch(Exception e) {
-			System.out.println("Controller ERROR(orderCancel) : " + e.getMessage());
+			System.out.println("ERROR(GLPageController/orderRefund) : " + e.getMessage());
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -123,7 +123,7 @@ public class GLPageController {
 			mav.addObject("orderdata", orderdata);
 			mav.setViewName("order_detail");
 		} catch(Exception e) {
-			System.out.println("Controller ERROR(orderDetail) : " + e.getMessage());
+			System.out.println("ERROR(GLPageController/orderDetail) : " + e.getMessage());
 			mav.setViewName("redirect:/");
 		}
 		return mav;

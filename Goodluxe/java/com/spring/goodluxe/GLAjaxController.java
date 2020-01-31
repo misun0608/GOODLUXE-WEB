@@ -33,7 +33,7 @@ public class GLAjaxController {
 				retVal.put("result", "ok");
 			}
 		} catch (Exception e) {
-			System.out.println("ERROR(MemberAjaxController/userChk) : " + e.getMessage());
+			System.out.println("ERROR(GLAjaxController/userChk) : " + e.getMessage());
 			retVal.put("result", "error_accur");
 		}
 		return retVal;

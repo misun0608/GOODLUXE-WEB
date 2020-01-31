@@ -56,7 +56,7 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			MypageMapper mypageMapper = sqlSession.getMapper(MypageMapper.class);
 			oaslist = mypageMapper.getOasData(id);
 		} catch(Exception e) {
-			System.out.println("Service ERROR(getOasData) : " + e.getMessage());
+			System.out.println("ERROR(GoodluxeService/getOasData) : " + e.getMessage());
 		}
 		return oaslist;
 	}
@@ -68,7 +68,7 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			MypageMapper mypageMapper = sqlSession.getMapper(MypageMapper.class);
 			cancellist = mypageMapper.getCancelData(id);
 		} catch(Exception e) {
-			System.out.println("Service ERROR(getCancelData) : " + e.getMessage());
+			System.out.println("ERROR(GoodluxeService/getCancelData) : " + e.getMessage());
 		}
 		return cancellist;
 	}
@@ -82,12 +82,12 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			int num = mypageMapper.orderCancel(order_number, ct, "취소완료");
 			mypageMapper.updatePBStatus(order_number, "판매중");
 			if(num <= 0) {
-				System.out.println("Service ERROR(orderCancel) : 주문 취소 실패");
+				System.out.println("ERROR(GoodluxeService/orderCancel) : 주문 취소 실패");
 				mypageMapper.updatePBStatus(order_number, "거래중");
 			}
 			
 		} catch(Exception e) {
-			System.out.println("Service ERROR(orderCancel) : " + e.getMessage());
+			System.out.println("ERROR(GoodluxeService/orderCancel) : " + e.getMessage());
 		}
 	}
 	// mypageOAS:refund
@@ -99,11 +99,11 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			Timestamp ct = new Timestamp(today.getTimeInMillis());
 			int num = mypageMapper.orderCancel(order_number, ct, "환불신청");
 			if(num <= 0) {
-				System.out.println("Service ERROR(orderRefund) : 환불 신청 실패");
+				System.out.println("ERROR(GoodluxeService/orderRefund) : 환불 신청 실패");
 			}
 			
 		} catch(Exception e) {
-			System.out.println("Service ERROR(orderCancel) : " + e.getMessage());
+			System.out.println("ERROR(GoodluxeService/orderCancel) : " + e.getMessage());
 		}
 	}
 	// mypageOAS:order_detail
@@ -114,7 +114,7 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			MypageMapper mypageMapper = sqlSession.getMapper(MypageMapper.class);
 			orderdata = mypageMapper.getOrderData(order_number);
 		} catch(Exception e) {
-			System.out.println("Service ERROR(getOrderData) : " + e.getMessage());
+			System.out.println("ERROR(GoodluxeService/getOrderData) : " + e.getMessage());
 		}
 		return orderdata;
 	}
