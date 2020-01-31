@@ -33,13 +33,10 @@ public class MemberServiceImpl implements MemberService {
 			membervo.setMember_class(member_db.getMember_class());
 			membervo.setMember_isadmin(member_db.getMember_isadmin());
 			
-			
 		} catch (Exception e) {
 			System.out.println("ERROR(MemberService/userChk) : " + e.getMessage());
 			return "error_accur";
 		}
-
 		return "ok";
 	}
-
 }
