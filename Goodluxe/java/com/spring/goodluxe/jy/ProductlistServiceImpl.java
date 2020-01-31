@@ -2,12 +2,14 @@ package com.spring.goodluxe.jy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.ConsignProductVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
+import com.spring.goodluxe.voes.PurchaseProductVO;
 import com.spring.mapper.ProductlistMapper;
 
 @Service("productlistService")

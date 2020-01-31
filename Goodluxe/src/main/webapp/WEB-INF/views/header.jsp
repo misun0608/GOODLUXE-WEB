@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	String mem_id = (String) session.getAttribute("member_id");
+	String mem_class = (String) session.getAttribute("member_class");
+	String mem_isadmin = (String) session.getAttribute("member_isadmin");
+%>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+
 <div class="header">
     <div class="header_bg">
         <div class="header_area">
+			<%
+				if (mem_id == null) {
+			%>
             <ul class="topmenu nonmember_menu on">
                 <li class="cs"><a href="#">고객센터</a></li>
                 <li class="singin"><a href="#">회원가입</a></li>
@@ -11,10 +22,21 @@
                     <a href="#">로그인</a>
                 </li>
             </ul>
-            <ul class="topmenu member_menu">
+			<%
+				} else {
+					if (mem_isadmin.equals("Y")) {
+			%>
+            <ul class="topmenu member_menu on">
+            	<li class="logout"><a href="logout.do">로그아웃</a></li>
+                <li class="admin_page_link"><a href="#">관리자페이지</a></li>
+            </ul>
+			<%
+				} else if (mem_class.equals("Y") || mem_class.equals("B")) {
+			%>
+            <ul class="topmenu member_menu on">
                 <li class="cs"><a href="#">고객센터</a></li>
                 <li class="logout"><a href="#">로그아웃</a></li>
-                <li class="mypage"><a href="#">마이페이지</a></li>
+                <li class="mypage"><a href="mypageOAS.do?member_id=<%=mem_id%>">마이페이지</a></li>
                 <li class="notice">
                     <img src="${pageContext.request.contextPath}/resources/img/icons/notice.png">
                     <a href="#" class='notice_btn'>알림</a>
@@ -56,8 +78,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="notice"><a href="#">관리자페이지</a></li>
             </ul>
+			<%
+				}
+				}
+			%>
             <div class="m_menu_icon">
                 <!-- <img src="${pageContext.request.contextPath}/resources/img/icons/list-menu_gold.png" alt="mobile_menu"> -->
                 <img src="${pageContext.request.contextPath}/resources/img/icons/list-menu_white.png" alt="mobile_menu">

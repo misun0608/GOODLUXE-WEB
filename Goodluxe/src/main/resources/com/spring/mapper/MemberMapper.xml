@@ -21,7 +21,7 @@
 		<result property="member_isadmin" column="member_isadmin"/>
 	</resultMap>
 	
-	<resultMap type="com.spring.goodluxe.mj.MemberVO" id="memberResult">
+	<resultMap type="com.spring.goodluxe.voes.MemberVO" id="memberResult">
 		<result property="member_id" column="MEMBER_ID"/>
 		<result property="member_pw" column="member_pw"/>
 		<result property="member_name" column="member_name"/>
@@ -40,7 +40,7 @@
 	</resultMap>
 	
 	
-	<select id="userChk" parameterType="com.spring.goodluxe.mj.MemberVO" resultMap="memberResult">
+	<select id="userChk" parameterType="com.spring.goodluxe.voes.MemberVO" resultMap="memberResult">
 		select * 
 		from gl_member 
 		where member_id=#{member_id} and member_pw=#{member_pw}

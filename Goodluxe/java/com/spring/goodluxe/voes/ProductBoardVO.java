@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jy;
+package com.spring.goodluxe.voes;
 
 import java.util.Date;
 
@@ -31,23 +31,23 @@ create sequence sellingBoard_seq
  */
 
 public class ProductBoardVO { 
-	private String pb_number;				//±Û¹øÈ£ (½ÃÄö½º)
-	private String pb_division; 			//°Ô½Ã±Û ºÐ·ù
-	private String pb_md_name;   			//Á¦Ç°ÀÌ¸§
-	private Date pb_date;   				//»óÇ°°³Ã¼¹øÈ£
-	private String pb_sale_status;  		//ÆÇ¸Å»óÅÂ
-	private String pb_post_status;  		//°Ô½Ã»óÅÂ
-	private String pb_detail;    			//»óÇ° »ó¼¼¼³¸í
-	private String pb_main_img_original;   	//¸ÞÀÎ »çÁø
+	private String pb_number;				//ï¿½Û¹ï¿½È£ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	private String pb_division; 			//ï¿½Ô½Ã±ï¿½ ï¿½Ð·ï¿½
+	private String pb_md_name;   			//ï¿½ï¿½Ç°ï¿½Ì¸ï¿½
+	private Date pb_date;   				//ï¿½ï¿½Ç°ï¿½ï¿½Ã¼ï¿½ï¿½È£
+	private String pb_sale_status;  		//ï¿½Ç¸Å»ï¿½ï¿½ï¿½
+	private String pb_post_status;  		//ï¿½Ô½Ã»ï¿½ï¿½ï¿½
+	private String pb_detail;    			//ï¿½ï¿½Ç° ï¿½ó¼¼¼ï¿½ï¿½ï¿½
+	private String pb_main_img_original;   	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private String pb_main_img_stored;   
-	private String pb_detail_img1_original;  //µðÅ×ÀÏ »çÁø1
+	private String pb_detail_img1_original;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½1
 	private String pb_detail_img1_stored;  
-	private String pb_detail_img2_original;  //µðÅ×ÀÏ »çÁø2
+	private String pb_detail_img2_original;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2
 	private String pb_detail_img2_stored;  
-	private String pb_detail_img3_original;  //µðÅ×ÀÏ »çÁø3
+	private String pb_detail_img3_original;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3
 	private String pb_detail_img3_stored;  
-	private int pb_view_count;  			//Á¶È¸¼ö
-	private int pb_like;  					//ÁÁ¾Æ¿ä
+	private int pb_view_count;  			//ï¿½ï¿½È¸ï¿½ï¿½
+	private int pb_like;  					//ï¿½ï¿½ï¿½Æ¿ï¿½
 	private String entity_number;
 	public String getPb_number() {
 		return pb_number;

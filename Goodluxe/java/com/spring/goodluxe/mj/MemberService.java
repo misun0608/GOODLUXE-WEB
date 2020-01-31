@@ -1,6 +1,6 @@
 package com.spring.goodluxe.mj;
 
-import org.springframework.ui.Model;
+import com.spring.goodluxe.voes.MemberVO;
 
 public interface MemberService{
 	String userChk(MemberVO membervo) throws Exception;

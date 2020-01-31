@@ -3,9 +3,9 @@ package com.spring.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.spring.goodluxe.jy.ConsignProductVO;
-import com.spring.goodluxe.jy.PurchaseProductVO;
-import com.spring.goodluxe.jy.ProductBoardVO;
+import com.spring.goodluxe.voes.ConsignProductVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
+import com.spring.goodluxe.voes.PurchaseProductVO;
 
 public interface ProductlistMapper {
 

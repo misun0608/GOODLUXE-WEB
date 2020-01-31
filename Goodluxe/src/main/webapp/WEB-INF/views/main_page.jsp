@@ -30,6 +30,34 @@
 	String fancy_img6 = (String)productList_view.get(5).get("pb_main_img_stored");
 	String fancy_img7 = (String)productList_view.get(6).get("pb_main_img_stored");
 	String fancy_img8 = (String)productList_view.get(7).get("pb_main_img_stored");
+	
+/* 	
+String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
+
+	String fancy_img1,fancy_img2,fancy_img3,fancy_img4,fancy_img5,fancy_img6,fancy_img7,fancy_img8;
+
+	
+	if(productList_view != null) {
+		entity1 = (String)productList_view.get(0).get("entity_number");
+		entity2 = (String)productList_view.get(1).get("entity_number");
+		entity3 = (String)productList_view.get(2).get("entity_number");
+		entity4 = (String)productList_view.get(3).get("entity_number");
+		entity5 = (String)productList_view.get(4).get("entity_number");
+		entity6 = (String)productList_view.get(5).get("entity_number");
+		entity7 = (String)productList_view.get(6).get("entity_number");
+		entity8 = (String)productList_view.get(7).get("entity_number");
+
+		fancy_img1 = (String)productList_view.get(0).get("pb_main_img_stored");
+		fancy_img2 = (String)productList_view.get(1).get("pb_main_img_stored");
+		fancy_img3 = (String)productList_view.get(2).get("pb_main_img_stored");
+		fancy_img4 = (String)productList_view.get(3).get("pb_main_img_stored");
+		fancy_img5 = (String)productList_view.get(4).get("pb_main_img_stored");
+		fancy_img6 = (String)productList_view.get(5).get("pb_main_img_stored");
+		fancy_img7 = (String)productList_view.get(6).get("pb_main_img_stored");
+		fancy_img8 = (String)productList_view.get(7).get("pb_main_img_stored");
+
+	} 
+*/
 
 %>
 
@@ -56,15 +84,11 @@
 		});
 	</script>
 	
-    
     <!-- main_page  -->
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/main_page.css" />
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/main_page.js"></script>
-		
-
-
 
 </head>
 <body>
@@ -79,7 +103,7 @@
         <div id="main">
 			<article class="mp_1st">
 				<video src="${pageContext.request.contextPath}/resources/img/video/taking_pictures.mp4" class="main_video"
-					autoplay loop poster="img/md_img/loading.png"></video>
+					autoplay loop poster="${pageContext.request.contextPath}/resources/img/md_img/loading.png"></video>
 			</article>
 			<div class="mp_section_area">
 				<article class="mp_2nd">

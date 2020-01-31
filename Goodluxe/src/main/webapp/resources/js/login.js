@@ -51,14 +51,14 @@ $input_login.on('focusout',function(){
     }
 });
 // 로그인 하기
-$login_btn.on('click',function(){
-	$login_bg.css({'display':'none'});
-	$topmenu.removeClass('on');
-	$membermenu.addClass('on');
-});
+//$login_btn.on('click',function(){
+//	$login_bg.css({'display':'none'});
+//	$topmenu.removeClass('on');
+//	$membermenu.addClass('on');
+//});
 // 로그아웃 하기
-$logout.on('click', function(){
-//    $('.topmenu').removeClass('on');
-//    $('.nonmember_menu').addClass('on');
-	location.href="mypageOAS.do";
-});
+//$logout.on('click', function(){
+////    $('.topmenu').removeClass('on');
+////    $('.nonmember_menu').addClass('on');
+//	location.href="mypageOAS.do";
+//});

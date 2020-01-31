@@ -5,7 +5,7 @@
 	
 <mapper namespace="com.spring.mapper.ProductlistMapper">
 
-	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.jy.PurchaseProductVO">
+	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.voes.PurchaseProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
 		<result property = "pd_brand" column = "pd_brand" />
@@ -19,7 +19,7 @@
 		<result property = "member_id" column = "member_id" />
 	</resultMap>
 	
-	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.jy.ConsignProductVO">
+	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.voes.ConsignProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
 		<result property = "pd_brand" column = "pd_brand" />
@@ -35,7 +35,7 @@
 		<result property = "member_id" column = "member_id" />
 	</resultMap>
 	
-	<resultMap id = "SellingBoardVO" type = "com.spring.goodluxe.jy.ProductBoardVO">
+	<resultMap id = "SellingBoardVO" type = "com.spring.goodluxe.voes.ProductBoardVO">
 		<result property = "pb_number" column = "pb_number"/>
 		<result property = "pb_division" column = "pb_division"/>
 		<result property = "pb_md_name" column = "pb_md_name"/>
@@ -88,7 +88,7 @@
 	</resultMap>
 	   
 	<!-- 매입 상품 등록 -->
-	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.jy.PurchaseProductVO"> 
+	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.voes.PurchaseProductVO"> 
 		insert into gl_purchase(entity_number, pd_name, pd_brand, pd_category,
 			quality_grade, sale_price, buying_price, purc_date,
 			appraise_exist, pd_component, member_id)	
@@ -98,7 +98,7 @@
 	</insert>
 
 	<!-- 위탁상품 등록 -->
-	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.jy.ConsignProductVO"> 
+	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.voes.ConsignProductVO"> 
 		insert into gl_consignment(entity_number, pd_name, pd_brand, pd_category,
 			quality_grade, sale_price, commission, start_date, end_date,
 			sale_status, appraise_exist, pd_component, member_id)	
@@ -109,7 +109,7 @@
 
 	<!-- 게시글 등록 -->
 	
-	<insert id = "insertSellingBoard" parameterType = "com.spring.goodluxe.jy.ProductBoardVO">
+	<insert id = "insertSellingBoard" parameterType = "com.spring.goodluxe.voes.ProductBoardVO">
 		insert into gl_productboard(pb_number,pb_division,pb_md_name,pb_date,
 			pb_sale_status,pb_post_status,pb_detail,pb_main_img_original,
 			pb_main_img_stored,pb_detail_img1_original,pb_detail_img1_stored,pb_detail_img2_original,pb_detail_img2_stored,pb_detail_img3_original,pb_detail_img3_stored,

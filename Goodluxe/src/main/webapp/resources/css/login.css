@@ -1,16 +1,16 @@
-/* PC¿Í ÅÂºí¸´ÀÏ °æ¿ì »ç¿ëÇÏ´Â css */
-/* ¸ð¹ÙÀÏÀÇ °æ¿ì ÇØ´ç ·Î±×ÀÎ ¹öÆ° Å¬¸¯ ºÒ°¡ */
+/* PCï¿½ï¿½ ï¿½Âºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ css */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½Ò°ï¿½ */
 
-/* ÆùÆ® */
+/* ï¿½ï¿½Æ® */
 @font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-/* ÃÊ±âÈ­ */
+/* ï¿½Ê±ï¿½È­ */
 * {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 ul,ol,li {list-style:none;}
 a {text-decoration:none; outline:0;}
 img {vertical-align:top;}
 
-/* ¹è°æ Èå¸®°Ô */
+/* ï¿½ï¿½ï¿½ ï¿½å¸®ï¿½ï¿½ */
 .login_bg {
     display: none;
     top:0; left: 0;
@@ -20,7 +20,7 @@ img {vertical-align:top;}
     z-index: 20;
 }
 
-/* ·Î±×ÀÎ ¿µ¿ª */
+/* ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .login_outline {
     width: 400px; height: 430px;
     position: absolute;
@@ -29,7 +29,7 @@ img {vertical-align:top;}
     margin-left: -200px;
     display: block;
 }
-/* ·Î±×ÀÎ Å¬¸¯½Ã ³ªÅ¸³ª´Â ¼± */
+/* ï¿½Î±ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ */
 .login_top {
     position: absolute;
     top: 0; left: 0;
@@ -54,7 +54,7 @@ img {vertical-align:top;}
     width: 3px; height: 0%;
     background: #fff;
 }
-/* ·Î±×ÀÎ ¿ä¼Ò */
+/* ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ */
 .login_area {
     width: 400px; height: 430px;
     position: absolute;
@@ -70,7 +70,7 @@ img {vertical-align:top;}
     margin: 20px 0 0 0;
     font: 30px/1.2 'EBSHMJESaeronRA','Nanum Gothic', sans-serif;
 }
-/* ´Ý±â ¹öÆ° */
+/* ï¿½Ý±ï¿½ ï¿½ï¿½Æ° */
 .login_close {
     position: absolute;
     top: 10px; right: 10px;
@@ -83,7 +83,7 @@ img {vertical-align:top;}
     margin-bottom: 10px; 
     left: 50%; margin-left: -150px;
 }
-/* ÀÔ·Â»óÀÚ css */
+/* ï¿½Ô·Â»ï¿½ï¿½ï¿½ css */
 .input_login {
     height : 50px; 
     width : 280px;
@@ -100,8 +100,8 @@ img {vertical-align:top;}
 .input_login:focus ~ .highlight {
     animation: inputHighlighter 0.3s ease;
 }
- /* ¶óº§ Highlight */
-label {
+ /* ï¿½ï¿½ Highlight */
+.group>label {
     color: #999; 
     font-size: 18px;
     font-weight: normal;
@@ -111,7 +111,7 @@ label {
     top: 14px;
     transition: all 0.2s ease;
 }
-label.color {
+.group>label.color {
     top: 2px;
     transform: scale(.75); left: 2px;
     color: #DFB1AB;

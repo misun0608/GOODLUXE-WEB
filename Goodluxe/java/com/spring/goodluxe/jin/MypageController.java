@@ -50,14 +50,12 @@ public class MypageController {
 	
 	// order_and_shipping
 	@RequestMapping(value = "mypageOAS.do", method = RequestMethod.GET)
-	public ModelAndView mypageOAS(HttpSession session) {
+	public ModelAndView mypageOAS(String member_id) {
 		ModelAndView mav = new ModelAndView();
 		try {
 			ArrayList<HashMap<String, Object>> oaslist = null;
 			ArrayList<HashMap<String, Object>> cancellist = null;
-			// 濡쒓렇�씤�맂 ID �젙蹂닿� session 媛앹껜�뿉 online_id 濡� ���옣�맂�떎怨� 媛��젙
-//			String online_id = (String) session.getAttribute("online_id");
-			String online_id = "test0123";
+			String online_id = member_id;
 			oaslist = mypageService.getOasData(online_id);
 			cancellist = mypageService.getCancelData(online_id);
 			mav.addObject("oaslist", oaslist);

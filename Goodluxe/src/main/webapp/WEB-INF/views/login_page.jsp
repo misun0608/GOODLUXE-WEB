@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.spring.goodluxe.mj.MemberVO"%>
+<%@ page import="com.spring.goodluxe.voes.MemberVO"%>
 <%
 	String mem_id = (String) session.getAttribute("member_id");
 	String mem_class = (String) session.getAttribute("member_class");

@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.goodluxe.voes.MemberVO;
+
 @RestController
 public class MemberAjaxController {
 	@Autowired
