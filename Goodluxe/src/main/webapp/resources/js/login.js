@@ -1,8 +1,7 @@
 $(document).ready(function(){
-
 });
 
-// 로그인 관련 변수
+// variances about login
 var speed1 = 450;
 var speed2 = 450;
 var $li_login = $('li.login');
@@ -19,7 +18,7 @@ var $topmenu = $('.topmenu');
 var $membermenu = $('.member_menu');
 var $logout = $('.logout');
 
-// 로그인창 열기
+// Open Login Area
 $li_login.on('click',function(){
 	$login_bg.css({'display':'block'});
 	$login_top.animate({'width':'100%'},speed1,function(){
@@ -31,7 +30,8 @@ $li_login.on('click',function(){
 		$login_area.fadeIn(speed2*2);
     });
 });
-// 로그인창 닫기
+
+// Close Login Area
 $login_close.on('click',function(){
 	$input_login.val('');
 	$login_top.animate({'width':'0%'},speed1);
@@ -42,7 +42,8 @@ $login_close.on('click',function(){
     	$login_bg.css({'display':'none'});
     });
 });
-// 로그인 정보 입력창
+
+// Login Information Input Box
 $input_login.on('focusout',function(){
     if($(this).val() != '') {
         $(this).siblings('label').addClass('color');
@@ -50,15 +51,4 @@ $input_login.on('focusout',function(){
         $(this).siblings('label').removeClass('color');
     }
 });
-// 로그인 하기
-//$login_btn.on('click',function(){
-//	$login_bg.css({'display':'none'});
-//	$topmenu.removeClass('on');
-//	$membermenu.addClass('on');
-//});
-// 로그아웃 하기
-//$logout.on('click', function(){
-////    $('.topmenu').removeClass('on');
-////    $('.nonmember_menu').addClass('on');
-//	location.href="mypageOAS.do";
-//});
+

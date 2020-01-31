@@ -18,7 +18,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	public int registerProduct(PurchaseProductVO purcVO) throws Exception {
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
@@ -27,9 +26,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			return res;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("���Ի�ǰ �Է� ����");
+			System.out.println("ERROR(ProductlistService/registerProduct/purcVO) : " + e.getMessage());
+			System.out.println("ERROR(ProductlistService/registerProduct/purcVO) : " + e.getStackTrace());
+			throw new Exception("ERROR(ProductlistService/registerProduct/purcVO)");
 		}
 		
 	}
@@ -45,9 +44,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 		
 			return res;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("��Ź��ǰ �Է� ����");
+			System.out.println("ERROR(ProductlistService/registerProduct/consVO) : " + e.getMessage());
+			System.out.println("ERROR(ProductlistService/registerProduct/consVO) : " + e.getStackTrace());
+			throw new Exception("ERROR(ProductlistService/registerProduct/consVO)");
 		}
 		
 	}
@@ -65,9 +64,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 		
 			return res;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�Խù� ��� ����");
+			System.out.println("ERROR(ProductlistService/uploadProductBoard) : " + e.getMessage());
+			System.out.println("ERROR(ProductlistService/uploadProductBoard) : " + e.getStackTrace());
+			throw new Exception("ERROR(ProductlistService/uploadProductBoard)");
 		}
 		
 	}
@@ -157,7 +156,8 @@ public class ProductlistServiceImpl implements ProductlistService{
 			throw new Exception("������ ������ �̸� �ҷ����� ����");
 		}	
 	}
-	//�Ʒ��� ����Ʈ �κ�
+	
+	// Main Page Item List
 	public ArrayList<HashMap<String, Object>> getMainPageItem() throws Exception{
 		
 		
@@ -168,21 +168,22 @@ public class ProductlistServiceImpl implements ProductlistService{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", 1); 
-			map.put("endRow", 12); //���� �������� ���� ������ ������ �Է��ϼ���.
+			map.put("endRow", 12);
 		
 			mainbolist = productlistMapper.getMainPageItem(map);
 			
 			return mainbolist;
 			
 		}catch(Exception e){
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("���� ������ �ҷ����� ����");
+			System.out.println("ERROR(ProductlistService/getMainPageItem) : " + e.getMessage());
+			System.out.println("ERROR(ProductlistService/getMainPageItem) : " + e.getStackTrace());
+			throw new Exception("ERROR(ProductlistService/getMainPageItem)");
 		}	
 
 		
 	}
-	//�ָ��� �Ÿ��� �κ�
+	
+	// Main Page Event Item List
 	public ArrayList<HashMap<String, Object>> getMainPageItem_view() throws Exception{
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
@@ -198,9 +199,9 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return mainbolist_view;
 			
 		}catch(Exception e){
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("���� �ָ��� ������ �ҷ����� ����");
+			System.out.println("ERROR(ProductlistService/getMainPageItem_view) : " + e.getMessage());
+			System.out.println("ERROR(ProductlistService/getMainPageItem_view) : " + e.getStackTrace());
+			throw new Exception("ERROR(ProductlistService/getMainPageItem_view)");
 		}	
 		
 	}

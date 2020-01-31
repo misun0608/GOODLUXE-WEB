@@ -7,7 +7,6 @@
 <%
 	ArrayList<HashMap<String, Object>> productList 
 	= (ArrayList<HashMap<String, Object>>)request.getAttribute("productList");
-	System.out.println("프로덕트리스트"+productList);
 	
 	ArrayList<HashMap<String, Object>> productList_view 
 	= (ArrayList<HashMap<String, Object>>)request.getAttribute("productList_view");

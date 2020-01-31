@@ -47,11 +47,7 @@ public class ProductlistController {
 			return "admin_post_upload";
 		}
 		
-		
-		
-		
-		
-		//
+		// 메인 페이지
 		@RequestMapping(value = "mainPage.do")
 		public String mainPage( Model model ) throws Exception {
 			

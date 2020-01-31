@@ -12,7 +12,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <br /><br /><a href="mypageOAS.do">진_만들고자 하는 페이지를 연결합시다</a>
-<br /><br /><a href="login_page.do">민지_만들고자 하는 페이지를 연결합시다</a>
+<br /><br /><a href="mainPage.do">민지_만들고자 하는 페이지를 연결합시다</a>
 
 
 <br /><br /><a href="adminProductRegisterPurchase.do">지예_매입 등록</a>

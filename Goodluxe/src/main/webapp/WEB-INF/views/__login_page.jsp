@@ -56,13 +56,13 @@
 			success : function(retVal) {
 				if (retVal.result == "login_success") {
 					alert("로그인에 성공했습니다")
-					location.href = "./login_page.do";
+					location.href = "./main_page.do";
 				} else if (retVal.result == "login_black") {
 					alert("블랙리스트입니다")
-					location.href = "./login_page.do";
+					location.href = "./main_page.do";
 				} else if (retVal.result == "login_admin") {
 					alert("관리자입니다")
-					location.href = "./login_page.do";
+					location.href = "./main_page.do";
 				} else if (retVal.result == "loginFail_confirm") {
 					alert("이메일을 인증해주세요")
 				} else if (retVal.result == "loginFail_IdPw") {

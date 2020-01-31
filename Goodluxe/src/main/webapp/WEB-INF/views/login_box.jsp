@@ -4,7 +4,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script>
 
 <script>
-	function onclick_login() {
+	/* Click login button */
+ 	function onclick_login() {
 		var params = $('#login_form').serialize(); // serialize로 문자열형태로? 만듦
 		$.ajax({
 			url : '/goodluxe/login.do',
@@ -14,25 +15,21 @@
 			dataType : "json", // 서버로 보내줄 타입  //응답할 타입은 json으로 하겠다
 
 			success : function(retVal) {
-				if (retVal.result == "login_success") {
-					alert("로그인에 성공했습니다")
+				if (retVal.result == "error_accur") {
+					alert("현재 로그인이 불가합니다.\n잠시 후 다시 시도해주세요.")
 					location.href = "./mainPage.do";
-				} else if (retVal.result == "login_black") {
-					alert("블랙리스트입니다")
+				} else if (retVal.result == "non-member") {
+					alert("존재하지 않는 회원입니다.");
+				} else if (retVal.result == "wrong_pw") {
+					alert("아이디 또는 비밀번호가 틀립니다.");
+				} else if (retVal.result == "email_N") {
+					alert("이메일 인증이 완료되어야 사이트 이용이 가능합니다.");
+				} else if (retVal.result == "ok") {
 					location.href = "./mainPage.do";
-				} else if (retVal.result == "login_admin") {
-					alert("관리자입니다")
-					location.href = "./mainPage.do";
-				} else if (retVal.result == "loginFail_confirm") {
-					alert("이메일을 인증해주세요")
-				} else if (retVal.result == "loginFail_IdPw") {
-					alert("아이디나 비밀번호를 확인해주세요")
-				} else { // 실패했다면
-					alert("가입되지 않은 아이디입니다");
 				}
 			},
 			error : function() {
-				alert("ajax통신 실패");
+				alert("현재 서버와 통신이 불가합니다.");
 			}
 		});
 	};

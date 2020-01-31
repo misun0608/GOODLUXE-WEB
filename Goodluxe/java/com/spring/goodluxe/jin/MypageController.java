@@ -80,6 +80,7 @@ public class MypageController {
 		}
 		return mav;
 	}
+	
 	// order_and_shipping : �젣�뭹 �솚遺� �떊泥�(寃곗젣 �썑)
 	@RequestMapping(value = "orderRefund.do", method = RequestMethod.GET)
 	public ModelAndView orderRefund(String order_number) {
