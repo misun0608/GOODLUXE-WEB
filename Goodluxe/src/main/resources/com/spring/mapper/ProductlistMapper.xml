@@ -5,7 +5,7 @@
 	
 <mapper namespace="com.spring.mapper.ProductlistMapper">
 
-	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.jy.PurchaseProductVO">
+	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.voes.PurchaseProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
 		<result property = "pd_brand" column = "pd_brand" />
@@ -19,7 +19,7 @@
 		<result property = "member_id" column = "member_id" />
 	</resultMap>
 	
-	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.jy.ConsignProductVO">
+	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.voes.ConsignProductVO">
 		<result property = "entity_number" column = "entity_number" />
 		<result property = "pd_name" column = "pd_name" />
 		<result property = "pd_brand" column = "pd_brand" />
@@ -35,7 +35,7 @@
 		<result property = "member_id" column = "member_id" />
 	</resultMap>
 	
-	<resultMap id = "SellingBoardVO" type = "com.spring.goodluxe.jy.ProductBoardVO">
+	<resultMap id = "SellingBoardVO" type = "com.spring.goodluxe.voes.ProductBoardVO">
 		<result property = "pb_number" column = "pb_number"/>
 		<result property = "pb_division" column = "pb_division"/>
 		<result property = "pb_md_name" column = "pb_md_name"/>
@@ -88,7 +88,7 @@
 	</resultMap>
 	   
 	<!-- 매입 상품 등록 -->
-	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.jy.PurchaseProductVO"> 
+	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.voes.PurchaseProductVO"> 
 		insert into gl_purchase(entity_number, pd_name, pd_brand, pd_category,
 			quality_grade, sale_price, buying_price, purc_date,
 			appraise_exist, pd_component, member_id)	
@@ -98,7 +98,7 @@
 	</insert>
 
 	<!-- 위탁상품 등록 -->
-	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.jy.ConsignProductVO"> 
+	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.voes.ConsignProductVO"> 
 		insert into gl_consignment(entity_number, pd_name, pd_brand, pd_category,
 			quality_grade, sale_price, commission, start_date, end_date,
 			sale_status, appraise_exist, pd_component, member_id)	
@@ -109,7 +109,7 @@
 
 	<!-- 게시글 등록 -->
 	
-	<insert id = "insertSellingBoard" parameterType = "com.spring.goodluxe.jy.ProductBoardVO">
+	<insert id = "insertSellingBoard" parameterType = "com.spring.goodluxe.voes.ProductBoardVO">
 		insert into gl_productboard(pb_number,pb_division,pb_md_name,pb_date,
 			pb_sale_status,pb_post_status,pb_detail,pb_main_img_original,
 			pb_main_img_stored,pb_detail_img1_original,pb_detail_img1_stored,pb_detail_img2_original,pb_detail_img2_stored,pb_detail_img3_original,pb_detail_img3_stored,
@@ -136,7 +136,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 				
 					<if test = "il_search_brand !='all'"> and pd_brand = #{il_search_brand} </if>
 					<if test = "il_search_category !='all'"> and pd_category = #{il_search_category} </if>
@@ -168,7 +168,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 				
 					<if test = "il_search_brand !='all'">
 						and pd_brand = #{il_search_brand}
@@ -224,7 +224,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 	
@@ -242,7 +242,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY pb_view_count desc)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 
@@ -261,7 +261,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'			
+				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'			
 			)where REGEXP_LIKE(pb_md_name,#{content},'i')
 	</select>
 	<select id = "getSearchBoardList" parameterType = "hashmap"  resultMap = "listHashmapVO">
@@ -290,7 +290,7 @@
 						ORDER BY sale_price ASC)
 					</if>
 					)where REGEXP_LIKE(pb_md_name,#{content},'i')
-			)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+			)WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 				
 		)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
 	</select>
@@ -321,7 +321,7 @@
 					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
 					from gl_consignment, gl_productboard
 					where gl_consignment.entity_number = gl_productboard.entity_number
-				)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				)WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 			)where entity_number = #{entity}
 	
 	</select>
@@ -341,7 +341,7 @@
 								from gl_consignment, gl_productboard
 								where gl_consignment.entity_number = gl_productboard.entity_number
 							)
-						)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+						)WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	
 				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category}
 			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
 	</select>

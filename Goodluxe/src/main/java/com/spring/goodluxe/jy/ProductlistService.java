@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.spring.goodluxe.voes.ConsignProductVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
+import com.spring.goodluxe.voes.PurchaseProductVO;
+
 public interface ProductlistService {
 
 

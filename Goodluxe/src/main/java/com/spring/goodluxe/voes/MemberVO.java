@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jin;
+package com.spring.goodluxe.voes;
 
 import java.sql.Date;
 

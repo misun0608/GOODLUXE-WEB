@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jy;
+package com.spring.goodluxe.voes;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
     entity_number varchar2(30) primary key,
     pd_name varchar2(100) not null,
     pd_brand  varchar2(30),
-    category varchar2(30) not null,
+    pd_category varchar2(30) not null,
     quality_grade varchar2(10) not null,
     sale_price number,
     commission number,

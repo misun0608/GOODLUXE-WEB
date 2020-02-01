@@ -261,20 +261,20 @@
 							<td class="td1">브랜드번호</td>
 							<td class="td2"><select name="pd_brand"
 								class="search">
-									<option value="none">브랜드선택</option>
+										<option value="none">브랜드 선택</option>
+									<option value="Armani">Armani</option>
+									<option value="Balenciaga">Balenciaga</option>
+									<option value="Bally">Bally</option>
+									<option value="Balmain">Balmain</option>
+									<option value="Barluti">Barluti</option>
+									<option value="BOUCHERON">BOUCHERON</option>
+									<option value="Breguet">Breguet</option>
+									<option value="BREITLING">BREITLING</option>
+									<option value="Burberrys">Burberrys</option>
+									<option value="Bvlgari">Bvlgari</option>
 									<option value="Cartier">Cartier</option>
-									<option value="Dior">Dior</option>
-									<option value="Etro">Etro</option>
-									<option value="Givenchy">Givenchy</option>
-									<option value="Gucci">Gucci</option>
-									<option value="Hermes">Hermes</option>
-									<option value="Jimmy Choo">Jimmy Choo</option>
-									<option value="Louis Vuitton">Louis Vuitton</option>
-									<option value="OM5552">OMEGA</option>
-									<option value="OMEGA">Prada</option>
-									<option value="Rolex">Rolex</option>
-									<option value="Tiffany">Tiffany</option>
-									<option value="Vivienne Westwood">Vivienne Westwodd</option>
+									<option value="Celine">Celine</option>
+									<option value="Chanel">Chanel</option>
 							</select></td>
 						</tr>
 						<tr>

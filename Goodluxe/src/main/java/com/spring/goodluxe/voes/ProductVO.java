@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jy;
+package com.spring.goodluxe.voes;
 
 /*
  * create sequence gl_product_seq

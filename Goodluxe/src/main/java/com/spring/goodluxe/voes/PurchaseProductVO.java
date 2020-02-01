@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jy;
+package com.spring.goodluxe.voes;
 
 import java.util.Date;
 
@@ -26,6 +26,7 @@ public class PurchaseProductVO extends ProductVO{
 	private int sale_price;
 	private int buying_price;
 	private Date purc_date;
+	private String sale_status;
 	private String appraise_exist;
 	private String pd_component;
 	private String member_id;
@@ -94,6 +95,12 @@ public class PurchaseProductVO extends ProductVO{
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	public String getSale_status() {
+		return sale_status;
+	}
+	public void setSale_status(String sale_status) {
+		this.sale_status = sale_status;
 	}
 	
 	

@@ -19,7 +19,7 @@
 <br /><br /><a href="mainPage.do">지예_메인페이지</a>
 <br /><br /><a href="searchResult.do?search_content=">지예_검색결과</a>
 <br /><br /><a href="mdDetail.do?entity_number=40">지예_상품상세</a>
-<br /><br /><a href="myInfo.do">지예 mypage 개인정보</a>
+<br /><br /><a href="myInfo.do?member_id=mjmj">지예 mypage 개인정보</a>
 
 
 <br /><br />

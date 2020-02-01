@@ -5,8 +5,27 @@
 	
 <mapper namespace = "com.spring.mapper.JyMyPageMapper">
 
+	<resultMap id = "MemberResultMap" type = "com.spring.goodluxe.voes.MemberVO">
+		<result property = "member_id" column = "member_id"/>
+		<result property = "member_pw" column = "member_pw"/>
+		<result property = "member_name" column = "member_name"/>
+		<result property = "member_zipcode" column = "member_zipcode"/>
+		<result property = "member_addr1" column = "member_addr1"/>
+		<result property = "member_addr2" column = "member_addr2"/>
+		<result property = "member_phone" column = "member_phone"/>
+		<result property = "member_email" column = "member_email"/>
+		<result property = "member_email_receive" column = "member_email_receive"/>
+		<result property = "member_like_brand" column = "member_like_brand"/>
+		<result property = "member_like_category" column = "member_like_category"/>
+		<result property = "member_join_date" column = "member_join_date"/>
+		<result property = "member_class" column = "member_class"/>
+		<result property = "member_point" column = "member_point"/>
+		<result property = "member_isadmin" column = "member_isadmin"/>
+	</resultMap>
 
-
+	<select id = "getMemberInfo" parameterType = "hashmap" resultMap = "MemberResultMap">
+		select * from gl_member where member_id = #{member_id}
+	</select>
 
 
 

@@ -51,13 +51,16 @@
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 
 </head>
@@ -159,35 +162,18 @@
                     <h3 class = "my_info_title">▶추가정보</h3>
                     <br/><br/>
                     <table class = "additional_info_table1">
-                        <tr>
+                       <tr>
                             <td>관심상품 분야</td>
-                        </tr>
-                        <%
-	                   		String likecate = memberVO.getMember_like_category();
-	                    	
-                       		StringTokenizer stcate = new StringTokenizer(likecate,",");
-                       	
-                       		int count = stcate.countTokens();
-                       		
-                       		String arrcate[] = new String [count];
-                       		
-                       		for(int i = 0; i<count ; i++){
-                       			arrcate[i] = stcate.nextToken();
-                       		}
-                       		int j=0;
-                       		
-                   
-                    
-                        %>
+                       </tr>
                        <tr>
                             <td>
-                                <input type = "checkbox" name = "prefer_category" value="CLOTHES" <%if(arrcate[j].equals("CLOTHES")){j++;%>checked<%}%>><label for = "prefer_category"> 옷</label>
-                                <input type = "checkbox" name = "prefer_category" value="JEWELRY" <%if(arrcate[j].equals("JEWELRY")){j++;%>checked<%}%>><label for = "prefer_category"> 쥬얼리</label>
-                                <input type = "checkbox" name = "prefer_category" value="WATCH" <%if(arrcate[j].equals("WATCH")){j++;%>checked<%}%>><label for = "prefer_category"> 시계</label>
-                                <input type = "checkbox" name = "prefer_category" value="BAG" <%if(arrcate[j].equals("BAG")){j++;%>checked<%}%>><label for = "prefer_category"> 가방</label>
-                                <input type = "checkbox" name = "prefer_category" value="WALLET" <%if(arrcate[j].equals("WALLET")){j++;%>checked<%}%>><label for = "prefer_category"> 지갑</label>
-                                <input type = "checkbox" name = "prefer_category" value="GLASSES" <%if(arrcate[j].equals("GLASSES")){j++;%>checked<%}%>><label for = "prefer_category"> 안경</label>
-                                <input type = "checkbox" name = "prefer_category" value="SHOES" <%if(arrcate[j].equals("SHOES")){j++;%>checked<%}%>><label for = "prefer_category"> 신발</label>
+                                <input type = "checkbox" name = "prefer_category" value="CLOTHES"><label for = "prefer_category"> 옷</label>
+                                <input type = "checkbox" name = "prefer_category" value="JEWELRY"><label for = "prefer_category"> 쥬얼리</label>
+                                <input type = "checkbox" name = "prefer_category" value="WATCH"><label for = "prefer_category"> 시계</label>
+                                <input type = "checkbox" name = "prefer_category" value="BAG"><label for = "prefer_category"> 가방</label>
+                                <input type = "checkbox" name = "prefer_category" value="WALLET"><label for = "prefer_category"> 지갑</label>
+                                <input type = "checkbox" name = "prefer_category" value="GLASSES"><label for = "prefer_category"> 안경</label>
+                                <input type = "checkbox" name = "prefer_category" value="SHOES"><label for = "prefer_category"> 신발</label>
                             </td>
                         </tr>
                     </table>

@@ -1,5 +1,7 @@
 package com.spring.goodluxe.jiyemypage;
 
-public interface JyMyPageService {
+import com.spring.goodluxe.voes.MemberVO;
 
+public interface JyMyPageService {
+	MemberVO getMemberInfo(String member_id) throws Exception;
 }

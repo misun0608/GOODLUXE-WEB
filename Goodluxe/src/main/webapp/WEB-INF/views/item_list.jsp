@@ -5,8 +5,8 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.text.DecimalFormat"%>
-<%@ page import="com.spring.goodluxe.jy.ProductBoardVO"%>
-<%@ page import="com.spring.goodluxe.jy.ProductVO"%>
+<%@ page import="com.spring.goodluxe.voes.ProductBoardVO"%>
+<%@ page import="com.spring.goodluxe.voes.ProductVO"%>
 
 
 <%
