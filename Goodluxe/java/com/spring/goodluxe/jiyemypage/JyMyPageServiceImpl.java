@@ -29,40 +29,89 @@ public class JyMyPageServiceImpl implements JyMyPageService {
 	}
 	
 	
-	public int myInfoAction(MemberVO memberVO)throws Exception{
+	public void myInfoAction(MemberVO memberVO)throws Exception{
 		
 		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
 		
-		int res = jymypageMapper.myInfoAction(memberVO);
+		jymypageMapper.myInfoAction(memberVO);
 		
-		return 0;
+		return;
 		
 	}
 	
 	
 	
-	public ArrayList<HashMap<String, Object>> myLikedGoods(String member_id)throws Exception{
+	public ArrayList<HashMap<String, Object>> myLikedGoods(int startRow, int endRow,String member_id)throws Exception{
 		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
 		
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		ArrayList<HashMap<String,String>> likedList = new ArrayList<HashMap<String,String>>();
-		ArrayList<HashMap<String,Object>> likedProductList = new ArrayList<HashMap<String,Object>>();
+		//ArrayList<HashMap<String,String>> likedList = new ArrayList<HashMap<String,String>>();
+		ArrayList<HashMap<String, Object>> likedProductList = new ArrayList<HashMap<String,Object>>();
 		
 		map.put("member_id",member_id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
 		
-		likedList = jymypageMapper.SearchlikedList(map);
+//		likedList = jymypageMapper.SearchlikedList(map);
+//		
+//		for(int i = 0; i<likedList.size(); i++) {
+//			
+//			likedProductList.set(i,jymypageMapper.getLikedProduct(likedList.get(i).get("entity_number")));
+//			
+//		}
 		
-		for(int i = 0; i<likedList.size(); i++) {
-			
-			likedProductList.set(i,jymypageMapper.getLikedProduct(likedList.get(i).get("entity_number")));
-			
-		}
+		likedProductList = jymypageMapper.getLikedProduct(map);
 
 		
 		return likedProductList;
 		
 		
 	}
+	public int myLikedGoodsCount(int startRow, int endRow,String member_id)throws Exception{
+		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
+	
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id",member_id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		int count = jymypageMapper.getLikedProductCount(map);
+		System.out.println("count"+ count);
+		return count;
+	}
+	
+	public void deleteLikedGoods(String entity_number)throws Exception {
+		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		//session
+		String member_id = "mjmj";
+		
+		map.put("entity_number", entity_number);
+		map.put("member_id",member_id);
+		
+		int res = jymypageMapper.deleteLikedGoods(map);
+		System.out.println("result = "+res);
+		return ;
+	}
+
+
+	public void deleteCheckedGoods(String[] checked) {
+		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
+		
+		HashMap<String,String> map = new HashMap<String,String>();
+		String member_id  = "mjmj";//session
+		map.put("member_id", member_id);
+		for(int i=0; i<checked.length;i++) {
+			map.put("entity_number",checked[i]);
+			jymypageMapper.deleteLikedGoods(map);
+		}
+		return ;
+	}
+
+
+
 	
 }

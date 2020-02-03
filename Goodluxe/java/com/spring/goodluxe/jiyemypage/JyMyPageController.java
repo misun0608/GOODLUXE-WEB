@@ -20,7 +20,7 @@ public class JyMyPageController {
 		private JyMyPageServiceImpl jyMyPageService;
 		
 		@RequestMapping(value = "myInfo.do")
-		public String my_info(Model model, @RequestParam(value = "member_id", required = false) String member_id)throws Exception {                   
+		public String my_info(Model model, @RequestParam(value = "member_id", required = false ,defaultValue = "mjmj") String member_id)throws Exception {                   
 			//Model model, @RequestParam(value = "member_id", required = false, defaultValue = "1") String member_id
 			//throws Exception 
 			
@@ -71,16 +71,73 @@ public class JyMyPageController {
 			return "redirect:myInfo.do?member_id=mjmj";
 		}
 		@RequestMapping(value = "myLikedGoods.do")
-		public String likedGoods(Model model, MemberVO memberVO, HttpServletRequest request )throws Exception {                   
+		public String likedGoods(Model model, MemberVO memberVO, HttpServletRequest request 
+				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
+				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum 
+				)throws Exception {                   
+			
+			if(pageNum<=0) {
+				pageNum = 1;
+			}
+			if(pageNum>pageCount) {
+				pageNum = pageCount;
+			}
+			int pageSize = 3;
+			int currentPage = pageNum;
+			int startRow = (currentPage-1) * pageSize +1;
+			int endRow = startRow + pageSize - 1;
+			int count = 0;
+			int number = 0;
 			
 			String member_id = "mjmj"; //session
 			
-			ArrayList<HashMap<String,Object>> list = null; 
+			ArrayList<HashMap<String,Object>> productList = null; 
+			count = jyMyPageService.myLikedGoodsCount(startRow, endRow,member_id);
 			
-			list = jyMyPageService.myLikedGoods(member_id);
+			if (count < startRow) {
+				currentPage = currentPage - 1;
+				startRow = (currentPage - 1) * pageSize + 1;
+				endRow = startRow + pageSize - 1;
+			}
+			if (count > 0) {
+				productList = jyMyPageService.myLikedGoods(startRow, endRow,member_id);
+				number = count - (currentPage - 1) * pageSize;
+			}
+		
+			System.out.println("list" +productList);
 			
+			model.addAttribute("productList",productList);		
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("count", count);
+			model.addAttribute("number", number);
+			model.addAttribute("pageSize", pageSize);
 			
 			return "mypage_liked_goods";
 		}
+		@RequestMapping(value = "deleteLikedGoods")
+		public String deleteLikedGoods(Model model, @RequestParam(value = "entity_number", required = false ,defaultValue = "40") String entity_number)throws Exception {                   
+			
+			jyMyPageService.deleteLikedGoods(entity_number);
+			
+			
+			return "redirect:myLikedGoods.do";
+		}
+		@RequestMapping(value = "deleteCheckedGoods")
+		public String deleteCheckedGoods(Model model, HttpServletRequest request)throws Exception {                   
+			
+			//jyMyPageService.deleteLikedGoods(entity_number);
+			System.out.println("랄랄라라");
+			String[] checked = request.getParameterValues("chk_one");
+			
+//			System.out.println("check" + checked);
+//			for(int i = 0; i<checked.length; i++) {
+//				System.out.println(checked[i]);
+//			}
+			
+			jyMyPageService.deleteCheckedGoods(checked);
+			
+			return "redirect:myLikedGoods.do";
+		}
+		
 		
 }

@@ -62,7 +62,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "mypage_liked_goods.html">
+             <a href = "myLikedGoods.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/heart_w_resize.png" class = "img_icon"/></i></div>
                      <div class = "menu_content">
@@ -70,7 +70,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "my_info.html">
+             <a href = "myInfo.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/person_w_resize.png" class = "img_icon"/></div>
                      <div class = "menu_content"> 

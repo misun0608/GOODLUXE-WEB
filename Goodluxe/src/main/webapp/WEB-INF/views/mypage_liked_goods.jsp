@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import = "java.util.List" %>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.HashMap"%>
+<%@ page import="java.text.DecimalFormat"%>
+<%
+	ArrayList<HashMap<String, Object>> productList 
+	= (ArrayList<HashMap<String, Object>>)request.getAttribute("productList");
 
-
-
-
+	int currentPage = (int)request.getAttribute("currentPage");
+	int count = (int)request.getAttribute("count");
+	int number = (int)request.getAttribute("number");
+	int pageSize = (int)request.getAttribute("pageSize");
+		
+%>
 
 <!DOCTYPE html>
 <html>
@@ -42,7 +52,38 @@
 	href="${pageContext.request.contextPath}/resources/css/mypage_onlymenu.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage_liked_goods.css" />
+<script>
+	
+	function checkAll(){
+		var chk_all = document.getElementById("chk_all");
+		var input = document.getElementsByTagName("input");
+		
+		if(chk_all.checked === true){
+			for(var i=0; i<input.length; i++){
+				if(input[i].type == "checkbox" && input[i].id =="chk_one"&&input[i].checked==false){
+					input[i].checked=true;
+				}
+			}
+		}
+		if(chk_all.checked === false){
+			for(var i=0; i<input.length; i++){
+				if(input[i].type == "checkbox" && input[i].id =="chk_one"&&input[i].checked==true){
+					input[i].checked=false;
+				}
+			}
+		}
+	}
 
+	
+	function deleteGoods(){
+		
+		
+		
+		
+	}
+
+
+</script>
 
 
 
@@ -70,57 +111,99 @@
 								</p>
 							</div>
 							<br />
-							<table id="liked_goodslist" border="1">
-								<thead>
-									<tr class="liked_goods_top_tr">
-										<td class="liked_goods_top_td"><input type="checkbox"
-											id="chk_all"></td>
-										<td class="liked_goods_top_td img_td">이미지</td>
-										<td class="liked_goods_top_td">상품명</td>
-										<td class="liked_goods_top_td">상품구매금액</td>
-										<td class="liked_goods_top_td">등급</td>
-										<td class="liked_goods_top_td liked_goods_btn_td">선택</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><input type="checkbox" class="chk"></td>
-										<td class="liked_goods_img_td"><img
-											src="img/md_img/wallet2.jpg" alt="샤넬 장지갑" width="150px">
-										</td>
-										<td>샤넬 장지갑</td>
-										<td>3,250,000원</td>
-										<td>A</td>
-										<td class="liked_goods_btn_td"><input type="button"
-											class="liked_goods_btn" value="주문"><br /> <input
-											type="button" class="liked_goods_btn" value="삭제"></td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="liked_goods_btnpart">
-								<input type="button"
-									class="liked_goods_btn liked_goods_deletebtn" value="선택 상품 삭제">
-							</div>
-							<!-- 페이징 부분 -->
-							<center>
-								<div class="liked_goods_page">
-									<ul class="pagination modal">
-										<li><a href="#" class="page_first">처음 페이지</a></li>
-										<li><a href="#" class="arrow left"><<</a></li>
-										<li><a href="#" class="active num">1</a></li>
-										<li><a href="#" class="num">2</a></li>
-										<li><a href="#" class="num">3</a></li>
-										<li><a href="#" class="num">4</a></li>
-										<li><a href="#" class="num">5</a></li>
-										<li><a href="#" class="num">6</a></li>
-										<li><a href="#" class="num">7</a></li>
-										<li><a href="#" class="num">8</a></li>
-										<li><a href="#" class="num">9</a></li>
-										<li><a href="#" class="arrow right">>></a></li>
-										<li><a href="#" class="page_last">끝 페이지</a></li>
-									</ul>
+							
+							<form name = "deleteForm" onsubmit = "return deleteGoods();" action="./deleteCheckedGoods" >
+								<table id="liked_goodslist" border="1">
+									<thead>
+										<tr class="liked_goods_top_tr">
+											<td class="liked_goods_top_td"><input type="checkbox"
+												id="chk_all" onclick = "checkAll();"></td>
+											<td class="liked_goods_top_td img_td">이미지</td>
+											<td class="liked_goods_top_td">상품명</td>
+											<td class="liked_goods_top_td">상품구매금액</td>
+											<td class="liked_goods_top_td">등급</td>
+											<td class="liked_goods_top_td liked_goods_btn_td">선택</td>
+										</tr>
+									</thead>
+									<%
+										for(int i = 0; i<productList.size(); i++){
+											HashMap<String,Object>  productHM = new HashMap <String, Object>();	
+											productHM = (HashMap<String,Object>)productList.get(i);
+											String img_name = (String)productHM.get("pb_main_img_stored");
+											String product_name = (String)productHM.get("pb_md_name");
+											int product_price_nonshaped = Integer.parseInt((productHM.get("sale_price")).toString());
+											DecimalFormat df = new DecimalFormat("###,###");
+											String product_price_shaped = df.format(product_price_nonshaped);
+											String product_grade = (String)productHM.get("quality_grade");
+											String entity_number = (String)productHM.get("entity_number");
+									
+									%>
+									<tbody>
+										<tr>
+											<td><input type="checkbox" class="chk" value = "<%=entity_number%>" id = "chk_one" name = "chk_one" ></td>
+											<td class="liked_goods_img_td"><img
+												src="/Goodluxe/image/<%=img_name %>" alt="샤넬 장지갑" width="150px">
+											</td>
+											<td><%= product_name %></td>
+											<td><%= product_price_shaped %> 원</td>
+											<td><%= product_grade %></td>
+											<td class="liked_goods_btn_td"><input type="button"
+												class="liked_goods_btn" value="주문"><br /> <input
+												type="button" class="liked_goods_btn" value="삭제" id = "delete" onClick = "location.href='deleteLikedGoods?entity_number=<%=entity_number%>'"></td><!-- onClick = "location.href=''" -->
+										</tr>
+									</tbody>
+									<%
+										}
+									%>
+								</table>
+								<div class="liked_goods_btnpart">
+									<input type="submit"
+										class="liked_goods_btn liked_goods_deletebtn" value="선택 상품 삭제">
 								</div>
-							</center>
+							</form>
+							
+							<!-- 페이징 부분 -->
+							<article class="3rd_arti">
+	 				 <center>
+                        <div class="liked_goods_page">
+                            <ul class="pagination modal">
+						<%	
+							if(count>0){
+								int pageCount = ((count-1)/pageSize)+1;
+								int startPage = 1;
+								int i;
+								
+								if(currentPage%10!=0)
+										startPage = (int)(currentPage/5)*5+1;
+								else
+									startPage = currentPage-4;
+								int pageBlock = 5;
+						
+						%>
+                                <li><a href="myLikedGoods.do?pageNum=1&pageCount=<%=pageCount%>" class="page_fisrt">처음 페이지</a></li>
+                                <li><a href="myLikedGoods.do?pageNum=<%=startPage-5%>&pageCount=<%=pageCount%>" class="arrow left">&lt;&lt;</a></li>
+							<% 	
+								for(i = startPage; (i<=startPage+4)&&(i<=pageCount);i++){
+							%>
+                                <li><a href="myLikedGoods.do?pageNum=<%=i%>&pageCount=<%=pageCount%>"
+                                	<% if(i==currentPage){
+                                	%> 
+                                			class = "active num"
+                                	<%}else{%>
+                                			class="num"
+                                	<%}%> ><%= i%></a></li>
+								<%
+									}
+								%>  
+                                <li><a href="myLikedGoods.do?pageNum=<%=startPage+5%>&pageCount=<%=pageCount%>" class="arrow right">&gt;&gt;</a></li>
+                                <li><a href="myLikedGoods.do?pageNum=<%=pageCount%>&pageCount=<%=pageCount%>" class="page_last">끝 페이지</a></li>
+						<%
+							}
+						%>
+                            </ul>
+                        </div>
+                     </center>
+				</article>
 						</div>
 					</center>
 				</div>

@@ -8,10 +8,12 @@ import com.spring.goodluxe.voes.MemberVO;
 public interface JyMyPageMapper {
 
 	MemberVO getMemberInfo(HashMap<String,String>map);
-	
-	ArrayList<HashMap<String, String>> SearchlikedList(HashMap<String, String> map);
-
-	HashMap<String,Object> getLikedProduct(String string);
-
 	int myInfoAction(MemberVO memberVO);
+
+	ArrayList<HashMap<String, Object>> getLikedProduct(HashMap<String, Object> map);
+	int getLikedProductCount(HashMap<String, Object> map);
+	int deleteLikedGoods(HashMap<String, String> map);
+
+
+	
 }
