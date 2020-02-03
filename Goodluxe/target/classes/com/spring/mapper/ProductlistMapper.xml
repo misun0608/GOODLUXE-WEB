@@ -136,7 +136,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 				
 					<if test = "il_search_brand !='all'"> and pd_brand = #{il_search_brand} </if>
 					<if test = "il_search_category !='all'"> and pd_category = #{il_search_category} </if>
@@ -168,7 +168,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 				
 					<if test = "il_search_brand !='all'">
 						and pd_brand = #{il_search_brand}
@@ -224,7 +224,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status = '판매중' and pb_post_status = '게시중'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 	
@@ -242,7 +242,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY pb_view_count desc)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				WHERE pb_sale_status = '판매중' and pb_post_status = '게시중'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 
@@ -261,7 +261,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'			
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'			
 			)where REGEXP_LIKE(pb_md_name,#{content},'i')
 	</select>
 	<select id = "getSearchBoardList" parameterType = "hashmap"  resultMap = "listHashmapVO">
@@ -290,7 +290,7 @@
 						ORDER BY sale_price ASC)
 					</if>
 					)where REGEXP_LIKE(pb_md_name,#{content},'i')
-			)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+			)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 				
 		)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
 	</select>
@@ -321,7 +321,7 @@
 					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
 					from gl_consignment, gl_productboard
 					where gl_consignment.entity_number = gl_productboard.entity_number
-				)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+				)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 			)where entity_number = #{entity}
 	
 	</select>
@@ -341,7 +341,7 @@
 								from gl_consignment, gl_productboard
 								where gl_consignment.entity_number = gl_productboard.entity_number
 							)
-						)WHERE pb_sale_status != 'sale' and pb_post_status = 'onboard'	
+						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category}
 			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
 	</select>

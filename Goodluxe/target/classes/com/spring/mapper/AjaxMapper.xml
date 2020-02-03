@@ -17,17 +17,16 @@
 		delete from gl_liked  where member_id=#{id} and entity_number=#{entity}
 	</delete>
 	
-	
 	<update id = "increaseLike" parameterType = "hashmap">
 		update gl_productboard
 		 set pb_like=pb_like+1
-		  where entity_number = '40'
+		  where entity_number = #{entity}
 	</update>
 	
 	<update id = "decreaseLike" parameterType = "hashmap">
 		update gl_productboard
 		 set pb_like=pb_like-1
-		  where entity_number='40'
+		  where entity_number = #{entity}
 	</update>
 	
 	

@@ -5,7 +5,6 @@
 <%@ page import="java.util.HashMap"%>
 <%
 	HashMap<String,Object> theProduct = (HashMap<String,Object>)request.getAttribute("theProduct");
-	System.out.println("theProduct = ? " + theProduct);
 	String main_img = (String)theProduct.get("pb_main_img_stored");
 	String detail_img1 = (String)theProduct.get("pb_detail_img1_stored");
 	String detail_img2 = (String)theProduct.get("pb_detail_img2_stored");
@@ -17,13 +16,13 @@
 	String entity_number=(String)theProduct.get("entity_number");
 	
 	int product_price = Integer.parseInt((theProduct.get("sale_price")).toString());
-	DecimalFormat df = new DecimalFormat("###,###");
+	DecimalFormat df = new DecimalFormat(",###");
 	String product_price_shaped = df.format(product_price);
 	
 	String expected_point = df.format(product_price/1000);
 	
 	String shipping_coast = "4000원";
-	if(product_price > 1000000){
+	if(product_price >= 500000){
 		shipping_coast = "무료";
 	}else{
 		shipping_coast = "4,000원";
@@ -31,11 +30,8 @@
 	
 	request.setAttribute("entity_number",entity_number);
 	
-	
 	ArrayList<HashMap<String, Object>> recommandList
 	= (ArrayList<HashMap<String, Object>>)request.getAttribute("recommandList");
-	System.out.println("상위 리스트"+recommandList);
-
 %>
 <!DOCTYPE html>
 <html>
@@ -59,18 +55,12 @@
 			$("#footer").load("footer.do");
 		});
 	</script>
+	
 	<!-- md_detail -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/md_detail.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/md_detail.js"></script>
-	
-	
-	
-	<!--  -->
 	<script type="text/javascript">
 		 	$(document).ready(function(){
-		 		
-		 		
-		 		
 		 		function setBtnColor(){
 		 			$.ajax({   
 		 				url:'/goodluxe/checkAlreadyLiked.do?entity_number=<%=entity_number%>',
@@ -88,11 +78,10 @@
 		 					}
 		 				},
 		 				error:function(){
-		 					alert("통신 실팽");
+		 					alert("서버와 통신에 실패하였습니다.");
 		 				}
 		 			});
 		 		}
-		 
 		 		
 		 		$('#likebtn').on('click',function(event){
 		 			jQuery.ajax({
@@ -106,6 +95,8 @@
 		 					} else if(data==0){
 		 						//좋아요 취소됨
 		 						$('#heartImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/heart.png");
+		 					} else if(data==-1) {
+		 						alert('로그인 후 이용해주세요!');
 		 					}
 			 			},
 			 			error:function() {
@@ -114,7 +105,6 @@
 		 			});
 		 			event.preventDefault(); //디폴트 이벤트 해제
 		 		});
-		 		
 		 		setBtnColor();
 		 });
 		</script>
@@ -228,13 +218,10 @@
 						<h3 class="related_item_title">Related Items</h3>
 						<div class="related_item_list">
 							
-							<%System.out.println("설마 포문도 못도는거?");
+							<%
 							for( int j = 0; j < recommandList.size() ; j++) {
-								System.out.println("사이즈 "+ recommandList.size());
-								
 								HashMap<String,Object>  productHM = new HashMap <String, Object>();	
 								productHM = (HashMap<String,Object>)recommandList.get(j);
-								System.out.println("productHM "+ productHM);
 								String main_img_recommand = (String)productHM.get("pb_main_img_stored");
 								String brand_name_recommand = (String)productHM.get("pd_brand");
 								String product_name_recommand = (String)productHM.get("pb_md_name");
@@ -243,7 +230,6 @@
 								DecimalFormat df_recommand = new DecimalFormat("###,###");
 								String product_price_shaped_recommand = df_recommand.format(product_price_nonshaped_recommand);
 							%>
-							
 								<div class="related_item">
 									<a href="./mdDetail.do?entity_number=<%= entity_recommand%>"> 
 									<img src="/Goodluxe/image/<%= main_img_recommand%>" alt="">
@@ -254,9 +240,7 @@
 										</div>
 									</a>
 								</div>
-							
 							<%} %>
-							
 						</div>
 					</div>
 				</div>

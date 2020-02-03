@@ -10,14 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.goodluxe.voes.MemberVO;
+import com.spring.mapper.AjaxMapper;
 import com.spring.mapper.MemberMapper;
 import com.spring.mapper.MypageMapper;
+import com.spring.mapper.ProductlistMapper;
 
 @Service
 public class GoodluxeServiceImpl implements GoodluxeService {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	/* AJAX */
 	// Login Information
 	@Override
 	public String userChk(MemberVO membervo) throws Exception {
@@ -46,6 +49,50 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 		return "ok";
 	}
 	
+	// Check if someone pressed 'Like Button'
+	public int isMemberLiked(String member_id, String entity_number)throws Exception {
+		int res = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			
+			res = ajaxMapper.isAlreadyLiked(map);
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/isMemberLiked) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/isMemberLiked)");
+		}
+		return res;
+	}
+	// When 'Like Button' is pressed
+	public int setLike(String member_id, String entity_number)throws Exception {
+		int data = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			
+			int res = ajaxMapper.isAlreadyLiked(map);
+			
+			if(res==0) { //좋아요 추가
+				ajaxMapper.insertLikedUser(map);
+				ajaxMapper.increaseLike(map);
+				data=1;
+			}
+			else { //좋아요 삭제
+				ajaxMapper.deleteLikedUser(map);
+				ajaxMapper.decreaseLike(map);
+				data=0;
+			}
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/setLike) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/setLike)");
+		}
+		return data;
+	}
 	
 	/* MyPage */
 	// mypageOAS
@@ -117,5 +164,174 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			System.out.println("ERROR(GoodluxeService/getOrderData) : " + e.getMessage());
 		}
 		return orderdata;
+	}
+	
+	
+	/* Item List */
+	// Main Page Item List
+	public ArrayList<HashMap<String, Object>> getMainPageItem() throws Exception{
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			
+			ArrayList<HashMap<String, Object>> mainbolist = null;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("startRow", 1); 
+			map.put("endRow", 12);
+		
+			mainbolist = productlistMapper.getMainPageItem(map);
+			
+			return mainbolist;
+			
+		}catch(Exception e){
+			System.out.println("ERROR(ProductlistService/getMainPageItem) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getMainPageItem)");
+		}	
+	}
+	
+	// Main Page Event Item List
+	public ArrayList<HashMap<String, Object>> getMainPageItem_view() throws Exception{
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			
+			ArrayList<HashMap<String, Object>> mainbolist_view = null;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("startRow", 1); 
+			map.put("endRow", 6); 
+			
+			mainbolist_view = productlistMapper.getMainPageItemView(map);
+			
+			return mainbolist_view;
+			
+		}catch(Exception e){
+			System.out.println("ERROR(ProductlistService/getMainPageItem_view) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getMainPageItem_view)");
+		}	
+	}
+	
+	// Page Counting
+	public int getSellingBoardCount(int startRow, int endRow ,String il_search_brand 
+			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception{
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			map.put("il_search_brand",il_search_brand);
+			map.put("il_search_category",il_search_category);
+			map.put("il_search_grade",il_search_grade);
+			map.put("il_search_price",il_search_price);
+			
+			int count = productlistMapper.getSellingBoardCount(map);
+			
+			return count;
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getSellingBoardCount)" + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSellingBoardCount)");
+		}
+	}
+	
+	// Item List
+	public ArrayList<HashMap<String, Object>> getSellingBoardProduct(int startRow, int endRow ,String il_search_brand 
+			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception{
+		
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+
+			ArrayList<HashMap<String, Object>> sellbo_list = null;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			map.put("il_search_brand",il_search_brand);
+			map.put("il_search_category",il_search_category);
+			map.put("il_search_grade",il_search_grade);
+			map.put("il_search_price",il_search_price);
+			
+			sellbo_list = productlistMapper.SellingBoardProduct(map);
+			
+			return sellbo_list;
+			
+		}catch(Exception e){
+			System.out.println("ERROR(ProductlistService/getSellingBoardProduct)" + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSellingBoardProduct)");
+		}	
+	}
+	
+	// search result page counting
+	public int getSearchBoardCount(String search_content, String orderbywhat)throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("content", search_content);
+	
+			int count = productlistMapper.getSearchBoardCount(map);
+			return count;
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getSearchBoardCount) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSearchBoardCount)");
+		}
+	}
+	
+	// Search Item List
+	public ArrayList<HashMap<String, Object>> getSearchBoardProduct(int startRow, int endRow, String search_content, String orderbywhat)throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			
+			ArrayList<HashMap<String, Object>> searchbolist_view = null;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			map.put("content",search_content);
+			map.put("orderbywhat", orderbywhat);
+			
+			searchbolist_view = productlistMapper.getSearchBoardList(map);
+			
+			return searchbolist_view;
+		
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getSearchBoardProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSearchBoardProduct)");
+		}
+	}
+	
+	// MD Detail Information
+	public HashMap<String, Object> getTheProduct(String entity_number)throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			
+			HashMap<String, Object> theProduct =null;
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			map.put("entityNo", entity_number);			
+			theProduct = productlistMapper.getTheProduct(map);
+			productlistMapper.viewCountPlus(map);
+			
+			return theProduct;
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getTheProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getTheProduct)");
+		}
+	}
+	// Related Item List
+	public ArrayList<HashMap<String, Object>> getRecommand(String entity_number) throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			ArrayList<HashMap<String, Object>> recommandList = null;
+			HashMap<String, String> map = new HashMap<String, String>();
+			HashMap<String, String> theme = null;
+			map.put("entity", entity_number);	
+			theme = productlistMapper.getRecommandtheme(map);
+			
+			recommandList = productlistMapper.getRecommandList(theme);
+			
+			return recommandList;
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getTheProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getTheProduct)");
+		}
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.goodluxe.voes.MemberVO;
 
-// @RestController
+@RestController
 public class MemberAjaxController {
 	@Autowired
 	private MemberService gls;
