@@ -1,16 +1,16 @@
-/* PC와 태블릿일 경우 사용하는 css */
-/* 모바일의 경우 해당 로그인 버튼 클릭 불가 */
+/* PC�� �º��� ��� ����ϴ� css */
+/* ������� ��� �ش� �α��� ��ư Ŭ�� �Ұ� */
 
-/* 폰트 */
+/* ��Ʈ */
 @font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-/* 초기화 */
+/* �ʱ�ȭ */
 * {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 ul,ol,li {list-style:none;}
 a {text-decoration:none; outline:0;}
 img {vertical-align:top;}
 
-/* 배경 흐리게 */
+/* ��� �帮�� */
 .login_bg {
     display: none;
     top:0; left: 0;
@@ -20,7 +20,7 @@ img {vertical-align:top;}
     z-index: 20;
 }
 
-/* 로그인 영역 */
+/* �α��� ���� */
 .login_outline {
     width: 400px; height: 430px;
     position: absolute;
@@ -29,7 +29,7 @@ img {vertical-align:top;}
     margin-left: -200px;
     display: block;
 }
-/* 로그인 클릭시 나타나는 선 */
+/* �α��� Ŭ���� ��Ÿ���� �� */
 .login_top {
     position: absolute;
     top: 0; left: 0;
@@ -54,7 +54,7 @@ img {vertical-align:top;}
     width: 3px; height: 0%;
     background: #fff;
 }
-/* 로그인 요소 */
+/* �α��� ��� */
 .login_area {
     width: 400px; height: 430px;
     position: absolute;
@@ -70,7 +70,7 @@ img {vertical-align:top;}
     margin: 20px 0 0 0;
     font: 30px/1.2 'EBSHMJESaeronRA','Nanum Gothic', sans-serif;
 }
-/* 닫기 버튼 */
+/* �ݱ� ��ư */
 .login_close {
     position: absolute;
     top: 10px; right: 10px;
@@ -83,7 +83,7 @@ img {vertical-align:top;}
     margin-bottom: 10px; 
     left: 50%; margin-left: -150px;
 }
-/* 입력상자 css */
+/* �Է»��� css */
 .input_login {
     height : 50px; 
     width : 280px;
@@ -100,8 +100,8 @@ img {vertical-align:top;}
 .input_login:focus ~ .highlight {
     animation: inputHighlighter 0.3s ease;
 }
- /* 라벨 Highlight */
-label {
+ /* �� Highlight */
+.group>label {
     color: #999; 
     font-size: 18px;
     font-weight: normal;
@@ -111,7 +111,7 @@ label {
     top: 14px;
     transition: all 0.2s ease;
 }
-label.color {
+.group>label.color {
     top: 2px;
     transform: scale(.75); left: 2px;
     color: #DFB1AB;
@@ -203,4 +203,4 @@ label.color {
     font-size: 14px;
     font-weight: bolder;
     color: #DFB1AB;
-}
+}s

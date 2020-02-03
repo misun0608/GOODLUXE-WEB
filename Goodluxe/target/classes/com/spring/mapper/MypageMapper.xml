@@ -7,7 +7,7 @@
 		<result property="order_order_date" column="order_order_date" />
 		<result property="order_pay_date" column="order_pay_date" />
 		<result property="pb_number" column="pb_number" />
-		<result property="pb_photo1" column="pb_photo1" />
+		<result property="pb_main_img_stored" column="pb_main_img_stored" />
 		<result property="pb_md_name" column="pb_md_name" />
 		<result property="order_product_price" column="order_product_price" />
 		<result property="order_status" column="order_status" />
@@ -27,14 +27,14 @@
 	</resultMap>
 	
 	<select id="getOasData" parameterType="String" resultMap="oasHM">
-		select order_number, order_order_date, order_pay_date, od.pb_number, pb_photo1, pb_md_name, order_product_price, order_status, order_invoice_number
+		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number
 		from gl_order od, gl_productboard pb, gl_member mem
 		where od.member_id=#{id} and od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_cancel_date is null
 		order by order_number desc
 	</select>
 	
 	<select id="getCancelData" parameterType="String" resultMap="oasHM">
-		select order_number, order_order_date, od.pb_number, pb_photo1, pb_md_name, order_product_price, order_status, order_invoice_number
+		select order_number, order_order_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number
 		from gl_order od, gl_productboard pb, gl_member mem
 		where od.member_id=#{id} and od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_cancel_date is not null
 		order by order_number desc
@@ -48,7 +48,7 @@
 	</update>
 	
 	<select id="getOrderData" parameterType="String" resultMap="oasHM">
-		select order_number, order_order_date, order_pay_date, od.pb_number, pb_photo1, pb_md_name, order_product_price, order_status, order_invoice_number, od.member_id, member_name, order_used_point, order_used_coupon, order_ship_fee, order_pay_system, order_receipt, order_zipcode, order_addr1, order_addr2, order_phone, order_message
+		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number, od.member_id, member_name, order_used_point, order_used_coupon, order_ship_fee, order_pay_system, order_receipt, order_zipcode, order_addr1, order_addr2, order_phone, order_message
 		from gl_order od, gl_productboard pb, gl_member mem
 		where od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_number=#{order_number}
 	</select>
