@@ -73,12 +73,11 @@ public class ProductlistServiceImpl implements ProductlistService{
 	
 	
 	
-	//�Խù� ���� Ȯ��
+	// Page Counting
 	public int getSellingBoardCount(int startRow, int endRow ,String il_search_brand 
 			,String il_search_category ,String il_search_grade ,String il_search_price) throws Exception{
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
-			
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", startRow);
@@ -92,9 +91,8 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			return count;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�� ���� Ȯ�� �Ұ�");
+			System.out.println("ERROR(ProductlistService/getSellingBoardCount)" + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSellingBoardCount)");
 		}
 	}
 
@@ -107,7 +105,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 
 			ArrayList<HashMap<String, Object>> sellbo_list = null;
-			//HashMap<String, Object> sellbo_list = null;
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", startRow);
@@ -122,9 +119,8 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return sellbo_list;
 			
 		}catch(Exception e){
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("������ ������ �̸� �ҷ����� ����");
+			System.out.println("ERROR(ProductlistService/getSellingBoardProduct)" + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSellingBoardProduct)");
 		}	
 	}
 
@@ -192,7 +188,7 @@ public class ProductlistServiceImpl implements ProductlistService{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", 1); 
-			map.put("endRow", 8); 
+			map.put("endRow", 6); 
 			
 			mainbolist_view = productlistMapper.getMainPageItemView(map);
 			
@@ -206,29 +202,23 @@ public class ProductlistServiceImpl implements ProductlistService{
 		
 	}
 
+	// search result page counting
 	public int getSearchBoardCount(String search_content, String orderbywhat)throws Exception {
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
-			
 			HashMap<String, String> map = new HashMap<String, String>();
-			
 			map.put("content", search_content);
-		
 	
 			int count = productlistMapper.getSearchBoardCount(map);
-			System.out.println("��ġ�۰���"+count);
 			return count;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�˻� ��� �� ���� Ȯ�� �Ұ�");
+			System.out.println("ERROR(ProductlistService/getSearchBoardCount) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSearchBoardCount)");
 		}
 	}
 
-
-
+	// Search Item List
 	public ArrayList<HashMap<String, Object>> getSearchBoardProduct(int startRow, int endRow, String search_content, String orderbywhat)throws Exception {
-	
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 			
@@ -242,24 +232,16 @@ public class ProductlistServiceImpl implements ProductlistService{
 			
 			searchbolist_view = productlistMapper.getSearchBoardList(map);
 			
-		
 			return searchbolist_view;
 		
-		
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�˻� ��� ���� Ȯ�� �Ұ�");
+			System.out.println("ERROR(ProductlistService/getSearchBoardProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getSearchBoardProduct)");
 		}
-		
-		
-		
 	}
 
-
-
+	// MD Detail Information
 	public HashMap<String, Object> getTheProduct(String entity_number)throws Exception {
-		
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 			
@@ -273,51 +255,28 @@ public class ProductlistServiceImpl implements ProductlistService{
 			return theProduct;
 			
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�˻� ��� ���� Ȯ�� �Ұ�");
+			System.out.println("ERROR(ProductlistService/getTheProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getTheProduct)");
 		}
-		
 	}
 
-
-
+	// Related Item List
 	public ArrayList<HashMap<String, Object>> getRecommand(String entity_number) throws Exception {
-		
 		try {
-			
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
-		
 			ArrayList<HashMap<String, Object>> recommandList = null;
-			
 			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("entity", entity_number);	
-			System.out.println("엔티티"+entity_number);
 			HashMap<String, String> theme = null;
-			System.out.println("serviceImpl 둘");
+			map.put("entity", entity_number);	
 			theme = productlistMapper.getRecommandtheme(map);
-			
-//			String brand = "";
-//			String category = "";
-//			
-//			brand = theme.get("pd_brand");
-//			
-//			category= theme.get("pd_category");
-//			
-			
 			
 			recommandList = productlistMapper.getRecommandList(theme);
 			
-			System.out.println("응???"+recommandList);
-			
 			return recommandList;
 		}catch(Exception e) {
-			System.out.println("�޼���" + e.getMessage());
-			System.out.println("����" + e.getStackTrace());
-			throw new Exception("�˻� ��� ���� Ȯ�� �Ұ�");
+			System.out.println("ERROR(ProductlistService/getTheProduct) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/getTheProduct)");
 		}
-		
-	
 	}
 	
 

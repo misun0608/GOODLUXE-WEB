@@ -1,6 +1,7 @@
 package com.spring.goodluxe.jy;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,7 @@ import com.spring.goodluxe.voes.PurchaseProductVO;
 public class ProductlistController {
 	
 	@Autowired
-	private ProductlistServiceImpl productlistService; 
+	private ProductlistServiceImpl gls; 
 	
 		//
 		@RequestMapping(value = "adminProductRegisterPurchase.do")
@@ -48,15 +50,15 @@ public class ProductlistController {
 		}
 		
 		// 메인 페이지
-		@RequestMapping(value = "mainPage.do")
+		// @RequestMapping(value = "mainPage.do")
 		public String mainPage( Model model ) throws Exception {
 			
 			ArrayList<HashMap<String, Object>> productList = new ArrayList<HashMap<String, Object>>();
-			productList = productlistService.getMainPageItem();
+			productList = gls.getMainPageItem();
 			
 			
 			ArrayList<HashMap<String, Object>> productList_view = new ArrayList<HashMap<String, Object>>();
-			productList_view = productlistService.getMainPageItem_view();
+			productList_view = gls.getMainPageItem_view();
 			
 
 			model.addAttribute("productList",productList);
@@ -73,7 +75,7 @@ public class ProductlistController {
 			Date date_date = new SimpleDateFormat("yyyy-MM-dd").parse(txt_date);
 			purcVO.setPurc_date(date_date);
 			
-			int res = productlistService.registerProduct(purcVO);	
+			int res = gls.registerProduct(purcVO);	
 			
 		
 			return "admin_purc_regi";
@@ -91,7 +93,7 @@ public class ProductlistController {
 			consVO.setStart_date(date_start_date);
 			consVO.setEnd_date(date_end_date);
 			
-			int res = productlistService.registerProduct(consVO);	
+			int res = gls.registerProduct(consVO);	
 			
 			return "admin_consign_regi";
 		}
@@ -142,13 +144,13 @@ public class ProductlistController {
 			}
 			sellboVO.setPb_detail_img3_original(mf_detail3.getOriginalFilename());
 			sellboVO.setPb_detail_img3_stored(storedFileName_detail3);
-			int res = productlistService.uploadProductBoard(sellboVO);	
+			int res = gls.uploadProductBoard(sellboVO);	
 			
 			return "admin_post_upload";
 		}
 		
 
-		@RequestMapping(value = "itemList.do")
+		// @RequestMapping(value = "itemList.do")
 		public String itemList( Model model, HttpServletRequest request
 				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
 				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum 
@@ -158,23 +160,19 @@ public class ProductlistController {
 				,@RequestParam(value = "il_search_price", required = false, defaultValue = "all") String il_search_price
 				)throws Exception {
 			
-			if(pageNum<=0) {
-				pageNum = 1;
-			}
-			if(pageNum>pageCount) {
-				pageNum = pageCount;
-			}
-			int pageSize = 3;
+			if(pageNum<=0) { pageNum = 1; }
+			if(pageNum>pageCount) { pageNum = pageCount; }
+			// int pageSize = 16;
+			int pageSize = 4;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
 			int count = 0;
 			int number = 0;
 		
-			//HashMap<String,Object>  productHM = new HashMap <String, Object>();
 			ArrayList<HashMap<String, Object>> productList = new ArrayList<HashMap<String, Object>>();
 
-			count = productlistService.getSellingBoardCount(startRow, endRow,il_search_brand,il_search_category,il_search_grade, il_search_price);
+			count = gls.getSellingBoardCount(startRow, endRow,il_search_brand,il_search_category,il_search_grade, il_search_price);
 			
 			if (count < startRow) {
 				currentPage = currentPage - 1;
@@ -182,7 +180,7 @@ public class ProductlistController {
 				endRow = startRow + pageSize - 1;
 			}
 			if (count > 0) {
-				productList = productlistService.getSellingBoardProduct(startRow, endRow,il_search_brand,il_search_category,il_search_grade, il_search_price);
+				productList = gls.getSellingBoardProduct(startRow, endRow,il_search_brand,il_search_category,il_search_grade, il_search_price);
 				number = count - (currentPage - 1) * pageSize;
 			}
 			
@@ -200,8 +198,7 @@ public class ProductlistController {
 			return "item_list";
 		}
 
-
-		@RequestMapping(value = "searchResult.do")
+		// @RequestMapping(value = "searchResult.do")
 		public String searchResult(Model model, HttpServletRequest request
 				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
 				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum 
@@ -209,12 +206,9 @@ public class ProductlistController {
 				,@RequestParam(value = "orderbywhat", required = false, defaultValue = "recently") String orderbywhat
 				)throws Exception {
 			
-			if(pageNum<=0) { 
-				pageNum = 1;
-			}
-			if(pageNum>pageCount) {
-				pageNum = pageCount;
-			}
+			if(pageNum<=0) { pageNum = 1; }
+			if(pageNum>pageCount) { pageNum = pageCount; }
+			// int pageSize = 12;
 			int pageSize = 3;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
@@ -223,11 +217,8 @@ public class ProductlistController {
 			int number = 0;
 			
 			ArrayList<HashMap<String, Object>> productList = new ArrayList<HashMap<String, Object>>();
-			
 			search_content = search_content.replaceAll("\\s", "\\|");
-		
-			
-			count = productlistService.getSearchBoardCount(search_content,orderbywhat);
+			count = gls.getSearchBoardCount(search_content,orderbywhat);
 			
 			if (count < startRow) {
 				currentPage = currentPage - 1;
@@ -235,7 +226,7 @@ public class ProductlistController {
 				endRow = startRow + pageSize - 1;
 			}
 			if (count > 0) {
-				productList = productlistService.getSearchBoardProduct(startRow, endRow, search_content, orderbywhat );
+				productList = gls.getSearchBoardProduct(startRow, endRow, search_content, orderbywhat );
 				number = count - (currentPage - 1) * pageSize;
 			}
 			
@@ -253,26 +244,28 @@ public class ProductlistController {
 		}
 		
 	
-		@RequestMapping(value = "mdDetail.do")
-		public String mdDetail( Model model,HttpServletRequest request
-				,@RequestParam(value = "entity_number", required = false, defaultValue = "40" ) String entity_number
-				 ) throws Exception {
+		// @RequestMapping(value = "mdDetail.do")
+		public String mdDetail( Model model, String entity_number, HttpServletResponse response ) throws Exception {
+			
+			if(entity_number == null) { return "redirect:/"; }
+			
 			HashMap<String,Object>theProduct = new HashMap<String,Object>();
 			ArrayList<HashMap<String, Object>> recommandList = new ArrayList<HashMap<String, Object>>();
 			
-			theProduct = productlistService.getTheProduct(entity_number);
+			theProduct = gls.getTheProduct(entity_number);
 			
-			System.out.println("엔티티 프로덕트 찾고 그다음");
+			if(theProduct == null) {
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter writer = response.getWriter();
+				writer.write("<script>alert('현재 판매중인 상품이 아닙니다.');" + "location.href='mainPage.do';</script>");
+				return null; }
 			
-			recommandList = productlistService.getRecommand(entity_number); 
-			System.out.println("컨트롤 "+recommandList);
+			recommandList = gls.getRecommand(entity_number); 
 			
 			model.addAttribute("recommandList",recommandList);
 			model.addAttribute("theProduct",theProduct);
 			return "md_detail";
 		}
-	
-	
-	
 	
 }

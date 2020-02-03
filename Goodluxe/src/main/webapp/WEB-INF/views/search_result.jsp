@@ -20,7 +20,6 @@
 	int pageSize = (int) request.getAttribute("pageSize");
 	String search_content = (String)request.getAttribute("search_content");
 	String orderbywhat = (String)request.getAttribute("orderbywhat");
-	System.out.println("jsp파일 orderby = "+ orderbywhat);
 %>
 
 <!DOCTYPE html>
@@ -45,7 +44,6 @@
 			$("#footer").load("footer.do");
 		});
 	</script>
-	
     
     <!--  search_result   -->
 	<link rel="stylesheet"
@@ -108,11 +106,9 @@
 							String brand_name = (String)productHM.get("pd_brand");
 							String product_name = (String)productHM.get("pb_md_name");
 							int product_price_nonshaped = Integer.parseInt((productHM.get("sale_price")).toString());
-							DecimalFormat df = new DecimalFormat("###,###");
+							DecimalFormat df = new DecimalFormat(",###");
 							String product_price_shaped = df.format(product_price_nonshaped);
 							String entity_number = (String)productHM.get("entity_number");
-							
-							
 					%>
 					<a href="./mdDetail.do?entity_number=<%=entity_number%>">
 						<div class="card">
@@ -172,6 +168,7 @@
 								}
 								%>
 				                           	</ul>
+							<br /><br /><br />
 						</div>
 					</center>
 				</article>

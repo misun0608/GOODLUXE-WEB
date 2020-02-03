@@ -221,7 +221,7 @@
 						//int product_price = (Integer)productHM.get("sale_price");
 						//int product_price = Integer.valueOf((String)productHM.get("sale_price"));
 						int product_price_nonshaped = Integer.parseInt((productHM.get("sale_price")).toString());
-						DecimalFormat df = new DecimalFormat("###,###");
+						DecimalFormat df = new DecimalFormat(",###");
 						String product_price_shaped = df.format(product_price_nonshaped);
 						
 					%>
@@ -281,9 +281,7 @@
 								for(i = startPage; (i<=startPage+4)&&(i<=pageCount);i++){
 							%>
                                 <li><a href="itemList.do?pageNum=<%=i%>&pageCount=<%=pageCount%>&il_search_brand=<%=il_search_brand%>&il_search_category=<%=il_search_category%>&il_search_grade=<%=il_search_grade%>&il_search_price=<%=il_search_price%>"
-                                	<% if(i==currentPage){
-                                		System.out.println("하....나의 신박했던 아이디어가 먹히지 않는군....아닌데 먹히는데.....ㅠㅠ");
-                                	%> 
+                                	<% if(i==currentPage){ %> 
                                 			class = "active num"
                                 	<%}else{%>
                                 			class="num"
@@ -297,6 +295,7 @@
 							}
 						%>
                             </ul>
+                        	<br/><br/><br/>
                         </div>
                      </center>
 				</article>
