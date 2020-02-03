@@ -189,7 +189,7 @@
 								<hr id="name_line">
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
-								<a href = "#"><div class="buybtn buybtn2">구매하기</div></a>
+								<a href = "orderForm.do?entity_number=<%=entity_number%>"><div class="buybtn buybtn2">구매하기</div></a>
 								<a href = "#"><div class="notibtn">
 									<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px">&nbsp;&nbsp;알림
 								</div></a>

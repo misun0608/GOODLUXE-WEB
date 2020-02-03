@@ -6,7 +6,7 @@ public class MemberVO {
 	private String member_id;
 	private String member_pw;
 	private String member_name;
-	private int member_zipcode;
+	private String member_zipcode;
 	private String member_addr1;
 	private String member_addr2;
 	private String member_phone;
@@ -17,7 +17,7 @@ public class MemberVO {
 	private Date member_join_date;
 	private String member_class; 
 	private int member_point;
-	private String member_isadmin;	
+	private String member_isadmin;
 	public String getMember_id() {
 		return member_id;
 	}
@@ -36,10 +36,10 @@ public class MemberVO {
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-	public int getMember_zipcode() {
+	public String getMember_zipcode() {
 		return member_zipcode;
 	}
-	public void setMember_zipcode(int member_zipcode) {
+	public void setMember_zipcode(String member_zipcode) {
 		this.member_zipcode = member_zipcode;
 	}
 	public String getMember_addr1() {
@@ -107,5 +107,6 @@ public class MemberVO {
 	}
 	public void setMember_isadmin(String member_isadmin) {
 		this.member_isadmin = member_isadmin;
-	} 
+	}
+	
 }

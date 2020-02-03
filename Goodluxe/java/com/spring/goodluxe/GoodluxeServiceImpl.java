@@ -61,8 +61,8 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			
 			res = ajaxMapper.isAlreadyLiked(map);
 		}catch(Exception e) {
-			System.out.println("ERRPR(AjaxService/isMemberLiked) : " + e.getMessage());
-			throw new Exception("ERRPR(AjaxService/isMemberLiked)");
+			System.out.println("ERRPR(GoodluxeService/isMemberLiked) : " + e.getMessage());
+			throw new Exception("ERRPR(GoodluxeService/isMemberLiked)");
 		}
 		return res;
 	}
@@ -88,8 +88,8 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 				data=0;
 			}
 		}catch(Exception e) {
-			System.out.println("ERRPR(AjaxService/setLike) : " + e.getMessage());
-			throw new Exception("ERRPR(AjaxService/setLike)");
+			System.out.println("ERRPR(GoodluxeService/setLike) : " + e.getMessage());
+			throw new Exception("ERRPR(GoodluxeService/setLike)");
 		}
 		return data;
 	}
