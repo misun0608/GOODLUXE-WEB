@@ -1,5 +1,6 @@
 package com.spring.goodluxe.jiyemypage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,5 +29,40 @@ public class JyMyPageServiceImpl implements JyMyPageService {
 	}
 	
 	
+	public int myInfoAction(MemberVO memberVO)throws Exception{
+		
+		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
+		
+		int res = jymypageMapper.myInfoAction(memberVO);
+		
+		return 0;
+		
+	}
+	
+	
+	
+	public ArrayList<HashMap<String, Object>> myLikedGoods(String member_id)throws Exception{
+		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		ArrayList<HashMap<String,String>> likedList = new ArrayList<HashMap<String,String>>();
+		ArrayList<HashMap<String,Object>> likedProductList = new ArrayList<HashMap<String,Object>>();
+		
+		map.put("member_id",member_id);
+		
+		likedList = jymypageMapper.SearchlikedList(map);
+		
+		for(int i = 0; i<likedList.size(); i++) {
+			
+			likedProductList.set(i,jymypageMapper.getLikedProduct(likedList.get(i).get("entity_number")));
+			
+		}
+
+		
+		return likedProductList;
+		
+		
+	}
 	
 }
