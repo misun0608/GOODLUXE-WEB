@@ -40,15 +40,28 @@ public class OrderServiceImpl implements OrderService {
 	// Order MD Information
 	@Override
 	public ProductVO selectProduct(String entity_number) throws Exception{
-		ProductVO mvo = null;
+		ProductVO pvo = null;
 		try {
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			mvo = orderMapper.selectProduct(entity_number);
+			pvo = orderMapper.selectProduct(entity_number);
 		}catch(Exception e) {
 			System.out.println("ERROR(OrderService/selectProduct) : " + e.getMessage());
 			throw new Exception("ERROR(OrderService/selectProduct)", e);
 		}
-		return mvo;
+		return pvo;
+	}
+	// Order MD Image
+	@Override
+	public String loadImg(String entity_number) throws Exception{
+		String img_path = null;
+		try {
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			img_path = orderMapper.loadImg(entity_number);
+		}catch(Exception e) {
+			System.out.println("ERROR(OrderService/selectProduct) : " + e.getMessage());
+			throw new Exception("ERROR(OrderService/selectProduct)", e);
+		}
+		return img_path;
 	}
 	
 	// Coupon List

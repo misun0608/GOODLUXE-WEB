@@ -31,8 +31,7 @@ public class OrderController {
 	
 	// 주문서 작성 페이지 이동
 	@RequestMapping(value = "orderForm.do")
-	public String orderForm(String entity_nuber, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-		String entity_number = request.getParameter("entity_number");
+	public String orderForm(String entity_nuber, Model model, String entity_number, HttpServletResponse response, HttpSession session) throws Exception{
 		String member_id = (String) session.getAttribute("member_id");
 		if(member_id == null) {
 			response.setCharacterEncoding("UTF-8");
@@ -44,13 +43,16 @@ public class OrderController {
 		try {
 			MemberVO mvo = gls.selectMember(member_id);
 			ProductVO pvo = gls.selectProduct(entity_number);
+			String img_path = gls.loadImg(entity_number);
 			ArrayList<CouponVO> coupon_list = gls.selectCoupon(member_id);
 			
 			model.addAttribute("mvo", mvo);
 			model.addAttribute("pvo", pvo);
+			model.addAttribute("img_path", img_path);
 			model.addAttribute("coupon_list", coupon_list);
 		} catch(Exception e) {
-			
+			System.out.println("ERROR(OrderController/orderForm) : " + e.getMessage());
+			return "redirect:/mainPage.do";
 		}
 		return "order_form";
 	}
@@ -58,6 +60,7 @@ public class OrderController {
 	// 무통장입금으로 주문했을 시
 	@RequestMapping(value = "/insertOrder.do")
 	public String insertOrder(OrderVO vo, MemberVO memberVO, CouponVO couponVO, PointVO pointVO, HttpServletResponse response) throws Exception {
+		System.out.println("Controller : " + vo.getOrder_number());
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();

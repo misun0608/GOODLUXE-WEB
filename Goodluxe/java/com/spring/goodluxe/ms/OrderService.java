@@ -6,12 +6,14 @@ import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
 import com.spring.goodluxe.voes.ProductVO;
 
 public interface OrderService {
 
 	// order_form에서 memberVO 정보 받아올 때
 	public MemberVO selectMember(String member_id) throws Exception;
+	public String loadImg(String entity_number) throws Exception;
 	public ProductVO selectProduct(String entity_number) throws Exception;
 	public ArrayList<CouponVO> selectCoupon(String member_id) throws Exception;
 	public int insertOrder(OrderVO orderVO) throws Exception;

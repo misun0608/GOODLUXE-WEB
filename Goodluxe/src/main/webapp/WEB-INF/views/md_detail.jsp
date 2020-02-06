@@ -21,11 +21,11 @@
 	
 	String expected_point = df.format(product_price/1000);
 	
-	String shipping_coast = "4000원";
+	String shipping_coast = "5000원";
 	if(product_price >= 500000){
 		shipping_coast = "무료";
 	}else{
-		shipping_coast = "4,000원";
+		shipping_coast = "5,000원";
 	}
 	
 	request.setAttribute("entity_number",entity_number);

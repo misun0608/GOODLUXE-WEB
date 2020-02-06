@@ -1,8 +1,8 @@
 $(document).ready(function(){
     $('.main_image_left').on('mouseenter',function(){
-        var link = $(this).children().children().attr('src');
-        console.log(link);
-        $('.main_image_link_right>img').attr('src',link);
+        var img_path = $(this).children().children().attr('src');
+        console.log(img_path);
+        $('.main_image_link_right>img').attr('src',img_path);
     });
 
     var posArr = [];
@@ -11,7 +11,6 @@ $(document).ready(function(){
 
     for(var i = 0; i < len; i++) {
         posArr.push($('.mp_3rd>a').eq(4*i).offset().top);
-        console.log(posArr);
     }
     posArr.push($('.mp_3rd>a').last().offset().top + $('.mp_3rd>a').last().height());
 

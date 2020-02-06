@@ -66,6 +66,33 @@ CREATE TABLE ORDERED(
 		<result property="order_message" column="order_message" />
 		<result property="order_pay_price" column="order_pay_price" />
 	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.ProductBoardVO" id="pbRM">
+		<result property="pb_number" column="pb_number" />
+		<result property="pb_division" column="pb_division" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="pb_date" column="pb_date" />
+		<result property="pb_sale_status" column="pb_sale_status" />
+		<result property="pb_post_status" column="pb_post_status" />
+		<result property="pb_detail" column="pb_detail" />
+		<result property="pb_main_img_original" column="pb_main_img_original" />
+		<result property="pb_main_img_stored" column="pb_main_img_stored" />
+		<result property="pb_detail_img1_original" column="pb_detail_img1_original" />
+		<result property="pb_detail_img1_stored" column="pb_detail_img1_stored" />
+		<result property="pb_detail_img2_original" column="pb_detail_img2_original" />
+		<result property="pb_detail_img2_stored" column="pb_detail_img2_stored" />
+		<result property="pb_detail_img3_original" column="pb_detail_img3_original" />
+		<result property="pb_detail_img3_stored" column="pb_detail_img3_stored" />
+		<result property="pb_view_count" column="pb_view_count" />
+		<result property="pb_like" column="pb_like" />
+		<result property="entity_number" column="entity_number" />
+	</resultMap>
+	
+	<select id="loadImg" parameterType="String" resultType="String">
+		select pb_main_img_stored
+		from gl_productboard
+		where entity_number=#{entity_number}
+	</select>
 
 	<select id="selectProduct" parameterType="String" resultMap="ProductRM">
 		select pd_name, sale_price, entity_number

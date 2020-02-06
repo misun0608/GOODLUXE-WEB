@@ -33,7 +33,6 @@
 	
 	/* 제품 정보 */
 	ProductVO productVO = (ProductVO)request.getAttribute("pvo");
-	String img_path = (String)request.getAttribute("img_path");
 	
 	int sale_price = productVO.getSale_price();
 	
@@ -120,197 +119,281 @@
 	$(document).ready(function() {
 		var order_product_price = <%=sale_price %>;	// 총주문금액
 		var delivery = <%=delivery_fee %>	// 배송비
+		$('#using_point').val('0');	// 적립금 초기화
+		
+		// 쿠폰 사용
+		if($("#coupon_select option:selected").text() != '가입 무료배송 쿠폰'){
+			$('#using_coupon').val('0');	// 적립금 사용
+		}
+	
 		var used_point = $('#using_point').val();
+		console.log('포인트 포멧' + used_point);
 		var used_point_num = parseInt($('#using_point').val().replace(/\,/g,''));
+		console.log('포인트 ' + used_point);
 		var used_coupon_num = parseInt($('#using_coupon').val().replace(/\,/g,''));
 		var used_coupon = $('#using_coupon').val();
-		$('#using_point').val('0');	// 적립금 초기화
+		console.log('쿠폰 ' + used_coupon);
+		
 		$('#final_price').val('<%=total_price %>');
 		$('#final_price2').val(numberWithCommas('<%=total_price %>') + '원');
 		
+		// 데이터 값 초기화 끝
+		
+		// 쿠폰 선택 이전값
 		var previous = '';
+		setTimeout("window.self.focus();", 1000);
+		
 		// 쿠폰 계산
 		$('#coupon_select').focus(function(){
 			previous = $("#coupon_select option:selected").text();
 		}).on('change', function(){
 			$('#coupon_select').trigger("blur");
+			console.log("선택쿠폰 " + used_coupon);
+			console.log("이전값" + previous);
+			
+			// 다른쿠폰을 선택할 경우
+			
+			// 배송비가 0원인 경우
 			if(delivery == 0){
 				alert('배송비가 무료인 상품입니다.');
 				$('#coupon_select').find('option:first').prop('selected', true);
+			
+			// 배송비가 0이 아닐 경우 > 무료배송 쿠폰 선택
 			}else {
+				// 포인트를 사용한 경우
 				var pay_money = 0;
-				if($("#coupon_select option:selected").text() == '가입 무료배송 쿠폰'){
-					$('#using_coupon').val(delivery);
-				}else if($("#coupon_select option:selected").text() != '가입 무료배송 쿠폰'){
-					$('#using_coupon').val(0);
+				if($('#order_used_point').val() != 0){
+					// 포인트 사용 > 배송비 0 아님 > 무료쿠폰 선택
+					if($("#coupon_select option:selected").text() == '가입 무료배송 쿠폰'){
+						// 포인트 사용 > 배송비 0 아님 > 무료쿠폰 선택 > 이전선택 쿠폰이 무료배송쿠폰
+						if(previous == '가입 무료배송 쿠폰'){
+							$('#using_coupon').val(delivery);
+							used_coupon = $('#using_coupon').val();
+							used_point = $('#using_point').val();
+							pay_money = (order_product_price + delivery - used_point - used_coupon);
+							
+							$('#final_price').val(pay_money);
+							$('#final_price2').val(numberWithCommas(pay_money)+'원');
+						// 포인트 사용 > 배송비 0 아님 > 무료쿠폰 선택 > 이전선택 쿠폰이 다른쿠폰
+						}else{
+							$('#using_coupon').val(delivery);
+							used_coupon = $('#using_coupon').val();
+							used_point = $('#using_point').val();
+							pay_money = (order_product_price + delivery - used_point - used_coupon);
+							
+							$('#final_price').val(pay_money);
+							$('#final_price2').val(numberWithCommas(pay_money)+'원');
+						}
+	
+					// 포인트 사용 > 배송비 0 아님 > 다른쿠폰 선택
+					}else if($("#coupon_select option:selected").text() != '가입 무료배송 쿠폰'){
+						$('#using_coupon').val(0);
+						used_coupon = $('#using_coupon').val();
+						used_point = $('#using_point').val();
+						pay_money = (order_product_price + delivery - used_point - used_coupon);
+						
+						$('#final_price').val(pay_money);
+						$('#final_price2').val(numberWithCommas(pay_money)+'원');
+					}
+				}else{
+					// 포인트 사용 안했을 경우
+					if($("#coupon_select option:selected").text() == '가입 무료배송 쿠폰'){
+						parseInt($('#using_coupon').val(delivery));
+						used_coupon = $('#using_coupon').val();
+						pay_money = (order_product_price + delivery - used_point - used_coupon);
+						console.log(pay_money);
+						$('#final_price').val(pay_money);
+						$('#final_price2').val(numberWithCommas(pay_money)+'원');
+					// 배송비가 0이 아닐 경우 > 다른 쿠폰 선택
+					}else if($("#coupon_select option:selected").text() != '가입 무료배송 쿠폰'){
+						$('#using_coupon').val(0);
+						pay_money = (order_product_price + delivery - used_point - used_coupon);
+						
+						$('#final_price').val(pay_money);
+						$('#final_price2').val(numberWithCommas(pay_money)+'원');
+					}
 				}
-					used_coupon = $('#using_coupon').val();
-					used_point = $('#using_point').val();
-					pay_money = (order_product_price + delivery - used_point - used_coupon);
-					
-					$('#final_price').val(pay_money);
-					$('#final_price2').val(numberWithCommas(pay_money)+'원');
 			}
 		});
 	
 		// 적립금 계산
 		$('#order_used_point').on('keyup', function(){
-			// 적립금 input에 숫자만 입력 가능
+			// 적립금 input에 숫자만 넣게하는 코드
 			$(this).val($(this).val().replace(/[^0-9]/g,""));
 			
 			var have_point = parseInt(<%=memberVO.getMember_point() %>);
 			used_point = $('#order_used_point').val();
-			
-			if($('#order_used_point').val() == ''){
+	
+			// 사용포인트가 5000보다 같거나 많을 시
+			if(used_point >= 5000){
+				// 보유 적립금이 사용적립금보다 많을 때
+				if(have_point >= used_point){
+					used_coupon = $('#using_coupon').val();
+					used_point = parseInt($('#order_used_point').val());
+					var pay_money_without_point = (order_product_price - used_coupon);
+					
+					// 적립금 사용이 결제가격보다 높을 시
+					if(pay_money_without_point < used_point){
+						alert('결제금액을 초과해서 적립금을 사용하실 수 없습니다');
+						$('#order_used_point').val(pay_money_without_point);
+						$('#using_point').val(pay_money_without_point);
+						used_point = $('#using_point').val();
+						pay_money = (order_product_price + delivery - used_point - used_coupon);
+						$('#final_price').val(pay_money);
+						$('#final_price2').val(numberWithCommas(pay_money)+'원');
+					
+					// 적립금 사용이 결제가격보다 낮을시
+					}else{
+						used_point = $('#order_used_point').val();
+						$('#using_point').val(used_point);
+						pay_money = (order_product_price + delivery - used_point - used_coupon);
+						$('#final_price').val(pay_money);
+						$('#final_price2').val(numberWithCommas(pay_money)+'원');
+					}
+					
+					
+				// 보유 적립금이 사용적립금보다 부족할 시
+				}else if(have_point < used_point){
+					alert('보유 적립금이 부족합니다');
+					$('#order_used_point').val('<%=memberVO.getMember_point() %>');
+					$('#using_point').val('<%=memberVO.getMember_point() %>');
+					used_point = parseInt($('#order_used_point').val());
+					pay_money = (order_product_price + delivery - used_point - used_coupon);
+					$('#final_price').val(pay_money);
+					$('#final_price2').val(numberWithCommas(pay_money)+'원');
+				}
+			// 사용포인트가 5000미만일 때
+			}else if(used_point < 5000){
 				$('#using_point').val(0);
-				$('#order_used_point').val(0);
+				used_point = parseInt($('#using_point').val());
 				pay_money = (order_product_price + delivery - used_point - used_coupon);
 				$('#final_price').val(pay_money);
 				$('#final_price2').val(numberWithCommas(pay_money)+'원');
-				return;
-			}
 			
-			if(used_point > have_point) {
-				alert('보유 포인트가 부족합니다.');
-				$('#order_used_point').val('');
-				return;
+			// 변수가 받으니까 안돼서... 적립금 사용 한번에 지웠을 경우
+			}else if($('#order_used_point').val() == ''){
+				$('#using_point').val(0);
+				$('#order_used_point').val(0);
+				used_point = parseInt($('#using_point').val());
+				pay_money = (order_product_price + delivery - used_point - used_coupon);
+				$('#final_price').val(pay_money);
+				$('#final_price2').val(numberWithCommas(pay_money)+'원');
 			}
-	
-			used_point = $('#order_used_point').val();
-			
-			if(order_product_price < used_point){
-				alert('결제금액을 초과해서 적립금을 사용하실 수 없습니다');
-				$('#order_used_point').val('');
-				return;
-			}
-
-			used_point = $('#order_used_point').val();
-			$('#using_point').val(used_point);
-			pay_money = (order_product_price + delivery - used_point - used_coupon);
-			$('#final_price').val(pay_money);
-			$('#final_price2').val(numberWithCommas(pay_money)+'원');
-
 		});
 		
-		$('#order_used_point').on('focusout',function(){
-			used_point = $('#order_used_point').val();
-			if(used_point < 5000) {
-				alert('5,000P부터 사용 가능합니다.');
-				$('#order_used_point').val('');
-				return;
-			}
-		});
-			
-	   $('#payment_click').click(function(){
-		   if(!chk_d_info()) {
-			   return;
-		   }
-		   
-	      var select2 = $('input[name="order_pay_system"]:checked').val();
-	      var order_phone = ($('input[name=order_phone1]').val() + $('input[name=order_phone2]').val() + $('input[name=order_phone3]').val());
-	      $('input[name=order_phone]').val(order_phone);
-			
-	      if(select2 == '카카오페이'){
-	         // 카카오페이일경우 submit을 못하기때문에 input에 적혀있는 데이터 하나하나 저장
-	         var order_receipt = $('input[name=order_receipt]').val();
-	         var order_zipcode = $('input[name=order_zipcode]').val();
-	         var order_addr1 = $('input[name=order_addr1]').val();
-	         var order_addr2 = $('input[name=order_addr2]').val();
-	         var order_product_price = $('input[name=order_product_price]').val();
-	         var order_ship_fee = $('input[name=order_ship_fee]').val();
-	         var order_used_point = $('input[name=order_used_point]').val();
-	         var order_used_coupon = $('#coupon_select').val();
-	         var order_pay_system = $('input[name=order_pay_system]').val();
-	         var member_id = $('input[name=member_id]').val();
-	         var order_message = $('textarea[name=order_message]').val();
-	         var order_pay_price = $('input[name=order_pay_price]').val();
-	         var member_point = $('input[name=member_point]').val();
-	         var entity_number = $('input[name=entity_number]').val();
-	         
-	         var order_number = create_order_num();
-	          
-	         IMP.init('imp78724107'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	         IMP.request_pay({
-	             pg : 'kakaopay',
-	             pay_method : 'card',
-	             merchant_uid : 'merchant_' + new Date().getTime(),
-	             name : 'GOODLUXE:결제테스트',
-	             amount : $('#final_price').val(),
-	             buyer_email : '<%=email%>',
-	             buyer_name : '<%=order_name%>',
-	             buyer_tel : '<%=phone%>',
-	             buyer_addr : '<%=order_addr1%>',
-	             buyer_postcode : '<%=order_zipcode%>'
-	                     }, function(rsp) {
-	                  if (rsp.success) {
-	                     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	                     jQuery.ajax({
-	                        url : "/goodluxe/insertKakaoOrder.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-	                        type : 'POST',
-	                        dataType : 'json',
-	                        data : {
-	                           imp_uid : rsp.imp_uid,
-	                           'order_number' : order_number,
-	                           'order_receipt' : order_receipt,
-	                           'order_zipcode' : order_zipcode,
-	                           'order_addr1' : order_addr1,
-	                           'order_addr2' : order_addr2,
-	                           'order_phone' : order_phone,
-	                           'order_product_price' : order_product_price,
-	                           'order_ship_fee' : order_ship_fee,
-	                           'order_used_point' : order_used_point,
-	                           'order_used_coupon' : order_used_coupon,
-	                           'order_pay_system' : order_pay_system,
-	                           'member_id' : member_id,
-	                           'order_message' : order_message,
-	                           'order_pay_price' : order_pay_price,
-	                           'member_point' : member_point,
-	                           'entity_number' : entity_number
-	                        //기타 필요한 데이터가 있으면 추가 전달
-	                        },
-	                        success:function(data) {
-	                           // 성공시 이동할 페이지하기
-	                           location.href='insertOrderDone.do?order_number='+order_number+'&entity_number='+entity_number;
-	                        }
-	                     });
-	                  } else {
-	                     var msg = '결제에 실패하였습니다.';
-	                     msg += '\nMESSAGE : ' + rsp.error_msg;
-	                     // 실패시 이동할 페이지 추가하기
-	                     location.href='orderForm.do?entity_number='+entity_number;
-	                     alert(msg);
-	                  }
-	               });
-	         
-	      }else if(select2 == '무통장입금'){
-	    	  if(!check_order_refund_info()) {
-	    		  return false;
-	    	  }
-	          var form = document.order_input_form;
-	    	  var order_number = create_order_num();
-	    	  $('#of_order_number').val(order_number);
-	          form.submit();
-	      }
-	   });
-	   
-		function create_order_num(){
-	         var dt = new Date();
-	         var Year = dt.getFullYear();        
-	         var Month = "" + (dt.getMonth()+1);
-	         var Day = "" + dt.getDate();            
-	         if(Month.length < 2) Month = "0" + Month;
-	         if(Day.length < 2) Day = "0" + Day;
-	         var Today = Year.toString() + Month + Day;
-	          
-	          // 6자리 난수
-	          var result = Math.floor(Math.random() * 1000000)+100000;
-	          if(result>1000000){
-	             result = result - 100000;
-	          }
-
-	          var order_number = Today + result;
-	          return order_number;
-		}
+		// 카카오페이 결제
+		   $('#payment_click').click(function(){
+		      var select2 = $('input[name="order_pay_system"]:checked').val();
+		      console.log(select2);
+		      // 폰 1~3 합쳐서 hidden으로 보내기 위해
+		      var order_phone = ($('input[name=order_phone1]').val() + $('input[name=order_phone2]').val() + $('input[name=order_phone3]').val());
+		      $('input[name=order_phone]').val(order_phone);
+		      
+		      
+		      if(select2 == '카카오페이'){
+		         // 카카오페이일경우 submit을 못하기때문에 input에 적혀있는 데이터 하나하나 저장
+		         var order_receipt = $('input[name=order_receipt]').val();
+		         var order_zipcode = $('input[name=order_zipcode]').val();
+		         var order_addr1 = $('input[name=order_addr1]').val();
+		         var order_addr2 = $('input[name=order_addr2]').val();
+		         var order_product_price = $('input[name=order_product_price]').val();
+		         var order_ship_fee = $('input[name=order_ship_fee]').val();
+		         var order_used_point = $('input[name=order_used_point]').val();
+		         var order_used_coupon = $('#coupon_select').val();
+		         var order_pay_system = $('input[name=order_pay_system]').val();
+		         var member_id = $('input[name=member_id]').val();
+		         var order_message = $('textarea[name=order_message]').val();
+		         var order_pay_price = $('input[name=order_pay_price]').val();
+		         var member_point = $('input[name=member_point]').val();
+		         var entity_number = $('input[name=entity_number]').val();
+		         
+		         // 주문번호 만들기
+		         var dt = new Date();
+		         var Year = dt.getFullYear();        
+		         var Month = "" + (dt.getMonth()+1);
+		         var Day = "" + dt.getDate();            
+		          
+		          if(Month.length < 2) Month = "0" + Month;
+		          if(Day.length < 2) Day = "0" + Day;
+		          
+		          // 오늘년월일
+		          var Today = Year.toString() + Month + Day;
+		          
+		          // 6자리 난수
+		          var result = Math.floor(Math.random() * 1000000)+100000;
+		          if(result>1000000){
+		             result = result - 100000;
+		          }
+	
+		          // 주문번호
+		          var order_number = Today + result;
+		          console.log('주문번호 ' + order_number);
+	
+		          
+		         IMP.init('imp78724107'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		         var msg;
+	
+		         IMP.request_pay({
+		             pg : 'kakaopay',
+		             pay_method : 'card',
+		             merchant_uid : 'merchant_' + new Date().getTime(),
+		             name : 'GOODLUXE:결제테스트',
+		             amount : $('#final_price').val(),
+		             buyer_email : '<%=email%>',
+		             buyer_name : '<%=order_name%>',
+		             buyer_tel : '<%=phone%>',
+		             buyer_addr : '<%=order_addr1%>',
+		             buyer_postcode : '<%=order_zipcode%>'
+		                     }, function(rsp) {
+		                  if (rsp.success) {
+		                     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+		                     jQuery.ajax({
+		                        url : "/goodluxe/insertKakaoOrder.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+		                        type : 'POST',
+		                        dataType : 'json',
+		                        data : {
+		                           imp_uid : rsp.imp_uid,
+		                           'order_number' : order_number,
+		                           'order_receipt' : order_receipt,
+		                           'order_zipcode' : order_zipcode,
+		                           'order_addr1' : order_addr1,
+		                           'order_addr2' : order_addr2,
+		                           'order_phone' : order_phone,
+		                           'order_product_price' : order_product_price,
+		                           'order_ship_fee' : order_ship_fee,
+		                           'order_used_point' : order_used_point,
+		                           'order_used_coupon' : order_used_coupon,
+		                           'order_pay_system' : order_pay_system,
+		                           'member_id' : member_id,
+		                           'order_message' : order_message,
+		                           'order_pay_price' : order_pay_price,
+		                           'member_point' : member_point,
+		                           'entity_number' : entity_number
+		                        //기타 필요한 데이터가 있으면 추가 전달
+		                        },
+		                        success:function(data) {
+		                           // 성공시 이동할 페이지하기
+		                           location.href='<%=request.getContextPath()%>/insertOrderDone.do?member_id='+member_id+'&order_number='+order_number+'&entity_number='+entity_number;
+		                        }
+		                     });
+		                  } else {
+		                     var msg = '결제에 실패하였습니다.';
+		                     msg += '에러내용 : ' + rsp.error_msg;
+		                     // 실패시 이동할 페이지 추가하기
+		                     location.href='<%=request.getContextPath()%>/order_form.do?member_id='+member_id+'&entity_number='+entity_number;
+		                     alert(msg);
+		                  }
+		               });
+		         
+		      }else if(select2 == '무통장입금'){
+		    	  // 입력안하면 안넘어가게
+		    	  
+		    	  
+		          var form = document.order_input_form;
+		          console.log(form);
+		          form.submit();
+		      }
+		   });
 	});
 	</script>
 </head>
@@ -338,7 +421,7 @@
                         <th>합계</th>
                     </tr>
                     <tr>
-                        <td><img src = "/Goodluxe/image/<%=img_path%>"></td>
+                        <td><img src = "${pageContext.request.contextPath}/resources/img/product/burberry_loafer.png"></td>
 						<td><%=productVO.getPd_name() %></td>
 						<td>
 							<fmt:formatNumber type="number" maxFractionDigits="3" value="<%=sale_price %>" />원
@@ -527,12 +610,11 @@
 										<option value="새마을금고">새마을금고</option>
 										<option value="카카오뱅크">카카오뱅크</option>
 									</select>
-									<input type="text" name="order_refund_account" id="order_refund_account" class="refund_input" placeholder="환불 계좌번호를 입력해주세요" required>
+									<input type="text" name="order_refund_account" class="refund_input" placeholder="환불 계좌번호를 입력해주세요" required>
 								</div>
-							</td>
+							</td>				
 						</tr>
 					</table>
-					<input type="hidden" name="order_number" id="of_order_number">
                 </article>
             </form>
 		</div>
