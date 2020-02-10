@@ -3,17 +3,23 @@ package com.spring.goodluxe.ms;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.ApplyVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
 import com.spring.goodluxe.voes.ProductVO;
+import com.spring.mapper.ApplyMapper;
 import com.spring.mapper.CouponMapper;
 import com.spring.mapper.MemberMapper;
+import com.spring.mapper.MypageMapper;
 import com.spring.mapper.OrderMapper;
 import com.spring.mapper.PointMapper;
 
@@ -23,21 +29,21 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// Member Information for delivery
+	// Get Member Information
 	@Override
 	public MemberVO selectMember(String member_id) throws Exception{
-		MemberVO vo = null;
+		MemberVO mvo = null;
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			vo = memberMapper.selectMember(member_id);
+			mvo = memberMapper.selectMember(member_id);
 		}catch(Exception e) {
 			System.out.println("ERROR(OrderService/selectMember) : " + e.getMessage());
 			throw new Exception("ERROR(OrderService/selectMember)", e);
 		}
-		return vo;
+		return mvo;
 	}
 	
-	// Order MD Information
+	// Get Product Information
 	@Override
 	public ProductVO selectProduct(String entity_number) throws Exception{
 		ProductVO pvo = null;
@@ -50,18 +56,19 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return pvo;
 	}
-	// Order MD Image
+	
+	// Get ProductBoard Information
 	@Override
-	public String loadImg(String entity_number) throws Exception{
-		String img_path = null;
+	public ProductBoardVO selectPB(String entity_number) throws Exception{
+		ProductBoardVO pbvo = null;
 		try {
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			img_path = orderMapper.loadImg(entity_number);
+			pbvo = orderMapper.selectPB(entity_number);
 		}catch(Exception e) {
-			System.out.println("ERROR(OrderService/selectProduct) : " + e.getMessage());
-			throw new Exception("ERROR(OrderService/selectProduct)", e);
+			System.out.println("ERROR(OrderService/selectPB) : " + e.getMessage());
+			throw new Exception("ERROR(OrderService/selectPB)", e);
 		}
-		return img_path;
+		return pbvo;
 	}
 	
 	// Coupon List
@@ -81,20 +88,42 @@ public class OrderServiceImpl implements OrderService {
 		return null;
 	}
 	
-	// 주문정보 입력
+	// Insert Order Information
 	@Override
 	public int insertOrder(OrderVO orderVO) throws Exception {
 		int res = 0;
 		try {
-			System.out.println("서비스 들어옴");
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			System.out.println("서비스 매퍼 전");
 			res = orderMapper.insertOrder(orderVO);
-			System.out.println("서비스 나옴");
-			return res;
+			
+			if(res == 1) {
+				MypageMapper mypageMapper = sqlSession.getMapper(MypageMapper.class);
+				mypageMapper.updatePBStatus(orderVO.getOrder_number(), "거래진행중");
+			}
 		}catch(Exception e) {
-			throw new Exception("주문 등록 실패. ", e);
+			System.out.println("ERROR(OrderService/insertOrder) : " + e.getMessage());
+			throw new Exception("ERROR(OrderService/insertOrder)", e);
 		}
+		return res;
+	}	
+	
+	// Insert Order Information(KAKAO)
+	@Override
+	public int insertKakaoOrder(OrderVO orderVO) throws Exception{
+		int res = 0;
+		try {
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			res = orderMapper.insertKakaoOrder(orderVO);
+			
+			if(res == 1) {
+				MypageMapper mypageMapper = sqlSession.getMapper(MypageMapper.class);
+				mypageMapper.updatePBStatus(orderVO.getOrder_number(), "거래진행중");
+			}
+		}catch(Exception e) {
+			System.out.println("ERROR(OrderService/insertKakaoOrder) : " + e.getMessage());
+			throw new Exception("ERROR(OrderService/insertKakaoOrder)", e);
+		}
+		return res;
 	}
 	
 	// Order_done 페이지에 띄울 정보
@@ -109,28 +138,20 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return ovo;
 	}
-	
-	// 카카오 주문 결제 정보 insert
-	@Override
-	public int insertKakaoOrder(OrderVO orderVO) throws Exception{
-		int res;
-		try {
-			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			res = orderMapper.insertKakaoOrder(orderVO);
-		}catch(Exception e) {
-			throw new Exception("주문 등록 실패. ", e);
-		}
-		return res;
-	}
-	
-	// 포인트 사용 주문시 포인트 차감
+
+	// Apply Used Point
 	@Override
 	public void updateMemberpoint(MemberVO memberVO) throws Exception{
+		int cnt = 0;
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			memberMapper.updateMemberpoint(memberVO);
+			cnt = memberMapper.updateMemberpoint(memberVO);
 		}catch(Exception e) {
-			throw new Exception("포인트 반영 실패. ", e);
+			System.out.println("ERROR(OrderService/updateMemberpoint) : " + e.getMessage());
+			throw new Exception("ERROR(OrderService/updateMemberpoint)", e);
+		}
+		if(cnt == 0) {
+			System.out.println("WARNING> 포인트 사용 내역 반영 실패(현재 포인트 : " + memberVO.getMember_point() + ")");
 		}
 	}
 	
@@ -149,7 +170,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void insertPointHistory(PointVO pointVO) throws Exception{
 		try {
-			System.out.println("서비스 포인트 서비스 들어옴");
 			PointMapper pointMapper = sqlSession.getMapper(PointMapper.class);
 			pointMapper.insertPointHistory(pointVO);
 		}catch(Exception e) {
@@ -241,4 +261,129 @@ public class OrderServiceImpl implements OrderService {
 			throw new Exception("쿠폰 기간만료 상태변경 실패. ", e);
 		}
 	}
+	
+	// 구매제한 페이지에 띄울 order리스트 불러오기
+	@Override
+	public ArrayList<HashMap<String, Object>> getOrderList(String member_id) throws Exception{
+		ArrayList<HashMap<String,Object>> order_list = null;
+		try {
+			// 주문상태 파라미터로 가져가야
+			
+			OrderMapper orderMapper =sqlSession.getMapper(OrderMapper.class);
+			order_list = orderMapper.getOrderList(member_id);
+			
+			if(order_list != null) {
+				return order_list;
+			}else {
+				return null;
+			}
+		}catch(Exception e) {
+			throw new Exception("주문 리스트 불러오기 실패.", e);
+		}
+	}
+	
+	// 매입 위탁 데이터 입력
+	@Override
+	public void insertApplyGoods(ApplyVO applyVO) throws Exception{
+		try {
+			ApplyMapper applyMapper = sqlSession.getMapper(ApplyMapper.class);
+			applyMapper.insertApplyGoods(applyVO);
+				
+		}catch(Exception e) {
+			throw new Exception("매입 위탁판매 등록 실패. ", e);
+		}
+	}
+	
+	// 위탁상품 등록전 상품 리스트 가져오기
+	@Override
+	public ArrayList<ApplyVO> getApplyList(String member_id) throws Exception{
+		ArrayList<ApplyVO> apply_list = null;
+		try {
+			HashMap<String,String> map = new HashMap<String,String>();
+			map.put("member_id", member_id);
+			map.put("ap_smethod", "위탁판매");
+			
+			
+			ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
+			apply_list = applyMapper.getApplyList(map);
+			
+			if(apply_list != null) {
+				return apply_list;
+			}else {
+				return null;
+			}
+		}catch(Exception e) {
+			throw new Exception("등록전 위탁상품 리스트 불러오기 실패.", e);
+		}
+	}
+	// 판매조회 판매중 리스트
+		public ArrayList<HashMap<String,Object>> getSellingList(String member_id) throws Exception{
+			ArrayList<HashMap<String,Object>> sellingList = null;
+			try {
+				
+				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
+				sellingList = applyMapper.getSellingList(member_id);
+				
+				if(sellingList != null) {
+					return sellingList;
+				}else {
+					return null;
+				}
+				
+			}catch(Exception e) {
+				throw new Exception("판매중 위탁상품 리스트 불러오기 실패.", e);
+			}
+		}
+	// 판매조회 거래진행중 리스트
+		public ArrayList<HashMap<String,Object>> getTradingList(String member_id) throws Exception{
+			ArrayList<HashMap<String,Object>> tradingList = null;
+			try {
+				
+				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
+				tradingList = applyMapper.getTradingList(member_id);
+				
+				if(tradingList != null) {
+					return tradingList;
+				}else {
+					return null;
+				}
+				
+			}catch(Exception e) {
+				throw new Exception("거래진행중 위탁상품 리스트 불러오기 실패.", e);
+			}
+		}
+	// 판매조회 판매완료 리스트
+		public ArrayList<HashMap<String,Object>> getFinishList(String member_id) throws Exception{
+			ArrayList<HashMap<String,Object>> finishList = null;
+			try {
+				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
+				finishList = applyMapper.getFinishList(member_id);
+				
+				if(finishList != null) {
+					return finishList;
+				}else {
+					return null;
+				}
+				
+			}catch(Exception e) {
+				throw new Exception("판매완료 위탁상품 리스트 불러오기 실패.", e);
+			}
+		}
+	
+	// 판매조회 매입상품 리스트
+		public ArrayList<HashMap<String,Object>> getPurchasingList(String member_id) throws Exception{
+			ArrayList<HashMap<String,Object>> purchasingList = null;
+			try {
+				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
+				purchasingList = applyMapper.getPurchasingList(member_id);
+				
+				if(purchasingList != null) {
+					return purchasingList;
+				}else {
+					return null;
+				}
+			}catch(Exception e) {
+				throw new Exception("매입상품 리스트 불러오기 실패.", e);
+			}
+		}
 }

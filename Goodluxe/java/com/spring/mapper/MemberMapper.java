@@ -7,5 +7,5 @@ public interface MemberMapper {
 	MemberVO selectMember(String member_id);
 	
 	// 주문시 적립금 차감
-	void updateMemberpoint(MemberVO mvo);
+	int updateMemberpoint(MemberVO mvo);
 }

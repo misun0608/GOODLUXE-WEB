@@ -33,7 +33,7 @@
 	
 	/* 제품 정보 */
 	ProductVO productVO = (ProductVO)request.getAttribute("pvo");
-	String img_path = (String)request.getAttribute("img_path");
+	ProductBoardVO pbVO = (ProductBoardVO)request.getAttribute("pbvo");
 	
 	int sale_price = productVO.getSale_price();
 	
@@ -184,17 +184,18 @@
 				return;
 			}
 
-			used_point = $('#order_used_point').val();
-			$('#using_point').val(used_point);
-			pay_money = (order_product_price + delivery - used_point - used_coupon);
-			$('#final_price').val(pay_money);
-			$('#final_price2').val(numberWithCommas(pay_money)+'원');
+			if(used_pint >= 5000){
+				$('#using_point').val(used_point);
+				pay_money = (order_product_price + delivery - used_point - used_coupon);
+				$('#final_price').val(pay_money);
+				$('#final_price2').val(numberWithCommas(pay_money)+'원');
+			}
 
 		});
 		
 		$('#order_used_point').on('focusout',function(){
 			used_point = $('#order_used_point').val();
-			if(used_point < 5000) {
+			if(used_point != '' && used_point < 5000) {
 				alert('5,000P부터 사용 가능합니다.');
 				$('#order_used_point').val('');
 				return;
@@ -221,7 +222,6 @@
 	         var order_used_point = $('input[name=order_used_point]').val();
 	         var order_used_coupon = $('#coupon_select').val();
 	         var order_pay_system = $('input[name=order_pay_system]').val();
-	         var member_id = $('input[name=member_id]').val();
 	         var order_message = $('textarea[name=order_message]').val();
 	         var order_pay_price = $('input[name=order_pay_price]').val();
 	         var member_point = $('input[name=member_point]').val();
@@ -261,11 +261,11 @@
 	                           'order_used_point' : order_used_point,
 	                           'order_used_coupon' : order_used_coupon,
 	                           'order_pay_system' : order_pay_system,
-	                           'member_id' : member_id,
 	                           'order_message' : order_message,
 	                           'order_pay_price' : order_pay_price,
-	                           'member_point' : member_point,
-	                           'entity_number' : entity_number
+	                           'member_point' : member_point, // 이거랑
+	                           'entity_number' : entity_number, // 이거는 왜 전달해주는 거지..
+	                           'pb_number' : <%=pbVO.getPb_number()%> // 추가..
 	                        //기타 필요한 데이터가 있으면 추가 전달
 	                        },
 	                        success:function(data) {
@@ -338,7 +338,7 @@
                         <th>합계</th>
                     </tr>
                     <tr>
-                        <td><img src = "/Goodluxe/image/<%=img_path%>"></td>
+                        <td><img src = "/Goodluxe/image/<%=pbVO.getPb_main_img_stored()%>"></td>
 						<td><%=productVO.getPd_name() %></td>
 						<td>
 							<fmt:formatNumber type="number" maxFractionDigits="3" value="<%=sale_price %>" />원
@@ -378,8 +378,8 @@
                             <td>받으시는 분 *</td>
                             <td>
 								<input type="text" value="<%=memberVO.getMember_name() %>" id="order_receipt" name="order_receipt" class="receiving" required>
-								<input type="hidden" value="<%=memberVO.getMember_id() %>" name="member_id">
 								<input type="hidden" value="<%=productVO.getEntity_number() %>" name="entity_number">
+								<input type="hidden" value="<%=pbVO.getPb_number() %>" name="pb_number">
 							</td>
                         </tr>
                         <tr>

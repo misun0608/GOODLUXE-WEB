@@ -31,8 +31,8 @@ CREATE TABLE ORDERED(
 	<resultMap type="com.spring.goodluxe.voes.ProductVO" id="ProductRM">
 		<result property="entity_number" column="entity_number" />
 		<result property="pd_name" column="pd_name" />
-		<result property="brand_number" column="brand_number" />
-		<result property="category" column="category" />
+		<result property="pd_brand" column="pd_brand" />
+		<result property="pd_category" column="pd_category" />
 		<result property="quality_grade" column="quality_grade" />
 		<result property="sale_price" column="sale_price" />
 		<result property="appraise_exist" column="appraise_exist" />
@@ -45,7 +45,6 @@ CREATE TABLE ORDERED(
 		<result property="order_receipt" column="order_receipt" />
 		<result property="order_pay_date" column="order_pay_date" />
 		<result property="order_order_date" column="order_order_date" />
-		<result property="order_confirm" column="order_confirm" />
 		<result property="order_status" column="order_status" />
 		<result property="order_addr1" column="order_addr1" />
 		<result property="order_addr2" column="order_addr2" />
@@ -88,19 +87,26 @@ CREATE TABLE ORDERED(
 		<result property="entity_number" column="entity_number" />
 	</resultMap>
 	
-	<select id="loadImg" parameterType="String" resultType="String">
-		select pb_main_img_stored
-		from gl_productboard
-		where entity_number=#{entity_number}
-	</select>
+	<resultMap type="java.util.HashMap" id="hashmapOrderBoardVO">
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_status" column="order_status" />
+		<result property="order_product_price" column="order_product_price" />
+	</resultMap>
 
 	<select id="selectProduct" parameterType="String" resultMap="ProductRM">
-		select pd_name, sale_price, entity_number
+		select entity_number, pd_name, pd_brand, pd_category, quality_grade, sale_price, appraise_exist, pd_component, member_id 
 		from GL_PURCHASE 
 		where entity_number=#{entity_number}
 		UNION 
-		select pd_name, sale_price, entity_number
+		select entity_number, pd_name, pd_brand, pd_category, quality_grade, sale_price, appraise_exist, pd_component, member_id
 		from gl_consignment
+		where entity_number=#{entity_number}
+	</select>
+	
+	<select id="selectPB" parameterType="String" resultMap="pbRM">
+		select * 
+		from GL_PRODUCTBOARD
 		where entity_number=#{entity_number}
 	</select>
 	
@@ -108,18 +114,18 @@ CREATE TABLE ORDERED(
 	<insert id="insertOrder" parameterType="com.spring.goodluxe.voes.OrderVO">
 		insert into GL_ORDER(
 		order_number,order_receipt,order_order_date,
-		order_confirm,order_status,order_addr1,order_addr2,order_zipcode,
+		order_status,order_addr1,order_addr2,order_zipcode,
 		order_phone,order_product_price,order_ship_fee,order_used_point,
 		order_used_coupon,
 		order_pay_system,order_refund_bank,order_refund_account,
-		member_id,order_message,order_pay_price) 
+		member_id,order_message,order_pay_price, pb_number)
 		values(
 		#{order_number},#{order_receipt},systimestamp,
-		#{order_confirm},#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
+		#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
 		#{order_phone},#{order_product_price},#{order_ship_fee},#{order_used_point},
 		#{order_used_coupon},
 		#{order_pay_system},#{order_refund_bank},#{order_refund_account},
-		#{member_id},#{order_message},#{order_pay_price})
+		#{member_id},#{order_message},#{order_pay_price},#{pb_number})
 	</insert>
 
 	<!-- 주문정보 불러오기 -->
@@ -131,18 +137,29 @@ CREATE TABLE ORDERED(
 	<insert id="insertKakaoOrder" parameterType="com.spring.goodluxe.voes.OrderVO">
 		insert into GL_ORDER(
 		order_number,order_receipt,order_pay_date,order_order_date,
-		order_confirm,order_status,order_addr1,order_addr2,order_zipcode,
+		order_status,order_addr1,order_addr2,order_zipcode,
 		order_phone,order_product_price,order_ship_fee,order_used_point,
 		order_used_coupon,
 		order_pay_system,
-		member_id,order_message,order_pay_price) 
+		member_id,order_message,order_pay_price, pb_number) 
 		values(
 		#{order_number},#{order_receipt},#{order_pay_date},#{order_order_date},
-		#{order_confirm},#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
+		#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
 		#{order_phone},#{order_product_price},#{order_ship_fee},#{order_used_point},
 		#{order_used_coupon},
 		#{order_pay_system},
-		#{member_id},#{order_message},#{order_pay_price})
+		#{member_id},#{order_message},#{order_pay_price}, #{pb_number})
 	</insert>	
+	
+	<!-- 주문정보 불러오기 -->
+	<select id="getOrderList" parameterType="String" resultMap="hashmapOrderBoardVO">
+		select * from (select rownum rnum, pb_md_name, order_order_date,order_status, order_product_price 
+		from(
+		select pb_md_name, order_order_date,order_status, order_product_price
+		from GL_PRODUCTBOARD glsb, gl_order glor 
+		where glsb.pb_number = glor.pb_number and glor.member_id = #{member_id} 
+		order by order_order_date desc)
+		) where rnum between 1 and 10
+	</select>
 
 </mapper>

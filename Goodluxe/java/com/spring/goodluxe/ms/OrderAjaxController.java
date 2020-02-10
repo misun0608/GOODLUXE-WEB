@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,45 +22,30 @@ public class OrderAjaxController {
 	private OrderService gls;
 
 	// produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다
-	@PostMapping(value = "/insertKakaoOrder.do", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> insertKakaoOrder(OrderVO vo, MemberVO memberVO, CouponVO couponVO, PointVO pointVO) {
+//	@PostMapping(value = "/insertKakaoOrder.do", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> insertKakaoOrder(HttpSession session, OrderVO vo, MemberVO memberVO, CouponVO couponVO, PointVO pointVO) {
 		Map<String, Object> retVal = new HashMap<String, Object>(); // 리턴값 저장
 		try {
 			
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			vo.setOrder_order_date(timestamp);
 			vo.setOrder_pay_date(timestamp);
-			vo.setOrder_confirm("확정전");
-			vo.setOrder_status("결제완료");
-			
-			// 값들어오는지 확인
-//			System.out.println("ordernum " + vo.getOrder_number());
-//			System.out.println("orderrecei " + vo.getOrder_receipt());
-//			System.out.println("orderpaydate " + vo.getOrder_pay_date());
-//			System.out.println("orderdate " + vo.getOrder_order_date());
-//			System.out.println("orderconfirm " + vo.getOrder_confirm());
-//			System.out.println("orderphone " + vo.getOrder_phone());
-//			System.out.println("orderprice " + vo.getOrder_product_price());
-//			System.out.println("orderpoint " + vo.getOrder_used_point());
-//			System.out.println("orderusedcoupon " + vo.getOrder_used_coupon());
-//			System.out.println("ordermessage " + vo.getOrder_message());
-//			System.out.println("orderpayprice " + vo.getOrder_pay_price());
-//			System.out.println("memberid " + vo.getMember_id());
-			
+			vo.setOrder_status("배송준비중");
+			String mem_id = (String)session.getAttribute("member_id");
+			vo.setMember_id(mem_id);
+			memberVO.setMember_id(mem_id);
+			couponVO.setMember_id(mem_id);
+			pointVO.setMember_id(mem_id);
+
 			int res = gls.insertKakaoOrder(vo);
-			retVal.put("res", "OK");
 			
-			System.out.println("controller res " + res);
 			if (res != 0) {
 				// 포인트사용 반영
 				int member_point = memberVO.getMember_point() - vo.getOrder_used_point();
 				memberVO.setMember_point(member_point);
 				gls.updateMemberpoint(memberVO);
-//				System.out.println("가용포인트 " + member_point);
 				
 				if(vo.getOrder_used_point() != 0) {
-					System.out.println("컨트롤러 포인트 사용내역 추가 들어옴");
-					
 					// order정보 받아오기(주문날짜 = 사용날짜 하기위해)
 					vo = gls.selectOrder(vo);
 					
@@ -73,11 +60,12 @@ public class OrderAjaxController {
 
 				// 쿠폰사용 반영
 				String order_used_coupon = vo.getOrder_used_coupon();
-
 				if (order_used_coupon != null) {
 					couponVO.setCoupon_number(order_used_coupon);
 					gls.updateCouponstatus(couponVO);
 				}
+				
+			retVal.put("res", "OK");
 				
 			}
 		} catch (Exception e) {
