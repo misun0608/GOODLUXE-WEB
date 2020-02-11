@@ -46,4 +46,14 @@
 		where member_id=#{member_id}
 	</select>
 	
+	<select id="selectMemberPoint" parameterType="com.spring.goodluxe.voes.PointVO" resultMap="memberResult">
+		select member_id, member_point
+		from gl_member 
+		where member_id=#{member_id}
+	</select>
+	
+	<update id="updateMemberPoint" parameterType="java.util.HashMap">
+		update GL_MEMBER set member_point = #{member_point} where member_id = #{member_id}
+	</update>
+	
 </mapper>

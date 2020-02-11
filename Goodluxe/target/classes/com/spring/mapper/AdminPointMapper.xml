@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.AdminPointMapper">
+	<resultMap type = "com.spring.goodluxe.voes.PointVO" id="AdminPointResultMap">
+		<result property = "point_number" column = "point_number" />
+		<result property = "point_date" column = "point_date" />
+		<result property = "point_status" column = "point_status" />
+		<result property = "point_amount" column = "point_amount" />
+		<result property = "member_id" column = "member_id" />
+		<result property = "order_number" column = "order_number" />
+	</resultMap>
+
+	<select id="getAdminPointList" resultMap="AdminPointResultMap">
+		select * from GL_POINT order by point_date desc
+	</select>
+	
+	<select id="getSearchPointList" parameterType="com.spring.goodluxe.voes.PointVO" resultMap="AdminPointResultMap">
+		select * from GL_POINT where member_id = #{member_id} order by point_date desc
+	</select>
+	
+	<insert id="insertPointStatus" parameterType="com.spring.goodluxe.voes.PointVO">
+		insert into GL_POINT(point_number, point_date, point_status, point_amount, member_id) 
+		values (GL_POINT_SEQ.NEXTVAL, systimestamp, #{point_status}, #{point_amount}, #{member_id})
+	</insert>
+</mapper>
