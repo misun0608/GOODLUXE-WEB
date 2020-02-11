@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+CREATE TABLE ORDERED(
+    ORDER_NUMBER VARCHAR2(40) PRIMARY KEY,
+    ORDER_PAY_DATE TIMESTAMP,
+    ORDER_ORDER_DATE TIMESTAMP,
+    ORDER_CONFIRM VARCHAR2(20),
+    ORDER_STATUS VARCHAR2(20),
+    ORDER_ADDR1 VARCHAR2(60),
+    ORDER_ADDR2 VARCHAR2(100),
+    ORDER_ZIPCODE VARCHAR2(10),
+    ORDER_PHONE VARCHAR2(13),
+    ORDER_INVOICE_NUMBER NUMBER,
+    ORDER_SHIP_DATE TIMESTAMP,
+    ORDER_CANCEL_DATE TIMESTAMP,
+    ORDER_PRODUCT_PRICE NUMBER,
+    ORDER_SHIP_FEE NUMBER,
+    ORDER_USED_POINT NUMBER,
+    ORDER_USED_COUPON VARCHAR2(50),
+    ORDER_PAY_SYSTEM VARCHAR2(20),
+    ORDER_REFUND_ACCOUNT VARCHAR2(40),
+    PB_NUMBER NUMBER,
+    MEMBER_ID VARCHAR2(20)
+    );
+-->
+
+<mapper namespace="com.spring.mapper.OrderMapper">
+
+	<resultMap type="com.spring.goodluxe.voes.ProductVO" id="ProductRM">
+		<result property="entity_number" column="entity_number" />
+		<result property="pd_name" column="pd_name" />
+		<result property="pd_brand" column="pd_brand" />
+		<result property="pd_category" column="pd_category" />
+		<result property="quality_grade" column="quality_grade" />
+		<result property="sale_price" column="sale_price" />
+		<result property="appraise_exist" column="appraise_exist" />
+		<result property="pd_component" column="pd_component" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.OrderVO" id="orderRM">
+		<result property="order_number" column="order_number" />
+		<result property="order_receipt" column="order_receipt" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_status" column="order_status" />
+		<result property="order_addr1" column="order_addr1" />
+		<result property="order_addr2" column="order_addr2" />
+		<result property="order_zipcode" column="order_zipcode" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_invoice_number" column="order_invoice_number" />
+		<result property="order_ship_date" column="order_ship_date" />
+		<result property="order_cancel_date" column="order_cancel_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="order_pay_system" column="order_pay_system" />
+		<result property="order_refund_account" column="order_refund_account" />
+		<result property="order_refund_bank" column="order_refund_bank" />
+		<result property="member_id" column="member_id" />
+		<result property="pb_number" column="pb_number" />
+		<result property="order_message" column="order_message" />
+		<result property="order_pay_price" column="order_pay_price" />
+	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.ProductBoardVO" id="pbRM">
+		<result property="pb_number" column="pb_number" />
+		<result property="pb_division" column="pb_division" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="pb_date" column="pb_date" />
+		<result property="pb_sale_status" column="pb_sale_status" />
+		<result property="pb_post_status" column="pb_post_status" />
+		<result property="pb_detail" column="pb_detail" />
+		<result property="pb_main_img_original" column="pb_main_img_original" />
+		<result property="pb_main_img_stored" column="pb_main_img_stored" />
+		<result property="pb_detail_img1_original" column="pb_detail_img1_original" />
+		<result property="pb_detail_img1_stored" column="pb_detail_img1_stored" />
+		<result property="pb_detail_img2_original" column="pb_detail_img2_original" />
+		<result property="pb_detail_img2_stored" column="pb_detail_img2_stored" />
+		<result property="pb_detail_img3_original" column="pb_detail_img3_original" />
+		<result property="pb_detail_img3_stored" column="pb_detail_img3_stored" />
+		<result property="pb_view_count" column="pb_view_count" />
+		<result property="pb_like" column="pb_like" />
+		<result property="entity_number" column="entity_number" />
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="hashmapOrderBoardVO">
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_status" column="order_status" />
+		<result property="order_product_price" column="order_product_price" />
+	</resultMap>
+
+	<select id="selectProduct" parameterType="String" resultMap="ProductRM">
+		select entity_number, pd_name, pd_brand, pd_category, quality_grade, sale_price, appraise_exist, pd_component, member_id 
+		from GL_PURCHASE 
+		where entity_number=#{entity_number}
+		UNION 
+		select entity_number, pd_name, pd_brand, pd_category, quality_grade, sale_price, appraise_exist, pd_component, member_id
+		from gl_consignment
+		where entity_number=#{entity_number}
+	</select>
+	
+	<select id="selectPB" parameterType="String" resultMap="pbRM">
+		select * 
+		from GL_PRODUCTBOARD
+		where entity_number=#{entity_number}
+	</select>
+	
+	<!-- 주문정보 넣기 -->
+	<insert id="insertOrder" parameterType="com.spring.goodluxe.voes.OrderVO">
+		insert into GL_ORDER(
+		order_number,order_receipt,order_order_date,
+		order_status,order_addr1,order_addr2,order_zipcode,
+		order_phone,order_product_price,order_ship_fee,order_used_point,
+		order_used_coupon,
+		order_pay_system,order_refund_bank,order_refund_account,
+		member_id,order_message,order_pay_price, pb_number)
+		values(
+		#{order_number},#{order_receipt},systimestamp,
+		#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
+		#{order_phone},#{order_product_price},#{order_ship_fee},#{order_used_point},
+		#{order_used_coupon},
+		#{order_pay_system},#{order_refund_bank},#{order_refund_account},
+		#{member_id},#{order_message},#{order_pay_price},#{pb_number})
+	</insert>
+
+	<!-- 주문정보 불러오기 -->
+	<select id="selectOrder" parameterType="com.spring.goodluxe.voes.OrderVO" resultMap="orderRM">
+		select * from GL_ORDER where order_number=#{order_number}
+	</select>
+
+	<!-- 카카오페이 주문정보 넣기 -->
+	<insert id="insertKakaoOrder" parameterType="com.spring.goodluxe.voes.OrderVO">
+		insert into GL_ORDER(
+		order_number,order_receipt,order_pay_date,order_order_date,
+		order_status,order_addr1,order_addr2,order_zipcode,
+		order_phone,order_product_price,order_ship_fee,order_used_point,
+		order_used_coupon,
+		order_pay_system,
+		member_id,order_message,order_pay_price, pb_number) 
+		values(
+		#{order_number},#{order_receipt},#{order_pay_date},#{order_order_date},
+		#{order_status},#{order_addr1},#{order_addr2},#{order_zipcode},
+		#{order_phone},#{order_product_price},#{order_ship_fee},#{order_used_point},
+		#{order_used_coupon},
+		#{order_pay_system},
+		#{member_id},#{order_message},#{order_pay_price}, #{pb_number})
+	</insert>	
+	
+	<!-- 주문정보 불러오기 -->
+	<select id="getOrderList" parameterType="String" resultMap="hashmapOrderBoardVO">
+		select * from (select rownum rnum, pb_md_name, order_order_date,order_status, order_product_price 
+		from(
+		select pb_md_name, order_order_date,order_status, order_product_price
+		from GL_PRODUCTBOARD glsb, gl_order glor 
+		where glsb.pb_number = glor.pb_number and glor.member_id = #{member_id} 
+		order by order_order_date desc)
+		) where rnum between 1 and 10
+	</select>
+
+</mapper>

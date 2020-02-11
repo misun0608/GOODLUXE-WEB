@@ -1,39 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String member_id = (String)request.getAttribute("member_id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
-	
-	<title>GOODLUXE :: 굿럭스</title>
-	
-	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-header.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
-	<script>
-		$(document).ready(function(){
-			$("#header").load("header.do");
-			$("#nav_bar").load("navBar.do");
-			$("#login_box").load("loginBox.do");
-			$("#footer").load("footer.do");
-		});
-	</script>
-	
-	<!-- mypage_apply2 / 마이페이지 > 판매신청 -->
-	<script>
-		$(document).ready(function(){
-			$("#mypage_menu").load("mypageMenu.do", function(){
-				$('.menu_container').children('a').eq(1).children().children('.icon').addClass('selected_menu');
-			});
-		});
-	</script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_onlymenu.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_apply_form.css" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_apply_form.js"></script>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+   <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
+   
+   <title>GOODLUXE :: 굿럭스</title>
+   
+   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-header.css" />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css" />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css" />
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
+   <script>
+      $(document).ready(function(){
+         $("#header").load("header.do");
+         $("#nav_bar").load("navBar.do");
+         $("#login_box").load("loginBox.do");
+         $("#footer").load("footer.do");
+      });
+   </script>
+   
+   <!-- mypage_apply2 / 마이페이지 > 판매신청 -->
+   <script>
+      $(document).ready(function(){
+         $("#mypage_menu").load("mypageMenu.do", function(){
+            $('.menu_container').children('a').eq(1).children().children('.icon').addClass('selected_menu');
+         });
+      });
+   </script>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_onlymenu.css" />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_apply_form.css" />
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_apply_form.js"></script>
 
 </head>
 
@@ -56,11 +59,11 @@
                 </div>
             </article>
             <article class="ap_2nd arti_box">
-                <form name="write_form" action="">
+                <form name="write_form" action="./insertApply.do" method="post" enctype="multipart/form-data">
                     <div class="info_area">
                         <div class="select_brand_area">
                             <div>브랜드</div>
-                            <select multiple name="selected_brand">
+                            <select multiple name="ap_selected_brand">
                                 <option value="Armani">Armani</option>
                                 <option value="Balenciaga">Balenciaga</option>
                                 <option value="Bally">Bally</option>
@@ -152,7 +155,7 @@
                         </div>
                         <div class="select_category_area">
                             <div>카테고리</div>
-                            <select multiple name="selected_category">
+                            <select multiple name="ap_selected_category">
                                 <option value="CLOTHES">Clothes</option>
                                 <option value="JEWELRY">Jewelry</option>
                                 <option value="WATCH">Watch</option>
@@ -166,11 +169,14 @@
                             <table class="applytable">
                                 <tr>
                                     <td class="titletd">상품명</td>
-                                    <td><input type="text" class="apply_inputarea" name="ap_md_name" required></td>
+                                    <td>
+                                    	<input type="hidden" class="apply_inputarea" name="member_id" value="<%=member_id %>">
+                                    	<input type="text" class="apply_inputarea" name="ap_md_name" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="titletd">판매희망가</td>
-                                    <td><input type="text" class="apply_inputarea" name="ap_hope_price" required></td>
+                                    <td><input type="text" id="ap_hope_price" class="apply_inputarea" name="ap_hope_price" required></td>
                                 </tr>
                                 <tr>
                                     <td class="titletd">구매연도</td>
@@ -178,7 +184,7 @@
                                 </tr>
                                 <tr>
                                     <td class="titletd">구매가격</td>
-                                    <td><input type="text" class="apply_inputarea" name="ap_buy_price" required></td>
+                                    <td><input type="text" id="ap_buy_price" class="apply_inputarea" name="ap_buy_price" required></td>
                                 </tr>
                                 <tr>
                                     <td class="titletd">구매매장</td>
@@ -193,20 +199,20 @@
                                 <tr>
                                     <td class="titletd">판매방법</td>
                                     <td>
-                                        <input type="radio" name="smethod" id="apply_combtn" value="위탁판매">
+                                        <input type="radio" name="ap_smethod" id="apply_combtn" value="위탁판매">
                                         <label for="apply_combtn" class="apply_label">위탁판매</label>
                                         &nbsp;
-                                        <input type="radio" name="smethod" id="apply_sellbtn" value="판매">
+                                        <input type="radio" name="ap_smethod" id="apply_sellbtn" value="판매">
                                         <label for="apply_sellbtn" class="apply_label">판매</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="titletd">배송방법</td>
                                     <td>
-                                        <input type="radio" name="dmethod" id="parcel" value="우체국 택배">
+                                        <input type="radio" name="ap_dmethod" id="parcel" value="우체국 택배">
                                         <label for="parcel" class="apply_label">우체국 택배</label>
                                         &nbsp;
-                                        <input type="radio" name="dmethod" id="visit" value="직접 매장 방문">
+                                        <input type="radio" name="ap_dmethod" id="visit" value="직접 매장 방문">
                                         <label for="visit" class="apply_label">직접 매장 방문</label>
                                     </td>
                                 </tr>

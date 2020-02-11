@@ -21,11 +21,11 @@
 	
 	String expected_point = df.format(product_price/1000);
 	
-	String shipping_coast = "4000원";
+	String shipping_coast = "5000원";
 	if(product_price >= 500000){
 		shipping_coast = "무료";
 	}else{
-		shipping_coast = "4,000원";
+		shipping_coast = "5,000원";
 	}
 	
 	request.setAttribute("entity_number",entity_number);
@@ -188,7 +188,7 @@
 								<hr id="name_line">
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
-								<a href = "#"><div class="buybtn buybtn2">구매하기</div></a>
+								<a href = "orderForm.do?entity_number=<%=entity_number%>"><div class="buybtn buybtn2">구매하기</div></a>
 								<a href = "#"><div class="notibtn">
 									<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px">&nbsp;&nbsp;알림
 								</div></a>

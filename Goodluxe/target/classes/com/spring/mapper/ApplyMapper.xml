@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.ApplyMapper">
+	<resultMap type="com.spring.goodluxe.voes.ApplyVO" id="ApplyResultMap">
+		<result property="member_id" column="member_id" />
+		<result property="ap_selected_brand" column="ap_selected_brand" />
+		<result property="ap_selected_category" column="ap_selected_category" />
+		<result property="ap_md_name" column="ap_md_name" />
+		<result property="ap_hope_price" column="ap_hope_price" />
+		<result property="ap_buy_year" column="ap_buy_year" />
+		<result property="ap_buy_price" column="ap_buy_price" />
+		<result property="ap_buy_store" column="ap_buy_store" />
+		<result property="ap_img_stored" column="ap_img_stored" />
+		<result property="ap_smethod" column="ap_smethod" />
+		<result property="ap_dmethod" column="ap_dmethod" />
+		<result property="ap_apply_date" column="ap_apply_date" />
+		<result property="ap_decision" column="ap_decision" />
+	</resultMap>
+	
+	<!-- HashMap 이용시 추가부분 -->
+	<resultMap type="java.util.HashMap" id="hashmapConsignBoardVO">
+		<result property="pb_date" column="pb_date" />
+		<result property="pd_brand" column="pd_brand" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="sale_price" column="sale_price" />
+		<result property="quality_grade" column="quality_grade" />
+	</resultMap>
+	
+	<!-- HashMap 이용시 추가부분 -->
+	<resultMap type="java.util.HashMap" id="hashmapOrderBoardVO">
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_status" column="order_status" />
+	</resultMap>
+	
+	<!-- HashMap 이용시 추가부분 -->
+	<resultMap type="java.util.HashMap" id="hashmapOrderBoardFVO">
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="order_product_price" column="order_product_price" />
+	</resultMap>
+	
+	<!-- HashMap 이용시 추가부분 -->
+	<resultMap type="java.util.HashMap" id="hashmapApplyPurcVO">
+		<result property="purc_date" column="purc_date" />
+		<result property="ap_md_name" column="ap_md_name" />
+		<result property="quality_grade" column="quality_grade" />
+		<result property="ap_hope_price" column="ap_hope_price" />
+		<result property="ap_decision" column="ap_decision" />
+	</resultMap>
+	
+	<insert id="insertApplyGoods" parameterType="com.spring.goodluxe.voes.ApplyVO">
+		insert into GL_APPLYGOODS(member_id,ap_selected_brand,ap_selected_category,ap_md_name,ap_hope_price,ap_buy_year,
+		ap_buy_price,ap_buy_store,ap_img_stored,ap_smethod,ap_dmethod,ap_apply_date,ap_decision
+		)
+		values(
+		#{member_id},#{ap_selected_brand},#{ap_selected_category},
+		#{ap_md_name},#{ap_hope_price},#{ap_buy_year},
+		#{ap_buy_price},#{ap_buy_store},#{ap_img_stored},
+		#{ap_smethod},#{ap_dmethod},sysdate,#{ap_decision}
+		)
+	</insert>
+	
+	<select id="getApplyList" parameterType="java.util.HashMap" resultMap="ApplyResultMap">
+		select * from GL_APPLYGOODS where member_id = #{member_id} and ap_smethod = #{ap_smethod} order by ap_apply_date desc
+	</select>
+	
+	<select id="getSellingList" parameterType="String" resultMap="hashmapConsignBoardVO">
+		select * from (select rownum rnum, pb_date, pd_brand,pb_md_name, sale_price,quality_grade
+		from(
+		select pb_date, pd_brand,pb_md_name, sale_price,quality_grade
+		from GL_PRODUCTBOARD glpb, gl_consignment glcs 
+		where glpb.entity_number = glcs.entity_number and glpb.pb_sale_status = '판매중' and glcs.member_id = #{member_id}
+		order by pb_date desc)
+		)
+	</select>
+	
+	<select id="getTradingList" parameterType="String" resultMap="hashmapOrderBoardVO">
+      select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status from
+      (select * from (select rownum rnum, order_order_date,order_pay_date,pb_md_name,
+ORDER_PRODUCT_PRICE,order_status
+      from(
+      select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status
+      from GL_ORDER glod, GL_PRODUCTBOARD glpb 
+      where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} 
+and glpb.pb_sale_status = '거래진행중')
+      )
+union
+      select * from (select rownum rnum, order_order_date,order_pay_date,pb_md_name,
+ORDER_PRODUCT_PRICE,order_status
+      from(
+      select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status
+      from GL_ORDER glod, GL_PRODUCTBOARD glpb 
+      where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} 
+and glpb.pb_sale_status = '판매완료' and order_pay_date > systimestamp - 14
+)
+      )) order by order_order_date desc
+	</select>
+	
+	<select id="getFinishList" parameterType="String" resultMap="hashmapOrderBoardFVO">
+	<![CDATA[
+		select * from (select rownum rnum, order_order_date,order_pay_date,order_ship_date,pb_md_name,ORDER_PRODUCT_PRICE
+		from(
+		select order_order_date,order_pay_date,order_ship_date,pb_md_name,ORDER_PRODUCT_PRICE
+		from GL_ORDER glod, GL_PRODUCTBOARD glpb 
+		where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} and glpb.pb_sale_status = '판매완료' and order_pay_date <= systimestamp -14
+		order by order_order_date desc))
+	]]>
+	</select>
+	
+	<select id="getPurchasingList" parameterType="String" resultMap="hashmapApplyPurcVO">
+SELECT purc_date,ap_md_name, ap_hope_price,quality_grade,ap_decision
+FROM
+(
+SELECT 
+ap_apply_date as purc_date,ap_md_name, ap_hope_price,'' AS quality_grade, ap_decision
+FROM GL_APPLYGOODS where member_id=#{member_id} and ap_decision = '반려' and ap_smethod = '판매'
+UNION all
+SELECT 
+purc_date,pd_name, buying_price,quality_grade,'' AS ap_decision
+FROM gl_purchase where member_id=#{member_id}
+) order by purc_date desc
+	</select>
+</mapper>
