@@ -138,6 +138,10 @@ public class JyMyPageController {
 			
 			return "redirect:myLikedGoods.do";
 		}
+		@RequestMapping(value = "mypageApplyForm.do")
+		public String mypageApplyForm(Model model, HttpServletRequest request)throws Exception {                   
+			return "mypage_apply_form";
+		}
 		
 		
 }

@@ -53,6 +53,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage_liked_goods.css" />
 <script>
+		$(document).ready(function(){
+			$("#mypage_menu").load("mypageMenu.do", function(){
+				$('.menu_container').children('a').eq(1).children().children('.icon').addClass('selected_menu');
+			});
+		});
+</script>
+<script>
 	
 	function checkAll(){
 		var chk_all = document.getElementById("chk_all");
@@ -98,7 +105,7 @@
 	<section id="container">
 		<br>
 		<div id="main">
-			<article class="arti_menu" id="mypage_menu"></article>
+			  <article class="arti_menu" id="mypage_menu"></article>
 
 			<center>
 				<div id="liked_goods_cover">

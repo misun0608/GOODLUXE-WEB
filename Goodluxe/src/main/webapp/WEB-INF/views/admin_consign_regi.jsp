@@ -317,13 +317,14 @@
 								<input type="date" name="end_date_text" class="search"></td>
 						</tr>
 						<tr>
-							<td class="td1">판매상태</td>
+<!-- 							<td class="td1">판매상태</td>
 							<td class="td2">&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="sale_status" value="onready">판매준비&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="onsale">판매중&nbsp;&nbsp;&nbsp; 
-								<input type="radio"name="sale_status" value="sold">판매완료&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="payed">대금지불완료&nbsp;&nbsp;&nbsp;
-						</tr>
+								<input type="radio" name="sale_status" value="판매준비">판매준비&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="판매중">판매중&nbsp;&nbsp;&nbsp; 
+								<input type="radio"name="sale_status" value="판매완료">판매완료&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="대금지불완료">대금지불완료&nbsp;&nbsp;&nbsp;
+						</tr> 
+					-->
 						<tr>
 							<td class="td1">감정서 유무</td>
 							<td class="td2">&nbsp;&nbsp;&nbsp;<input type="radio"
@@ -338,7 +339,7 @@
 								class="text1"></td>
 						</tr>
 						<tr>
-							<td class="td1">판매자 아이디</td>
+							<td class="td1">위탁자 아이디</td>
 							<td class="td2"><input type="text" name="member_id"
 								class="text1"></td>
 						</tr>

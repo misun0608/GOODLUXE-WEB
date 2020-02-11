@@ -51,16 +51,11 @@
 	</script>
 	
 	<!-- item_list -->
-    <link rel="styleshee	"
-		href="${pageContext.request.contextPath}/resources/css/item_list.css" 	>
-	<link rel="styleshee	"
-		href="${pageContext.request.contextPath}/resources/css/item_list_doesntExist.css" 	>
-	<link rel="styleshee	"
-		href="${pageContext.request.contextPath}/resources/css/pagination.css" 	>
-	<script type="text/javascrip	"
-		src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>  	 
-	
-
+ 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/item_list.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/item_list_doesntExist.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pagination.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
 
 
 	

@@ -65,7 +65,6 @@
 		 			$.ajax({   
 		 				url:'/goodluxe/checkAlreadyLiked.do?entity_number=<%=entity_number%>',
 		 				type:'POST',
-		 				
 		 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 		 				success:function(data){
 		 					if (data==1){

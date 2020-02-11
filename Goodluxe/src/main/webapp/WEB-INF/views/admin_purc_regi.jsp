@@ -201,6 +201,22 @@
 						</div>
 					</div>
 				</li>
+				<li class="gnb_li">
+					<button type="button" class="btn_op menu-500 menu-order-5"
+						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
+					<div class="gnb_oparea_wr">
+						<div class="gnb_oparea">
+							<h3>쇼핑몰현황/기타</h3>
+							<ul>
+								<li data-menu="500110"><a href="./adminMain.html"
+									class="gnb_2da  ">매출현황</a></li>
+								<li data-menu="500130"><a
+									href="./admindelivermanagement.html" class="gnb_2da ">배송관리</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</nav>
 
@@ -296,14 +312,14 @@
 							<td class="td2"><input type="date" name="purc_date_text" id = "purc_date" class="search"></td>
 							
 						</tr>
-						<tr>
+				<!--		<tr>
 							<td class="td1">판매상태</td>
 							<td class="td2">&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="sale_status" value="onready">판매준비&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="onsale">판매중&nbsp;&nbsp;&nbsp; 
-								<input type="radio"name="sale_status" value="sold">판매완료&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="payed">대금지불완료&nbsp;&nbsp;&nbsp;
-						</tr>
+								<input type="radio" name="sale_status" value="판매준비">판매준비&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="판매중">판매중&nbsp;&nbsp;&nbsp; 
+								<input type="radio"name="sale_status" value="판매완료">판매완료&nbsp;&nbsp;&nbsp; 
+								
+						</tr>  -->
 						<tr>
 							<td class="td1">감정서 유무</td>
 							<td class="td2">&nbsp;<input type="radio" name="appraise_exist" value = "O"> &nbsp;유&nbsp;&nbsp;&nbsp; <input

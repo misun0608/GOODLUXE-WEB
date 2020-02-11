@@ -12,6 +12,7 @@ create table gl_purchase(
     sale_price number,
     buying_price number not null,
     purc_date date,
+    sale_status varchar2(20),
     appraise_exist varchar2(10),
     pd_component varchar2(200),
     member_id varchar2(20)

@@ -152,10 +152,10 @@
                         <%
                         	String tel_all, tel1, tel2, tel3;
                         	tel_all = memberVO.getMember_phone();
-                        	StringTokenizer sttel = new StringTokenizer(tel_all,"-");
-                        	tel1 = sttel.nextToken();
-							tel2 = sttel.nextToken();
-							tel3 = sttel.nextToken();
+                        	
+                        	tel1 = tel_all.substring(0,3);
+							tel2 = tel_all.substring(3,7);
+							tel3 = tel_all.substring(7,11);
                         %>
                         <tr>
                             <td>휴대전화</td>

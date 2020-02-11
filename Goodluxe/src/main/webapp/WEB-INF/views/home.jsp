@@ -24,7 +24,10 @@
 <br /><br /><a href="mdDetail.do?entity_number=40">지예_상품상세</a>
 <br /><br /><a href="myInfo.do?member_id=mjmj">지예 mypage 개인정보</a>
 <br /><br /><a href="myLikedGoods.do">지예 mypage 관심상품</a>
-
+<br /><br /><a href="adminCoupon.do">지예 admin 쿠폰관리</a>
+<br /><br /><a href="adminCustomer.do">지예 admin 블랙리스트관리</a>
+<br /><br /><a href="adminOrder.do">지예 admin 주문관리</a>
+<br /><br /><a href="adminProduct.do">지예 admin 상품관리</a>
 
 <br /><br />
 css, js, img를 가져다가 사용하고 싶다면...<br>

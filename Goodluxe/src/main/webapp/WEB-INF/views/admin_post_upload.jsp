@@ -203,20 +203,20 @@
 							<td class="td1">제품이름</td>
 							<td class="td2"><input name="pb_md_name" class="text1"></td>
 						</tr>
-						<tr>
+						<!--<tr>
 							<td class="td1">판매상태</td>
 							<td class="td2">
-								<input type = "radio" name = "pb_sale_status" value = "onsale">판매중
-								<input type = "radio" name = "pb_sale_status" value = "inprogress">거래진행중
-								<input type = "radio" name = "pb_sale_status" value = "sold"> 판매완료
+								<input type = "radio" name = "pb_sale_status" value = "판매중">판매중
+								<input type = "radio" name = "pb_sale_status" value = "판매중">거래진행중
+							 	<input type = "radio" name = "pb_sale_status" value = "판매완료"> 판매완료 
 								
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="td1">게시상태</td>
 							<td class="td2">
-								<input type = "radio" name = "pb_post_status" value = "onboard">게시중
-								<input type = "radio" name = "pb_post_status" value = "offboard">게시안함
+								<input type = "radio" name = "pb_post_status" value = "게시중" checked>게시중
+								<input type = "radio" name = "pb_post_status" value = "게시안함">게시안함
 							</td>
 						</tr>
 						<tr>

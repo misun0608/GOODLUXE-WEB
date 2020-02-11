@@ -163,7 +163,7 @@
 					<li><a href="./itemList.do?il_search_category=WALLET">WALLET</a></li>
 					<li><a href="./itemList.do?il_search_category=GLASSES">GLASSES</a></li>
 					<li><a href="./itemList.do?il_search_category=SHOES">SHOES</a></li>
-					<li><a href="event_page.html">EVENT</a></li>
+					<li><a href="./homeTT.do">EVENT</a></li>
 				</ul>
 				<ul class="search">
 					<img

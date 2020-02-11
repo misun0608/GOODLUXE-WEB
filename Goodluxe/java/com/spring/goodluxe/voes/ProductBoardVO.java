@@ -31,23 +31,23 @@ create sequence sellingBoard_seq
  */
 
 public class ProductBoardVO { 
-	private String pb_number;				//�۹�ȣ (������)
-	private String pb_division; 			//�Խñ� �з�
-	private String pb_md_name;   			//��ǰ�̸�
-	private Date pb_date;   				//��ǰ��ü��ȣ
-	private String pb_sale_status;  		//�ǸŻ���
-	private String pb_post_status;  		//�Խû���
-	private String pb_detail;    			//��ǰ �󼼼���
-	private String pb_main_img_original;   	//���� ����
+	private String pb_number;				
+	private String pb_division; 			
+	private String pb_md_name;   			
+	private Date pb_date;   				
+	private String pb_sale_status;  		
+	private String pb_post_status;  		
+	private String pb_detail;    			
+	private String pb_main_img_original;   	
 	private String pb_main_img_stored;   
-	private String pb_detail_img1_original;  //������ ����1
+	private String pb_detail_img1_original;  
 	private String pb_detail_img1_stored;  
-	private String pb_detail_img2_original;  //������ ����2
+	private String pb_detail_img2_original;  
 	private String pb_detail_img2_stored;  
-	private String pb_detail_img3_original;  //������ ����3
+	private String pb_detail_img3_original;  
 	private String pb_detail_img3_stored;  
-	private int pb_view_count;  			//��ȸ��
-	private int pb_like;  					//���ƿ�
+	private int pb_view_count;  			
+	private int pb_like;  					
 	private String entity_number;
 	public String getPb_number() {
 		return pb_number;

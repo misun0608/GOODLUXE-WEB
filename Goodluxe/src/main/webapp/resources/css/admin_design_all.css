@@ -65,7 +65,7 @@ a:link, a:visited {color:#000;text-decoration:none}
   
   #logo{background: #BBCDDB; height:100%; float:left; width:220px; padding:15px 0 15px 50px; text-align: center; }
 
-  #btn_gnb{background:url(../img/menu.png) 50% 50% no-repeat #8FB0CA; height:50px; width:50px; background-size: 25px 25px; border:0; position: absolute;}
+  #btn_gnb{background:url(./resource/img/menu.png) 50% 50% no-repeat #8FB0CA; height:50px; width:50px; background-size: 25px 25px; border:0; position: absolute;}
   /* #btn_gnb.btn_gnb_open{background:url(./menu.png) 50% 50% no-repeat #C97D73;width:50px; background-size:25px 25px;
     height:50px;border:0;position:absolute;top:0;left:0;text-indent:-999px;overflow:hidden} */
 
@@ -109,18 +109,18 @@ a:link, a:visited {color:#000;text-decoration:none}
 #gnb .on .btn_op{background:url() 50% 50% no-repeat #fff; background-size:25px 25px;}
     
     /* 사이드바 버튼들에 들어가는 각종 메뉴들 */
-  #gnb .gnb_li .btn_op.menu-100{background:url(../img/settings.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-100{background:url(../img/settings.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
-  #gnb .gnb_li .btn_op.menu-200{background:url(../img/user.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-200{background:url(../img/user.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
-  #gnb .gnb_li .btn_op.menu-300{background:url(../img/post.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-300{background:url(../img/post.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
-  #gnb .gnb_li .btn_op.menu-400{background:url(../img/shop.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-400{background:url(../img/shop.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
-  #gnb .gnb_li .btn_op.menu-500{background:url(../img/web.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-500{background:url(../img/web.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
-  #gnb .gnb_li .btn_op.menu-900{background:url(../img/box.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
-  #gnb .on .btn_op.menu-900{background:url(../img/box.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-100{background:url(../img/admin_menu/settings.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-100{background:url(../img/admin_menu/settings.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-200{background:url(../img/admin_menu/user.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-200{background:url(../img/admin_menu/user.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-300{background:url(../img/admin_menu/post.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-300{background:url(../img/admin_menu/post.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-400{background:url(../img/admin_menu/shop.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-400{background:url(../img/admin_menu/shop.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-500{background:url(../img/admin_menu/web.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-500{background:url(../img/admin_menu/web.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
+  #gnb .gnb_li .btn_op.menu-900{background:url(../img/admin_menu/box.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px; }
+  #gnb .on .btn_op.menu-900{background:url(../img/admin_menu/box.png) 50% 50% no-repeat #ebebeb; background-size:25px 25px;}
   #gnb .gnb_li button:hover{background-color:#f3f3f3}
 
     /* 사이드바 메뉴에 하위 메뉴들을 보기좋게 오른쪽에서 보여주되 겹치게  */
@@ -293,6 +293,8 @@ a:link, a:visited {color:#000;text-decoration:none}
     .btn42 {float:left; width:100%}
     .btn42:last-of-type{text-align:right;}
 
-  
-    
-    
+   .table_behind{
+   	z-index : 1;
+   }
+   		
+   }

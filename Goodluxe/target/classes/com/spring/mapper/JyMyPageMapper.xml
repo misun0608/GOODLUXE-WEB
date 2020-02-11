@@ -65,7 +65,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY entity_number DESC)
-				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	)
             where entity_number in(select entity_number from gl_liked where member_id = #{member_id}))
 		<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
 		
@@ -85,7 +85,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY entity_number DESC)
-				WHERE pb_sale_status != 'sold' and pb_post_status = 'onboard'	)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	)
                 where entity_number in(select entity_number from gl_liked where member_id = #{member_id})
 			
 	</select>
