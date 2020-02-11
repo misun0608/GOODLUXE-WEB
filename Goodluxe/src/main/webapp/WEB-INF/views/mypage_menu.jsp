@@ -22,7 +22,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "mypageApplyForm.do">
+             <a href = "get_apply_form.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/shop_w_resize.png" class = "img_icon"/></div>
                      <div class = "menu_content">
@@ -30,7 +30,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "mypage_salesinquiry.html">
+             <a href = "get_salesinquiry_form.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/wish_w_resize.png" class = "img_icon"/></div>
                      <div class = "menu_content">
@@ -38,7 +38,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "restriction.html">
+             <a href = "get_restriction_view.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/lock_w_resize.png" class = "img_icon"/> </div>
                      <div class = "menu_content">
@@ -46,7 +46,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "point_view.html">    
+             <a href = "get_point_view.do">    
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/money_w_resize.png" class = "img_icon"/></div>
                      <div class = "menu_content">
@@ -54,7 +54,7 @@
                      </div>
                  </div>
              </a>
-             <a href = "coupon_view.html">
+             <a href = "get_coupon_view.do">
                  <div class = "box">
                      <div class = "icon"><img src ="${pageContext.request.contextPath}/resources/img/icons/coupon_w_resize.png" class = "img_icon"/></div>
                      <div class = "menu_content">

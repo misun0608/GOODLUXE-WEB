@@ -3,7 +3,13 @@ package com.spring.goodluxe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.spring.goodluxe.voes.ApplyVO;
+import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
+import com.spring.goodluxe.voes.OrderVO;
+import com.spring.goodluxe.voes.PointVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
+import com.spring.goodluxe.voes.ProductVO;
 
 public interface GoodluxeService {
 	public String userChk(MemberVO membervo) throws Exception;
@@ -29,4 +35,28 @@ public interface GoodluxeService {
 
 	public HashMap<String, Object> getTheProduct(String entity_number) throws Exception;
 	public ArrayList<HashMap<String, Object>> getRecommand(String entity_number)throws Exception;
+	
+	// Order Service
+	public MemberVO selectMember(String member_id) throws Exception;
+	public ProductVO selectProduct(String entity_number) throws Exception;
+	public ProductBoardVO selectPB(String entity_number) throws Exception;
+	public ArrayList<CouponVO> selectCoupon(String member_id) throws Exception;
+	public int insertOrder(OrderVO orderVO) throws Exception;
+	public OrderVO selectOrder(OrderVO vo) throws Exception;
+	public int insertKakaoOrder(OrderVO orderVO) throws Exception;
+	public void updateMemberpoint(MemberVO memberVO) throws Exception;
+	public void updateCouponstatus(CouponVO couponVO) throws Exception;
+	public void insertPointHistory(PointVO pointVO) throws Exception;
+	public ArrayList<PointVO> getPointList(String member_id, int startRow, int endRow) throws Exception;
+	public int getListCount(String member_id) throws Exception;
+	public ArrayList<CouponVO> getCouponList(String member_id, int startRow, int endRow) throws Exception;
+	public int getCouponListCount(String member_id) throws Exception;
+	public void updateCouponExstatus(CouponVO couponVO) throws Exception;
+	public ArrayList<HashMap<String,Object>> getOrderList(String member_id) throws Exception;
+	public void insertApplyGoods(ApplyVO applyVO) throws Exception;
+	public ArrayList<ApplyVO> getApplyList(String member_id) throws Exception;
+	public ArrayList<HashMap<String,Object>> getSellingList(String member_id) throws Exception;
+	public ArrayList<HashMap<String,Object>> getTradingList(String member_id) throws Exception;
+	public ArrayList<HashMap<String,Object>> getFinishList(String member_id) throws Exception;
+	public ArrayList<HashMap<String,Object>> getPurchasingList(String member_id) throws Exception;
 }

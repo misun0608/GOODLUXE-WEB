@@ -46,5 +46,9 @@ public class PointVO {
 	public void setOrder_number(String order_number) {
 		this.order_number = order_number;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> origin/master
 }

@@ -7,13 +7,12 @@ public class OrderVO {
 	private String order_receipt; // 받는사람
 	private Timestamp order_pay_date; // 결제일
 	private Timestamp order_order_date; // 주문일
-	private String order_confirm; // 구매확정
 	private String order_status; // 주문상태
 	private String order_addr1; // 배송기본주소
 	private String order_addr2; // 배송상세주소
-	private String order_phone; // 배송폰번호
 	private String order_zipcode; // 배송우편번호
-	private int order_invoice_number; // 송장번호
+	private String order_phone; // 배송폰번호
+	private String order_invoice_number; // 송장번호
 	private Timestamp order_ship_date; // 배송날짜
 	private Timestamp order_cancel_date; // 주문취소일자
 	private int order_product_price; // 제품 금액
@@ -21,10 +20,12 @@ public class OrderVO {
 	private int order_used_point; // 사용 적립금
 	private String order_used_coupon; // 사용 쿠폰
 	private String order_pay_system; // 결제 방식
+	private String order_refund_bank; // 환불계좌 은행
 	private String order_refund_account; // 환불계좌번호
-	private String order_message; // 주문메세지
-	private String pb_number; // 상품번호 / 지예꺼에서.....
+	private int pb_number; // 게시글 번호 / 지예꺼에서.....
 	private String member_id; // 멤버 아이디 / 민지꺼에서 가져올 예정...?
+	private String order_message; // 주문메세지
+	private int order_pay_price; // 결제 금액
 
 	public String getOrder_number() {
 		return order_number;
@@ -58,14 +59,6 @@ public class OrderVO {
 		this.order_order_date = order_order_date;
 	}
 
-	public String getOrder_confirm() {
-		return order_confirm;
-	}
-
-	public void setOrder_confirm(String order_confirm) {
-		this.order_confirm = order_confirm;
-	}
-
 	public String getOrder_status() {
 		return order_status;
 	}
@@ -90,14 +83,6 @@ public class OrderVO {
 		this.order_addr2 = order_addr2;
 	}
 
-	public String getOrder_phone() {
-		return order_phone;
-	}
-
-	public void setOrder_phone(String order_phone) {
-		this.order_phone = order_phone;
-	}
-
 	public String getOrder_zipcode() {
 		return order_zipcode;
 	}
@@ -106,11 +91,19 @@ public class OrderVO {
 		this.order_zipcode = order_zipcode;
 	}
 
-	public int getOrder_invoice_number() {
+	public String getOrder_phone() {
+		return order_phone;
+	}
+
+	public void setOrder_phone(String order_phone) {
+		this.order_phone = order_phone;
+	}
+
+	public String getOrder_invoice_number() {
 		return order_invoice_number;
 	}
 
-	public void setOrder_invoice_number(int order_invoice_number) {
+	public void setOrder_invoice_number(String order_invoice_number) {
 		this.order_invoice_number = order_invoice_number;
 	}
 
@@ -170,6 +163,14 @@ public class OrderVO {
 		this.order_pay_system = order_pay_system;
 	}
 
+	public String getOrder_refund_bank() {
+		return order_refund_bank;
+	}
+
+	public void setOrder_refund_bank(String order_refund_bank) {
+		this.order_refund_bank = order_refund_bank;
+	}
+
 	public String getOrder_refund_account() {
 		return order_refund_account;
 	}
@@ -178,19 +179,11 @@ public class OrderVO {
 		this.order_refund_account = order_refund_account;
 	}
 
-	public String getOrder_message() {
-		return order_message;
-	}
-
-	public void setOrder_message(String order_message) {
-		this.order_message = order_message;
-	}
-
-	public String getPb_number() {
+	public int getPb_number() {
 		return pb_number;
 	}
 
-	public void setPb_number(String pb_number) {
+	public void setPb_number(int pb_number) {
 		this.pb_number = pb_number;
 	}
 
@@ -202,4 +195,19 @@ public class OrderVO {
 		this.member_id = member_id;
 	}
 
+	public String getOrder_message() {
+		return order_message;
+	}
+
+	public void setOrder_message(String order_message) {
+		this.order_message = order_message;
+	}
+
+	public int getOrder_pay_price() {
+		return order_pay_price;
+	}
+
+	public void setOrder_pay_price(int order_pay_price) {
+		this.order_pay_price = order_pay_price;
+	}
 }
