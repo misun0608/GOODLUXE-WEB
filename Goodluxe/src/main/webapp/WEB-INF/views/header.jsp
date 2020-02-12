@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="search_result.html" class="notice_list on">
+                            <a href="#" class="notice_list on">
                                 '생로랑 모노그램 카바스백' 제품이 판매 완료되었습니다 ㅠㅠ..<br>
                                 Saint Laurent 의 다른 제품을 보시겠어요?
                             </a>
