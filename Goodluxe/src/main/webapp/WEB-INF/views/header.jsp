@@ -16,7 +16,7 @@
 				if (mem_id == null) {
 			%>
             <ul class="topmenu nonmember_menu on">
-                <li class="cs"><a href="#">고객센터</a></li>
+                <li class="cs"><a href="SC.do">고객센터</a></li>
                 <li class="singin"><a href="#">회원가입</a></li>
                 <li class="login">
                     <a href="#">로그인</a>
@@ -34,7 +34,7 @@
 					} else if (mem_class.equals("Y") || mem_class.equals("B")) {
 			%>
             <ul class="topmenu member_menu on">
-                <li class="cs"><a href="#">고객센터</a></li>
+                <li class="cs"><a href="SC.do">고객센터</a></li>
                 <li class="logout"><a href="logout.do">로그아웃</a></li>
                 <li class="mypage"><a href="mypageOAS.do?member_id=<%=mem_id%>">마이페이지</a></li>
                 <li class="notice">
