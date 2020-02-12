@@ -17,7 +17,7 @@
 			%>
             <ul class="topmenu nonmember_menu on">
                 <li class="cs"><a href="SC.do">고객센터</a></li>
-                <li class="singin"><a href="#">회원가입</a></li>
+                <li class="singin"><a href="joinform.do">회원가입</a></li>
                 <li class="login">
                     <a href="#">로그인</a>
                 </li>
