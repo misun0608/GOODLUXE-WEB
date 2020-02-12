@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+create table gl_inquire(
+    inquire_number number,
+    member_id varchar2(20),
+    inquire_title varchar2(1000),
+    inquire_content varchar2(4000),
+    inquire_date timestamp,
+    inquire_comment number,
+    inquire_public varchar2(10)
+);
+create sequence gl_inquire_seq
+start with 1
+increment by 1
+maxvalue 10000000;
+-->
+
+<mapper namespace="com.spring.mapper.HelpMapper">
+	<resultMap type="com.spring.goodluxe.voes.InquireVO" id="inquireRM">
+		<result property="inquire_number" column="inquire_number" />
+		<result property="member_id" column="member_id" />
+		<result property="inquire_title" column="inquire_title" />
+		<result property="inquire_content" column="inquire_content" />
+		<result property="inquire_date" column="inquire_date" />
+		<result property="inquire_comment" column="inquire_comment" />
+		<result property="inquire_public" column="inquire_public" />
+	</resultMap>
+	
+	<insert id="inquireInsert" parameterType="com.spring.goodluxe.voes.InquireVO">
+		insert into gl_inquire values(gl_inquire_seq.NEXTVAL, #{member_id}, #{inquire_title}, #{inquire_content}, systimestamp, 0, #{inquire_public})
+	</insert>
+	
+	<select id="loadQBList" resultMap="inquireRM">
+		select *
+		from gl_inquire
+		order by inquire_number desc
+	</select>
+	
+	<select id="loadQPost" parameterType="int" resultMap="inquireRM">
+		select *
+		from gl_inquire
+		where inquire_number = #{inquire_number}
+	</select>
+
+</mapper>
