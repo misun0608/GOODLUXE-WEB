@@ -1,0 +1,330 @@
+/* 초기화 */
+* {margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+.line{
+    display: inline-block;
+    width: 95px;
+}
+
+.linefont{
+    color: gray;
+}
+
+.joinbox {
+    font-size: 15px;
+    display: inline-block; 
+    border: 1px solid lightgray;
+    margin: 20px;
+    padding: 15px 40px;
+    width: 150px;
+    color: darkgray
+}
+
+.joinbox:hover{
+    color: black;
+}
+
+#emailbox{
+    margin: 35px;
+}
+
+#email1{
+    width: 80px;
+}
+
+#email2{
+    width: 80px;
+}
+
+#email_select{
+    width: 120px;
+}
+.joinstep{
+    width: 480px;
+}
+
+.jointitle{
+    padding-top: 10px;
+}
+
+.join_btn{
+    background-color: #C97D73;
+    border: none;
+    color: white;
+    padding: 8px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.join_btn1{
+    background-color: white;
+    color: #555555;
+    border: 0.8px solid #555555;
+}
+
+/*
+.btn1:hover{
+    background-color: #707070;
+    color: #080424;
+}
+*/
+
+.join_btn2{
+    background-color: #2F87C9; 
+    color: white; 
+    border: 0.8px solid #2F87C9;
+}
+
+/*
+.btn2:hover{
+    background-color: #0e073f;
+    color: #080424; 
+    border: 1px solid #080424;
+}
+*/
+
+/* .menu_line{
+    width: 120px;
+    height: 2px;
+    border: 0;
+    background: #C97D73;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.join_underline{
+    width: 490px;
+}
+
+#two{
+    font-size: 20px;
+    font-weight: bold;
+} */
+
+
+/* 회원가입3 */
+
+.jointable{
+    /* border-top: 1px solid #444444; */
+    border-collapse: collapse;
+}
+
+.jointable2{
+    border-collapse: collapse;
+}
+.jointd{
+    border-bottom: 1px solid #444444;
+}
+
+.jointable input[type=text]{
+    position: relative;
+    width: 69%;
+    height : 30px;
+    border: none;
+    outline: none;
+    /* font-size: 13px; */
+}
+
+.jointable input[type=password]{
+    position: relative;
+    width:95%;
+    height : 30px;
+    border: none;
+    outline: none;
+}
+
+.jointable input[type=tel]{
+    position: relative;
+    width:25%;
+    height : 30px;
+    border: none;
+    outline: none;
+}
+
+.joinform1{
+    font-size: 14px;
+    text-align: left;
+}
+
+.joinform2{
+    font-size: 14px;
+    text-align: left;
+}
+
+.joinall{
+    width: 480px;
+}
+
+.jointable{
+    width: 100%;
+}
+
+.jttitle{
+    width: 23%;
+    vertical-align: middle;
+    line-height: 200%;
+}
+
+.likedcate{
+    margin-bottom: 10px;
+}
+
+.liked_title{
+    vertical-align: top;
+}
+
+.scheck{
+    width: 95px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 3px;
+    border: 0.9px solid black;
+}
+
+.join_inputarea{
+    padding: 3px;
+    margin: 3px;
+    height: 30px;
+    vertical-align: middle;
+    /* width: 264px; */
+}
+
+#email1{
+    width: 95px;
+}
+
+#email2{
+    width: 95px;
+}
+
+.addrinput{
+    width: 96px;
+}
+
+.telinput{
+    width: 60px;
+}
+
+.passwd{
+    width: 370px;
+}
+
+.likedcate{
+    display: inline-block;
+    margin: 7px 0;
+}
+
+/* .join_td{
+    height: 36px;
+} */
+
+/* #prefer_brand_td{
+    margin-top: 20px;
+} */
+
+.join_td_brandbox{
+    width: 160px;
+    float: left;
+}
+
+.join_td_catebox{
+    width: 120px;
+    float: left;
+}
+
+.join_td_catebox p{
+    display:inline-block;
+    margin-left:10px;
+}
+
+.join_td_brandbox p{
+    display:inline-block;
+    margin-left:10px;
+}
+.join_td_brandbox .join_prefer_brand{
+    margin:7px 0;
+}
+
+.liked_title{
+    padding-bottom: 10px;
+    padding-top: 25px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.jointable2_top_td{
+    margin-bottom: 10px;
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px){
+    .menu_line{
+        width: 10%;
+        height: 2px;
+        border: 0;
+        background: #C97D73;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .jointitle{
+        width: 90%;
+    }
+
+    #onetitle{
+        padding-right: 13%;
+        font-weight: bold;
+    }
+    
+    #twotitle{
+        padding-right: 13%;
+        font-size: 15px;
+    }
+    
+    #threetitle{
+        font-size: 15px;
+    }
+
+    .underline{
+        width: 90%;
+    }
+
+    .agreement{
+        width: 90%;
+        text-align: right;
+    }
+
+    .join,
+    .join2{
+        display: block;
+        overflow: auto;
+    }
+
+    .joinform2{
+        width: 100%;
+    }
+
+    .joinform1{
+        width: 100%;
+    }
+}

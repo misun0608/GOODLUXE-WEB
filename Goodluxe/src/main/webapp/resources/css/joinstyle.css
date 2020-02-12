@@ -1,0 +1,415 @@
+/* 초기화 */
+* {margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    .join_label{
+        position: relative;
+        top: 0;
+        font-size: 13px;
+        color: black;
+    }
+    
+    .join_line{
+        display: inline-block;
+        width: 95px;
+    }
+    
+    .join_linefont{
+        color: gray;
+    }
+    
+    .joinbox {
+        font-size: 15px;
+        display: inline-block; 
+        border: 1px solid lightgray;
+        margin: 20px;
+        padding: 15px 40px;
+        width: 150px;
+        color: darkgray
+    }
+    
+    .joinbox:hover{
+        color: black;
+    }
+    
+    #emailbox{
+        margin: 35px;
+    }
+    
+    .joinstep{
+        width: 480px;
+    }
+    
+    .jointitle{
+        padding-top: 10px;
+    }
+
+    .join_agreement{
+        width: 480px;
+        text-align: right;
+    }
+    
+    .agr_title{
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .agr{
+        font-size: 13px;
+        margin-right: 15px;
+    }
+
+    .agree_textarea{
+        background-color: #F3F4F8;
+        border: none;
+        resize: none;
+        width: 100%;
+        line-height: 150%;
+    }
+    
+    .join_btn{
+        background-color: #2F87C9;
+        border: none;
+        color: white;
+        padding: 8px 60px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 10px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .join_before_btn{
+        background-color: white;
+        color: #555555;
+        border: 0.8px solid #555555;
+    }
+    
+    .join_btn1{
+        background-color: white;
+        color: #2F87C9;
+        border: 0.8px solid #2F87C9;
+    }
+    
+    /*
+    .btn1:hover{
+        background-color: #707070;
+        color: #080424;
+    }
+    */
+    
+    .join_btn2{
+        background-color: #2F87C9; 
+        color: white; 
+        border: 0.8px solid #2F87C9;
+    }
+    
+    /*
+    .btn2:hover{
+        background-color: #0e073f;
+        color: #080424; 
+        border: 1px solid #080424;
+    }
+    */
+    
+    .menu_line{
+        width: 120px;
+        height: 2px;
+        border: 0;
+        background: #080424;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .join_underline{
+        width: 490px;
+    }
+    
+    .scheck{
+        width: 100px;
+        text-align: center;
+        background-color: white;
+        border-radius: 5px;
+        border: 0;
+        font-size: 12px;
+        padding: 2px;
+        border: 0.9px solid black;
+    }
+}
+
+
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    .join_label{
+        position: relative;
+        top: 0;
+        font-size: 13px;
+        color: black;
+    }
+    
+    .join_line{
+        display: inline-block;
+        width: 95px;
+    }
+    
+    .join_linefont{
+        color: gray;
+    }
+    
+    .joinbox {
+        font-size: 15px;
+        display: inline-block; 
+        border: 1px solid lightgray;
+        margin: 20px;
+        padding: 15px 40px;
+        width: 150px;
+        color: darkgray
+    }
+    
+    .joinbox:hover{
+        color: black;
+    }
+    
+    #emailbox{
+        margin: 35px;
+    }
+    
+    .joinstep{
+        width: 480px;
+    }
+    
+    .jointitle{
+        padding-top: 10px;
+    }
+
+    .join_agreement{
+        width: 480px;
+        text-align: right;
+    }
+    
+    .agr_title{
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .agr{
+        font-size: 13px;
+        margin-right: 15px;
+    }
+
+    .agree_textarea{
+        background-color: #F3F4F8;
+        border: none;
+        resize: none;
+        width: 100%;
+        line-height: 150%;
+    }
+    
+    .join_btn{
+        background-color: #2F87C9;
+        border: none;
+        color: white;
+        padding: 8px 60px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 10px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .join_before_btn{
+        background-color: white;
+        color: #555555;
+        border: 0.8px solid #555555;
+    }
+    
+    .join_btn1{
+        background-color: white;
+        color: #2F87C9;
+        border: 0.8px solid #2F87C9;
+    }
+    
+    .join_btn2{
+        background-color: #2F87C9; 
+        color: white; 
+        border: 0.8px solid #2F87C9;
+    }
+    
+    .menu_line{
+        width: 120px;
+        height: 2px;
+        border: 0;
+        background: #080424;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .join_underline{
+        width: 490px;
+    }
+    
+    .scheck{
+        width: 100px;
+        text-align: center;
+        background-color: white;
+        border-radius: 5px;
+        border: 0;
+        font-size: 12px;
+        padding: 2px;
+        border: 0.9px solid black;
+    }
+}
+
+
+/* 스마트폰 */
+@media screen and (max-width: 767px){
+
+    /*단계 이미지*/
+
+    .joinstep_img{
+        width: 340px;
+    }
+
+    .join_label{
+        position: relative;
+        top: 0;
+        font-size: 13px;
+        color: black;
+    }
+    
+    .join_line{
+        display: inline-block;
+        width: 95px;
+    }
+    
+    .join_linefont{
+        color: gray;
+    }
+    
+    .joinbox {
+        font-size: 15px;
+        display: inline-block; 
+        border: 1px solid lightgray;
+        margin: 20px;
+        padding: 15px 40px;
+        width: 150px;
+        color: darkgray
+    }
+    
+    .joinbox:hover{
+        color: black;
+    }
+    
+    #emailbox{
+        margin: 35px;
+    }
+    
+    .joinstep{
+        width: 340px;
+    }
+    
+    .jointitle{
+        padding-top: 10px;
+    }
+
+    .join_agreement{
+        width: 340px;
+        padding: 0 10px;
+        text-align: right;
+    }
+    
+    .agr_title{
+        text-align: left;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    
+    .agr{
+        font-size: 13px;
+        margin-right: 15px;
+    }
+
+    .agree_textarea{
+        background-color: #F3F4F8;
+        border: none;
+        resize: none;
+        width: 100%;
+        line-height: 150%;
+    }
+    
+    .join_btn{
+        background-color: #2F87C9;
+        border: none;
+        color: white;
+        padding: 8px 60px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 10px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .join_before_btn{
+        background-color: white;
+        color: #555555;
+        border: 0.8px solid #555555;
+    }
+    
+    .join_btn1{
+        background-color: white;
+        color: #2F87C9;
+        border: 0.8px solid #2F87C9;
+    }
+    
+    .join_btn2{
+        background-color: #2F87C9; 
+        color: white; 
+        border: 0.8px solid #2F87C9;
+    }
+    
+    .menu_line{
+        width: 120px;
+        height: 2px;
+        border: 0;
+        background: #080424;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .join_underline{
+        width: 340px;
+    }
+    
+    .scheck{
+        width: 100px;
+        text-align: center;
+        background-color: white;
+        border-radius: 5px;
+        border: 0;
+        font-size: 12px;
+        padding: 2px;
+        border: 0.9px solid black;
+    }
+}
