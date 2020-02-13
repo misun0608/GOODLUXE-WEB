@@ -26,7 +26,10 @@ public interface AjaxMapper {
 	int setWhiteClass(HashMap<String, String> map);
 	//오더관리
 	ArrayList<OrderVO> getAllOrderList();
+	ArrayList<OrderVO> getOrderListOrdernumber(HashMap<String, Object> map);
+	ArrayList<OrderVO> getOrderListCanceled(HashMap<String, Object> map);
 	ArrayList<OrderVO> getOrderList(HashMap<String, Object> map);
+	
 	int orderChangeStatusStartShipping(String chekd);
 	int adminOrderSetStartShipping(HashMap<String, String> map);
 	int adminOrderSetEndShipping(String order_number);
@@ -38,20 +41,28 @@ public interface AjaxMapper {
 	ArrayList<HashMap<String, Object>> adminProductListCons(HashMap<String, String> map);
 	ArrayList<HashMap<String, Object>> adminProductListPurcEnNo(HashMap<String, String> map);
 	ArrayList<HashMap<String, Object>> adminProductListConsEnNo(HashMap<String, String> map);
-	String checkNowPostStatus(String chked);
-	int changeOffBoard(String chked);
-	int changeOnBoard(String chked);
+	String checkNowPostStatus(String entity_number);
+	int changeOffBoard(String entity_number);
+	int changeOnBoard(String entity_number);
 	void postStatChange(String entity_number);
 	String checkNowSaleStatus(String entity_number);
 	void chgSaleStatOnsale(String entity_number);
 	void chgSaleStatOndeal(String entity_number);
 	void chgSaleStatSoldout(String entity_number);
-	
+
 	String getDivision(HashMap<String, String> map);
 	int deletePurchaseInfo(HashMap<String, String> map);
 	int deleteConsignmentInfo(HashMap<String, String> map);
-
 	void deleteProductList(HashMap<String, String> map);
+	
+	
+	//환불
+	ArrayList<OrderVO> getReturnList();
+	ArrayList<OrderVO> getDetailReturndList(String orderstatus);
+	void setReturnConfirm(String order_number);
+	void setReturnFinished(String order_number);
+	int setPostStatusBackToSale(String order_number);
+	
 
 	
 	

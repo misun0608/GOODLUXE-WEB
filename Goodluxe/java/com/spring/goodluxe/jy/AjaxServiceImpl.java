@@ -172,27 +172,20 @@ try {
 			HashMap<String, String>map = new HashMap<String,String>();
 
 			map.put("member_id",member_id);
-			System.out.println("나");
 			String witchClass = ajaxMapper.isBlack(map);
-			System.out.println("클래스" + witchClass);
 			int res;
 			String data ="O";
 			if( witchClass.equals("B")){
 				res = ajaxMapper.setWhiteClass(map);
-				System.out.println("화이트첵");
 				if(res==1) {
-					System.out.println("화이트첵1");
 					data="B";
 				}
 			}else {
 				res = ajaxMapper.setBlackClass(map);
-				System.out.println("블랙첵");
 				if(res==1) {
 					data="Y";
-					System.out.println("블랙첵1");
 				}
 			}
-			System.out.println("다");
 			return data;
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/deleteCouponList) : " + e.getMessage());
@@ -214,13 +207,49 @@ try {
 		}
 		
 	}
+	
+	
 	@Override
 	public ArrayList<OrderVO> getOrderList(HashMap<String, Object> map)throws Exception{
 		
 		try {
 			ArrayList<OrderVO> orderList = null; 
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
-			orderList = ajaxMapper.getOrderList(map);
+			String str = (String) map.get("order_number");
+			String str2 = (String)map.get("is_canceled");
+			System.out.println("str"+str);
+			System.out.println("str2"+str2);
+			
+			
+			if( str!=null ) {
+				System.out.println("SSSSSSSSSSS");
+				if( !str.equals("")) {
+					System.out.println("하하하하하하하하하하하");
+					orderList = ajaxMapper.getOrderListOrdernumber(map);
+				}else {
+					if(str2.equals("cancelN")) {
+						System.out.println("NNNNNNN");
+						orderList = ajaxMapper.getOrderListCanceled(map);
+					}
+					else if(str2.equals("cancelY")){
+						System.out.println("YYYYYYYYYYYYYY");
+						orderList = ajaxMapper.getOrderList(map);
+					}
+				}
+			}else{
+				System.out.println("EEEEEEEE");
+				if(str2.equals("cancelN")) {
+					System.out.println("NNNNNNN");
+					orderList = ajaxMapper.getOrderListCanceled(map);
+				}
+				else if(str2.equals("cancelY")){
+					System.out.println("YYYYYYYYYYYYYY");
+					orderList = ajaxMapper.getOrderList(map);
+				}
+			}
+			
+		
+			
 			
 			return orderList;
 		}catch(Exception e) {
@@ -228,6 +257,19 @@ try {
 			throw new Exception("ERRPR(AjaxService/getOrderList)");
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public int orderChangeStatusStartShipping(String[] chked_change_me)throws Exception {
@@ -391,8 +433,10 @@ try {
 				ajaxMapper.chgSaleStatOnsale(entity_number);
 			}else if(entity_chk.equals("거래진행중")) {
 				ajaxMapper.chgSaleStatOndeal(entity_number);
+				ajaxMapper.changeOffBoard(entity_number);
 			}else {//판매완료일때
 				ajaxMapper.chgSaleStatSoldout(entity_number);
+				ajaxMapper.changeOnBoard(entity_number);
 			}
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/postStatChange) : " + e.getMessage());
@@ -425,11 +469,67 @@ try {
 				}
 			}
 		}catch(Exception e) {
-			System.out.println("ERRPR(AjaxService/deleteCouponList) : " + e.getMessage());
-			throw new Exception("ERRPR(AjaxService/deleteCouponList)");
+			System.out.println("ERRPR(AjaxService/deleteProductList) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/deleteProductList)");
 		}
 		
 	}
+	@Override
+	public ArrayList<OrderVO> getReturnList() throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ArrayList<OrderVO> returnList = null;
+			
+			returnList = ajaxMapper.getReturnList();
+			return returnList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getReturnList) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getReturnList)");
+		}
+	}
+	@Override
+	public ArrayList<OrderVO> getDetailReturndList(String orderstatus) throws Exception {
+		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ArrayList<OrderVO> returnList = null;
+			
+			returnList = ajaxMapper.getDetailReturndList(orderstatus);
+			return returnList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getDetailReturndList) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getDetailReturndList)");
+		}
+	}
+	@Override
+	public void setReturnConfirm(String order_number) throws Exception {
+		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ajaxMapper.setReturnConfirm(order_number);
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/setReturnConfirm)");
+		}
+	}
+	@Override
+	public void setReturnFinished(String order_number) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ajaxMapper.setReturnFinished(order_number);
+			int res = ajaxMapper.setPostStatusBackToSale(order_number);
+			if( res == 1) {// 알람 테이블 추가
+				
+			}
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/setReturnConfirm)");
+		}
+		
+	}
+
 
 	
 	

@@ -363,6 +363,11 @@ public class ProductlistController {
 			
 			return "member_shipping_info";
 		}
+		@RequestMapping(value = "adminReturn.do")
+		public String adminReturn() {
+			
+			return "admin_return";
+		}
 		
 		
 		

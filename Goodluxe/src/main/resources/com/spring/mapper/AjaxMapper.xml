@@ -124,11 +124,14 @@
 	<select id = "getAllOrderList" parameterType = "hashmap" resultMap = "adminOrderMap">
 		select * from gl_order order by order_order_date desc
 	</select>
+	<select id = "getOrderListOrdernumber" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order where order_number = #{order_number}
+			 
+	</select>
 	<select id = "getOrderList" parameterType = "hashmap" resultMap = "adminOrderMap">
 		select * from gl_order where 1=1
-		<if test = "order_number!=null">
-			and order_number = #{order_number}
-		</if>	
+		
+		
 		<if test = "period=='today'">
 			and order_order_date 
 				between to_timestamp(sysdate-1 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
@@ -159,20 +162,20 @@
 				#{item}
 			</foreach>
 		</if>
-		
-		<if test = "is_canceled=='cancelY' ">
-			and order_cancel_date is null
-		</if>
-		<if test = "is_canceled=='cancelN' ">
-			and order_cancel_date is not null
-		</if>   
-		
-  		<if test = "is_payed == 'beforeP'">
+		<if test = "is_payed == 'beforeP'">
 			and order_status = '입금전'
 		</if>
-		<if test = "is_payed == 'afterP'">
+		<if test = "is_payed != 'beforeP'">
 			and order_status != '입금전'
 		</if>
+		
+		<if test = "is_canceled=='cancelY' ">
+			and order_status != '취소완료'
+		</if> 
+
+	</select>
+	<select id = "getOrderListCanceled" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = '취소완료'
 	</select>
 	
 	<update id = "orderChangeStatusStartShipping" parameterType = "String">
@@ -281,13 +284,13 @@
 			
 	</select>
 	<select id = "checkNowPostStatus" parameterType = "String" resultType = "String">
-		select pb_post_status from gl_productboard where entity_number = #{chked}
+		select pb_post_status from gl_productboard where entity_number = #{entity_number}
 	</select>
 	<update id = "changeOffBoard" parameterType = "String">
-		update gl_productboard set pb_post_status = '게시안함' where entity_number=#{chked} 
+		update gl_productboard set pb_post_status = '게시안함' where entity_number=#{entity_number} 
 	</update>
 	<update id = "changeOnBoard" parameterType = "String">
-		update gl_productboard set pb_post_status = '게시중' where entity_number=#{chked} 
+		update gl_productboard set pb_post_status = '게시중' where entity_number=#{entity_number} 
 	</update>
 	<select id = "checkNowSaleStatus" parameterType = "String" resultType = "String">
 		select pb_sale_status from gl_productboard where entity_number = #{entity_number}
@@ -310,12 +313,26 @@
  	<delete id = "deleteConsignmentInfo" parameterType = "hashMap">
 		delete from gl_consignment where entity_number = #{entity_number}
 	</delete> 
-	
 	<delete id = "deleteProductList" parameterType = "hashMap">
 		delete from gl_productboard where entity_number = #{entity_number}	
 	</delete>
 	
-	
-	
+	<!-- 환불 -->
+	<select id = "getReturnList" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = '환불신청' or order_status = '반품확인' or order_status = '환불완료'
+	</select>
+	<select id = "getDetailReturndList" parameterType = "String" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = #{orderstatus}
+	</select>
+	<update id = "setReturnConfirm" parameterType = "String">
+		update gl_order set order_status = '반품확인' where order_number = #{order_number}
+	</update>
+	<update id = "setReturnFinished" parameterType = "String">
+		update gl_order set order_status = '환불완료' where order_number = #{order_number}
+	</update>
+	<update id = "setPostStatusBackToSale" parameterType = "String">
+		update gl_productboard set pb_sale_status = '판매중' , pb_post_status = '게시중'
+		where pb_number in(select pb_number from gl_order where order_number = #{order_number} )
+	</update>
 
 </mapper>

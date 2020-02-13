@@ -28,6 +28,7 @@
 <br /><br /><a href="adminCustomer.do">지예 admin 블랙리스트관리</a>
 <br /><br /><a href="adminOrder.do">지예 admin 주문관리</a>
 <br /><br /><a href="adminProduct.do">지예 admin 상품관리</a>
+<br /><br /><a href="adminReturn.do">지예 admin 반품관리</a>
 
 <br /><br />
 css, js, img를 가져다가 사용하고 싶다면...<br>

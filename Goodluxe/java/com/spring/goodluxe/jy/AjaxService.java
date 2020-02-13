@@ -33,7 +33,11 @@ public interface AjaxService {
 	void postStatChange(String entity_number)throws Exception;
 	void saleStatChange(String entity_number)throws Exception;
 	void deleteProductList(String[] delete_this)throws Exception;
-	
+	ArrayList<OrderVO> getReturnList()throws Exception;
+	ArrayList<OrderVO> getDetailReturndList(String orderstatus)throws Exception;
+	void setReturnConfirm(String order_number)throws Exception;
+	void setReturnFinished(String order_number)throws Exception;
+
 	
 	
 	

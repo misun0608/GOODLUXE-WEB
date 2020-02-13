@@ -91,6 +91,7 @@
 			}
 		});
 	});
+	
 
 
 </script>
@@ -118,6 +119,19 @@
 			return year + "-" + month + "-" + date + " " + hour + ":" + min;
 		}
 		
+		$('input[name=is_payed]:eq(1)').click(function(event){
+			document.getElementById("is_checked3").checked = true;
+			document.getElementById("is_checked4").checked = false;
+			document.getElementById("is_checked5").checked = false;
+			document.getElementById("is_checked6").checked = false;
+		});
+		$('input[name=is_payed]:eq(2)').click(function(event){
+			document.getElementById("is_checked3").checked = false;
+			document.getElementById("is_checked4").checked = true;
+			document.getElementById("is_checked5").checked = true;
+			document.getElementById("is_checked6").checked = true;
+		});
+		
 		function selectData() {
 			$('#output').empty();
 				$.ajax({
@@ -127,44 +141,40 @@
 					contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 					success:function(data){
 						$.each(data,function(index,item){
-							
-							var is_canceled
-							if(item.order_cancel_date==null){is_canceled="정상주문"}
-							else{is_canceled="취소"}
-							
-							var date = new Date(item.order_pay_date);
-							var pay_date = date_format(date);
-							
-							if(item.order_pay_date == null){pay_date = ""}
-							
-							var link = "./getShippingInfo.do?order_number='"+item.order_number+"'";
-							var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
-							
-							var output = ''; 
-							output += '<tr class="tr2">';
-							//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me" value = "'+item.order_number+'"></td>';
-							output += '<td class="td3">'+pay_date+'</td>';
-							output += '<td class="td3">'+item.order_number+'</td>';
-							output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
-							output += '<td class="td3">'+item.pb_number+'</td>';
-							output += '<td class="td3">'+item.order_pay_price+'</td>';
-							output += '<td class="td3">'+item.order_pay_system+'</td>';
-							output += '<td class="td3">'+item.order_status;
-								if(item.order_status=='배송준비중'){
-		
-									output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
-									output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-									output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
-							
-								}
-								if(item.order_status=='배송중'){
-									output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
-								}
-							output +='</td>';
-							output += '<td class="td3">'+is_canceled+'</td>';
-							output += '</tr>';
-							console.log("output:" + output);
-							$('#output').append(output);//뒤에 이어붙이기
+							if(item.order_status!='환불완료' & item.order_status!='반품확인' & item.order_status!='환불신청'){
+								var date = new Date(item.order_pay_date);
+								var pay_date = date_format(date);
+								
+								if(item.order_pay_date == null){pay_date = ""}
+								
+								var link = "./getShippingInfo.do?order_number='"+item.order_number+"'";
+								var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
+								
+								var output = ''; 
+								output += '<tr class="tr2">';
+								//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me" value = "'+item.order_number+'"></td>';
+								output += '<td class="td3">'+pay_date+'</td>';
+								output += '<td class="td3">'+item.order_number+'</td>';
+								output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
+								output += '<td class="td3">'+item.pb_number+'</td>';
+								output += '<td class="td3">'+item.order_pay_price+'</td>';
+								output += '<td class="td3">'+item.order_pay_system+'</td>';
+								output += '<td class="td3">'+item.order_status;
+									if(item.order_status=='배송준비중'){
+			
+										output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+										output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
+										output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+								
+									}
+									if(item.order_status=='배송중'){
+										output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+									}
+								output +='</td>';
+								output += '</tr>';
+								console.log("output:" + output);
+								$('#output').append(output);//뒤에 이어붙이기
+							}
 						});
 					},
 		         error:function() {
@@ -189,41 +199,39 @@
 	 						if(item.order_number == "orderNull"){
 								alert("검색결과가 없습니다.");
 							}else{
-								var is_canceled
-								if(item.order_cancel_date==null){is_canceled="정상주문"}
-								else{is_canceled="취소"}
-								
-								var date = new Date(item.order_pay_date);
-								var pay_date = date_format(date);
-								
-								if(item.order_pay_date == null){pay_date = ""}
-								
-								var link = "./getShippingInfo.do?order_number='"+item.order_number+"'";
-								var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
-								
-								var output = ''; 
-								output += '<tr class="tr2">';
-								//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me"  value = "'+item.order_number+'"></td>';
-								output += '<td class="td3">'+pay_date+'</td>';
-								output += '<td class="td3">'+item.order_number+'</td>';
-								output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
-								output += '<td class="td3">'+item.pb_number+'</td>';
-								output += '<td class="td3">'+item.order_pay_price+'</td>';
-								output += '<td class="td3">'+item.order_pay_system+'</td>';
-								output += '<td class="td3">'+item.order_status;
-									if(item.order_status=='배송준비중'){
-										output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
-										output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-										output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
-									}
-									if(item.order_status=='배송중'){
-										output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
-									} 
-								output +='</td>';
-								output += '<td class="td3">'+is_canceled+'</td>';
-								output += '</tr>';
-								console.log("output:" + output);
-								$('#output').append(output);//뒤에 이어붙이기	
+								if(item.order_status!='환불완료' & item.order_status!='반품확인' & item.order_status!='환불신청'){
+									var date = new Date(item.order_pay_date);
+									var pay_date = date_format(date);
+									
+									if(item.order_pay_date == null){pay_date = ""}
+									
+									var link = "./getShippingInfo.do?order_number='"+item.order_number+"'";
+									var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
+									
+									var output = ''; 
+									output += '<tr class="tr2">';
+									//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me"  value = "'+item.order_number+'"></td>';
+									output += '<td class="td3">'+pay_date+'</td>';
+									output += '<td class="td3">'+item.order_number+'</td>';
+									output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
+									output += '<td class="td3">'+item.pb_number+'</td>';
+									output += '<td class="td3">'+item.order_pay_price+'</td>';
+									output += '<td class="td3">'+item.order_pay_system+'</td>';
+									output += '<td class="td3">'+item.order_status;
+										if(item.order_status=='배송준비중'){
+											output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
+											output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+										}
+										if(item.order_status=='배송중'){
+											output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+										} 
+									output +='</td>';
+									output += '</tr>';
+									console.log("output:" + output);
+									
+									$('#output').append(output);//뒤에 이어붙이기	
+								}	
 							}
 	 					});
 	 				},
@@ -239,8 +247,15 @@
 			var orderNo = start_btn.attr("value");
 			var invoice_txt = start_btn.parent();
 			var invoice = invoice_txt.attr("value");
-			var the_btn =start_btn.prev().val();
-			var params = {"order_number" : orderNo, "order_invoice_number":the_btn}
+			var order_invoice_number =start_btn.prev().val();
+			
+			alert('alert'+order_invoice_number);
+			if(order_invoice_number==""){
+				alert('송장번호를 입력하세요');//왜 안뜨나요....???
+				return false;
+			}
+			
+			var params = {"order_number" : orderNo, "order_invoice_number":order_invoice_number}
 			jQuery.ajax({
 				url :'/goodluxe/adminOrderSetStartShipping.do',
                 type : 'POST',
@@ -284,25 +299,21 @@
 		
 		});
 			
-		
-		$(document).on('click','#init_btn',function(event) { 
+		$('#init_btn').click(function(event){
+		//$(document).on('click','#init_btn',function(event) { 
 			document.getElementById("order_number_txt").value =""; 
 			document.getElementById("period").value="none";
-			document.getElementById("is_checked").checked= true;
+			document.getElementById("date1").value="";
+			document.getElementById("date2").value="";
+
 			document.getElementById("is_checked2").checked= true;
 			document.getElementById("is_checked3").checked= true;
 			document.getElementById("is_checked4").checked= true;
 			document.getElementById("is_checked5").checked= true;
 			document.getElementById("is_checked6").checked= true;
-			document.getElementById("date1").value="";
-			document.getElementById("date2").value="";
+			$("input:radio[id='cancelY']").prop("checked",true);
 			selectData();
 		});
-		
-		
-		
-		
-		
 		
 		selectData();
 	});
@@ -436,6 +447,9 @@
 								<td class="td2">&nbsp;&nbsp;&nbsp;<input type="text"
 									class="text3" name="order_number"id = "order_number_txt"></td>
 							</tr>
+						</table>
+						<br/>
+						<table class="impormation" border="1">
 							<tr>
 								<td class="td1">기간</td>
 								<td class="td2">
@@ -462,27 +476,30 @@
 									<input type="checkbox"name="check_order_status" value = "배송완료" id = "is_checked6" checked> 배송 완료
 								</td>
 							</tr>
-							<tr>
-								<td class="td1">cs 주문상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
-									<input type="radio"name="is_canceled" id = "is_checked" value = "all" checked> 전체 &nbsp;
-									<input type="radio"name="is_canceled" value = "cancelY"> 취소제외 &nbsp;
-									<input type="radio"name="is_canceled" value = "cancelN"> 취소내역
-								</td>
-							</tr>
+							
 							<tr>
 								<td class="td1">입금 / 결제상태</td>
 								<td class="td2">&nbsp;&nbsp;&nbsp; 
 									<input type="radio"name="is_payed" id = "is_checked2" value = "all" checked> 전체 &nbsp;
 									<input type="radio"name="is_payed" value = "beforeP"> 입금 전 &nbsp;
-									<input type="radio"name="is_payed" value = "afterP"> 결제 완료
+									<input type="radio"name="is_payed" value = "afterP" > 결제 완료
 								</td>
 							</tr>
 	
 						</table>
-	
+						<br/>
+						<table class="impormation" border="1">
+							<tr>
+								<td class="td1">cs 주문상태</td>
+								<td class="td2">&nbsp;&nbsp;&nbsp; 
+									<!-- <input type="radio"name="is_canceled" id = "is_checked" value = "all" checked> 전체 &nbsp; -->
+									<input type="radio"name="is_canceled" value = "cancelY" id = "cancelY"checked> 취소제외 &nbsp;
+									<input type="radio"name="is_canceled" value = "cancelN"> 취소내역
+								</td>
+							</tr>
+						</table>
 						<div class="btn12" align="center">
-							<button type="button" class="btn1_2" id = "init_btn" >초기화</button>
+							<button type="button" class="btn1_2" id = "init_btn" >전체보기</button>
 							<button type="button" class="btn1" id = "search_btn">검색</button>
 						</div>
 					</form>
@@ -505,7 +522,6 @@
 								<td class="td4">결제금액</td>
 								<td class="td4">결제수단</td>
 								<td class="td4">배송상태</td>
-								<td class="td4">취소여부</td>
 							</tr>
 							<tbody id = "output">
 								

@@ -1,9 +1,7 @@
 package com.spring.goodluxe.jy;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -154,9 +152,16 @@ public class AjaxController {
 		start_date_text += " 15:00:00.000000000";
 		end_date_text += " 15:00:00.000000000";
 		//yyyy-mm-dd hh:mm:ss.fffffffff
-		
-		System.out.println("qoodyf dsf"+ check_order_status[0]);
+		System.out.println("====================================================");
+		System.out.println(order_number);
+		System.out.println("====================================================");
+		System.out.println("period = "+period);
+		System.out.println("start_date_text = "+start_date_text);
+		System.out.println("end_date_text = "+end_date_text);
+		System.out.println("check_order_status = "+ check_order_status[0]);
 		System.out.println("is_canceled = "+is_canceled);
+		System.out.println("is_payed = "+is_payed);
+		System.out.println("====================================================");
 		
 		Timestamp date_start;
 		Timestamp date_end;
@@ -178,13 +183,17 @@ public class AjaxController {
 		
 		}
 		
-		
-		map.put("order_number",order_number);
-		map.put("period",period );
-		map.put("check_order_status",check_order_status);
 		map.put("is_canceled",is_canceled );
-		map.put("is_payed", is_payed);
 		
+		if(!is_canceled.equals("cancelN")) {
+			System.out.println("cancelN");
+			map.put("order_number",order_number);
+			map.put("period",period );
+			map.put("check_order_status",check_order_status);
+			map.put("is_canceled",is_canceled );
+			map.put("is_payed", is_payed);
+			
+		}
 		
 		orderList = gls.getOrderList(map);
 		if(orderList.isEmpty()) {
@@ -313,11 +322,45 @@ public class AjaxController {
 			gls.deleteProductList(delete_this);
 			
 		}
+		@RequestMapping(value="/getReturnList.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<OrderVO> getReturnList() throws Exception {
+			
+			ArrayList<OrderVO> returnList = null;
+			
+			returnList = gls.getReturnList();
+			return returnList;
+		}
 	
+		@RequestMapping(value="/getDetailReturndList.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<OrderVO> getDetailReturndList(
+				@RequestParam(value="orderstatus", required = false)String orderstatus,
+				@RequestParam(value="order_number",required = false)String order_number)throws Exception {
+			
+			ArrayList<OrderVO> returnList = null;
+			
+			if(orderstatus.equals("all")) {
+				returnList = gls.getReturnList();
+			}else {
+				returnList = gls.getDetailReturndList(orderstatus);
+			}
+			
+			return returnList;
+		}
 	
-	
-	
-	
+		@RequestMapping(value="/setReturnConfirm.do", produces= "application/json;charset=UTF-8")
+		public void setReturnConfirm(
+				@RequestParam(value="order_number", required = false)String order_number) throws Exception {
+			
+			ArrayList<OrderVO> returnList = null;
+			gls.setReturnConfirm(order_number);
+		}
+		@RequestMapping(value="/setReturnFinished.do", produces= "application/json;charset=UTF-8")
+		public void setReturnFinished(
+				@RequestParam(value="order_number", required = false)String order_number) throws Exception {
+			
+			ArrayList<OrderVO> returnList = null;
+			gls.setReturnFinished(order_number);
+		}
 	
 	
 	
