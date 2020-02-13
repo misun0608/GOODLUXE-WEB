@@ -12,12 +12,14 @@
 <script>
 	$(document).ready(function(){
 		$('.qb_title').on('click',function(e){
-			var w_id = $(this).attr('writer_id');
-			var m_id = "<%=member_id%>";
-
-			if(w_id != m_id && "<%=member_isadmin%>" != "Y") {
-				alert('비밀글입니다.');
-				e.preventDefault();
+			if($(this).attr('qb_public') == "private") {
+				var w_id = $(this).attr('writer_id');
+				var m_id = "<%=member_id%>";
+	
+				if(w_id != m_id && "<%=member_isadmin%>" != "Y") {
+					alert('비밀글입니다.');
+					e.preventDefault();
+				}
 			}
 		});
 	});
@@ -67,7 +69,7 @@
     <tr class="service_center_middle_tr">
         <td><%= i+1 %></td>
         <td>
-	         	<a href="scQBoardDetail.do?inquire_number=<%=inVO.getInquire_number()%>" class="qb_title" writer_id="<%=inVO.getMember_id()%>">
+	         	<a href="scQBoardDetail.do?inquire_number=<%=inVO.getInquire_number()%>" class="qb_title" writer_id="<%=inVO.getMember_id()%>" qb_public="<%=inVO.getInquire_public()%>">
         		<% if(inVO.getInquire_public().equals("private")) { %>
         		<img src="" alt="[비밀글]">
         		<% } %>

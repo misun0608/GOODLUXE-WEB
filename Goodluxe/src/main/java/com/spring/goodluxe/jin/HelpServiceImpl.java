@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.InquireCommentVO;
 import com.spring.goodluxe.voes.InquireVO;
 import com.spring.mapper.HelpMapper;
 
@@ -53,6 +54,49 @@ public class HelpServiceImpl implements HelpService {
 			throw new Exception("ERROR(HelpService/loadQPost)", e);
 		}
 		return qPost;
+	}
+
+	@Override
+	public int insertComment(InquireCommentVO commVO) throws Exception {
+		int res = 0;
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			int cnt = helpMapper.countComment();
+			int commNum = 0;
+			if(cnt == 0) {
+				commNum = 1;
+			} else {
+				commNum = helpMapper.maxCommentNumber() + 1;
+			}
+			commVO.setComment_number(commNum);
+			commVO.setComment_ref(commNum);
+			commVO.setComment_ref_step(0);
+			commVO.setComment_ref_level(0);
+			
+			res = helpMapper.insertComment(commVO);
+			
+			if(res != 0) {
+				helpMapper.addCommentNum(commVO.getInquire_number());
+			}
+			
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpSerivce/insertComment) : " + e.getMessage());
+			throw new Exception("ERROR(HelpSerivce/insertComment)", e);
+		}
+		return res;
+	}
+
+	@Override
+	public ArrayList<InquireCommentVO> commList(int inquire_number) throws Exception {
+		ArrayList<InquireCommentVO> commList = null;
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			commList = helpMapper.commList(inquire_number);
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpService/commList) : " + e.getMessage());
+			throw new Exception("ERROR(HelpService/commList)", e);
+		}
+		return commList;
 	}
 	
 	
