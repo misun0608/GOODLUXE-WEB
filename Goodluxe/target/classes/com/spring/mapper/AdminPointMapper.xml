@@ -12,6 +12,43 @@
 		<result property = "member_id" column = "member_id" />
 		<result property = "order_number" column = "order_number" />
 	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.OrderVO" id="orderRM">
+		<result property="order_number" column="order_number" />
+		<result property="order_receipt" column="order_receipt" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_status" column="order_status" />
+		<result property="order_addr1" column="order_addr1" />
+		<result property="order_addr2" column="order_addr2" />
+		<result property="order_zipcode" column="order_zipcode" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_invoice_number" column="order_invoice_number" />
+		<result property="order_ship_date" column="order_ship_date" />
+		<result property="order_cancel_date" column="order_cancel_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="order_pay_system" column="order_pay_system" />
+		<result property="order_refund_account" column="order_refund_account" />
+		<result property="order_refund_bank" column="order_refund_bank" />
+		<result property="member_id" column="member_id" />
+		<result property="pb_number" column="pb_number" />
+		<result property="order_message" column="order_message" />
+		<result property="order_pay_price" column="order_pay_price" />
+	</resultMap>
+
+	<!-- HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapAdminRM">
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="buying_price" column="buying_price" />
+		<result property="commission" column="commission" />
+	</resultMap>
 
 	<select id="getAdminPointList" resultMap="AdminPointResultMap">
 		select * from GL_POINT order by point_date desc
@@ -25,4 +62,101 @@
 		insert into GL_POINT(point_number, point_date, point_status, point_amount, member_id) 
 		values (GL_POINT_SEQ.NEXTVAL, systimestamp, #{point_status}, #{point_amount}, #{member_id})
 	</insert>
+	
+	<!-- 오늘 주문건수 -->
+	<select id="getTodayOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_ORDER_DATE > sysdate -1 and ORDER_ORDER_DATE < sysdate +1
+	]]>
+	</select>
+	
+	<!-- 오늘 주문매출액 -->
+	<select id="getTodayOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where ORDER_ORDER_DATE > sysdate -1 and ORDER_ORDER_DATE < sysdate +1
+	]]>	
+	</select>
+	
+	<!-- 오늘 결제주문건수 -->
+	<select id="getTodayPaidOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and ORDER_PAY_DATE > sysdate -1 and ORDER_PAY_DATE < sysdate +1
+	]]>
+	</select>
+	
+	<!-- 오늘 결제매출액 -->
+	<select id="getTodayPaidOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and ORDER_PAY_DATE > sysdate -1 and ORDER_PAY_DATE < sysdate +1
+	]]>	
+	</select>
+	
+	<!-- 오늘 환불주문건수 -->
+	<select id="getTodayRefundOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -1 and ORDER_CANCEL_DATE < sysdate +1
+	]]>
+	</select>
+	
+	<!-- 오늘 주문매출액 -->
+	<select id="getTodayRefundOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -1 and ORDER_CANCEL_DATE < sysdate +1
+	]]>	
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(결제전) -->
+	<select id="getMonthlyPaidBeforeCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '결제전' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송준비중) -->
+	<select id="getMonthlyPreparedCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송준비중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송중) -->
+	<select id="getMonthlyShippingCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송완료) -->
+	<select id="getMonthlyDoneCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송완료' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(취소) -->
+	<select id="getMonthlyCancelCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '취소완료' or ORDER_STATUS = '자동취소' or ORDER_STATUS = '환불신청') and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(반품) -->
+	<select id="getMonthlyItemBackCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '반품확인' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(환불) -->
+	<select id="getMonthlyRefundCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '환불완료' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+	]]>
+	</select>
+	
+	<!-- 관리자메인 디폴트 데이터 / 오늘부터 7일전까지 -->
+	<select id="getAdminDefaultData" resultMap="HashMapAdminRM">
+		select * from GL_ORDER
+	</select>
+	
 </mapper>

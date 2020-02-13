@@ -2,12 +2,9 @@ package com.spring.goodluxe.ms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.goodluxe.voes.PointVO;
@@ -41,5 +38,18 @@ public class AdminAjaxController {
 			System.out.println("ERROR(AdminAjaxController/searchPointList) : " + e.getMessage());
 		}
 		return point_list;
+	}
+	
+	// 관리자 메인페이지 디폴트
+	@PostMapping(value="getDefaultMainData.do", produces="application/json;charset=UTF-8")
+	HashMap<String,Object> getDefaultMainData() throws Exception{
+		HashMap<String,Object> map = null;
+		System.out.println("관리자 메인 디폴트");
+		try {
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminAjaxController/getDefaultMainData) : " + e.getMessage());
+		}
+		return map;
 	}
 }

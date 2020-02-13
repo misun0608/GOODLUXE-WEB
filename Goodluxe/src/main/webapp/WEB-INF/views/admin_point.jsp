@@ -202,7 +202,7 @@ $(document).ready(function(){
 		              var ex_date = new Date(item.point_date);
 		              var date = date_format(ex_date);
 		               var output= '';
-		               output += '<tr class="tr2"><td class="td3"><input type="checkbox" name="delivermanagement">';
+		               output += '<tr class="tr2">';
 		               output += '<td class="td3">'+date+'</td>';
 		               output += '<td class="td3">'+item.member_id+'</td>';
 		               output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
@@ -239,7 +239,7 @@ $(document).ready(function(){
                     var date = date_format(ex_date);
 					
 					var output = '';
-					output += '<tr class="tr2"><td class="td3"><input type="checkbox" name="delivermanagement">';
+					output += '<tr class="tr2">';
 					output += '<td class="td3">'+date+'</td>';
 					output += '<td class="td3">'+item.member_id+'</td>';
 					output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
@@ -389,7 +389,6 @@ $(document).ready(function(){
                     <table border="1" id="pointtable" class="pointtable paginated">
                     	<thead>
                     		<tr class="tr1">
-                    			<td class="td3">선택</td>
                     			<td class="td4">날짜</td>
                     			<td class="td4">아이디</td>
                     			<td class="td4">금액</td>

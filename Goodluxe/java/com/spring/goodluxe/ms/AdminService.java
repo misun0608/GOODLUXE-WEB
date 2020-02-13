@@ -1,6 +1,7 @@
 package com.spring.goodluxe.ms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,4 +16,8 @@ public interface AdminService {
 	public void insertPointStatus(PointVO pvo, HttpServletResponse response) throws Exception;
 	// 포인트 회수 입력
 	public void minusPointStatus(PointVO pvo, HttpServletResponse response) throws Exception;
+	// 관리자페이지 현황부분 데이터
+	public HashMap<String,Object> getTodayOrderCount() throws Exception;
+	public ArrayList<HashMap<String,Object>> getDefaultGraph() throws Exception;
+	
 }
