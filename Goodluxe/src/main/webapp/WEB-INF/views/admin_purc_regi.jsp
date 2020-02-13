@@ -60,6 +60,11 @@
 			alert("매입일을 입력하세요.");
 			return false;
 		}
+		/*판매상태 입력체크*/
+		if(document.input_form.sale_status.value==""){
+			alert("판매상태를 입력하세요.");
+			return false;
+		}
 		/*감정서 유무 입력체크*/
 		if(document.input_form.appraise_exist.value==""){
 			alert("감정서유무를 입력하세요.");
@@ -73,8 +78,7 @@
 		if(document.input_form.member_id.value==""){
 			document.input_form.member_id.value = "불명"
 		}
-		
-		
+
 		return true;
 	}
 </script>
@@ -197,6 +201,22 @@
 						</div>
 					</div>
 				</li>
+				<li class="gnb_li">
+					<button type="button" class="btn_op menu-500 menu-order-5"
+						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
+					<div class="gnb_oparea_wr">
+						<div class="gnb_oparea">
+							<h3>쇼핑몰현황/기타</h3>
+							<ul>
+								<li data-menu="500110"><a href="./adminMain.html"
+									class="gnb_2da  ">매출현황</a></li>
+								<li data-menu="500130"><a
+									href="./admindelivermanagement.html" class="gnb_2da ">배송관리</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</nav>
 
@@ -233,19 +253,19 @@
 							<td class="td2"><select name="pd_brand"
 								class="search">
 									<option value="none">브랜드 선택</option>
+									<option value="Armani">Armani</option>
+									<option value="Balenciaga">Balenciaga</option>
+									<option value="Bally">Bally</option>
+									<option value="Balmain">Balmain</option>
+									<option value="Barluti">Barluti</option>
+									<option value="BOUCHERON">BOUCHERON</option>
+									<option value="Breguet">Breguet</option>
+									<option value="BREITLING">BREITLING</option>
+									<option value="Burberrys">Burberrys</option>
+									<option value="Bvlgari">Bvlgari</option>
 									<option value="Cartier">Cartier</option>
-									<option value="Dior">Dior</option>
-									<option value="Etro">Etro</option>
-									<option value="Givenchy">Givenchy</option>
-									<option value="Gucci">Gucci</option>
-									<option value="Hermes">Hermes</option>
-									<option value="Jimmy Choo">Jimmy Choo</option>
-									<option value="Louis Vuitton">Louis Vuitton</option>
-									<option value="OMEGA">OMEGA</option>
-									<option value="Prada">Prada</option>
-									<option value="Rolex">Rolex</option>
-									<option value="Tiffany">Tiffany</option>
-									<option value="Vivienne Westwood">Vivienne Westwood</option>
+									<option value="Celine">Celine</option>
+									<option value="Chanel">Chanel</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -292,6 +312,14 @@
 							<td class="td2"><input type="date" name="purc_date_text" id = "purc_date" class="search"></td>
 							
 						</tr>
+				<!--		<tr>
+							<td class="td1">판매상태</td>
+							<td class="td2">&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="sale_status" value="판매준비">판매준비&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="판매중">판매중&nbsp;&nbsp;&nbsp; 
+								<input type="radio"name="sale_status" value="판매완료">판매완료&nbsp;&nbsp;&nbsp; 
+								
+						</tr>  -->
 						<tr>
 							<td class="td1">감정서 유무</td>
 							<td class="td2">&nbsp;<input type="radio" name="appraise_exist" value = "O"> &nbsp;유&nbsp;&nbsp;&nbsp; <input

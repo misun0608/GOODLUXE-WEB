@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.goodluxe.voes.ConsignProductVO;
+import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.ProductBoardVO;
 import com.spring.goodluxe.voes.PurchaseProductVO;
 
@@ -52,7 +55,6 @@ public class ProductlistController {
 		// 메인 페이지
 		// @RequestMapping(value = "mainPage.do")
 		public String mainPage( Model model ) throws Exception {
-			
 			ArrayList<HashMap<String, Object>> productList = new ArrayList<HashMap<String, Object>>();
 			productList = gls.getMainPageItem();
 			
@@ -74,7 +76,7 @@ public class ProductlistController {
 			String txt_date = (String) request.getParameter("purc_date_text");
 			Date date_date = new SimpleDateFormat("yyyy-MM-dd").parse(txt_date);
 			purcVO.setPurc_date(date_date);
-			
+			purcVO.setSale_status("판매준비");
 			int res = gls.registerProduct(purcVO);	
 			
 		
@@ -92,7 +94,7 @@ public class ProductlistController {
 			Date date_end_date = new SimpleDateFormat("yyyy-MM-dd").parse(txt_end_date);
 			consVO.setStart_date(date_start_date);
 			consVO.setEnd_date(date_end_date);
-			
+			consVO.setSale_status("판매준비");
 			int res = gls.registerProduct(consVO);	
 			
 			return "admin_consign_regi";
@@ -101,7 +103,7 @@ public class ProductlistController {
 		
 		@RequestMapping(value = "postUploadAction.do")
 		public String postUploadAction(ProductBoardVO sellboVO, Model model, MultipartHttpServletRequest m_request) throws Exception {
-			
+			System.out.println("postUploadAction들어옴");
 			MultipartFile mf_main = m_request.getFile("pb_main_img");
 			MultipartFile mf_detail1 = m_request.getFile("pb_detail_img1");
 			MultipartFile mf_detail2 = m_request.getFile("pb_detail_img2");
@@ -144,6 +146,8 @@ public class ProductlistController {
 			}
 			sellboVO.setPb_detail_img3_original(mf_detail3.getOriginalFilename());
 			sellboVO.setPb_detail_img3_stored(storedFileName_detail3);
+			
+		
 			int res = gls.uploadProductBoard(sellboVO);	
 			
 			return "admin_post_upload";
@@ -267,5 +271,104 @@ public class ProductlistController {
 			model.addAttribute("theProduct",theProduct);
 			return "md_detail";
 		}
-	
+		
+		//관리자 페이지 접근용 임시 링크
+		@RequestMapping(value = "homeTT.do")
+		public String homeTT( Model model) throws Exception {
+			
+			return "home";
+		}
+		//관리자 페이지 쿠폰관리
+		@RequestMapping(value = "adminCoupon.do")
+		public String adminCoupon( Model model ) throws Exception {
+			
+			return "admin_coupon";
+		}
+		//관리자 페이지 작은 아이디 검색창
+		@RequestMapping(value = "adminSearchId.do")
+		public String adminSearchId( Model model, 
+				@RequestParam(value = "member_id", required = false)String member_id )throws Exception {
+			
+			String nullChk = "";
+			MemberVO memberVO = null; 
+			memberVO = gls.adminSearchID("member_id",member_id );
+			System.out.println(memberVO );
+			if(memberVO==null) {
+				System.out.println("아아아아아");
+				nullChk = "none";
+			}else {
+				model.addAttribute("memberVO",memberVO);
+			}
+			model.addAttribute("nullChk",nullChk);
+			return "admin_search_id";
+		}
+		@RequestMapping(value = "issueCoupon.do")
+		public String issueCoupon( CouponVO couponVO, Model model, HttpServletRequest request,HttpServletResponse response ) throws Exception {
+			
+			String allSel = request.getParameter("allselect");
+			
+			PrintWriter out = null;
+			out = response.getWriter(); 
+			
+			System.out.println("쿠폰쿠폰"+couponVO.getMember_id());
+			
+			if(allSel==null) {
+				allSel="none";
+				if(couponVO.getMember_id().equals("")) {
+					out.print("<script>alert('전체선택과 이름중 하나는 기입해야합니다');</script>");
+					//out.print안먹음.....더이상 보고싶지 않아서 광속PASS
+					return "redirect:adminCoupon.do";
+				}
+			}
+			couponVO.setCoupon_status("사용전");
+			
+			if(allSel.equals("all_member")) {
+				gls.issueAllmemberCoupon(couponVO);
+			}else {
+				gls.issueOnememberCoupon(couponVO);
+			}
+			return "redirect:adminCoupon.do";
+		}
+		//관리자 페이지 쿠폰관리
+		@RequestMapping(value = "adminCustomer.do")
+		public String adminCustomer( Model model ) throws Exception {
+			
+			return "admin_customer";
+		}
+		
+		//관리자 주문관리
+		@RequestMapping(value="/adminOrder.do", produces= "application/json;charset=UTF-8")
+		public String adminOrder() throws Exception {
+			
+			return "admin_order";
+		}
+		//관리자 상품관리
+		@RequestMapping(value="/adminProduct.do", produces= "application/json;charset=UTF-8")
+		public String adminProduct() throws Exception {
+			
+			return "admin_product";
+		}
+		//상품관리 배송정보창
+		@RequestMapping(value="/getShippingInfo.do", produces= "application/json;charset=UTF-8")
+		public String getShippingInfo( Model model,
+				@RequestParam(value = "order_number", required = false)String order_number 
+				) throws Exception {
+			
+			System.out.println("왔다!!!");
+			HashMap<String, String>shipping_info = null;
+			
+			shipping_info=gls.getShippingInfo(order_number);
+			
+			model.addAttribute("shipping_info",shipping_info);
+			
+			return "member_shipping_info";
+		}
+		@RequestMapping(value = "adminReturn.do")
+		public String adminReturn() {
+			
+			return "admin_return";
+		}
+		
+		
+		
 }

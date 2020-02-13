@@ -261,20 +261,20 @@
 							<td class="td1">브랜드번호</td>
 							<td class="td2"><select name="pd_brand"
 								class="search">
-									<option value="none">브랜드선택</option>
+										<option value="none">브랜드 선택</option>
+									<option value="Armani">Armani</option>
+									<option value="Balenciaga">Balenciaga</option>
+									<option value="Bally">Bally</option>
+									<option value="Balmain">Balmain</option>
+									<option value="Barluti">Barluti</option>
+									<option value="BOUCHERON">BOUCHERON</option>
+									<option value="Breguet">Breguet</option>
+									<option value="BREITLING">BREITLING</option>
+									<option value="Burberrys">Burberrys</option>
+									<option value="Bvlgari">Bvlgari</option>
 									<option value="Cartier">Cartier</option>
-									<option value="Dior">Dior</option>
-									<option value="Etro">Etro</option>
-									<option value="Givenchy">Givenchy</option>
-									<option value="Gucci">Gucci</option>
-									<option value="Hermes">Hermes</option>
-									<option value="Jimmy Choo">Jimmy Choo</option>
-									<option value="Louis Vuitton">Louis Vuitton</option>
-									<option value="OM5552">OMEGA</option>
-									<option value="OMEGA">Prada</option>
-									<option value="Rolex">Rolex</option>
-									<option value="Tiffany">Tiffany</option>
-									<option value="Vivienne Westwood">Vivienne Westwodd</option>
+									<option value="Celine">Celine</option>
+									<option value="Chanel">Chanel</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -317,13 +317,14 @@
 								<input type="date" name="end_date_text" class="search"></td>
 						</tr>
 						<tr>
-							<td class="td1">판매상태</td>
+<!-- 							<td class="td1">판매상태</td>
 							<td class="td2">&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="sale_status" value="onready">판매준비&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="onsale">판매중&nbsp;&nbsp;&nbsp; 
-								<input type="radio"name="sale_status" value="sold">판매완료&nbsp;&nbsp;&nbsp; 
-								<input type="radio" name="sale_status" value="payed">대금지불완료&nbsp;&nbsp;&nbsp;
-						</tr>
+								<input type="radio" name="sale_status" value="판매준비">판매준비&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="판매중">판매중&nbsp;&nbsp;&nbsp; 
+								<input type="radio"name="sale_status" value="판매완료">판매완료&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="sale_status" value="대금지불완료">대금지불완료&nbsp;&nbsp;&nbsp;
+						</tr> 
+					-->
 						<tr>
 							<td class="td1">감정서 유무</td>
 							<td class="td2">&nbsp;&nbsp;&nbsp;<input type="radio"
@@ -338,7 +339,7 @@
 								class="text1"></td>
 						</tr>
 						<tr>
-							<td class="td1">판매자 아이디</td>
+							<td class="td1">위탁자 아이디</td>
 							<td class="td2"><input type="text" name="member_id"
 								class="text1"></td>
 						</tr>

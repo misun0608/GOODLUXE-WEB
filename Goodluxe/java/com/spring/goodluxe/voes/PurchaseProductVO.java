@@ -12,6 +12,7 @@ create table gl_purchase(
     sale_price number,
     buying_price number not null,
     purc_date date,
+    sale_status varchar2(20),
     appraise_exist varchar2(10),
     pd_component varchar2(200),
     member_id varchar2(20)
@@ -26,6 +27,7 @@ public class PurchaseProductVO extends ProductVO{
 	private int sale_price;
 	private int buying_price;
 	private Date purc_date;
+	private String sale_status;
 	private String appraise_exist;
 	private String pd_component;
 	private String member_id;
@@ -94,6 +96,12 @@ public class PurchaseProductVO extends ProductVO{
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	public String getSale_status() {
+		return sale_status;
+	}
+	public void setSale_status(String sale_status) {
+		this.sale_status = sale_status;
 	}
 	
 	

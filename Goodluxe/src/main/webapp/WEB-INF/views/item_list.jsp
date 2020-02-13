@@ -51,16 +51,11 @@
 	</script>
 	
 	<!-- item_list -->
-    <link rel="stylesheet"
-		href="${pageContext.request.contextPath}/resources/css/item_list.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/resources/css/item_list_doesntExist.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/resources/css/pagination.css" />
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>    
-	
-
+ 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/item_list.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/item_list_doesntExist.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pagination.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
 
 
 	
@@ -74,7 +69,7 @@
 
     <section id="container">
         <br>
-       <div id="main">
+   <div id="main">
 			<div class="il_area">
 				<article class="il_1st">
 					<form id="il_search_form" onclick = "filtering_check();">
@@ -299,7 +294,6 @@
                         </div>
                      </center>
 				</article>
-	
 			</div>
 		</div>
     </section>
