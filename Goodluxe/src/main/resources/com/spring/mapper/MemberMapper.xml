@@ -52,5 +52,5 @@
 		select member_isadmin from gl_member where member_id=#{member_id, jdbcType=VARCHAR}
 	</select>
 	
-   
+   	
 </mapper>

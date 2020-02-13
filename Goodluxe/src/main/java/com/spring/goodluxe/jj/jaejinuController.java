@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,37 +47,247 @@ public class jaejinuController {
 	private PurchaseService purchaseService;
 	@Autowired
 	private ChatService chatService;
-
-
+	@Autowired
+	private ChatMemberService chatmemberService;
+	
+	
+	
+	// 만든 페이지들 있는 곳으로 이동 
 	@RequestMapping("/jaejinupage.do")
 	public String jaejinu() {
+		
 		return "jaejinupage";
 	}
-
+	
+	
+	//관리자 경매 페이지 이동 
 	@RequestMapping("/adminrudao.do")
 	public String adminrudao() {
+		
 		return "adminrudao";
 	}
 	
+	
+	//로그인 하는 곳으로 이동 
 	@RequestMapping(value = "loginForm.do")
 	public String loginForm() {
+		
 		return "loginForm";
 	}
 	
+	
+	//회원가입 하는 곳으로 이동 
 	@RequestMapping(value="joinForm.do")
 	public String joinForm() {
+		
 		return "joinForm";
 	}
 	
+	//채팅 들어가기 전 페이지
+	@RequestMapping(value="choicepage.do")
+	public String choicepage(MemberVO vo, HttpSession session,HttpServletResponse response) {
+		
+
+		String member_id= vo.getMember_id();
+		
+		int res=0;
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+		res = memberService.userCheckMember(member_id);
+		
+			PrintWriter writer = response.getWriter();
+			
+			if(res == 1) {
+				System.out.println("member_id="+member_id);
+				System.out.println(vo.getMember_id());
+				session.setAttribute("member_id", vo.getMember_id());
+				String member_name = memberService.pickNameMember(member_id);
+				session.setAttribute("member_name", member_name);
+				System.out.println("member_name"+member_name);
+				String member_isadmin = memberService.pickisadminMember(member_id);
+				session.setAttribute("member_isadmin", member_isadmin);
+				System.out.println("member_isadmin="+member_isadmin);
+				if(session.getAttribute("member_isadmin").equals("Y")) {
+					writer.write("<script>alert('관리자 채팅리스트 입장'); </script>");
+					// location.href='./choicepage.do';</script>");
+					return "choicepage";
+				}
+				System.out.println("일로 넘어왔니");
+				
+				
+				ChatMemberVO chatmembervo = new ChatMemberVO();
+				chatmembervo.setChat_room(member_id);
+				chatmembervo.setMember_id(member_id);
+				chatmembervo.setChat_num(0);
+				
+				
+				session.setAttribute("chatmembervo", chatmembervo);
+				
+				writer.write("<script>alert('유저체크 및 이름 가져오기 성공!!'); </script>");
+				return "choicepage";
+						//location.href='./choicepage.jsp';</script>");
+			} else {
+				writer.print("<script>alert('유저체크 실패!!');location.href='./loginForm.do';</script>");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
+	
+	//전체채팅룸으로 이동
+	@RequestMapping(value="chat.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String chat (Model model,HttpSession session) throws Exception{
+		String member_id= (String)session.getAttribute("member_id");
+		System.out.println(member_id);
+		//이전 페이지에서 세션을 받아오는데 속성이름이 login -> 즉 다른 거로 바꿔줘야함 
+		/*
+		 * MemberVO login = new MemberVO(); login = (MemberVO)
+		 * session.getAttribute("member_id");
+		 */
+		//로그인 상태가 아니라면 로그인 창으로 되돌아가기 
+		if(member_id.equals(null)) {
+			return "redirect:/loginForm.do";
+		}
+		ChatMemberVO chatmembervo = new ChatMemberVO();
+		chatmembervo.setChat_num(0);
+		chatmembervo.setMember_id(member_id);
+		chatmembervo.setChat_room("");
+		
+		
+		//DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
+		if(!member_id.equals("admin")) {
+		ChatMemberVO chatM = chatmemberService.getRoomMember(chatmembervo);
+		System.out.println("관리자야 왔다 갔니");
+		//만약 채팅방을 처음 입장하는 것이라면 방에대한 아이디정보를 생성
+		if(chatM == null) {
+			ChatMemberVO chatmembervo_add = new ChatMemberVO();
+			chatmembervo_add.setChat_num(0);
+			chatmembervo_add.setMember_id(member_id); 
+			chatmembervo_add.setChat_room(member_id);
+			chatmemberService.addRoomMember(chatmembervo_add);
+			
+
+			//추가를 한다음 chatM을 다시 받아오도록한다.
+			//추가할 때 vo에 set으로 추가해서 넣어주자 저거 안되더라 
+			ChatMemberVO chatmembervo_get = new ChatMemberVO();
+			chatmembervo_get.setChat_num(0);
+			chatmembervo_get.setMember_id(member_id);
+			chatmembervo_get.setChat_room("");
+			chatM = chatmemberService.getRoomMember(chatmembervo_get);
+			
+			
+			
+		}
+		//존재한다면 방정보를 all로 변경 
+		//존재한다면 그 방으로 이동 
+		else {
+			System.out.println("관리자");
+			
+//			ChatMemberVO chatmembervo_add = new ChatMemberVO();
+//			chatmembervo_add.setChat_num(0);
+//			chatmembervo_add.setMember_id(member_id);
+//			chatmembervo_add.setChat_room("all");
+//			chatmemberService.updateRoomMember(chatmembervo_add); //room 변경
+		}
+		}
+		//현재 방이름 넣기(전체채팅방이니 all)
+		//해당 이름으로 넣쟈 
+		if(member_id.equals("admin")) {
+		model.addAttribute("room", "all");
+		}else {
+		model.addAttribute("room", member_id);
+		}
+		
+		ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
+		model.addAttribute("chatlist", chatlist);
+		
+		
+		return "chat";
+		}
+		
+		
+		
+		
+		//중복확인
+		@ResponseBody
+		@RequestMapping(value="checkRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public int checkRoom(Model model, String name) throws Exception{
+			System.out.println("name="+name);
+			
+			ChatVO dto = chatService.checkRoom(name);
+			//중복값이 없을경우
+			if(dto ==null) {
+				return 1;
+			}
+			else {
+				return 0;
+			}		
+		}
+		
+		//방이동
+		@RequestMapping(value="MoveChatRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public String MoveChatRoom (Model model, HttpServletRequest req, String roomName) throws Exception{
+			
+			MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+			
+			if(login==null) {
+				return "redirect:/loginForm.do";
+			}
+			
+			System.out.println("이동할 방이름 : "+roomName);
+			
+			
+//			ChatMemberVO chatmembervo = new ChatMemberVO();
+//			chatmembervo.setChat_num(0);
+//			chatmembervo.setMember_id(login.getMember_id());
+//			chatmembervo.setMember_id(roomName);
+//			//이동하게 될 방 이름으로 수정
+//			chatmemberService.updateRoomMember(chatmembervo);
+			
+			//접속 끊기 이전방은 수정하지 않음.
+			
+			//방이동 처리
+			model.addAttribute("room", roomName);
+			
+			return "chat";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//채팅하는 곳으로 이동 
 	@RequestMapping(value="client_chat.do", method=RequestMethod.GET)
 	public String home() {
 		
 		return "client_chat";
 	}
 	
+	
+	//관리자 >> 채팅 리스트 가 있는 페이지 이동 
 	@RequestMapping(value="admin_chat_room.do", method=RequestMethod.GET)
-	public String admin_chat_room(Model model) {
-		
+	public String admin_chat_room(MemberVO vo, HttpSession session,Model model) {
 		
 		ArrayList<ChatVO> chatlist = null;
 		try{
@@ -89,7 +300,7 @@ public class jaejinuController {
 		return "admin_chat_room";
 	}
 	
-	
+	// 멤버 가입  >> 다시 로그인 페이지로 
 	@RequestMapping(value="memberinsert.do")
 	public String memberinsert(MemberVO vo) {
 		
@@ -101,19 +312,18 @@ public class jaejinuController {
 		return "loginForm";
 	}
 	
+	
+	// 멤버가 있나 확인 후 관리자 확인 후 각 페이지로 이동 
 	@RequestMapping(value="memberCheck.do")
 	public String usesrCheckMember(MemberVO vo, HttpSession session, HttpServletResponse response) {
 		
 		String member_id= vo.getMember_id();
 		
-		System.out.println(member_id);
 		int res=0;
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 		res = memberService.userCheckMember(member_id);
-		System.out.println(member_id);
-		System.out.println(res);
 		
 			PrintWriter writer = response.getWriter();
 			
@@ -128,7 +338,14 @@ public class jaejinuController {
 					writer.write("<script>alert('관리자 채팅리스트 입장'); location.href='./admin_chat_room.do';</script>");
 				}
 				
-				writer.write("<script>alert('유저체크 및 이름 가져오기 성공!!'); location.href='./client_chat.do?"+member_id+"';</script>");
+				ChatMemberVO chatmembervo = new ChatMemberVO();
+				
+				chatmembervo.setChat_room(member_id);
+				chatmembervo.setMember_id(member_id);
+				chatmemberService.addRoomMember(chatmembervo);
+				session.setAttribute("", chatmembervo);
+				
+				writer.write("<script>alert('유저체크 및 이름 가져오기 성공!!'); location.href='./client_chat.do?member_id="+member_id+"';</script>");
 			} else {
 				writer.print("<script>alert('유저체크 실패!!');location.href='./loginForm.do';</script>");
 			}

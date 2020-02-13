@@ -6,14 +6,18 @@ import com.spring.goodluxe.jj.ChatMemberVO;
 
 public interface ChatMemberMapper {
 
-	public void addRoomMember(ChatMemberVO chatmembervo) throws Exception;
+	public int addRoomMember(ChatMemberVO chatmembervo) throws Exception;
 
 	public ChatMemberVO getRoomMember(ChatMemberVO chatmembervo) throws Exception;
 
 	public List<ChatMemberVO> sameRoomList(ChatMemberVO chatmembervo) throws Exception;
 
-	public void updateRoomMember(ChatMemberVO chatmembervo) throws Exception;
+	public int updateRoomMember(ChatMemberVO chatmembervo) throws Exception;
 
-	public void deleteRoomMember(ChatMemberVO chatmembervo) throws Exception;
+	public int deleteRoomMember(ChatMemberVO chatmembervo) throws Exception;
+	
+	public List<ChatMemberVO> selectChatList()throws Exception;
+	
+	public int countRoomMember(String member_id)throws Exception;
 
 }

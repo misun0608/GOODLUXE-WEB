@@ -57,7 +57,7 @@
 	</script>
 </head>
 <body>
-	<form action="memberCheck.do" name="loginform" method="post">
+	<form action="choicepage.do" name="loginform" method="post">
 		<center>
 			<table border=1>
 				<tr>

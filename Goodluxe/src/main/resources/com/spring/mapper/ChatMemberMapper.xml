@@ -16,8 +16,11 @@
 	
 	<!-- 현재 어떤 방에 들어가있는지 데이터추가하기 -->
 	<insert id="addRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
-	INSERT INTO gl_chatmember(chat_num, member_id, chat_room)
-	VALUES(CHAT_MEMBER_SEQ.NEXTVAL, #{chat_id}, #{chat_room})
+	<selectKey order="BEFORE" keyProperty="chat_num" resultType="int">
+       SELECT NVL(MAX(TO_NUMBER(chat_num)),0)+1 
+       FROM gl_chatmember
+      </selectKey>
+	INSERT INTO gl_chatmember VALUES(#{chat_num}, #{member_id}, #{chat_room})
 	</insert>
 	
 	<!-- 현재 아이디가 어떤방에 들어가있는지 확인 -->
@@ -25,7 +28,12 @@
 	SELECT member_id,chat_room
 	FROM gl_chatmember
 	WHERE member_id = #{member_id}
-		
+	</select>
+	
+	<select id="countRoomMember" parameterType="String" resultType="int" >
+	select count(*)
+	from gl_chatmember
+	where member_id= #{member_id}
 	</select>
 	
 	<!-- 같은 방에 존재하는 사람정보 모두가져오기 -->
@@ -40,8 +48,22 @@
 	<!-- 방정보 제거-->
 	<delete id="deleteRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
 	DELETE FROM gl_chatmember
-	WHERE member_id=#{member_id}
-	
+	WHERE member_id=#{member_id	}
 	</delete>
 	
+	<!-- 방변경 -->
+	<update id="updateRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
+	<if test="chat_room !=null and chat_room !=''">
+	UPDATE gl_chatmember SET chat_room = #{chat_room} 
+	WHERE member_id= #{member_id}
+	</if>
+	</update>
+	
+	<!-- 관리자가 볼 리스트 -->
+	<select id="selectChatList" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+		select *
+		from gl_chatmember
+	</select>
+	
+		
 </mapper>

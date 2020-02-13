@@ -48,7 +48,17 @@
 	WHERE chat_remaincount !=0 AND chat_name LIKE '%'||#{chat_name}||'%'
 	</select>
 
-
+	<!-- 채팅방 입장 count증가 : Controller에서 처리-->
+	<update id="updateChatCountInc" parameterType="com.spring.goodluxe.jj.ChatVO">
+		UPDATE gl_chat SET chat_remaincount = chat_remaincount + 1
+		WHERE chat_name = #{chat_name}
+	</update>
+	
+	<!-- 채팅방 입장 count감소 : Controller에서 처리-->
+	<update id="updateChatCountDec" parameterType="com.spring.goodluxe.jj.ChatVO">
+		UPDATE gl_chat SET chat_remaincount = chat_remaincount - 1
+		WHERE chat_name = #{chat_name}
+	</update>
 
 
 

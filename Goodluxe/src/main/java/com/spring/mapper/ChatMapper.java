@@ -12,15 +12,15 @@ public interface ChatMapper {
 	
 	public ChatVO checkRoom(String chat_name);
 
-	public void createChatRoom(ChatVO chatvo);
+	public int createChatRoom(ChatVO chatvo);
 
 	public List<ChatVO> getRoomList();
 
-	public void updateChatCountInc(ChatVO chatvo);
+	public int updateChatCountInc(ChatVO chatvo);
 
-	public void updateChatCountDec(ChatVO chatvo);
+	public int updateChatCountDec(ChatVO chatvo);
 
-	public void deleteChat();
+	public int deleteChat();
 
 	public List<ChatVO> searchRoomList(String chat_name);
 

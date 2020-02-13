@@ -48,6 +48,17 @@
     		<artifactId>javax.json</artifactId>
     		<version>1.0.4</version>
 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- jaejin add code -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -55,6 +66,13 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+		<dependency>
+    	<groupId>org.glassfish</groupId>
+    		<artifactId>javax.json</artifactId>
+    		<version>1.0.4</version>
+		</dependency>
+<!--  jaejin add code end -->
+
 		
 		<!-- myBatis 시작 -->
 		<dependency>
@@ -115,7 +133,7 @@
 		</dependency>
 		<!-- WebSocket 기능 추가 끝 -->
 		
-		<!-- jaejin -->
+		<!-- jaejin add code -->
 		<!-- Provided Websocket API, because tomcat has its own implementation -->
 		<dependency>
 			<groupId>javax.websocket</groupId>
