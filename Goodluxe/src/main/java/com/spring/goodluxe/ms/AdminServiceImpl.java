@@ -219,7 +219,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public ArrayList<HashMap<String,Object>> getDefaultGraph() throws Exception{
+	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception{
 		ArrayList<HashMap<String,Object>> data_list = null;
 		try {
 			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
@@ -229,5 +229,18 @@ public class AdminServiceImpl implements AdminService {
 			throw new Exception("ERROR(AdminService/getDefaultGraph)");
 		}
 		return data_list;
+	}
+	
+	@Override
+	public ArrayList<HashMap<String, Object>> getRefundData() throws Exception{
+		ArrayList<HashMap<String, Object>> refund_list = null;
+		try {
+			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
+			refund_list = adminpointMapper.getRefundData();
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getRefundData) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getRefundData)");
+		}
+		return refund_list;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 
 public interface AdminService {
@@ -18,6 +19,7 @@ public interface AdminService {
 	public void minusPointStatus(PointVO pvo, HttpServletResponse response) throws Exception;
 	// 관리자페이지 현황부분 데이터
 	public HashMap<String,Object> getTodayOrderCount() throws Exception;
-	public ArrayList<HashMap<String,Object>> getDefaultGraph() throws Exception;
+	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getRefundData() throws Exception;
 	
 }

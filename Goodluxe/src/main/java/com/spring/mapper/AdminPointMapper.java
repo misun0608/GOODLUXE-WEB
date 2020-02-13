@@ -39,4 +39,6 @@ public interface AdminPointMapper {
 	
 	// 관리자 메인 데이터
 	ArrayList<HashMap<String,Object>> getAdminDefaultData();
+	// 7일간 환불 데이터 리스트
+	ArrayList<HashMap<String, Object>> getRefundData();
 }

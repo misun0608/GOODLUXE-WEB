@@ -354,7 +354,7 @@ public class ProductlistController {
 				@RequestParam(value = "order_number", required = false)String order_number 
 				) throws Exception {
 			
-			System.out.println("왔다!!!");
+//			System.out.println("왔다!!!");
 			HashMap<String, String>shipping_info = null;
 			
 			shipping_info=gls.getShippingInfo(order_number);

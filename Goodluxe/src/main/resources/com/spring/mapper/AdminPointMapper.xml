@@ -49,6 +49,12 @@
 		<result property="buying_price" column="buying_price" />
 		<result property="commission" column="commission" />
 	</resultMap>
+	
+	<!-- HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapRM">
+		<result property="order_cancel_date" column="order_cancel_date" />
+		<result property="order_pay_price" column="order_pay_price" />
+	</resultMap>
 
 	<select id="getAdminPointList" resultMap="AdminPointResultMap">
 		select * from GL_POINT order by point_date desc
@@ -108,55 +114,81 @@
 	<!-- 최근 한달 주문 현황 건수(결제전) -->
 	<select id="getMonthlyPaidBeforeCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '결제전' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '결제전' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 주문 현황 건수(배송준비중) -->
 	<select id="getMonthlyPreparedCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '배송준비중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송준비중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 주문 현황 건수(배송중) -->
 	<select id="getMonthlyShippingCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '배송중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 주문 현황 건수(배송완료) -->
 	<select id="getMonthlyDoneCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '배송완료' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송완료' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 취소 현황 건수(취소) -->
 	<select id="getMonthlyCancelCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where (ORDER_STATUS = '취소완료' or ORDER_STATUS = '자동취소' or ORDER_STATUS = '환불신청') and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+		select count(*) from GL_ORDER where (ORDER_STATUS = '취소완료' or ORDER_STATUS = '자동취소' or ORDER_STATUS = '환불신청') and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 취소 현황 건수(반품) -->
 	<select id="getMonthlyItemBackCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '반품확인' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '반품확인' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 최근 한달 취소 현황 건수(환불) -->
 	<select id="getMonthlyRefundCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_STATUS = '환불완료' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +31)
+		select count(*) from GL_ORDER where ORDER_STATUS = '환불완료' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
 	]]>
 	</select>
 	
 	<!-- 관리자메인 디폴트 데이터 / 오늘부터 7일전까지 -->
 	<select id="getAdminDefaultData" resultMap="HashMapAdminRM">
-		select * from GL_ORDER
+		         select *
+        from (select  glpr.order_order_date, glpr.order_product_price, glpr.order_ship_fee, glpr.order_used_point, glpr.order_used_coupon,glpr.pb_number, glpr.entity_number, glco.commission, glpr.buying_price
+        from  (select glor.order_order_date, glor.order_product_price, glor.order_ship_fee, glor.order_used_point, glor.order_used_coupon,glpr.pb_number, glpr.entity_number,glpu.buying_price
+        from gl_productboard glpr, gl_purchase glpu ,gl_order glor
+        where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number
+        ) glpr left outer join
+        gl_consignment glco
+        on glpr.entity_number = glco.entity_number
+        union
+        all
+          select glpr.order_order_date, glpr.order_product_price, glpr.order_ship_fee, glpr.order_used_point, glpr.order_used_coupon,glpr.pb_number, glpr.entity_number, glpr.commission, glpu.buying_price
+        from  (select glor.order_order_date, glor.order_product_price, glor.order_ship_fee, glor.order_used_point, glor.order_used_coupon,glpr.pb_number, glpr.entity_number,glco.commission
+        from gl_productboard glpr, gl_consignment glco,gl_order glor
+        where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number
+        ) glpr left outer join
+        gl_purchase glpu
+        on glpr.entity_number = glpu.entity_number)
+        order by pb_number asc
 	</select>
+	
+	<!-- 환불액 -->
+	<select id="getRefundData" resultMap="HashMapRM">
+	<![CDATA[
+		select order_cancel_date,order_pay_price from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -8 and ORDER_CANCEL_DATE < sysdate +1
+	]]>
+	</select>
+	
+	
 	
 </mapper>
