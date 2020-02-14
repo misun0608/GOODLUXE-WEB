@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_apply_form.js"></script>
 	<script>
 		$(document).ready(function(){
 			$("#header").load("header.do");
