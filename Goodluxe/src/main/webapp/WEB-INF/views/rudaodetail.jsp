@@ -77,7 +77,7 @@
 	
 	AuctionVO auctionvo = (AuctionVO) request.getAttribute("auctionvo");
 	int historynumber = ((Integer) request.getAttribute("auctionnumber")).intValue();
-	PurchaseVO purchasevo = (PurchaseVO) request.getAttribute("purchasevo");
+	Purchase2VO purchasevo = (Purchase2VO) request.getAttribute("purchasevo");
 	
 	
 	

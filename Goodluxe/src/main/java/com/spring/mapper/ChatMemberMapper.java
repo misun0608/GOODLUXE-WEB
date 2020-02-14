@@ -18,6 +18,9 @@ public interface ChatMemberMapper {
 	
 	public List<ChatMemberVO> selectChatList()throws Exception;
 	
+	
 	public int countRoomMember(String member_id)throws Exception;
+	
+	public List<ChatMemberVO> selectChatroomList(String member_id)throws Exception;
 
 }

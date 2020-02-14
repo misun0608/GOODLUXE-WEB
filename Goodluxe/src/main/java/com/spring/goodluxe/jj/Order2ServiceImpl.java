@@ -4,30 +4,30 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.mapper.OrderMapper;
+import com.spring.mapper.Order2Mapper;
 
 @Service("orderService")
-public class OrderServiceImpl implements OrderService{
+public class Order2ServiceImpl implements Order2Service{
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
-	public int insertorder(OrderVO ordervo)throws Exception{
+	public int insertorder(Order2VO ordervo)throws Exception{
 		int res=0;
 		
 		try {
 			
-			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			System.out.println("ÁÖ¹® µé¾î°£´Ù");
+			Order2Mapper orderMapper = sqlSession.getMapper(Order2Mapper.class);
+			System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½î°£ï¿½ï¿½");
 			
 			
 			res=orderMapper.insertorder(ordervo);
 			
-			System.out.println("ÁÖ¹® µé¾î°¬´Ù.");
+			System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½î°¬ï¿½ï¿½.");
 			
 		}catch(Exception e) {
-			throw new Exception("ÁÖ¹® Ãß°¡ ½ÇÆÐ"+e.getMessage());
+			throw new Exception("ï¿½Ö¹ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½"+e.getMessage());
 		}
 		
 		

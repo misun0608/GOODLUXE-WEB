@@ -1,7 +1,7 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jj.OrderVO;
+import com.spring.goodluxe.jj.Order2VO;
 
-public interface OrderMapper {
-	int insertorder(OrderVO ordervo);
+public interface Order2Mapper {
+	int insertorder(Order2VO ordervo);
 }

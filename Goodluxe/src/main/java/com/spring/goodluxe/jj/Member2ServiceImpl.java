@@ -3,44 +3,44 @@ package com.spring.goodluxe.jj;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.spring.mapper.MemberMapper;
+import com.spring.mapper.Member2Mapper;
 
 @Service("memberService")
-public class MemberServiceImpl implements MemberService {
+public class Member2ServiceImpl implements Member2Service {
 	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public MemberVO selectMember1(String member_id)throws Exception{
+	public Member2VO selectMember1(String member_id)throws Exception{
 		
-		MemberVO membervo = null;
+		Member2VO membervo = null;
 		try {
-		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		Member2Mapper memberMapper = sqlSession.getMapper(Member2Mapper.class);
 		System.out.println(member_id);
 		membervo = memberMapper.selectMember1(member_id);
 		if(membervo == null) {
-			System.out.println("¸â¹ö ³Î~");
+			System.out.println("ï¿½ï¿½ï¿½ ï¿½ï¿½~");
 			
 		}
 		}catch(Exception e) {
-			System.out.println("¸â¹ö Á¶È¸ ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		
 		return membervo;
 	}
 	
 	@Override
-	public int insertMember(MemberVO membervo)throws Exception{
+	public int insertMember(Member2VO membervo)throws Exception{
 		int res=0;
 		try {
-			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			Member2Mapper memberMapper = sqlSession.getMapper(Member2Mapper.class);
 			res= memberMapper.insertMember(membervo);
 			if(res == 0) {
-				System.out.println("Ãß°¡ ½ÇÆÐ¿ä");
+				System.out.println("ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Ð¿ï¿½");
 			}
 		}catch(Exception e) {
-			System.out.println("¸â¹ö Ãß°¡ ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return res;
 		
@@ -50,15 +50,15 @@ public class MemberServiceImpl implements MemberService {
 	public int userCheckMember(String member_id)throws Exception{
 		int count=0;
 		try {
-			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			Member2Mapper memberMapper = sqlSession.getMapper(Member2Mapper.class);
 			count=memberMapper.userCheckMember(member_id);
 			if(count==0) {
-				System.out.println("Ã¼Å© ½ÇÆÐ");
+				System.out.println("Ã¼Å© ï¿½ï¿½ï¿½ï¿½");
 			}
 			System.out.println("count="+count);
 			
 		}catch(Exception e) {
-			System.out.println("¸â¹öÃ¼Å© ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½Ã¼Å© ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return count;
 	}
@@ -67,11 +67,11 @@ public class MemberServiceImpl implements MemberService {
 	public String pickNameMember(String member_id)throws Exception{
 		String member_name = null;
 		try {
-			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			Member2Mapper memberMapper = sqlSession.getMapper(Member2Mapper.class);
 			member_name=memberMapper.pickNameMember(member_id);
 			
 		}catch(Exception e) {
-			System.out.println("¸â¹öÀÌ¸§ ÇÈ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½+"+e.getMessage());
 		}
 		return member_name;
 	}
@@ -80,11 +80,11 @@ public class MemberServiceImpl implements MemberService {
 	public String pickisadminMember(String member_id)throws Exception{
 		String member_isadmin = null;
 		try {
-			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			Member2Mapper memberMapper = sqlSession.getMapper(Member2Mapper.class);
 			member_isadmin=memberMapper.pickisadminMember(member_id);
 			
 		}catch(Exception e) {
-			System.out.println("¸â¹öisadmin ÇÈ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½isadmin ï¿½ï¿½+"+e.getMessage());
 		}
 		return member_isadmin;
 	}

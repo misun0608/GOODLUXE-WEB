@@ -5,7 +5,7 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PurchaseVO {
+public class Purchase2VO {
 		private String entity_number;
 		private String pd_name;
 		private String pd_brand;

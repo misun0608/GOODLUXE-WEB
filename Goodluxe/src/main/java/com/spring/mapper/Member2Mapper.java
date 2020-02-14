@@ -1,10 +1,10 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jj.MemberVO;
+import com.spring.goodluxe.jj.Member2VO;
 
-public interface MemberMapper {
-	MemberVO selectMember1(String member_id);
-	int insertMember(MemberVO membervo);
+public interface Member2Mapper {
+	Member2VO selectMember1(String member_id);
+	int insertMember(Member2VO membervo);
 	int userCheckMember(String member_id);
 	String pickNameMember(String member_id);
 	String pickisadminMember(String member_id);

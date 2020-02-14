@@ -67,7 +67,7 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 	//1. 들어온 사람의 실제 로그인 아이디 정보를 가져온다.
 	Map<String, Object> map = session.getAttributes();
 		String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
 	
@@ -157,10 +157,10 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 	Map<String, Object> map = session.getAttributes();
 
 	String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
-	String roomName = chatmemberService.selectChatList(member_id).get(0).getChat_room();
+	String roomName = chatmemberService.selectChatroomList(member_id).get(0).getChat_room();
 	System.out.println("164 roomName="+roomName);
 	// 검색어로 들어왔을 경우,
 	if(message.getPayload().contains("!%/&")) {
@@ -274,7 +274,7 @@ public void afterConnectionClosed(WebSocketSession session, CloseStatus status) 
 	//1. 현재 접속한 사람의 로그인한 id정보를 가져온다.
     Map<String, Object> map = session.getAttributes();
     String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
  	

@@ -5,31 +5,31 @@ import java.sql.Timestamp;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderVO {
-//   private String order_img;         // ÀÌ¹ÌÁö
-   private String order_number;      // ÁÖ¹®¹øÈ£
-   private String order_receipt;      // ¹Þ´Â»ç¶÷
-   private Timestamp order_pay_date;   // °áÁ¦ÀÏ
-   private Timestamp order_order_date;   // ÁÖ¹®ÀÏ
-   private String order_status;      // ÁÖ¹®»óÅÂ
-   private String order_addr1;         // ¹è¼Û±âº»ÁÖ¼Ò
-   private String order_addr2;         // ¹è¼Û»ó¼¼ÁÖ¼Ò
-   private String order_zipcode;      // ¹è¼Û¿ìÆí¹øÈ£
-   private String order_phone;         // ¹è¼ÛÆù¹øÈ£
-   private String order_invoice_number;   // ¼ÛÀå¹øÈ£
-   private Timestamp order_ship_date;      // ¹è¼Û³¯Â¥
-   private Timestamp order_cancel_date;    // ÁÖ¹®Ãë¼ÒÀÏÀÚ
-   private int order_product_price;   // Á¦Ç° ±Ý¾×
-   private int order_ship_fee;         // ¹è¼Ûºñ
-   private int order_used_point;      // »ç¿ë Àû¸³±Ý
-   private String order_used_coupon;   // »ç¿ë ÄíÆù
-   private String order_pay_system;   // °áÁ¦ ¹æ½Ä
-   private String order_refund_bank;   // È¯ºÒ°èÁÂ ÀºÇà
-   private String order_refund_account; // È¯ºÒ°èÁÂ¹øÈ£
-   private int pb_number;         // °Ô½Ã±Û ¹øÈ£ / Áö¿¹²¨¿¡¼­.....
-   private String member_id;         // ¸â¹ö ¾ÆÀÌµð / ¹ÎÁö²¨¿¡¼­ °¡Á®¿Ã ¿¹Á¤...?
-   private String order_message;      // ÁÖ¹®¸Þ¼¼Áö
-   private int order_pay_price;      // °áÁ¦ ±Ý¾×
+public class Order2VO {
+//   private String order_img;         // ï¿½Ì¹ï¿½ï¿½ï¿½
+   private String order_number;      // ï¿½Ö¹ï¿½ï¿½ï¿½È£
+   private String order_receipt;      // ï¿½Þ´Â»ï¿½ï¿½
+   private Timestamp order_pay_date;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   private Timestamp order_order_date;   // ï¿½Ö¹ï¿½ï¿½ï¿½
+   private String order_status;      // ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
+   private String order_addr1;         // ï¿½ï¿½Û±âº»ï¿½Ö¼ï¿½
+   private String order_addr2;         // ï¿½ï¿½Û»ï¿½ï¿½Ö¼ï¿½
+   private String order_zipcode;      // ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ï¿½È£
+   private String order_phone;         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+   private String order_invoice_number;   // ï¿½ï¿½ï¿½ï¿½ï¿½È£
+   private Timestamp order_ship_date;      // ï¿½ï¿½Û³ï¿½Â¥
+   private Timestamp order_cancel_date;    // ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   private int order_product_price;   // ï¿½ï¿½Ç° ï¿½Ý¾ï¿½
+   private int order_ship_fee;         // ï¿½ï¿½Ûºï¿½
+   private int order_used_point;      // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   private String order_used_coupon;   // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   private String order_pay_system;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+   private String order_refund_bank;   // È¯ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   private String order_refund_account; // È¯ï¿½Ò°ï¿½ï¿½Â¹ï¿½È£
+   private int pb_number;         // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.....
+   private String member_id;         // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...?
+   private String order_message;      // ï¿½Ö¹ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½
+   private int order_pay_price;      // ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¾ï¿½
 public String getOrder_number() {
 	return order_number;
 }

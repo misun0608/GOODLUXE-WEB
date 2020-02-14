@@ -6,25 +6,25 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.mapper.PurchaseMapper;
+import com.spring.mapper.Purchase2Mapper;
 
 @Service
-public class PurchaseServiceImpl implements PurchaseService {
+public class Purchase2ServiceImpl implements Purchase2Service {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
-	public PurchaseVO selectPurchase(String entity_number)throws Exception{
-		PurchaseVO purchasevo = new PurchaseVO();
+	public Purchase2VO selectPurchase(String entity_number)throws Exception{
+		Purchase2VO purchasevo = new Purchase2VO();
 		
 		try {
-			PurchaseMapper purchaseMapper = sqlSession.getMapper(PurchaseMapper.class);
+			Purchase2Mapper purchaseMapper = sqlSession.getMapper(Purchase2Mapper.class);
 			purchasevo = purchaseMapper.selectPurchase(entity_number);
 			purchasevo.getEntity_number();
-			System.out.println("Ã£¾Æ¶ó"+entity_number);
+			System.out.println("Ã£ï¿½Æ¶ï¿½"+entity_number);
 		}catch(Exception e) {
-			System.out.println("Ã£¾Æ¶ó ¸ÅÀÔ¶ì+"+e.getMessage());
+			System.out.println("Ã£ï¿½Æ¶ï¿½ ï¿½ï¿½ï¿½Ô¶ï¿½+"+e.getMessage());
 		}
 		
 		return purchasevo;
@@ -36,7 +36,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		int res=0;
 		
 		try {
-			PurchaseMapper purchaseMapper = sqlSession.getMapper(PurchaseMapper.class);
+			Purchase2Mapper purchaseMapper = sqlSession.getMapper(Purchase2Mapper.class);
 		res = purchaseMapper.entitycheck(entity_number);
 		if(res==1) {
 			System.out.println("res="+res);
@@ -44,22 +44,22 @@ public class PurchaseServiceImpl implements PurchaseService {
 			System.out.println("res="+res);
 		}
 		}catch(Exception e) {
-			System.out.println("Ã¼Å©ÇÏ°Å¶ó ¿£Æ¼Æ¼!");
+			System.out.println("Ã¼Å©ï¿½Ï°Å¶ï¿½ ï¿½ï¿½Æ¼Æ¼!");
 		}
 		return res;
 	}
 	
 	@Override
-	public ArrayList<PurchaseVO> selectEntitySearchWord (String entity_number){
+	public ArrayList<Purchase2VO> selectEntitySearchWord (String entity_number){
 		
-		ArrayList<PurchaseVO> purchaselist = null;
+		ArrayList<Purchase2VO> purchaselist = null;
 		
 		try {
-			PurchaseMapper purchaseMapper = sqlSession.getMapper(PurchaseMapper.class);
+			Purchase2Mapper purchaseMapper = sqlSession.getMapper(Purchase2Mapper.class);
 			purchaselist = purchaseMapper.selectEntitySearchWord(entity_number);
 			
 		}catch(Exception e) {
-			System.out.println("¸®½ºÆ® ¸øÃ£?"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã£?"+e.getMessage());
 		}
 		
 		return purchaselist;
@@ -67,14 +67,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
-	public ArrayList<PurchaseVO> selectKeywordSearch(String entity_number){
-		ArrayList<PurchaseVO> purchaselist = null;
+	public ArrayList<Purchase2VO> selectKeywordSearch(String entity_number){
+		ArrayList<Purchase2VO> purchaselist = null;
 		
 		try {
-			PurchaseMapper purchaseMapper = sqlSession.getMapper(PurchaseMapper.class);
+			Purchase2Mapper purchaseMapper = sqlSession.getMapper(Purchase2Mapper.class);
 			purchaselist = purchaseMapper.selectKeywordSearch(entity_number);
 		}catch(Exception e) {
-			System.out.println("Å°¿öµå ¸øÃ£?+"+e.getMessage());
+			System.out.println("Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã£?+"+e.getMessage());
 		}
 		return purchaselist;
 		
