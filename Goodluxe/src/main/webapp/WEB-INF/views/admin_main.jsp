@@ -321,8 +321,8 @@
 								} ]
 					},
 					options : {
-						//responsive: false,
-						maintainAspectRatio : false,
+						responsive: false,
+						//maintainAspectRatio : false,
 						scales : {
 							yAxes : [ {
 								id : 'A',
@@ -348,24 +348,24 @@
 
 				// 원형그래프
 				var ctx2 = document.getElementById('myChart2');
-				var myChart2 = new Chart(ctx, {
+				var myChart2 = new Chart(ctx2, {
 					type : 'doughnut',
 					data : {
 						datasets : [ {
 							data : [ 10, 20, 30, 20, 10 ],
 							backgroundColor : [
-							'rgba(190, 190, 190, 1)',
-							'rgba(241, 196, 15, 1)',
-							'rgba(244, 7, 7, 1)',
-							'rgba(52, 152, 219, 1)',
-							'rgba(46, 204, 113, 1)'
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)'
 							],
 						} ],
 						labels : [ '미지정', '다음주 이후', '이번주 까지', '완료', '기한 만료' ]
 					},
 					options : {
-						maintainAspectRatio : false,
-						//responsive: false,
+						//maintainAspectRatio : false,
+						responsive: false,
 						cutoutPercentage : 50,
 						legend : {
 							display : true,
@@ -402,12 +402,17 @@
 				</section>
 
 				<div class="grapharea">
-					<canvas id="myChart" width="700" height="500"></canvas>
+					<canvas id="myChart" width="1100" height="500"></canvas>
 				</div>
+				<br />
+				<br />
 				<div class="grapharea2">
-					<canvas id="myChart2" width="700" height="500"></canvas>
+					<canvas id="myChart2" width="550" height="500"></canvas>
+					<canvas id="myChart3" width="550" height="500"></canvas>
 				</div>
-				
+				<br />
+				<br />
+				<br />
 				<div class="tbl_head01 tbl_wrap">
 					<table border=1>
 						<tr>

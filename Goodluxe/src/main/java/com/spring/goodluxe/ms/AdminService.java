@@ -21,5 +21,7 @@ public interface AdminService {
 	public HashMap<String,Object> getTodayOrderCount() throws Exception;
 	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception;
 	public ArrayList<HashMap<String,Object>> getRefundData() throws Exception;
+	public HashMap<String,Object> getCateCntData() throws Exception;
+	public HashMap<String, HashMap<String,Object>> getBrandCntData() throws Exception;
 	
 }

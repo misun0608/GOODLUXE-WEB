@@ -44,6 +44,8 @@ public class AdminController {
 	public String MainView(Model model) throws Exception {
 		System.out.println("관리자 메인 일반 컨트롤러");
 		HashMap<String, Object> map = null;
+		HashMap<String, Object> cate_cnt = null;
+		HashMap<String, Object> brand_cnt = null;
 
 		// 추가
 		ArrayList<HashMap<String, Object>> data_list = null;
@@ -200,6 +202,14 @@ public class AdminController {
 				model.addAttribute("real_sales" + j, real_sales[j]);
 				cal.add(Calendar.DATE, -1); // 날짜 하루 빼주기
 			}
+			
+			// 도넛 그래프 데이터
+			// 카테고리별 주문수
+			cate_cnt = gls.getCateCntData();
+			// 브랜드별 주문수
+			
+			
+			
 			model.addAttribute("map", map);
 
 		} catch (Exception e) {

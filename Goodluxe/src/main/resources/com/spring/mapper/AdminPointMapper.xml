@@ -55,6 +55,14 @@
 		<result property="order_cancel_date" column="order_cancel_date" />
 		<result property="order_pay_price" column="order_pay_price" />
 	</resultMap>
+	
+	<!-- 도넛만들떄 필요한 데이터 HashMap -->
+		<resultMap type="java.util.HashMap" id="HashMapCateRM">
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="pd_category" column="pd_category" />
+		<result property="pd_brand" column="pd_brand" />
+	</resultMap>
 
 	<select id="getAdminPointList" resultMap="AdminPointResultMap">
 		select * from GL_POINT order by point_date desc

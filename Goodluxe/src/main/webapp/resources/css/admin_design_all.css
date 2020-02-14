@@ -1037,3 +1037,8 @@ tr .td2 {
 }
 
 /* 추가부분 끝 */
+
+/* 관리자 메인 그래프*/
+.grapharea2{
+	display: inline-block;
+}
