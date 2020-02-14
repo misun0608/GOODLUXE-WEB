@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,17 +21,19 @@ public class JyMyPageController {
 		private JyMyPageServiceImpl jyMyPageService;
 		
 		@RequestMapping(value = "myInfo.do")
-		public String my_info(Model model, @RequestParam(value = "member_id", required = false ,defaultValue = "mjmj") String member_id)throws Exception {                   
+		public String my_info(Model model, HttpSession session)throws Exception {                   
 			//Model model, @RequestParam(value = "member_id", required = false, defaultValue = "1") String member_id
 			//throws Exception 
 			
 			MemberVO memberVO = null;
 			
-			String session_id = "mjmj" ;
-			 
-			if(member_id.equals(session_id)) {
-				memberVO=jyMyPageService.getMemberInfo(member_id);
+			String session_id = (String)session.getAttribute("member_id") ;
+			
+			if(session_id == null) {
+				return "redirect:mainPage.do";
 			}
+			 
+			memberVO=jyMyPageService.getMemberInfo(session_id);
 		
 			model.addAttribute("memberVO",memberVO);
 			
@@ -71,7 +74,7 @@ public class JyMyPageController {
 			return "redirect:myInfo.do?member_id=mjmj";
 		}
 		@RequestMapping(value = "myLikedGoods.do")
-		public String likedGoods(Model model, MemberVO memberVO, HttpServletRequest request 
+		public String likedGoods(HttpSession session, Model model, MemberVO memberVO, HttpServletRequest request 
 				,@RequestParam(value = "pageCount", required = false, defaultValue = "1") int pageCount
 				,@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum 
 				)throws Exception {                   
@@ -89,7 +92,10 @@ public class JyMyPageController {
 			int count = 0;
 			int number = 0;
 			
-			String member_id = "mjmj"; //session
+			String member_id = (String) session.getAttribute("member_id"); //session
+			if(member_id == null) {
+				return "redirect:mainPage.do";
+			}
 			
 			ArrayList<HashMap<String,Object>> productList = null; 
 			count = jyMyPageService.myLikedGoodsCount(startRow, endRow,member_id);

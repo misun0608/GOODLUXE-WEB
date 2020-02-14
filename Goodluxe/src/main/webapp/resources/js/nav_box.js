@@ -14,8 +14,4 @@ $(document).ready(function(){
 	  $search_area.fadeOut(500);
 	  $search_area.animate({'width':'0px'},100);
   });
-  // 검색
-  $('body').on('click','.search_btn', function(){
-      location.href="search_result.html";
-  });
-})
+});
