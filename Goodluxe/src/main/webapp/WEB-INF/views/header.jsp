@@ -3,11 +3,48 @@
 
 <%
 	String mem_id = (String) session.getAttribute("member_id");
+	System.out.println("member_id session = "+ mem_id);
 	String mem_class = (String) session.getAttribute("member_class");
 	String mem_isadmin = (String) session.getAttribute("member_isadmin");
 %>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+
+<script>
+	var alarm_number;
+	function connect(){
+		w = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");
+
+		w.onopen = function(){
+			alert("WebSocket Conneted!!!");
+		}
+		w.onmessage = function(e){       
+			alarm_number = e.data.toString();
+		
+			alert("alarm??"+alarm_number);
+		}
+		w.onclose = function(e){
+			alert("WebSocket closed!!!");
+		}
+		w.onerror = function(e){ 
+			alert("WebSocket error!!!");
+		}
+	}
+	window.onload = function(){
+		<%
+			if(session.getAttribute("member_id") !=null){
+		%>
+				alert("하하하");	
+				connect();
+		<%
+			}
+		%>
+		
+	}
+
+	
+
+</script>
 
 <div class="header">
     <div class="header_bg">
@@ -41,10 +78,13 @@
                 <li class="notice">
                     <img src="${pageContext.request.contextPath}/resources/img/icons/notice.png">
                     <a href="#" class='notice_btn'>알림</a>
-                    <ul class="notice_content">
+                    <ul class="notice_content" id = "alarm_box">
                         <li>
                             <a href="#" class="notice_list on">
                                 '생로랑 모노그램 카바스백' 제품을 구매할 수 있습니다 :D<br>
+<<<<<<< HEAD
+                              	  이 기회를 놓치지 마세요!
+=======
                                 이 기회를 놓치지 마세요!
                             </a>
                         </li>
@@ -70,11 +110,12 @@
                             <a href="#" class="notice_list">
                                 '생로랑 모노그램 카바스백' 경매 종료까지 한 시간 남았습니다.<br>
                                 경매 진행 상황을 확인하세요!
+>>>>>>> origin/master
                             </a>
                         </li>
                         <li>
                             <a href="#" class="notice_more notice_list" >
-                                지난 알림 더보기
+                               	 지난 알림 더보기
                             </a>
                         </li>
                     </ul>
