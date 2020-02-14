@@ -14,7 +14,13 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
+<script>
+   $(document).ready(function(){
+      $("#hd").load("admin_header.do");
+   });
+</script>
 
 <script>
 
@@ -230,115 +236,8 @@
 
 </head>
 <body>
-	<header id="hd">
-		<div id="hd_top">
-			<button type="button" id="btn_gnb" class="btn_gnb_close btn_gnb_open"></button>
-			<div id="logo">
-				<a href="./adminMain.html"><img src="./img/logo.png"></a>
-			</div>
+	<header id="hd"></header>
 
-			<div id="tnb">
-				<ul>
-					<li class="tnb_li"><a href="#" class="tnb_service"
-						target="_blank"><img src="./img/home.png" width="25px"></a></li>
-				</ul>
-			</div>
-		</div>
-		<nav id="gnb" class="gnb_large gnb_small">
-
-			<ul class="gnb_ul">
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-200 menu-order-2"
-						title="회원관리">회원관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>회원관리</h3>
-							<ul>
-								<li><a href="./admincustomermanagement.html"
-									class="gnb_2da  ">회원관리</a></li>
-								<li><a href="./adminpointmanagement.html"
-									class="gnb_2da  gnb_grp_div">적립금관리</a></li>
-								<li><a href="./admincouponmanagement.html"
-									class="gnb_2da  ">쿠폰관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-900 menu-order-2"
-						title="회원관리">상품관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>상품관리</h3>
-							<ul>
-								<li><a href="#" class="gnb_2da">매입 상품 등록</a></li>
-								<li><a href="#" class="gnb_2da">위탁 상품 등록</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-300 menu-order-3"
-						title="게시판관리">게시판관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>게시판관리</h3>
-							<ul>
-								<li><a href="./adminpostmanagement.html" class="gnb_2da  ">게시판관리</a></li>
-								<li><a href="./adminvksao.html" class="gnb_2da  ">게시판
-										판매 등록</a></li>
-								<li><a href="./adminrudao.html" class="gnb_2da  ">게시판
-										경매 등록</a></li>
-								<li><a href="#" class="gnb_2da  gnb_grp_div">Q&A관리</a></li>
-								<li><a href="#" class="gnb_2da gnb_grp_style ">FAQ관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-400 menu-order-4"
-						title="쇼핑몰관리">몰관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>사이트 관리</h3>
-							<ul>
-								<li><a href="./adminorderproduct.html"
-									clss="gnb_2da gnb_grp_style gnb_grp_div">주문목록</a></li>
-								<li><a href="./adminorderproduct_cancel.html"
-									clss="gnb_2da gnb_grp_style gnb_grp_div">주문취소</a></li>
-								<li><a href="./adminorderproduct_refund.html"
-									clss="gnb_2da gnb_grp_style gnb_grp_div">주문 반품</a></li>
-								<li><a href="./adminorderproduct_return.html"
-									clss="gnb_2da gnb_grp_style gnb_grp_div">주문 환불</a></li>
-								<li><a href="./adminorderproduct_customermanagement.html"
-									class="gnb_2da gnb_grp_style ">주문 고객 관리</a></li>
-								<li><a href="./adminproductregister.html" class="gnb_2da  ">상품등록</a></li>
-								<li><a href="./admindelivermanagement.html"
-									clss="gnb_2da gnb_grp_style gnb_grp_div">배송관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-500 menu-order-5"
-						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>쇼핑몰현황/기타</h3>
-							<ul>
-								<li><a href="./adminMain.html" class="gnb_2da  ">매출현황</a></li>
-								<li><a href="./admindelivermanagement.html"
-									class="gnb_2da ">배송관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-	</header>
-
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<div id="wrapper">
 
 		<div id="container" class="container-small">

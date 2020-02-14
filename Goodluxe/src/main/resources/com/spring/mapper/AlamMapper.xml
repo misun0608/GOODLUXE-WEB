@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.spring.mapper.AlamMapper">
+
+<resultMap type="com.spring.goodluxe.voes.AlamVO" id="resultAlamVO">
+		<result property="alam_number" column="alam_number" />
+		<result property="member_id" column="member_id" />
+		<result property="alam_date" column="alam_date" />
+		<result property="alam_read" column="alam_read" />
+		<result property="alam_linkpage" column="alam_linkpage" />
+	</resultMap>
+	
+	<insert id="insertAlam" parameterType="com.spring.goodluxe.voes.AlamVO">
+	  <selectKey order="BEFORE" keyProperty="alam_number" resultType="int">
+       SELECT NVL(MAX(TO_NUMBER(alam_number)),0)+1 
+       FROM gl_alam
+      </selectKey>
+		INSERT INTO gl_alam VALUES(
+			#{alam_number},
+			#{member_id},
+    		SYSDATE,
+    		#{alam_read},
+    		#{alam_linkpage}
+		)
+	</insert>
+	
+	
+	
+	</mapper>

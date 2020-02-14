@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:websocket="http://www.springframework.org/schema/websocket"
+   xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd"
+      >
+      
+
+
+<!-- jaejin -->
+<!-- <beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -7,13 +22,39 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+<<<<<<< HEAD
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
+=======
+	http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+ -->
+>>>>>>> origin/master
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+	<!-- jaejin -->
+<!-- 	<websocket:handlers>
+		<websocket:mapping handler="myHandler" path="/echo.do"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+	
+	<beans:bean id="myHandler" class="com.spring.goodluxe.jj.WebSocket" /> -->
+	
+	<!-- WebSocket에 사용할 핸들러 객체 생성 -->
+	<beans:bean id="socketHandler" class="com.spring.goodluxe.jj.SocketHandler"  />
+	
+	<websocket:handlers>
+		<!-- path : websocket 사용할 때 url 형식 -->
+		<websocket:mapping path="/broadcasting.do" handler="socketHandler" />
+		<websocket:handshake-interceptors>
+			<!-- Websocket에서 HttpSession 객체를 사용하고자 할 때 사용 -->
+			<beans:bean class="com.spring.goodluxe.jj.HandShakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -31,6 +72,10 @@
 		</beans:property>
 		<beans:property name = "uploadTempDir" value = "file:/C:/Project138/upload"></beans:property> <!--여러명이 한번에 동시업로드 할 때 효율성에 대비해서 임시 저장기억공간을 지정한다. -->
 	</beans:bean>
+
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.spring.goodluxe.mj.NaverLoginBO" />
+
 	
 	<beans:bean id = "alarmSocketHandler" class = "com.spring.goodluxe.jy.AlarmSocketHandler"/>
 		
@@ -43,5 +88,9 @@
 	</websocket:handlers>
 	
 	<context:component-scan base-package="com.spring.goodluxe" />
+	<context:component-scan base-package="com.spring.goodluxe.jj" />
+	
+	
+	
 	
 </beans:beans>

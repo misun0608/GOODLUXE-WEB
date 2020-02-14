@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.spring.mapper.ChatMapper">
+
+<resultMap type="com.spring.goodluxe.voes.ChatVO" id="resultChatVO">
+		<result property="chat_num" column="chat_num" />
+		<result property="chat_name" column="chat_name" />
+		<result property="chat_totalcount" column="chat_totalcount" />
+		<result property="chat_remaincount" column="chat_remaincount" />
+		<result property="chat_content" column="chat_content" />
+	</resultMap>
+
+<select id="SelectChatList" resultMap="resultChatVO">
+	select *
+	from gl_chat
+	</select>
+
+<!-- 방 존재 여부 확인 & 방정보 가져오기 -->
+	<select id="getRoom" parameterType="String" resultType="com.spring.goodluxe.voes.ChatVO">
+	SELECT * FROM gl_chat WHERE chat_name =#{name} AND chat_remaincount !=0
+	</select>
+	
+	<!-- 방 생성 -->
+	<insert id="createChatRoom" parameterType="com.spring.goodluxe.voes.ChatVO">
+	INSERT INTO gl_chat (chat_num, chat_name, chat_totalcount,chat_remaincount, chat_content)
+	VALUES(CHAT_SEQ.NEXTVAL, #{chat_name}, #{chat_totalcount},0, #{chat_content})
+	</insert>
+	
+	<!-- 존재하는 방 리스트가져오기 -->
+	<select id="getRoomList" resultType="com.spring.goodluxe.voes.ChatVO">
+	SELECT * FROM gl_chat
+	WHERE chat_remaincount !=0
+	</select>
+	
+	<!-- 채팅방 삭제 : REMAINCOUNT가 0이되면 삭제한다. -->
+	<delete id="deleteChat">
+		DELETE FROM gl_chat
+		WHERE chat_remaincount = 0
+	</delete>
+	
+	<!-- 검색한 방 리스트가져오기 -->
+	<select id="searchRoomList" resultType="com.spring.goodluxe.voes.ChatVO" parameterType="String">
+	SELECT * FROM gl_chat
+	WHERE chat_remaincount !=0 AND chat_name LIKE '%'||#{chat_name}||'%'
+	</select>
+
+	<!-- 채팅방 입장 count증가 : Controller에서 처리-->
+	<update id="updateChatCountInc" parameterType="com.spring.goodluxe.voes.ChatVO">
+		UPDATE gl_chat SET chat_remaincount = chat_remaincount + 1
+		WHERE chat_name = #{chat_name}
+	</update>
+	
+	<!-- 채팅방 입장 count감소 : Controller에서 처리-->
+	<update id="updateChatCountDec" parameterType="com.spring.goodluxe.voes.ChatVO">
+		UPDATE gl_chat SET chat_remaincount = chat_remaincount - 1
+		WHERE chat_name = #{chat_name}
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
