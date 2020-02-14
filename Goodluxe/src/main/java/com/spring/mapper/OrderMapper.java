@@ -1,7 +1,19 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jj.OrderVO;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.spring.goodluxe.voes.OrderVO;
+import com.spring.goodluxe.voes.ProductBoardVO;
+import com.spring.goodluxe.voes.ProductVO;
 
 public interface OrderMapper {
-	int insertorder(OrderVO ordervo);
+	ProductVO selectProduct(String entity_number);
+	ProductBoardVO selectPB(String entity_number);
+	
+	// 주문 데이터 넣기
+	int insertOrder(OrderVO orderVO);
+	OrderVO selectOrder(OrderVO vo);
+	int insertKakaoOrder(OrderVO orderVO);
+	ArrayList<HashMap<String,Object>> getOrderList(String member_id);
 }

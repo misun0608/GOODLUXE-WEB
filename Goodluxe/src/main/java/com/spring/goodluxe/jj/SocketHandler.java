@@ -19,6 +19,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.spring.goodluxe.voes.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Member2VO;
+
 
 //작성순서 : afterConnectionEstablished(서버접속시) -> afterConnectionClosed(서버연결끊을시) 
 //-> handleTextMessage(서버가 메세지를 받았을때) 
@@ -67,7 +71,7 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 	//1. 들어온 사람의 실제 로그인 아이디 정보를 가져온다.
 	Map<String, Object> map = session.getAttributes();
 		String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
 	
@@ -157,7 +161,7 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 	Map<String, Object> map = session.getAttributes();
 
 	String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
 	String roomName = chatmemberService.selectChatroomList(member_id).get(0).getChat_room();
@@ -274,7 +278,7 @@ public void afterConnectionClosed(WebSocketSession session, CloseStatus status) 
 	//1. 현재 접속한 사람의 로그인한 id정보를 가져온다.
     Map<String, Object> map = session.getAttributes();
     String member_id = (String) map.get("member_id"); 
-	MemberVO mem = new MemberVO();
+	Member2VO mem = new Member2VO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
  	

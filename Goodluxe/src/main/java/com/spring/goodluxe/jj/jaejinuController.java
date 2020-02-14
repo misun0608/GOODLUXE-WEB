@@ -25,6 +25,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.goodluxe.voes.AlamVO;
+import com.spring.goodluxe.voes.AuctionVO;
+import com.spring.goodluxe.voes.Auction_HistoryVO;
+import com.spring.goodluxe.voes.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Member2VO;
+import com.spring.goodluxe.voes.Order2VO;
+import com.spring.goodluxe.voes.Purchase2VO;
+
 import net.sf.json.JSONObject;
 
 /**
@@ -40,11 +49,11 @@ public class jaejinuController {
 	@Autowired
 	private AlamService alamService;
 	@Autowired
-	private MemberService memberService;
+	private Member2Service memberService;
 	@Autowired
-	private OrderService orderService;
+	private Order2Service orderService;
 	@Autowired
-	private PurchaseService purchaseService;
+	private Purchase2Service purchaseService;
 	@Autowired
 	private ChatService chatService;
 	@Autowired
@@ -85,7 +94,7 @@ public class jaejinuController {
 	
 	//채팅 들어가기 전 페이지
 	@RequestMapping(value="choicepage.do")
-	public String choicepage(MemberVO vo, HttpSession session,HttpServletResponse response) {
+	public String choicepage(Member2VO vo, HttpSession session,HttpServletResponse response) {
 		
 
 		String member_id= vo.getMember_id();
@@ -233,7 +242,7 @@ public class jaejinuController {
 		@RequestMapping(value="MoveChatRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
 		public String MoveChatRoom (Model model, HttpServletRequest req, String roomName) throws Exception{
 			
-			MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+			Member2VO login = (Member2VO)req.getSession().getAttribute("login");
 			
 			if(login==null) {
 				return "redirect:/loginForm.do";
@@ -287,7 +296,7 @@ public class jaejinuController {
 	
 	//관리자 >> 채팅 리스트 가 있는 페이지 이동 
 	@RequestMapping(value="admin_chat_room.do", method=RequestMethod.GET)
-	public String admin_chat_room(MemberVO vo, HttpSession session,Model model) {
+	public String admin_chat_room(Member2VO vo, HttpSession session,Model model) {
 		
 		ArrayList<ChatVO> chatlist = null;
 		try{
@@ -302,7 +311,7 @@ public class jaejinuController {
 	
 	// 멤버 가입  >> 다시 로그인 페이지로 
 	@RequestMapping(value="memberinsert.do")
-	public String memberinsert(MemberVO vo) {
+	public String memberinsert(Member2VO vo) {
 		
 		try {
 		memberService.insertMember(vo);
@@ -315,7 +324,7 @@ public class jaejinuController {
 	
 	// 멤버가 있나 확인 후 관리자 확인 후 각 페이지로 이동 
 	@RequestMapping(value="memberCheck.do")
-	public String usesrCheckMember(MemberVO vo, HttpSession session, HttpServletResponse response) {
+	public String usesrCheckMember(Member2VO vo, HttpSession session, HttpServletResponse response) {
 		
 		String member_id= vo.getMember_id();
 		
@@ -359,7 +368,7 @@ public class jaejinuController {
 
 	// 경매 상세페이지 만들 때
 	@RequestMapping(value = "/rudaodetail.do")
-	public String rudaodetail(@RequestParam("file_1")List<MultipartFile> fileList_1,@RequestParam("file_2")List<MultipartFile> fileList_2 ,MultipartHttpServletRequest request, AuctionVO auctionvo, RequestModel model,
+	public String rudaodetail(@RequestParam("file_1")List<MultipartFile> fileList_1,@RequestParam("file_2")List<MultipartFile> fileList_2 ,MultipartHttpServletRequest request, AuctionVO auctionvo, Request2Model model,
 			Model model_t) throws IllegalStateException, IOException {
 		
 		String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";
@@ -427,7 +436,7 @@ public class jaejinuController {
 		String entitynum = auctionvo.getENTITY_NUMBER();
 			System.out.println(entitynum);
 		try {
-			PurchaseVO purchasevo = purchaseService.selectPurchase(entitynum);
+			Purchase2VO purchasevo = purchaseService.selectPurchase(entitynum);
 			auctionService.insertAuction(auctionvo);
 			int AUCTION_POST_NUMBER = auctionvo.getAUCTION_POST_NUMBER();
 			AuctionVO vo = auctionService.selectAuction(auctionvo);
@@ -456,7 +465,7 @@ public class jaejinuController {
 			AuctionVO vo_2 = auctionService.selectAuction_PostNumber(AUCTION_POST_NUMBER);
 			String entitynumber = vo_2.getENTITY_NUMBER();
 			
-			PurchaseVO purchasevo = purchaseService.selectPurchase(entitynumber);
+			Purchase2VO purchasevo = purchaseService.selectPurchase(entitynumber);
 			model_t.addAttribute("purchasevo", purchasevo);
 			
 			
@@ -535,9 +544,9 @@ public class jaejinuController {
 	public int insertJSON(HttpServletRequest request) {
 		AuctionVO auctionvo = new AuctionVO();
 		Auction_HistoryVO historyvo = new Auction_HistoryVO();
-		OrderVO ordervo = new OrderVO();
+		Order2VO ordervo = new Order2VO();
 		AlamVO alamvo = new AlamVO();
-		MemberVO membervo = new MemberVO();
+		Member2VO membervo = new Member2VO();
 		int res = 0;
 		int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
 		String link = request.getParameter("link");
@@ -651,9 +660,9 @@ public class jaejinuController {
 	
 	@ResponseBody 
 	@RequestMapping(value = "/putimporamtion.do" ,method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public PurchaseVO selectinpormation(String entity_number) throws Exception {
+	public Purchase2VO selectinpormation(String entity_number) throws Exception {
 		
-		 PurchaseVO purchasevo = purchaseService.selectPurchase(entity_number);
+		 Purchase2VO purchasevo = purchaseService.selectPurchase(entity_number);
 		System.out.println(purchasevo.getEntity_number());
 		return purchasevo;
     }

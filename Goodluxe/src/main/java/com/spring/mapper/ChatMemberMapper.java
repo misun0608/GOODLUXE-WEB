@@ -2,7 +2,7 @@ package com.spring.mapper;
 
 import java.util.List;
 
-import com.spring.goodluxe.jj.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatMemberVO;
 
 public interface ChatMemberMapper {
 
@@ -17,6 +17,7 @@ public interface ChatMemberMapper {
 	public int deleteRoomMember(ChatMemberVO chatmembervo) throws Exception;
 	
 	public List<ChatMemberVO> selectChatList()throws Exception;
+	
 	
 	public int countRoomMember(String member_id)throws Exception;
 	

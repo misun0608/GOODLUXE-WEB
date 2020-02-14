@@ -7,7 +7,7 @@
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
 <%@page import="java.util.*"%>
-<%@page import="com.spring.goodluxe.jj.AuctionVO"%>
+<%@page import="com.spring.goodluxe.voes.AuctionVO"%>
 
 <!-- 파일 중복처리 객체 임포트 -->
 

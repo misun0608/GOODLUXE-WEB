@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.MypageMapper">
+	<resultMap type="java.util.HashMap" id="oasHM">
+		<result property="order_number" column="order_number" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="pb_number" column="pb_number" />
+		<result property="pb_main_img_stored" column="pb_main_img_stored" />
+		<result property="pb_md_name" column="pb_md_name" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_status" column="order_status" />
+		<result property="order_invoice_number" column="order_invoice_number" />
+		<result property="member_id" column="member_id" />
+		<result property="member_name" column="member_name" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_pay_system" column="order_pay_system" />
+		<result property="order_receipt" column="order_receipt" />
+		<result property="order_zipcode" column="order_zipcode" />
+		<result property="order_addr1" column="order_addr1" />
+		<result property="order_addr2" column="order_addr2" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_message" column="order_message" />
+	</resultMap>
+	
+	<select id="getOasData" parameterType="String" resultMap="oasHM">
+		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number
+		from gl_order od, gl_productboard pb, gl_member mem
+		where od.member_id=#{id} and od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_cancel_date is null
+		order by order_number desc
+	</select>
+	
+	<select id="getCancelData" parameterType="String" resultMap="oasHM">
+		select order_number, order_order_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number
+		from gl_order od, gl_productboard pb, gl_member mem
+		where od.member_id=#{id} and od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_cancel_date is not null
+		order by order_number desc
+	</select>
+	
+	<update id="orderCancel">
+		update gl_order set order_cancel_date=#{order_cancel_date}, order_status=#{status} where order_number=#{order_number}
+	</update>
+	<update id="updatePBStatus">
+		update GL_PRODUCTBOARD set PB_SALE_STATUS=#{status} where pb_number = ( select pb_number from gl_order where order_number=#{order_number} )
+	</update>
+	
+	<select id="getOrderData" parameterType="String" resultMap="oasHM">
+		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number, od.member_id, member_name, order_used_point, order_used_coupon, order_ship_fee, order_pay_system, order_receipt, order_zipcode, order_addr1, order_addr2, order_phone, order_message
+		from gl_order od, gl_productboard pb, gl_member mem
+		where od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_number=#{order_number}
+	</select>
+	
+	<select id="test" parameterType="String" resultType="int">
+		select count(*) from gl_order where ORDER_NUMBER=#{id}
+	</select>
+</mapper>

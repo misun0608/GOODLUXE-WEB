@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.mapper.ChatMapper;
 import com.spring.mapper.ChatMemberMapper;
 
@@ -26,7 +27,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.addRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("¹æ ¸â¹ö Ãß°¡ ½ÇÆÐ +"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ +"+e.getMessage());
 		}return res;
 		// TODO Auto-generated method stub
 	}
@@ -39,7 +40,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			vo = chatmemberMapper.getRoomMember(chatmembervo);
 			
 		}catch(Exception e) {
-			System.out.println("ÃÂ¸â¹ö °¡Á®¿À±â ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½Â¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return vo;
@@ -52,7 +53,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			roomlist = (ArrayList<ChatMemberVO>) chatmemberMapper.sameRoomList(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("°°Àº ·ë ¸®½ºÆ® »Ì¾Æ¿À±â ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return roomlist;
@@ -65,7 +66,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.updateRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("¹æ ¸â¹ö ¾÷µ¥ÀÌÆ® ½ÇÆÐ +"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ +"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -79,7 +80,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.deleteRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("¹æ ¸â¹ö »èÁ¦ ½ÇÆÐ +"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ +"+e.getMessage());
 		}return res;
 		// TODO Auto-generated method stub
 
@@ -96,7 +97,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 				chatlist=null;
 			}
 		}catch(Exception e) {
-			System.out.println("¸®½ºÆ® »Ì±â ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return chatlist;
 		
@@ -109,7 +110,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.countRoomMember(member_id); 
 		}catch(Exception e) {
-			System.out.println("count ½ÇÆÐ+"+e.getMessage());
+			System.out.println("count ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return res;
 	}
@@ -118,6 +119,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 	public List<ChatMemberVO> selectChatroomList(String member_id)throws Exception{
 		ArrayList<ChatMemberVO> chatlist = new ArrayList<ChatMemberVO>();
 		try {
+<<<<<<< HEAD
 		ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 		chatlist = (ArrayList<ChatMemberVO>) chatmemberMapper.selectChatroomList(member_id);
 		if(chatlist.equals(null)) {
@@ -130,4 +132,17 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 	return chatlist;
 	}
 
+=======
+			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
+			chatlist = (ArrayList<ChatMemberVO>) chatmemberMapper.selectChatroomList(member_id);
+			if(chatlist.equals(null)) {
+				System.out.println("chatlist=null");
+				chatlist=null;
+			}
+		}catch(Exception e) {
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
+		}
+		return chatlist;
+	}
+>>>>>>> origin/master
 }

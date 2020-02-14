@@ -2,6 +2,8 @@ package com.spring.goodluxe.jj;
 
 import java.util.ArrayList;
 
+import com.spring.goodluxe.voes.Auction_HistoryVO;
+
 public interface HistoryService {
 
 	int insertHistory(Auction_HistoryVO historyvo)throws Exception;

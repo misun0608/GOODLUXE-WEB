@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="com.spring.mapper.CouponMapper">
+	<resultMap type="com.spring.goodluxe.voes.CouponVO" id="couponRM">
+		<result property="coupon_number" column="coupon_number" />
+		<result property="coupon_type" column="coupon_type" />
+		<result property="coupon_expire" column="coupon_expire" />
+		<result property="coupon_status" column="coupon_status" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+	
+	<!-- 결제페이지에 사용가능한 쿠폰 리스트 구하기 -->
+	<select id="selectCoupon" parameterType="String" resultMap="couponRM">
+		select * from GL_COUPON where member_id=#{member_id} and coupon_status ='사용전'
+	</select>
+	
+	<!-- 쿠폰사용시 상태 변경 -->
+	<update id="updateCouponstatus" parameterType="com.spring.goodluxe.voes.CouponVO">
+		update GL_COUPON set COUPON_STATUS = '사용' WHERE COUPON_NUMBER = #{coupon_number}
+	</update>
+		
+	<!-- 쿠폰 리스트 수 -->
+	<select id="getCouponListCount" resultType="int" parameterType="String">
+		select count(*) from GL_COUPON where member_id = #{member_id}
+	</select>
+	
+	<!-- 쿠폰조회페이지 쿠폰리스트 구하기 -->
+	<select id="getCouponList" parameterType="java.util.HashMap" resultMap="couponRM">
+	<![CDATA[
+		select * from (select rownum rnum,coupon_number,coupon_type,coupon_expire,
+		coupon_status,member_id
+		from(select * from GL_COUPON order by coupon_number desc))
+		where member_id = #{member_id} and rnum >= #{startRow} and rnum < =#{endRow}
+	]]>
+	</select>
+	
+	<!-- 쿠폰사용시 상태 변경 / 기간만료시 -->
+	<update id="updateCouponExstatus" parameterType="com.spring.goodluxe.voes.CouponVO">
+		update GL_COUPON set COUPON_STATUS = #{coupon_status} WHERE COUPON_NUMBER = #{coupon_number}
+	</update>
+
+</mapper>

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
-<%@ page import="com.spring.goodluxe.jj.ChatVO" %>
+<%@ page import="com.spring.goodluxe.voes.ChatVO" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	if (session.getAttribute("member_isadmin")=="N") {

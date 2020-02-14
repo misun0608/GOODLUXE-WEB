@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.AlamVO;
 import com.spring.mapper.AlamMapper;
 
 @Service("alamService")
@@ -21,7 +22,7 @@ public class AlamServiceImpl implements AlamService{
 			res = alamMapper.insertAlam(alamvo);
 			
 		}catch(Exception e) {
-			throw new Exception("¾Ë¶÷ Ãß°¡ ½ÇÆÐ´Ù À¯ÀçÁø"+e.getMessage());
+			throw new Exception("ï¿½Ë¶ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Ð´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+e.getMessage());
 		}
 		return res;
 		

@@ -3,6 +3,8 @@ package com.spring.goodluxe.jj;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.mapper.AuctionMapper;
 @Service("auctionService")
 public class AuctionServiceImpl implements AuctionService {
@@ -23,7 +25,7 @@ public class AuctionServiceImpl implements AuctionService {
 			res = auctionMapper.insertAuction(auctionvo);
 			
 		}catch(Exception e) {
-			throw new Exception("°æ¸Å Ãß°¡ ½ÇÆÐ",e);
+			throw new Exception("ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½",e);
 		}
 		return res;
 	}
@@ -39,7 +41,7 @@ public class AuctionServiceImpl implements AuctionService {
 			vo = boardMapper.selectBoard(boardvo);
 		} 
 		catch (Exception e) { 
-			System.out.println("°Ë»ö ½ÇÆÐ." + e.getMessage());
+			System.out.println("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½." + e.getMessage());
 		} 
 
 		return vo;

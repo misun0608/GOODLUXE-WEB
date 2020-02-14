@@ -7,7 +7,7 @@
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
 <%@page import="java.util.*"%>
-<%@page import="com.spring.goodluxe.jj.ChatMemberVO" %>
+<%@page import="com.spring.goodluxe.voes.ChatMemberVO" %>
 <!DOCTYPE html>
 <html>
 <head>

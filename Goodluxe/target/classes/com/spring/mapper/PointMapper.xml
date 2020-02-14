@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.PointMapper">
+	<resultMap type="com.spring.goodluxe.voes.PointVO" id="PointRM">
+		<result property="point_number" column="point_number" />
+		<result property="point_date" column="point_date" />
+		<result property="point_status" column="point_status" />
+		<result property="point_amount" column="point_amount" />
+		<result property="member_id" column="member_id" />
+		<result property="order_number" column="order_number" />
+	</resultMap>
+	
+	<insert id="insertPointHistory" parameterType="com.spring.goodluxe.voes.PointVO">
+		insert into GL_POINT(
+		point_number,point_date,point_status,
+		point_amount,member_id,order_number		
+		)
+		values(
+		gl_point_seq.NEXTVAL,#{point_date},#{point_status},
+		#{point_amount},#{member_id},#{order_number}
+		)
+	</insert>
+
+	<select id="getListCount" resultType="int" parameterType="String">
+		select count(*) from gl_point where member_id = #{member_id}
+	</select>
+
+	
+	<select id="getPointList" parameterType="java.util.HashMap" resultMap="PointRM">
+	<![CDATA[
+		select * from (select rownum rnum,point_number,point_date,point_status,
+		point_amount,member_id,order_number
+		from(select * from GL_POINT order by point_number desc))
+		where member_id = #{member_id} and rnum >= #{startRow} and rnum < =#{endRow}
+	]]>
+	</select>
+
+</mapper>

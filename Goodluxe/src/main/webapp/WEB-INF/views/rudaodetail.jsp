@@ -8,8 +8,9 @@
 <%@page import="javax.naming.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.spring.goodluxe.jj.*"%>
-<%@page import="com.spring.goodluxe.jj.AuctionVO"%>
-<%@page import="com.spring.goodluxe.jj.Auction_HistoryVO"%>
+<%@page import="com.spring.goodluxe.voes.AuctionVO"%>
+<%@page import="com.spring.goodluxe.voes.Auction_HistoryVO"%>
+<%@page import="com.spring.goodluxe.voes.Purchase2VO"%>
 <%@page import="org.springframework.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -77,7 +78,7 @@
 	
 	AuctionVO auctionvo = (AuctionVO) request.getAttribute("auctionvo");
 	int historynumber = ((Integer) request.getAttribute("auctionnumber")).intValue();
-	PurchaseVO purchasevo = (PurchaseVO) request.getAttribute("purchasevo");
+	Purchase2VO purchasevo = (Purchase2VO) request.getAttribute("purchasevo");
 	
 	
 	
@@ -694,8 +695,8 @@
 <%@page import="javax.naming.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.spring.goodluxe.jj.*"%>
-<%@page import="com.spring.goodluxe.jj.AuctionVO" %>
-<%@page import="com.spring.goodluxe.jj.Auction_HistoryVO" %>
+<%@page import="com.spring.goodluxe.voes.AuctionVO" %>
+<%@page import="com.spring.goodluxe.voes.Auction_HistoryVO" %>
 
 <!DOCTYPE html>
 <html>
