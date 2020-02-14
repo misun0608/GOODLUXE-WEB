@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!--     /* 경매 */
+CREATE TABLE GL_AUCTION (
+	AUCTION_POST_NUMBER NUMBER PRIMARY KEY, /* 경매게시글번호 */
+	AUTION_MD_NAME VARCHAR2(50) NOT NULL, /* 제품이름 */
+	AUTION_START_PRICE NUMBER NOT NULL, /* 시작가 */
+	AUTION_NOW_PRICE NUMBER, /* 현재가 */
+	AUTION_PRICE_TIME TIMESTAMP, /* 최고가sysdate yy-mm-dd hh:mm */
+	AUTION_BID_PRICE NUMBER, /* 제품낙찰가 */
+	AUTION_POST_DATE TIMESTAMP ,/* 게시일 */
+	AUTION_START_TIME TIMESTAMP, /* 경매시작시간 */
+	AUTION_END_TIME TIMESTAMP, /* 경매마감시간 */
+	AUTION_PHOTO1 VARCHAR2(100), /* 게시글대표이미지 */
+	AUTION_PHOTO2 VARCHAR2(500), /* 게시글상세이미지 */
+	AUTION_DETAIL VARCHAR2(1000), /* 제품설명상세 */
+	AUTION_LIKE NUMBER, /* 좋아용 */
+	AUTION_POST_STATUS VARCHAR2(20), /* 게시상태 */
+	ENTITY_NUMBER VARCHAR2(30) /* 상품개체번호 */
+); -->
+
+	<mapper namespace="com.spring.mapper.AuctionMapper">
+	
+		<!-- HashMap 사용 시 -->
+	<!-- 	<resultMap type="java.util.HashMap" id="hashmapAuctionVO">
+			<result property="AUCTION_POST_NUMBER" column="AUCTION_POST_NUMBER" />
+			<result property="AUCTION_MD_NAME" column="AUCTION_MD_NAME"/>
+			<result property="AUCTION_START_PRICE" column="AUCTION_START_PRICE"/>
+			<result property="AUCTION_NOW_PRICE" column="AUCTION_NOW_PRICE"/>
+			<result property="AUCTION_PRICE_TIME" column="AUCTION_PRICE_TIME"/>
+			<result property="AUCTION_BID_PRICE" column="AUCTION_BID_PRICE"/>
+			<result property="AUCTION_POST_DATE" column="AUCTION_POST_DATE"/>
+			<result property="AUCTION_START_TIME" column="AUCTION_START_TIME"/>
+			<result property="AUCTION_END_TIME" column="AUCTION_END_TIME"/>
+			<result property="AUCTION_PHOTO1" column="AUCTION_PHOTO1"/>
+			<result property="AUCTION_PHOTO2" column="AUCTION_PHOTO2"/>
+			<result property="AUCTION_DETAIL" column="AUCTION_DETAIL"/>
+			<result property="AUCTION_LIKE" column="AUCTION_LIKE"/>
+			<result property="AUCTION_POST_STATUS" column="AUCTION_POST_STATUS"/>
+			<result property="ENTITY_NUMBER" column="ENTITY_NUMBER"/>
+		</resultMap> -->
+		
+	<resultMap type="com.spring.goodluxe.voes.AuctionVO" id="resultAuctionVO">
+			<result property="AUCTION_POST_NUMBER" column="AUCTION_POST_NUMBER" />
+			<result property="AUCTION_MD_NAME" column="AUCTION_MD_NAME" />
+			<result property="AUCTION_START_PRICE" column="AUCTION_START_PRICE" />
+			<result property="AUCTION_NOW_PRICE" column="AUCTION_NOW_PRICE" />
+			<result property="AUCTION_PRICE_TIME" column="AUCTION_PRICE_TIME" />
+			<result property="AUCTION_BID_PRICE" column="AUCTION_BID_PRICE" />
+			<result property="AUCTION_POST_DATE" column="AUCTION_POST_DATE" />
+			<result property="AUCTION_START_TIME" column="AUCTION_START_TIME" />
+			<result property="AUCTION_END_TIME" column="AUCTION_END_TIME" />
+			<result property="AUCTION_PHOTO1_STORED" column="AUCTION_PHOTO1_STORED" />
+			<result property="AUCTION_PHOTO2_STORED" column="AUCTION_PHOTO2_STORED" />
+			<result property="AUCTION_PHOTO3_STORED" column="AUCTION_PHOTO3_STORED" />
+			<result property="AUCTION_PHOTO4_STORED" column="AUCTION_PHOTO4_STORED" />
+			<result property="AUCTION_PHOTO5_STORED" column="AUCTION_PHOTO5_STORED" />
+			<result property="AUCTION_DETAIL" column="AUCTION_DETAIL" />
+			<result property="AUCTION_LIKE" column="AUCTION_LIKE" />
+			<result property="AUCTION_POST_STATUS" column="AUCTION_POST_STATUS" />
+			<result property="ENTITY_NUMBER" column="ENTITY_NUMBER" />
+	</resultMap>  
+		
+
+
+	
+	
+	<insert id="insertAuction" parameterType="com.spring.goodluxe.voes.AuctionVO">
+	<selectKey order="BEFORE" keyProperty="AUCTION_POST_NUMBER" resultType="int">
+       SELECT NVL(MAX(TO_NUMBER(AUCTION_POST_NUMBER)),0)+1 
+       FROM GL_AUCTION
+       
+      </selectKey>
+		INSERT INTO GL_AUCTION VALUES(
+		#{AUCTION_POST_NUMBER},
+		#{AUCTION_MD_NAME},
+		#{AUCTION_START_PRICE},
+		#{AUCTION_NOW_PRICE},
+		SYSTIMESTAMP,
+		0,
+		SYSDATE,
+		#{AUCTION_START_TIME},
+		#{AUCTION_END_TIME},
+		#{AUCTION_PHOTO1_STORED},
+		#{AUCTION_PHOTO2_STORED},
+		#{AUCTION_PHOTO3_STORED},
+		#{AUCTION_PHOTO4_STORED},
+		#{AUCTION_PHOTO5_STORED},
+		#{AUCTION_DETAIL},
+		0,
+		#{AUCTION_POST_STATUS},
+		#{ENTITY_NUMBER}
+		)
+	</insert>
+		
+		
+	
+	
+	<select id="selectAuction" parameterType="com.spring.goodluxe.voes.AuctionVO" resultMap="resultAuctionVO">
+		SELECT * FROM GL_AUCTION WHERE AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+	</select>
+	
+	<select id="selectAuction_PostNumber" parameterType="com.spring.goodluxe.voes.AuctionVO" resultMap="resultAuctionVO">
+		SELECT * FROM GL_AUCTION WHERE AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+	</select>
+	<!-- <select id="selectekfmsrj" resultMap="resultAuctionVO">
+		select * from gl_auction order by id
+	</select>
+	<update id="updateAction" parameterType="com.spring.goodluxe.voes.AuctionVO">
+		update gl_auction set id=#{id}, name=#{name}, age=#{age} where id=#{id}
+	</update>
+		
+	<delete id="deleteAuction" parameterType="com.spring.goodluxe.voes.AuctionVO">
+		delete from gl_auction where id=#{id}
+	</delete> -->
+	
+		
+		
+	</mapper>

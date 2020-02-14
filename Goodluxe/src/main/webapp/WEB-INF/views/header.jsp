@@ -16,8 +16,8 @@
 				if (mem_id == null) {
 			%>
             <ul class="topmenu nonmember_menu on">
-                <li class="cs"><a href="#">고객센터</a></li>
-                <li class="singin"><a href="#">회원가입</a></li>
+                <li class="cs"><a href="SC.do">고객센터</a></li>
+                <li class="singin"><a href="joinform.do">회원가입</a></li>
                 <li class="login">
                     <a href="#">로그인</a>
                 </li>
@@ -27,14 +27,15 @@
 					if (mem_isadmin.equals("Y")) {
 			%>
             <ul class="topmenu member_menu on">
+            	<li class="cs"><a href="SC.do">고객센터</a></li>
             	<li class="logout"><a href="logout.do">로그아웃</a></li>
-                <li class="admin_page_link"><a href="#">관리자페이지</a></li>
+                <li class="admin_page_link"><a href="admin_main.do">관리자페이지</a></li>
             </ul>
 			<%
-					} else if (mem_class.equals("Y") || mem_class.equals("B")) {
+					} else if (mem_class.equals("Y") || mem_class.equals("B") || mem_id.equals(null)) {
 			%>
             <ul class="topmenu member_menu on">
-                <li class="cs"><a href="#">고객센터</a></li>
+                <li class="cs"><a href="SC.do">고객센터</a></li>
                 <li class="logout"><a href="logout.do">로그아웃</a></li>
                 <li class="mypage"><a href="mypageOAS.do?member_id=<%=mem_id%>">마이페이지</a></li>
                 <li class="notice">
@@ -48,7 +49,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="search_result.html" class="notice_list on">
+                            <a href="#" class="notice_list on">
                                 '생로랑 모노그램 카바스백' 제품이 판매 완료되었습니다 ㅠㅠ..<br>
                                 Saint Laurent 의 다른 제품을 보시겠어요?
                             </a>
