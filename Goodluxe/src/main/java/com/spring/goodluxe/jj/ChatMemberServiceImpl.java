@@ -113,5 +113,21 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 		}
 		return res;
 	}
+	
+	@Override
+	public List<ChatMemberVO> selectChatroomList(String member_id)throws Exception{
+		ArrayList<ChatMemberVO> chatlist = new ArrayList<ChatMemberVO>();
+		try {
+		ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
+		chatlist = (ArrayList<ChatMemberVO>) chatmemberMapper.selectChatroomList(member_id);
+		if(chatlist.equals(null)) {
+			System.out.println("chatlist=null");
+			chatlist=null;
+		}
+	}catch(Exception e) {
+		System.out.println("리스트 뽑기 실패+"+e.getMessage());
+	}
+	return chatlist;
+	}
 
 }

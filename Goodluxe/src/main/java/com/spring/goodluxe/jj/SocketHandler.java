@@ -160,7 +160,7 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 	MemberVO mem = new MemberVO();
 		mem.setMember_id(member_id); 
 	String userId = mem.getMember_id();
-	String roomName = chatmemberService.selectChatList(member_id).get(0).getChat_room();
+	String roomName = chatmemberService.selectChatroomList(member_id).get(0).getChat_room();
 	System.out.println("164 roomName="+roomName);
 	// 검색어로 들어왔을 경우,
 	if(message.getPayload().contains("!%/&")) {

@@ -65,5 +65,13 @@
 		from gl_chatmember
 	</select>
 	
+	<!-- 룸네임을 구하기위한  -->
+	<select id="selectChatroomList" parameterType="String" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+		select *
+		from gl_chatmember
+		where member_id = #{member_id}
+	</select>
+	
+	
 		
 </mapper>
