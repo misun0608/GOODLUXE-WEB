@@ -30,10 +30,10 @@ public class MemberJoinController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping(value = "/joinform.do")
-	public String joinform() {
-		return "joinform";
-	}
+//	@RequestMapping(value = "/joinform.do")
+//	public String joinform() {
+//		return "joinform";
+//	}
 
 	@RequestMapping(value = "/joinform2.do")
 	public String joinform2() {

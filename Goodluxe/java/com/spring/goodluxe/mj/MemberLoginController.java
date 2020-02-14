@@ -30,7 +30,7 @@ public class MemberLoginController {
     
 	@Autowired
 	private MemberService gls;
-//
+
 //	@RequestMapping(value = "/login_page.do")
 //	public String login_page() {
 //		return "login_page";
@@ -106,7 +106,7 @@ public class MemberLoginController {
    private JavaMailSender mailSender;
    
    //로그인 첫 화면 요청 메소드
-   @RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
+   @RequestMapping(value = "/joinform.do", method = { RequestMethod.GET, RequestMethod.POST })
    public ModelAndView login_page(Model model, HttpSession session) {
       ModelAndView mav = new ModelAndView();
       /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -120,8 +120,7 @@ public class MemberLoginController {
        model.addAttribute("kakao_url", kakaoUrI);
 
         //네이버 
-		mav.setViewName("login");
-        
+		mav.setViewName("joinform");
         
       return mav;
    }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.mapper.MemberMapper;
@@ -79,44 +80,44 @@ public class MemberServiceImpl implements MemberService {
 
 		return result; // 결과값 "", EY, EN, B, ADMIN, IDPWN
 	}
-	
+
 	@Override
 	public String userSnsChk(MemberVO memberVO) throws Exception {
 		MemberVO member_chk, admin_chk = null;
 		String get_mapper_member_id, get_mapper_member_pass, get_mapper_member_class, get_mapper_member_isadmin = null;
-		String id = null, pass = null, m_class=null, isadmin = null;
+		String id = null, pass = null, m_class = null, isadmin = null;
 		String m_status_chk, a_status_chk = "";
 		String result = ""; // 이메일 비번이 틀렸을 경우 결과값
-		
+
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 			member_chk = memberMapper.userSnsChk(memberVO);
 			System.out.println("0-3. MemberServiceImpl 캐스트 오류:" + member_chk);
-			
+
 			get_mapper_member_id = member_chk.getMember_id();
 			id = memberVO.getMember_id();
-			
+
 //			System.out.println("1. MemberServiceImpl" + id);
 //			System.out.println("2. MemberServiceImpl" + pass);
 //			System.out.println("3. MemberServiceImpl" + m_class);
 //			System.out.println("4. MemberServiceImpl" + isadmin);
-			
+
 			// 동일한 아이디 있을 경우
 			if (get_mapper_member_id.equals(id)) {
 				result = "Y";
 			} else { // 아이디 없을 경우
 				result = "N";
 			}
-			
+
 			memberVO.setMember_id(id);
 			memberVO.setMember_class(m_class);
 			memberVO.setMember_isadmin(isadmin);
-			
+
 		} catch (Exception e) {
 			System.out.println("6. memberServiceImpl 로그인 실패" + e.getMessage());
 		}
 		System.out.println("7. memberServiceImpl:" + result);
-		
+
 		return result; // 결과값 Null, "Y", "N"
 	}
 
@@ -208,7 +209,6 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
-	
 	// 이메일 중복 체크
 	@Override
 	public int emailCheck(MemberVO memberVO) throws Exception {
@@ -230,7 +230,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return res;
 	}
-	
+
 	// 회원 가입
 	@Override
 	public int insertMember(MemberVO memberVO) {
@@ -239,7 +239,7 @@ public class MemberServiceImpl implements MemberService {
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
 			res = membermapper.insertMember(memberVO);
 			System.out.println("1 res = " + res);
-			
+
 			return res;
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -254,7 +254,7 @@ public class MemberServiceImpl implements MemberService {
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
 			res = membermapper.verifyEmail(memberVO);
 			System.out.println("2 res = " + res);
-			
+
 			return res;
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -274,17 +274,75 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return res;
 	}
-	
+
 	@Override
 	public ArrayList<MemberVO> getMemberlist() throws Exception {
 		try {
 			ArrayList<MemberVO> member_list = new ArrayList<MemberVO>();
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
 			member_list = membermapper.getMemberList();
-			
+
 			return member_list;
 		} catch (Exception e) {
 			throw new Exception("회원 리스트 검색 실패", e);
 		}
+	}
+
+	// 아이디 찾기 - 이름, 이메일 주소 비교
+	@Override
+	public String findMemberId(MemberVO memberVO) throws Exception {
+		String findId = null;
+
+		try {
+			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+			findId = membermapper.findMemberId(memberVO);
+
+			System.out.println(findId);
+			System.out.println(memberVO.getMember_email());
+			System.out.println(memberVO.getMember_name());
+
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return findId;
+	}
+
+//	// 이름, 이메일 주소 비교
+//	@Override
+//	public Model findMemberPw(MemberVO memberVO) throws Exception {
+//		Model findPw = null;
+//		String dbemail = "";
+//		String dbid = "";
+//
+//			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+//			dbemail = membermapper.emailLink_chk(memberVO);
+//			dbid = membermapper.findMemberPw(memberVO);
+//
+//				System.out.println(dbemail);
+//				System.out.println(dbid);
+//				System.out.println(memberVO.getMember_email());
+//				System.out.println(memberVO.getMember_id());
+//		return findPw;
+//	}
+	
+	// 이름, 이메일 주소 비교
+	@Override
+	public int findMemberPw(MemberVO memberVO) throws Exception {
+		int res = 0;
+		String dbid = null;
+		try {
+			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+			dbid = membermapper.findMemberId(memberVO);
+
+			if(dbid != null) {
+			System.out.println(dbid);
+			System.out.println(memberVO.getMember_email());
+			System.out.println(memberVO.getMember_name());
+			res = 1;
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return res;
 	}
 }

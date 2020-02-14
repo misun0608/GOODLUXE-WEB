@@ -34,7 +34,7 @@ public class KakaoController {
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "b4dc56940b37e8721993fe66252e1bb6"));
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/goodluxe/oauth"));
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/goodluxe/kakaologin.do"));
 		postParams.add(new BasicNameValuePair("code", autorize_code)); //로그인과정 중 얻은 코드값
 		System.out.println(autorize_code);
 		final HttpClient client = HttpClientBuilder.create().build();

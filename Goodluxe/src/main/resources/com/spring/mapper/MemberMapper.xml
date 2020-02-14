@@ -96,16 +96,38 @@
 		VALUES(#{member_id}, #{member_pw}, #{member_name}, #{member_zipcode}, #{member_addr1}, #{member_addr2}, #{member_phone}, #{member_email}, #{member_email_receive}, #{member_like_brand}, #{member_like_category}, sysdate, 'N', 0, 'N')
 	</insert>
 	
+	<!-- 이메일 인증 -->
 	<update id="verifyEmail" parameterType="com.spring.goodluxe.voes.MemberVO">
 		UPDATE gl_member
 		SET member_class = 'Y'
 		WHERE member_id=#{member_id}
 	</update>
 		
+	<!-- sns 간편 회원가입 -->
 	<insert id="insertSnsMember" parameterType="com.spring.goodluxe.voes.MemberVO">
 		INSERT
 		INTO gl_member (member_id, member_name, member_email, member_join_date, member_class, member_point, member_isadmin) 
 		VALUES(#{member_id}, #{member_name}, #{member_email}, sysdate, 'N', 0, 'N')
 	</insert>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
+		SELECT member_id 
+		FROM gl_member 
+		WHERE member_name=#{member_name} AND member_email=#{member_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
+		SELECT member_id
+		FROM gl_member
+		WHERE member_id=#{member_id} AND member_email=#{member_email}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changeMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
+		UPDATE gl_member
+		SET member_pw=#{member_pw}
+		WHERE member_id=#{member_id} 
+	</update>
 </mapper>
