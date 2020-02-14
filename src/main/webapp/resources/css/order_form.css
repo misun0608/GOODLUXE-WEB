@@ -1,0 +1,505 @@
+/* PC와 태블릿일 경우 사용하는 css */
+/* 모바일의 경우 해당 로그인 버튼 클릭 불가 */
+
+/* 폰트 */
+@font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+/* 초기화 */
+* {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+
+/* 데스크톱 */
+.order_form_title{
+    position:relative;
+    width : 1060px;
+    height : 35px;
+    left: 50%;
+    margin-left: -540px;
+    padding : 10px
+}
+.my_discount_info{
+    position : relative;
+    width : 1080px;
+    height : 30px;
+    left:50%;
+    margin-left : -540px;
+    padding : 10px;
+    border : 1.5px solid  #8073A0;
+    border-collapse: collapse;
+}
+.my_discount_info td{
+    border : 1.5px solid #8073A0; 
+    background-color: #D8D5E0	;
+    padding : 0 20px 0px 20px;
+}
+.my_discount_info td:first-of-type{
+    width : 100px;
+    background-color: #8073A0;
+    color : white;
+    text-align: center;
+}
+.about_order_table{
+    position : relative;
+    width : 1080px;
+    height : 30px;
+    left:50%;
+    margin-left : -540px;
+    border-collapse: collapse;
+    border : 1px solid #DFB1AB;
+}
+.about_order_table tr th{
+    background-color:#F0D2CF;
+    padding : 7px;
+    font-weight: normal;
+    border : 1px solid #DFB1AB;
+}
+.about_order_table tr td{
+    border : 1px solid #DFB1AB;
+    padding : 7px;
+    font-weight: normal;
+    text-align: center;
+}
+.about_order_table img{
+    width : 160px;
+}
+.about_order_table tr:last-of-type td{
+    text-align: right;
+}
+.about_shipping_table{
+    position : relative;
+    width : 1080px;
+    height : 30px;
+    left:50%;
+    margin-left : -540px;
+    border-collapse: collapse;
+    border : 1px solid #DFB1AB;
+}
+.about_shipping_table tr td{
+    padding: 8px;
+    border : 1px solid #DFB1AB;
+}
+.about_shipping_table tr td:first-of-type{
+    background-color:#F0D2CF; 
+    min-width : 100px;
+    text-align: center;
+}
+.about_shipping_table input[type=radio]{
+    margin : 10px;
+    outline: none;
+}
+.about_shipping_table label{
+    position: relative;
+    top : 0;
+    margin:0 10px 0 -15px;
+    font-size: 16px;
+}
+.about_shipping_table .receiving[type = text]{
+    border:none;
+    width : 100%;
+    height : 20px   ;
+    outline: none;
+}
+.about_shipping_table .zipcode_button{
+    width : 60px;
+    height : 23px;
+    padding : 3px;
+    margin: 0 10px 5px 0px;
+    border: 0.9px solid #BBCDDB;
+    background-color : #D1DFE8;
+    border-radius: 3px;
+    color : grey;
+    font-size: 12px;
+}
+.about_shipping_table .zipcode[type = text]{
+    position: relative;
+    width: 80px;
+    height : 20px;
+    border : none;
+    outline: none;
+}
+.about_shipping_table .addr[type=text]{
+    position: relative;
+    width : 100%;
+    height : 20px;
+    border: none;
+    margin : 5px 0 5px 0; 
+    border-bottom: 1px solid #BBCDDB;
+    outline: none;
+}
+.about_shipping_table input[type = tel]{
+    border: none;
+    width : 40px;
+    height : 20px;
+    outline: none;
+}
+.about_shipping_table .email{
+    border:none;
+    width : 120px;
+    height : 20px;
+    outline: none;
+}
+.about_shipping_table .email2{
+    border:none;
+    width : 15px;
+    height : 20px;
+    outline: none;
+}
+.grey_letter{
+    color : grey;
+}
+.about_shipping_table textarea{
+    width : 100%;
+    height : 50px;
+    border : none;
+    outline: none;
+}
+.about_pay_table{
+    position : relative;
+    width : 1080px;
+    height : 30px;
+    left:50%;
+    margin-left : -540px;
+    border-collapse: collapse;
+    border : 1px solid #DFB1AB;
+}
+.about_pay_table tr td{
+    padding: 8px 20px;
+    border : 1px solid #DFB1AB;
+    text-align: right;
+}
+
+.about_pay_table tr:first-of-type td{
+    background-color:#F0D2CF; 
+    min-width : 100px;
+    text-align: center;
+}
+.about_checksys_table{
+    position : relative;
+    width : 1080px;
+    height : 30px;
+    left:50%;
+    margin-left : -540px;
+    border-collapse: collapse;
+    border : 1px solid#8073A0;
+    background-color:#F3F4F8;
+}
+.about_checksys_table tr td{
+    padding: 8px;
+    border : 1px solid #8073A0;
+}
+.about_checksys_table input[type = radio]{
+    margin : 10px;
+}
+.about_checksys_table label{
+    position: relative;
+    top : 0;
+    margin:0 10px 0 -15px;
+    font-size: 16px;
+    color : black;
+}
+.checksys_how{
+    background-color: #C6C0D5
+}
+.about_checksys_table hr{
+    border : 0.3px solid grey;
+}
+.check_confirm{
+    text-align: right;
+    font-size: 15px;
+    width : 223px;
+}
+.check_confirm .final_price{
+    font-size: 25px;
+    color : rgb(156, 0, 0);
+    font-weight: bolder;
+}
+.check_confirm .payment_btn{
+    position: relative;
+    width : 250px;
+    height : 40px;
+    margin : 10px 10px -50px 10px;
+    background-color: #8073A0;
+    color : white;
+    font-size: 18px;
+    border : 0px;
+}
+.checksys_more_info{
+    height : 150px;
+}
+
+
+@media screen and (max-width: 767px) {
+
+/* 데스크톱 */
+.order_form_title{
+    position:relative;
+    width : 340px;
+    height : 35px;
+    left: 50%;
+    margin-left: -170px;
+    padding : 0px;
+}
+.my_discount_info{
+    position : relative;
+    width : 340px;
+    height : 35px;
+    left:50%;
+    margin-left : -170px;
+    padding : 10px;
+    border : 1.5px solid  #8073A0;
+    border-collapse: collapse;
+}
+.my_discount_info td{
+    border : 1.5px solid white;
+    background-color: #8073A0;
+    color : white;
+    padding : 0 20px 0px 20px;
+}
+.my_discount_info td:first-of-type{
+    width : 50px;
+    background-color: #8073A0;
+    color : white;
+    text-align: center;
+    display: none;
+}
+.about_order_table{
+    position : relative;
+    width : 340px;
+    height : 30px;
+    left:50%;
+    margin-left : -170px;
+    border-collapse: collapse;
+    border : none;
+}
+.about_order_table tr th{
+    background-color:#F0D2CF;
+    padding : 7px;
+    font-weight: normal;
+    border : 1px solid #DFB1AB;
+    display: none;
+}
+.about_order_table tr td{
+    border : none;
+    font-weight: normal;
+    text-align: center;
+    display:block;
+}
+.about_order_table tr td:first-of-type{
+    border-top:3px solid #DFB1AB;
+
+}
+.about_order_table tr:last-of-type td:last-of-type{
+    border-bottom:3px solid #DFB1AB;
+}
+.product_name{
+    font-weight: bolder;
+    font-size: 23px;
+    padding : 20px 0 20px 0 
+}
+.about_order_table img{
+    width : 160px;
+}
+.about_order_table tr:last-of-type td{
+    text-align: right;
+}
+.about_order_table td[data-title]:before{
+    content:attr(data-title);
+    float: left;
+    font-size: .7em;
+    font-weight: 400;
+    color:#757575;
+}
+.about_shipping_table{
+    position : relative;
+    width : 340px;
+    height : 30px;
+    left:50%;
+    margin-left : -170px;
+    border-collapse: collapse;
+    border : 1px solid #DFB1AB;
+}
+.about_shipping_table tr td{
+    padding: 8px;
+    border : 1px solid #DFB1AB;
+}
+.about_shipping_table tr td:first-of-type{
+    background-color:#F0D2CF; 
+    min-width : 100px;
+    text-align: center;
+}
+.about_shipping_table input[type=radio]{
+    margin : 10px;
+    outline: none;
+}
+.about_shipping_table label{
+    position: relative;
+    top : 0;
+    margin:0 40px 0 -15px;
+    font-size: 16px;
+}
+.about_shipping_table .receiving[type = text]{
+    border:none;
+    width : 100%;
+    height : 20px   ;
+    outline: none;
+}
+.about_shipping_table .zipcode_button{
+    width : 60px;
+    height : 23px;
+    padding : 3px;
+    margin: 0 10px 5px 0px;
+    border: 0.9px solid #BBCDDB;
+    background-color : #D1DFE8;
+    border-radius: 3px;
+    color : grey;
+    font-size: 12px;
+}
+.about_shipping_table .zipcode[type = text]{
+    position: relative;
+    width: 80px;
+    height : 20px;
+    border : none;
+    outline: none;
+}
+.about_shipping_table .addr[type=text]{
+    position: relative;
+    width : 100%;
+    height : 20px;
+    border: none;
+    margin : 5px 0 5px 0; 
+    border-bottom: 1px solid #BBCDDB;
+    outline: none;
+}
+.about_shipping_table input[type = tel]{
+    border: none;
+    width : 40px;
+    height : 20px;
+    outline: none;
+}
+.about_shipping_table .email{
+    border:none;
+    width : 120px;
+    height : 20px;
+    outline: none;
+}
+.about_shipping_table .email:first-of-type{
+    margin-right: 80px;
+    border-bottom: 0.9px solid #BBCDDB;
+   
+}
+.about_shipping_table .email2{
+    border:none;
+    width : 15px;
+    height : 20px;
+    outline: none;
+}
+.grey_letter{
+    color : grey;
+}
+.about_shipping_table textarea{
+    width : 100%;
+    height : 50px;
+    border : none;
+    outline: none;
+}
+.about_pay_table{
+    position : relative;
+    width : 340px;
+    height : 30px;
+    left:50%;
+    margin-left : -170px;
+    border-collapse: collapse;
+    border :none;
+}
+.about_pay_table tr td{
+    padding: 8px 20px;
+    border : none;
+    text-align: right;
+    display: block;
+}
+.about_pay_table tr:first-of-type td{
+    background-color:#F0D2CF; 
+    min-width : 100px;
+    text-align: center;
+    display: none;
+}
+.about_pay_table td[data-title]:before{
+    content:attr(data-title);
+    float: left;
+    font-size: 1em;
+    font-weight: bolder;
+    color:rgb(206, 121, 110);
+}
+.about_pay_table tr td:first-of-type{
+    border-top: 3px solid #DFB1AB;
+}
+.about_pay_table tr td:last-of-type{
+    border-bottom: 3px solid #DFB1AB;
+}
+
+.about_checksys_table{
+    position : relative;
+    width : 340px;
+    height : 30px;
+    left:50%;
+    margin-left : -170px;
+    border-collapse: collapse;
+    border : 1px solid#8073A0;
+}
+.about_checksys_table tr td{
+    padding: 8px;
+    border : 1px solid #8073A0;
+}
+.about_checksys_table input[type = radio]{
+    margin : 10px;
+}
+.about_checksys_table label{
+    position: relative;
+    top : 0;
+    margin:0 10px 0 -15px;
+    font-size: 16px;
+    color : black;
+}
+.about_checksys_table{
+    background-color:#F3F4F8;
+}
+.about_checksys_table td {
+    display: block;
+}
+
+.checksys_how{
+    background-color: #C6C0D5;
+}
+.about_checksys_table hr{
+    border : 0.3px solid grey;
+}
+.check_confirm{
+    text-align: right;
+    font-size: 15px;
+    height : 140px;
+}
+.check_confirm .final_price{
+    font-size: 25px;
+    color : rgb(156, 0, 0);
+    font-weight: bolder;
+}
+.payment_btn{
+    position: absolute;
+    width : 250px;
+    height : 40px;
+    margin : 10px;
+    left: 50%;
+    margin-left: -125px;
+    background-color: #8073A0;
+}
+
+.checksys_more_info{
+    height : 50px;
+}
+
+
+
+}

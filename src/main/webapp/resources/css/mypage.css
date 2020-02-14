@@ -1,0 +1,309 @@
+@charset "UTF-8";
+
+	/* 초기화 */
+	* {margin:0px; padding:0px;}
+	ul,ol,li {list-style:none;}
+	a {text-decoration:none; outline:0;}
+	img {vertical-align:top;}
+	
+	/* 데스크톱 */	
+	.title_div{
+		width : 1100px;
+		height : 75px;
+		position : absolute;
+		left : 50%;
+		margin-left : -550px;
+	}
+	.mypage_title{
+		position : absolute ; 
+		left : 100px; 
+		top : 10px;
+		color : #080424;
+	}
+	.mypage_body{
+		text-align : center;
+	}
+	
+	.my_info{
+		position : absolute;
+		top : 280px;
+		left : 50%;
+		display : flex;
+		align-items : center;
+		justify-content : center;
+		width : 980px;
+		margin-left : -490px;
+		height : 80px;
+		background:#CEB172;
+		
+	}
+	.info_list{
+		position : relative;
+	}
+	.info_list>li{
+		float:left;
+		margin:20px;
+		font-weight : bold;
+		color: white;
+	}
+	.menu_block{
+		position : absolute;
+		left : 50%;
+		top : 380px;
+		width : 1000px;
+		margin-left : -500px;
+	}
+	.mypage_menu{
+		margin:10px;
+		width : 230px;
+		height : 140px;
+		background:#080424;
+		float:left;
+	}
+	.back_card .mypage_menu{
+		background :#CDD1DF;
+	}
+	.menu_icon{
+		padding-top: 20px;
+	}	
+	.icons{
+		
+		width : 50px;
+		height : 50px;
+		
+	}
+	.menu_content{
+		 padding : 15px;
+	}	
+	.menu_title{
+		font-size : 1.2em;	
+		font-weight : bold;
+	}
+	.menu_explain{
+		font-size :0.8em;
+	}
+	.my_info a{
+		 text-decoration: underline;
+	}
+	.menu_block a {
+	   text-decoration: none;
+	}
+	.mypage_body .my_info a:link, .mypage_body .my_info a:visited {
+	    color : white;
+	}
+	.mypage_body  {
+	    color: #CEB172;
+	}
+	.mypage_body a:visited ,.back_card a:link{
+		color:#080424;
+	}
+	
+	.main_container{
+		width:250px;
+		height:160px;
+		position: relative;
+		float: left;
+	}
+	.the_card{
+		position: absolute;
+		width:100%;
+		height:100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease;
+	}
+	/* .the_card.on{
+		transform:rotateY(180deg);
+	} */
+	/* .the_card:hover{
+		transform:rotateY(180deg);
+	} */
+	.front_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility : hidden;	
+	}
+	.back_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility: hidden;
+		transform :rotateY(180deg);
+	}
+
+
+	
+	/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+	.title_div{
+		width : 768px;
+		height : 65px;
+		position : absolute;
+		left : 50%;
+		margin-left : -384px;
+	}
+	.mypage_title{
+		position : absolute ; 
+		left : 60px; 
+		top : 10px;
+		color : #080424;
+	}
+	.my_info{
+		position : absolute;
+		top : 250px;
+		left : 50%;
+		display : flex;
+		align-items : center;
+		justify-content : center;
+		width : 720px;
+		margin-left : -360px;
+		height : 80px;
+		background:#CEB172;
+		
+	}
+	.info_list>li{
+		float:left;
+		margin:18px;
+		font-weight : bold;
+		color: white;
+	}
+	.menu_block{
+		position : absolute;
+		left : 50%;
+		top : 380px;
+		width : 740px;
+		margin-left : -370px;
+	}
+	.mypage_menu{
+		margin:10px;
+		width : 165px;
+		height : 155px;
+		background:#080424;
+		float:left;
+	}
+	.main_container{
+		width:185px;
+		height:175px;
+		position: relative;
+		float: left;
+	}
+	.the_card{
+		position: absolute;
+		width:100%;
+		height:100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease;
+	}
+	.front_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility : hidden;	
+	}
+	.back_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility: hidden;
+		transform :rotateY(180deg);
+	}
+
+		
+}
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+
+	.title_div{
+		width : 90%;
+		height : 70px;
+		position : absolute;
+		left : 50%;
+		margin-left : -200px;
+	}
+	.mypage_title{
+		position : absolute ; 
+		left : 15px; 
+		top : 13px;
+		color : #080424;
+		
+	}
+	.my_info{
+		position : absolute;
+		top : 170px;
+		left : 50%;
+		display : flex;
+		align-items : center;
+		justify-content : center;
+		width : 360px;
+		margin-left : -180px;
+		height : 110px;
+		background:#CEB172;
+		
+	}
+	.info_list>li{
+		float:left;
+		margin:5px;
+		margin-left:25px;
+		font-weight : bold;
+		color: white;
+	}
+	.menu_block{
+		position : absolute;
+		left : 50%;
+		top : 330px;
+		width : 380px;
+		margin-left : -185px;
+	}
+	.mypage_menu{
+		margin:5px;
+		width : 82px;
+		height : 90px;
+		background:#080424;
+		float:left;
+	}
+	.icons{
+		width : 30px;
+		height : 30px;
+	}
+	.menu_content{
+		padding : 5px;
+   }	
+   .menu_title{
+	   font-size : 0.8em;	
+	   font-weight : bold;
+   }
+   .back_card .menu_content{
+	   position : relative;
+	   top:30%;
+
+   }
+   .menu_explain{
+	   display : none;
+   }
+	.main_container{
+		width:92px;
+		height:100px;
+		position: relative;
+		float: left;
+	}
+	.the_card{
+		position: absolute;
+		width:100%;
+		height:100%;
+		transform-style: preserve-3d;
+		transition: all 0.5s ease;
+	}
+	.front_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility : hidden;	
+	}
+	.back_card{
+		position: absolute;
+		width: 100%;
+		height : 100%;
+		backface-visibility: hidden;
+		transform :rotateY(180deg);
+	}
+}

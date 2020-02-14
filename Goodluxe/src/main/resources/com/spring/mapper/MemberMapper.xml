@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.MemberMapper">
+	<!-- property 값이 키 값이 됨 -->
+	<resultMap type="java.util.HashMap" id="hashMapVO">
+		<result property="member_id" column="member_id"/>
+		<result property="member_pw" column="member_pw"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_zipcode" column="member_zipcode"/>
+		<result property="member_addr1" column="member_addr1"/>
+		<result property="member_addr2" column="member_addr2"/>
+		<result property="member_phone" column="member_phone"/>
+		<result property="member_email" column="member_email"/>
+		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의입니다...크흠 -->
+		<result property="member_like_brand" column="member_like_brand"/>
+		<result property="member_like_category" column="member_like_category"/>
+		<result property="member_join_date" column="member_join_date"/>
+		<result property="member_class" column="member_class"/>
+		<result property="member_point" column="member_point"/>
+		<result property="member_isadmin" column="member_isadmin"/>
+	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.MemberVO" id="memberRM">
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_pw" column="member_pw"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_zipcode" column="member_zipcode"/>
+		<result property="member_addr1" column="member_addr1"/>
+		<result property="member_addr2" column="member_addr2"/>
+		<result property="member_phone" column="member_phone"/>
+		<result property="member_email" column="member_email"/>
+		<result property="member_email_receive" column="member_email_receive"/>
+		<result property="member_like_brand" column="member_like_brand"/>
+		<result property="member_like_category" column="member_like_category"/>
+		<result property="member_join_date" column="member_join_date"/>
+		<result property="member_class" column="member_class"/>
+		<result property="member_point" column="member_point"/>
+		<result property="member_isadmin" column="member_isadmin"/>
+	</resultMap>
+	
+	
+	<select id="userChk" parameterType="com.spring.goodluxe.voes.MemberVO" resultMap="memberRM">
+		select * 
+		from gl_member 
+		where member_id=#{member_id}
+	</select>
+	
+	<select id="selectMemberPoint" parameterType="com.spring.goodluxe.voes.PointVO" resultMap="memberRM">
+      select member_id, member_point
+      from gl_member 
+      where member_id=#{member_id}
+	</select>
+	
+	<update id="updateMemberPoint" parameterType="java.util.HashMap">
+      update GL_MEMBER set member_point = #{member_point} where member_id = #{member_id}
+	</update>
+	
+	<select id="selectMember" parameterType="String" resultMap="memberRM">
+		select * from GL_MEMBER where member_id=#{member_id}
+	</select>
+	
+	<update id="updateMemberpoint" parameterType="com.spring.goodluxe.voes.MemberVO">
+		update GL_MEMBER set MEMBER_POINT = #{member_point} WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	<!-- 로그인시 회원 등급 체크 -->
+	<select id="member_status_chk" resultType="String">
+      select member_class
+      from gl_member 
+      where member_id = #{member_id}
+   </select>
+   
+   <!-- 로그인시 어드민인지 아닌지 체크 -->
+	<select id="admin_status_chk" resultType="String">
+      select member_isadmin
+      from gl_member 
+      where member_id = #{member_id}
+   </select>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idChk" resultType="String"> <!-- resultType 안쓰면 기본이 int랬나? -->
+		select member_id
+		from gl_member
+		where member_id=#{member_id}
+	</select>
+
+	<!-- 이메일 중복 체크 -->
+	<select id="emailLink_chk" resultType="String">
+		select member_email
+		from gl_member 
+		where member_email=#{member_email}
+	</select>
+	
+	<!-- 이메일 수신 동의 여부 체크 -->
+	<select id="emailChk" resultType="String">
+		select member_email_receive 
+		from gl_member 
+		where member_id=#{member_id}
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="insertMember" parameterType="com.spring.goodluxe.voes.MemberVO">
+		INSERT 
+		INTO gl_member 
+		VALUES(#{member_id}, #{member_pw}, #{member_name}, #{member_zipcode}, #{member_addr1}, #{member_addr2}, #{member_phone}, #{member_email}, #{member_email_receive}, #{member_like_brand}, #{member_like_category}, sysdate, 'N', 0, 'N')
+	</insert>
+	
+	<!-- 이메일 인증 -->
+	<update id="verifyEmail" parameterType="com.spring.goodluxe.voes.MemberVO">
+		UPDATE gl_member
+		SET member_class = 'Y'
+		WHERE member_id=#{member_id}
+	</update>
+		
+	<!-- sns 간편 회원가입 -->
+	<insert id="insertSnsMember" parameterType="com.spring.goodluxe.voes.MemberVO">
+		INSERT
+		INTO gl_member (member_id, member_name, member_email, member_join_date, member_class, member_point, member_isadmin) 
+		VALUES(#{member_id}, #{member_name}, #{member_email}, sysdate, 'N', 0, 'N')
+	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
+		SELECT member_id 
+		FROM gl_member 
+		WHERE member_name=#{member_name} AND member_email=#{member_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
+		SELECT member_id
+		FROM gl_member
+		WHERE member_id=#{member_id} AND member_email=#{member_email}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changeMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
+		UPDATE gl_member
+		SET member_pw=#{member_pw}
+		WHERE member_id=#{member_id} 
+	</update>
+</mapper>

@@ -1,0 +1,89 @@
+$(document).ready(function () {
+
+// 실시간 아이디 중복체크
+	$(function() {
+		$("#alert-success_id").hide();
+		$("#alert-danger_id").hide(); // 아이디를 입력해주세요
+		$("#alert-danger_id1").hide(); // 동일한 아이디 존재
+		$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
+		$("#alert-danger_id3").hide();
+		$("input").keyup(function() {
+			var join_id = $("#join_id").val();
+			$.ajax({
+				url : '/goodluxe/idCheck.do',
+				type : "post",
+				dataType : "json",
+				data : {
+					member_id : join_id
+				},
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+
+				success : function(retVal) {
+					if (retVal.res == "Fail") { // 이 안에 if문 넣어서
+												// 각 상황에 맞도록 경고?글 띄우려고
+												// 했는데 입력받은 아이디를 뭘로
+												// 가져와야 할 지 모르겠어요........
+						$(".id_overlap_btn").attr("value", "Y");
+						$("#alert-success_id").hide(); // 사용할 수 있는 아이디
+						$("#alert-danger_id").hide(); // 아이디를 입력해주세요
+						$("#alert-danger_id1").show(); // 동일한 아이디 존재
+						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
+						$("#alert-danger_id3").hide(); // 중복 확인 X
+					} else {
+						$("#alert-success_id").show();
+						$("#alert-danger_id").hide(); // 아이디를 확인해주세요
+						$("#alert-danger_id1").hide(); // 동일한 아이디 존재
+						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
+						$("#alert-danger_id3").hide(); // 중복 확인 X
+					}
+				},
+				error : function() {
+					alert("ajax통신 실패!!!");
+				}
+			});											
+		});
+	});
+
+	// 비밀번호 비교
+	$(function() {
+		$("#alert-success_pw").hide();
+		$("#alert-danger_pw").hide();
+		$("input").keyup(function() {
+			var join_pw1 = $("#join_pw1").val();
+			var join_pw2 = $("#join_pw2").val();
+			if (join_pw1 != "" || join_pw2 != "") {
+				if (join_pw1 == join_pw2) {
+					$("#alert-success_pw").show();
+					$("#alert-danger_pw").hide();
+					$("#submit").removeAttr("disabled");
+				} else {
+					$("#alert-success_pw").hide();
+					$("#alert-danger_pw").show();
+					$("#submit").attr("disabled", "disabled");
+				}
+			}
+		});
+	});
+
+	// 우편번호 주소검색
+	$(".zipcode_button").click(
+			function openZipSearch() {
+				new daum.Postcode({
+					oncomplete : function(data) {
+						$('[name=member_zipcode]').val(
+								data.zonecode); // 우편번호
+						// (5자리)
+						$('[name=member_addr1]').val(
+								data.address); // 기본주소
+						$('[name=member_addr2]').val(
+								data.buildingName); // 상세주소
+						console.log(data);
+					}
+				}).open();
+			});
+
+	// checkbox의 name값이 이름이면서 체크되어 있는 함수를 체크하여 호출함.
+	$("input[name=likedcate]:checked").each(function() {
+		var likedCate = $(this).val();
+	});
+});

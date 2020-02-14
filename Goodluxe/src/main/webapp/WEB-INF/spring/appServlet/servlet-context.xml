@@ -57,6 +57,19 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+
+	<!-- 멀티파트(파일업로드) 관련 빈 설정 -->
+	<!-- Multipart지원 기능을 사용하려면 먼저 MultipartResolver를 스프링 설정 파일에 등록. -->
+	<!--  *DispatcherServlet은 이름이 "multipartResolver"인 빈을 사용하기 때문에 다른 이름(아이디)을 지정할 경우  MultipartResolver로 사용되지 않음. -->
+	<beans:bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name = "maxUploadSize" value = "10000000" ><!-- value는 10000000바이트를 의미한다.  -->
+		
+		</beans:property>
+		<beans:property name = "uploadTempDir" value = "file:/C:/Project138/upload"></beans:property> <!--여러명이 한번에 동시업로드 할 때 효율성에 대비해서 임시 저장기억공간을 지정한다. -->
+	</beans:bean>
+
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.spring.goodluxe.mj.NaverLoginBO" />
 	
 	<!-- 멀티파트(파일업로드) 관련 빈 설정 -->
 	<!-- Multipart지원 기능을 사용하려면 먼저 MultipartResolver를 스프링 설정 파일에 등록. -->
@@ -69,8 +82,6 @@
 	
 	<context:component-scan base-package="com.spring.goodluxe" />
 	<context:component-scan base-package="com.spring.goodluxe.jj" />
-	
-	
 	
 	
 	

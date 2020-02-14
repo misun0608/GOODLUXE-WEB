@@ -1,0 +1,248 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    body{
+        font-size: 13px;
+    }
+
+    .sm_select {display: none;}
+    .select-content {display: none;}
+
+    .container{
+        width: 1000px;
+        margin: 0 auto;
+    }
+    
+    /*탭 메뉴*/
+    ul.tabs{
+        text-align: center;
+        margin: 0 auto;
+        width: 998px;
+        /* background: #CDD1DF; */
+        list-style: none;
+    }
+
+    ul.tabs li{
+        text-align: center;
+        display: inline-block;
+        width: 131px;
+        padding: 10px 15px; /*탭버튼 위아래 여백(컬러)*/
+        background: #CDD1DF;
+        color: #222;
+        cursor: pointer;
+    }
+
+    ul.tabs li.current{
+        text-align: center;
+        width: 131px;
+        background: #9BA2BB;
+        border-color: #9BA2BB;
+        color: black;
+    }
+
+    /* ul.tabs li{
+        text-align: center;
+        width: 131px;
+        background: #CDD1DF;
+        color: black;
+    } */
+
+    .tab-line{
+        text-align: center;
+        margin-left: 5.5px;
+        /* left: 10px; */
+        height: 7px;
+        width: 988.5px;
+        background: #9BA2BB;
+        border: 0px;
+    }
+
+    .tab-content{
+        display: none;
+        padding: 15px;
+    }
+
+    .tab-content.current{
+        display: inherit;
+    }
+
+    /*FAQ 테이블*/
+    .faq_table{
+        width: 970px;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse; /*테이블 기본 간격 없애기*/
+    }
+    .top_tr{
+        text-align: center;
+        background-color: #F2F2F2;
+        height: 30px;
+        padding: 10px 0px 10px 0px;
+        border: 1px solid darkgray;
+    }
+    .middle_tr{
+        height: 30px;
+        border-top: 1px solid darkgray;
+    }
+    .hidden_content{
+        display: none;
+        background-color: #f2f2f2;
+        text-align: left;
+        margin: 10px 30px 10px 30px;
+    }
+    .hidden_detail{
+        padding: 15px 15px 15px 15px;
+    }
+    .faq{
+        cursor:pointer;
+    }
+
+    /*tab2, 문의 게시판*/
+    .inquiry_table{
+        width: 970px;
+    }
+}
+
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    body{
+        font-size: 13px;
+        }
+
+        .sm_select {display: none;}
+        .select-content {display: none;}
+
+        .container{
+            width: 803px;
+            margin: 0 auto;
+        }
+    
+        /* 탭 메뉴 */
+        ul.tabs{
+            text-align: center;
+            margin: 0 auto;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            text-align: center;
+            width: 100px;
+            background: #CDD1DF;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    
+        ul.tabs li.current{
+            text-align: center;
+            width: 100px;
+            background: #9BA2BB;
+            border-color: #9BA2BB;
+            color: black;
+        }
+
+        .tab-line{
+            text-align: center;
+            margin: 0px auto;
+            height: 7px;
+            width: 803px;
+            background: #9BA2BB;
+            border: 0px;
+        }
+    
+        .tab-content{
+            display: none;
+            padding: 15px;
+        }
+    
+        .tab-content.current{
+            display: inherit;
+        }
+        
+        /*FAQ 테이블*/
+    .faq_table{
+        width: 760px;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse; /*테이블 기본 간격 없애기*/
+    }
+    .top_tr{
+        text-align: center;
+        background-color: #F2F2F2;
+        height: 30px;
+        padding: 10px 0px 10px 0px;
+        border: 1px solid darkgray;
+    }
+    .middle_tr{
+        height: 30px;
+        border-top: 1px solid darkgray;
+    }
+    .hidden_content{
+        display: none;
+        background-color: #f2f2f2;
+        text-align: left;
+        margin: 10px 30px 10px 30px;
+    }
+    .hidden_detail{
+        padding: 15px 15px 15px 15px;
+    }
+    .faq{
+        cursor:pointer;
+    }
+    /* 탭2, 문의게시판 */
+    .inquiry_table{
+        width: 780px;
+    }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    .sm_select {display: block;}
+    .sm_select select {width:100%; height: 45px; margin-top: -30px; background-color: #CDD1DF;}
+
+    body{
+        font-size: 13px;
+        }
+        .container{
+            width: 700px;
+            margin: 0 auto;
+            display: none;
+        }
+    
+        /*FAQ 테이블*/
+        .faq_table{
+            width: 100%;
+            text-align: center;
+            border: 1px solid darkgray;
+            border-collapse: collapse; /*테이블 기본 간격 없애기*/
+        }
+        .top_tr{
+            text-align: center;
+            background-color: #F2F2F2;
+            height: 30px;
+            padding: 10px 0px 10px 0px;
+            border: 1px solid darkgray;
+        }
+        .middle_tr{
+            height: 30px;
+            border-top: 1px solid darkgray;
+        }
+        .hidden_content{
+            display: none;
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .hidden_detail{
+            padding: 15px 15px 15px 15px;
+        }
+        .faq{
+            cursor:pointer;
+        }
+   }

@@ -1,0 +1,164 @@
+
+/* 초기화 */
+* {
+    margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+     
+    /*pc*/
+    .table_div{
+        position : relative;
+        width : 900px;
+        left : 50%;
+        margin-left: -450px;
+        grid-area: inherit;
+        margin-top: 50px;
+    }
+    .coupon_table{
+        min-width : 900px;
+        border-collapse: collapse;
+        margin:10px 0;
+        border-radius: 2px 2px 2px 2px;
+        overflow: hidden;
+        font-size: .9em;
+    }
+    .coupon_table thead tr{
+        background-color: #F0D2CF;
+        color : black;
+        text-align: center;
+        font-weight: bold;
+        border-top: 2px solid  #C97D73;
+        border-bottom: 1px solid  #C97D73;
+    }
+    .coupon_table thead tr th:first-of-type{
+        min-width:30px;
+    }
+    .coupon_table thead tr th:last-of-type{
+        min-width:60px;
+    }
+    .coupon_table th, .coupon_table td{
+        padding:9px 12px;
+    }
+    .coupon_table tbody tr:last-of-type{
+        border-bottom: 2px solid  #C97D73;
+    }
+    .page_num{
+        text-align: center;
+        font-size: .9em;
+    }
+
+
+	/* 태블릿 PC */
+    @media screen and (min-width: 768px) and (max-width: 959px) {
+        .table_div{
+            position : relative;
+            width : 690px;
+            left : 50%;
+            margin-left: -345px;
+            grid-area: inherit;
+        }
+        .coupon_table{
+            min-width : 690px;
+            border-collapse: collapse;
+            margin:10px 0;
+            border-radius: 2px 2px 2px 2px;
+            overflow: hidden;
+           
+            font-size: .9em;
+        }
+        .coupon_table thead tr{
+            background-color: #F0D2CF;
+            color : black;
+            text-align: center;
+            font-weight: bold;
+            border-top: 2px solid  #C97D73;
+            border-bottom: 1px solid  #C97D73;
+        }
+        .coupon_table thead tr th:first-of-type{
+            min-width:30px;
+        }
+        .coupon_table thead tr th:last-of-type{
+            min-width:60px;
+        }
+        .coupon_table th, .coupon_table td{
+            padding:9px 12px;
+        }
+        .coupon_table tbody tr:last-of-type{
+            border-bottom: 2px solid  #C97D73;
+        }
+        .page_num{
+            text-align: center;
+            font-size: .9em;
+        }
+    }
+    /* 스마트폰 */
+    @media screen and (max-width: 767px) {
+        
+        .table_div{
+            position : relative;
+            width : 330px;
+            left : 50%;
+            margin-left: -165px;
+            grid-area: inherit;
+        }
+        .coupon_table{
+            min-width : 330px;
+            border-collapse: collapse;
+            margin:10px 0;
+            border-radius: 2px 2px 2px 2px;
+            overflow: hidden;
+            font-size: .9em;
+        }
+        .coupon_table thead tr{
+            display: none;
+        }
+        .coupon_table tbody tr td{
+            display: block;
+        }
+        .coupon_table th, .coupon_table td{
+            padding:9px 12px;
+        }
+        .coupon_table tbody tr:first-of-type td:first-of-type{
+            border-top: 3px solid  #C97D73;
+        }
+        .coupon_table tbody tr:nth-of-type(even){
+            background-color : #F9E7E5;
+        }
+        .coupon_table tbody tr:last-of-type{
+            border-bottom: 2px solid  #C97D73;
+        }
+        .coupon_table tbody tr td{
+            display : block;
+            font-size: .9em;
+            padding-right: 1em;
+            text-align: right;
+            /* border-bottom: 1px dotted #CDD1DF; */
+        }
+        .coupon_table tbody tr td[data-title]:before{
+            content:attr(data-title);
+            float: left;
+            font-size: .8em;
+            font-weight: 400;
+            color:#757575;
+        }
+        .page_num{
+            text-align: center;
+            font-size: .9em;
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    }
