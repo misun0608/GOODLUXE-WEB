@@ -288,8 +288,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
-	// 아이디 찾기 - 이름, 이메일 주소 비교
-	@Override
+	// .p,ride
 	public String findMemberId(MemberVO memberVO) throws Exception {
 		String findId = null;
 

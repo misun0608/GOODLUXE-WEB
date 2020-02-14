@@ -40,6 +40,8 @@
 		function find_id(){
 			if ((find_id_name != null) && (find_id_email != null)){
 				
+			} else {
+				alert("이름과 이메일 주소를 모두 입력하세요");
 			}
 		}
 		
