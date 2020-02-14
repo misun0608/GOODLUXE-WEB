@@ -32,18 +32,18 @@
          $("#footer").load("footer.do");
       });
       
-//        Kakao.init('dc50a646222a7303868e2fc1557ba996');
-//        function loginWithKakao() {
-//          // 로그인 창을 띄웁니다.
-//          Kakao.Auth.login({
-//            success: function(authObj) {
-//              alert(JSON.stringify(authObj));
-//            },
-//            fail: function(err) {
-//              alert(JSON.stringify(err));
-//            }
-//          });
-//        }; 
+       Kakao.init('dc50a646222a7303868e2fc1557ba996');
+       function loginWithKakao() {
+         // 로그인 창을 띄웁니다.
+         Kakao.Auth.login({
+           success: function(authObj) {
+             alert(JSON.stringify(authObj));
+           },
+           fail: function(err) {
+             alert(JSON.stringify(err));
+           }
+         });
+       }; 
      
     </script>
 
