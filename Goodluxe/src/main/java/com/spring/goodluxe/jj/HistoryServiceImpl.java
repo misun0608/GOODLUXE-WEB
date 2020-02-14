@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.Auction_HistoryVO;
 import com.spring.mapper.HistoryMapper;
 
 @Service("historyService")
@@ -24,7 +25,7 @@ public class HistoryServiceImpl implements HistoryService {
 			res = historyMapper.insertHistory(historyvo);
 
 		} catch (Exception e) {
-			throw new Exception("º£ÆÃ Ãß°¡ ½ÇÆÐ", e);
+			throw new Exception("ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½", e);
 		}
 		return res;
 	}
@@ -36,7 +37,7 @@ public class HistoryServiceImpl implements HistoryService {
 		HistoryMapper historyMapper = sqlSession.getMapper(HistoryMapper.class);
 		 vo = historyMapper.selectHistory(AUCTION_POST_NUMBER);
 		}catch(Exception e) {
-			System.out.println("È÷½ºÅä¸® Á¶È¸ ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return vo;
 
@@ -52,7 +53,7 @@ public class HistoryServiceImpl implements HistoryService {
 		count = historyMapper.selecthistorycount(AUCTION_POST_NUMBER);
 
 		}catch(Exception e) {
-			System.out.println("Ä«¿îÆ® ½ÇÆÐ"+e.getMessage());
+			System.out.println("Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½"+e.getMessage());
 		}
 		return count;
 
@@ -67,7 +68,7 @@ public class HistoryServiceImpl implements HistoryService {
 			
 					
 		}catch(Exception e) {
-			System.out.println("¸®½ºÆ® »Ì±â ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		
 		return list;
@@ -82,7 +83,7 @@ public class HistoryServiceImpl implements HistoryService {
 		
 			auctionvo = historyMapper.auctionhistoryselectone(auction_post_number);
 		}catch(Exception e) {
-			System.out.println("ÇÑ¸íÀ» Ã£¾Æ¶ó ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½Ñ¸ï¿½ï¿½ï¿½ Ã£ï¿½Æ¶ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		
 		return auctionvo;

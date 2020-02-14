@@ -1,6 +1,6 @@
 package com.spring.goodluxe.jj;
 
-import com.spring.goodluxe.jj.AuctionVO;
+import com.spring.goodluxe.voes.AuctionVO;
 
 public interface AuctionService {
 	int insertAuction(AuctionVO auctionvo)throws Exception;

@@ -7,7 +7,7 @@
 
 <mapper namespace="com.spring.mapper.HistoryMapper">
 
-<resultMap type="com.spring.goodluxe.jj.Auction_HistoryVO" id="resultAuction_HistoryVO">
+<resultMap type="com.spring.goodluxe.voes.Auction_HistoryVO" id="resultAuction_HistoryVO">
 		<result property="AUCTION_POST_NUMBER" column="AUCTION_POST_NUMBER" />
 		<result property="AUHIS_NUMBER" column="AUHIS_NUMBER" />
 		<result property="MEMBER_ID" column="MEMBER_ID" />
@@ -15,7 +15,7 @@
 		<result property="AUHIS_BETTING_PRICE" column="AUHIS_BETTING_PRICE" />
 	</resultMap>
 
-<insert id="insertHistory" parameterType="com.spring.goodluxe.jj.Auction_HistoryVO">
+<insert id="insertHistory" parameterType="com.spring.goodluxe.voes.Auction_HistoryVO">
 	  <selectKey order="BEFORE" keyProperty="AUHIS_NUMBER" resultType="int">
        SELECT NVL(MAX(TO_NUMBER(AUHIS_NUMBER)),0)+1 
        FROM GL_AUCTION_HISTORY
@@ -30,7 +30,7 @@
 	</insert>
 	
 	
-	<select id="selectHistory" parameterType="com.spring.goodluxe.jj.Auction_HistoryVO" resultMap="resultAuction_HistoryVO">
+	<select id="selectHistory" parameterType="com.spring.goodluxe.voes.Auction_HistoryVO" resultMap="resultAuction_HistoryVO">
 		select *
 		from(
         	select rownum rnum, AUCTION_POST_NUMBER, AUHIS_NUMBER, 

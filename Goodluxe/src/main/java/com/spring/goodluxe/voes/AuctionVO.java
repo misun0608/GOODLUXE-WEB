@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jj;
+package com.spring.goodluxe.voes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -8,24 +8,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuctionVO {
 	
-	private int AUCTION_POST_NUMBER; /* °æ¸Å°Ô½Ã±Û¹øÈ£ */
-	private String AUCTION_MD_NAME; /* Á¦Ç°ÀÌ¸§ */
-	private int AUCTION_START_PRICE;/* ½ÃÀÛ°¡ */
-	private int AUCTION_NOW_PRICE; /* ÇöÀç°¡ */
-	private Timestamp AUCTION_PRICE_TIME; /* ÃÖ°í°¡sysdate yy-mm-dd hh:mm */
-	private int AUCTION_BID_PRICE;/* Á¦Ç°³«Âû°¡ */
-	private Date AUCTION_POST_DATE; /* °Ô½ÃÀÏ */
-	private Timestamp AUCTION_START_TIME; /* °æ¸Å½ÃÀÛ½Ã°£ */
-	private Timestamp AUCTION_END_TIME; /* °æ¸Å¸¶°¨½Ã°£ */
+	private int AUCTION_POST_NUMBER; /* ï¿½ï¿½Å°Ô½Ã±Û¹ï¿½È£ */
+	private String AUCTION_MD_NAME; /* ï¿½ï¿½Ç°ï¿½Ì¸ï¿½ */
+	private int AUCTION_START_PRICE;/* ï¿½ï¿½ï¿½Û°ï¿½ */
+	private int AUCTION_NOW_PRICE; /* ï¿½ï¿½ï¿½ç°¡ */
+	private Timestamp AUCTION_PRICE_TIME; /* ï¿½Ö°ï¿½sysdate yy-mm-dd hh:mm */
+	private int AUCTION_BID_PRICE;/* ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	private Date AUCTION_POST_DATE; /* ï¿½Ô½ï¿½ï¿½ï¿½ */
+	private Timestamp AUCTION_START_TIME; /* ï¿½ï¿½Å½ï¿½ï¿½Û½Ã°ï¿½ */
+	private Timestamp AUCTION_END_TIME; /* ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
 	private String AUCTION_PHOTO1_STORED;
 	private String AUCTION_PHOTO2_STORED;
 	private String AUCTION_PHOTO3_STORED;
 	private String AUCTION_PHOTO4_STORED;
 	private String AUCTION_PHOTO5_STORED;
-	private String AUCTION_DETAIL; /* Á¦Ç°¼³¸í»ó¼¼ */
-	private int AUCTION_LIKE; /* ÁÁ¾Æ¿ë */
-	private String AUCTION_POST_STATUS; /* °Ô½Ã»óÅÂ */
-	private String ENTITY_NUMBER; /* »óÇ°°³Ã¼¹øÈ£ */
+	private String AUCTION_DETAIL; /* ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	private int AUCTION_LIKE; /* ï¿½ï¿½ï¿½Æ¿ï¿½ */
+	private String AUCTION_POST_STATUS; /* ï¿½Ô½Ã»ï¿½ï¿½ï¿½ */
+	private String ENTITY_NUMBER; /* ï¿½ï¿½Ç°ï¿½ï¿½Ã¼ï¿½ï¿½È£ */
 	public int getAUCTION_POST_NUMBER() {
 		return AUCTION_POST_NUMBER;
 	}

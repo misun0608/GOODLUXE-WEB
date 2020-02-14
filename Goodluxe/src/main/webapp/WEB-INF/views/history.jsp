@@ -8,7 +8,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
-<%@page import="com.spring.goodluxe.jj.Auction_HistoryVO" %>
+<%@page import="com.spring.goodluxe.voes.Auction_HistoryVO" %>
 
 <!DOCTYPE html>
 <HTML>

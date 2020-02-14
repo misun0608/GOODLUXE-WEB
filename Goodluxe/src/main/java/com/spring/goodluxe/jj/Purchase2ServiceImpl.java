@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.Purchase2VO;
 import com.spring.mapper.Purchase2Mapper;
 
 @Service

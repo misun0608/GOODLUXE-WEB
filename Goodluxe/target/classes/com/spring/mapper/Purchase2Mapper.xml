@@ -8,7 +8,7 @@
 
 <mapper namespace="com.spring.mapper.Purchase2Mapper">
 
-   <resultMap type="com.spring.goodluxe.jj.Purchase2VO" id="ResultMapperchase">
+   <resultMap type="com.spring.goodluxe.voes.Purchase2VO" id="ResultMapperchase">
       <result property="entity_number" column="entity_number" />
       <result property="pd_name" column="pd_name" />
       <result property="pd_brand" column="pd_brand" />

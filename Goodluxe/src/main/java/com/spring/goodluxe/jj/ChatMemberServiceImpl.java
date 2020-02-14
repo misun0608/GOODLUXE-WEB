@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.mapper.ChatMapper;
 import com.spring.mapper.ChatMemberMapper;
 

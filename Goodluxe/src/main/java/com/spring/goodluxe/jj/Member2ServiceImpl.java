@@ -3,9 +3,11 @@ package com.spring.goodluxe.jj;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.spring.goodluxe.voes.Member2VO;
 import com.spring.mapper.Member2Mapper;
 
-@Service("memberService")
+@Service
 public class Member2ServiceImpl implements Member2Service {
 	
 	@Autowired

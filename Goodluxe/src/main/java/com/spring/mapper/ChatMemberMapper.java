@@ -2,7 +2,7 @@ package com.spring.mapper;
 
 import java.util.List;
 
-import com.spring.goodluxe.jj.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatMemberVO;
 
 public interface ChatMemberMapper {
 

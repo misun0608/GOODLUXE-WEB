@@ -5,7 +5,7 @@
     
 <mapper namespace="com.spring.mapper.Member2Mapper">
 
-   <resultMap type="com.spring.goodluxe.jj.Member2VO" id="ResultMapmember">
+   <resultMap type="com.spring.goodluxe.voes.Member2VO" id="ResultMapmember">
       <result property="member_id" column="member_id" />
       <result property="member_pw" column="member_pw" />
       <result property="member_name" column="member_name" />
@@ -29,7 +29,7 @@
       where member_id = #{member_id}
    </select>
    
-   <insert id="insertMember" parameterType="com.spring.goodluxe.jj.Member2VO">
+   <insert id="insertMember" parameterType="com.spring.goodluxe.voes.Member2VO">
    		insert into gl_member values(
    		#{member_id},#{member_pw},#{member_name},#{member_zipcode},
    		#{member_addr1},#{member_addr2},#{member_phone},#{member_email},

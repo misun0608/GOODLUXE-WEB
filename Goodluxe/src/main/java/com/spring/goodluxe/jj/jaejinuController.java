@@ -25,6 +25,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.goodluxe.voes.AlamVO;
+import com.spring.goodluxe.voes.AuctionVO;
+import com.spring.goodluxe.voes.Auction_HistoryVO;
+import com.spring.goodluxe.voes.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Member2VO;
+import com.spring.goodluxe.voes.Order2VO;
+import com.spring.goodluxe.voes.Purchase2VO;
+
 import net.sf.json.JSONObject;
 
 /**
@@ -359,7 +368,7 @@ public class jaejinuController {
 
 	// 경매 상세페이지 만들 때
 	@RequestMapping(value = "/rudaodetail.do")
-	public String rudaodetail(@RequestParam("file_1")List<MultipartFile> fileList_1,@RequestParam("file_2")List<MultipartFile> fileList_2 ,MultipartHttpServletRequest request, AuctionVO auctionvo, RequestModel model,
+	public String rudaodetail(@RequestParam("file_1")List<MultipartFile> fileList_1,@RequestParam("file_2")List<MultipartFile> fileList_2 ,MultipartHttpServletRequest request, AuctionVO auctionvo, Request2Model model,
 			Model model_t) throws IllegalStateException, IOException {
 		
 		String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";

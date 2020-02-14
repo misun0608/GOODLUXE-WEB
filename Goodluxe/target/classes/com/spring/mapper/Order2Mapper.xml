@@ -8,7 +8,7 @@
 
 <mapper namespace="com.spring.mapper.Order2Mapper">
 
-   <resultMap type="com.spring.goodluxe.jj.Order2VO" id="ResultMaporder">
+   <resultMap type="com.spring.goodluxe.voes.Order2VO" id="ResultMaporder">
       <result property="order_number" column="order_number" />
       <result property="order_receipt" column="order_receipt" />
       <result property="order_pay_date" column="order_pay_date" />
@@ -34,7 +34,7 @@
       <result property="order_pay_price" column="order_pay_price" />
    </resultMap>
    
-   <insert id="insertorder" parameterType="com.spring.goodluxe.jj.Order2VO">
+   <insert id="insertorder" parameterType="com.spring.goodluxe.voes.Order2VO">
 		INSERT INTO gl_order VALUES(
 			#{order_number,jdbcType=VARCHAR},
 			#{order_receipt,jdbcType=VARCHAR},

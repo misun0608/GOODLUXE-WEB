@@ -2,7 +2,7 @@ package com.spring.mapper;
 
 import java.util.ArrayList;
 
-import com.spring.goodluxe.jj.Auction_HistoryVO;
+import com.spring.goodluxe.voes.Auction_HistoryVO;
 
 public interface HistoryMapper {
 	int insertHistory(Auction_HistoryVO historyvo);

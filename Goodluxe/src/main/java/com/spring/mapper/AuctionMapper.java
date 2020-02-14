@@ -1,6 +1,6 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jj.AuctionVO;
+import com.spring.goodluxe.voes.AuctionVO;
 
 public interface AuctionMapper {
 	

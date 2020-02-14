@@ -3,6 +3,8 @@ package com.spring.goodluxe.jj;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spring.goodluxe.voes.ChatVO;
+
 public interface ChatService {
 
 	ArrayList<ChatVO> SelectChatList() throws Exception;

@@ -1,6 +1,6 @@
 package com.spring.mapper;
 
-import com.spring.goodluxe.jj.Member2VO;
+import com.spring.goodluxe.voes.Member2VO;
 
 public interface Member2Mapper {
 	Member2VO selectMember1(String member_id);

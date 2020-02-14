@@ -1,4 +1,4 @@
-package com.spring.goodluxe.jj;
+package com.spring.goodluxe.voes;
 
 public class ChatMemberVO {
 	 private int chat_num; 

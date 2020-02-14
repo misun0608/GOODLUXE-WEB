@@ -2,7 +2,7 @@ package com.spring.goodluxe.jj;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class RequestModel {
+public class Request2Model {
 	
 	private MultipartFile file_1;
 	private MultipartFile file_2;

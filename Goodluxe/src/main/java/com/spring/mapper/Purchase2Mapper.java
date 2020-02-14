@@ -2,7 +2,7 @@ package com.spring.mapper;
 
 import java.util.ArrayList;
 
-import com.spring.goodluxe.jj.Purchase2VO;
+import com.spring.goodluxe.voes.Purchase2VO;
 
 public interface Purchase2Mapper {
 	Purchase2VO selectPurchase(String entity_number);

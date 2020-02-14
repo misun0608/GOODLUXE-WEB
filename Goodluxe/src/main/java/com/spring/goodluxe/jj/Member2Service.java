@@ -1,6 +1,6 @@
 package com.spring.goodluxe.jj;
 
-import com.spring.goodluxe.jj.Member2VO;
+import com.spring.goodluxe.voes.Member2VO;
 
 public interface Member2Service {
 	Member2VO selectMember1(String member_id)throws Exception;

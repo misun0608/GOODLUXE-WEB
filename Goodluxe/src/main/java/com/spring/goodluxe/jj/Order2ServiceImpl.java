@@ -4,9 +4,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.Order2VO;
 import com.spring.mapper.Order2Mapper;
 
-@Service("orderService")
+@Service
 public class Order2ServiceImpl implements Order2Service{
 	
 	@Autowired

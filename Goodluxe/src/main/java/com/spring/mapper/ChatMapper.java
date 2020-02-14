@@ -3,7 +3,7 @@ package com.spring.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.spring.goodluxe.jj.ChatVO;
+import com.spring.goodluxe.voes.ChatVO;
 
 public interface ChatMapper {
 

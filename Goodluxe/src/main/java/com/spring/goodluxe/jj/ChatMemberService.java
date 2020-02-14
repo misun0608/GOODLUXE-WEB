@@ -2,6 +2,8 @@ package com.spring.goodluxe.jj;
 
 import java.util.List;
 
+import com.spring.goodluxe.voes.ChatMemberVO;
+
 public interface ChatMemberService {
 
 	public int addRoomMember(ChatMemberVO chatmembervo) throws Exception;

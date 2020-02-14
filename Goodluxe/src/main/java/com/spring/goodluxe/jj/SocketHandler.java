@@ -19,6 +19,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.spring.goodluxe.voes.ChatMemberVO;
+import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Member2VO;
+
 
 //작성순서 : afterConnectionEstablished(서버접속시) -> afterConnectionClosed(서버연결끊을시) 
 //-> handleTextMessage(서버가 메세지를 받았을때) 

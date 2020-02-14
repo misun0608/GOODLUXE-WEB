@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.ChatVO;
 import com.spring.mapper.ChatMapper;
 
 @Service("chatService")
@@ -22,7 +23,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			chatlist = chatMapper.SelectChatList();
 		} catch (Exception e) {
-			System.out.println("Ã¤ÆÃ¹æ ¸®½ºÆ® »Ì±â ½ÇÆÐ+" + e.getMessage());
+			System.out.println("Ã¤ï¿½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½+" + e.getMessage());
 		}
 		return chatlist;
 	}
@@ -35,7 +36,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			chatvo = chatMapper.checkRoom(chat_name);
 		}catch(Exception e) {
-			System.out.println("¹æ Ã¼Å© ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return chatvo;
 		// TODO Auto-generated method stub
@@ -49,7 +50,7 @@ public class ChatServiceImpl implements ChatService {
 			res= chatMapper.createChatRoom(chatvo);
 			
 		}catch(Exception e){
-			System.out.println("¹æ »ý¼º ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -63,7 +64,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			chatlist = (ArrayList<ChatVO>) chatMapper.getRoomList();
 		}catch(Exception e) {
-			System.out.println("·ë ¸®½ºÆ® °¡Á®¿À±â ½ÇÆÐ +"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ +"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return chatlist;
@@ -76,7 +77,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			res = chatMapper.updateChatCountInc(chatvo);
 		}catch(Exception e) {
-			System.out.println("ÀÎ¿ø¼ö Áõ°¡ ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -90,7 +91,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			res = chatMapper.updateChatCountDec(chatvo);
 		}catch(Exception e) {
-			System.out.println("ÀÎ¿ø¼ö °¨¼Ò ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -103,7 +104,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			res= chatMapper.deleteChat();
 		}catch(Exception e) {
-			System.out.println("Ã¤ÆÃ delete+"+e.getMessage());
+			System.out.println("Ã¤ï¿½ï¿½ delete+"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -118,7 +119,7 @@ public class ChatServiceImpl implements ChatService {
 			ChatMapper chatMapper = sqlSession.getMapper(ChatMapper.class);
 			roomlist = (ArrayList<ChatVO>) chatMapper.searchRoomList(chat_name);
 		}catch(Exception e) {
-			System.out.println("·ë ¸®½ºÆ® °¡Á®¿À±â ½ÇÆÐ+"+e.getMessage());
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return roomlist;
