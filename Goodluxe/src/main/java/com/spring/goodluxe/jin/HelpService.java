@@ -9,6 +9,7 @@ public interface HelpService {
 	public void inquireInsert(InquireVO inVO) throws Exception;
 	public ArrayList<InquireVO> loadQBList() throws Exception;
 	public InquireVO loadQPost(int inquire_number) throws Exception;
-	public int insertComment(InquireCommentVO commVO) throws Exception;
 	public ArrayList<InquireCommentVO> commList(int inquire_number) throws Exception;
+	public int insertComment(InquireCommentVO commVO) throws Exception;
+	public int insertReComment(InquireCommentVO commVO) throws Exception;
 }

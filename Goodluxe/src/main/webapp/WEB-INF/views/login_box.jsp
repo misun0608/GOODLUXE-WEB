@@ -5,7 +5,7 @@
 
 <script>
 	// 카카오 팝업 로그인
-	Kakao.init('dc50a646222a7303868e2fc1557ba996');
+/* 	Kakao.init('dc50a646222a7303868e2fc1557ba996');
 	function loginWithKakao() {
 		// 로그인 창을 띄웁니다.
 		Kakao.Auth.login({
@@ -16,7 +16,7 @@
 				alert(JSON.stringify(err));
 			}
 		});
-	};
+	}; */
 	
 // 		// 네이버 팝업 로그인
 // 		var naverLogin = new naver.LoginWithNaverId({

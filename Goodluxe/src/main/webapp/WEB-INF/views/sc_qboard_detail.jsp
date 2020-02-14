@@ -35,7 +35,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board_detail.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board_detail.js"></script>
     <script>
-    	
+    	$(document).ready(function(){
+    		loadComment();
+    	});
     
     	$(document).on('click','.comment_write_btn',function(e){
     		if(!login_chk("<%=member_id%>")){ return; }
@@ -43,6 +45,33 @@
     		
     		var params = $('.comment_write_form').serialize();
     		
+    		$.ajax({
+    			url : 'insertComment.do',
+    			type : 'POST',
+    			data : params,
+    			contentType : 'application/x-www-form-urlencoded;charset=utf-8',
+    			dataType : 'json',
+    			success : function(retVal) {
+    				if(retVal.message == "덧글 등록 성공") {
+	    				loadComment();
+    				} else {
+    					alert('덧글 등록에 실패하였습니다.');
+    				}
+    			},
+    			error : function() {
+    				alert('현재 서버와의 통신이 원활하지 않습니다.');
+    			}
+    		});
+    		$('.comment_write_form').children('textarea').val('');
+    		e.preventDefault();
+    	});
+    	
+    	$(document).on('click','.reply_write_btn',function(e){
+    		if(!login_chk("<%=member_id%>")){ return; }
+    		var form_name = ".comment_write_form" + $(this).attr('form_index');
+    		if(!content_chk($(form_name).find('textarea').val())){ return; }
+    		var params = $(form_name).serialize();
+/* 
     		$.ajax({
     			url : 'insertComment.do',
     			type : 'POST',
@@ -58,8 +87,11 @@
     			}
     		});
     		$('.comment_write_form').children('textarea').val('');
+    		 */
     		e.preventDefault();
     	});
+    	
+    	
     	
     	function login_chk(m_id){
     		if(m_id == "null" || m_id == ""){
@@ -90,37 +122,51 @@
     				if(data != null) {
     					$.each(data, function(index, comment){
     						var output = '';
+    						output += '<form name="comm_write_form' + index + '" class="comment_write_form' + index + '">';
+    						output += '<input type="hidden" name="inquire_number" value=' + comment.inquire_number + ' >';
     						output += '<table class="detail_comment_table" style="border: 1px solid #d7d7d7;">';
     						output += '<tr>';
     						if(comment.comment_ref_level != 0) {
     							output += '<td class="detail_re_comment_td_icon"><img src="${pageContext.request.contextPath}/resources/img/icons/re_comment.png" style="width: 10px;"></td>';
     						}
-    						output += '<td class="detail_comment_td_id">' + comment.member_id + '</td>';
+    						output += '<td class="detail_comment_td_id">&nbsp;' + comment.member_id + '&nbsp;';
+    						if(comment.comment_ref_level > 1) {    							
+    							output += '<span class="detail_re_re_comment">@' + comment.comment_ref_writer + '님에 대한 답글</span>';
+    						}
+    						output += '</td>';
     						output += '<td class="detail_comment_td_btn" rowspan="2">';
     						output += '<input type="button" class="detail_re_comment_btn comm_reply_btn" form_index='+ index +' value="답글"><br>';
-    						/* 답글인 경우... 본인/관리자/다른사람인 경우 버튼부터 계산... */
-    						output += '<input type="button" class="detail_re_comment_btn comm_update_btn" form_index='+ index +' value="수정"><br>';
-    						output += '<input type="button" class="detail_re_comment_btn comm_del_btn" form_index='+ index +' value="삭제">';
+    						if(comment.member_id == "<%=member_id%>") {
+    							output += '<input type="button" class="detail_re_comment_btn comm_update_btn" form_index='+ index +' value="수정"><br>';
+    						}
+    						if(comment.member_id == "<%=member_id%>" || "<%=member_isadmin%>" == "Y") {
+    							output += '<input type="button" class="detail_re_comment_btn comm_del_btn" form_index='+ index +' value="삭제">';
+    						}
     						output += '</td></tr>';
     						output += '<tr><td class="detail_comment_td_content">' + comment.comment_content + '</td></tr>';
     						output += '<tr class="tr_comment_write comm_write_form' + index + '">';
-    						output += '<form name="comm_write_form' + index + '">';
+    						if(comment.comment_ref_step > 0) {
+    							output += '<td></td>';
+    						}
     						output += '<td class="td_comment_write">';
     						output += '<input type="hidden" name="member_id" value="<%=member_id%>">';
     						output += '<input type="hidden" name="comment_ref" value=' + comment.comment_ref + ' >';
     						output += '<input type="hidden" name="comment_ref_step" value=' + comment.comment_ref_step + ' >';
     						output += '<input type="hidden" name="comment_ref_level" value=' + comment.comment_ref_level + ' >';
+    						output += '<input type="hidden" name="comment_ref_writer" value=' + comment.member_id + ' >';
     						output += '<textarea class="td_detail_comment_text" name="comment_content" cols="90" rows="2"></textarea>';
     						output += '</td><td>';
-    						output += '<input type="button" class="td_detail_comment_btn reply_write_btn" value="답글 달기">';
-    						output += '</td></form></tr>';
+    						output += '<input type="button" class="td_detail_comment_btn reply_write_btn" form_index=' + index + ' value="답글 달기">';
+    						output += '</td></tr>';
     						output += '<tr class="tr_comment_write comm_update_form' + index + '">';
-    						output += '<form name="comm_update_form' + index + '">';
+    						if(comment.comment_ref_step > 0) {
+    							output += '<td></td>';
+    						}
     						output += '<td class="td_comment_write">';
     						output += '<input type="hidden" name="comment_number" value=' + comment.comment_number + ' >';
-    						output += '<textarea class="td_detail_comment_text" name="comment_content" cols="90" rows="2">'+ comment.comment_content +'</textarea>';
+    						output += '<textarea class="td_detail_comment_text" name="updated_content" cols="90" rows="2">'+ comment.comment_content +'</textarea>';
     						output += '</td><td>';
-    						output += '<input type="button" class="td_detail_comment_btn reply_update_btn" value="댓글 수정">';
+    						output += '<input type="button" class="td_detail_comment_btn reply_update_btn" form_index=' + index + ' value="댓글 수정">';
     						output += '</td></form></tr>';
     						output += '</table>';
     						$('.comment_area').append(output);
@@ -336,6 +382,7 @@
                             </tr>
                         </table>
 
+                        <form name="comm_write_form4" class="comment_write_form4">
                         <table class="detail_comment_table">
                             <tr>
                                 <td class="detail_re_comment_td_icon"><img src="${pageContext.request.contextPath}/resources/img/icons/re_comment.png" style="width: 10px;"></td>
@@ -352,16 +399,17 @@
                             </tr>
                             <tr class="tr_comment_write comm_write_form4">
                                 <td></td>
-                                <form name="comm_write_form4">
-                                <td class="td_comment_write">
-                                        <input type="hidden" name="member_id">
-                                        <input type="hidden" name="comment_ref">
-                                        <textarea class="td_detail_comment_text" name="comment_content" cols="90" rows="2"></textarea>
-                                    </td>
-                                    <td>
-                                        <input type="submit" class="td_detail_comment_btn" value="답글 달기">
-                                    </td>
-                                </form>
+                               	<td class="td_comment_write">
+                                       <input type="hidden" name="member_id">
+                                       <input type="hidden" name="comment_ref">
+                                       <input type="hidden" name="comment_ref_step">
+                                       <input type="hidden" name="comment_ref_level">
+                                       <input type="hidden" name="comment_ref_writer">
+                                       <textarea class="td_detail_comment_text" name="comment_content" cols="90" rows="2"></textarea>
+                                 </td>
+                                 <td>
+                                     <input type="submit" class="td_detail_comment_btn reply_write_btn" form_index=4 value="답글 달기">
+                                 </td>
                             </tr>
                             <tr class="tr_comment_write comm_update_form4">
                                 <td></td>
@@ -376,6 +424,7 @@
                                 </form>
                             </tr>
                         </table>
+                        </form>
 
                         <table class="detail_comment_table" style="border: 1px solid #d7d7d7;">
                             <tr>
@@ -415,8 +464,8 @@
                             </tr>
                         </table>
 
-                        <br />
                     </section>
+                    <br /><br /><br />
                 </div>
             </section>
         </div>

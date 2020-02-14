@@ -36,6 +36,7 @@ maxvalue 10000000;
 		<result property="comment_ref" column="comment_ref" />
 		<result property="comment_ref_step" column="comment_ref_step" />
 		<result property="comment_ref_level" column="comment_ref_level" />
+		<result property="comment_ref_writer" column="comment_ref_writer" />
 	</resultMap>
 	
 	<insert id="inquireInsert" parameterType="com.spring.goodluxe.voes.InquireVO">
@@ -64,7 +65,7 @@ maxvalue 10000000;
 	
 	<insert id="insertComment" parameterType="com.spring.goodluxe.voes.InquireCommentVO">
 		insert into gl_inquire_comment
-		values(#{comment_number}, #{inquire_number}, #{member_id}, #{comment_content}, systimestamp, #{comment_ref}, #{comment_ref_step}, #{comment_ref_level})
+		values(#{comment_number}, #{inquire_number}, #{member_id}, #{comment_content}, systimestamp, #{comment_ref}, #{comment_ref_step}, #{comment_ref_level}, #{comment_ref_writer,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="addCommentNum" parameterType="int">
@@ -84,5 +85,16 @@ maxvalue 10000000;
 		where inquire_number = #{inquire_number}
 		order by comment_ref, comment_ref_step
 	</select>
+	
+	<select id="calRefLev" parameterType="int" resultType="int">
+		select count(*)
+		from gl_inquire_comment
+		where comment_ref = #{ref} and comment_ref_level >= #{ref_level}
+	</select>
+	<update id="updateRefStep" parameterType="int">
+		update gl_inquire_comment
+		set comment_ref_step = comment_ref_step + 1
+		where comment_ref_step > #{ref_step}
+	</update>
 
 </mapper>
