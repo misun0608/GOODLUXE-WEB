@@ -27,6 +27,7 @@
 					if (mem_isadmin.equals("Y")) {
 			%>
             <ul class="topmenu member_menu on">
+            	<li class="cs"><a href="SC.do">고객센터</a></li>
             	<li class="logout"><a href="logout.do">로그아웃</a></li>
                 <li class="admin_page_link"><a href="admin_main.do">관리자페이지</a></li>
             </ul>
