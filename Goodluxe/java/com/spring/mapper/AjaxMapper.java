@@ -63,6 +63,10 @@ public interface AjaxMapper {
 	void setReturnFinished(String order_number);
 	int setPostStatusBackToSale(String order_number);
 	
+	String getEntityNumberForLiked(String order_number);
+	ArrayList<HashMap<String, String>> getorderNumberLikedMember(String likedEntity);
+	int setAlarmInfo(HashMap<String, String> map);
+
 
 	
 	

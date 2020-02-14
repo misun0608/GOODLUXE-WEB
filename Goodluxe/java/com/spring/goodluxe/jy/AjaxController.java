@@ -355,11 +355,15 @@ public class AjaxController {
 			gls.setReturnConfirm(order_number);
 		}
 		@RequestMapping(value="/setReturnFinished.do", produces= "application/json;charset=UTF-8")
-		public void setReturnFinished(
+		public ArrayList<HashMap<String,String>> setReturnFinished(
 				@RequestParam(value="order_number", required = false)String order_number) throws Exception {
 			
 			ArrayList<OrderVO> returnList = null;
-			gls.setReturnFinished(order_number);
+			ArrayList<HashMap<String,String>> likedMember = null;
+			
+			likedMember = gls.setReturnFinished(order_number);
+			
+			return likedMember;
 		}
 	
 	

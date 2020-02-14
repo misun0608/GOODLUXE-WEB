@@ -318,6 +318,10 @@
 	</delete>
 	
 	<!-- 환불 -->
+	<resultMap id = "likedMemberListMap" type = "java.util.HashMap">
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	
 	<select id = "getReturnList" resultMap = "adminOrderMap">
 		select * from gl_order where order_status = '환불신청' or order_status = '반품확인' or order_status = '환불완료'
 	</select>
@@ -334,5 +338,24 @@
 		update gl_productboard set pb_sale_status = '판매중' , pb_post_status = '게시중'
 		where pb_number in(select pb_number from gl_order where order_number = #{order_number} )
 	</update>
+	<select id = "getEntityNumberForLiked" parameterType = "String" resultType = "String">
+		select entity_number from gl_productboard
+		where pb_number = (select pb_number from gl_order where order_number = #{order_number})
+	</select>
+	<select id = "getorderNumberLikedMember" parameterType = "String" resultMap = "likedMemberListMap">
+		select member_id from gl_liked where entity_number = #{likedEntity}
+	</select>
+	
+	<insert id = "setAlarmInfo" >
+		insert into gl_alarm(alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number) 
+		values(gl_alarm_seq.nextval,#{member_id},sysdate,'N','제품을 구매할 수 있습니다 :D 이 기회를 놓치지 마세요!',#{entity_number})
+	</insert>
+	
+	<resultMap id = "alarmNumberMap" type = "java.util.HashMap">
+		<result property = "alarm_number" column = "alarm_number"/>
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	
+	
 
 </mapper>

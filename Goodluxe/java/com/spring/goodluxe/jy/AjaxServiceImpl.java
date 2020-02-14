@@ -514,19 +514,34 @@ try {
 		}
 	}
 	@Override
-	public void setReturnFinished(String order_number) throws Exception {
+	public ArrayList<HashMap<String,String>> setReturnFinished(String order_number) throws Exception {
 		try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ArrayList<HashMap<String, String>> likedMember = null;
+			HashMap<String, String>map = new HashMap<String, String>();
+			HashMap<String,String> alarmNumberList = null;
+			int count = 0;
 			ajaxMapper.setReturnFinished(order_number);
 			int res = ajaxMapper.setPostStatusBackToSale(order_number);
+			String likedEntity;
 			if( res == 1) {// 알람 테이블 추가
-				
+				//오더넘버에 좋아요 누른사람 먼저 데려오기
+				likedEntity = ajaxMapper.getEntityNumberForLiked(order_number);
+				map.put("entity_number", likedEntity);
+				likedMember =  ajaxMapper.getorderNumberLikedMember(likedEntity);
+				for(int i = 0; i<likedMember.size(); i++) {
+					map.put("member_id", likedMember.get(i).get("member_id"));
+					System.out.println("확인"+i+" : "+map.get("memb/0er_id"));
+					count += ajaxMapper.setAlarmInfo(map);
+					System.out.println(count);
+				}
 			}
-			
+			return likedMember;
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/setReturnConfirm)");
 		}
+		
 		
 	}
 

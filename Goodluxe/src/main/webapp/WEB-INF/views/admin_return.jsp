@@ -157,6 +157,24 @@
              event.preventDefault();
           });
 		
+		
+		
+		
+		var w = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");
+		
+		function sendAlarm(msg){
+			w.send(JSON.stringify(msg));
+		}
+		w.onopen = function(){ //클라이언트와 서버간의 웹소켓이 정상적으로 생성되었다.(연결되었다)
+			alert("WebSocket Conneted!!!");
+		}
+		w.onclose = function(e){ //웹소켓 연결이 종료되면 호출됨.
+			alert("WebSocket closed!!!");
+		}
+		w.onerror = function(e){ //연결 실패시 호출됨.
+			alert("WebSocket error!!!");
+		}
+		
 		$(document).on('click','#return_finished',function(event) { //얘가 바로 동적 버튼!!!
 			 
 			var return_finished = $(this);
@@ -166,16 +184,26 @@
 			var params = {
 				"order_number": data
 			}
+			
 			jQuery.ajax({
 				url : '/goodluxe/setReturnFinished.do',
                 type : 'POST',
                 data : params, // 서버로 보낼 데이터
                 contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
-            	success: function () {
-            		//selectData();
-            		//$("search_btn").trigger("click");
-            		search_btn_click();
-                },
+                dataType : "json",
+                success: function(data){
+                	search_btn_click();
+ 					$.each(data, function(index, item){
+	            		//selectData();
+	            		//$("search_btn").trigger("click");
+    					//var msg = {
+    					//	member_id : item.member_id,
+    					//};
+            			//sendAlarm(msg);
+            			w.send( item.member_id );
+            			alarm("알람전송");
+ 					});
+ 				},
                 error:function() {
                    alert("insert ajax통신 실패!!!");
                 }
@@ -189,9 +217,17 @@
 		selectData();
 		
 	});
-		
-	
 </script>
+
+<script>
+	
+	
+
+
+</script>
+
+
+
 </head>
 <body>
 	<header id="hd">

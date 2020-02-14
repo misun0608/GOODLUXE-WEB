@@ -36,7 +36,7 @@ public interface AjaxService {
 	ArrayList<OrderVO> getReturnList()throws Exception;
 	ArrayList<OrderVO> getDetailReturndList(String orderstatus)throws Exception;
 	void setReturnConfirm(String order_number)throws Exception;
-	void setReturnFinished(String order_number)throws Exception;
+	ArrayList<HashMap<String,String>> setReturnFinished(String order_number)throws Exception;
 
 	
 	
