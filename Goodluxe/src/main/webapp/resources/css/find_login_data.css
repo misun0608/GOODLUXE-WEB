@@ -1,0 +1,87 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 아이디/비밀번호 찾기 */
+.find_content{
+    margin: auto;
+    text-align: center;
+}
+
+.find_idpw_table td{
+    padding: 0px 10px 12px 10px;
+}
+
+.find_idpw_table{
+    text-align: center;
+    margin: auto;
+    width: 300px;
+    border: 1px solid #aaaaaa;
+    border-collapse: collapse;
+}
+
+.find_idpw_textbox{
+    margin: 15px 5px -5px 5px;
+    padding-left: 5px;
+    width: 285px;
+    height: 30px;
+    border: 1px solid #aaaaaa;
+}
+.find_idpw_text1{
+    vertical-align: bottom;
+    margin: 15px 2px 0px 2px;
+    /* background-color: #EEEEEE; */
+    /* 분홍 계열 */
+    background-color: rgb(253, 246, 245);
+    /* 하늘 계열 */
+    /* background-color: rgb(237, 245, 250); */
+    height: 30px;
+    font-size: 13px;
+}
+.text2{ /*본인인증 웅앵 부분*/
+    margin : 20px 10px 0px 5px;
+    text-align: left;
+    font-size: 12px;
+    color: #999999;
+}
+
+.find_idpw_button{
+    font-size: 13px;
+    width: 290px;
+    height: 45px;
+    border-radius: 3px;
+    border: 1px solid white; 
+    /* 파란 계열 */
+    /* background-color: #8FB0CA;  */
+    /* 분홍 계열 */
+    background-color: #DFB1AB; 
+    color: white; 
+    outline: 0;
+}
+
+.find_idpw_button:hover{
+    background-color: #F0D2CF; 
+}
+
+.find_login_join_table{
+    text-align: center;
+    margin: auto;
+    width: 300px;
+    padding: 10px 0px 0px 0px;
+    font-size: 13px;
+}
+
+.find_login_join:link {
+    color : black;
+}
+.find_login_join:visited {
+    color : black;
+}
+.find_login_join:hover {
+    /* 파란 계열 */
+    /* color: #8FB0CA; */
+    /* 분홍 계열 */
+    color: #C97D73;
+}

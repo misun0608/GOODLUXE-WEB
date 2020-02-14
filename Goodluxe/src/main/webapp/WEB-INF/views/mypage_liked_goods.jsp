@@ -133,7 +133,7 @@
 											<td class="liked_goods_top_td liked_goods_btn_td">선택</td>
 										</tr>
 									</thead>
-									<%
+									<%if (productList != null) {
 										for(int i = 0; i<productList.size(); i++){
 											HashMap<String,Object>  productHM = new HashMap <String, Object>();	
 											productHM = (HashMap<String,Object>)productList.get(i);
@@ -161,7 +161,7 @@
 										</tr>
 									</tbody>
 									<%
-										}
+										} } else { %> 관심 상품이 없습니다. <% }
 									%>
 								</table>
 								<div class="liked_goods_btnpart">

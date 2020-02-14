@@ -14,6 +14,12 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#hd").load("admin_header.do");
+   });
+</script>
 <script>
 	function submitCheck(){
 		
@@ -94,135 +100,7 @@
 		<a href="#container">본문 바로가기</a>
 	</div>
 
-	<header id="hd">
-		<h1>관리자메인</h1>
-		<div id="hd_top">
-			<button type="button" id="btn_gnb" class="btn_gnb_close btn_gnb_open"></button>
-			<div id="logo">
-				<a href="./adminMain.html"><img
-					src="${pageContext.request.contextPath}/resources/img/admin_menu/logo.png"
-					alt="이건어디서바꾸나 관리자"></a>
-			</div>
-
-			<div id="tnb">
-				<ul>
-					<li class="tnb_li"><a href="#" class="tnb_service"
-						target="_blank"><img
-							src="${pageContext.request.contextPath}/resources/img/admin_menu/home.png"
-							width="25px"></a></li>
-				</ul>
-
-			</div>
-		</div>
-		<nav id="gnb" class="gnb_large gnb_small">
-			<h2>관리자 주메뉴</h2>
-			<ul class="gnb_ul">
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-200 menu-order-2"
-						title="회원관리">회원관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>회원관리</h3>
-							<ul>
-								<li data-menu="200100"><a
-									href="./admincustomermanagement.html" class="gnb_2da  ">회원관리</a></li>
-								<li data-menu="200200"><a
-									href="./adminpointmanagement.html" class="gnb_2da  gnb_grp_div">적립금관리</a></li>
-								<li data-menu="200900"><a
-									href="./admincouponmanagement.html" class="gnb_2da  ">쿠폰관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-300 menu-order-3"
-						title="게시판관리">게시판관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>게시판관리</h3>
-							<ul>
-								<li data-menu="300100"><a href="./adminpostmanagement.html"
-									class="gnb_2da  ">게시판관리</a></li>
-								<li data-menu="300200"><a href="./adminvksao.html"
-									class="gnb_2da  ">게시판 판매 등록</a></li>
-								<li data-menu="300250"><a href="./adminrudao.html"
-									class="gnb_2da  ">게시판 경매 등록</a></li>
-								<li data-menu="300500"><a href="#"
-									class="gnb_2da  gnb_grp_div">Q&A관리</a></li>
-								<li data-menu="300700"><a href="#"
-									class="gnb_2da gnb_grp_style ">FAQ관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-400 menu-order-4"
-						title="쇼핑몰관리">몰관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>사이트 관리</h3>
-							<ul>
-								<li data-menu="400400"><a href="./adminorderproduct.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문목록</a></li>
-								<li data-menu="400410"><a
-									href="./adminorderproduct_cancel.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문취소</a></li>
-								<li data-menu="400420"><a
-									href="./adminorderproduct_refund.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문 반품</a></li>
-								<li data-menu="400430"><a
-									href="./adminorderproduct_return.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문 환불</a></li>
-								<li data-menu="400440"><a
-									href="./adminorderproduct_customermanagement.html"
-									class="gnb_2da gnb_grp_style ">주문 고객 관리</a></li>
-								<li data-menu="400300"><a
-									href="./adminproductregister.html" class="gnb_2da  ">상품등록</a></li>
-								<li data-menu="400700"><a
-									href="./admindelivermanagement.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">배송관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-500 menu-order-5"
-						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>쇼핑몰현황/기타</h3>
-							<ul>
-								<li data-menu="500110"><a href="./adminMain.html"
-									class="gnb_2da  ">매출현황</a></li>
-								<li data-menu="500130"><a
-									href="./admindelivermanagement.html" class="gnb_2da ">배송관리</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-500 menu-order-5"
-						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>쇼핑몰현황/기타</h3>
-							<ul>
-								<li data-menu="500110"><a href="./adminMain.html"
-									class="gnb_2da  ">매출현황</a></li>
-								<li data-menu="500130"><a
-									href="./admindelivermanagement.html" class="gnb_2da ">배송관리</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-	</header>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-
+	<header id="hd"></header>
 
 	<div id="wrapper">
 

@@ -20,7 +20,7 @@ function add_list(){
 }
 
 function check_brand(){
-    if(document.write_form.selected_brand.value == "") {
+    if(document.write_form.ap_selected_brand.value == "") {
         alert("브랜드를 선택해주세요.");
         return false;
     } else if(document.write_form.selected_brand.length != 1) {

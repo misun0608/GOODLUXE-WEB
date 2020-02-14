@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+
+
+<mapper namespace="com.spring.mapper.HistoryMapper">
+
+<resultMap type="com.spring.goodluxe.voes.Auction_HistoryVO" id="resultAuction_HistoryVO">
+		<result property="AUCTION_POST_NUMBER" column="AUCTION_POST_NUMBER" />
+		<result property="AUHIS_NUMBER" column="AUHIS_NUMBER" />
+		<result property="MEMBER_ID" column="MEMBER_ID" />
+		<result property="AUHIS_BID_TIME" column="AUHIS_BID_TIME" />
+		<result property="AUHIS_BETTING_PRICE" column="AUHIS_BETTING_PRICE" />
+	</resultMap>
+
+<insert id="insertHistory" parameterType="com.spring.goodluxe.voes.Auction_HistoryVO">
+	  <selectKey order="BEFORE" keyProperty="AUHIS_NUMBER" resultType="int">
+       SELECT NVL(MAX(TO_NUMBER(AUHIS_NUMBER)),0)+1 
+       FROM GL_AUCTION_HISTORY
+      </selectKey>
+		INSERT INTO GL_AUCTION_HISTORY VALUES(
+			#{AUCTION_POST_NUMBER},
+    		#{AUHIS_NUMBER},
+    		#{MEMBER_ID},
+    		SYSTIMESTAMP,
+    		#{AUHIS_BETTING_PRICE}
+		)
+	</insert>
+	
+	
+	<select id="selectHistory" parameterType="com.spring.goodluxe.voes.Auction_HistoryVO" resultMap="resultAuction_HistoryVO">
+		select *
+		from(
+        	select rownum rnum, AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        	MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE 
+        	from( 
+            	select AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        		MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE
+            	from GL_AUCTION_HISTORY 
+            	where AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+            	order by AUHIS_BETTING_PRICE desc 
+            	
+               )
+        ) where rnum between 1 and 10
+	</select>
+	
+	
+	<select id="selecthistorycount" resultType="int">
+	
+		select count(*)
+		from GL_AUCTION_HISTORY
+		where AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+	
+	</select>
+	
+	
+	<select id="auctionhistoryselect" parameterType="int" resultMap="resultAuction_HistoryVO">
+		select *
+		from(
+        	select rownum rnum, AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        	MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE 
+        	from( 
+            	select AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        		MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE
+            	from GL_AUCTION_HISTORY 
+            	where AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+            	order by AUHIS_BETTING_PRICE desc 
+            	
+               )
+        ) where rnum between 1 and 10
+	</select>
+	
+	<select id="auctionhistoryselectone" parameterType="int" resultMap="resultAuction_HistoryVO">
+		select *
+		from(
+        	select rownum rnum, AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        	MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE 
+        	from( 
+            	select AUCTION_POST_NUMBER, AUHIS_NUMBER, 
+        		MEMBER_ID, AUHIS_BID_TIME, AUHIS_BETTING_PRICE
+            	from GL_AUCTION_HISTORY 
+            	where AUCTION_POST_NUMBER=#{AUCTION_POST_NUMBER}
+            	order by AUHIS_BETTING_PRICE desc 
+            	
+               )
+        ) where rnum =1
+	</select>
+
+</mapper>
