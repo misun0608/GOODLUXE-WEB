@@ -10,19 +10,22 @@
 		<div id="hd_top">
 			<button type="button" id="btn_gnb" class="btn_gnb_close btn_gnb_open"></button>
 			<div id="logo">
-				<a href="./adminMain.html"><img
-					src="${pageContext.request.contextPath}/resources/img/logo.png"></a>
+				<a href="./admin_main.do"><img
+					src="${pageContext.request.contextPath}/resources/img/admin_img/logo.png"></a>
 			</div>
 
 			<div id="tnb">
 				<ul>
-					<li class="tnb_li"><a href="#" class="tnb_service"
-						target="_blank";><img src="./img/home.png" width="25px"></a></li>
+					<li class="tnb_li">
+						<a href="./mainPage.do" class="tnb_service" target="_blank";>
+							<img src="${pageContext.request.contextPath}/resources/img/admin_img/home.png" width="25px">
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
+		
 		<nav id="gnb" class="gnb_large gnb_small">
-
 			<ul class="gnb_ul">
 				<li class="gnb_li">
 					<button type="button" class="btn_op menu-200 menu-order-2">회원관리</button>
@@ -34,31 +37,31 @@
 									<a href="./admin_main.do" class="gnb_2da">관리자메인</a>
 								</li>
 								<li>
-									<a href="./adminPostUpload.do" class="gnb_2da  gnb_grp_div">게시글등록</a>
+									<a href="./adminPostUpload.do" class="gnb_2da gnb_grp_div">게시글등록</a>
 								</li>
 								<li>
-									<a href="./adminProductRegisterPurchase.do" class="gnb_2da  gnb_grp_div">매입등록</a>
+									<a href="./adminProductRegisterPurchase.do" class="gnb_2da gnb_grp_div">매입등록</a>
 								</li>
 								<li>
-									<a href="./adminProductRegisterConsign.do" class="gnb_2da  gnb_grp_div">위탁등록</a>
+									<a href="./adminProductRegisterConsign.do" class="gnb_2da gnb_grp_div">위탁등록</a>
 								</li>
 								<li>
-									<a href="./adminCoupon.do" class="gnb_2da  gnb_grp_div">쿠폰관리</a>
+									<a href="./adminCoupon.do" class="gnb_2da gnb_grp_div">쿠폰관리</a>
 								</li>
 								<li>
-									<a href="./pointView.do" class="gnb_2da  gnb_grp_div">적립금관리</a>
+									<a href="./pointView.do" class="gnb_2da gnb_grp_div">적립금관리</a>
 								</li>
 								<li>
-									<a href="./adminCustomer.do" class="gnb_2da  gnb_grp_div">블랙리스트관리</a>
+									<a href="./adminCustomer.do" class="gnb_2da gnb_grp_div">블랙리스트관리</a>
 								</li>
 								<li>
-									<a href="./adminOrder.do" class="gnb_2da  gnb_grp_div">주문관리</a>
+									<a href="./adminOrder.do" class="gnb_2da gnb_grp_div">주문관리</a>
 								</li>
 								<li>
-									<a href="./adminProduct.do" class="gnb_2da  gnb_grp_div">상품관리</a>
+									<a href="./adminProduct.do" class="gnb_2da gnb_grp_div">상품관리</a>
 								</li>
 								<li>
-									<a href="./adminReturn.do" class="gnb_2da  gnb_grp_div">반품관리</a>
+									<a href="./adminReturn.do" class="gnb_2da gnb_grp_div">반품관리</a>
 								</li>
 							</ul>
 						</div>
@@ -77,8 +80,7 @@
 					</div>
 				</li>
 				<li class="gnb_li">
-					<button type="button" class="btn_op menu-300 menu-order-3"
-						title="게시판관리">게시판관리</button>
+					<button type="button" class="btn_op menu-300 menu-order-3">게시판관리</button>
 					<div class="gnb_oparea_wr">
 						<div class="gnb_oparea">
 							<h3>게시판관리</h3>
@@ -88,15 +90,14 @@
 										판매 등록</a></li>
 								<li><a href="./adminrudao.html" class="gnb_2da">게시판
 										경매 등록</a></li>
-								<li><a href="#" class="gnb_2da  gnb_grp_div">Q&A관리</a></li>
+								<li><a href="#" class="gnb_2da gnb_grp_div">Q&A관리</a></li>
 								<li><a href="#" class="gnb_2da gnb_grp_style ">FAQ관리</a></li>
 							</ul>
 						</div>
 					</div>
 				</li>
 				<li class="gnb_li">
-					<button type="button" class="btn_op menu-400 menu-order-4"
-						title="쇼핑몰관리">몰관리</button>
+					<button type="button" class="btn_op menu-400 menu-order-4">쇼핑몰관리</button>
 					<div class="gnb_oparea_wr">
 						<div class="gnb_oparea">
 							<h3>사이트 관리</h3>
@@ -117,15 +118,13 @@
 					</div>
 				</li>
 				<li class="gnb_li">
-					<button type="button" class="btn_op menu-500 menu-order-5"
-						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
+					<button type="button" class="btn_op menu-500 menu-order-5">쇼핑몰현황/기타</button>
 					<div class="gnb_oparea_wr">
 						<div class="gnb_oparea">
 							<h3>쇼핑몰현황/기타</h3>
 							<ul>
-								<li><a href="./adminMain.html" class="gnb_2da  ">매출현황</a></li>
-								<li><a href="./admindelivermanagement.html"
-									class="gnb_2da ">배송관리</a></li>
+								<li><a href="./adminMain.html" class="gnb_2da">매출현황</a></li>
+								<li><a href="./admindelivermanagement.html" class="gnb_2da ">배송관리</a></li>
 							</ul>
 						</div>
 					</div>

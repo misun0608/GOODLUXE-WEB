@@ -44,8 +44,12 @@ public class AdminController {
 	public String MainView(Model model) throws Exception {
 		System.out.println("관리자 메인 일반 컨트롤러");
 		HashMap<String, Object> map = null;
-		HashMap<String, Object> cate_cnt = null;
-		HashMap<String, Object> brand_cnt = null;
+		
+		// 도넛 그래프
+		ArrayList<HashMap<String, Object>> cate_cnt_list = null;
+		ArrayList<HashMap<String, Object>> brand_cnt_list = null;
+		ArrayList<HashMap<String, Object>> cate_sales_list = null;
+		ArrayList<HashMap<String, Object>> brand_sales_list = null;
 
 		// 추가
 		ArrayList<HashMap<String, Object>> data_list = null;
@@ -205,12 +209,24 @@ public class AdminController {
 			
 			// 도넛 그래프 데이터
 			// 카테고리별 주문수
-			cate_cnt = gls.getCateCntData();
+			cate_cnt_list = gls.getCateCntData();
 			// 브랜드별 주문수
+			brand_cnt_list = gls.getBrandCntData();
+			// 카테고리별 매출액
+			cate_sales_list = gls.getCateSalesData();
+			// 브랜드별 매출액
+			brand_sales_list = gls.getBrandSalesData();
 			
-			
+//			System.out.println(cate_cnt_list);
+//			System.out.println(brand_cnt_list);
+//			System.out.println(cate_sales_list);
+//			System.out.println(brand_sales_list);
 			
 			model.addAttribute("map", map);
+			model.addAttribute("cate_cnt_list", cate_cnt_list);
+			model.addAttribute("brand_cnt_list", brand_cnt_list);
+			model.addAttribute("cate_sales_list", cate_sales_list);
+			model.addAttribute("brand_sales_list", brand_sales_list);
 
 		} catch (Exception e) {
 			System.out.println("ERROR(AdminController/MainView) : " + e.getMessage());

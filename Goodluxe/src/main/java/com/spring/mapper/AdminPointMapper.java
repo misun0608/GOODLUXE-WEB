@@ -41,4 +41,10 @@ public interface AdminPointMapper {
 	ArrayList<HashMap<String,Object>> getAdminDefaultData();
 	// 7일간 환불 데이터 리스트
 	ArrayList<HashMap<String, Object>> getRefundData();
+	
+	// 도넛 그래프 데이터들
+	ArrayList<HashMap<String,Object>> getCateCnt();
+	ArrayList<HashMap<String,Object>> getCateSales();
+	ArrayList<HashMap<String,Object>> getBrandCnt();
+	ArrayList<HashMap<String,Object>> getBrandSales();
 }

@@ -150,7 +150,7 @@ h3 {
 }
 
 section {
-	width: 1500px;
+	width: 1100px;
 }
 /* head부분 목록  */
 #hd_top {
@@ -337,62 +337,62 @@ section {
 
 /* 사이드바 버튼들에 들어가는 각종 메뉴들 */
 #gnb .gnb_li .btn_op.menu-100 {
-	background: url(../img/settings.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/settings.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-100 {
-	background: url(../img/settings.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/settings.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .gnb_li .btn_op.menu-200 {
-	background: url(../img/user.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/user.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-200 {
-	background: url(../img/user.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/user.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .gnb_li .btn_op.menu-300 {
-	background: url(../img/post.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/post.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-300 {
-	background: url(../img/post.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/post.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .gnb_li .btn_op.menu-400 {
-	background: url(../img/shop.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/shop.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-400 {
-	background: url(../img/shop.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/shop.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .gnb_li .btn_op.menu-500 {
-	background: url(../img/web.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/web.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-500 {
-	background: url(../img/web.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/web.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .gnb_li .btn_op.menu-900 {
-	background: url(../img/box.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/box.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
 #gnb .on .btn_op.menu-900 {
-	background: url(../img/box.png) 50% 50% no-repeat #ebebeb;
+	background: url(../img/admin_img/box.png) 50% 50% no-repeat #ebebeb;
 	background-size: 25px 25px;
 }
 
@@ -465,7 +465,8 @@ section {
 
 #container_wr {
 	padding: 25px;
-	min-height: 500px
+	min-height: 500px;
+	width: 1200px
 }
 
 #container_title {
@@ -529,7 +530,7 @@ tfoot th, tfoot td {
 
 .tbl_head01 table {
 	clear: both;
-	width: 100%;
+	width: 1100px;
 	border-collapse: collapse;
 	border-spacing: 0
 }
@@ -708,24 +709,25 @@ tfoot th, tfoot td {
 }
 
 .btn00_1 {
-	width: 33.1%;
+	width: 25%;
+/* 	width: 33.1%; */
 	height: 120px;
 	background-color: white;
 	outline: 0;
 	border: 1px solid #BBCDDB;
-	font-size: 20px;
-	line-height: 30px;
+	font-size: 16px;
+	line-height: 10px;
 	background: #BBCDDB
 }
 
 .btn00_2 {
-	width: 24.8%;
+	width: 24.75%;
 	height: 120px;
 	background-color: white;
 	outline: 0;
 	border: 1px solid #BBCDDB;
-	font-size: 20px;
-	line-height: 30px;
+	font-size: 16px;
+	line-height: 10px;
 	background: #BBCDDB
 }
 
@@ -737,7 +739,7 @@ button span.wkrdma {
 	font-size: 0.9em;
 	float: left;
 	margin-left: 10px;
-	margin-top: -15px
+	margin-top: -30px
 }
 
 .btn0 {
@@ -1039,6 +1041,7 @@ tr .td2 {
 /* 추가부분 끝 */
 
 /* 관리자 메인 그래프*/
-.grapharea2{
-	display: inline-block;
-}
+/* .graphblock{
+	position: relative;
+	float:left;
+} */
