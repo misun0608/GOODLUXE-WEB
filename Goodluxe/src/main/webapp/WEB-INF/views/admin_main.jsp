@@ -11,11 +11,11 @@
 	DecimalFormat df3 = new DecimalFormat("###,###");
 
 	// 주문액
-	String order_sales = df3.format(vo.get("order_sales")) + "원";
+	String order_sales = df3.format(vo.get("order_sales"));
 	// 결제액
-	String paid_sales = df3.format(vo.get("paid_order_sales")) + "원";
+	String paid_sales = df3.format(vo.get("paid_order_sales"));
 	// 환불액
-	String refund_sales = df3.format(vo.get("refund_order_sales")) + "원";
+	String refund_sales = df3.format(vo.get("refund_order_sales"));
 
 	// 오늘 품목수
 	int cnt[] = {0, 0, 0, 0, 0, 0, 0};
@@ -295,6 +295,7 @@
 <script>
 	$(document).ready(function() {
 		$("#hd").load("admin_header.do");
+		$("#admin_footer").load("admin_footer.do");
 	});
 </script>
 
@@ -715,46 +716,58 @@
 			<br />
 				<section>
 						<div class="local_desc02 local_desc">일간 데이터</div>
-
-						<h2>오늘 매출 현황</h2>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">주문(<%=vo.get("order_count")%>건)
-							</span><br> <b><span class="zma"><%=order_sales%></span></b>
-						</button>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">결제(<%=vo.get("paid_order_count")%>건)
-							</span><br> <b><span class="zma"><%=paid_sales%></spqn></b>
-						</button>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">환불(<%=vo.get("refund_order_count")%>건)
-							</span><br> <b><span class="zma"><%=refund_sales%></span></b>
-						</button>
-
-						<h2>주문 현황 (최근 1개월(30일) 기준)</h2>
-						<button type="button" class="btn00_2">
-							<span class="wkrdma">결제전</span><br> <b><span class="zma"><%=vo.get("paid_before_count")%></span class="zma"></b>
-						</button>
-						<button type="button" class="btn00_2">
-							<span class="wkrdma">배송준비중</span><br> <b><span
-								class="zma"><%=vo.get("prepared_count")%></span class="zma"></b>
-						</button>
-						<button type="button" class="btn00_2">
-							<span class="wkrdma">배송중</span><br> <span class="zma"><b><%=vo.get("shipping_count")%></b></span class="zma">
-						</button>
-						<button type="button" class="btn00_2">
-							<span class="wkrdma">배송완료</span><br> <span class="zma"><b><%=vo.get("done_count")%></b></span class="zma">
-						</button>
-
-						<h2>취소 / 반품 / 환불 현황 (최근 1개월(30일) 기준)</h2>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">취소</span><br> <b><span class="zma"><%=vo.get("cancel_count")%></span class="zma"></b>
-						</button>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">반품</span><br> <b><span class="zma"><%=vo.get("item_back_count")%></span class="zma"></b>
-						</button>
-						<button type="button" class="btn00_1">
-							<span class="wkrdma">환불</span><br> <b><span class="zma"><%=vo.get("refund_count")%></span class="zma"></b>
-						</button>
+						<div>
+							<h2>오늘 매출 현황</h2>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">주문(<%=vo.get("order_count")%>건)
+								</span><br><span class="zma"><b><%=order_sales%></b></span>
+								<span>원</span>
+							</button>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">결제(<%=vo.get("paid_order_count")%>건)
+								</span><br> <b><span class="zma"><%=paid_sales%></span></b>
+								<span>원</span>
+							</button>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">환불(<%=vo.get("refund_order_count")%>건)
+								</span><br> <b><span class="zma"><%=refund_sales%></span></b>
+								<span>원</span>
+							</button>
+						</div>
+						<br />
+						
+						<div>
+							<h2>주문 현황 (최근 30일 기준)</h2>
+							<button type="button" class="btn00_2">
+								<span class="wkrdma">결제전</span><br>
+								<b><span class="zma"><%=vo.get("paid_before_count")%></span></b>
+							</button>
+							<button type="button" class="btn00_2">
+								<span class="wkrdma">배송준비중</span><br>
+								<b><span class="zma"><%=vo.get("prepared_count")%></span></b>
+							</button>
+							<button type="button" class="btn00_2">
+								<span class="wkrdma">배송중</span><br>
+								<span class="zma"><b><%=vo.get("shipping_count")%></b></span>
+							</button>
+							<button type="button" class="btn00_2">
+								<span class="wkrdma">배송완료</span><br>
+								<span class="zma"><b><%=vo.get("done_count")%></b></span>
+							</button>
+						</div>
+						<br />
+						<div>
+							<h2>취소 / 반품 / 환불 현황 (최근 30일 기준)</h2>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">취소</span><br> <b><span class="zma"><%=vo.get("cancel_count")%></span class="zma"></b>
+							</button>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">반품</span><br> <b><span class="zma"><%=vo.get("item_back_count")%></span class="zma"></b>
+							</button>
+							<button type="button" class="btn00_1">
+								<span class="wkrdma">환불</span><br> <b><span class="zma"><%=vo.get("refund_count")%></span class="zma"></b>
+							</button>
+						</div>
 					</section>
 					<br />
 					<br />
@@ -892,17 +905,7 @@
 
 
 
-			<footer id="ft" class="container-fluid">
-				<p>
-					Copyright &copy; watches.zak.kr. All rights reserved. YoungCart
-					Version 5.3.2.9.1<br>
-					<button type="button" class="scroll_top">
-						<span class="top_img"></span><span class="top_txt">TOP</span>
-					</button>
-				</p>
-			</footer>
+			<footer id="admin_footer" class="container-fluid"></footer>
 		</div>
-
-	</div>
 </body>
 </html>

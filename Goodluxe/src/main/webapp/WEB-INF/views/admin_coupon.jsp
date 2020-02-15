@@ -16,6 +16,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 <script>
@@ -188,12 +189,12 @@ $(document).ready(function() {
           <h3>▶쿠폰 발급 </h3>
           <br>
           <form name = "issue_form" action = "./issueCoupon.do">
-	          <table class="impormation" border="1">
+	          <table class="information" border="1">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
 	                &nbsp;&nbsp;<input type = text class="text3" id = "member_id" name = "member_id">
-	                <button type="button" class="btn22" onclick = "newWin();">아이디 검색</button>
+	                <button type="button" class="id_search_btn" onclick = "newWin();">아이디 검색</button>
 	                <!-- "window.open('adminSearchId.do','아이디검색','resizable=no width=600 height=700')" -->
 	                <input type="checkbox" class="allselect" name = "allselect" value = "all_member"> 전원 지급
 	              </td>
@@ -216,23 +217,23 @@ $(document).ready(function() {
 	            </tr> -->
 	          </table>
 	          <div class="btn12" align="center">
-	            <button type="submit" class="btn1">발급</button>
+	            <button type="submit" class="bottom_btn">발급</button>
 	          </div>
           </form>
           
           <br>
           <br>
 
-          <h3>▶쿠폰 발급 검색 </h3>
+          <h3>▶쿠폰 발급 검색</h3>
           <br>
-          <form id = "issued_list_form" method = "post">
-	          <table class="impormation" border="1" >
+          <form id="issued_list_form" method="post">
+	          <table class="information">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
 	                &nbsp;&nbsp;
 	                <input class="text3" name = "member_id2" id = "member_id2">
-	                <button type="button" class="btn22" onclick = "newWin2();">아이디 검색</button>
+	                <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
 	              </td>
 	            </tr>
@@ -240,24 +241,27 @@ $(document).ready(function() {
 	              <td class="td1">쿠폰 종류</td>
 	              <td class="td2">
 	                <select class="search" name = "coupon_type">
-	                	<option name = "coupon_type" value="전체">전체</option>
-		                <option name = "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
-						<option name = "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
-						<option name = "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
+	                	<option name= "coupon_type" value="전체">전체</option>
+		                <option name= "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
+						<option name= "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
+						<option name= "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
 	                </select>
 	              </td>
 	            </tr>
 	            <tr>
 	              <td class="td1">쿠폰 상태</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;<input type="radio" name="coupon_status" value = "all" checked > 전체
-	                <input type="radio" name="coupon_status" value = "사용전"> 사용전
-	                <input type="radio" name="coupon_status" value = "사용후"> 사용후
+	                &nbsp;&nbsp;<input type="radio" id="coupon_status1" name="coupon_status" value ="all" checked>
+	               	<label for ="coupon_status1">전체</label>
+	                <input type="radio" id="coupon_status2" name="coupon_status" value = "사용전">
+					<label for ="coupon_status2">사용전</label>
+	                <input type="radio" id="coupon_status3" name="coupon_status" value = "사용후">
+	                <label for ="coupon_status3">사용후</label>
 	              </td>
 	            </tr>
 	          </table>
 	          <div class="btn12" align="center">
-	            <button type="button" class="btn1" id = "search_btn">검색</button>
+	            <button type="button" class="bottom_btn one_btn" id ="search_btn">검색</button>
 	          </div>
 	      </form>    
           <br>
@@ -265,9 +269,9 @@ $(document).ready(function() {
 	
 		<form name="delete_form" method = "post">
           <h3>▶ 발급 쿠폰 목록 </h3>
-          <button type="button" class="btn3" id = "delete_btn">삭제</button>
+          <button type="button" class="delete_btn" id ="delete_btn">삭제</button>
           <br>
-          <table border="1" >
+          <table class="information">
             <tr class="tr1">
               <td class="td3"><input type="checkbox"id="chk_all" onclick = "checkAll();"></td>
               <td class="td4">쿠폰 번호</td>
@@ -288,9 +292,7 @@ $(document).ready(function() {
     </div>
   </div>
 
-  <footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
+  <footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

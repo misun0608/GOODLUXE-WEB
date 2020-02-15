@@ -19,6 +19,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 
@@ -265,9 +266,7 @@
 	</div>
 
 
-	<footer class="container-fluid">
-		<p>Footer Text</p>
-	</footer>
+	<footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

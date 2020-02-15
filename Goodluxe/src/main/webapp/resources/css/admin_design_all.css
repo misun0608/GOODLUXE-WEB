@@ -63,16 +63,32 @@ legend {
 	overflow: hidden
 }
 
-label, input, button, select, img {
-	vertical-align: middle
+/* 미선 추가 */
+
+input[type="text"]{
+	border:none;
+	margin-left: 10px;
 }
 
-input, button {
+/* input[type="date"]{
+	border:none;
+} */
+
+label, input, button, select, img {
+	vertical-align: middle;
+}
+
+/* input, button {
 	margin: 0;
 	padding: 0;
 	font-family: 'Nanum Gothic', sans-serif;
 	font-size: 1em
+} */
+
+input:focus{
+	outline: none;
 }
+
 
 button, input[type="submit"] {
 	cursor: pointer
@@ -83,15 +99,15 @@ textarea, select {
 	font-size: 1em
 }
 
-select {
+/* select {
 	margin: 0
-}
+} */
 
-p {
+/* p {
 	margin: 0;
 	padding: 0;
 	word-break: break-all
-}
+} */
 
 pre {
 	overflow-x: scroll;
@@ -132,13 +148,13 @@ body {
 /* h2 기본 */
 h2 {
 	font-size: 1.083em;
-	font-weight: bold;
+	/* font-weight: bold; */
 	margin: 10px 0
 }
 
 h3 {
 	font-size: 1.25em;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 /* 레이아웃 */
@@ -173,7 +189,7 @@ section {
 }
 
 #btn_gnb {
-	background: url(../img/menu.png) 50% 50% no-repeat #8FB0CA;
+	background: url(../img/admin_menu/menu.png) 50% 50% no-repeat #8FB0CA;
 	height: 50px;
 	width: 50px;
 	background-size: 25px 25px;
@@ -494,9 +510,10 @@ section {
 /* 테이블 */
 table {
 	clear: both;
-	width: 100%;
+	width: 90%;
 	border-collapse: collapse;
 	border-spacing: 0;
+	color: #555555;
 }
 
 table caption {
@@ -524,9 +541,6 @@ tfoot th, tfoot td {
 }
 
 /* thead 한줄 테이블 */
-.tbl_head01 {
-	
-}
 
 .tbl_head01 table {
 	clear: both;
@@ -709,26 +723,28 @@ tfoot th, tfoot td {
 }
 
 .btn00_1 {
-	width: 25%;
-/* 	width: 33.1%; */
-	height: 120px;
-	background-color: white;
-	outline: 0;
-	border: 1px solid #BBCDDB;
-	font-size: 16px;
-	line-height: 10px;
-	background: #BBCDDB
+	width: 27%;
+    margin-right: 29.3px;
+    /* width: 33.1%; */
+    height: 130px;
+    background-color: white;
+    outline: 0;
+    border: 1px solid #BBCDDB;
+    font-size: 16px;
+    line-height: 15px;
+    background: #D1DFE8;
 }
 
 .btn00_2 {
-	width: 24.75%;
-	height: 120px;
-	background-color: white;
-	outline: 0;
-	border: 1px solid #BBCDDB;
-	font-size: 16px;
-	line-height: 10px;
-	background: #BBCDDB
+	width: 21.5%;
+    /* margin-right: 15px; */
+    height: 130px;
+    background-color: white;
+    outline: 0;
+    border: 1px solid #BBCDDB;
+    font-size: 16px;
+    line-height: 15px;
+    background: #D1DFE8;
 }
 
 button span.zma {
@@ -808,25 +824,31 @@ a:visited {
 	background: #bbcddb;
 }
 
-.impormation {
-	font-size: 10;
+.information {
+	font-size: 13px;
+	border: 1px solid lightgray;
+	color: #555555;
 }
 
+/* 테이블 왼쪽 제목부분 */
 tr .td1 {
-	width: 150px;
+	width: 135px;
 	text-align: center;
-	background-color: #BBCDDB;
-	height: 50px;
-	color: black;
-	font-size: 15px;
+	background-color: #D1DFE8;
+	height: 45px;
+	font-size: 13px;
+	/* border: 1px solid lightgray; */
 }
 
+/* 오른쪽 내용부분 */
 tr .td2 {
-	height: 50px;
+	height: 45px;
 	background-color: #ffffff;
 	width: 700px;
 	text-align: left;
-	font-size: 15px;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	border-left : 0px;
 }
 
 .tr1 {
@@ -856,11 +878,7 @@ tr .td2 {
 	text-align: center;
 }
 
-.btn12 {
-	
-}
-
-.btn1 {
+/* .btn1 {
 	height: 50px;
 	width: 150px;
 	border: 0;
@@ -870,7 +888,9 @@ tr .td2 {
 	border-radius: 3px 3px 3px 3px;
 	margin-top: 10px;
 	outline: 0;
-}
+} */
+
+
 
 .btn2 {
 	height: 50px;
@@ -885,7 +905,7 @@ tr .td2 {
 	border: 1px solid darkgray;
 }
 
-.btn22 {
+/* .btn22 {
 	height: 35px;
 	width: 150px;
 	border: 0.5;
@@ -894,7 +914,7 @@ tr .td2 {
 	border-radius: 3px 3px 3px 3px;
 	outline: 0;
 	border: 1px solid darkgray;
-}
+} */
 
 .btn1_2 {
 	height: 50px;
@@ -908,7 +928,7 @@ tr .td2 {
 	border: 1px solid darkgray;
 }
 
-.btn3 {
+/* .btn3 {
 	height: 30px;
 	width: 85px;
 	border: 0;
@@ -928,7 +948,7 @@ tr .td2 {
 	border-radius: 3px 3px 3px 3px;
 	outline: 0;
 	margin: 5px;
-}
+} */
 
 .btn5 {
 	height: 100%;
@@ -938,7 +958,7 @@ tr .td2 {
 }
 
 .text1 {
-	width: 100%;
+	width: 80%;
 	height: 100%;
 }
 
@@ -965,7 +985,7 @@ tr .td2 {
 
 .search {
 	width: 150px;
-	height: 35px;
+	height: 25px;
 	margin-left: 10px;
 }
 
@@ -1040,8 +1060,77 @@ tr .td2 {
 
 /* 추가부분 끝 */
 
-/* 관리자 메인 그래프*/
-/* .graphblock{
-	position: relative;
-	float:left;
+/* 버튼 부분 */
+.bottom_btn{
+	background-color: #8FB0CA;
+    border: none;
+    color: white;
+    padding: 8px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    /* -webkit-transition-duration: 0.4s; */
+    /* transition-duration: 0.4s; */
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.cancel_btn{
+	background-color: white;
+    color: #555555;
+    border: 0.8px solid #555555;
+}
+
+.one_btn{
+	border-radius: 3px 3px 3px 3px;
+}
+
+.id_search_btn{
+	width: 110px;
+    text-align: center;
+    background-color: white;
+    border-radius: 6px;
+    border: 0;
+    height: 28px;
+    font-size: 12px;
+    padding: 3px;
+    border: 0.9px solid #555555;
+}
+
+.delete_btn{
+	width: 50px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #555555;
+}
+
+/* 푸터 부분 */
+#admin_footer div{
+	margin: 10px 0px 10px 60px;
+}
+.footer_context{
+    padding: 0 10px;
+    font-size: 12px;
+    width: 100%;
+    /* background: lemonchiffon; */
+    line-height: 23px;
+}
+/* .footer_context>ul:first-child {
+    float: right;
+    text-align: right;
+    margin-right: 20px;
+}
+.footer_context>ul:nth-child(2)>li:nth-child(1) {
+    float: left;
+    margin-right: 20px;
+}
+.footer_context>ul:last-child {
+    margin: 10px 0;
 } */
+

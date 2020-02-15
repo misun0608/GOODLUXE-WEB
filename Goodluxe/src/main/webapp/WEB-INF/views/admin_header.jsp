@@ -37,7 +37,7 @@
 									<a href="./admin_main.do" class="gnb_2da">관리자메인</a>
 								</li>
 								<li>
-									<a href="./adminPostUpload.do" class="gnb_2da gnb_grp_div">게시글등록</a>
+									<a href="./adminPostUpload.do" class="gnb_2da gnb_grp_div">판매글등록</a>
 								</li>
 								<li>
 									<a href="./adminProductRegisterPurchase.do" class="gnb_2da gnb_grp_div">매입등록</a>

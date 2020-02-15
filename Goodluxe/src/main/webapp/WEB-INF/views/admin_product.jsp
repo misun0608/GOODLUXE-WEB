@@ -19,6 +19,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 <script>
@@ -389,7 +390,7 @@ $(document).ready(function() {
 					<h3>▶ 배송관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">분류</td>
 								<td class="td2">&nbsp;&nbsp;&nbsp; 
@@ -417,7 +418,7 @@ $(document).ready(function() {
 							
 						</table>
 						<br/>
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">상품 번호</td>
 								<td class="td2">
@@ -438,7 +439,7 @@ $(document).ready(function() {
 						<br> <br>
 					</div>
 					<form id = "chk_form">
-						<table border="1" id = "output">
+						<table border="1" id="output">
 					
 						</table>
 					</form>
@@ -461,9 +462,7 @@ $(document).ready(function() {
 
 
 
-	<footer class="container-fluid">
-		<p>Footer Text</p>
-	</footer>
+	<footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

@@ -15,6 +15,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 
@@ -279,7 +280,7 @@ $(document).ready(function(){
                     <h3>▶ 회원 검색 </h3>
                     <br>
                     <form name="searchform" id="searchform" method="post">
-                    <table class="impormation" border="1">
+                    <table class="information">
                         <tr>
                             <td class="td1">아이디</td>
                             <td class="td2">
@@ -303,7 +304,7 @@ $(document).ready(function(){
                     </div>
                     <br>
                     <%-- 테이블 --%>
-                    <table border="1" id="pointtable" class="pointtable paginated">
+                    <table id="pointtable" class="information">
                     	<thead>
                     		<tr class="tr1">
                     			<td class="td4">날짜</td>
@@ -333,9 +334,7 @@ $(document).ready(function(){
 
     </div>
 
-  <footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
+  <footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

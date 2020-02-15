@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,16 @@ public class AdminController {
 
 	/* Page Components */
 	@RequestMapping(value = "admin_header.do", method = RequestMethod.GET)
-	public ModelAndView header() {
+	public ModelAndView admin_header() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin_header");
+		return mav; 
+	}
+	
+	@RequestMapping(value = "admin_footer.do", method = RequestMethod.GET)
+	public ModelAndView admin_footer() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin_footer");
 		return mav; 
 	}
 	
@@ -41,8 +49,13 @@ public class AdminController {
 
 	// 관리자 메인페이지
 	@RequestMapping(value = "admin_main.do")
-	public String MainView(Model model) throws Exception {
+	public String MainView(Model model, HttpSession session) throws Exception {
 		System.out.println("관리자 메인 일반 컨트롤러");
+		
+		if(session.getAttribute("member_id") == null) {
+			return "redirect:/mainPage.do";
+		}
+		
 		HashMap<String, Object> map = null;
 		
 		// 도넛 그래프
@@ -236,13 +249,17 @@ public class AdminController {
 
 	// 포인트 관리자페이지로 이동
 	@RequestMapping(value = "pointView.do")
-	public String pointView() throws Exception {
+	public String pointView(HttpSession session) throws Exception {
+		if(session.getAttribute("member_id") == null) {
+			return "redirect:/mainPage.do";
+		}
 		return "admin_point";
 	}
 
 	// 포인트 관리자 페이지 입력폼 띄우기
 	@RequestMapping(value = "pointUpdateView.do")
 	public String pointUpdateView() throws Exception {
+
 		return "admin_point_update";
 	}
 
