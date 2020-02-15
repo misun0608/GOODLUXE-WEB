@@ -86,15 +86,36 @@ maxvalue 10000000;
 		order by comment_ref, comment_ref_step
 	</select>
 	
-	<select id="calRefLev" parameterType="int" resultType="int">
+	<select id="countRefStep" parameterType="int" resultType="int">
 		select count(*)
 		from gl_inquire_comment
-		where comment_ref = #{ref} and comment_ref_level >= #{ref_level}
+		where comment_ref = #{ref} and comment_ref_level <![CDATA[ <= ]]> #{ref_level} and comment_ref_step > #{ref_step}
+	</select>
+	<select id="maxRefStep" parameterType="int" resultType="int">
+		select max(comment_ref_step)
+		from gl_inquire_comment
+		where comment_ref = #{ref}
+	</select>
+	<select id="calRefStep" parameterType="int" resultType="int">
+		select comment_ref_step
+		from gl_inquire_comment
+		where comment_ref = #{ref} and comment_ref_level <![CDATA[ <= ]]> #{ref_level} and comment_ref_step > #{ref_step} and rownum = 1
 	</select>
 	<update id="updateRefStep" parameterType="int">
 		update gl_inquire_comment
 		set comment_ref_step = comment_ref_step + 1
-		where comment_ref_step > #{ref_step}
+		where comment_ref = #{ref} and comment_ref_step >= #{ref_step}
 	</update>
+	
+	<update id="updateComment" parameterType="com.spring.goodluxe.voes.InquireCommentVO">
+		update gl_inquire_comment
+		set comment_content = #{comment_content}
+		where comment_number = #{comment_number}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from gl_inquire_comment
+		where comment_number = #{comment_number}
+	</delete>
 
 </mapper>

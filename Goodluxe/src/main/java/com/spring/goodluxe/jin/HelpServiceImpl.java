@@ -104,21 +104,19 @@ public class HelpServiceImpl implements HelpService {
 			int commNum = setCommNum();
 			commVO.setComment_number(commNum);
 			
-			int num = helpMapper.calRefLev(ref, ref_level+1);
+			int num = helpMapper.countRefStep(ref, ref_step, ref_level);
 			if(num == 0) {
-				helpMapper.updateRefStep(ref_step);
-				commVO.setComment_ref_step(ref_step + 1);
-				commVO.setComment_ref_level(ref_level + 1);
+				ref_step = helpMapper.maxRefStep(ref) + 1;
 			} else {
-				
+				ref_step = helpMapper.calRefStep(ref, ref_step, ref_level);
+				helpMapper.updateRefStep(ref, ref_step);
 			}
-			
+			commVO.setComment_ref_step(ref_step);
+			commVO.setComment_ref_level(ref_level + 1);
 			
 			res = helpMapper.insertComment(commVO);
 			
-			if(res != 0) {
-				helpMapper.addCommentNum(commVO.getInquire_number());
-			}
+			if(res != 0) { helpMapper.addCommentNum(commVO.getInquire_number()); }
 			
 		} catch(Exception e) {
 			System.out.println("ERROR(HelpSerivce/insertComment) : " + e.getMessage());
@@ -138,6 +136,34 @@ public class HelpServiceImpl implements HelpService {
 			System.out.println("ERROR(HelpSerivce/setCommNum) : " + e.getMessage());
 		}
 		return commNum;
+	}
+
+	@Override
+	public int updateComment(InquireCommentVO commVO) throws Exception {
+		int res = 0;
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			res = helpMapper.updateComment(commVO);
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpSerivce/updateComment) : " + e.getMessage());
+			throw new Exception("ERROR(HelpSerivce/updateComment)", e);
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteComment(InquireCommentVO commVO) throws Exception {
+		int res = 0;
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			res = helpMapper.deleteComment(commVO.getComment_number());
+			
+			if(res != 0) { helpMapper.subCommentNum(commVO.getInquire_number()); }
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpSerivce/deleteComment) : " + e.getMessage());
+			throw new Exception("ERROR(HelpSerivce/deleteComment)", e);
+		}
+		return res;
 	}
 
 

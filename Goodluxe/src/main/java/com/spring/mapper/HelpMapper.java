@@ -18,7 +18,10 @@ public interface HelpMapper {
 	public void addCommentNum(int inquire_number);
 	public void subCommentNum(int inquire_number);
 	public ArrayList<InquireCommentVO> commList(int inquire_number);
-	public int calRefLev(@Param("ref")int ref, @Param("ref_level")int ref_level);
-	public void updateRefStep(int ref_step);
-	
+	public int countRefStep(@Param("ref")int ref, @Param("ref_step")int ref_step, @Param("ref_level")int ref_level);
+	public int maxRefStep(int ref);
+	public int calRefStep(@Param("ref")int ref, @Param("ref_step")int ref_step, @Param("ref_level")int ref_level);
+	public void updateRefStep(@Param("ref")int ref, @Param("ref_step")int ref_step);
+	public int updateComment(InquireCommentVO commVO);
+	public int deleteComment(int comment_nubmer);
 }

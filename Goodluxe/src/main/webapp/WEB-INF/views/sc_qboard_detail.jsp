@@ -69,9 +69,9 @@
     	$(document).on('click','.reply_write_btn',function(e){
     		if(!login_chk("<%=member_id%>")){ return; }
     		var form_name = ".comment_write_form" + $(this).attr('form_index');
-    		if(!content_chk($(form_name).find('textarea').val())){ return; }
+    		if(!content_chk($(form_name).find('.write_content').val())){ return; }
     		var params = $(form_name).serialize();
-/* 
+
     		$.ajax({
     			url : 'insertComment.do',
     			type : 'POST',
@@ -79,15 +79,56 @@
     			contentType : 'application/x-www-form-urlencoded;charset=utf-8',
     			dataType : 'json',
     			success : function(retVal) {
-    				alert(retVal.message);
     				loadComment();
     			},
     			error : function() {
     				alert('현재 서버와의 통신이 원활하지 않습니다.');
     			}
     		});
-    		$('.comment_write_form').children('textarea').val('');
-    		 */
+    		
+    		e.preventDefault();
+    	});
+    	
+    	$(document).on('click','.reply_update_btn',function(e){
+    		var form_name = ".comment_write_form" + $(this).attr('form_index');
+    		if(!content_chk($(form_name).find('.updated_content').val())){ return; }
+    		var params = $(form_name).serialize();
+    		
+    		$.ajax({
+    			url : 'updateComment.do',
+    			type : 'POST',
+    			data : params,
+    			contentType : 'application/x-www-form-urlencoded;charset=utf-8',
+    			dataType : 'json',
+    			success : function(retVal) {
+    				loadComment();
+    			},
+    			error : function() {
+    				alert('현재 서버와의 통신이 원활하지 않습니다.');
+    			}
+    		});
+    		
+    		e.preventDefault();
+    	});
+    	
+    	$(document).on('click','.comm_del_btn',function(e){
+    		var form_name = ".comment_write_form" + $(this).attr('form_index');
+    		var params = $(form_name).serialize();
+    		
+    		$.ajax({
+    			url : 'deleteComment.do',
+    			type : 'POST',
+    			data : params,
+    			contentType : 'application/x-www-form-urlencoded;charset=utf-8',
+    			dataType : 'json',
+    			success : function(retVal) {
+    				loadComment();
+    			},
+    			error : function() {
+    				alert('현재 서버와의 통신이 원활하지 않습니다.');
+    			}
+    		});
+    		
     		e.preventDefault();
     	});
     	
@@ -126,15 +167,21 @@
     						output += '<input type="hidden" name="inquire_number" value=' + comment.inquire_number + ' >';
     						output += '<table class="detail_comment_table" style="border: 1px solid #d7d7d7;">';
     						output += '<tr>';
-    						if(comment.comment_ref_level != 0) {
+    						if(comment.comment_ref_level > 0) {
     							output += '<td class="detail_re_comment_td_icon"><img src="${pageContext.request.contextPath}/resources/img/icons/re_comment.png" style="width: 10px;"></td>';
-    						}
-    						output += '<td class="detail_comment_td_id">&nbsp;' + comment.member_id + '&nbsp;';
-    						if(comment.comment_ref_level > 1) {    							
-    							output += '<span class="detail_re_re_comment">@' + comment.comment_ref_writer + '님에 대한 답글</span>';
+    							output += '<td class="detail_re_comment_td_id">&nbsp;' + comment.member_id + '&nbsp;';
+	    						if(comment.comment_ref_level > 1) {    							
+	    							output += '<span class="detail_re_re_comment">@' + comment.comment_ref_writer + '님에 대한 답글</span>';
+	    						}
+    						} else {
+	    						output += '<td class="detail_comment_td_id">&nbsp;' + comment.member_id + '&nbsp;';
     						}
     						output += '</td>';
-    						output += '<td class="detail_comment_td_btn" rowspan="2">';
+    						if(comment.comment_ref_level > 0) {
+	    						output += '<td class="detail_re_comment_td_btn" rowspan="2">';
+    						} else {
+    							output += '<td class="detail_comment_td_btn" rowspan="2">';
+    						}
     						output += '<input type="button" class="detail_re_comment_btn comm_reply_btn" form_index='+ index +' value="답글"><br>';
     						if(comment.member_id == "<%=member_id%>") {
     							output += '<input type="button" class="detail_re_comment_btn comm_update_btn" form_index='+ index +' value="수정"><br>';
@@ -143,9 +190,15 @@
     							output += '<input type="button" class="detail_re_comment_btn comm_del_btn" form_index='+ index +' value="삭제">';
     						}
     						output += '</td></tr>';
-    						output += '<tr><td class="detail_comment_td_content">' + comment.comment_content + '</td></tr>';
+    						output += '<tr>';
+    						if(comment.comment_ref_level > 0) {
+    							output += '<td class="detail_re_comment_td_icon"></td>';
+    							output += '<td class="detail_re_comment_td_content">' + comment.comment_content + '</td></tr>';
+    						} else {
+    							output += '<td class="detail_comment_td_content">' + comment.comment_content + '</td></tr>';
+    						}
     						output += '<tr class="tr_comment_write comm_write_form' + index + '">';
-    						if(comment.comment_ref_step > 0) {
+    						if(comment.comment_ref_level > 0) {
     							output += '<td></td>';
     						}
     						output += '<td class="td_comment_write">';
@@ -154,7 +207,7 @@
     						output += '<input type="hidden" name="comment_ref_step" value=' + comment.comment_ref_step + ' >';
     						output += '<input type="hidden" name="comment_ref_level" value=' + comment.comment_ref_level + ' >';
     						output += '<input type="hidden" name="comment_ref_writer" value=' + comment.member_id + ' >';
-    						output += '<textarea class="td_detail_comment_text" name="comment_content" cols="90" rows="2"></textarea>';
+    						output += '<textarea class="td_detail_comment_text write_content" name="comment_content" cols="90" rows="2"></textarea>';
     						output += '</td><td>';
     						output += '<input type="button" class="td_detail_comment_btn reply_write_btn" form_index=' + index + ' value="답글 달기">';
     						output += '</td></tr>';
@@ -164,7 +217,7 @@
     						}
     						output += '<td class="td_comment_write">';
     						output += '<input type="hidden" name="comment_number" value=' + comment.comment_number + ' >';
-    						output += '<textarea class="td_detail_comment_text" name="updated_content" cols="90" rows="2">'+ comment.comment_content +'</textarea>';
+    						output += '<textarea class="td_detail_comment_text updated_content" name="updated_content" cols="90" rows="2">'+ comment.comment_content +'</textarea>';
     						output += '</td><td>';
     						output += '<input type="button" class="td_detail_comment_btn reply_update_btn" form_index=' + index + ' value="댓글 수정">';
     						output += '</td></form></tr>';
@@ -231,9 +284,11 @@
 		                        	<input type="button" class="center_detail_btn" onClick="location.href='SC.do';" style="background-color: white;" value="목록">
 		                        </td>
 		                        <td style="text-align: right;">
-		                        <% if( member_id !=null && (member_id.equals(qPost.getMember_id()) || member_isadmin.equals("Y")) ) { %>
+		                        <% if( member_id != null && member_id.equals(qPost.getMember_id()) ) { %>
 		                        	<button class="center_detail_btn" style="background-color: white;">삭제</button>
 		                            <button class="center_detail_btn" style="background-color: white;">수정</button>
+		                        <% } else if( member_id !=null && member_isadmin.equals("Y") ) { %>
+		                        	<button class="center_detail_btn" style="background-color: white;">삭제</button>
 		                        <% } %>
 		                        </td>
 		                    </tr>
