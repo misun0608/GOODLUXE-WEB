@@ -17,33 +17,33 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/joinstyle.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script> 
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/joinstyle.css">
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goodluxe-header.js"></script> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goodluxe-footer.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> 
-   	<script>
-		$(document).ready(function(){
-			$("#header").load("header.do");
-			$("#nav_bar").load("navBar.do");
-			$("#login_box").load("loginBox.do");
-			$("#footer").load("footer.do");
-		});
-		
-// 		 Kakao.init('dc50a646222a7303868e2fc1557ba996');
-// 	    function loginWithKakao() {
-// 	      // 로그인 창을 띄웁니다.
-// 	      Kakao.Auth.login({
-// 	        success: function(authObj) {
-// 	          alert(JSON.stringify(authObj));
-// 	        },
-// 	        fail: function(err) {
-// 	          alert(JSON.stringify(err));
-// 	        }
-// 	      });
-// 	    }; 
+      <script>
+      $(document).ready(function(){
+         $("#header").load("header.do");
+         $("#nav_bar").load("navBar.do");
+         $("#login_box").load("loginBox.do");
+         $("#footer").load("footer.do");
+      });
+      
+//        Kakao.init('dc50a646222a7303868e2fc1557ba996');
+//        function loginWithKakao() {
+//          // 로그인 창을 띄웁니다.
+//          Kakao.Auth.login({
+//            success: function(authObj) {
+//              alert(JSON.stringify(authObj));
+//            },
+//            fail: function(err) {
+//              alert(JSON.stringify(err));
+//            }
+//          });
+//        }; 
      
     </script>
 

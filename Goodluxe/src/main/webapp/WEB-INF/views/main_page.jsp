@@ -11,7 +11,6 @@
 	ArrayList<HashMap<String, Object>> productList_view 
 	= (ArrayList<HashMap<String, Object>>)request.getAttribute("productList_view");
 	
-	
 	String entity1 = (String)productList_view.get(0).get("entity_number");
 	String entity2 = (String)productList_view.get(1).get("entity_number");
 	String entity3 = (String)productList_view.get(2).get("entity_number");

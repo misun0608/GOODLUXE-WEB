@@ -66,7 +66,7 @@ public class MemberJoinController {
 	           
 //				writer.write("<script>alert('회원 가입 성공'); location.href='./mailSending.do';</script>");
 				System.out.println("2-1"); 
-				return "redirect:/mailSending.do";
+				return "redirect:/mailSendingJoin.do";
 			} else {
 				writer.write("<script>alert('회원 가입 실패'); location.href='./joinform3.do';</script>");
 				System.out.println("2-2");
@@ -80,8 +80,8 @@ public class MemberJoinController {
 	}
 	
 	/* mailSending 코드 */
-	@RequestMapping(value = "/mailSending.do")
-	public String mailSending(HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "/mailSendingJoin.do")
+	public String mailSendingJoin(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_email") String member_email, @RequestParam("member_id") String member_id) throws Exception {
 
 		String setfrom = "bit.goodluxe@gmail.com"; // host 메일 주소

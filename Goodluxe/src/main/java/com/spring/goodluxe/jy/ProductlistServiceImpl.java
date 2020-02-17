@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.goodluxe.voes.ConsignProductVO;
+import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.ProductBoardVO;
 import com.spring.goodluxe.voes.PurchaseProductVO;
 import com.spring.mapper.ProductlistMapper;
@@ -57,9 +59,16 @@ public class ProductlistServiceImpl implements ProductlistService{
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 		
+			sellboVO.setPb_sale_status("판매중");
 			sellboVO.setPb_view_count(0);
 			sellboVO.setPb_like(0);
-			
+			if(sellboVO.getPb_division().equals("purchase")) {
+				productlistMapper.setPurcSaleStatus(sellboVO);
+				System.out.println("if문 들어옴");
+			}else if(sellboVO.getPb_division().equals("consign")) {
+				productlistMapper.setConsSaleStatus(sellboVO);
+			}
+				
 			int res = productlistMapper.insertSellingBoard(sellboVO);
 		
 			return res;
@@ -277,6 +286,83 @@ public class ProductlistServiceImpl implements ProductlistService{
 			System.out.println("ERROR(ProductlistService/getTheProduct) : " + e.getMessage());
 			throw new Exception("ERROR(ProductlistService/getTheProduct)");
 		}
+	}
+
+
+
+	public MemberVO adminSearchID(String string, String member_id) throws Exception {
+		
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			HashMap<String, String> map = new HashMap<String, String>();
+			MemberVO memberVO = new MemberVO();
+			map.put("member_id", member_id);
+			
+			int nullChk = productlistMapper.countOneMember(map);
+			if(nullChk==0) {
+				return null;
+			}else {
+				memberVO = productlistMapper.adminSearchId(map);
+				return memberVO;
+			}
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/adminSearchId) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/adminSearchId)");
+		}
+	}
+
+	public int issueAllmemberCoupon(CouponVO couponVO) throws Exception {
+		ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		try {
+			ArrayList<HashMap<String,String>>allIds = null;
+			allIds = productlistMapper.selectAllMember();
+			
+			System.out.println( " 1 "+ allIds.get(0).get("member_id"));
+			System.out.println( " 2 "+ allIds.get(1).get("member_id"));
+			System.out.println( " 3 "+ allIds.get(2).get("member_id"));
+			
+			
+			for(int i = 0 ; i<allIds.size(); i++) {
+				couponVO.setMember_id(allIds.get(i).get("member_id"));
+				System.out.println("couponVO.getCoupon_type()="+couponVO.getCoupon_type());
+				productlistMapper.issueAllmemberCoupon(couponVO);
+			}
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/issueAllmemberCoupon) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/ issueAllmemberCoupon)");
+		}
+		return 0;
+		
+		
+	}
+
+	public int issueOnememberCoupon(CouponVO couponVO) throws Exception {
+		ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		try {
+		
+			int res = productlistMapper.issueOnememberCoupon(couponVO);
+			return res;
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/issueOnememberCoupon) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/ issueOnememberCoupon)");
+		}
+		
+	}
+	public HashMap<String,String> getShippingInfo(String order_number)throws Exception {
+		ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		try {
+		
+			HashMap<String, String> shipping_info = productlistMapper.getShippingInfo(order_number);
+			return shipping_info;
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/getShippingInfo) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/ getShippingInfo)");
+		}
+		
+		
 	}
 	
 
