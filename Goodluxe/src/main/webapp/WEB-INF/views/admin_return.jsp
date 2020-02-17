@@ -106,23 +106,23 @@
 							var order_date_shaped = date_format(order_date1);
 							output += '<tr class="tr2">';
 							
-							output += '<td class="td3">'+item.order_number+'</td>';
-							output += '<td class="td3">'+order_date_shaped+'</td>';
-							output += '<td class="td3">'+item.order_status;
+							output += '<td class="context_td">'+item.order_number+'</td>';
+							output += '<td class="context_td">'+order_date_shaped+'</td>';
+							output += '<td class="context_td">'+item.order_status;
 							if(item.order_status=='환불신청'){
-								output+= '&nbsp;<button id = "return_confirm" value = "'+item.order_number+'">상품 회수중</button>';
+								output+= '&nbsp;<button id="return_confirm" value = "'+item.order_number+'">상품 회수중</button>';
 							}else if(item.order_status=='반품확인'){
-								output+= '&nbsp;<button id = "return_finished" value = "'+item.order_number+'">회수&환불 완료</button>';
+								output+= '&nbsp;<button id="return_finished" value = "'+item.order_number+'">회수&환불 완료</button>';
 							}
 							output += '</td>';
-							output += '<td class="td3">'+item.order_pay_system;
+							output += '<td class="context_td">'+item.order_pay_system;
 							if(item.order_pay_system == '무통장입금'){
 								output+= '[ '+item.order_refund_account+'('+item.order_refund_bank+') ]';
 							}
 							output += '</td>';
-							output += '<td class="td3">'+item.order_pay_price+'</td>';
-							output += '<td class="td3">'+item.member_id+'</td>';
-							output += '<td class="td3">'+item.pb_number+'</td>';
+							output += '<td class="context_td">'+item.order_pay_price+'</td>';
+							output += '<td class="context_td">'+item.member_id+'</td>';
+							output += '<td class="context_td">'+item.pb_number+'</td>';
 							output += '</tr>';
 							console.log("output:" + output);
 							$('#output').append(output);
@@ -211,18 +211,20 @@
 			<div class="container_wr">
 				<section>
 
-
 					<br> <br>
 					<form id = "search_detail_form">
 						<table class="information">
-						
 							<tr>
 								<td class="td1">주문상태로 검색</td>
 								<td class="td2">&nbsp;&nbsp;
-									<input type="radio" name="orderstatus" value = "all"  checked> 전체 &nbsp;
-									<input type="radio" name="orderstatus" value = "환불신청"> 환불 신청 &nbsp;
-									<input type="radio" name="orderstatus" value = "반품확인"> 반품 확인(처리중) &nbsp;
-									<input type="radio" name="orderstatus" value = "환불완료"> 환불 완료 &nbsp;
+									<input type="radio" id="orderstatus1" name="orderstatus" value = "all"  checked>
+									<label for="orderstatus1">전체</label>
+									<input type="radio" id="orderstatus2" name="orderstatus" value = "환불신청">
+									<label for="orderstatus2">환불신청</label>
+									<input type="radio" id="orderstatus3" name="orderstatus" value = "반품확인">
+									<label for="orderstatus3">반품확인(처리중)</label>
+									<input type="radio" id="orderstatus4" name="orderstatus" value = "환불완료">
+									<label for="orderstatus4">환불완료</label>
 								</td>
 							</tr>
 						</table>
@@ -236,22 +238,22 @@
 						</table>
 	 					 -->
 						<div class="btn12" align="center">
-							<button type="button" class="btn1_2">초기화</button>
-							<button type="button" class="btn1" id = "search_btn">검색</button>
+							<button type="button" class="bottom_btn cancel_btn">초기화</button>
+							<button type="button" class="bottom_btn" id = "search_btn">검색</button>
 						</div>
 					</form>
 					<br> <br>
 					<br>
-					<table border="1">
+					<table class="information">
 
 						<tr class="tr1">
-							<td class="td4">주문번호</td>
-							<td class="td4">주문일</td>
-							<td class="td4">주문상태</td>
-							<td class="td4">결제방식</td>
-							<td class="td4">결제금액</td>
-							<td class="td4">주문자 아이디</td>
-							<td class="td4">상품 번호</td>
+							<td class="title_td">주문번호</td>
+							<td class="title_td">주문일</td>
+							<td class="title_td">주문상태</td>
+							<td class="title_td">결제방식</td>
+							<td class="title_td">결제금액</td>
+							<td class="title_td">주문자 아이디</td>
+							<td class="title_td">상품 번호</td>
 						</tr>
 						<tbody id = "output">						
 							

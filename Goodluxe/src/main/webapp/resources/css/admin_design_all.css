@@ -510,13 +510,13 @@ section {
 }
 
 /* 테이블 */
-table {
+/* table {
 	clear: both;
 	width: 90%;
 	border-collapse: collapse;
 	border-spacing: 0;
 	color: #555555;
-}
+} */
 
 table caption {
 	height: 0;
@@ -829,6 +829,44 @@ a:visited {
 /* 테이블 */
 
 .information {
+	clear: both;
+	width: 90%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #555555;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	color: #555555;
+}
+
+.id_table{
+	clear: both;
+	width: 45%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #555555;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	color: #555555;
+}
+
+.point_table{
+	clear: both;
+	width: 75%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #555555;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	color: #555555;
+}
+
+.id_search_table{
+	clear: both;
+	width: 75%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #555555;
 	font-size: 13px;
 	border: 1px solid lightgray;
 	color: #555555;
@@ -855,6 +893,16 @@ tr .td2 {
 	border-left : 0px;
 }
 
+tr .id_search_td{
+	height: 45px;
+	background-color: #ffffff;
+	width: 300px;
+	text-align: left;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	border-left : 0px;
+}
+
 .tr1 {
 	background-color: whitesmoke;
 	height: 25px;
@@ -875,14 +923,20 @@ tr .td2 {
 .check_td{
 	width:30px;
 	text-align: center;
-	height: 20px;
+	height: 25px;
 }
 
 .title_td{
 	text-align: center;
 	font-size: 13px;
-	height: 20px;
+	height: 32px;
 	background-color: whitesmoke;
+}
+
+.context_td{
+	text-align: center;
+	height: 25px;
+	font-size: 12px;
 }
 
 .tr2 {
@@ -1089,7 +1143,12 @@ tr .td3{
 	text-align: right;
 }
 
+
 /*페이징 css 추가부분*/
+#pagination{
+	
+}
+
 .hover {
 	text-decoration: underline;
 }
@@ -1128,6 +1187,10 @@ tr .td3{
     border-radius: 8px;
 }
 
+/* .use_btn{
+	width: 150px;
+} */
+
 .cancel_btn{
 	background-color: white;
     color: #555555;
@@ -1142,6 +1205,7 @@ tr .td3{
 	width: 110px;
     text-align: center;
     background-color: white;
+    color: #555555;
     border-radius: 6px;
     border: 0;
     height: 28px;
@@ -1154,6 +1218,43 @@ tr .td3{
 	width: 50px;
     text-align: center;
     background-color: white;
+    color: #555555;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #555555;
+}
+
+#return_confirm{
+	width: 80px;
+    text-align: center;
+    background-color: white;
+    color: #555555;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #555555;
+}
+
+#return_finished{
+	width: 95px;
+    text-align: center;
+    background-color: #8FB0CA;
+    color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #8FB0CA;
+}
+
+.select_all_btn{
+	width: 70px;
+    text-align: center;
+    background-color: white;
+    color: #555555;
     border-radius: 5px;
     border: 0;
     font-size: 12px;
