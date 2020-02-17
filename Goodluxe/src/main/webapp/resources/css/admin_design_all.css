@@ -921,7 +921,6 @@ tr .id_search_td{
 }
 
 .check_td{
-	width:30px;
 	text-align: center;
 	height: 25px;
 }
@@ -1261,6 +1260,42 @@ tr .td3{
     padding: 2px;
     border: 0.9px solid #555555;
 }
+
+/* input file */
+.form-group input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.form-group label {
+	font-size: 12px;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #999;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+}
+
+/* named upload */
+.form-group .upload-name, .upload-name2, .upload-name3, .upload-name4{
+	width: 325px;
+	display: inline-block;
+	height: 35px;
+	font-size: 12x; 
+	padding: 0 10px;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-radius: 5px;
+}
+
 
 /* 푸터 부분 */
 #admin_footer div{

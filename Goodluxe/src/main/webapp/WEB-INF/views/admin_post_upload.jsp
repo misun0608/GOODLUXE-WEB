@@ -65,6 +65,35 @@
 		
 		return true;
 	}
+	
+	$(document).ready(function(){ 
+		var fileTarget = $('#exampleInputFile'); 
+		var fileTarget2 = $('#exampleInputFile2'); 
+		var fileTarget3 = $('#exampleInputFile3'); 
+		var fileTarget4 = $('#exampleInputFile4');
+		
+		fileTarget.on('change', function(){ // 값이 변경되면 
+			var cur=$(".form-group input[type='file']").val(); 
+			$(".upload-name").val(cur); 
+		});
+		
+		fileTarget2.on('change', function(){ // 값이 변경되면 
+			var cur=$(".form-group input[type='file']").val(); 
+			$(".upload-name2").val(cur); 
+		}); 
+		
+		fileTarget3.on('change', function(){ // 값이 변경되면 
+			var cur=$(".form-group input[type='file']").val(); 
+			$(".upload-name3").val(cur); 
+		}); 
+		
+		fileTarget4.on('change', function(){ // 값이 변경되면 
+			var cur=$(".form-group input[type='file']").val(); 
+			$(".upload-name4").val(cur); 
+		}); 
+	});
+
+	
 </script>
 
 </head>
@@ -140,8 +169,10 @@
 							<td class="td2">
 								<div class="form-group" align="left">
 								&nbsp;
-									<input type="file" name = "pb_main_img" class="form-control-file"
+									<label for="exampleInputFile">업로드</label> 
+									<input type="file" name ="pb_main_img" class="form-control-file"
 										id="exampleInputFile" aria-describedby="fileHelp">
+									<input class="upload-name" value="파일선택">
 								</div>
 							</td>
 	
@@ -151,8 +182,10 @@
 							<td class="td2">
 								<div class="form-group" align="left">
 								&nbsp;
+									<label for="exampleInputFile2">업로드</label> 
 									<input type="file" name = "pb_detail_img1" class="form-control-file"
-										id="exampleInputFile" aria-describedby="fileHelp">
+										id="exampleInputFile2" aria-describedby="fileHelp">
+									<input class="upload-name2" value="파일선택">
 								</div>
 							</td>
 						</tr> 
@@ -161,8 +194,10 @@
 							<td class="td2">
 								<div class="form-group" align="left">
 								&nbsp;
+									<label for="exampleInputFile3">업로드</label> 
 									<input type="file" name = "pb_detail_img2" class="form-control-file"
-										id="exampleInputFile" aria-describedby="fileHelp">
+										id="exampleInputFile3" aria-describedby="fileHelp">
+									<input class="upload-name3" value="파일선택">
 								</div>
 							</td>
 						</tr> 
@@ -171,8 +206,10 @@
 							<td class="td2">
 								<div class="form-group" align="left">
 								&nbsp;
+									<label for="exampleInputFile4">업로드</label> 
 									<input type="file" name = "pb_detail_img3" class="form-control-file"
-										id="exampleInputFile" aria-describedby="fileHelp">
+										id="exampleInputFile4" aria-describedby="fileHelp">
+									<input class="upload-name4" value="파일선택">
 								</div>
 							</td>
 						</tr> 
