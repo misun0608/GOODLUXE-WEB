@@ -393,26 +393,35 @@ $(document).ready(function() {
 						<table class="information">
 							<tr>
 								<td class="td1">분류</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
-									<input type="radio" id = "pb_division" name = "pb_division" value = "purchase"  checked /> 매입 &nbsp;
-									<input type="radio" id = "pb_division" name = "pb_division" value = "consign" /> 위탁 &nbsp;
+								<td class="td2">&nbsp;&nbsp;
+									<input type="radio" id="pb_division1" name = "pb_division" value = "purchase"  checked />
+									<label for="pb_division1">매입</label>
+									<input type="radio" id="pb_division2" name = "pb_division" value = "consign" />
+									<label for="pb_division2">위탁</label>
 								</td>
 							</tr>
 							<tr>
 								<td class="td1">게시상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
-									<input type="radio" name = "pb_post_status" value = "all" id = "is_checked" checked /> 전체&nbsp; 
-									<input type="radio" name = "pb_post_status" value = "게시중"/> 게시 중&nbsp; 
-									<input type="radio" name = "pb_post_status" value = "게시안함"/> 게시 안함&nbsp;
+								<td class="td2">&nbsp;&nbsp;
+									<input type="radio" name = "pb_post_status" value = "all" id = "is_checked" checked />
+									<label for="is_checked">전체</label>
+									<input type="radio" id="pb_post_status2" name = "pb_post_status" value = "게시중"/>
+									<label for="pb_post_status2">게시중</label>
+									<input type="radio" id="pb_post_status3" name = "pb_post_status" value = "게시안함"/>
+									<label for="pb_post_status3">게시안함</label>
 								</td>
 							</tr>
 							<tr>
-								<td class="td1">판매 상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
-									<input type="radio" name = "pb_sale_status" value = "all" id = "is_checked2" checked/> 전체&nbsp; 
-									<input type="radio" name = "pb_sale_status" value = "판매중"/> 판매 중&nbsp; 
-									<input type="radio" name = "pb_sale_status" value = "거래진행중"/> 거래 진행 중&nbsp; 
-									<input type="radio" name = "pb_sale_status" value = "판매완료"/> 판매 완료&nbsp;
+								<td class="td1">판매상태</td>
+								<td class="td2">&nbsp;&nbsp;
+									<input type="radio" name = "pb_sale_status" value = "all" id ="is_checked2" checked/>
+									<label for="is_checked2">전체</label>
+									<input type="radio" id="pb_sale_status2" name = "pb_sale_status" value = "판매중"/>
+									<label for="pb_sale_status2">판매중</label>
+									<input type="radio" id="pb_sale_status3" name = "pb_sale_status" value = "거래진행중"/>
+									<label for="pb_sale_status3">거래진행중</label>
+									<input type="radio" id="pb_sale_status4" name = "pb_sale_status" value = "판매완료"/>
+									<label for="pb_sale_status4">판매완료</label>
 								</td>
 							</tr>
 							
