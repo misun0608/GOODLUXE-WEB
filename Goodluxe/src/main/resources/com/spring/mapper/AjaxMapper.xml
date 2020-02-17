@@ -342,20 +342,52 @@
 		select entity_number from gl_productboard
 		where pb_number = (select pb_number from gl_order where order_number = #{order_number})
 	</select>
+	<select id = "getEntitysPdname"  parameterType = "String" resultType = "String">
+		select pb_md_name from (
+			select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+			from gl_purchase, gl_productboard
+			where gl_purchase.entity_number = gl_productboard.entity_number
+			UNION
+			select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+			from gl_consignment, gl_productboard
+			where gl_consignment.entity_number = gl_productboard.entity_number
+		) where entity_number = #{likedEntity}
+	</select>
+
+
 	<select id = "getorderNumberLikedMember" parameterType = "String" resultMap = "likedMemberListMap">
 		select member_id from gl_liked where entity_number = #{likedEntity}
 	</select>
-	
-	<insert id = "setAlarmInfo" >
-		insert into gl_alarm(alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number) 
-		values(gl_alarm_seq.nextval,#{member_id},sysdate,'N','제품을 구매할 수 있습니다 :D 이 기회를 놓치지 마세요!',#{entity_number})
+	<insert id = "setAlarmInfo" parameterType = "hashMap" >
+		insert into gl_notice(alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number) 
+		values(gl_notice_seq.nextval,#{member_id},sysdate,'N',#{alarm_content},#{entity_number})
 	</insert>
 	
-	<resultMap id = "alarmNumberMap" type = "java.util.HashMap">
+	<!-- header-alarm -->
+	<resultMap id = "noticeAlarmMap" type = "com.spring.goodluxe.voes.NoticeVO">
 		<result property = "alarm_number" column = "alarm_number"/>
 		<result property = "member_id" column = "member_id"/>
+		<result property = "alarm_date" column = "alarm_date"/>
+		<result property = "alarm_read" column = "alarm_read"/>
+		<result property = "alarm_content" column = "alarm_content"/>
+		<result property = "entity_number" column = "entity_number"/>
 	</resultMap>
 	
+	<select id = "getAlarmContent" parameterType = "String" resultMap = "noticeAlarmMap">
+		select * from(select ROWNUM RNUM, alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number from (
+			select * from gl_notice where member_id = #{member_id} order by alarm_date desc
+		))where <![CDATA[RNUM>0 and RNUM<6 ]]>
+	</select>
+	<select id = "getMoreAlarmContent" parameterType = "hashMap" resultMap = "noticeAlarmMap">
+		select * from(select ROWNUM RNUM, alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number from (
+			select * from gl_notice where member_id = #{member_id} order by alarm_date desc
+		))where <![CDATA[RNUM>=#{start} and RNUM<=#{end} ]]>
+	</select>
+	<select id ="afterLoginCheckAlarm" parameterType = "String" >
+	 	select count(*) from(
+			select * from gl_notice where member_id = #{member_id} and alarm_read = 'N'
+		)
+	</select>
 	
 
 </mapper>

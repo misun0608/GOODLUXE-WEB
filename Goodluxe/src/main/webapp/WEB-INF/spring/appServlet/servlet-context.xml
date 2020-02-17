@@ -28,7 +28,7 @@
 =======
 	http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
  -->
->>>>>>> origin/master
+
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -80,7 +80,7 @@
 	<beans:bean id = "alarmSocketHandler" class = "com.spring.goodluxe.jy.AlarmSocketHandler"/>
 		
 	<websocket:handlers>
-		<websocket:mapping path = "/broadcasting.do" handler = "alarmSocketHandler"/> <!-- 여기서 path는 정해진거 아니고 적절히 알아서 잘 정해주면 된다 -->
+		<websocket:mapping path = "/broadcasting2.do" handler = "alarmSocketHandler"/> <!-- 여기서 path는 정해진거 아니고 적절히 알아서 잘 정해주면 된다 -->
 							<!-- 이 유알엘에 들어오게 되면 저 핸들러??를 사용하게 됨 여기서 broadcasting이라는 url은 jsp문서의 WebSocket ws://의 주소와 반드시 같아야함. -->
 			<websocket:handshake-interceptors><!-- Websocket에서 HttpSession객체를 사용하고자 할때 사용 -->
 				<beans:bean class = "com.spring.goodluxe.jy.AlarmHandshakeInterceptor"/> 

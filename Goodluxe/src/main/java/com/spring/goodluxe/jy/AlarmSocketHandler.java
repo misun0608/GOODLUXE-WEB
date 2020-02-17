@@ -50,18 +50,26 @@ public class AlarmSocketHandler extends TextWebSocketHandler{
 			System.out.println("TextWebSocketHandler : 메시지 수신!");
 			System.out.println("receiver : " + receiver.getPayload());
 			
-			//여기가 아닌듯.
+			int indexNo = -1;
+		
 			for(int i=0; i<sessionList.size(); i++) { 
 				
 				System.out.println("세션get(i).getID()"+ sessionList.get(i).getAttributes().get("member_id").toString());
 				String receive = sessionList.get(i).getAttributes().get("member_id").toString();
 				
+				for(int k=0; k<sessionList.size();k++) {
+					if(sessionList.get(k).getAttributes().get("member_id").toString().equals(receive)) {
+						indexNo = k;
+					}
+				}
+				
+				userMap.put(receive, sessionList.get(indexNo));
+				System.out.println("user"+userMap.get(receive));
 				if(receive.equals(receiver.getPayload())){
 					System.out.println("반짝0");
 					WebSocketSession ws = (WebSocketSession)userMap.get(receive);
-					WebSocketSession ws = 
 					System.out.println("반짝1");
-					ws.sendMessage(new TextMessage("반짝"));
+					ws.sendMessage(new TextMessage(receive));
 					System.out.println("반짝2");
 				}
 			}

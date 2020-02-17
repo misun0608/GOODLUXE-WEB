@@ -369,6 +369,18 @@ public class ProductlistController {
 			return "admin_return";
 		}
 		
+		@RequestMapping(value = "preChgReadStatus.do")
+		public String preChgReadStatus(@RequestParam(value = "entity_number", required = false)String entity_number,
+				@RequestParam(value = "alarm_read", required = false)String alarm_read,
+				@RequestParam(value = "alarm_number", required = false)String alarm_number) throws Exception {
+				System.out.println("alarm_read = " + alarm_read);
+				System.out.println("어디보자!!!왜 안바뀌나~~~");
+			
+			if(alarm_read.equals("N")) {
+				gls.preChgReadStatus(alarm_number);
+			}
+			return "redirect:mdDetail.do?entity_number="+entity_number;
+		}
 		
 		
 }

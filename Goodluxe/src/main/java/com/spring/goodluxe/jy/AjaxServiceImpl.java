@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
 import com.spring.mapper.AjaxMapper;
 
@@ -519,21 +520,26 @@ try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
 			ArrayList<HashMap<String, String>> likedMember = null;
 			HashMap<String, String>map = new HashMap<String, String>();
-			HashMap<String,String> alarmNumberList = null;
-			int count = 0;
+			
 			ajaxMapper.setReturnFinished(order_number);
 			int res = ajaxMapper.setPostStatusBackToSale(order_number);
+			
 			String likedEntity;
 			if( res == 1) {// 알람 테이블 추가
 				//오더넘버에 좋아요 누른사람 먼저 데려오기
 				likedEntity = ajaxMapper.getEntityNumberForLiked(order_number);
 				map.put("entity_number", likedEntity);
+				
+				String pdMdName = ajaxMapper.getEntitysPdname(likedEntity);
+				String mdnameMsg = "["+pdMdName+"] 제품을 구매할 수 있습니다 :D 이 기회를 놓치지 마세요!";
+				map.put("alarm_content",mdnameMsg);
+				
 				likedMember =  ajaxMapper.getorderNumberLikedMember(likedEntity);
 				for(int i = 0; i<likedMember.size(); i++) {
 					map.put("member_id", likedMember.get(i).get("member_id"));
-					System.out.println("확인"+i+" : "+map.get("memb/0er_id"));
-					count += ajaxMapper.setAlarmInfo(map);
-					System.out.println(count);
+					System.out.println("확인"+i+" : "+map.get("member_id"));
+					ajaxMapper.setAlarmInfo(map);
+					
 				}
 			}
 			return likedMember;
@@ -541,8 +547,58 @@ try {
 			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/setReturnConfirm)");
 		}
+	}
+	
+	
+	//header-alarm
+	@Override
+	public  ArrayList<NoticeVO> getAlarmContent(String member_id)throws Exception{
 		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			ArrayList<NoticeVO> noticeList = null;
+			noticeList = ajaxMapper.getAlarmContent(member_id);
+			
+			return noticeList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getAlarmContent) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getAlarmContent)");
+		}
+	
+	}
+	@Override
+	public ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map) throws Exception {
 		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			System.out.println("start"+map.get("start"));
+			System.out.println("end"+map.get("end"));
+			
+			
+			ArrayList<NoticeVO> noticeList = null;
+			noticeList = ajaxMapper.getMoreAlarmContent(map);
+			
+			return noticeList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getAlarmContent) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getAlarmContent)");
+		}
+	}
+	@Override
+	public int afterLoginCheckAlarm(String member_id) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+	
+			int res = ajaxMapper.afterLoginCheckAlarm(member_id);
+			
+			return res;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/afterLoginCheckAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/afterLoginCheckAlarm)");
+		}
 	}
 
 

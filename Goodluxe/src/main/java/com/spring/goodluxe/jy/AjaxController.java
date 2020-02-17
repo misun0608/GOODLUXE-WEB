@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
 
 @RestController 
@@ -366,15 +367,70 @@ public class AjaxController {
 			return likedMember;
 		}
 	
+		@RequestMapping(value="/getAlarmContent.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<NoticeVO> getAlarmContent(HttpSession session) throws Exception {
+			System.out.println("왔니???getAlarmContent");
+			
+			String member_id = (String) session.getAttribute("member_id");
+			ArrayList<NoticeVO> noticeList = null;
+			
+			noticeList = gls.getAlarmContent(member_id);
+			
+			if(noticeList.isEmpty()) {
+				System.out.println("isNULL");
+				NoticeVO noticeVO = new NoticeVO();
+				noticeVO.setAlarm_number("isNULL");
+				noticeList.add(noticeVO);
+			}
+			return noticeList;
+		}
+	
+		@RequestMapping(value="/getMoreAlarmContent.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<NoticeVO> getMoreAlarmContent(HttpSession session,
+				@RequestParam(value="count", required = false) int count) throws Exception {
+			
+			System.out.println("파라미터가 ㅇ문제인건가???");
+			String member_id = (String) session.getAttribute("member_id");
+			ArrayList<NoticeVO> noticeList = null;
+			HashMap<String,Object>map = new HashMap<String,Object>();
+			
+			int start = 5*(count-1)+1;
+			int end = 5*count;
+			
+			map.put("member_id", member_id);
+			map.put("start",start);
+			map.put("end",end);
+			
+			noticeList = gls.getMoreAlarmContent(map);
+			
+			if(noticeList.isEmpty()) {
+				System.out.println("isNULL");
+				NoticeVO noticeVO = new NoticeVO();
+				noticeVO.setAlarm_number("isNULL");
+				noticeList.add(noticeVO);
+			}
+			return noticeList;
+		}
+		
+		@RequestMapping(value="/afterLoginCheckAlarm.do", produces= "application/json;charset=UTF-8")
+		public HashMap<String,String> afterLoginCheckAlarm(HttpSession session) throws Exception {
+			String member_id = (String) session.getAttribute("member_id");
+			HashMap<String,String> data = new HashMap<String,String>();
+			
+			int res = gls.afterLoginCheckAlarm(member_id);
+			
+			if(res != 0 ) {
+				data.put("result", "notzero");
+			}else {
+				data.put("result", "iszero");
+			}
+			return data;
+		}
 	
 	
 	
 	
-	
-	
-	
-	
-	
+		
 	
 	
 	
