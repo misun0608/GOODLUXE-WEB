@@ -131,13 +131,15 @@
 	<select id="findMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
 		SELECT member_id
 		FROM gl_member
-		WHERE member_id=#{member_id} AND member_email=#{member_email}
+		WHERE member_id=#{member_id} AND member_name=#{member_name} AND member_email=#{member_email}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="changeMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
+	<update id="updateMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
 		UPDATE gl_member
 		SET member_pw=#{member_pw}
 		WHERE member_id=#{member_id} 
 	</update>
+	
+	
 </mapper>

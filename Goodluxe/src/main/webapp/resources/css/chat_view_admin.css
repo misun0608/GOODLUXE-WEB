@@ -1,0 +1,231 @@
+
+/* 초기화 */
+* {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+.screen_size{
+    position: relative;
+    width : 400px;
+    height : 730px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    text-align: center;
+}
+.screen_size_unavailable{
+    background-color:#F9E7E5;
+}
+.screen_size_available{
+    background-color:#B8E1D4;
+}
+/*영업시간이 아닐때*/
+.screen_size>img{
+    position: relative;
+    width : 50%;
+    top : 100px;
+}
+.chat_info_letters{
+    position: relative;
+    text-align: center;
+    top : 150px;
+}
+.chat_sorry{
+    font-size: 30px;
+    margin: 10px;
+}
+.chat_nottime{
+    margin: 5px;
+}
+.chat_chatting_service{
+    margin: 5px;
+}
+.chat_dateandtime{
+    margin: 8px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.chat_available{
+    margin: 5px;
+}
+
+
+/*영업시간일때*/
+.chatting_header{
+    width : 390px;
+    height :63px;
+    padding : 5px;
+}
+.chatting_header>.customer_id_info{
+    font-size: 18px;
+}
+.chatting_header>.chatting_title{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.chatting_content{
+    position: relative;
+    width : 380px;
+    height : 545px;
+    padding :10px;
+    border: none;
+    background-color: #B8E1D4;
+    overflow-y : scroll;
+}
+.received_chats{
+    position: relative;
+    width : 370px;
+    min-height : 40px;
+    padding: 5px;
+    margin: 0;
+    clear : both;
+    overflow: auto;
+}
+.received_chats_img{
+    position :relative;
+    width:40px;
+    height : 40px;
+    top : 0;
+    float: left;
+}
+.received_chats_img>img{
+    position: relative;
+    width : 100%;
+    height : 100%;
+    border-radius: 20px;
+}
+.received_chats_msg {
+    position: relative;
+    max-width : 220px;
+    min-height : 40px;
+    top : 0;
+    background-color : white;
+    float: left;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding : 0px 10px 0 10px;
+}
+.received_chats_msg>p{
+    float: left;
+    font-size: 15px;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    line-height: 20px;
+}
+.outgoing_chats_msg>p{
+    font-size: 15px;
+    margin-top : 10px;
+    margin-bottom: 10px;  
+    text-align: left;
+    line-height: 20px;
+}
+.outgoing_chats{
+    position: relative;
+    width : 370px;
+    min-height : 40px;
+    padding: 5px;
+    margin: 0;
+    clear : both;
+    overflow: auto;
+   
+}
+.outgoing_chats_img{
+    position: relative;
+    width:40px;
+    height : 40px;
+    top : 0px;
+     float: right;
+    /* overflow: hidden; */
+}
+.outgoing_chats_img>img{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width : 40px;
+    height : 40px;
+    border-radius: 20px;
+}
+.outgoing_chats_msg {
+    position: relative;
+    max-width : 220px;
+    min-height : 40px;
+    top : 0;
+    background-color : #F9E7E5	;
+    /* #F9E7E5; */
+    float: right;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding : 0px 10px 0 10px;
+}
+
+
+
+
+
+
+.send_chatting{
+    width : 400px;
+    height : 62px;
+}
+.chat_write{
+    position: relative;
+    width : 345px;
+    height: 60px;
+    
+    resize: none;
+    float: left;
+}
+.send_btn{
+    position: relative;
+    width : 50px;
+    height : 59px;
+    margin: 0px;
+    background-color: #F0D2CF; 
+    text-align: center;
+    float: left;
+/*     background: url(../img/icons/paper_plane.png) center/cover pink; */
+    border : 1.5px solid #F0D2CF; 
+
+}
+.send_btn>img{
+    position:relative;
+    width : 25px; height: 25px;
+    margin: 8px -2px;
+    top:0;
+} 
+.send_letter{
+    font-size: 14px;
+    color : black;
+    margin-top: 20px;
+}  
+.profile_img{
+    width : 50px
+}
+
+.make_text_file{
+    position : relative;
+    width : 400px;
+    height : 30px;
+}
+.make_text_file button{
+    width : 100%;
+    height : 100%;
+}
+.make_text_file button:hover{
+    background: #D7EAE4	;
+}
+
+/* 스크롤설정 */
+.chatting_content::-webkit-scrollbar{
+    width : 7px;
+    background-color:  #B8E1D4;
+    /* #BBCDDB; */
+}
+.chatting_content::-webkit-scrollbar-thumb{
+    background-color: #93CFBC;
+     border-radius: 4px;
+}
+.chatting_content::-webkit-scrollbar-track{
+    background-color:  #B8E1D4;
+}

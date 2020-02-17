@@ -77,19 +77,19 @@ $(document).ready(function() {
 						var output = "";
 						var outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
-							+'<td class="td4">상품번호</td>'
-							+'<td class="td4">상품이름</td>'
-							+'<td class="td4">브랜드</td>'
-							+'<td class="td4">카테고리</td>'
-							+'<td class="td4">상품 등급</td>'
-							+'<td class="td4">감정서 유무</td>'
-							+'<td class="td4">제품 구성품</td>'
-							+'<td class="td4">판매 가격</td>'
-							+'<td class="td4">매입 가격</td>'
-							+'<td class="td4">매입일</td>'
-							+'<td class="td4">판매자 아이디</td>'
-							+'<td class="td4">판매상태</td>'
-							+'<td class="td4">게시상태</td>'
+							+'<td class="title_td">상품번호</td>'
+							+'<td class="title_td">상품이름</td>'
+							+'<td class="title_td">브랜드</td>'
+							+'<td class="title_td">카테고리</td>'
+							+'<td class="title_td">상품등급</td>'
+							+'<td class="title_td">감정서유무</td>'
+							+'<td class="title_td">제품구성품</td>'
+							+'<td class="title_td">판매가격</td>'
+							+'<td class="title_td">매입가격</td>'
+							+'<td class="title_td">매입일</td>'
+							+'<td class="title_td">판매자아이디</td>'
+							+'<td class="title_td">판매상태</td>'
+							+'<td class="title_td">게시상태</td>'
 							+'</tr>';
 							//+'<tbody>';
 						$.each(data, function(index, item) {
@@ -97,21 +97,21 @@ $(document).ready(function() {
 							var purc_date_shaped = date_format(purc_date1);
 							output += '<tr class="tr2">';
 							output += '<td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.entity_number+'"></td>';
-							output += '<td>'+item.entity_number+'</td>';
-							output += '<td>'+item.pd_name+'</td>';
-							output += '<td>'+item.pd_brand+'</td>';
-							output += '<td>'+item.pd_category+'</td>';
-							output += '<td>'+item.quality_grade+'</td>';
-							output += '<td>'+item.appraise_exist+'</td>';
-							output += '<td>'+item.pd_component+'</td>';
-							output += '<td>'+item.sale_price+'</td>';
-							output += '<td>'+item.buying_price+'</td>';
-							output += '<td>'+purc_date_shaped+'</td>';
-							output += '<td>'+item.member_id+'</td>';
-							output += '<td>'+item.pb_sale_status;
-							output += '<button id = "chg_sale_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
-							output += '<td>'+item.pb_post_status;
-							output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
+							output += '<td class="context_td">'+item.entity_number+'</td>';
+							output += '<td class="context_td">'+item.pd_name+'</td>';
+							output += '<td class="context_td">'+item.pd_brand+'</td>';
+							output += '<td class="context_td">'+item.pd_category+'</td>';
+							output += '<td class="context_td">'+item.quality_grade+'</td>';
+							output += '<td class="context_td">'+item.appraise_exist+'</td>';
+							output += '<td class="context_td">'+item.pd_component+'</td>';
+							output += '<td class="context_td">'+item.sale_price+'</td>';
+							output += '<td class="context_td">'+item.buying_price+'</td>';
+							output += '<td class="context_td">'+purc_date_shaped+'</td>';
+							output += '<td class="context_td">'+item.member_id+'</td>';
+							output += '<td class="context_td">'+item.pb_sale_status;
+							output += '<br /><button id="chg_sale_stat_btn" class="delete_btn" value="'+item.entity_number+'">상태변경</button></td>';
+							output += '<td class="context_td">'+item.pb_post_status;
+							output += '<br /><button id="chg_post_stat_btn" class="delete_btn" value="'+item.entity_number+'">상태변경</button></td>';
 							output += '</tr>';
 						});
 						//output+='</tbody>';
@@ -122,19 +122,19 @@ $(document).ready(function() {
 						var output = "";
 						var outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
-							+'<td class="td4">상품번호</td>'
-							+'<td class="td4">상품이름</td>'
-							+'<td class="td4">브랜드</td>'
-							+'<td class="td4">카테고리</td>'
-							+'<td class="td4">상품 등급</td>'
-							+'<td class="td4">감정서 유무</td>'
-							+'<td class="td4">제품 구성품</td>'
-							+'<td class="td4">판매 가격</td>'
-							+'<td class="td4">수수료</td>'
-							+'<td class="td4">위탁기간</td>'
-							+'<td class="td4">위탁인 아이디</td>'
-							+'<td class="td4">판매상태</td>'
-							+'<td class="td4">게시상태</td>'
+							+'<td class="title_td">상품번호</td>'
+							+'<td class="title_td">상품이름</td>'
+							+'<td class="title_td">브랜드</td>'
+							+'<td class="title_td">카테고리</td>'
+							+'<td class="title_td">상품등급</td>'
+							+'<td class="title_td">감정서유무</td>'
+							+'<td class="title_td">제품구성품</td>'
+							+'<td class="title_td">판매가격</td>'
+							+'<td class="title_td">수수료</td>'
+							+'<td class="title_td">위탁기간</td>'
+							+'<td class="title_td">위탁인 아이디</td>'
+							+'<td class="title_td">판매상태</td>'
+							+'<td class="title_td">게시상태</td>'
 							+'</tr>';
 							//+'<tbody>';
 						$.each(data, function(index, item) {
@@ -145,21 +145,21 @@ $(document).ready(function() {
 							
 							output += '<tr class="tr2">';
 							output += '<td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.entity_number+'"></td>';
-							output += '<td>'+item.entity_number+'</td>';
-							output += '<td>'+item.pd_name+'</td>';
-							output += '<td>'+item.pd_brand+'</td>';
-							output += '<td>'+item.pd_category+'</td>';
-							output += '<td>'+item.quality_grade+'</td>';
-							output += '<td>'+item.appraise_exist+'</td>';
-							output += '<td>'+item.pd_component+'</td>';
-							output += '<td>'+item.sale_price+'</td>';
-							output += '<td>'+item.commission+'</td>';
-							output += '<td>'+start_date_shaped+'  ~  '+end_date_shaped+'</td>';
-							output += '<td>'+item.member_id+'</td>';
-							output += '<td>'+item.pb_sale_status;
-							output += '<button id = "chg_sale_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
-							output += '<td>'+item.pb_post_status;
-							output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
+							output += '<td class="context_td">'+item.entity_number+'</td>';
+							output += '<td class="context_td">'+item.pd_name+'</td>';
+							output += '<td class="context_td">'+item.pd_brand+'</td>';
+							output += '<td class="context_td">'+item.pd_category+'</td>';
+							output += '<td class="context_td">'+item.quality_grade+'</td>';
+							output += '<td class="context_td">'+item.appraise_exist+'</td>';
+							output += '<td class="context_td">'+item.pd_component+'</td>';
+							output += '<td class="context_td">'+item.sale_price+'</td>';
+							output += '<td class="context_td">'+item.commission+'</td>';
+							output += '<td class="context_td">'+start_date_shaped+'  ~  '+end_date_shaped+'</td>';
+							output += '<td class="context_td">'+item.member_id+'</td>';
+							output += '<td class="context_td">'+item.pb_sale_status;
+							output += '<br /><button id="chg_sale_stat_btn" class="delete_btn" value="'+item.entity_number+'">상태변경</button></td>';
+							output += '<td class="context_td">'+item.pb_post_status;
+							output += '<br /><button id="chg_post_stat_btn" class="delete_btn" value="'+item.entity_number+'">상태변경</button></td>';
 							output += '</tr>';
 						});	
 						//output+='</tbody>';
@@ -198,19 +198,19 @@ $(document).ready(function() {
 					var output = "";
 					var outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"  id = "chk_all"></td>'
-						+'<td class="td4">상품번호</td>'
-						+'<td class="td4">상품이름</td>'
-						+'<td class="td4">브랜드</td>'
-						+'<td class="td4">카테고리</td>'
-						+'<td class="td4">상품 등급</td>'
-						+'<td class="td4">감정서 유무</td>'
-						+'<td class="td4">제품 구성품</td>'
-						+'<td class="td4">판매 가격</td>'
-						+'<td class="td4">매입 가격</td>'
-						+'<td class="td4">매입일</td>'
-						+'<td class="td4">판매자 아이디</td>'
-						+'<td class="td4">판매상태</td>'
-						+'<td class="td4">게시상태</td>'
+						+'<td class="title_td">상품번호</td>'
+						+'<td class="title_td">상품이름</td>'
+						+'<td class="title_td">브랜드</td>'
+						+'<td class="title_td">카테고리</td>'
+						+'<td class="title_td">상품등급</td>'
+						+'<td class="title_td">감정서유무</td>'
+						+'<td class="title_td">제품구성품</td>'
+						+'<td class="title_td">판매가격</td>'
+						+'<td class="title_td">매입가격</td>'
+						+'<td class="title_td">매입일</td>'
+						+'<td class="title_td">판매자아이디</td>'
+						+'<td class="title_td">판매상태</td>'
+						+'<td class="title_td">게시상태</td>'
 						+'</tr>';
 					
 					$.each(data, function(index, item) {
@@ -218,21 +218,21 @@ $(document).ready(function() {
 						var purc_date_shaped = date_format(purc_date1);
 						output += '<tr class="tr2">';
 						output += '<td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.entity_number+'"></td>';
-						output += '<td>'+item.entity_number+'</td>';
-						output += '<td>'+item.pd_name+'</td>';
-						output += '<td>'+item.pd_brand+'</td>';
-						output += '<td>'+item.pd_category+'</td>';
-						output += '<td>'+item.quality_grade+'</td>';
-						output += '<td>'+item.appraise_exist+'</td>';
-						output += '<td>'+item.pd_component+'</td>';
-						output += '<td>'+item.sale_price+'</td>';
-						output += '<td>'+item.buying_price+'</td>';
-						output += '<td>'+purc_date_shaped+'</td>';
-						output += '<td>'+item.member_id+'</td>';
-						output += '<td>'+item.pb_sale_status;
-						output += '<button id = "chg_sale_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
-						output += '<td>'+item.pb_post_status;
-						output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
+						output += '<td class="context_td">'+item.entity_number+'</td>';
+						output += '<td class="context_td">'+item.pd_name+'</td>';
+						output += '<td class="context_td">'+item.pd_brand+'</td>';
+						output += '<td class="context_td">'+item.pd_category+'</td>';
+						output += '<td class="context_td">'+item.quality_grade+'</td>';
+						output += '<td class="context_td">'+item.appraise_exist+'</td>';
+						output += '<td class="context_td">'+item.pd_component+'</td>';
+						output += '<td class="context_td">'+item.sale_price+'</td>';
+						output += '<td class="context_td">'+item.buying_price+'</td>';
+						output += '<td class="context_td">'+purc_date_shaped+'</td>';
+						output += '<td class="context_td">'+item.member_id+'</td>';
+						output += '<td class="context_td">'+item.pb_sale_status;
+						output += '<br /><button id="chg_sale_stat_btn" class="delete_btn" value = "'+item.entity_number+'">상태변경</button></td>';
+						output += '<td class="context_td">'+item.pb_post_status;
+						output += '<br /><button id="chg_post_stat_btn" class="delete_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 						output += '</tr>';
 					});
 					$('#outputth').append(outputth);//뒤에 이어붙이기
@@ -242,19 +242,19 @@ $(document).ready(function() {
 					var output  = "";
 					var outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"name="delivermanagement" id = "chk_all"></td>'
-						+'<td class="td4">상품번호</td>'
-						+'<td class="td4">상품이름</td>'
-						+'<td class="td4">브랜드</td>'
-						+'<td class="td4">카테고리</td>'
-						+'<td class="td4">상품 등급</td>'
-						+'<td class="td4">감정서 유무</td>'
-						+'<td class="td4">제품 구성품</td>'
-						+'<td class="td4">판매 가격</td>'
-						+'<td class="td4">수수료</td>'
-						+'<td class="td4">위탁기간</td>'
-						+'<td class="td4">위탁인 아이디</td>'
-						+'<td class="td4">판매상태</td>'
-						+'<td class="td4">게시상태</td>'
+						+'<td class="title_td">상품번호</td>'
+						+'<td class="title_td">상품이름</td>'
+						+'<td class="title_td">브랜드</td>'
+						+'<td class="title_td">카테고리</td>'
+						+'<td class="title_td">상품등급</td>'
+						+'<td class="title_td">감정서유무</td>'
+						+'<td class="title_td">제품구성품</td>'
+						+'<td class="title_td">판매가격</td>'
+						+'<td class="title_td">수수료</td>'
+						+'<td class="title_td">위탁기간</td>'
+						+'<td class="title_td">위탁인아이디</td>'
+						+'<td class="title_td">판매상태</td>'
+						+'<td class="title_td">게시상태</td>'
 						+'</tr>';
 						
 					$.each(data, function(index, item) {
@@ -265,21 +265,21 @@ $(document).ready(function() {
 						
 						output += '<tr class="tr2">';
 						output += '<td class="td3"><input type="checkbox"name="delete_this" id = "chk_one"  value = "'+item.entity_number+'"></td>';
-						output += '<td>'+item.entity_number+'</td>';
-						output += '<td>'+item.pd_name+'</td>';
-						output += '<td>'+item.pd_brand+'</td>';
-						output += '<td>'+item.pd_category+'</td>';
-						output += '<td>'+item.quality_grade+'</td>';
-						output += '<td>'+item.appraise_exist+'</td>';
-						output += '<td>'+item.pd_component+'</td>';
-						output += '<td>'+item.sale_price+'</td>';
-						output += '<td>'+item.commission+'</td>';
-						output += '<td>'+start_date_shaped+'  ~  '+end_date_shaped+'</td>';
-						output += '<td>'+item.member_id+'</td>';
-						output += '<td>'+item.pb_sale_status;
-						output += '<button id = "chg_sale_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
-						output += '<td>'+item.pb_post_status;
-						output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
+						output += '<td class="context_td">'+item.entity_number+'</td>';
+						output += '<td class="context_td">'+item.pd_name+'</td>';
+						output += '<td class="context_td">'+item.pd_brand+'</td>';
+						output += '<td class="context_td">'+item.pd_category+'</td>';
+						output += '<td class="context_td">'+item.quality_grade+'</td>';
+						output += '<td class="context_td">'+item.appraise_exist+'</td>';
+						output += '<td class="context_td">'+item.pd_component+'</td>';
+						output += '<td class="context_td">'+item.sale_price+'</td>';
+						output += '<td class="context_td">'+item.commission+'</td>';
+						output += '<td class="context_td">'+start_date_shaped+'  ~  '+end_date_shaped+'</td>';
+						output += '<td class="context_td">'+item.member_id+'</td>';
+						output += '<td class="context_td">'+item.pb_sale_status;
+						output += '<br /><button id="chg_sale_stat_btn" class="delete_btn" value="'+item.entity_number+'">상태변경</button></td>';
+						output += '<td class="context_td">'+item.pb_post_status;
+						output += '<br /><button id="chg_post_stat_btn" class="delete_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 						output += '</tr>';
 					});	
 					
@@ -508,7 +508,7 @@ $(document).ready(function() {
 
 
 					<br>
-					<h3>▶ 배송관리</h3>
+					<h3>| 배송관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
 						<table class="information">
@@ -526,16 +526,16 @@ $(document).ready(function() {
 								<td class="td2">&nbsp;&nbsp;
 									<input type="radio" name = "pb_post_status" value = "all" id = "is_checked" checked />
 									<label for="is_checked">전체</label>
-									<input type="radio" id="pb_post_status2" name = "pb_post_status" value = "게시중"/>
+									<input type="radio" id="pb_post_status2" name ="pb_post_status" value = "게시중"/>
 									<label for="pb_post_status2">게시중</label>
-									<input type="radio" id="pb_post_status3" name = "pb_post_status" value = "게시안함"/>
+									<input type="radio" id="pb_post_status3" name ="pb_post_status" value = "게시안함"/>
 									<label for="pb_post_status3">게시안함</label>
 								</td>
 							</tr>
 							<tr>
 								<td class="td1">판매상태</td>
 								<td class="td2">&nbsp;&nbsp;
-									<input type="radio" name = "pb_sale_status" value = "all" id ="is_checked2" checked/>
+									<input type="radio" name ="pb_sale_status" value ="all" id ="is_checked2" checked/>
 									<label for="is_checked2">전체</label>
 									<input type="radio" id="pb_sale_status2" name = "pb_sale_status" value = "판매중"/>
 									<label for="pb_sale_status2">판매중</label>
@@ -548,9 +548,9 @@ $(document).ready(function() {
 							
 						</table>
 						<br/>
-						<table class="information" id = "output_table">
+						<table class="information" id ="output_table">
 							<tr>
-								<td class="td1">상품 번호</td>
+								<td class="td1">상품번호</td>
 								<td class="td2">
 									<input type = "text" class="text3" name = "entity_number" id = "txtentity_number">
 								</td>
@@ -559,17 +559,17 @@ $(document).ready(function() {
 
 
 						<div class="btn12" align="center">
-							<button type="button" class="btn1_2" id = "init_btn" >초기화</button>
-							<button type="button" class="btn1" id = "search_btn">검색</button>
+							<button type="button" class="bottom_btn cancel_btn" id = "init_btn">초기화</button>
+							<button type="button" class="bottom_btn" id ="search_btn">검색</button>
 						</div>
 					</form>
 					<br> <br> <br> <br> <br>
 					<div class="config01">
-						<button type="button" class="btn3" id = "delete_btn">선택삭제</button>
+						<button type="button" class="delete_btn" id ="delete_btn">선택삭제</button>
 						<br> <br>
 					</div>
 					<form id = "chk_form">
-						<table border="1" id ="output_table">
+						<table class="information2" id="output_table">
 							<thead id="outputth"></thead>
 							<tbody id="output"></tbody>
 						</table>

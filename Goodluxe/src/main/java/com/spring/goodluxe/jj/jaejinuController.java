@@ -30,6 +30,7 @@ import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.Auction_HistoryVO;
 import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Chat_recordVO;
 import com.spring.goodluxe.voes.Member2VO;
 import com.spring.goodluxe.voes.Order2VO;
 import com.spring.goodluxe.voes.Purchase2VO;
@@ -58,7 +59,8 @@ public class jaejinuController {
 	private ChatService chatService;
 	@Autowired
 	private ChatMemberService chatmemberService;
-	
+	@Autowired
+	private Chat_recordService chat_recordService;
 	
 	
 	// 만든 페이지들 있는 곳으로 이동 
@@ -92,6 +94,23 @@ public class jaejinuController {
 		return "joinForm";
 	}
 	
+	
+	//챗 관리자
+	@RequestMapping(value="chat_admin.do")
+	public String chat_admin() {
+		
+		return "chat_admin";
+	}
+	
+	
+	//챗 회원
+	@RequestMapping(value="chat_customer.do")
+	public String chat_customer() {
+		
+		return "chat_customer";
+	}
+	
+	
 	//채팅 들어가기 전 페이지
 	@RequestMapping(value="choicepage.do")
 	public String choicepage(Member2VO vo, HttpSession session,HttpServletResponse response) {
@@ -118,6 +137,7 @@ public class jaejinuController {
 				session.setAttribute("member_isadmin", member_isadmin);
 				System.out.println("member_isadmin="+member_isadmin);
 				if(session.getAttribute("member_isadmin").equals("Y")) {
+					
 					writer.write("<script>alert('관리자 채팅리스트 입장'); </script>");
 					// location.href='./choicepage.do';</script>");
 					return "choicepage";
@@ -148,7 +168,7 @@ public class jaejinuController {
 	}
 	
 	
-	//전체채팅룸으로 이동
+	//채팅룸으로 이동
 	@RequestMapping(value="chat.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String chat (Model model,HttpSession session) throws Exception{
 		String member_id= (String)session.getAttribute("member_id");
@@ -162,10 +182,19 @@ public class jaejinuController {
 		if(member_id.equals(null)) {
 			return "redirect:/loginForm.do";
 		}
+		
+		
 		ChatMemberVO chatmembervo = new ChatMemberVO();
+		
+		
 		chatmembervo.setChat_num(0);
 		chatmembervo.setMember_id(member_id);
 		chatmembervo.setChat_room("");
+		
+		chatmembervo = chatmemberService.getRoomMember(chatmembervo);
+		String chat_room = chatmembervo.getChat_room();
+		System.out.println("-----------");
+		System.out.println("chat_room="+chat_room);
 		
 		
 		//DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
@@ -186,45 +215,85 @@ public class jaejinuController {
 			ChatMemberVO chatmembervo_get = new ChatMemberVO();
 			chatmembervo_get.setChat_num(0);
 			chatmembervo_get.setMember_id(member_id);
-			chatmembervo_get.setChat_room("");
+			if(!member_id.equals("admin")) {
+			chatmembervo_get.setChat_room(member_id);
+			}else {
+			chatmembervo_get.setChat_room(chat_room);
+			}
 			chatM = chatmemberService.getRoomMember(chatmembervo_get);
-			
-			
-			
 		}
-		//존재한다면 방정보를 all로 변경 
 		//존재한다면 그 방으로 이동 
 		else {
 			System.out.println("관리자");
-			
-//			ChatMemberVO chatmembervo_add = new ChatMemberVO();
-//			chatmembervo_add.setChat_num(0);
-//			chatmembervo_add.setMember_id(member_id);
-//			chatmembervo_add.setChat_room("all");
-//			chatmemberService.updateRoomMember(chatmembervo_add); //room 변경
 		}
-		}
-		//현재 방이름 넣기(전체채팅방이니 all)
-		//해당 이름으로 넣쟈 
-		if(member_id.equals("admin")) {
-		model.addAttribute("room", "all");
-		}else {
-		model.addAttribute("room", member_id);
 		}
 		
+		//현재 방이름 넣기(전체채팅방이니 all)
+		//해당 이름으로 넣쟈 
+		System.out.println("--------");
+		System.out.println(member_id);
+		System.out.println(chatmembervo.getChat_room());
+		if(member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
+		model.addAttribute("room", "all");
+		}else {
+		model.addAttribute("room", chatmembervo.getChat_room());
+		}
+		System.out.println("chatmembervo.getChat_room()="+chatmembervo.getChat_room());
 		ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
 		model.addAttribute("chatlist", chatlist);
+		
+		ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
+		 
+		 System.out.println(chat_room);
+		 chatrecord=chat_recordService.selectListchatRecord(chat_room);
+		 model.addAttribute("chatrecord",chatrecord);
+		 
 		
 		
 		return "chat";
 		}
-		
-		
-		
+	
+//	  // 채팅 list count 뽑기 	  
+//	  @RequestMapping(value="chatroomlistcount.do", method = { RequestMethod.GET, RequestMethod.POST },produces="application/json;charset=UTF-8")
+//	  @ResponseBody 
+//	  public ArrayList<Chat_recordVO> chatroomlistcount(HttpServletRequest req, Model model) throws Exception{
+//	  
+//	  ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
+//	  
+//	  ArrayList<ChatMemberVO> chatmembervo = new ArrayList<ChatMemberVO>();
+//	  chatmembervo = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
+//	  String chat_room = req.getParameter("chat_room");
+//	  System.out.println(chat_room); 
+//	  try { 
+//		  chatrecord = chat_recordService.selectListchatRecord(chat_room);
+//		  int count =0;
+//		 for(int i = 0; i<chatmembervo.size(); i++) {
+//			  ArrayList<Chat_recordVO> chatcount = chat_recordService.selectListchatRecordCount(chatmembervo.get(i).getChat_room());
+//			  
+//			  for(int j=0; j<chatcount.size(); j++) {
+//				  if(chatmembervo.get(i).getChat_room()==chatcount.get(i).getChat_room()) {
+//					  count++;
+//				  }else {
+//					  break;
+//				  }
+//			  }
+//		  }
+//		  
+//		  model.addAttribute("chatrecord",chatrecord); 
+//			  
+//		  
+//	  }catch(Exception e){
+//	  System.out.println("chat_room 실패 +"+e.getMessage()); }
+//	 
+//	  return chatrecord; }
+	 
+	
+	
+	
 		
 		//중복확인
-		@ResponseBody
 		@RequestMapping(value="checkRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
+		@ResponseBody
 		public int checkRoom(Model model, String name) throws Exception{
 			System.out.println("name="+name);
 			
@@ -240,10 +309,13 @@ public class jaejinuController {
 		
 		//방이동
 		@RequestMapping(value="MoveChatRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public String MoveChatRoom (Model model, HttpServletRequest req, String roomName) throws Exception{
+		public String MoveChatRoom (Model model, HttpServletRequest req) throws Exception{
 			
-			Member2VO login = (Member2VO)req.getSession().getAttribute("login");
+			String login = (String) req.getSession().getAttribute("member_id");
+			System.out.println(login );
 			
+			String roomName = req.getParameter("roomName");
+			System.out.println(roomName);
 			if(login==null) {
 				return "redirect:/loginForm.do";
 			}
@@ -251,16 +323,18 @@ public class jaejinuController {
 			System.out.println("이동할 방이름 : "+roomName);
 			
 			
-//			ChatMemberVO chatmembervo = new ChatMemberVO();
-//			chatmembervo.setChat_num(0);
-//			chatmembervo.setMember_id(login.getMember_id());
-//			chatmembervo.setMember_id(roomName);
-//			//이동하게 될 방 이름으로 수정
-//			chatmemberService.updateRoomMember(chatmembervo);
+		ChatMemberVO chatmembervo = new ChatMemberVO();
+		chatmembervo.setChat_num(0);
+		chatmembervo.setMember_id(login);
+			chatmembervo.setChat_room(roomName);
+			//이동하게 될 방 이름으로 수정
+			chatmemberService.updateRoomMember(chatmembervo);
 			
 			//접속 끊기 이전방은 수정하지 않음.
 			
 			//방이동 처리
+			ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
+			model.addAttribute("chatlist", chatlist);
 			model.addAttribute("room", roomName);
 			
 			return "chat";
@@ -452,25 +526,45 @@ public class jaejinuController {
 	}
 
 	// 입찰하기
-	@RequestMapping(value = "/history.do")
-	public String historyinsert(Auction_HistoryVO historyvo, AuctionVO auctionvo, Model model_t,
+	@RequestMapping(value="/history.do", method=RequestMethod.GET,produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String historyinsert(Model model_t,
 			HttpServletRequest request) {
+		int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
+		System.out.println(auction_post_number);
+		String member_id = request.getParameter("member_id");
+		System.out.println(member_id);
+		System.out.println(request.getParameter("AUHIS_BETTING_PRICE"));
+		int auhis_betting_price = Integer.parseInt(request.getParameter("AUHIS_BETTING_PRICE"));
+		System.out.println(auhis_betting_price);
+		
+		Auction_HistoryVO historyvo = new Auction_HistoryVO();
+		System.out.println(auction_post_number);
+		historyvo.setAUCTION_POST_NUMBER(auction_post_number);
+		historyvo.setMEMBER_ID(member_id);
+		historyvo.setAUCTION_POST_NUMBER(auhis_betting_price);
 		
 		int count = 0;
 		int AUCTION_POST_NUMBER = historyvo.getAUCTION_POST_NUMBER();
-		System.out.println("AUCTION_POST_NUMBER="+AUCTION_POST_NUMBER);
+		System.out.println("AUCTION_POST_NUMBER="+auction_post_number);
 		try {
-			
+			System.out.println("history");
 			historyService.insertHistory(historyvo);
-			AuctionVO vo_2 = auctionService.selectAuction_PostNumber(AUCTION_POST_NUMBER);
+			System.out.println("history");
+			AuctionVO vo_2 = auctionService.selectAuction_PostNumber(auction_post_number);
+			System.out.println(vo_2.getENTITY_NUMBER());
+			System.out.println(vo_2.getAUCTION_DETAIL());
+			System.out.println(vo_2.getAUCTION_MD_NAME());
+			System.out.println("history");
 			String entitynumber = vo_2.getENTITY_NUMBER();
 			
 			Purchase2VO purchasevo = purchaseService.selectPurchase(entitynumber);
+			System.out.println("history");
 			model_t.addAttribute("purchasevo", purchasevo);
 			
 			
 			model_t.addAttribute("auctionvo", vo_2);
-			count = historyService.selecthistorycount(AUCTION_POST_NUMBER);
+			count = historyService.selecthistorycount(auction_post_number);
 			model_t.addAttribute("auctionnumber", count);
 			
 		} catch (Exception e) {
@@ -480,7 +574,7 @@ public class jaejinuController {
 
 	}
 
-	// 입찰하기
+	// 회원 -> 경매방 입장
 	@RequestMapping(value = "/auctiondetail.do")
 	public String historyselect(AuctionVO auctionvo, Auction_HistoryVO historyvo, Model model_t,
 			HttpServletRequest request) {
@@ -523,13 +617,22 @@ public class jaejinuController {
 	public String member_auction_history(HttpServletRequest request, Model model_t) {
 		int auction_post_number = 0;
 		auction_post_number = Integer.parseInt(request.getParameter("AUCTION_POST_NUMBER"));
+		System.out.println(auction_post_number);
+		Purchase2VO purchasevo = new Purchase2VO();
+		
 		int count = 0;
 		try {
 			AuctionVO vo_1 = auctionService.selectAuction_PostNumber(auction_post_number);
+			System.out.println("1");
+			String entity_number = vo_1.getENTITY_NUMBER();
+			System.out.println(entity_number);
+			purchasevo = purchaseService.selectPurchase(entity_number);
+			System.out.println("1");
 			model_t.addAttribute("auctionvo", vo_1);
+			System.out.println("1");
 			count = historyService.selecthistorycount(auction_post_number);
 			model_t.addAttribute("auctionnumber", count);
-
+			model_t.addAttribute("purchasevo", purchasevo);
 		} catch (Exception e) {
 			System.out.println("멤버로 경매 들어가기 실패+" + e.getMessage());
 		}
@@ -647,8 +750,9 @@ public class jaejinuController {
 		return res;
 	}
 	
-	@ResponseBody 
+	
 	@RequestMapping(value = "/enumberCheck.do" ,method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	@ResponseBody 
 	public int entityCheck(String entity_number) throws Exception {
                
 		return purchaseService.entitycheck(entity_number);
@@ -658,8 +762,9 @@ public class jaejinuController {
 	
 	
 	
-	@ResponseBody 
+	
 	@RequestMapping(value = "/putimporamtion.do" ,method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	@ResponseBody 
 	public Purchase2VO selectinpormation(String entity_number) throws Exception {
 		
 		 Purchase2VO purchasevo = purchaseService.selectPurchase(entity_number);

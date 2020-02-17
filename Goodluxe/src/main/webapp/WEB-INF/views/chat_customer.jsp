@@ -13,9 +13,9 @@
     <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
     <title> 기본 페이지 </title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
-    <link rel="stylesheet" href="css/chat_view_customer.css" />
-	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script> 
+    <link rel="stylesheet" href="./resources/css/chat_view_customer.css" />
+	<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="./resources/js/jquery.easing.1.3.js"></script> 
 
 </head>
 <body class="">

@@ -283,7 +283,7 @@ $(document).ready(function(){
                     <br>
 
                     <br>
-                    <h3>▶ 회원 검색 </h3>
+                    <h3>| 회원 검색 </h3>
                     <br>
                     <form name="searchform" id="searchform" method="post">
                     <table class="id_table">
@@ -303,7 +303,7 @@ $(document).ready(function(){
                     <br>
                     <br>
 
-                    <h3>▶회원 적립금 내역</h3>
+                    <h3>| 회원 적립금 내역</h3>
                     <br />
                     <div align="left">
                         <button type="button" id="selectAllbtn"  name="selectbutton" class="select_all_btn">전체보기</button>

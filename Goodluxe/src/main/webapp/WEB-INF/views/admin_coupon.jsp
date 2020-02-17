@@ -387,7 +387,7 @@ $(document).ready(function() {
 		<form name="delete_form" method = "post">
           <h3>| 발급 쿠폰 목록 </h3>
           <br />
-          <button type="button" class="delete_btn" id ="delete_btn">삭제</button>
+          <button type="button" class="delete_btn" id ="delete_btn">선택삭제</button>
           <br />
           <br />
           <table class="information" id = "output_table">

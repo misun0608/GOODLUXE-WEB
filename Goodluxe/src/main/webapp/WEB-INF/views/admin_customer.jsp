@@ -36,12 +36,12 @@
 							if(item.member_class=="B"){isblack = "블랙리스트"}else{isblack = "일반"}
 							var output = ''; 
 							output += '<tr class="tr2">';
-							output += '<td class="td3"><input type = "hidden" name = "member_id" value = "'+item.member_id+'">'+item.member_id+'</td>';
-							output += '<td class="td3">'+item.member_name+'</td>';
-							output += '<td class="td3">'+isblack+'</td>';
-							output += '<td class="td3">'+item.member_phone+'</td>';
-							output += '<td class="td3">'+item.member_email+'</td>';
-							output += '<td class="td3"><button class="btn4" id = "black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
+							output += '<td class="context_td"><input type = "hidden" name = "member_id" value = "'+item.member_id+'">'+item.member_id+'</td>';
+							output += '<td class="context_td">'+item.member_name+'</td>';
+							output += '<td class="context_td">'+isblack+'</td>';
+							output += '<td class="context_td">'+item.member_phone+'</td>';
+							output += '<td class="context_td">'+item.member_email+'</td>';
+							output += '<td class="context_td"><button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
 							output += '</tr>';
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
@@ -73,12 +73,12 @@
 					if(data.member_class=="B"){isblack = "블랙리스트"}else{isblack = "일반"}
 					var output = ''; 
 					output += '<tr class="tr2">';
-					output += '<td class="td3"><input type = "hidden" name = "member_id" value = "'+data.member_id+'">'+data.member_id+'</td>';
-					output += '<td class="td3">'+data.member_name+'</td>';
-					output += '<td class="td3">'+isblack+'</td>';
-					output += '<td class="td3">'+data.member_phone+'</td>';
-					output += '<td class="td3">'+data.member_email+'</td>';
-					output += '<td class="td3"><button class="btn4" id = "black_btn" value = "'+data.member_id+'">블랙리스트 설정</button> </td>';
+					output += '<td class="context_td"><input type = "hidden" name = "member_id" value = "'+data.member_id+'">'+data.member_id+'</td>';
+					output += '<td class="context_td">'+data.member_name+'</td>';
+					output += '<td class="context_td">'+isblack+'</td>';
+					output += '<td class="context_td">'+data.member_phone+'</td>';
+					output += '<td class="context_td">'+data.member_email+'</td>';
+					output += '<td class="context_td"><button class="delete_btn" id="black_btn" value = "'+data.member_id+'">설정</button> </td>';
 					output += '</tr>';
 					console.log("output:" + output);
 					$('#output').append(output);//뒤에 이어붙이기
@@ -256,14 +256,16 @@
 			<h1 id="container_title">관리자 고객관리 페이지</h1>
 			<div class="container_wr">
 				<section>
-					<br> <br>
-					<h3>▶회원조회</h3>
+					<br><br>
+					<h3>| 회원조회</h3>
 					<br>
 					<form id = "search_member_form">
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">아이디</td>
-								<td class="td2"><input class="text3" name="member_id" id = "idSearchBox"></td>
+								<td class="td2">
+									<input type="text" class="id_search_input" name="member_id" id ="idSearchBox">
+								</td>
 							</tr>
 						<!--<tr>
 								<td class="td1">이름</td>
@@ -286,8 +288,8 @@
 					</form>
 
 					<div class="btn12" align="center">
-						<button type="button" class="btn1_2" id = "init_btn">초기화</button>
-						<button type="button" class="btn1" id = "search_btn">검색</button>
+						<button type="button" class="bottom_btn cancel_btn" id ="init_btn">초기화</button>
+						<button type="button" class="bottom_btn" id ="search_btn">검색</button>
 					</div>
 					<br><br><br>
 					
@@ -296,14 +298,14 @@
 							<!-- <input type="submit" class="btn4" id = "black_btn" value = "블랙리스트 설정"/>  -->
 							<br>
 						</div> 
-						<table border="1" id = "output_table">
+						<table class="information" id="output_table">
 							<tr class="tr1">
-								<td class="td4">아이디</td>
-								<td class="td4">이름</td>
-								<td class="td4">등급</td>
-								<td class="td4">핸드폰</td>
-								<td class="td4">이메일</td>	
-								<td class="td4">블랙리스트 설정/해제</td>
+								<td class="title_td">아이디</td>
+								<td class="title_td">이름</td>
+								<td class="title_td">등급</td>
+								<td class="title_td">핸드폰</td>
+								<td class="title_td">이메일</td>	
+								<td class="title_td">블랙리스트 설정/해제</td>
 							</tr>
 							<tbody  id = "output">
 							

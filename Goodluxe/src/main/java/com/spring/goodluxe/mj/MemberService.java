@@ -19,5 +19,6 @@ public interface MemberService{
 	String userSnsChk(MemberVO memberVO) throws Exception; // SNS  
 	String findMemberId(MemberVO memberVO) throws Exception; // 아이디 찾기 - 이름, 이메일 주소 비교
 	int findMemberPw(MemberVO memberVO) throws Exception; // 비밀번호 찾기 - 아이디, 이메일 주소 비교
+	int updateMemberPw(MemberVO memberVO) throws Exception; // 비밀번호 변경
 }
 	
