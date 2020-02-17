@@ -36,12 +36,12 @@
 							if(item.member_class=="B"){isblack = "블랙리스트"}else{isblack = "일반"}
 							var output = ''; 
 							output += '<tr class="tr2">';
-							output += '<td class="td3"><input type = "hidden" name = "member_id" value = "'+item.member_id+'">'+item.member_id+'</td>';
-							output += '<td class="td3">'+item.member_name+'</td>';
-							output += '<td class="td3">'+isblack+'</td>';
-							output += '<td class="td3">'+item.member_phone+'</td>';
-							output += '<td class="td3">'+item.member_email+'</td>';
-							output += '<td class="td3"><button class="btn4" id = "black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
+							output += '<td class="context_td"><input type = "hidden" name = "member_id" value = "'+item.member_id+'">'+item.member_id+'</td>';
+							output += '<td class="context_td">'+item.member_name+'</td>';
+							output += '<td class="context_td">'+isblack+'</td>';
+							output += '<td class="context_td">'+item.member_phone+'</td>';
+							output += '<td class="context_td">'+item.member_email+'</td>';
+							output += '<td class="context_td"><button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
 							output += '</tr>';
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기

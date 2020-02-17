@@ -63,12 +63,13 @@
 		var the_btn = $(this);
 		event.preventDefault();
 		//$(this).css("display","none");
-		//$(this).parent().children("#order_invoice_number").show();
-		//$(this).parent().children("#inv_p").show();
-		//$(this).parent().children("#btn_start_shipping").show();
-		the_btn.parent().children().eq(2).show();
-		the_btn.parent().children().eq(3).show();
-		the_btn.parent().children().eq(4).show();
+		$(this).parent().children("#order_invoice_number").show();
+		$(this).parent().children("#inv_p").show();
+		$(this).parent().children("#btn_start_shipping").show();
+		//the_btn.parent().children().eq(2).show();
+		//the_btn.parent().children().eq(3).show();
+		//the_btn.parent().children().eq(4).show();
+		//the_btn.parent().children().eq(5).show();
 		//$("#order_invoice_number").show();
 		//$("#inv_p").show();
 		//$("#btn_start_shipping").show();
@@ -159,22 +160,22 @@
 								var output = ''; 
 								output += '<tr class="tr2">';
 								//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me" value = "'+item.order_number+'"></td>';
-								output += '<td class="td3">'+pay_date+'</td>';
-								output += '<td class="td3">'+item.order_number+'</td>';
-								output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
-								output += '<td class="td3">'+item.pb_number+'</td>';
-								output += '<td class="td3">'+item.order_pay_price+'</td>';
-								output += '<td class="td3">'+item.order_pay_system+'</td>';
-								output += '<td class="td3">'+item.order_status;
+								output += '<td class="context_td">'+pay_date+'</td>';
+								output += '<td class="context_td">'+item.order_number+'</td>';
+								output += '<td class="context_td"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
+								output += '<td class="context_td">'+item.pb_number+'</td>';
+								output += '<td class="context_td">'+item.order_pay_price+'</td>';
+								output += '<td class="context_td">'+item.order_pay_system+'</td>';
+								output += '<td class="context_td">'+item.order_status;
 									if(item.order_status=='배송준비중'){
 			
-										output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
-										output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-										output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+										output +='<br /><button class="delivery_btn" id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+										output +='<p id ="inv_p" style="display:none">송장번호 :</p><input type ="text" id ="order_invoice_number" style="display:none">';
+										output +='<button class="delivery_btn confirm_btn" value ="'+item.order_number+'" id ="btn_start_shipping" style="display:none">확인</button>';
 								
 									}
 									if(item.order_status=='배송중'){
-										output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
 									}
 								output +='</td>';
 								output += '</tr>';
@@ -226,12 +227,12 @@
 									output += '<td class="context_td">'+item.order_pay_system+'</td>';
 									output += '<td class="context_td">'+item.order_status;
 										if(item.order_status=='배송준비중'){
-											output +='<br /><button id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+											output +='<br /><button class="delivery_btn" id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-											output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+											output +='<button class="delivery_btn confirm_btn" value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
 										}
 										if(item.order_status=='배송중'){
-											output +='<br /><button value="'+item.order_number+'" id ="btn_end_shipping">판매완료</button>';
+											output +='<br /><button class="delivery_btn finish_btn" value="'+item.order_number+'" id ="btn_end_shipping">판매완료</button>';
 										} 
 									output +='</td>';
 									output += '</tr>';

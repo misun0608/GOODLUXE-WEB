@@ -347,7 +347,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">주문 관리 목록 > 반품</h1>
+			<h1 id="container_title">| 주문 관리 목록 > 반품</h1>
 			<div class="container_wr">
 				<section>
 

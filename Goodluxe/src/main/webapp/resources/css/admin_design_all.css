@@ -74,6 +74,14 @@ input[type="text"]{
 	border:none;
 } */
 
+#order_invoice_number{
+	border-bottom: 1px solid lightgray;
+	width: 95px;
+	color: #555555;
+	font: 10px;
+}
+
+
 label, input, button, select, img {
 	vertical-align: middle;
 }
@@ -839,6 +847,17 @@ a:visited {
 	color: #555555;
 }
 
+.information2 {
+	clear: both;
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #555555;
+	font-size: 13px;
+	border: 1px solid lightgray;
+	color: #555555;
+}
+
 .id_table{
 	clear: both;
 	width: 45%;
@@ -936,6 +955,7 @@ tr .id_search_td{
 	text-align: center;
 	height: 25px;
 	font-size: 12px;
+	vertical-align: middle;
 }
 
 .tr2 {
@@ -979,9 +999,7 @@ tr .td3{
 	outline: 0;
 } */
 
-
-
-.btn2 {
+/* .btn2 {
 	height: 50px;
 	width: 150px;
 	border: 0.5;
@@ -992,7 +1010,7 @@ tr .td3{
 	margin-top: 10px;
 	outline: 0;
 	border: 1px solid darkgray;
-}
+} */
 
 /* .btn22 {
 	height: 35px;
@@ -1214,15 +1232,41 @@ tr .td3{
 }
 
 .delete_btn{
-	width: 80px;
+	width: 70px;
     text-align: center;
     background-color: white;
     color: #555555;
     border-radius: 5px;
     border: 0;
     font-size: 12px;
-    padding: 2px;
+    padding: 1px;
     border: 0.9px solid #555555;
+}
+
+.delivery_btn{
+	width: 70px;
+    text-align: center;
+    background-color: white;
+    color: #555555;
+    border-radius: 5px;
+    border: 0;
+    font-size: 11px;
+    padding: 1px;
+    border: 0.9px solid #555555;
+}
+
+.confirm_btn{
+	width: 50px;
+}
+
+.black_btn{
+	width: 100px;
+}
+
+.finish_btn{
+	background-color: #8FB0CA;
+	color: white;
+	border: 0.9px solid #8FB0CA;
 }
 
 /* ajax는 왜 버튼 class로 하면 안먹힐까..?*/
@@ -1250,33 +1294,6 @@ tr .td3{
     padding: 2px;
     border: 0.9px solid #8FB0CA;
 }
-
-#invoice_input{
-	width: 80px;
-    text-align: center;
-    background-color: white;
-    color: #555555;
-    border-radius: 5px;
-    border: 0;
-    font-size: 12px;
-    padding: 2px;
-    border: 0.9px solid #555555;
-}
-
-#btn_end_shipping{
-	width: 80px;
-    text-align: center;
-    background-color: white;
-    color: #555555;
-    border-radius: 5px;
-    border: 0;
-    font-size: 12px;
-    padding: 2px;
-    border: 0.9px solid #555555;
-}
-
-
-
 
 
 .select_all_btn{
@@ -1318,7 +1335,8 @@ tr .td3{
 	width: 325px;
 	display: inline-block;
 	height: 35px;
-	font-size: 12x; 
+	font-size: 11x; 
+	color: #555555;
 	padding: 0 10px;
 	vertical-align: middle;
 	background-color: #f5f5f5;
