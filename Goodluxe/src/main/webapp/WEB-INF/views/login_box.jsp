@@ -4,6 +4,29 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script>
 
 <script>
+	// 카카오 팝업 로그인
+/* 	Kakao.init('dc50a646222a7303868e2fc1557ba996');
+	function loginWithKakao() {
+		// 로그인 창을 띄웁니다.
+		Kakao.Auth.login({
+			success : function(authObj) {
+				alert(JSON.stringify(authObj));
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			}
+		});
+	}; */
+	
+// 		// 네이버 팝업 로그인
+// 		var naverLogin = new naver.LoginWithNaverId({
+// 			clientId : "{qEGPL5Id8n1rsr7QzFiv}",
+// 			callbackUrl : "{http://localhost:8080/goodluxe/mainPage.do/}",
+// 			isPopup : true, /* 팝업을 통한 연동처리 여부 */
+// 			});
+// 		/* 설정정보를 초기화하고 연동을 준비 */
+// 		naverLogin.init();
+	
 	/* Click login button */
  	function onclick_login() {
 		var params = $('#login_form').serialize(); // serialize로 문자열형태로? 만듦
@@ -56,7 +79,7 @@
                     <label>비밀번호</label>
                 </div>
             </div>
-            <a href="#" class="find_login_data">아이디/비밀번호 찾기</a>
+            <a href="find_data.do" class="find_login_data">아이디/비밀번호 찾기</a>
             <input type="button" class="login_btn" onClick="onclick_login();" value="로그인">
             
         </form>
@@ -67,12 +90,13 @@
         </div>
         <div class="login_icons">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" class="login_icon"></a>
-            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a>
-            <a href="#"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" class="login_icon"></a>
+<%--             <a href="${kakao_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a> --%>
+            <a href="javascript:loginWithKakao()"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a>
+            <a href="${naver_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" class="login_icon"></a>
         </div>
         <div class="anonymous">
             <span>계정이 없으신가요?</span>
-            <a href="#">회원가입</a>
+            <a href="joinform.do">회원가입</a>
         </div>
     </div>
 </div>

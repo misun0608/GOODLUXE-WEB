@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+#countdown, #newcountdown {
+  display: inline-table;
+  color: red;
+}

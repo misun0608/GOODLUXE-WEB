@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+
+
+<mapper namespace="com.spring.mapper.Order2Mapper">
+
+   <resultMap type="com.spring.goodluxe.voes.Order2VO" id="ResultMaporder">
+      <result property="order_number" column="order_number" />
+      <result property="order_receipt" column="order_receipt" />
+      <result property="order_pay_date" column="order_pay_date" />
+      <result property="order_order_date" column="order_order_date" />
+      <result property="order_status" column="order_status" />
+      <result property="order_addr1" column="order_addr1" />
+      <result property="order_addr2" column="order_addr2" />
+      <result property="order_zipcode" column="order_zipcode" />
+      <result property="order_phone" column="order_phone" />
+      <result property="order_invoice_number" column="order_invoice_number" />
+      <result property="order_ship_date" column="order_ship_date" />
+      <result property="order_cancel_date" column="order_cancel_date" />
+      <result property="order_product_price" column="order_product_price" />
+      <result property="order_ship_fee" column="order_ship_fee" />
+      <result property="order_used_point" column="order_used_point" />
+      <result property="order_used_coupon" column="order_used_coupon" />
+      <result property="order_pay_system" column="order_pay_system" />
+      <result property="order_refund_account" column="order_refund_account" />
+      <result property="order_refund_bank" column="order_refund_bank" />
+      <result property="member_id" column="member_id" />
+      <result property="pb_number" column="pb_number" />
+      <result property="order_message" column="order_message" />
+      <result property="order_pay_price" column="order_pay_price" />
+   </resultMap>
+   
+   <insert id="insertorder" parameterType="com.spring.goodluxe.voes.Order2VO">
+		INSERT INTO gl_order VALUES(
+			#{order_number,jdbcType=VARCHAR},
+			#{order_receipt,jdbcType=VARCHAR},
+			SYSTIMESTAMP,
+			,
+			#{order_status,jdbcType=VARCHAR},
+			#{order_addr1,jdbcType=VARCHAR},
+			#{order_addr2,jdbcType=VARCHAR},
+			#{order_zipcode,jdbcType=VARCHAR},
+			#{order_phone,jdbcType=VARCHAR},
+			#{order_invoice_number,jdbcType=VARCHAR},
+			,
+			,
+			#{order_product_price},
+			#{order_ship_fee},
+			#{order_used_point},
+			#{order_used_coupon,jdbcType=VARCHAR},
+			#{order_pay_system,jdbcType=VARCHAR},
+			#{order_refund_account,jdbcType=VARCHAR},
+			#{order_refund_bank,jdbcType=VARCHAR},
+			#{member_id,jdbcType=VARCHAR},
+			#{pb_number},
+			#{order_message,jdbcType=VARCHAR},
+			#{order_pay_price}
+			)
+	</insert>
+   
+   
+   
+   
+   
+   </mapper>

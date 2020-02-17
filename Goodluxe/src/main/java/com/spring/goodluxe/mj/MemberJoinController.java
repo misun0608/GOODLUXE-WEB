@@ -1,22 +1,21 @@
 package com.spring.goodluxe.mj;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.goodluxe.voes.MemberVO;
@@ -24,16 +23,41 @@ import com.spring.goodluxe.voes.MemberVO;
 @Controller
 public class MemberJoinController {
 
+	/* NaverLoginBO */
+    private NaverLoginBO naverLoginBO;
+    private String apiResult = null;
+    
 	@Autowired
 	private MemberService gls;
 
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping(value = "/joinform.do")
-	public String joinform() {
-		return "joinform";
-	}
+    @Autowired(required = false)
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
+	
+   //로그인 첫 화면 요청 메소드
+   @RequestMapping(value = "/joinform.do", method = { RequestMethod.GET, RequestMethod.POST })
+   public ModelAndView joinform(Model model, HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+       String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+       System.out.println("네이버:" + naverAuthUrl);
+       model.addAttribute("naver_url", naverAuthUrl);
+      
+       //카카오 인증 url을 view로 전달
+       String kakaoUrI = KakaoController.getAuthorizationUri(session);
+       System.out.println("카카오: "+ kakaoUrI);
+       model.addAttribute("kakao_url", kakaoUrI);
+
+        //네이버 
+		mav.setViewName("joinform");
+        
+        
+      return mav;
+   }
 
 	@RequestMapping(value = "/joinform2.do")
 	public String joinform2() {
@@ -75,7 +99,6 @@ public class MemberJoinController {
 			e.printStackTrace();
 		}
 		System.out.println("3");
-//		return "redirect:/mailSending.do";
 		return null;
 	}
 	
@@ -131,7 +154,7 @@ public class MemberJoinController {
 			if (res == 1) {
 //				writer.write("<script>alert('회원 가입 성공!!'); location.href='login_page.do';</script>");
 				
-				return "redirect:/mainPage.do";
+				return "redirect:/mainPage.do"; // 여기서 페이지 하나 더 만들어서 인증이 완료되었습니다 웅앵 하기
 			}
 
 		} catch (Exception e) {

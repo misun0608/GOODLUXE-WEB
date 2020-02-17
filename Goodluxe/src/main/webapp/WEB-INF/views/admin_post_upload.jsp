@@ -6,13 +6,19 @@
 <meta charset="UTF-8">
 <meta http-equiv="imagetoolbar" content="no">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.8.3.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.menu.js"></script>
-<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#hd").load("admin_header.do");
+   });
+</script>
 <script>
 	function submitCheck(){
 		
@@ -62,119 +68,9 @@
 
 </head>
 <body>
-	<header id="hd">
-		<div id="hd_top">
-			<button type="button" id="btn_gnb" class="btn_gnb_close btn_gnb_open"></button>
-			<div id="logo">
-				<a href="./adminMain.html"><img src="./img/logo.png"></a>
-			</div>
-
-			<div id="tnb">
-				<ul>
-					<li class="tnb_li"><a href="#" class="tnb_service"
-						target="_blank"><img src="./img/home.png" width="25px"></a></li>
-				</ul>
-			</div>
-		</div>
-		<nav id="gnb" class="gnb_large gnb_small">
-
-			<ul class="gnb_ul">
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-200 menu-order-2"
-						title="회원관리">회원관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>회원관리</h3>
-							<ul>
-								<li><a href="./admincustomermanagement.html"
-									class="gnb_2da  ">회원관리</a></li>
-								<li><a href="./adminpointmanagement.html"
-									class="gnb_2da  gnb_grp_div">적립금관리</a></li>
-								<li><a href="./admincouponmanagement.html"
-									class="gnb_2da  ">쿠폰관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-900 menu-order-2"
-						title="회원관리">상품관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>상품관리</h3>
-							<ul>
-								<li><a href="#" class="gnb_2da">매입 상품 등록</a></li>
-								<li><a href="#" class="gnb_2da">위탁 상품 등록</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-300 menu-order-3"
-						title="게시판관리">게시판관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>게시판관리</h3>
-							<ul>
-								<li><a href="./adminpostmanagement.html" class="gnb_2da  ">게시판관리</a></li>
-								<li><a href="./adminvksao.html" class="gnb_2da  ">게시판
-										판매 등록</a></li>
-								<li><a href="./adminrudao.html" class="gnb_2da  ">게시판
-										경매 등록</a></li>
-								<li><a href="#" class="gnb_2da  gnb_grp_div">Q&A관리</a></li>
-								<li><a href="#" class="gnb_2da gnb_grp_style ">FAQ관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-400 menu-order-4"
-						title="쇼핑몰관리">몰관리</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>사이트 관리</h3>
-							<ul>
-								<li><a href="./adminorderproduct.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문목록</a></li>
-								<li><a href="./adminorderproduct_cancel.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문취소</a></li>
-								<li><a href="./adminorderproduct_refund.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문 반품</a></li>
-								<li><a href="./adminorderproduct_return.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">주문 환불</a></li>
-								<li><a href="./adminorderproduct_customermanagement.html"
-									class="gnb_2da gnb_grp_style ">주문 고객 관리</a></li>
-								<li><a href="./adminproductregister.html" class="gnb_2da  ">상품등록</a></li>
-								<li><a href="./admindelivermanagement.html"
-									class="gnb_2da gnb_grp_style gnb_grp_div">배송관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-				<li class="gnb_li">
-					<button type="button" class="btn_op menu-500 menu-order-5"
-						title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
-					<div class="gnb_oparea_wr">
-						<div class="gnb_oparea">
-							<h3>쇼핑몰현황/기타</h3>
-							<ul>
-								<li><a href="./adminMain.html" class="gnb_2da  ">매출현황</a></li>
-								<li><a href="./admindelivermanagement.html"
-									class="gnb_2da ">배송관리</a></li>
-							</ul>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-	</header>
-
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-
+	<header id="hd"></header>
 
 	<div id="wrapper">
-
 		<div id="container" class="container-small">
 
 			<h1 id="container_title">관리자 판매 페이지</h1>
@@ -203,20 +99,20 @@
 							<td class="td1">제품이름</td>
 							<td class="td2"><input name="pb_md_name" class="text1"></td>
 						</tr>
-						<tr>
+						<!--<tr>
 							<td class="td1">판매상태</td>
 							<td class="td2">
-								<input type = "radio" name = "pb_sale_status" value = "onsale">판매중
-								<input type = "radio" name = "pb_sale_status" value = "inprogress">거래진행중
-								<input type = "radio" name = "pb_sale_status" value = "sold"> 판매완료
+								<input type = "radio" name = "pb_sale_status" value = "판매중">판매중
+								<input type = "radio" name = "pb_sale_status" value = "판매중">거래진행중
+							 	<input type = "radio" name = "pb_sale_status" value = "판매완료"> 판매완료 
 								
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="td1">게시상태</td>
 							<td class="td2">
-								<input type = "radio" name = "pb_post_status" value = "onboard">게시중
-								<input type = "radio" name = "pb_post_status" value = "offboard">게시안함
+								<input type = "radio" name = "pb_post_status" value = "게시중" checked>게시중
+								<input type = "radio" name = "pb_post_status" value = "게시안함">게시안함
 							</td>
 						</tr>
 						<tr>

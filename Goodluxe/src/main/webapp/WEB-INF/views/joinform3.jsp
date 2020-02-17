@@ -148,7 +148,7 @@
 										style="font-size: 12px; color: #0084c9; padding: 4px 0 0 5px">사용할
 										수 있는 아이디입니다.</td>
 									<td class="alert alert-danger_id" id="alert-danger_id"
-										style="font-size: 12px; color: red; padding: 4px 0 0 5px">아이디를
+										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">아이디를
 										입력해 주세요.</td>
 									<td class="alert alert-danger_id1" id="alert-danger_id1"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">동일한
@@ -156,9 +156,6 @@
 									<td class="alert alert-danger_id2" id="alert-danger_id2"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">영문자와
 										숫자만 사용해주세요.</td>
-									<td class="alert alert-danger_id3" id="alert-danger_id3"
-										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">중복
-										확인 되지 않은 아이디입니다.</td>
 								</tr>
 								<!--                                        <td class="chk_font" id="chk_id"></td> -->
 								</tr>
@@ -181,6 +178,9 @@
 									<td class="alert alert-danger_pw" id="alert-danger_pw"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호가
 										일치하지 않습니다.</td>
+									<td class="alert alert-danger_pw1" id="alert-danger_pw"
+										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호는
+										10자 이상 입력해주세요.</td>
 								</tr>
 								</tr>
 								<tr class="jointablerow">
@@ -595,10 +595,9 @@
 								<tr>
 									<td colspan="2">
 										<center>
-											<br /> <br /> <input type="button"
-												class="join_btn join_btn1" value="이전"> <input
-												type="submit" onclick="join_check()"
-												class="join_btn join_btn2" value="회원가입">
+											<br /> <br /> 
+											<input type="button" class="join_btn join_btn1" value="이전"> 
+											<input type="submit" onclick="join_check()" class="join_btn join_btn2" value="회원가입">
 									</td>
 								</tr>
 							</table>
