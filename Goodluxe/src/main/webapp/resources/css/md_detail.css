@@ -99,8 +99,10 @@ img {vertical-align:top;}
         margin-top: 30px;
     }
     .buybtn{
+    	position : relative;
+    	float:left;
         width: 190px;
-        height: 60px;
+        height: 62px;
         font-size: 14px;
         color: white;
         border: 1px solid #C97D73;
@@ -109,25 +111,76 @@ img {vertical-align:top;}
         border: 0px;
         outline: none;
     }
+    .buybtn_letter{
+    	position : relative;
+    	width : 53px;
+    	height : 40px;
+   	 	font-size: 14px;
+    	color: white;
+    	top : 50%;
+        left : 50%;
+        margin-top: -20px;
+    	margin-left : -27px;
+    }
     /* 댓글 버튼 호버(하면 조잡해보이는 것 같기도한데 버튼이 많아서 어느 버튼 선택하는지 구분이 필요할 것 같기도 해서 일단 해둠) */
     .buybtn:hover{ 
         background-color: #DFB1AB;
         border-color: #DFB1AB;
     }
-    .notibtn{
+     .notibtn{
+        position: relative;
+        float:left;
         width: 90px;
         height: 60px;
         border: 1px solid #C97D73;
         background-color: white;
         color: #555555;
-        margin: 0 11px;
+        text-align: center;
+        margin : 0 11px;
     }
-    .likebtn{
+    .notice_Img{
+        position : relative;
+        width : 16px;
+        height : 16px;
+        top : 22px;
+        margin-left: -22px;
+    }
+    .notice_letter{
+        position : relative;
+    	width : 40px;
+    	height : 30px;
+   	 	font-size: 14px;
+        color: #555555;
+        left : 50%;
+        margin-top: -31px;
+    	margin-left : -8px;
+    }
+     .likebtn{
+        position : relative;
+        float:left;
+        text-align: center;
         width: 90px;
         height: 60px;
         border: 1px solid #C97D73;
         background-color: white;
         color: #555555;
+    }
+    .like_Img{
+        position : relative;
+        width : 16px;
+        height : 16px;
+        top : 22px;
+        margin-left: -35px;
+    }
+    .like_letters{
+        position : relative;
+    	width : 40px;
+    	height : 30px;
+   	 	font-size: 14px;
+        color: #555555;
+        left : 50%;
+        margin-top: -31px;
+    	margin-left : -8px;
     }
 
     /* 하단부분 */

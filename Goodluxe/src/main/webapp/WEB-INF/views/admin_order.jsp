@@ -63,12 +63,12 @@
 		var the_btn = $(this);
 		event.preventDefault();
 		//$(this).css("display","none");
-		//$(this).parent().children("#order_invoice_number").show();
-		//$(this).parent().children("#inv_p").show();
-		//$(this).parent().children("#btn_start_shipping").show();
-		the_btn.parent().children().eq(2).show();
-		the_btn.parent().children().eq(3).show();
-		the_btn.parent().children().eq(4).show();
+		$(this).parent().children("#order_invoice_number").show();
+		$(this).parent().children("#inv_p").show();
+		$(this).parent().children("#btn_start_shipping").show();
+		//the_btn.parent().children().eq(2).show();
+		//the_btn.parent().children().eq(3).show();
+		//the_btn.parent().children().eq(4).show();
 		//$("#order_invoice_number").show();
 		//$("#inv_p").show();
 		//$("#btn_start_shipping").show();
