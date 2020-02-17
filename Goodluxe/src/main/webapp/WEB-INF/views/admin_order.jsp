@@ -218,20 +218,20 @@
 									var output = ''; 
 									output += '<tr class="tr2">';
 									//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me"  value = "'+item.order_number+'"></td>';
-									output += '<td class="td3">'+pay_date+'</td>';
-									output += '<td class="td3">'+item.order_number+'</td>';
-									output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
-									output += '<td class="td3">'+item.pb_number+'</td>';
-									output += '<td class="td3">'+item.order_pay_price+'</td>';
-									output += '<td class="td3">'+item.order_pay_system+'</td>';
-									output += '<td class="td3">'+item.order_status;
+									output += '<td class="context_td">'+pay_date+'</td>';
+									output += '<td class="context_td">'+item.order_number+'</td>';
+									output += '<td class="context_td"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
+									output += '<td class="context_td">'+item.pb_number+'</td>';
+									output += '<td class="context_td">'+item.order_pay_price+'</td>';
+									output += '<td class="context_td">'+item.order_pay_system+'</td>';
+									output += '<td class="context_td">'+item.order_status;
 										if(item.order_status=='배송준비중'){
-											output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+											output +='<br /><button id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
 											output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
 										}
 										if(item.order_status=='배송중'){
-											output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+											output +='<br /><button value="'+item.order_number+'" id ="btn_end_shipping">판매완료</button>';
 										} 
 									output +='</td>';
 									output += '</tr>';
@@ -441,7 +441,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">주문 관리 > 전체 주문 목록</h1>
+			<h1 id="container_title">| 주문 관리 > 전체 주문 목록</h1>
 			<div class="container_wr">
 				<section>
 					<br><br>
@@ -483,11 +483,14 @@
 							</tr>
 							
 							<tr>
-								<td class="td1">입금 / 결제상태</td>
+								<td class="td1">입금 /결제상태</td>
 								<td class="td2">&nbsp;&nbsp;
-									<input type="radio"name="is_payed" id = "is_checked2" value = "all" checked> 전체 &nbsp;
-									<input type="radio"name="is_payed" value = "beforeP"> 입금 전 &nbsp;
-									<input type="radio"name="is_payed" value = "afterP" > 결제 완료
+									<input type="radio" name="is_payed" id ="is_checked2" value="all" checked> 
+									<label for="is_checked2">전체</label>
+									<input type="radio" id="is_payed1" name="is_payed" value="beforeP">
+									<label for="is_payed1">입금전</label>
+									<input type="radio" id="is_payed2" name="is_payed" value="afterP">
+									<label for="is_payed2">결제완료</label>
 								</td>
 							</tr>
 	
@@ -496,16 +499,18 @@
 						<table class="information">
 							<tr>
 								<td class="td1">cs 주문상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
+								<td class="td2">&nbsp;&nbsp;
 									<!-- <input type="radio"name="is_canceled" id = "is_checked" value = "all" checked> 전체 &nbsp; -->
-									<input type="radio"name="is_canceled" value = "cancelY" id = "cancelY"checked> 취소제외 &nbsp;
-									<input type="radio"name="is_canceled" value = "cancelN"> 취소내역
+									<input type="radio" name="is_canceled" value = "cancelY" id ="cancelY" checked>
+									<label for="cancelY">취소제외</label>
+									<input type="radio" id="cancelN" name="is_canceled" value = "cancelN">
+									<label for="cancelN">취소내역</label>
 								</td>
 							</tr>
 						</table>
 						<div class="btn12" align="center">
-							<button type="button" class="btn1_2" id = "init_btn" >전체보기</button>
-							<button type="button" class="btn1" id = "search_btn">검색</button>
+							<button type="button" class="bottom_btn cancel_btn" id="init_btn">전체보기</button>
+							<button type="button" class="bottom_btn" id="search_btn">검색</button>
 						</div>
 					</form>
 					<br> <br>
@@ -516,17 +521,16 @@
 						<button id = "modal_open">fasdfasd</button>-->
 						
 						
-						<table border="1" id = "output_table" >
-	
+						<table class="information" id ="output_table">
 							<tr class="tr1">
 								<!--  <td class="td3"><input type="checkbox"id="chk_all" onclick = "checkAll();"></td> -->
-								<td class="td4">주문일(결제일)</td>
-								<td class="td4">주문번호</td>
-								<td class="td4">주문자</td>
-								<td class="td4">상품번호[상품명]</td>
-								<td class="td4">결제금액</td>
-								<td class="td4">결제수단</td>
-								<td class="td4">배송상태</td>
+								<td class="title_td">주문일(결제일)</td>
+								<td class="title_td">주문번호</td>
+								<td class="title_td">주문자</td>
+								<td class="title_td">상품번호[상품명]</td>
+								<td class="title_td">결제금액</td>
+								<td class="title_td">결제수단</td>
+								<td class="title_td">배송상태</td>
 							</tr>
 							<tbody id = "output">
 								

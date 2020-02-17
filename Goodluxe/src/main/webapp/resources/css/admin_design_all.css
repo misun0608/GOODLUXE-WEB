@@ -1214,7 +1214,7 @@ tr .td3{
 }
 
 .delete_btn{
-	width: 50px;
+	width: 80px;
     text-align: center;
     background-color: white;
     color: #555555;
@@ -1224,6 +1224,8 @@ tr .td3{
     padding: 2px;
     border: 0.9px solid #555555;
 }
+
+/* ajax는 왜 버튼 class로 하면 안먹힐까..?*/
 
 #return_confirm{
 	width: 80px;
@@ -1248,6 +1250,34 @@ tr .td3{
     padding: 2px;
     border: 0.9px solid #8FB0CA;
 }
+
+#invoice_input{
+	width: 80px;
+    text-align: center;
+    background-color: white;
+    color: #555555;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #555555;
+}
+
+#btn_end_shipping{
+	width: 80px;
+    text-align: center;
+    background-color: white;
+    color: #555555;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid #555555;
+}
+
+
+
+
 
 .select_all_btn{
 	width: 70px;
