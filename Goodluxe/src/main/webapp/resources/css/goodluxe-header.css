@@ -76,6 +76,18 @@ img {vertical-align:top;}
     .notice_content>li:last-child>a {
         font-size: 12px;
     }
+    /*알림 두번째 레이어 모르겠다.......ㅠㅠㅠㅠㅠㅠㅠㅠㅠ*/
+    .hidden_alarm_box>li{
+   	 	position: relative;
+        padding: 10px 20px;
+        border-bottom: 1px solid #DCDCDC;
+    }
+    .hidden_alarm_box>li>a {
+        font: 14px/1.2 'Nanum Gothic', sans-serif;
+        color: #000;
+    }
+    
+    
     /* 안 읽은 알림 */
     .notice_content>li>a.on {
         font-weight: bold;

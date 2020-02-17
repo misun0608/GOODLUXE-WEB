@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
 
 public interface AjaxService {
@@ -36,7 +37,10 @@ public interface AjaxService {
 	ArrayList<OrderVO> getReturnList()throws Exception;
 	ArrayList<OrderVO> getDetailReturndList(String orderstatus)throws Exception;
 	void setReturnConfirm(String order_number)throws Exception;
-	void setReturnFinished(String order_number)throws Exception;
+	ArrayList<HashMap<String,String>> setReturnFinished(String order_number)throws Exception;
+	ArrayList<NoticeVO> getAlarmContent(String member_id) throws Exception;
+	ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map)throws Exception;
+	int afterLoginCheckAlarm(String member_id)throws Exception;
 
 	
 	

@@ -421,4 +421,8 @@
 	
 	</select>
 	
+	<update id = "preChgReadStatus" parameterType = "String">
+		update gl_notice set alarm_read = 'Y' where alarm_number = #{alarm_number}
+	</update>
+	
 </mapper>

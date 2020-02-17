@@ -195,7 +195,7 @@ public class MemberLoginController {
         e.printStackTrace();
      }
      
-     return "redirect:/mainPage.do";
+     return "/mainPage.do";
    }
    
    //카카오 로그인 성공
@@ -253,7 +253,8 @@ public class MemberLoginController {
               session.setAttribute("member_id", memberVO.getMember_id());
               session.setAttribute("member_class", memberVO.getMember_class());
               session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
-           } else {
+           } else { // 실패 
+        	  session.setAttribute("member_id", "null");
               System.out.println("sns 회원가입 컨트롤러 실패");
            }
         } else {   //등록된 회원

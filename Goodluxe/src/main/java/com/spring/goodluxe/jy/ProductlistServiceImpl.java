@@ -361,7 +361,19 @@ public class ProductlistServiceImpl implements ProductlistService{
 			System.out.println("ERROR(ProductlistService/getShippingInfo) : " + e.getMessage());
 			throw new Exception("ERROR(ProductlistService/ getShippingInfo)");
 		}
-		
+	}
+
+	public void preChgReadStatus(String alarm_number) throws Exception{
+		ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		try {
+			System.out.println("알람넘버 "+alarm_number);
+			System.out.println("안들어왔니???");
+			productlistMapper.preChgReadStatus(alarm_number);
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/preChgReadStatus) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/ preChgReadStatus)");
+		}
 		
 	}
 	

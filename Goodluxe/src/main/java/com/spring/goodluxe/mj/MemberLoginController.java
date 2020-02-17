@@ -105,25 +105,27 @@ public class MemberLoginController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	/*
-	 * //로그인 첫 화면 요청 메소드
-	 * 
-	 * @RequestMapping(value = "/login.do", method = { RequestMethod.GET,
-	 * RequestMethod.POST }) public ModelAndView login(Model model, HttpSession
-	 * session) { ModelAndView mav = new ModelAndView(); 네이버아이디로 인증 URL을 생성하기 위하여
-	 * naverLoginBO클래스의 getAuthorizationUrl메소드 호출 String naverAuthUrl =
-	 * naverLoginBO.getAuthorizationUrl(session); System.out.println("네이버:" +
-	 * naverAuthUrl); model.addAttribute("naver_url", naverAuthUrl);
-	 * 
-	 * //카카오 인증 url을 view로 전달 String kakaoUrI =
-	 * KakaoController.getAuthorizationUri(session); System.out.println("카카오: "+
-	 * kakaoUrI); model.addAttribute("kakao_url", kakaoUrI);
-	 * 
-	 * //네이버 mav.setViewName("login");
-	 * 
-	 * 
-	 * return mav; }
-	 */
+
+	  //로그인 첫 화면 요청 메소드
+	  
+	  @RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	  public ModelAndView login(Model model, HttpSession session) { ModelAndView mav = new ModelAndView(); 
+	  // 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의  getAuthorizationUrl 메소드 호출 
+	  String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
+	  System.out.println("네이버:" + naverAuthUrl); 
+	  model.addAttribute("naver_url", naverAuthUrl);
+	  
+	  //카카오 인증 url을 view로 전달
+	  String kakaoUrI = KakaoController.getAuthorizationUri(session); 
+	  System.out.println("카카오: "+ kakaoUrI); 
+	  model.addAttribute("kakao_url", kakaoUrI);
+	  
+	  //네이버 
+	  mav.setViewName("login_box");
+	  
+	  
+	  return mav;
+	  }
 
 	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -136,7 +138,7 @@ public class MemberLoginController {
 
 		// 정보동의 취소시 이전페이지로 이동
 		if (code.equals("0")) {
-			return "redirect:/loginform.do";
+			return "redirect:/mainPage.do";
 		}
 		System.out.println("여기는 callback");
 
@@ -208,7 +210,7 @@ public class MemberLoginController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/login.do";
+		return "redirect:/mainPage.do";
 	}
 
 	// 카카오 로그인 성공

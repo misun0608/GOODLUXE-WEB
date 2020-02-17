@@ -15,6 +15,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 
@@ -207,12 +208,15 @@ $(document).ready(function(){
 					$.each(data,function(index,item){
 		              var ex_date = new Date(item.point_date);
 		              var date = date_format(ex_date);
+		              var num = index + 1;
+		              
 		               var output= '';
 		               output += '<tr class="tr2">';
-		               output += '<td class="td3">'+date+'</td>';
-		               output += '<td class="td3">'+item.member_id+'</td>';
-		               output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
-		               output += '<td class="td3">'+item.point_status+'</td></tr>';
+		               output += '<td class="context_td">'+num+'</td>';
+		               output += '<td class="context_td">'+date+'</td>';
+		               output += '<td class="context_td">'+item.member_id+'</td>';
+		               output += '<td class="context_td">'+numberFormat(item.point_amount)+'</td>';
+		               output += '<td class="context_td">'+item.point_status+'</td></tr>';
 		               $('#pointtable-tbody').append(output);
 		               });
 					page();	// 페이징
@@ -243,15 +247,18 @@ $(document).ready(function(){
             	$.each(data,function(index,item){
 	                var ex_date = new Date(item.point_date);
                     var date = date_format(ex_date);
+                    var num = index + 1;
 					
 					var output = '';
 					output += '<tr class="tr2">';
-					output += '<td class="td3">'+date+'</td>';
-					output += '<td class="td3">'+item.member_id+'</td>';
-					output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
-					output += '<td class="td3">'+item.point_status+'</td></tr>';
+					output += '<td class="context_td">'+num+'</td>';
+					output += '<td class="context_td">'+date+'</td>';
+					output += '<td class="context_td">'+item.member_id+'</td>';
+					output += '<td class="context_td">'+numberFormat(item.point_amount)+'</td>';
+					output += '<td class="context_td">'+item.point_status+'</td></tr>';
 					$('#pointtable-tbody').append(output);
             	});
+            	$('#member_id').val('');
             	page();
             },
             error:function(){
@@ -276,15 +283,16 @@ $(document).ready(function(){
                     <br>
 
                     <br>
-                    <h3>▶ 회원 검색 </h3>
+                    <h3>| 회원 검색 </h3>
                     <br>
                     <form name="searchform" id="searchform" method="post">
-                    <table class="impormation" border="1">
+                    <table class="id_table">
                         <tr>
                             <td class="td1">아이디</td>
-                            <td class="td2">
-                                &nbsp;&nbsp;<input id="member_id" name="member_id" class="text3" onkeyup="enterkey();">
-                                <button type="button" id="idsearchbtn" class="btn22">아이디 검색</button>
+                            <td class="id_search_td">
+                                &nbsp;&nbsp;
+                                <input type="text" id="member_id" name="member_id" class="id_search_input" onkeyup="enterkey();">
+                                <button type="button" id="idsearchbtn" class="id_search_btn">검색</button>
                             </td>
                         </tr>
 
@@ -295,21 +303,23 @@ $(document).ready(function(){
                     <br>
                     <br>
 
-                    <h3>▶회원 적립금 내역</h3>
-                    <div align="right">
-                        <button type="button" id="selectAllbtn"  name="selectbutton" class="btn23">전체 보기</button>
-                        <button type="button" id="updatebtn" name="selectbutton" class="btn23" onclick="popupform();">입력</button>
+                    <h3>| 회원 적립금 내역</h3>
+                    <br />
+                    <div align="left">
+                        <button type="button" id="selectAllbtn"  name="selectbutton" class="select_all_btn">전체보기</button>
+                        <button type="button" id="updatebtn" name="selectbutton" class="select_all_btn" onclick="popupform();">입력</button>
                         &nbsp;&nbsp;&nbsp;
                     </div>
                     <br>
                     <%-- 테이블 --%>
-                    <table border="1" id="pointtable" class="pointtable paginated">
+                    <table id="pointtable" class="point_table">
                     	<thead>
-                    		<tr class="tr1">
-                    			<td class="td4">날짜</td>
-                    			<td class="td4">아이디</td>
-                    			<td class="td4">금액</td>
-                    			<td class="td4">내용</td>
+                    		<tr class="tr_title">
+                    			<td class="title_td">번호</td>
+                    			<td class="title_td">날짜</td>
+                    			<td class="title_td">아이디</td>
+                    			<td class="title_td">금액</td>
+                    			<td class="title_td">내용</td>
                     		</tr>
                     	</thead>
                     	<%--ajax 내용 들어갈 tbody 부분--%>
@@ -333,9 +343,7 @@ $(document).ready(function(){
 
     </div>
 
-  <footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
+  <footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

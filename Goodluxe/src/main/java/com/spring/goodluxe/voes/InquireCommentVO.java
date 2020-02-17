@@ -11,6 +11,7 @@ public class InquireCommentVO {
 	private int comment_ref;
 	private int comment_ref_step;
 	private int comment_ref_level;
+	private String comment_ref_writer;
 	public int getComment_number() {
 		return comment_number;
 	}
@@ -58,5 +59,11 @@ public class InquireCommentVO {
 	}
 	public void setComment_ref_level(int comment_ref_level) {
 		this.comment_ref_level = comment_ref_level;
+	}
+	public String getComment_ref_writer() {
+		return comment_ref_writer;
+	}
+	public void setComment_ref_writer(String comment_ref_writer) {
+		this.comment_ref_writer = comment_ref_writer;
 	}
 }

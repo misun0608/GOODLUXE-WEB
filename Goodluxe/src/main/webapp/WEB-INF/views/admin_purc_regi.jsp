@@ -18,6 +18,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 <script>
@@ -114,7 +115,7 @@
 					<br> <br>
 					<h3>▶ 기본 정보 입력</h3>
 					<br>
-					<table class="impormation" border="1">
+					<table class="information">
 <!-- 					<tr>
 							<td class="td1">상품개체번호(개체고유번호)</td>
 							<td class="td2"><input type="text" name="entity_number"
@@ -123,8 +124,8 @@
 -->
 						<tr>
 							<td class="td1">상품명</td>
-							<td class="td2"><input type="text" name="pd_name"
-								class="text1"></td>
+							<td class="td2"><input type="text" name="pd_name" class="text1">
+						</td>
 						</tr>
 						<tr>
 							<td class="td1">브랜드번호</td>
@@ -172,13 +173,15 @@
 						<tr>
 							<td class="td1">판매가격</td>
 							<td class="td2">
-							<input type="number" name = "sale_price" class="text1" id = "sale_price"></td>
+							<input type="text" name = "sale_price" class="text1" id = "sale_price">
+							</td>
 						</tr>
 				
 						<tr>
 							<td class="td1">매입가격</td>
-							<td class="td2"><input type="number" name="buying_price" id = "buying_price"
-								class="text1"></td>
+							<td class="td2"><input type="text" name="buying_price" id = "buying_price"
+								class="text1">
+							</td>
 						</tr>
 						<tr>
 							<td class="td1">매입날짜</td>
@@ -200,8 +203,12 @@
 						</tr>  -->
 						<tr>
 							<td class="td1">감정서 유무</td>
-							<td class="td2">&nbsp;<input type="radio" name="appraise_exist" value = "O"> &nbsp;유&nbsp;&nbsp;&nbsp; <input
-								type="radio" name="appraise_exist" value = "X"> &nbsp;무&nbsp;
+							<td class="td2">
+								&nbsp;
+								<input type="radio" name="appraise_exist" id="appraise_exist1" value = "O" checked>
+								<label for="appraise_exist1">유</label>
+								<input type="radio" name="appraise_exist" id="appraise_exist2" value = "X">
+								<label for="appraise_exist2">무</label>
 							</td>
 						</tr>
 						<tr>
@@ -216,17 +223,15 @@
 					</table>
 					<br> <br>
 					<div align="center">
-						<input type="reset" class="btn3" name="reset" value="취소">
-						<input type="submit" class="btn4" name="submit" value="등록" onclick = "change_int();">
+						<input type="reset" class="bottom_btn cancel_btn" name="reset" value="취소">
+						<input type="submit" class="bottom_btn" name="submit" value="등록" onclick = "change_int();">
 						<br> <br> <br> <br>
 					</div>
 				</form>
 			</div>
 		</div>
-
-		<footer class="container-fluid">
-			<p>Footer Text</p>
-		</footer>
+	</div>
+		<footer id="admin_footer" class="container-fluid"></footer>
 </body>
 
 </html>
