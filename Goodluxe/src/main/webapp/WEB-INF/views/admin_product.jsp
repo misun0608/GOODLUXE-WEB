@@ -60,7 +60,7 @@ $(document).ready(function() {
 		}
 		return year + "-" + month + "-" + date;
 	}
-
+//<!--<input type="checkbox" id = "chk_all" onclick = "checkAll();">-->
 	function selectData() {
 		var division_chk = $(':radio[name="pb_division"]:checked').val();
 		var params = {"pb_division":division_chk};
@@ -75,7 +75,7 @@ $(document).ready(function() {
 				success:function(data) { 
 					if(division_chk=="purchase"){
 						var output = '<tr class="tr1">'
-							+'<td class="td3"><input type="checkbox" id = "chk_all" onclick = "checkAll();"></td>'
+							+'<td class="td3"></td>'
 							+'<td class="td4">상품번호</td>'
 							+'<td class="td4">상품이름</td>'
 							+'<td class="td4">브랜드</td>'
@@ -116,7 +116,7 @@ $(document).ready(function() {
 						$('#output').append(output);//뒤에 이어붙이기
 					}else{
 						var output = '<tr class="tr1">'
-							+'<td class="td3"><input type="checkbox" id = "chk_all" onclick = "checkAll();"></td>'
+							+'<td class="td3"></td>'
 							+'<td class="td4">상품번호</td>'
 							+'<td class="td4">상품이름</td>'
 							+'<td class="td4">브랜드</td>'
@@ -159,8 +159,7 @@ $(document).ready(function() {
 						console.log("output:" + output);
 						$('#output').append(output);//뒤에 이어붙이기
 					}
-					
-					
+					page();
 				},
 			 	error:function() {
 					alert("리스트 ajax통신 실패!!!");
@@ -273,6 +272,7 @@ $(document).ready(function() {
 					console.log("output:" + output);
 					$('#output').append(output);//뒤에 이어붙이기
 				}
+				page();
 			},
 			error:function() {
 	           alert("리스트 ajax통신 실패!!!");
@@ -363,7 +363,112 @@ $(document).ready(function() {
 
 	selectData();
 
-
+	//페이징
+	function page(){ 
+		$('#output').each(function() {
+			var pagesu = 10;  //페이지 번호 갯수
+			var currentPage = 0;
+			var numPerPage = 11;  //목록의 수
+			var $table = $(this);   
+			var tr = $('#output_table tr');
+			var pagination = $("#pagination");
+			   
+			//length로 원래 리스트의 전체길이구함
+			var numRows = tr.length;
+			console.log(numRows);
+			
+			//Math.ceil를 이용하여 반올림
+			var numPages = Math.ceil(numRows / numPerPage);
+			
+			//리스트가 없으면 종료
+			if (numPages==0) 
+				return;
+			//pager라는 클래스의 div엘리먼트 작성
+			var $pager = $('<div class="pager"></div>');
+			var nowp = currentPage;
+			var endp = nowp+10;
+			
+			//페이지를 클릭하면 다시 셋팅
+			$table.bind('repaginate', function() {
+				//기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+				// 테이블 하위 요소 중 tbody tr 요소 선택
+				$table.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+				$("#pagination").html("");
+				
+				if (numPages > 1) {     // 한페이지 이상이면
+				if (currentPage < 5 && numPages-currentPage >= 5) {   // 현재 5p 이하이면
+					nowp = 0;     // 1부터 
+					endp = pagesu;    // 10까지
+				}else{
+					nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+					endp = nowp+pagesu;   // 10까지
+					pi = 1;
+				}
+				if (numPages < endp) {   // 10페이지가 안되면
+					endp = numPages;   // 마지막페이지를 갯수 만큼
+					nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+				}
+				if (nowp < 1) {     // 시작이 음수 or 0 이면
+					nowp = 0;     // 1페이지부터 시작
+				}
+				}else{       // 한페이지 이하이면
+					nowp = 0;      // 한번만 페이징 생성
+					endp = numPages;
+				}
+	
+				// [처음]
+				$('<span class="pageNum first" style="cursor: pointer">처음</span>').bind('click', {newPage: page},function(event) {
+					currentPage = 0;   
+					$table.trigger('repaginate');  
+					$($(".pageNum")[2]).addClass('active').siblings().removeClass('active');
+					$("html, body").animate({ scrollTop : 0 }, 500);
+				}).appendTo(pagination).addClass('clickable');
+				
+				// [이전]
+				$('<span class="pageNum back" style="cursor: pointer">&nbsp < &nbsp</span>').bind('click', {newPage: page},function(event) {
+					if(currentPage == 0) return;
+					currentPage = currentPage-1;
+					$table.trigger('repaginate');
+					$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+					$("html, body").animate({ scrollTop : 0 }, 500);
+				}).appendTo(pagination).addClass('clickable');
+				
+				// [1,2,3,4,5,6,7,8]
+				for (var page = nowp ; page < endp; page++) {
+					$('<span class="pageNum" style = "cursor: pointer"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+						currentPage = event.data['newPage'];
+						$table.trigger('repaginate');
+						$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+				} 
+				
+				// [다음]
+				$('<span class="pageNum next" style = "cursor: pointer">&nbsp > &nbsp</span>').bind('click', {newPage: page},function(event) {
+					if(currentPage == numPages-1) return;
+					currentPage = currentPage+1;
+					$table.trigger('repaginate'); 
+					$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+					$("html, body").animate({ scrollTop : 0 }, 500);
+				}).appendTo(pagination).addClass('clickable');
+	
+				// [끝]
+				$('<span class="pageNum last" style = "cursor: pointer">끝</span>').bind('click', {newPage: page},function(event) {
+					currentPage = numPages-1;
+					$table.trigger('repaginate');
+					$($(".pageNum")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+					$("html, body").animate({ scrollTop : 0}, 500);
+				}).appendTo(pagination).addClass('clickable');
+	
+				$($(".pageNum")[2]).addClass('active');
+			});
+			
+			$pager.insertAfter($table).find('span.pageNum:first').next().next().addClass('active');   
+			$pager.appendTo(pagination);
+			$table.trigger('repaginate');
+			
+		});
+	}	
 
 
 
@@ -427,7 +532,7 @@ $(document).ready(function() {
 							
 						</table>
 						<br/>
-						<table class="information">
+						<table class="information" id = "output_table">
 							<tr>
 								<td class="td1">상품 번호</td>
 								<td class="td2">
@@ -453,7 +558,9 @@ $(document).ready(function() {
 						</table>
 					</form>
 					<br>
-					<p align="center">◁&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;▷</p>
+					<center>
+			        	<div class="pagination" id="pagination">
+			        </center> 
 				</section>
 			</div>
 

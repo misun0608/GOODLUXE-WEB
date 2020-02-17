@@ -111,7 +111,7 @@ $(document).ready(function() {
 					output += '<td class="title_td">'+item.member_id+'</td></tr>';
 		            $('#output').append(output);//뒤에 이어붙이기
 		         });
-		         page();
+		         //page();
 				},
 		         error:function() {
 		            alert("리스트 ajax통신 실패!!!");
@@ -145,7 +145,7 @@ $(document).ready(function() {
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
 	 					});
-	 					page();
+	 					//page();
 	 				},
 	 				error:function(){
 	 					alert("리스트 ajax통신 실패!!!");
@@ -159,8 +159,6 @@ $(document).ready(function() {
 			var delete_this = [];
 			$("input[name='delete_this']:checked").each(function(i){
 				delete_this.push($(this).val());
-				numRows--;
-				alert(numRows);
 			});
 			  
 			var params = {"delete_this":delete_this};
