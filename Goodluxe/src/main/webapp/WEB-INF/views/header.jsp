@@ -18,19 +18,15 @@
 		w = new WebSocket("ws://localhost:8080/goodluxe/broadcasting2.do");
 
 		w.onopen = function(){
-			alert("WebSocket Conneted!!!");
 		}
 		w.onmessage = function(e){       
 			alarm_number = e.data.toString();
 			console.log("알람 수신");
-			alert("alarm??"+alarm_number);
 			alarm_arrived();
 		}
 		w.onclose = function(e){
-			alert("WebSocket closed!!!");
 		}
 		w.onerror = function(e){ 
-			alert("WebSocket error!!!");
 		}
 	}
 	window.onload = function(){
@@ -61,9 +57,7 @@
 		var count = 1;
 		
 		function login_alarm_check(){
-			alert(mem_id);
 			if(mem_id != null && mem_isadmin =="N"){
-				alert("통과~~~"+mem_id);
 				jQuery.ajax({
 					url : '/goodluxe/afterLoginCheckAlarm.do',
 	                type : 'POST',
@@ -71,10 +65,8 @@
 	                contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
 	            	success: function (data) {
 	            		if(data.result=="notzero"){
-	            			alert("notzero");
 	            		}
 	            		else if(data.result=="iszero"){
-	            			alert("iszero");
 	            		}
 	                },
 	                error:function() {
