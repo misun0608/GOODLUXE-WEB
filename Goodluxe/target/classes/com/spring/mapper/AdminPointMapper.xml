@@ -55,6 +55,16 @@
 		<result property="order_cancel_date" column="order_cancel_date" />
 		<result property="order_pay_price" column="order_pay_price" />
 	</resultMap>
+	
+	<!-- 도넛만들떄 필요한 데이터 HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapDoughRM">
+		<result property="pd_category" column="pd_category" />
+		<result property="pd_brand" column="pd_brand" />
+		<result property="categorycount" column="categorycount" />
+		<result property="brandcount" column="brandcount" />
+		<result property="cate_sales_sum" column="cate_sales_sum" />
+		<result property="brand_sales_sum" column="brand_sales_sum" />
+	</resultMap>
 
 	<select id="getAdminPointList" resultMap="AdminPointResultMap">
 		select * from GL_POINT order by point_date desc
@@ -189,6 +199,78 @@
 	]]>
 	</select>
 	
+	<!-- 카테고리별 판매완료 건수 -->
+	<select id="getCateCnt" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_category , count (*) categorycount
+from (
+select glpr.pb_number, glpu.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_category
+order by categorycount desc
+	]]>
+	</select>
+	<!-- 카테고리 매출액 -->
+	<select id="getCateSales" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_category , count (*) categorycount, sum(order_product_price) as cate_sales_sum
+from (
+select glpr.pb_number, glpu.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_category
+order by sum(order_product_price) desc
+	]]>
+	</select>
+	<!-- 브랜드 판매완료 건수 -->
+	<select id="getBrandCnt" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_brand , count (*) brandcount
+from (
+select glpr.pb_number, glpu.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_brand
+order by brandcount desc
+	]]>
+	</select>
 	
+	<!-- 브랜드 매출액 -->
+	<select id="getBrandSales" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_brand , count (*) brandcount,sum(order_product_price) as brand_sales_sum
+from (
+select glpr.pb_number, glpu.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_brand
+order by sum(order_product_price) desc
+	]]>
+	</select>
 	
 </mapper>

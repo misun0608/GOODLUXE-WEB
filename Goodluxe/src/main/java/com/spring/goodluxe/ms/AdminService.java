@@ -21,5 +21,10 @@ public interface AdminService {
 	public HashMap<String,Object> getTodayOrderCount() throws Exception;
 	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception;
 	public ArrayList<HashMap<String,Object>> getRefundData() throws Exception;
+	// 도넛그래프
+	public ArrayList<HashMap<String,Object>> getCateCntData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getBrandCntData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getCateSalesData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getBrandSalesData() throws Exception;
 	
 }

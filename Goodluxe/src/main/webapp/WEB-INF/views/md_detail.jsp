@@ -188,15 +188,23 @@
 								<hr id="name_line">
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
-								<a href = "orderForm.do?entity_number=<%=entity_number%>"><div class="buybtn buybtn2">구매하기</div></a>
-								<a href = "#"><div class="notibtn">
-									<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px">&nbsp;&nbsp;알림
-								</div></a>
-								<a href="mdDetailLike.do?entity_number=<%=entity_number%>" id="likebtn" >
-									<div class="likebtn" >
-										<img id="heartImg"  alt="좋아요" width="16px">&nbsp;&nbsp;좋아요
+								<a href = "orderForm.do?entity_number=<%=entity_number%>">
+									<div class="buybtn buybtn2"><p class = "buybtn_letter">구매하기</p></div>
+								</a>
+								<a href = "#">
+									<div class="notibtn">
+										<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px" class = "notice_Img">
+										<p class = "notice_letter">알림</p>
 									</div>
 								</a>
+								<a href="mdDetailLike.do?entity_number=<%=entity_number%>" id="likebtn" >
+									<div class="likebtn" >
+										<img id="heartImg"  alt="좋아요" width="16px" class = "like_Img">
+										<p class = "like_letters">좋아요</p>
+									</div>
+								</a>
+								 
+								
 							</div>
 						</div>
 					</div>

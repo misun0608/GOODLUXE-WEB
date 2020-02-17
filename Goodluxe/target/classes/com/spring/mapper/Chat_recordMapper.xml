@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.spring.mapper.Chat_recordMapper">
+
+<resultMap type="com.spring.goodluxe.voes.Chat_recordVO" id="resultChatrecordVO">
+		<result property="member_id" column="member_id" />
+		<result property="chat_message" column="chat_message" />
+		<result property="chat_timestamp" column="chat_timestamp" />
+		<result property="chat_room" column="chat_room" />
+	</resultMap>
+	
+	<select id="selectListchatRecord" parameterType="String" resultMap="resultChatrecordVO" >
+		select *
+		from gl_chat_record
+		where chat_room = #{chat_room}
+		order by chat_timestamp asc
+	</select>
+	
+	<select id="selectListchatRecordCount" parameterType="String" resultMap="resultChatrecordVO" >
+		select *
+		from gl_chat_record
+		where chat_room = #{chat_room}
+		order by chat_timestamp desc
+	</select>
+	
+	
+	
+	<insert id="insertchatRecord" parameterType="com.spring.goodluxe.voes.Chat_recordVO" >
+		insert into gl_chat_record values(
+		#{member_id}, #{chat_message}, SYSTIMESTAMP, #{chat_room} 
+		)
+	</insert>
+	
+	
+
+</mapper>

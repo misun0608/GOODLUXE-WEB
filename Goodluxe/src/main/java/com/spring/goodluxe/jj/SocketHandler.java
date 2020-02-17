@@ -21,6 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.goodluxe.voes.ChatVO;
+import com.spring.goodluxe.voes.Chat_recordVO;
 import com.spring.goodluxe.voes.Member2VO;
 
 
@@ -41,6 +42,8 @@ public class SocketHandler extends TextWebSocketHandler {
 	ChatService chatService;
 	@Autowired
 	ChatMemberService chatmemberService;
+	@Autowired
+	Chat_recordService chat_recordService;
 	
 	//연결 요청 처리 
     //메시지 받기, 메시지 전달
@@ -87,17 +90,6 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 	roomList.put(session, userRoom.getChat_room());
 	System.out.println(userId+"님이 "+userRoom.getChat_room()+" 방에 들어왔습니다.");
 	
-		/*
-		 * //4. 이전 방 정보 DB에서 수정하기 //System.out.println("변경 전 :"+userRoom.getPriroom());
-		 * //변경전 String priroom = userRoom.getChat_room();
-		 * 
-		 * ChatMemberVO chatmembervo_update = new ChatMemberVO();
-		 * chatmembervo.setChat_num(0); chatmembervo.setMember_id(userId);
-		 * chatmembervo.setChat_room("");
-		 * chatmemberService.updateRoomMember(chatmembervo_update);
-		 * //System.out.println("변경 후 :"+userRoom.getRoom()); //변경전
-		 */ 	
-	
 	//4. mapList(해당세션의 실제아이디 값을 저장하기위해 map으로 저장)
 	mapList.put(session,userId); //세션:key, 유저아이디:value
 	
@@ -136,6 +128,13 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 		ChatUtil chatUtil = new ChatUtil(); //f.project.util소속 클래스 선언
 		String userListMessage = chatUtil.split(userList); // 받아온 list에 대해서 문자열로 바인딩해서 날려줌
 		sessionList.get(i).sendMessage(new TextMessage(JsonUser(userListMessage)));
+		
+		ArrayList<Chat_recordVO> recordlist = chat_recordService.selectListchatRecord(roomName);
+		
+		for(int j =0; j< recordlist.size(); j++) {
+		
+		sessionList.get(i).sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
+		}
 		
 		//12. 방리스트를 모든 사람들에게 보내줌
 		String roomNames = roomName;
@@ -190,7 +189,7 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 			//자신한테만 보내도록 함
 			if(session.getId().equals(webSocketSession.getId())) {
 				
-				webSocketSession.sendMessage(new TextMessage(JsonRoom(roomNames)));
+				webSocketSession.sendMessage(new TextMessage(JsonRoom(userId)));
 			}
 		}
 		
@@ -201,37 +200,46 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 		System.out.println(message.getPayload());
 		
 		//3. 배열선언(split을 이용해서 문자열을 자른다)
-		String msgArr[] = new String[3];
+		String msgArr[] = new String[2];
 		msgArr = message.getPayload().split("!%/"); // %!로 문자를 잘라서 배열에저장
 		
 		//4. [0]: 유저가 보낸 메시지,  [1]:귓속말 대상자,  [2]:방의 이름
-		System.out.println("보낸메시지:"+msgArr[0]+", 귓속말대상자:"+msgArr[1]+", 방의이름:"+msgArr[2]);
-		
-		//5.귓속말이라면 해당아이디를 가진사람한테만 보내도록한다.
-		if(!msgArr[1].equals("")) {
-			Iterator<WebSocketSession> sessionIds = mapList.keySet().iterator(); //기존에 저장된 접속자명단을 가져옴
-	    	while(sessionIds.hasNext()) {
-	    		WebSocketSession sessionId = sessionIds.next();
-	    		String value = mapList.get(sessionId);
-	    		//while문을 돌면서 귓속말 대상자를 찾는다. 찾게되면 해당사람에게 귓속말로 문자를 보내도록한다.
-	    		if(value.equals(msgArr[1])) {
-	    			sessionId.sendMessage(new TextMessage(JsonWisper(userId, msgArr[0])));
-	    		}
-	    	}
-		}
+		System.out.println("보낸메시지:"+msgArr[0]+", 방의이름:"+msgArr[1]);
+//		
+//		//5.귓속말이라면 해당아이디를 가진사람한테만 보내도록한다.
+//		if(!msgArr[1].equals("")) {
+//			Iterator<WebSocketSession> sessionIds = mapList.keySet().iterator(); //기존에 저장된 접속자명단을 가져옴
+//	    	while(sessionIds.hasNext()) {
+//	    		WebSocketSession sessionId = sessionIds.next();
+//	    		String value = mapList.get(sessionId);
+//	    		//while문을 돌면서 귓속말 대상자를 찾는다. 찾게되면 해당사람에게 귓속말로 문자를 보내도록한다.
+//	    		if(value.equals(msgArr[1])) {
+//	    			sessionId.sendMessage(new TextMessage(JsonWisper(userId, msgArr[0])));
+//	    		}
+//	    	}
+//		}
+			Chat_recordVO chat_recordvo = new Chat_recordVO();
+			chat_recordvo.setMember_id(member_id);
+			chat_recordvo.setChat_message(msgArr[0]);
+			chat_recordvo.setChat_timestamp(null);
+			chat_recordvo.setChat_room(roomName);
+			
+		 	chat_recordService.insertchatRecord(chat_recordvo);
+		 	System.out.println(chat_recordvo.getMember_id());
+		 	System.out.println(chat_recordvo.getChat_message());
 		 	
 		//6.귓속말로 하지않았을경우 해당 유저와 같은 방에 있는 사람에게만 메세지를 날리도록한다.
-		else {
+//		else {
 			for (WebSocketSession webSocketSession : sessionList) {
 		   		
 				//같은방일때만 보냄
-				if(msgArr[2].equals(roomList.get(webSocketSession))) {
+				if(msgArr[1].equals(roomList.get(webSocketSession))) {
 					//만약 자신의 세션아이디와 다르다면 메세지를 아래와같이 전달(자기자신한테는 보낼필요가없기때문)
 	        		if(!session.getId().equals(webSocketSession.getId())) {
 	        			webSocketSession.sendMessage(new TextMessage(JsonData(userId, msgArr[0])));
 	        		}   
 				}  		
-			}
+		//	}
 			
 		}
 		
@@ -404,20 +412,17 @@ public String JsonRoom(String roomNames) {
 }
 
 
-//json형태로 귓속말
-public String JsonWisper(String fromId, Object msg) {
-	JsonObject jsonObject = Json.createObjectBuilder().add("message",
-	"<a href='#none' onclick=\"insertWisper('"+fromId+"')\">"+
-	"<i class='user icon'></i>"+
-	" <b style='color:green'>["+ // 아이디를 클릭하게되면 귓속말아이디 세팅
-	fromId+"]</b>님의 귓속말</a> : "+msg+"").build();
-	StringWriter write = new StringWriter();
-
-	try(JsonWriter jsonWriter = Json.createWriter(write)){
-		jsonWriter.write(jsonObject);
-	};
-	return write.toString();
-}
+	/*
+	 * //json형태로 귓속말 public String JsonWisper(String fromId, Object msg) {
+	 * JsonObject jsonObject = Json.createObjectBuilder().add("message",
+	 * "<a href='#none' onclick=\"insertWisper('"+fromId+"')\">"+
+	 * "<i class='user icon'></i>"+ " <b style='color:green'>["+ // 아이디를 클릭하게되면
+	 * 귓속말아이디 세팅 fromId+"]</b>님의 귓속말</a> : "+msg+"").build(); StringWriter write =
+	 * new StringWriter();
+	 * 
+	 * try(JsonWriter jsonWriter = Json.createWriter(write)){
+	 * jsonWriter.write(jsonObject); }; return write.toString(); }
+	 */
 
 
 

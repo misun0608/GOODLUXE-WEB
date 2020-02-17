@@ -359,10 +359,6 @@ public class GLPageController {
 		return "md_detail";
 	}
 	
-	
-	
-	
-	
 	// Order Part
 	// Move to Order Form
 	@RequestMapping(value = "orderForm.do")

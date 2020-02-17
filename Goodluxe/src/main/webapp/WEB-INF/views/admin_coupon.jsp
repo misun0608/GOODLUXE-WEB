@@ -16,7 +16,13 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
+</script>
+<script>
+	
+	
+
 </script>
 <script>
 	function newWin(){
@@ -46,14 +52,14 @@
 		var input = document.getElementsByTagName("input");
 		
 		if(chk_all.checked === true){
-			for(var i=0; i<input.length; i++){
+			for(var i=0; i<18; i++){//왜 그런진 모르겠으나 갯수가 18개일때 10개가 선택됨....
 				if(input[i].type == "checkbox" && input[i].id =="chk_one"&&input[i].checked==false){
 					input[i].checked=true;
 				}
 			}
 		}
 		if(chk_all.checked === false){
-			for(var i=0; i<input.length; i++){
+			for(var i=0; i<18; i++){
 				if(input[i].type == "checkbox" && input[i].id =="chk_one"&&input[i].checked==true){
 					input[i].checked=false;
 				}
@@ -64,6 +70,7 @@
 <script>
 
 $(document).ready(function() {
+	
 	
 	function date_format(format) {
 		var year = format.getFullYear();
@@ -97,14 +104,15 @@ $(document).ready(function() {
 		       	  var ex_date = new Date(item.coupon_expire);
 		                var date = date_format(ex_date);
 		       	  var output = '';
-		            output += '<tr><td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
-					output += '<td class="td3">'+item.coupon_number+'</td>';
-					output += '<td class="td3">'+item.coupon_type+'</td>';
-					output += '<td class="td3">'+ date +'</td>';
-					output += '<td class="td3">'+item.member_id+'</td></tr>';
+		            output += '<tr class="context_tr"><td class="check_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
+					output += '<td class="context_td">'+item.coupon_number+'</td>';
+					output += '<td class="context_td">'+item.coupon_type+'</td>';
+					output += '<td class="context_td">'+ date +'</td>';
+					output += '<td class="context_td">'+item.member_id+'</td></tr>';
 		            $('#output').append(output);//뒤에 이어붙이기
 		         });
-		         },
+		         page();
+				},
 		         error:function() {
 		            alert("리스트 ajax통신 실패!!!");
 		         }
@@ -129,14 +137,15 @@ $(document).ready(function() {
 		                     
 	 						//$('#output').empty();
 	 						var output = '';
-	 						output += '<tr><td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
-	 						output += '<td class="td3">'+item.coupon_number+'</td>';
-	 						output += '<td class="td3">'+item.coupon_type+'</td>';
-	 						output += '<td class="td3">'+ date +'</td>';
-	 						output += '<td class="td3">'+item.member_id+'</td></tr>';
+	 						output += '<tr><td class="check_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
+	 						output += '<td class="context_td">'+item.coupon_number+'</td>';
+	 						output += '<td class="context_td">'+item.coupon_type+'</td>';
+	 						output += '<td class="context_td">'+ date +'</td>';
+	 						output += '<td class="context_td">'+item.member_id+'</td></tr>';
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
 	 					});
+	 					page();
 	 				},
 	 				error:function(){
 	 					alert("리스트 ajax통신 실패!!!");
@@ -151,7 +160,7 @@ $(document).ready(function() {
 			$("input[name='delete_this']:checked").each(function(i){
 				delete_this.push($(this).val());
 			});
-			
+			  
 			var params = {"delete_this":delete_this};
 			
 	        jQuery.ajax({
@@ -159,10 +168,9 @@ $(document).ready(function() {
 	        		type:'POST',
 	        		data : params,
 	 				traditional:true,
-	 				dataType : "json",
 	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-	 				success: function(result){	
-							selectData();
+	 				success: function(){	
+						selectData();
 	 				},
 	 				error:function(){
 	 					alert("리스트 ajax통신 실패!!!");
@@ -171,7 +179,117 @@ $(document).ready(function() {
 	     	   //event.preventDefault();
 			});
 		
+		
+		
+		//페이징
+		function page(){ 
+			$('#output').each(function() {
+				var pagesu = 10;  //페이지 번호 갯수
+				var currentPage = 0;
+				var numPerPage = 10;  //목록의 수
+				var $table = $(this);   
+				var tr = $('#output_table tbody tr');
+				var pagination = $("#pagination");
+				   
+				//length로 원래 리스트의 전체길이구함
+				var numRows = tr.length-1;
+				console.log(numRows);
+				
+				//Math.ceil를 이용하여 반올림
+				var numPages = Math.ceil(numRows / numPerPage);
+				
+				//리스트가 없으면 종료
+				if (numPages==0) 
+					return;
+				//pager라는 클래스의 div엘리먼트 작성
+				var $pager = $('<div class="pager"></div>');
+				var nowp = currentPage;
+				var endp = nowp+10;
+				
+				//페이지를 클릭하면 다시 셋팅
+				$table.bind('repaginate', function() {
+					//기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+					// 테이블 하위 요소 중 tbody tr 요소 선택
+					$table.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+					$("#pagination").html("");
+					
+					if (numPages > 1) {     // 한페이지 이상이면
+					if (currentPage < 5 && numPages-currentPage >= 5) {   // 현재 5p 이하이면
+						nowp = 0;     // 1부터 
+						endp = pagesu;    // 10까지
+					}else{
+						nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+						endp = nowp+pagesu;   // 10까지
+						pi = 1;
+					}
+					if (numPages <= endp) {   // 10페이지가 안되면asdgasdfsfadfsdfadsfadfasdfasdaasdfs
+						endp = numPages;   // 마지막페이지를 갯수 만큼
+						nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+					}
+					if (nowp < 1) {     // 시작이 음수 or 0 이면
+						nowp = 0;     // 1페이지부터 시작
+					}
+					}else{       // 한페이지 이하이면
+						nowp = 0;      // 한번만 페이징 생성
+						endp = numPages;
+					}
+		
+					// [처음]
+					$('<span class="pageNum first" style="cursor: pointer">처음</span>').bind('click', {newPage: page},function(event) {
+						currentPage = 0;   
+						$table.trigger('repaginate');  
+						$($(".pageNum")[2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+					
+					// [이전]
+					$('<span class="pageNum back" style="cursor: pointer">&nbsp < &nbsp</span>').bind('click', {newPage: page},function(event) {
+						if(currentPage == 0) return;
+						currentPage = currentPage-1;
+						$table.trigger('repaginate');
+						$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+					
+					// [1,2,3,4,5,6,7,8]
+					for (var page = nowp ; page < endp; page++) {
+						$('<span class="pageNum" style = "cursor: pointer"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+							currentPage = event.data['newPage'];
+							$table.trigger('repaginate');
+							$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+							$("html, body").animate({ scrollTop : 0 }, 500);
+						}).appendTo(pagination).addClass('clickable');
+					} 
+					
+					// [다음]
+					$('<span class="pageNum next" style = "cursor: pointer">&nbsp > &nbsp</span>').bind('click', {newPage: page},function(event) {
+						if(currentPage == numPages-1) return;
+						currentPage = currentPage+1;
+						$table.trigger('repaginate'); 
+						$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+		
+					// [끝]
+					$('<span class="pageNum last" style = "cursor: pointer">끝</span>').bind('click', {newPage: page},function(event) {
+						currentPage = numPages-1;
+						$table.trigger('repaginate');
+						$($(".pageNum")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0}, 500);
+					}).appendTo(pagination).addClass('clickable');
+		
+					$($(".pageNum")[2]).addClass('active');
+				});
+				
+				$pager.insertAfter($table).find('span.pageNum:first').next().next().addClass('active');   
+				$pager.appendTo(pagination);
+				$table.trigger('repaginate');
+				
+			});
+		}	
+		
 		  selectData();
+		 
 });	
 </script>
 </head>
@@ -185,15 +303,15 @@ $(document).ready(function() {
         <section>
           <br><br>	
           
-          <h3>▶쿠폰 발급 </h3>
+          <h3>| 쿠폰 발급 </h3>
           <br>
           <form name = "issue_form" action = "./issueCoupon.do">
-	          <table class="impormation" border="1">
+	          <table class="information" border="1">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;<input type = text class="text3" id = "member_id" name = "member_id">
-	                <button type="button" class="btn22" onclick = "newWin();">아이디 검색</button>
+	                <input type = text class="id_search_input" id = "member_id" name = "member_id">
+	                <button type="button" class="id_search_btn" onclick = "newWin();">아이디 검색</button>
 	                <!-- "window.open('adminSearchId.do','아이디검색','resizable=no width=600 height=700')" -->
 	                <input type="checkbox" class="allselect" name = "allselect" value = "all_member"> 전원 지급
 	              </td>
@@ -216,23 +334,22 @@ $(document).ready(function() {
 	            </tr> -->
 	          </table>
 	          <div class="btn12" align="center">
-	            <button type="submit" class="btn1">발급</button>
+	            <button type="submit" class="bottom_btn one_btn">발급</button>
 	          </div>
           </form>
           
           <br>
           <br>
 
-          <h3>▶쿠폰 발급 검색 </h3>
+          <h3>| 쿠폰 발급 검색</h3>
           <br>
-          <form id = "issued_list_form" method = "post">
-	          <table class="impormation" border="1" >
+          <form id="issued_list_form" method="post">
+	          <table class="information">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;
-	                <input class="text3" name = "member_id2" id = "member_id2">
-	                <button type="button" class="btn22" onclick = "newWin2();">아이디 검색</button>
+	                <input type="text" class="id_search_input" name = "member_id" id = "member_id2">
+	                <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
 	              </td>
 	            </tr>
@@ -240,57 +357,65 @@ $(document).ready(function() {
 	              <td class="td1">쿠폰 종류</td>
 	              <td class="td2">
 	                <select class="search" name = "coupon_type">
-	                	<option name = "coupon_type" value="전체">전체</option>
-		                <option name = "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
-						<option name = "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
-						<option name = "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
+	                	<option name= "coupon_type" value="전체">전체</option>
+		                <option name= "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
+						<option name= "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
+						<option name= "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
 	                </select>
 	              </td>
 	            </tr>
 	            <tr>
 	              <td class="td1">쿠폰 상태</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;<input type="radio" name="coupon_status" value = "all" checked > 전체
-	                <input type="radio" name="coupon_status" value = "사용전"> 사용전
-	                <input type="radio" name="coupon_status" value = "사용후"> 사용후
+	                &nbsp;&nbsp;
+	                <input type="radio" id="coupon_status1" name="coupon_status" value ="all" checked>
+	               	<label for ="coupon_status1">전체</label>
+	                <input type="radio" id="coupon_status2" name="coupon_status" value = "사용전">
+					<label for ="coupon_status2">사용전</label>
+	                <input type="radio" id="coupon_status3" name="coupon_status" value = "사용후">
+	                <label for ="coupon_status3">사용후</label>
 	              </td>
 	            </tr>
 	          </table>
 	          <div class="btn12" align="center">
-	            <button type="button" class="btn1" id = "search_btn">검색</button>
+	            <button type="button" class="bottom_btn one_btn" id ="search_btn">검색</button>
 	          </div>
 	      </form>    
           <br>
           <br>
 	
 		<form name="delete_form" method = "post">
-          <h3>▶ 발급 쿠폰 목록 </h3>
-          <button type="button" class="btn3" id = "delete_btn">삭제</button>
-          <br>
-          <table border="1" >
-            <tr class="tr1">
-              <td class="td3"><input type="checkbox"id="chk_all" onclick = "checkAll();"></td>
-              <td class="td4">쿠폰 번호</td>
-              <td class="td4">쿠폰  종류</td>
-              <td class="td4">사용 기한</td>
-              <td class="td4">아이디</td>
+          <h3>| 발급 쿠폰 목록 </h3>
+          <br />
+          <button type="button" class="delete_btn" id ="delete_btn">선택삭제</button>
+          <br />
+          <br />
+          <table class="information" id = "output_table">
+            <tr class="tr_title">
+              <td class="check_td">
+              	<!-- <input type="checkbox"id="chk_all" class="check_td" onclick = "checkAll();"> -->
+              </td>
+              <td class="title_td">쿠폰 번호</td>
+              <td class="title_td">쿠폰  종류</td>
+              <td class="title_td">사용 기한</td>
+              <td class="title_td">아이디</td>
             </tr>
             <tbody id = "output">
             
             </tbody>
           </table>
          </form>
-
-          <br>
-          <p align="center">◁&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;▷</p>
+          <br/>
+         <center>
+          <div class="pagination" id="pagination">
+         </center> 
         </section>
       </div>
     </div>
   </div>
+  <br />
 
-  <footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
+  <footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

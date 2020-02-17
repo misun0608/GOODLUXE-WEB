@@ -17,6 +17,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 	<script>
@@ -110,8 +111,6 @@
 
 	<header id="hd"></header>
 
-
-
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
@@ -121,9 +120,9 @@
 				<form name="input_form" action="./consRegiAction.do" method="post" onsubmit = "return submitCheck()">
 
 					<br> <br>
-					<h3>▶ 기본 정보 입력</h3>
+					<h3>| 기본 정보 입력</h3>
 					<br>
-					<table class="impormation" border="1">
+					<table class="information">
 <!-- 					<tr>
 							<td class="td1">상품개체번호(개체고유번호)</td>
 							<td class="td2"><input type="text" name="entity_number"
@@ -132,14 +131,15 @@
 -->
 						<tr>
 							<td class="td1">상품명</td>
-							<td class="td2"><input type="text" name="pd_name"
-								class="text1"></td>
+							<td class="td2">
+								<input type="text" name="pd_name" class="text1">
+							</td>
 						</tr>
 						<tr>
 							<td class="td1">브랜드번호</td>
-							<td class="td2"><select name="pd_brand"
-								class="search">
-										<option value="none">브랜드 선택</option>
+							<td class="td2">
+								<select name="pd_brand" class="search">
+									<option value="none">브랜드 선택</option>
 									<option value="Armani">Armani</option>
 									<option value="Balenciaga">Balenciaga</option>
 									<option value="Bally">Bally</option>
@@ -158,7 +158,7 @@
 						<tr>
 							<td class="td1">카테고리 번호</td>
 							<td class="td2"><select name="pd_category" class="search">
-									<option value="none">카테고리선택</option>
+									<option value="none">카테고리 선택</option>
 									<option value="CLOTHES">CLOTHES</option>
 									<option value="JEWELRY">JEWELRY</option>
 									<option value="WATCH">WATCH</option>
@@ -205,10 +205,12 @@
 					-->
 						<tr>
 							<td class="td1">감정서 유무</td>
-							<td class="td2">&nbsp;&nbsp;&nbsp;<input type="radio"
-								name="appraise_exist" value="O">
-								&nbsp;유&nbsp;&nbsp;&nbsp; <input type="radio"
-								name="appraise_exist" value="X"> &nbsp;무&nbsp;
+							<td class="td2">
+								&nbsp;
+								<input type="radio" name="appraise_exist" id="appraise_exist1" value = "O" checked>
+								<label for="appraise_exist1">유</label>
+								<input type="radio" name="appraise_exist" id="appraise_exist2" value = "X">
+								<label for="appraise_exist2">무</label>
 							</td>
 						</tr>
 						<tr>
@@ -224,16 +226,15 @@
 					</table>
 					<br> <br>
 					<div align="center">
-						<input type="reset" class="btn3" name="reset" value = "취소"/>
-						<input type="submit" class="btn4" name = "submit" value = "등록"/>
+						<input type="reset" class="bottom_btn cancel_btn" name="reset" value = "취소"/>
+						<input type="submit" class="bottom_btn" name = "submit" value = "등록"/>
 						<br> <br> <br> <br>
 					</div>
 				</form>
 			</div>
 		</div>
+		</div>
 
-		<footer class="container-fluid">
-			<p>Footer Text</p>
-		</footer>
+		<footer id="admin_footer" class="container-fluid"> </footer>
 </body>
 </html>
