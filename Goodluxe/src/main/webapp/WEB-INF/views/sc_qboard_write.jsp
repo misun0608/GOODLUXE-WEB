@@ -98,7 +98,7 @@
                         </div>
                         <div class="container4">
                             <div style="text-align: center;">
-                                <button onClick="location.href='SC.do'; return false;" class="center_write_btn"
+                                <button onClick="location.href='scQBoard.do'; return false;" class="center_write_btn"
                                     style="background-color: white; border-color: darkgray ;">취소</button>
                                 <input type="button" class="center_write_btn"
                                     style="background-color: #8FB0CA; color: white;" value="등록" onClick="chk_wf();">
