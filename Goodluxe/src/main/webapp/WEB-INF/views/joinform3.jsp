@@ -178,7 +178,7 @@
 									<td class="alert alert-danger_pw" id="alert-danger_pw"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호가
 										일치하지 않습니다.</td>
-									<td class="alert alert-danger_pw1" id="alert-danger_pw"
+									<td class="alert alert-danger_pw1" id="alert-danger_pw1"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호는
 										10자 이상 입력해주세요.</td>
 								</tr>
@@ -227,13 +227,15 @@
 											<option value="empas.com">empas.com</option>
 											<option value="gmail.com">gmail.com</option>
 											<option value="etc">직접입력</option>
-									</select></td>
+									</select>
 									<input type="hidden" id="member_email" name="member_email"
 										value="">
 									<input type="hidden" id="member_phone" name="member_phone"
 										value=member_phone>
 									<input type="hidden" name="member_class" value="N">
 									<input type="hidden" name="member_isadmin" value="N">
+									</td>
+
 									<!-- 								<tr> -->
 									<!-- 									<td></td> -->
 									<!-- 									<td class="alert alert-success_email" id="alert-success_email" -->

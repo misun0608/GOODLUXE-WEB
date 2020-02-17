@@ -206,7 +206,7 @@
                 <li class="admin_page_link"><a href="admin_main.do">관리자페이지</a></li>
             </ul>
 			<%
-					} else if (mem_class.equals("Y") || mem_class.equals("B") || mem_id.equals(null)) {
+					} else if (mem_class.equals("Y") || mem_class.equals("B") || mem_id != null) {
 			%>
             <ul class="topmenu member_menu on">
                 <li class="cs"><a href="SC.do">고객센터</a></li>

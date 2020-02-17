@@ -30,6 +30,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goodluxe-footer.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> 
     <script>
+
 		$(document).ready(function(){
 			$("#header").load("header.do");
 			$("#nav_bar").load("navBar.do");
@@ -37,13 +38,53 @@
 			$("#footer").load("footer.do");
 		});
 		
-		function find_id(){
-			if ((find_id_name != null) && (find_id_email != null)){
-				
+		
+		function find_id_btn() {
+			if ((document.getElementById("find_id_name").value == "") || (document.getElementById("find_id_email").value == "")){
+				alert("이름과 이메일 주소를 모두 입력하세요");
+			} else {
+				document.getElementById('find_id_form').submit();
 			}
 		}
 		
+		function find_pw_btn() {
+			if ((document.getElementById("find_pw_id").value == "") || (document.getElementById("find_pw_name").value == "") || (document.getElementById("find_pw_email").value == "")){
+				alert("모든 정보를 입력하세요");
+			} else {
+				document.getElementById('find_pw_form').submit();
+			}
+		}
 		
+/* 		$('#find_id_btn').click(function(){
+			if ((find_id_name == null) || (find_id_email == null)){
+				alert("이름과 이메일 주소를 모두 입력하세요");
+			} else {
+				alert("됨");
+				
+			}
+		}); */
+// 		function find_pw(){
+// 			if ((find_pw_id == null) || (find_pw_email == null)){
+// 				alert("이름과 이메일 주소를 모두 입력하세요");
+// 				return;
+// 			} else {
+// 				alert("됨");
+// 				return;
+// 			}
+// 		};
+		
+// 		function frmchk(FormNum){
+
+// 			if (FormNum==1){
+// 			document.form1.action="./chk_ok.php"; //form1의 액션지정
+// 			document.form1.submit();//폼1을 서브밋
+// 			}
+
+// 			else{
+// 			document.form2.action="./chk2_ok.php";
+// 			document.form2.submit();
+// 			}
+// 		}
 	</script>
 </head>
 <body>
@@ -63,33 +104,34 @@
                 아이디/비밀번호 찾기
             </p>
         </div>
-	<form name="find_id_form" action="" method="post" onsubmit="return find_id();">
+	<form id="find_id_form" action="findMemberId.do" method="post">
     <table class="find_idpw_table">
         <tr>
             <td class="find_idpw_text1">아이디 찾기</td>
         </tr>
         <tr>
             <td>
-                <input type="text" placeholder="이름" id="find_id_name" class="find_idpw_textbox"><br>
-                <input type="text"  STYLE="ime-mode: disabled" placeholder="이메일 주소" id="find_id_email" class="find_idpw_textbox"><br>
+                <input type="text" placeholder="이름" name="member_name" id="find_id_name" class="find_idpw_textbox"><br>
+                <input type="text" name="member_email" STYLE="ime-mode: disabled" placeholder="이메일 주소" id="find_id_email" class="find_idpw_textbox"><br>
                 <p class="text2"> GOODLUXE 본인인증시 사용하였던 이메일 주소로 가입 시 등록했던 아이디를 보내드립니다.</p><br>
-                <input type="submit" class="find_idpw_button" value="이메일 주소로 아이디 전송">
+                <input type="button" onclick="find_id_btn();" class="find_idpw_button" value="이메일 주소로 아이디 전송">
             </td>
         </tr>
     </table>
     </form>
     <br>
-	<form name="find_pw_form" action="" method="post" onsubmit="return find_pw();">
+	<form id="find_pw_form" action="findMemberPw.do" method="post">
     <table class="find_idpw_table">
         <tr>
             <td class="find_idpw_text1">비밀번호 찾기</td>
         </tr>
         <tr>
             <td>
-                <input type="text"  STYLE="ime-mode: disabled" placeholder="아이디" id="find_pw_id" class="find_idpw_textbox"><br>
-                <input type="text"  STYLE="ime-mode: disabled" placeholder="이메일 주소" id="find_pw_email" class="find_idpw_textbox"><br>
+                <input type="text"  STYLE="ime-mode: disabled" placeholder="아이디" name="member_id" id="find_pw_id" class="find_idpw_textbox"><br>
+                <input type="text"  placeholder="이름" id="find_pw_name" name="member_name" class="find_idpw_textbox"><br>
+                <input type="text"  STYLE="ime-mode: disabled" name="member_email" placeholder="이메일 주소" id="find_pw_email" class="find_idpw_textbox"><br>
                 <p class="text2"> GOODLUXE 가입 시 등록하였던 이메일 입력시, 비밀번호 변경 URL이 전송됩니다.</p><br>
-                <input type="submit" class="find_idpw_button" value="비밀번호 변경 URL 전송">
+                <input type="button" onclick="find_pw_btn();" class="find_idpw_button" value="비밀번호 변경 URL 전송">
             </td>
         </tr>
     </table>

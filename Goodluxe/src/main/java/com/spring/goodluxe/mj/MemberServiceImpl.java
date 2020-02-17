@@ -288,7 +288,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
-	// 아이디 찾기 - 이름, 이메일 주소 비교
+	// 아이디 찾기
 	@Override
 	public String findMemberId(MemberVO memberVO) throws Exception {
 		String findId = null;
@@ -296,11 +296,19 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
 			findId = membermapper.findMemberId(memberVO);
-
-			System.out.println(findId);
-			System.out.println(memberVO.getMember_email());
-			System.out.println(memberVO.getMember_name());
-
+			System.out.println("2 MemberServiceImpl 아이디 찾기 :" + findId);
+			
+			if(findId != null) {
+				System.out.println(findId);
+				System.out.println(memberVO.getMember_email());
+				System.out.println(memberVO.getMember_name());
+				return findId;
+			} else {
+				System.out.println("아이디 없음");
+				System.out.println(findId);
+				System.out.println(memberVO.getMember_email());
+				System.out.println(memberVO.getMember_name());
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -325,21 +333,40 @@ public class MemberServiceImpl implements MemberService {
 //		return findPw;
 //	}
 	
-	// 이름, 이메일 주소 비교
+	// 아이디, 이름, 이메일 주소 비교
 	@Override
 	public int findMemberPw(MemberVO memberVO) throws Exception {
 		int res = 0;
 		String dbid = null;
 		try {
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
-			dbid = membermapper.findMemberId(memberVO);
+			dbid = membermapper.findMemberPw(memberVO);
+			System.out.println("2 MemberServiceImpl 비밀번호 찾기 :" + dbid);
 
 			if(dbid != null) {
-			System.out.println(dbid);
-			System.out.println(memberVO.getMember_email());
-			System.out.println(memberVO.getMember_name());
-			res = 1;
+//				System.out.println(dbid);
+//				System.out.println(memberVO.getMember_email());
+//				System.out.println(memberVO.getMember_name());
+				res = 1;
+			} else {
+//				System.out.println("아이디 없음");
+				res = -1;
 			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int updateMemberPw(MemberVO memberVO) throws Exception{
+		int res = 0;
+		try {
+			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+			System.out.println("1231");
+			res = membermapper.updateMemberPw(memberVO);
+			System.out.println("2 MemberServiceImpl 비밀번호 변경 :" + res);
+			return res;
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
