@@ -286,9 +286,16 @@ $("#wisper").click(function() {
 
 	<!-- 방 이름 / 방 만들기 / 방 나가기  -->
 	<table
-		style="width: 900px;">
+		style="width: 1000px;">
 
 		<tr>
+			
+
+			<td align="center" style="width: 400px; " >
+			<h2>검색을 하자	</h2>
+			</td>
+			
+			
 			<td align="center" style="width: 600px; background-color:#b8e1d4;">
 				<!-- 방이름 출력 -->
 				<h2 >
@@ -297,47 +304,30 @@ $("#wisper").click(function() {
 					<p>${room} 고객님</p>
 				</h2>
 			</td>
-
-			<td align="center" style="width: 300px; " >
-			</td>
 		</tr>
 	</table>
 	<!-- 채팅방 구현하기위한 테이블 -->
 	<table align="center"
-		style="height: 600px; width: 900px; margin: 0; padding: 0;"
+		style="height: 600px; width: 1000px; margin:0; padding: 0;"
 		class="ui blue table">
 		<!-- 왼쪽 채팅창 출력 -->
-		<col width="200px">
+		<col width="400px">
 		<!-- 귓속말 영역 -->
 		<col width="400px">
 		<!-- 메세지 입력 영역 -->
 		<!-- 오른쪽 리스트 출력영역 -->
-		<col width="300px">
+		<col width="200px">
 		<!-- 보내기 영역 -->
 
-		<tr height="600px; ">
-		
-		
-			<!-- 채팅내용 출력 -->
-			<td style="width: 550px; background-color:#b8e1d4;" colspan="2">
-
-				<div
-					style="width: 100%; height: 550px; overflow-y: scroll; overflow-x: inherit;"
-					class="ui message" id="output"></div>
-			</td>
-			<!-- 채팅방 목록 -->
-			<td style="width: 300px; ">
+		<tr height="600px">
+			
+			
+			
+			<td style="width: 400px; ">
 				<!-- 채팅 참여자 출력 -->
-				<div style="width: 100%; height: 400px; overflow-y: scroll;"
-					class="ui message" id="">
-					<table id="chatroomlist" border="1">
-
-			<tr>
-				<th>순서</th>
-				<th>번호</th>
-				<th>아이디</th>
-				<th>방이름</th>
-			</tr>
+				<div style="width: 100%; height: 100%; overflow-y: scroll;"
+					class="ui message" id="chatroomlist">
+					<table id=""  width="100%">
 
 
 			<!-- <form action="MoveChatRoom.do" method="post" id="moveChatForm"> -->
@@ -350,12 +340,10 @@ $("#wisper").click(function() {
 
 			<!-- 관리자 해당 회원 행 클릭 시 방 바꿔주자  -->
 			<tr>
-				<td><%=i + 1%></td>
-				<td><%=vo.getChat_num()%></td>
-				<td name="member_id"><%=vo.getMember_id()%>***</td>
-				<td name="roomName"><%=vo.getChat_room()%></td>
-				<td><a href="MoveChatRoom.do?roomName=<%=vo.getChat_room()%>"><button
-							type="button">들어가기</button></a></td>
+				<td name="member_id" width="75px"><%=vo.getMember_id()%><br><%=vo.getMember_id()%></td>
+				<td name="roomName"><%=vo.getChat_room()%><%=vo.getChat_room()%><%=vo.getChat_room()%></td>
+				<td align="right" width="75px"><a href="MoveChatRoom.do?roomName=<%=vo.getChat_room()%>"><button
+							type="button">들어가기</button></a><br><%=vo.getChat_room()%></td>
 			</tr>
 			<%
 				}
@@ -363,12 +351,26 @@ $("#wisper").click(function() {
 		</table>
 					</div>
 			</td>
+			
+			
+		
+			<!-- 채팅내용 출력 -->
+			<td style="width: 550px; background-color:#b8e1d4;" colspan="2">
+
+				<div
+					style="width: 100%; height: 550px; overflow-y: scroll; overflow-x: inherit;"
+					class="ui message" id="output"></div>
+			</td>
+			<!-- 채팅방 목록 -->
+			
 			</tr>
 		<!-- 입력 창 -->
 		<tr height="100px;">
-
+			
+			<td>
+			</td>
 			<!-- 보낼 메세지 입력 -->
-			<td colspan="2"><input type="text" id="textID" size="50"
+			<td ><input type="text" id="textID" size="50"
 				value="" style="width: 100%; height: 100%; font-weight: bold;"
 				class="ui message blue" name="chatInput" placeholder="내용 입력">
 			</td>
@@ -377,31 +379,69 @@ $("#wisper").click(function() {
 			<td><input type="button" value="보내기" id="buttonMessage"
 				style="width: 100%; height: 100%" class="ui primary button">
 			</td>
+			
 		</tr>
 	</table>
 
 	<div id="container">
-		<script type="text/javascript">
-	var chat_room = '${chat_room}';
+	<!-- 	<script type="text/javascript">
+	var chat_room = '${room}';
 	
   	$.ajax({//ajax 호출 JQuery.ajax== 
-		url:'/goodluxe/chatroomlist.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
+		url:'/goodluxe/chatroomlistcount.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
 		type:'GET',  //데이터 보낼 때 방식 사용
 		data: {
 			chat_room : chat_room
 		}, //서버로 보낼 데이터 타입
 		contentType: 'application/x-www-form-urlencoded;charset=utf-8',
 		dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
-		success : function(data){	
+		cache : false,
+		success : function(jsonData){	
 
-			var jsondata = JSON.stringify(data);
+			var jsondata = JSON.stringify(jsonData);
 			
+			chatroomlist
 			
-			$.each(data.chatlist, function(i,chatlist){
-				$("#output").append("<b style='color:blue'>["+chatlist[i].member_id+"]</b> : "+chatlist[i].chat_message+"<br>");
-			})
+			$("#chatroomlist").html(""); // div를 일단 공백으로 초기화해줌 , 왜냐면 버튼 여러번 눌리면 중첩되니깐
+
+			$("<table/>").css({
+
+				backgroundColor : "#E4F7BA",
+
+				border : "solid 3px #E4F7BA",
+
+			}).appendTo("#chatroomlist"); // 테이블을 생성하고 그 테이블을 div에 추가함
+
+			var key = Object.keys(data["chatmembervo"]); // id , pw , addr , tel 의 키값을 가져옴
+
+			$("<tr>" , {
+
+				html : "<td>" + "순번" + "</td>"+  // 컬럼명들
+						"<td>" + "번호 "+ "</td>"+
+						"<td>" + "아이디" + "</td>"+
+						"<td>" + "방이름" + "</td>"
+						
+
+			}).appendTo("table") // 이것을 테이블에붙임
+
+			$.each(data, function(index, jsonObject) { // 이치를 써서 모든 데이터들을 배열에 넣음
+
+				var items = [];
+				items.push("<td>" + index+1 + "</td>"); // 여기에 id pw addr tel의 값을 배열에 넣은뒤
+				items.push("<td>" + jsonObject.chat_num + "</td>");
+				items.push("<td>" + jsonObject.member_id + "</td>");
+				items.push("<td>" + jsonObject.chat_room + "</td>");
+
+				$("<tr/>", {
+
+					html : items // 티알에 붙임,
+
+				}).appendTo("table"); // 그리고 그 tr을 테이블에 붙임
+
+			});//each끝 
+		
 			
-			//alert(jsondata);
+			alert(jsondata);
 			},
 			  error: function (request, status, error){  
 			      var msg = "ERROR<br><br>"
@@ -412,7 +452,7 @@ $("#wisper").click(function() {
 	});
 	
 	</script>
-		
+		 -->
 		<!-- 	</form> -->
 
 
