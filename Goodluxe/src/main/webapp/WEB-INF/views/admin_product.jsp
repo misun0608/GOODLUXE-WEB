@@ -64,7 +64,7 @@ $(document).ready(function() {
 	function selectData() {
 		var division_chk = $(':radio[name="pb_division"]:checked').val();
 		var params = {"pb_division":division_chk};
-		
+		$('#outputth').empty();
 		$('#output').empty();
 			$.ajax({
 				url:'/goodluxe/adminAllProductList.do',
@@ -74,7 +74,8 @@ $(document).ready(function() {
 				contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
 				success:function(data) { 
 					if(division_chk=="purchase"){
-						var output = '<tr class="tr1">'
+						var output = "";
+						var outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
 							+'<td class="td4">상품번호</td>'
 							+'<td class="td4">상품이름</td>'
@@ -90,6 +91,7 @@ $(document).ready(function() {
 							+'<td class="td4">판매상태</td>'
 							+'<td class="td4">게시상태</td>'
 							+'</tr>';
+							//+'<tbody>';
 						$.each(data, function(index, item) {
 							var purc_date1 = new Date(item.purc_date);
 							var purc_date_shaped = date_format(purc_date1);
@@ -112,10 +114,13 @@ $(document).ready(function() {
 							output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 							output += '</tr>';
 						});
+						//output+='</tbody>';
 						console.log("output:" + output);
+						$('#outputth').append(outputth)
 						$('#output').append(output);//뒤에 이어붙이기
 					}else{
-						var output = '<tr class="tr1">'
+						var output = "";
+						var outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
 							+'<td class="td4">상품번호</td>'
 							+'<td class="td4">상품이름</td>'
@@ -131,6 +136,7 @@ $(document).ready(function() {
 							+'<td class="td4">판매상태</td>'
 							+'<td class="td4">게시상태</td>'
 							+'</tr>';
+							//+'<tbody>';
 						$.each(data, function(index, item) {
 							var start_date1 = new Date(item.start_date);
 							var start_date_shaped = date_format(start_date1);
@@ -156,6 +162,8 @@ $(document).ready(function() {
 							output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 							output += '</tr>';
 						});	
+						//output+='</tbody>';
+						$('#outputth').append(outputth);//뒤에 이어붙이기
 						console.log("output:" + output);
 						$('#output').append(output);//뒤에 이어붙이기
 					}
@@ -187,7 +195,8 @@ $(document).ready(function() {
 			contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 			success:function(data) { 
 				if(division_chk=="purchase"){
-					var output = '<tr class="tr1">'
+					var output = "";
+					var outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"  id = "chk_all"></td>'
 						+'<td class="td4">상품번호</td>'
 						+'<td class="td4">상품이름</td>'
@@ -203,6 +212,7 @@ $(document).ready(function() {
 						+'<td class="td4">판매상태</td>'
 						+'<td class="td4">게시상태</td>'
 						+'</tr>';
+					
 					$.each(data, function(index, item) {
 						var purc_date1 = new Date(item.purc_date);
 						var purc_date_shaped = date_format(purc_date1);
@@ -225,10 +235,12 @@ $(document).ready(function() {
 						output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 						output += '</tr>';
 					});
+					$('#outputth').append(outputth);//뒤에 이어붙이기
 					console.log("output:" + output);
 					$('#output').append(output);//뒤에 이어붙이기
 				}else{
-					var output = '<tr class="tr1">'
+					var output  = "";
+					var outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"name="delivermanagement" id = "chk_all"></td>'
 						+'<td class="td4">상품번호</td>'
 						+'<td class="td4">상품이름</td>'
@@ -244,6 +256,7 @@ $(document).ready(function() {
 						+'<td class="td4">판매상태</td>'
 						+'<td class="td4">게시상태</td>'
 						+'</tr>';
+						
 					$.each(data, function(index, item) {
 						var start_date1 = new Date(item.start_date);
 						var start_date_shaped = date_format(start_date1);
@@ -269,7 +282,9 @@ $(document).ready(function() {
 						output += '&nbsp;<button id="chg_post_stat_btn" value = "'+item.entity_number+'">상태변경</button></td>';
 						output += '</tr>';
 					});	
+					
 					console.log("output:" + output);
+					$('#outputth').append(outputth);//뒤에 이어붙이기
 					$('#output').append(output);//뒤에 이어붙이기
 				}
 				page();
@@ -368,13 +383,14 @@ $(document).ready(function() {
 		$('#output').each(function() {
 			var pagesu = 10;  //페이지 번호 갯수
 			var currentPage = 0;
-			var numPerPage = 11;  //목록의 수
+			var numPerPage = 10;  //목록의 수
 			var $table = $(this);   
-			var tr = $('#output_table tr');
+			var tr = $('#output_table tbody tr');
 			var pagination = $("#pagination");
+		
 			   
 			//length로 원래 리스트의 전체길이구함
-			var numRows = tr.length;
+			var numRows = tr.length-1;
 			console.log(numRows);
 			
 			//Math.ceil를 이용하여 반올림
@@ -553,8 +569,9 @@ $(document).ready(function() {
 						<br> <br>
 					</div>
 					<form id = "chk_form">
-						<table border="1" id="output">
-					
+						<table border="1" id ="output_table">
+							<thead id="outputth"></thead>
+							<tbody id="output"></tbody>
 						</table>
 					</form>
 					<br>

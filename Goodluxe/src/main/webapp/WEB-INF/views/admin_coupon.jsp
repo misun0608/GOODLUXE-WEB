@@ -111,7 +111,7 @@ $(document).ready(function() {
 					output += '<td class="context_td">'+item.member_id+'</td></tr>';
 		            $('#output').append(output);//뒤에 이어붙이기
 		         });
-		         //page();
+		         page();
 				},
 		         error:function() {
 		            alert("리스트 ajax통신 실패!!!");
@@ -145,7 +145,7 @@ $(document).ready(function() {
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
 	 					});
-	 					//page();
+	 					page();
 	 				},
 	 				error:function(){
 	 					alert("리스트 ajax통신 실패!!!");
@@ -192,7 +192,7 @@ $(document).ready(function() {
 				var pagination = $("#pagination");
 				   
 				//length로 원래 리스트의 전체길이구함
-				var numRows = tr.length;
+				var numRows = tr.length-1;
 				console.log(numRows);
 				
 				//Math.ceil를 이용하여 반올림
@@ -222,7 +222,7 @@ $(document).ready(function() {
 						endp = nowp+pagesu;   // 10까지
 						pi = 1;
 					}
-					if (numPages < endp) {   // 10페이지가 안되면
+					if (numPages <= endp) {   // 10페이지가 안되면asdgasdfsfadfsdfadsfadfasdfasdaasdfs
 						endp = numPages;   // 마지막페이지를 갯수 만큼
 						nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
 					}
@@ -393,7 +393,7 @@ $(document).ready(function() {
           <table class="information" id = "output_table">
             <tr class="tr_title">
               <td class="check_td">
-              	<input type="checkbox"id="chk_all" class="check_td" onclick = "checkAll();">
+              	<!-- <input type="checkbox"id="chk_all" class="check_td" onclick = "checkAll();"> -->
               </td>
               <td class="title_td">쿠폰 번호</td>
               <td class="title_td">쿠폰  종류</td>
