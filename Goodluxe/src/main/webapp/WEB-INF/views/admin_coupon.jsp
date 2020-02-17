@@ -104,11 +104,11 @@ $(document).ready(function() {
 		       	  var ex_date = new Date(item.coupon_expire);
 		                var date = date_format(ex_date);
 		       	  var output = '';
-		            output += '<tr class="context_tr"><td class="title_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
-					output += '<td class="title_td">'+item.coupon_number+'</td>';
-					output += '<td class="title_td">'+item.coupon_type+'</td>';
-					output += '<td class="title_td">'+ date +'</td>';
-					output += '<td class="title_td">'+item.member_id+'</td></tr>';
+		            output += '<tr class="context_tr"><td class="check_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
+					output += '<td class="context_td">'+item.coupon_number+'</td>';
+					output += '<td class="context_td">'+item.coupon_type+'</td>';
+					output += '<td class="context_td">'+ date +'</td>';
+					output += '<td class="context_td">'+item.member_id+'</td></tr>';
 		            $('#output').append(output);//뒤에 이어붙이기
 		         });
 		         page();
@@ -137,11 +137,11 @@ $(document).ready(function() {
 		                     
 	 						//$('#output').empty();
 	 						var output = '';
-	 						output += '<tr><td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
-	 						output += '<td class="td3">'+item.coupon_number+'</td>';
-	 						output += '<td class="td3">'+item.coupon_type+'</td>';
-	 						output += '<td class="td3">'+ date +'</td>';
-	 						output += '<td class="td3">'+item.member_id+'</td></tr>';
+	 						output += '<tr><td class="check_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
+	 						output += '<td class="context_td">'+item.coupon_number+'</td>';
+	 						output += '<td class="context_td">'+item.coupon_type+'</td>';
+	 						output += '<td class="context_td">'+ date +'</td>';
+	 						output += '<td class="context_td">'+item.member_id+'</td></tr>';
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
 	 					});
@@ -159,8 +159,6 @@ $(document).ready(function() {
 			var delete_this = [];
 			$("input[name='delete_this']:checked").each(function(i){
 				delete_this.push($(this).val());
-				numRows--;
-				alert(numRows);
 			});
 			  
 			var params = {"delete_this":delete_this};
@@ -305,14 +303,13 @@ $(document).ready(function() {
         <section>
           <br><br>	
           
-          <h3>▶쿠폰 발급 </h3>
+          <h3>| 쿠폰 발급 </h3>
           <br>
           <form name = "issue_form" action = "./issueCoupon.do">
 	          <table class="information" border="1">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;
 	                <input type = text class="id_search_input" id = "member_id" name = "member_id">
 	                <button type="button" class="id_search_btn" onclick = "newWin();">아이디 검색</button>
 	                <!-- "window.open('adminSearchId.do','아이디검색','resizable=no width=600 height=700')" -->
@@ -344,14 +341,13 @@ $(document).ready(function() {
           <br>
           <br>
 
-          <h3>▶쿠폰 발급 검색</h3>
+          <h3>| 쿠폰 발급 검색</h3>
           <br>
           <form id="issued_list_form" method="post">
 	          <table class="information">
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;
 	                <input type="text" class="id_search_input" name = "member_id" id = "member_id2">
 	                <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
@@ -389,7 +385,7 @@ $(document).ready(function() {
           <br>
 	
 		<form name="delete_form" method = "post">
-          <h3>▶ 발급 쿠폰 목록 </h3>
+          <h3>| 발급 쿠폰 목록 </h3>
           <br />
           <button type="button" class="delete_btn" id ="delete_btn">삭제</button>
           <br />
@@ -397,7 +393,8 @@ $(document).ready(function() {
           <table class="information" id = "output_table">
             <tr class="tr_title">
               <td class="check_td">
-              <input type="checkbox"id="chk_all" onclick = "checkAll();"></td>
+              	<input type="checkbox"id="chk_all" class="check_td" onclick = "checkAll();">
+              </td>
               <td class="title_td">쿠폰 번호</td>
               <td class="title_td">쿠폰  종류</td>
               <td class="title_td">사용 기한</td>
@@ -416,6 +413,7 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
+  <br />
 
   <footer id="admin_footer" class="container-fluid"></footer>
 
