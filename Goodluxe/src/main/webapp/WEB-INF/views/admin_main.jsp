@@ -852,20 +852,20 @@
 					<div class="local_desc02 local_desc">월간 데이터</div>
 						<div class="grapharea2">
 							<span>
-								<canvas id="myChart2" width="550" height="500"  style="display: flex;float: left;"></canvas>
+								<canvas id="myChart2" width="450" height="400"  style="display: flex;float: left;"></canvas>
 							</span>
 							<span>
-								<canvas id="myChart3" width="550" height="500"></canvas>
+								<canvas id="myChart3" width="450" height="400"></canvas>
 							</span>
 							
 							<br />
 							<br />
 							
 							<span>
-								<canvas id="myChart4" width="550" height="500" style="display: flex;float: left;"></canvas>
+								<canvas id="myChart4" width="450" height="400" style="display: flex;float: left;"></canvas>
 							</span>
 							<span>
-								<canvas id="myChart5" width="550" height="500"></canvas>
+								<canvas id="myChart5" width="450" height="400"></canvas>
 							</span>
 						</div>
 					</section>
