@@ -27,7 +27,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.addRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("�� ��� �߰� ���� +"+e.getMessage());
+			System.out.println("占쏙옙 占쏙옙占� 占쌩곤옙 占쏙옙占쏙옙 +"+e.getMessage());
 		}return res;
 		// TODO Auto-generated method stub
 	}
@@ -40,7 +40,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			vo = chatmemberMapper.getRoomMember(chatmembervo);
 			
 		}catch(Exception e) {
-			System.out.println("�¸�� �������� ����+"+e.getMessage());
+			System.out.println("占승몌옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙+"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return vo;
@@ -53,7 +53,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			roomlist = (ArrayList<ChatMemberVO>) chatmemberMapper.sameRoomList(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("���� �� ����Ʈ �̾ƿ��� ����+"+e.getMessage());
+			System.out.println("占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙트 占싱아울옙占쏙옙 占쏙옙占쏙옙+"+e.getMessage());
 		}
 		// TODO Auto-generated method stub
 		return roomlist;
@@ -66,7 +66,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.updateRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("�� ��� ������Ʈ ���� +"+e.getMessage());
+			System.out.println("占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙트 占쏙옙占쏙옙 +"+e.getMessage());
 		}
 		return res;
 		// TODO Auto-generated method stub
@@ -80,7 +80,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.deleteRoomMember(chatmembervo);
 		}catch(Exception e) {
-			System.out.println("�� ��� ���� ���� +"+e.getMessage());
+			System.out.println("占쏙옙 占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙 +"+e.getMessage());
 		}return res;
 		// TODO Auto-generated method stub
 
@@ -97,7 +97,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 				chatlist=null;
 			}
 		}catch(Exception e) {
-			System.out.println("����Ʈ �̱� ����+"+e.getMessage());
+			System.out.println("占쏙옙占쏙옙트 占싱깍옙 占쏙옙占쏙옙+"+e.getMessage());
 		}
 		return chatlist;
 		
@@ -110,7 +110,7 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 			res = chatmemberMapper.countRoomMember(member_id); 
 		}catch(Exception e) {
-			System.out.println("count ����+"+e.getMessage());
+			System.out.println("count 占쏙옙占쏙옙+"+e.getMessage());
 		}
 		return res;
 	}
@@ -119,7 +119,6 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 	public List<ChatMemberVO> selectChatroomList(String member_id)throws Exception{
 		ArrayList<ChatMemberVO> chatlist = new ArrayList<ChatMemberVO>();
 		try {
-<<<<<<< HEAD
 		ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
 		chatlist = (ArrayList<ChatMemberVO>) chatmemberMapper.selectChatroomList(member_id);
 		if(chatlist.equals(null)) {
@@ -127,22 +126,8 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 			chatlist=null;
 		}
 	}catch(Exception e) {
-		System.out.println("����Ʈ �̱� ����+"+e.getMessage());
+		System.out.println("리스트 뽑기 실패+"+e.getMessage());
 	}
 	return chatlist;
 	}
-
-=======
-			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
-			chatlist = (ArrayList<ChatMemberVO>) chatmemberMapper.selectChatroomList(member_id);
-			if(chatlist.equals(null)) {
-				System.out.println("chatlist=null");
-				chatlist=null;
-			}
-		}catch(Exception e) {
-			System.out.println("����Ʈ �̱� ����+"+e.getMessage());
-		}
-		return chatlist;
-	}
->>>>>>> origin/master
 }

@@ -1,34 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page session="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.sql.*"%>
 <%@page import="javax.naming.*"%>
 <%@page import="java.util.*"%>
+<%@page import="com.spring.goodluxe.voes.ChatMemberVO"%>
+
+
 <%
-	request.setCharacterEncoding("UTF-8");
-	if (session.getAttribute("member_id")==null) {
-		out.println("<script>");
-		out.println("location.href='loginForm.do'");
-		out.println("</script>");
-	}
-	String member_id = (String)session.getAttribute("member_id");
-	String member_name = (String)session.getAttribute("member_name");
-	String member_isadmin = (String)session.getAttribute("member_isadmin");
-	String user = request.getParameter("member_id");
-	long sessionstarttime = session.getCreationTime();
-	long sessionendtime = session.getLastAccessedTime();
-	long time = (sessionendtime - sessionstarttime) / 1000; 
-	if (time < 0) 
-		time = 0;
 
-	
-	if(member_isadmin.equals("Y")){
+request.setCharacterEncoding("UTF-8");
+if (session.getAttribute("member_id") == null) {
+	out.println("<script>");
+	out.println("location.href='loginForm.do'");
+	out.println("</script>");
+}
+String member_id = (String) session.getAttribute("member_id");
+String member_name = (String) session.getAttribute("member_name");
+String member_isadmin = (String) session.getAttribute("member_isadmin");
+String user = request.getParameter("member_id");
+
+
+ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) request.getAttribute("chatlist");
+ChatMemberVO chatmembervo = new ChatMemberVO();
+
+long sessionstarttime = session.getCreationTime();
+long sessionendtime = session.getLastAccessedTime();
+long time = (sessionendtime - sessionstarttime) / 1000;
+if (time < 0)
+	time = 0;
+
+if (member_isadmin.equals("Y")) {
 	session.setMaxInactiveInterval(-1);
-	
 
-	}
+}
+
 
 	
 %>

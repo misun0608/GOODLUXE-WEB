@@ -7,7 +7,7 @@
 
 <mapper namespace="com.spring.mapper.ChatMemberMapper">
 
-<resultMap type="com.spring.goodluxe.jj.ChatMemberVO" id="resultChatMemberVO">
+<resultMap type="com.spring.goodluxe.voes.ChatMemberVO" id="resultChatMemberVO">
 		<result property="chat_num" column="chat_num" />
 		<result property="member_id" column="member_id" />
 		<result property="chat_room" column="chat_room" />
@@ -15,7 +15,7 @@
 	
 	
 	<!-- 현재 어떤 방에 들어가있는지 데이터추가하기 -->
-	<insert id="addRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
+	<insert id="addRoomMember" parameterType="com.spring.goodluxe.voes.ChatMemberVO">
 	<selectKey order="BEFORE" keyProperty="chat_num" resultType="int">
        SELECT NVL(MAX(TO_NUMBER(chat_num)),0)+1 
        FROM gl_chatmember
@@ -24,7 +24,7 @@
 	</insert>
 	
 	<!-- 현재 아이디가 어떤방에 들어가있는지 확인 -->
-	<select id="getRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+	<select id="getRoomMember" parameterType="com.spring.goodluxe.voes.ChatMemberVO" resultType="com.spring.goodluxe.voes.ChatMemberVO">
 	SELECT member_id,chat_room
 	FROM gl_chatmember
 	WHERE member_id = #{member_id}
@@ -37,7 +37,7 @@
 	</select>
 	
 	<!-- 같은 방에 존재하는 사람정보 모두가져오기 -->
-	<select id="sameRoomList" parameterType="com.spring.goodluxe.jj.ChatMemberVO" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+	<select id="sameRoomList" parameterType="com.spring.goodluxe.voes.ChatMemberVO" resultType="com.spring.goodluxe.voes.ChatMemberVO">
 	SELECT member_id, chat_room
 	FROM gl_chatmember
 	WHERE chat_room=#{chat_room}
@@ -46,13 +46,13 @@
 	
 	
 	<!-- 방정보 제거-->
-	<delete id="deleteRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
+	<delete id="deleteRoomMember" parameterType="com.spring.goodluxe.voes.ChatMemberVO">
 	DELETE FROM gl_chatmember
 	WHERE member_id=#{member_id	}
 	</delete>
 	
 	<!-- 방변경 -->
-	<update id="updateRoomMember" parameterType="com.spring.goodluxe.jj.ChatMemberVO">
+	<update id="updateRoomMember" parameterType="com.spring.goodluxe.voes.ChatMemberVO">
 	<if test="chat_room !=null and chat_room !=''">
 	UPDATE gl_chatmember SET chat_room = #{chat_room} 
 	WHERE member_id= #{member_id}
@@ -60,13 +60,13 @@
 	</update>
 	
 	<!-- 관리자가 볼 리스트 -->
-	<select id="selectChatList" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+	<select id="selectChatList" resultType="com.spring.goodluxe.voes.ChatMemberVO">
 		select *
 		from gl_chatmember
 	</select>
 	
 	<!-- 룸네임을 구하기위한  -->
-	<select id="selectChatroomList" parameterType="String" resultType="com.spring.goodluxe.jj.ChatMemberVO">
+	<select id="selectChatroomList" parameterType="String" resultType="com.spring.goodluxe.voes.ChatMemberVO">
 		select *
 		from gl_chatmember
 		where member_id = #{member_id}
