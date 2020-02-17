@@ -10,7 +10,7 @@ import com.spring.goodluxe.voes.InquireVO;
 
 public interface HelpMapper {
 	public int inquireInsert(InquireVO inVO);
-	public ArrayList<InquireVO> loadQBList();
+	public ArrayList<InquireVO> loadQBList(@Param("startRow")int startRow, @Param("endRow")int endRow);
 	public InquireVO loadQPost(int inquire_number);
 	public int countComment();
 	public int maxCommentNumber();
@@ -24,4 +24,5 @@ public interface HelpMapper {
 	public void updateRefStep(@Param("ref")int ref, @Param("ref_step")int ref_step);
 	public int updateComment(InquireCommentVO commVO);
 	public int deleteComment(int comment_nubmer);
+	public int getQBoardCount();
 }

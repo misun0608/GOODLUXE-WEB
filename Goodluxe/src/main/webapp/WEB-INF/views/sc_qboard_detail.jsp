@@ -281,7 +281,7 @@
 		                    <tr>
 		                        <!-- 작성자가 당사자일 경우, 목록/수정/삭제 버튼 모두 보임. 당사자가 아닐 경우 목록만 보임. admin일 경우 목록/삭제 보임(삭제도 보여도 되나?)-->
 		                        <td style="text-align: left;">
-		                        	<input type="button" class="center_detail_btn" onClick="location.href='SC.do';" style="background-color: white;" value="목록">
+		                        	<input type="button" class="center_detail_btn" onClick="location.href='scQBoard.do';" style="background-color: white;" value="목록">
 		                        </td>
 		                        <td style="text-align: right;">
 		                        <% if( member_id != null && member_id.equals(qPost.getMember_id()) ) { %>

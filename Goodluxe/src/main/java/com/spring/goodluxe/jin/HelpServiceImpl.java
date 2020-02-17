@@ -31,11 +31,11 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public ArrayList<InquireVO> loadQBList() throws Exception {
+	public ArrayList<InquireVO> loadQBList(int startRow, int endRow) throws Exception {
 		ArrayList<InquireVO> qbList = null;
 		try {
 			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
-			qbList = helpMapper.loadQBList();
+			qbList = helpMapper.loadQBList(startRow, endRow);
 		} catch(Exception e) {
 			System.out.println("ERROR(HelpService/loadQBList) : " + e.getMessage());
 			throw new Exception("ERROR(HelpService/loadQBList)", e);
@@ -164,6 +164,21 @@ public class HelpServiceImpl implements HelpService {
 			throw new Exception("ERROR(HelpSerivce/deleteComment)", e);
 		}
 		return res;
+	}
+
+	// Pagination
+	@Override
+	public int getQBoardCount(int startRow, int endRow) throws Exception {
+		int count = 0;
+		
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			count = helpMapper.getQBoardCount();
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpSerivce/getQBoardCount) : " + e.getMessage());
+			throw new Exception("ERROR(HelpSerivce/getQBoardCount)", e);
+		}
+		return count;
 	}
 
 

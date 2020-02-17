@@ -23,7 +23,6 @@ maxvalue 10000000;
 		<result property="member_id" column="member_id" />
 		<result property="inquire_title" column="inquire_title" />
 		<result property="inquire_content" column="inquire_content" />
-		<result property="inquire_date" column="inquire_date" />
 		<result property="inquire_comment" column="inquire_comment" />
 		<result property="inquire_public" column="inquire_public" />
 	</resultMap>
@@ -44,10 +43,11 @@ maxvalue 10000000;
 		values(gl_inquire_seq.NEXTVAL, #{member_id}, #{inquire_title}, #{inquire_content}, systimestamp, 0, #{inquire_public})
 	</insert>
 	
-	<select id="loadQBList" resultMap="inquireRM">
+	<select id="loadQBList" parameterType="int" resultMap="inquireRM">
 		select *
-		from gl_inquire
-		order by inquire_number desc
+		from ( select rownum rnum, inquire_number, member_id, inquire_title, inquire_content, inquire_date, inquire_public
+			from ( select * from gl_inquire order by inquire_number desc ) )
+		where rnum >= #{startRow} and rnum <![CDATA[ <= ]]> #{endRow}
 	</select>
 	
 	<select id="loadQPost" parameterType="int" resultMap="inquireRM">
@@ -117,5 +117,9 @@ maxvalue 10000000;
 		delete from gl_inquire_comment
 		where comment_number = #{comment_number}
 	</delete>
+	
+	<select id="getQBoardCount" resultType="int">
+		select count(*) from gl_inquire
+	</select>
 
 </mapper>
