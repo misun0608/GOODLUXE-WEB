@@ -19,6 +19,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 
@@ -244,11 +245,11 @@
 
 					<br> <br>
 					<form id = "search_detail_form">
-						<table class="impormation" border="1">
+						<table class="information">
 						
 							<tr>
 								<td class="td1">주문상태로 검색</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp;
+								<td class="td2">&nbsp;&nbsp;
 									<input type="radio" name="orderstatus" value = "all"  checked> 전체 &nbsp;
 									<input type="radio" name="orderstatus" value = "환불신청"> 환불 신청 &nbsp;
 									<input type="radio" name="orderstatus" value = "반품확인"> 반품 확인(처리중) &nbsp;
@@ -296,9 +297,7 @@
 	</div>
 
 
-	<footer class="container-fluid">
-		<p>Footer Text</p>
-	</footer>
+	<footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

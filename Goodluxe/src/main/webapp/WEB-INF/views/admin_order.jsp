@@ -20,6 +20,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 <script>
@@ -327,10 +328,7 @@
 <body>
 
 	<header id="hd"></header>
-
 	
-
-
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
@@ -340,19 +338,19 @@
 				<section>
 					<br><br>
 					<form id = "search_filter_form">
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">주문번호</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp;<input type="text"
+								<td class="td2">&nbsp;&nbsp;<input type="text"
 									class="text3" name="order_number"id = "order_number_txt"></td>
 							</tr>
 						</table>
 						<br/>
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">기간</td>
 								<td class="td2">
-									<select class="search"name = "period" id = "period" onchange= "dateSelect();">
+									<select class="search" name = "period" id = "period" onchange= "dateSelect();">
 										<option name = "period" value="none">선택안함</option>
 										<option name = "period" value="write">직접입력</option>
 										<option name = "period" value="today">오늘</option>
@@ -368,7 +366,7 @@
 							</tr>
 							<tr>
 								<td class="td1">주문상태</td>
-								<td class="td2">&nbsp;&nbsp; &nbsp;
+								<td class="td2">&nbsp;&nbsp;
 									<input type="checkbox"name="check_order_status" value = "입금전" id = "is_checked3" checked> 입금대기 &nbsp;
 									<input type="checkbox"name="check_order_status" value = "배송준비중" id = "is_checked4" checked> 배송 준비중 &nbsp;
 									<input type="checkbox"name="check_order_status" value = "배송중" id = "is_checked5" checked> 배송중 &nbsp;
@@ -378,7 +376,7 @@
 							
 							<tr>
 								<td class="td1">입금 / 결제상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
+								<td class="td2">&nbsp;&nbsp;
 									<input type="radio"name="is_payed" id = "is_checked2" value = "all" checked> 전체 &nbsp;
 									<input type="radio"name="is_payed" value = "beforeP"> 입금 전 &nbsp;
 									<input type="radio"name="is_payed" value = "afterP" > 결제 완료
@@ -387,7 +385,7 @@
 	
 						</table>
 						<br/>
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">cs 주문상태</td>
 								<td class="td2">&nbsp;&nbsp;&nbsp; 
@@ -446,9 +444,7 @@
 	
 	
 
-	<footer class="container-fluid">
-		<p>Footer Text</p>
-	</footer>
+	<footer id="admin_footer" class="container-fluid"></footer>
 </body>
 
 </html>

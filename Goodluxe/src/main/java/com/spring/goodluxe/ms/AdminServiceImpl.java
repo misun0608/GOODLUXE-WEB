@@ -218,6 +218,120 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 	
+	// 카테고리별 TOP3 주문수
+	@Override
+	public ArrayList<HashMap<String,Object>> getCateCntData() throws Exception{
+		ArrayList<HashMap<String,Object>> cnt_list = null;
+		
+//		// 카테고리별
+//		int clothes = 0;
+//		int jewelry = 0;
+//		int watch = 0;
+//		int bag = 0;
+//		int wallet = 0;
+//		int glasses = 0;
+//		int shoes = 0;
+		
+		try {
+			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
+			cnt_list = adminpointMapper.getCateCnt();
+			
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getCateCntData) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getCateCntData)");
+		}
+		return cnt_list;
+	}
+	
+	// 브랜드별 TOP5 주문수
+	@Override
+	public ArrayList<HashMap<String,Object>> getBrandCntData() throws Exception{
+		ArrayList<HashMap<String,Object>> cnt_list = null;
+		
+//		// 브랜드별
+//		int Armani = 0;
+//		int Balenciaga = 0;
+//		int Bally = 0;
+//		int Balmain = 0;
+//		int Berluti = 0;
+//		int BOUCHERON = 0;
+//		int Breguet = 0;
+//		int BREITLING = 0;
+//		int Burberrys = 0;
+//		int Bvlgari = 0;
+//		int Cartier = 0;
+//		int Celine = 0;
+//		int Chanel = 0;
+		
+		try {
+			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
+			cnt_list = adminpointMapper.getBrandCnt();
+			
+			// 브랜드별 cnt를 구해서 각각 변수에 넣어줌
+			
+			// 그리고 순위 구함(순위가 같으면 어떻하지?)
+			
+			// hashmap 처음 키값은 TOP1, TOP2, TOP3, 기타
+			
+			// hashmap 두번째 키값은 카테고리이름 / Object엔 cnt값
+			
+			// if문 만들어서 배열 숫자에 따라 두번째 HashMap 카테고리 이름 키값 넣어주고 오더개수 넣어주고
+			
+			
+//			//	TOP3 순위 구하기
+//			// 점수가 들어있는 배열 생성
+//	        int score[] = new int[] {Armani, Balenciaga, Bally, Balmain, Berluti, BOUCHERON, Breguet, BREITLING, Burberrys, Bvlgari, Cartier, Celine, Chanel};
+//	        // 등수를 측정하기 위해 rank를 1로 선언
+//	        int i=0, j=0, rank=1;
+//	        // 배열의 인덱스별 크기 비교
+//	        for(i=0; i<score.length; i++) {
+//	            for(j=0; j<score.length; j++) {
+//	                if(score[i]<score[j]) {
+//	                    // 배열의 인덱스별로 자신보다 큰 인덱스의 개수를 카운트
+//	                    rank++;
+//	                }
+//	            }
+//	            System.out.println(score[i] + "점 : " + rank + "등");
+//	            rank=1;
+//	        }
+			
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getBrandCntData) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getBrandCntData)");
+		}
+		return cnt_list;
+	}
+	
+	// 카테고리 매출액
+	@Override
+	public ArrayList<HashMap<String,Object>> getCateSalesData() throws Exception{
+		ArrayList<HashMap<String,Object>> sales_list = null;
+		try {
+			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
+			sales_list = adminpointMapper.getCateSales();
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getCateSalesData) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getCateSalesData)");
+		}
+		return sales_list;
+	}
+	
+	// 브랜드 매출액
+	@Override
+	public ArrayList<HashMap<String,Object>> getBrandSalesData() throws Exception{
+		ArrayList<HashMap<String,Object>> sales_list = null;
+		try {
+			AdminPointMapper adminpointMapper = sqlSession.getMapper(AdminPointMapper.class);
+			sales_list = adminpointMapper.getBrandSales();
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getBrandSalesData) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getBrandSalesData)");
+		}
+		return sales_list;
+	}
+	
 	@Override
 	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception{
 		ArrayList<HashMap<String,Object>> data_list = null;
@@ -243,4 +357,6 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return refund_list;
 	}
+	
+	
 }
