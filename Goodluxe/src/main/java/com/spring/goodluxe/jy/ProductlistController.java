@@ -338,6 +338,7 @@ public class ProductlistController {
 			allSel = "none";
 			if (couponVO.getMember_id().equals("")) {
 				out.print("<script>alert('전체선택과 이름중 하나는 기입해야합니다');</script>");
+				System.out.println("전체선택과 이름중 하나는 기입해야합니다.");
 				// out.print안먹음.....더이상 보고싶지 않아서 광속PASS
 				return "redirect:adminCoupon.do";
 			}
@@ -393,5 +394,16 @@ public class ProductlistController {
 
 		return "admin_return";
 	}
-
+	@RequestMapping(value = "preChgReadStatus.do")
+	public String preChgReadStatus(@RequestParam(value = "entity_number", required = false)String entity_number,
+			@RequestParam(value = "alarm_read", required = false)String alarm_read,
+			@RequestParam(value = "alarm_number", required = false)String alarm_number) throws Exception {
+			System.out.println("alarm_read = " + alarm_read);
+			System.out.println("어디보자!!!왜 안바뀌나~~~");
+		
+		if(alarm_read.equals("N")) {
+			gls.preChgReadStatus(alarm_number);
+		}
+		return "redirect:mdDetail.do?entity_number="+entity_number;
+	}
 }

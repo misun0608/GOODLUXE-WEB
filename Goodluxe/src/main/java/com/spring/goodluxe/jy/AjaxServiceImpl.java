@@ -125,7 +125,7 @@ try {
 				map.put("coupon_number", deletethis[i]);
 				ajaxMapper.deleteCouponList(map);
 			}
-			
+			System.out.println("삭제됬고");
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/deleteCouponList) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/deleteCouponList)");

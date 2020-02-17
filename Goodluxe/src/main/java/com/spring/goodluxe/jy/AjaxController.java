@@ -83,10 +83,12 @@ public class AjaxController {
 		
 	}
 	@RequestMapping(value="/deleteCouponList.do", produces= "application/json;charset=UTF-8")
-	public String deleteCouponList(HttpServletRequest request,
+	public void deleteCouponList(HttpServletRequest request,
 			@RequestParam(value="delete_this")String[] deletethis) throws Exception {
+		
+		String result = "성공";		
 		gls.deleteCouponList(deletethis);
-		return null;
+		
 	}
 	
 	//회원리스트
