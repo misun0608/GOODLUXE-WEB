@@ -11,6 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
+
 </head>
 <body>
 	<%
@@ -22,6 +26,7 @@
 			<%
 		}else{
 	%>
+	<div class="tbl_head01 tbl_wrap">
 	<table border = "1">
 		<tr>
 			<th> 아이디 </th><th> 이 름 </th><th>가입일</th><th>등급</th>
@@ -38,6 +43,7 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 	<%
 		}
 	%>

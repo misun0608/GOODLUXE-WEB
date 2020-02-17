@@ -284,8 +284,9 @@ $(document).ready(function(){
                         <tr>
                             <td class="td1">아이디</td>
                             <td class="td2">
-                                &nbsp;&nbsp;<input id="member_id" name="member_id" class="text3" onkeyup="enterkey();">
-                                <button type="button" id="idsearchbtn" class="btn22">아이디 검색</button>
+                                &nbsp;&nbsp;
+                                <input type="text" id="member_id" name="member_id" class="id_search_input" onkeyup="enterkey();">
+                                <button type="button" id="idsearchbtn" class="id_search_btn">검색</button>
                             </td>
                         </tr>
 

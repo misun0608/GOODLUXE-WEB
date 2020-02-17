@@ -839,6 +839,7 @@
 							<td><%=format_tot_real_sales%></td>
 						</tr>
 					</table>
+					</div>
 					</section>
 					<!-- 주간 끝 -->
 					

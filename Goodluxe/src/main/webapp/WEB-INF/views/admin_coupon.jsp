@@ -98,11 +98,11 @@ $(document).ready(function() {
 		       	  var ex_date = new Date(item.coupon_expire);
 		                var date = date_format(ex_date);
 		       	  var output = '';
-		            output += '<tr><td class="td3"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
-					output += '<td class="td3">'+item.coupon_number+'</td>';
-					output += '<td class="td3">'+item.coupon_type+'</td>';
-					output += '<td class="td3">'+ date +'</td>';
-					output += '<td class="td3">'+item.member_id+'</td></tr>';
+		            output += '<tr class="context_tr"><td class="title_td"><input type="checkbox" name="delete_this" id = "chk_one" value = "'+item.coupon_number+'"></td>';
+					output += '<td class="title_td">'+item.coupon_number+'</td>';
+					output += '<td class="title_td">'+item.coupon_type+'</td>';
+					output += '<td class="title_td">'+ date +'</td>';
+					output += '<td class="title_td">'+item.member_id+'</td></tr>';
 		            $('#output').append(output);//뒤에 이어붙이기
 		         });
 		         },
@@ -193,7 +193,8 @@ $(document).ready(function() {
 	            <tr>
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;<input type = text class="text3" id = "member_id" name = "member_id">
+	                &nbsp;&nbsp;
+	                <input type = text class="id_search_input" id = "member_id" name = "member_id">
 	                <button type="button" class="id_search_btn" onclick = "newWin();">아이디 검색</button>
 	                <!-- "window.open('adminSearchId.do','아이디검색','resizable=no width=600 height=700')" -->
 	                <input type="checkbox" class="allselect" name = "allselect" value = "all_member"> 전원 지급
@@ -217,7 +218,7 @@ $(document).ready(function() {
 	            </tr> -->
 	          </table>
 	          <div class="btn12" align="center">
-	            <button type="submit" class="bottom_btn">발급</button>
+	            <button type="submit" class="bottom_btn one_btn">발급</button>
 	          </div>
           </form>
           
@@ -232,7 +233,7 @@ $(document).ready(function() {
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
 	                &nbsp;&nbsp;
-	                <input class="text3" name = "member_id2" id = "member_id2">
+	                <input type="text" class="id_search_input" name = "member_id2" id = "member_id2">
 	                <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
 	              </td>
@@ -251,7 +252,8 @@ $(document).ready(function() {
 	            <tr>
 	              <td class="td1">쿠폰 상태</td>
 	              <td class="td2">
-	                &nbsp;&nbsp;<input type="radio" id="coupon_status1" name="coupon_status" value ="all" checked>
+	                &nbsp;&nbsp;
+	                <input type="radio" id="coupon_status1" name="coupon_status" value ="all" checked>
 	               	<label for ="coupon_status1">전체</label>
 	                <input type="radio" id="coupon_status2" name="coupon_status" value = "사용전">
 					<label for ="coupon_status2">사용전</label>
@@ -269,15 +271,18 @@ $(document).ready(function() {
 	
 		<form name="delete_form" method = "post">
           <h3>▶ 발급 쿠폰 목록 </h3>
+          <br />
           <button type="button" class="delete_btn" id ="delete_btn">삭제</button>
-          <br>
+          <br />
+          <br />
           <table class="information">
-            <tr class="tr1">
-              <td class="td3"><input type="checkbox"id="chk_all" onclick = "checkAll();"></td>
-              <td class="td4">쿠폰 번호</td>
-              <td class="td4">쿠폰  종류</td>
-              <td class="td4">사용 기한</td>
-              <td class="td4">아이디</td>
+            <tr class="tr_title">
+              <td class="check_td">
+              <input type="checkbox"id="chk_all" onclick = "checkAll();"></td>
+              <td class="title_td">쿠폰 번호</td>
+              <td class="title_td">쿠폰  종류</td>
+              <td class="title_td">사용 기한</td>
+              <td class="title_td">아이디</td>
             </tr>
             <tbody id = "output">
             

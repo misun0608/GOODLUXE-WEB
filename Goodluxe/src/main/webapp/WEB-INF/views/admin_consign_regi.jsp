@@ -137,9 +137,9 @@
 						</tr>
 						<tr>
 							<td class="td1">브랜드번호</td>
-							<td class="td2"><select name="pd_brand"
-								class="search">
-										<option value="none">브랜드 선택</option>
+							<td class="td2">
+								<select name="pd_brand" class="search">
+									<option value="none">브랜드 선택</option>
 									<option value="Armani">Armani</option>
 									<option value="Balenciaga">Balenciaga</option>
 									<option value="Bally">Bally</option>
