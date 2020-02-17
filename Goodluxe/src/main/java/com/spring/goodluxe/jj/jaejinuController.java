@@ -72,10 +72,10 @@ public class jaejinuController {
 	
 	
 	//관리자 경매 페이지 이동 
-	@RequestMapping("/adminrudao.do")
-	public String adminrudao() {
+	@RequestMapping("/admin_auction.do")
+	public String adminAuction() {
 		
-		return "adminrudao";
+		return "admin_auction";
 	}
 	
 	

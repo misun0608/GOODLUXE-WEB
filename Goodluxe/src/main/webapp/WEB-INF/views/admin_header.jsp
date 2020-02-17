@@ -63,6 +63,9 @@
 								<li>
 									<a href="./adminReturn.do" class="gnb_2da gnb_grp_div">반품관리</a>
 								</li>
+								<li>
+									<a href="./admin_auction.do" class="gnb_2da gnb_grp_div">경매등록</a>
+								</li>
 							</ul>
 						</div>
 					</div>

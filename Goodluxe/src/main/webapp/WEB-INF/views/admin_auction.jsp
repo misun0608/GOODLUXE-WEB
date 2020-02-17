@@ -24,128 +24,26 @@
 <meta http-equiv="imagetoolbar" content="no">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <title>관리자메인</title>
-<link rel="stylesheet" href="./resources/css/admincss.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
-<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
-<script src="./resources/js/jquery-1.8.3.min.js"></script>
-<script src="./resources/js/jquery.menu.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
+   });
+</script>
 
 </head>
 
 <body>
 	<form action="./rudaodetail.do" name="adminrudao" method="post"
 		enctype=multipart/form-data>
-		<header id="hd">
-			<div id="hd_top">
-				<button type="button" id="btn_gnb"
-					class="btn_gnb_close btn_gnb_open"></button>
-				<div id="logo">
-					<a href="./adminMain.html"><img src="./resources/img/admin.png"
-						width="30px"></a>
-				</div>
-
-				<div id="tnb">
-					<ul>
-						<li class="tnb_li"><a href="#" class="tnb_service"
-							target="_blank"><img src="./resources/img/home.png"
-								width="25px"></a></li>
-					</ul>
-				</div>
-			</div>
-			<nav id="gnb" class="gnb_large gnb_small">
-
-				<ul class="gnb_ul">
-					<li class="gnb_li">
-						<button type="button" class="btn_op menu-200 menu-order-2"
-							title="회원관리">회원관리</button>
-						<div class="gnb_oparea_wr">
-							<div class="gnb_oparea">
-								<h3>회원관리</h3>
-								<ul>
-									<li><a href="./admincustomermanagement.html"
-										class="gnb_2da  ">회원관리</a></li>
-									<li><a href="./adminpointmanagement.html"
-										class="gnb_2da  gnb_grp_div">적립금관리</a></li>
-									<li><a href="./admincouponmanagement.html"
-										class="gnb_2da  ">쿠폰관리</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					<li class="gnb_li">
-						<button type="button" class="btn_op menu-900 menu-order-2"
-							title="회원관리">상품관리</button>
-						<div class="gnb_oparea_wr">
-							<div class="gnb_oparea">
-								<h3>상품관리</h3>
-								<ul>
-									<li><a href="#" class="gnb_2da">매입 상품 등록</a></li>
-									<li><a href="#" class="gnb_2da">위탁 상품 등록</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					<li class="gnb_li">
-						<button type="button" class="btn_op menu-300 menu-order-3"
-							title="게시판관리">게시판관리</button>
-						<div class="gnb_oparea_wr">
-							<div class="gnb_oparea">
-								<h3>게시판관리</h3>
-								<ul>
-									<li><a href="./adminpostmanagement.html" class="gnb_2da  ">게시판관리</a></li>
-									<li><a href="./adminvksao.html" class="gnb_2da  ">게시판
-											판매 등록</a></li>
-									<li><a href="./adminrudao.html" class="gnb_2da  ">게시판
-											경매 등록</a></li>
-									<li><a href="#" class="gnb_2da  gnb_grp_div">QnA관리</a></li>
-									<li><a href="#" class="gnb_2da gnb_grp_style ">FAQ관리</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					<li class="gnb_li">
-						<button type="button" class="btn_op menu-400 menu-order-4"
-							title="쇼핑몰관리">몰관리</button>
-						<div class="gnb_oparea_wr">
-							<div class="gnb_oparea">
-								<h3>사이트 관리</h3>
-								<ul>
-									<li><a href="./adminorderproduct.html"
-										class="gnb_2da gnb_grp_style gnb_grp_div">주문목록</a></li>
-									<li><a href="./adminorderproduct_cancel.html"
-										class="gnb_2da gnb_grp_style gnb_grp_div">주문취소</a></li>
-									<li><a href="./adminorderproduct_refund.html"
-										class="gnb_2da gnb_grp_style gnb_grp_div">주문 반품</a></li>
-									<li><a href="./adminorderproduct_return.html"
-										class="gnb_2da gnb_grp_style gnb_grp_div">주문 환불</a></li>
-									<li><a href="./adminorderproduct_customermanagement.html"
-										class="gnb_2da gnb_grp_style ">주문 고객 관리</a></li>
-									<li><a href="./adminproductregister.html"
-										class="gnb_2da  ">상품등록</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					<li class="gnb_li">
-						<button type="button" class="btn_op menu-500 menu-order-5"
-							title="쇼핑몰현황/기타">쇼핑몰현황/기타</button>
-						<div class="gnb_oparea_wr">
-							<div class="gnb_oparea">
-								<h3>쇼핑몰현황/기타</h3>
-								<ul>
-									<li><a href="./adminMain.html" class="gnb_2da  ">매출현황</a></li>
-									<li><a href="./admindelivermanagement.html"
-										class="gnb_2da ">배송관리</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</nav>
-
-		</header>
-
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<header id="hd"></header>
 
 		<script type="text/javascript">
 		function checkEntity(){
@@ -279,86 +177,81 @@
 				<h1 id="container_title">관리자 경매 페이지</h1>
 				<div class="container_wr">
 					<section>
-
-
-
 						<br>
-						<h3>▶ 기본 정보 입력</h3>
 						<br>
-						<table class="impormation" id="ajaxTable" border="1">
+						<h3>| 기본 정보 입력</h3>
+						<br>
+						<table class="information" id="ajaxTable">
 							<tr>
 								<td class="td1">상품번호</td>
-								<td class="td2"><input name="ENTITY_NUMBER" id="entity_number" onblur="putimpormation(this)" oninput = "checkEntity()" class="text1"  /></td>
+								<td class="td2" colspan="3"><input type="text" name="ENTITY_NUMBER" id="entity_number" onblur="putimpormation(this)" oninput = "checkEntity()" class="text1"  /></td>
 							</tr>
 							<tr>
 								<td class="td1">상품명</td>
-								<td class="td2"><input id="pd_name" name="AUCTION_MD_NAME" style="pointer-events:none;" class="text1"></td>
+								<td class="td2" colspan="3"><input type="text" id="pd_name" name="AUCTION_MD_NAME" style="pointer-events:none;" class="text1"></td>
 							</tr>
 							<tr>
 								<td class="td1">브랜드</td>
-								<td class="td2"><input id="pd_brand" name="pd_brand" style="pointer-events:none;" class="text1"></td>
+								<td class="td2" colspan="3"><input type="text" id="pd_brand" name="pd_brand" style="pointer-events:none;" class="text1"></td>
 							</tr>
 							<tr>
 								<td class="td1">카테고리</td>
-								<td class="td2"><input id="pd_category" style="pointer-events:none;" name="pd_category" class="text1"></td>
+								<td class="td2" colspan="3"><input type="text" id="pd_category" style="pointer-events:none;" name="pd_category" class="text1"></td>
 							</tr>
 							<tr>
 								<td class="td1">상품 등급</td>
-								<td class="td2"><input id="quality_grade" style="pointer-events:none;" name="quality_grade" class="text1"></td>
+								<td class="td2" colspan="3"><input type="text" id="quality_grade" style="pointer-events:none;" name="quality_grade" class="text1"></td>
 							</tr>
 							<tr>
 								<td class="td1">경매 시작가</td>
-								<td class="td2"><input id="sale_price" name="AUCTION_START_PRICE"
+								<td class="td2"><input type="text" id="sale_price" name="AUCTION_START_PRICE"
 									class="text1"></td>
-							</tr>
-							<tr>
 								<td class="td1">현재 금액</td>
-								<td class="td2"><input id="sale_price_2" style="pointer-events:none;" name="AUCTION_NOW_PRICE"
+								<td class="td2"><input type="text" id="sale_price_2" style="pointer-events:none;" name="AUCTION_NOW_PRICE"
 									class="text1"></td>
 							</tr>
+
 							<tr>
 								<td class="td1">경매 시작일</td>
-								<td class="td2"><input name="AUCTION_START_TIME"
-									class="text1"></td>
-							</tr>
-							<tr>
+								<td class="td2">
+									<input type="text" name="AUCTION_START_TIME" class="text1">
+								</td>
 								<td class="td1">경매 마감일</td>
-								<td class="td2"><input name="AUCTION_END_TIME"
-									class="text1"></td>
+								<td class="td2">
+									<input type="text" name="AUCTION_END_TIME" class="text1">
+								</td>
 							</tr>
-							<tr height="200px">
+
+							<tr>
 								<td class="td1">상품 상세 설명</td>
-								<td class="td2"><input name="AUCTION_DETAIL" class="text1"></td>
+								<td class="td2" colspan="3">
+									<textarea name="AUCTION_DETAIL" id="AUCTION_DETAIL"></textarea>
+								</td>
 							</tr>
 							<tr>
 								<td class="td1">경매 게시 상태</td>
-								<td class="td2">&nbsp; <input type="radio" />
-									&nbsp;전체&nbsp; <input type="radio" name="AUCTION_POST_STATUS" />
-									게시 중&nbsp; <input type="radio" name="AUCTION_POST_STATUS" />
-									게시 안함&nbsp;
+								<td class="td2" colspan="3">&nbsp; 
+									<input type="radio" id="auction_post1" name="AUCTION_POST_STATUS" />
+									<label for="auction_post1">게시중</label>
+									<input type="radio" id="auction_post2" name="AUCTION_POST_STATUS" />
+									<label for="auction_post2">게시안함</label>
 								</td>
-								
 							</tr>
 							
-<input type="hidden" name="member_id" value="member_id" />
+						<input type="hidden" name="member_id" value="member_id" />
 
 						</table>
 						<br> <br>
 
-						<h3>▶ 이미지 등록</h3>
+						<h3>| 이미지 등록</h3>
 						<br>
 
-
 						<div class="inputArea">
-
-
-
-
-
-							<table class="impormation" border="1">
+							<table class="information">
 								<tr>
 									<td class="td1">대표 이미지</td>
-									<td class="td2"><br> <label for="gdsImg">이미지</label>
+									<td class="td2">
+									&nbsp;<label for="gdsImg">이미지</label>
 										<input type="file" id="real-input" class="image_inputType_file" accept="img/*" name="file_1" multiple />
 										<div id="imagePreview">
 										</div> <script type="text/javascript" 
@@ -426,7 +319,8 @@
 								</tr>
 								<tr>
 									<td class="td1">상세 이미지</td>
-									<td class="td2"><br> <label for="gdsImg_2">이미지</label>
+									<td class="td2">
+									&nbsp;<label for="gdsImg_2">이미지</label>
 										<input type="file" id="gdsImg_2" name="file_2" multiple />
 										<div class="select_img_2">
 										</div> <script type="text/javascript"
@@ -478,7 +372,7 @@
 								</tr>
 								<tr>
 									<td class="td1">이미지 미리보기</td>
-									<td class="td2"><br> <label for="gdsImg_2"></label>
+									<td class="td2"><br><label for="gdsImg_2"></label>
 									<input type="hidden" id="gdsImg_3" name="file_3"  />
 										<div class="select_img_3">
 										</div>
@@ -487,15 +381,18 @@
 								</tr>
 							</table>
 						</div>
-						<br> <br> <br> <br> <br> <br>
+						<br> <br>
 
 						<div align="center">
-							<a href="javascript:adminrudao.reset()"><button type="button"
-									class="btn4">취소</button></a> <a
-								href="javascript:adminrudao.submit()">
-								<button id="signupbtn" disabled="true" name="" class="btn4_rest">등록</button>
+							<a href="javascript:adminrudao.reset()">
+								<button type="button" class="bottom_btn cancel_btn">취소</button>
+							</a>
+							<a href="javascript:adminrudao.submit()">
+								<button id="signupbtn" disabled="true" class="bottom_btn">등록</button>
 							</a>
 						</div>
+					<br />
+					<br />
 					</section>
 				</div>
 
@@ -504,10 +401,7 @@
 		</div>
 
 
-
-		<footer class="container-fluid">
-			<p>Footer Text</p>
-		</footer>
+		<footer id="admin_footer" class="container-fluid"></footer>
 	</form>
 </body>
 

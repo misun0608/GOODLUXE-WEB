@@ -161,7 +161,7 @@
 					</table>
 					<br> <br>
 	
-					<h3>▶ 이미지 등록</h3>
+					<h3>| 이미지 등록</h3>
 					<br>
 					<table class="information">
 						<tr>
@@ -217,7 +217,7 @@
 						
 					</table>
 	
-					<br> <br> <br>
+					<br> <br>
 	
 					<div align="center">
 						<input type="reset" class="bottom_btn cancel_btn" value ="취소">

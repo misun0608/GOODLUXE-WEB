@@ -107,6 +107,13 @@ button, input[type="submit"] {
 	height: 90%;
 	margin-left: 10px;
 	margin-top: 5px;
+}
+
+#AUCTION_DETAIL{
+	width: 90%;
+	height: 200px;
+	margin-left: 10px;
+	margin-top: 5px;
 } 
 
 /* select {
@@ -871,7 +878,7 @@ a:visited {
 
 .point_table{
 	clear: both;
-	width: 75%;
+	width: 90%;
 	border-collapse: collapse;
 	border-spacing: 0;
 	color: #555555;
@@ -1163,7 +1170,9 @@ tr .td3{
 
 /*페이징 css 추가부분*/
 #pagination{
-	
+	font-size: 13px;
+	color: #555555;
+	width: 90%;
 }
 
 .hover {
@@ -1181,8 +1190,9 @@ tr .td3{
 .active {
 	width: 10px;
 	height: 10px;
-	color: #555555;
+	color: #8FB0CA;
 	font-weight: bold;
+	font-size: 16px;
 }
 
 /* 추가부분 끝 */
