@@ -42,6 +42,7 @@ public interface ProductlistMapper {
 	int issueOnememberCoupon(CouponVO couponVO);
 	
 	HashMap<String, String> getShippingInfo(String order_number);
+	void preChgReadStatus(String alarm_number)throws Exception;
 	
 	
 	

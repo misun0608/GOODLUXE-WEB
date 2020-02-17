@@ -279,7 +279,7 @@
                                    
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Coach</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Colombo</label><br/>
-                                    <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Comme des Garcons</label><br/>
+                           <!--     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Comme des Garcons</label><br/> -->
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Damiani</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">DELVAUX</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Dior Homme</label><br/>
@@ -311,7 +311,7 @@
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Louis Vuitton</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Manolo Blahnik</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Maje</label><br/>
-                                    <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc by Marc Jacobs</label><br/>
+                          		<!--<input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc by Marc Jacobs</label><br/> -->
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc Jacobs</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marni</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Martin Margiella</label><br/>
