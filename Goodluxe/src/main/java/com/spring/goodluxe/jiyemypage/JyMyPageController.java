@@ -132,10 +132,13 @@ public class JyMyPageController {
 		@RequestMapping(value = "deleteCheckedGoods.do")
 		public String deleteCheckedGoods(Model model, HttpServletRequest request,HttpSession session)throws Exception {                   
 			
+			
 			//jyMyPageService.deleteLikedGoods(entity_number);
-			//System.out.println("랄랄라라");
+			
 			String member_id = (String) session.getAttribute("member_id");
 			String[] checked = request.getParameterValues("chk_one");
+			System.out.println("멤버아이디: "+ member_id);
+			System.out.println("checked: "+ checked[0]);
 			
 //			System.out.println("check" + checked);
 //			for(int i = 0; i<checked.length; i++) {

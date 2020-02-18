@@ -183,7 +183,7 @@
 	</update>
 	
 	<update id = "adminOrderSetEndShipping" parameterType = "String">
-		update gl_order set order_status = '판매완료' where order_number = #{order_number}
+		update gl_order set order_status = '배송완료' where order_number = #{order_number}
 	</update>
 	<update id = "adminOrderSetStartShipping" parameterType = "hashMap">
 		update gl_order 

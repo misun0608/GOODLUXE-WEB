@@ -175,7 +175,7 @@
 								
 									}
 									if(item.order_status=='배송중'){
-										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">배송완료</button>';
 									}
 								output +='</td>';
 								output += '</tr>';
@@ -232,7 +232,7 @@
 											output +='<button class="delivery_btn confirm_btn" value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
 										}
 										if(item.order_status=='배송중'){
-											output +='<br /><button class="delivery_btn finish_btn" value="'+item.order_number+'" id ="btn_end_shipping">판매완료</button>';
+											output +='<br /><button class="delivery_btn finish_btn" value="'+item.order_number+'" id ="btn_end_shipping">배송완료</button>';
 										} 
 									output +='</td>';
 									output += '</tr>';
@@ -518,7 +518,7 @@
 					<form id = "order_status_form" method = "post" class = "table_behind">
 					
 						<!--  <input type = "submit" class="btn4" id="btn_start_shipping" value = "배송상태변경-발송완료">
-						<input type = "submit" class="btn4" id="modal_open" value = "배송상태변경-판매완료">
+						<input type = "submit" class="btn4" id="modal_open" value = "배송상태변경-배송완료">
 						<button id = "modal_open">fasdfasd</button>-->
 						
 						

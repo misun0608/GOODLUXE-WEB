@@ -99,7 +99,7 @@ public class JyMyPageServiceImpl implements JyMyPageService {
 
 	public void deleteCheckedGoods(String[] checked, String member_id) {
 		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
-		
+		System.out.println("서비스 : "+ member_id);
 		HashMap<String,String> map = new HashMap<String,String>();
 		
 		map.put("member_id", member_id);
