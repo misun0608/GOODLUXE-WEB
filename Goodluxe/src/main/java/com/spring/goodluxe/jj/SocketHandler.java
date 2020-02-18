@@ -131,6 +131,7 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 		
 		ArrayList<Chat_recordVO> recordlist = chat_recordService.selectListchatRecord(roomName);
 		
+		//대화 내용 뿌리기 
 		for(int j =0; j< recordlist.size(); j++) {
 		
 		sessionList.get(i).sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
@@ -353,9 +354,10 @@ public void afterConnectionClosed(WebSocketSession session, CloseStatus status) 
 
 //json형태로 메세지 변환(일반 메세지 보낼 때)
 public String JsonData(String id, Object msg) {
+	
 	JsonObject jsonObject = Json.createObjectBuilder().add("message", 
-	"<i class='user icon'></i>"+
-	"<a href='#none' onclick=\"insertWisper('"+id+"')\"><b>["+id+"]</b></a> : "+msg).build();
+	"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>").build();
+	
 	StringWriter write = new StringWriter();
 	
 	try(JsonWriter jsonWriter = Json.createWriter(write)){
@@ -367,8 +369,7 @@ public String JsonData(String id, Object msg) {
 //json형태로 메세지 변환2( 접속했음을 알릴때)
 public String JsonDataOpen(String id) {
 	JsonObject jsonObject = Json.createObjectBuilder().add("message",
-			"<a href='#none' onclick=\"insertWisper('"+id+"')\">"+"<b>["+ 
-id+"]</b> 님이 <b style='color:blue'>접속</b>하셨습니다.</a>").build();
+			"").build();
 	StringWriter write = new StringWriter();
 	
 	try(JsonWriter jsonWriter = Json.createWriter(write)){

@@ -42,168 +42,20 @@
 		session.setMaxInactiveInterval(-1);
 	}
 %>
+<style type="text/css">
+
+div #output {
+	float:right;
+	align:right;
+	
+}
+	
+	
+
+</style>
 <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
-<script type="text/javascript">
-var sock = null;
-var id = '${member_id}';
-var member_isadmin = '${member_isadmin}';
-var chat_room = '${chat_room}';
-$(document).ready(function() {
-   $("#textID").focus(); // 처음 접속시, 메세지 입력창에 focus 시킴
-   
-   
-   //서버로 접속할때는 localhost로 설정해줘야됨 (관리자)
-   // 본인의 서버로 접속할경우, admin으로 들어가야만 채팅이 가능하다.
-   if(member_isadmin=='Y'){
-      ws = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");
-   }
-   
-   // 그 외 회원은 admin을 제외한 다른 아이디로 접속 시, 채팅참여가 가능하다.
-   else{
-      ws = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");   
-   }
-   
-   
-   //서버로 메세지 보낼때
-   ws.onopen = function() {
-	//처음 접속 시에만 채팅방에 추가함(현재 방정보도 같이 출력)	   
-      	$("#output").append("<b>채팅방에 참여했습니다.</b> : "+"<br>");
-      	var chat_room = $("#room").val();
-		
-	<%-- 	var list = new list();
-			list.add(<%=chatrecord %>);
-			
-		for(var i=0; i < list.size(); i++){
-			$("#output").append("<b style='color:blue'>["+list.get(i).member_id()+"]</b> : "+list.get(i).chat_message()+"<br>");
-			
-		} --%>
-		/* 
-      	$.ajax({//ajax 호출 JQuery.ajax== 
-			url:'/goodluxe/chat_room.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
-			type:'GET',  //데이터 보낼 때 방식 사용
-			data: {
-				chat_room : chat_room
-			}, //서버로 보낼 데이터 타입
-			contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-			dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
-			success : function(data){	
 
-				var jsondata = JSON.stringify(data);
-				
-				
-				$.each(data.chatlist, function(i,chatlist){
-					$("#output").append("<b style='color:blue'>["+chatlist[i].member_id+"]</b> : "+chatlist[i].chat_message+"<br>");
-				})
-				
-				alert(jsondata);
-				},
-				  error: function (request, status, error){  
-				      var msg = "ERROR<br><br>"
-				      msg += request.status + "<br>" + request.responseText + "<br>" + error;
-				      console.log(msg);                    
-				    }
-				
-		}); */
-      	
-		
-      	//보내기 버튼 눌렀을때
-      	$("#buttonMessage").click(function() {
-         	var msg = $('input[name=chatInput]').val().trim("!%/"); //메시지
-         
-         	var room = $("#room").val().trim("!%/"); //방이름(전체단톡방이면 all)
-         
-         	//메시지 보낼때
-         	if(msg !=""){
-         		//소켓으로 메세지 전달
-            	ws.send(msg+"!%/"+room);
-            	$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
-            
-            	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
-            	$("#textID").val(""); //입력창 내용지우기
-            	$("#textID").focus(); //입력창 포커스 획득
-         	}
-         	//귓속말
-         	else if(wisper !="" && msg !=""){
-         		//본인에게 보낼경우
-            	if($("#userId").val()==wisper){
-               	alert("본인에게는 보낼 수 없습니다.");
-               	$("#wisper").focus();
-            	}
-         	}
-      	});
-      	//엔터키 입력처리
-      	$("#textID").keypress(function(event) {
-         	if(event.which == "13"){
-            	event.preventDefault();
-            	
-            	var msg = $('input[name=chatInput]').val().trim("!%/"); //메시지
-                
-             	var room = $("#room").val().trim("!%/"); //방이름
-             
-             	
-             	//메시지 보낼때
-             	if(msg !=""){
-             		//소켓으로 메세지 전달
-             		
-                	ws.send(msg+"!%/"+room);
-                	$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
-                
-                	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
-                	$("#textID").val(""); //입력창 내용지우기
-                	$("#textID").focus(); //입력창 포커스 획득
-             	}
-         	}
-      	}); 
-   	}
-	//서버로 부터 받은 메세지 보내주기
-   	ws.onmessage = function(message) {
-		
-    	//메세지 
-      	var jsonData = JSON.parse(message.data);
-    	
-      	if(jsonData.message !=null){
-        	$("#output").append(jsonData.message+"<br>");
-        	$("#output").scrollTop(99999999);
-      	}
-      	
-      	//접속자리스트
-      	var jsonData2 = JSON.parse(message.data);
-      	if(jsonData2.list !=null){
-         	$("#listPeople").html(jsonData2.list);
-      	}
-      	
-      	//방 정보
-      	var jsonData3 = JSON.parse(message.data);
-      	if(jsonData3.room !=null){
-      		//alert(jsonData3.room);
-			var roomSplit = jsonData3.room.split(',');
-      		
-			var str = "<div class='item'><div class='content'>"+
-			"<b title='전체채팅방입니다' class= 'chatRoom' "+
-			"onclick=\"moveRoom('all',0,10000,'null')\">"+
-			"전체 채팅방</b> (총 "+roomSplit[0]+"명 참여)</div></div>";
-			
-			for( i=1; i<roomSplit.length; i++){
-				var spl = roomSplit[i].split("/");
-				
-				if(spl[0] =='방이 존재하지 않습니다.'){
-					str += "<div class='item'><div class='content'><b title='방이존재하지않습니다'>"+spl[0]+"</b></div></div>";
-				}
-				else{
-					//방이름 : spl[0] , 남은인원수 : spl[1] , 전체인원수:spl[2], 방내용:spl[3]
-					str += "<div class='item'><div class='content'><b title='"+spl[3]+"' class='chatRoom' "+
-					"onclick=\"moveRoom('"+spl[0]+"','"+spl[1]+"','"+spl[2]+"','"+spl[4]+"')\"> "
-					+spl[0]+"</b> ("+spl[1]+"/"+spl[2]+")</div></div>";
-				}
-			}
-			$("#getRoomList").html(str);
-      	}
-	};   
-   	//닫힐때
-   	ws.onclose = function(event) {};
-});
-</script>
 
 
 <!-- 방이동 처리함수 -->
@@ -226,16 +78,6 @@ function moveRoom(room,remaincount,totalcount,pwd) {
 		}
 		}
 	   
-	/* } */
-/* }; */
-</script>
-
-
-<script>
-//방나가기
-$("#backBtn").click(function() {
-	location.href = "chat.do";
-});
 </script>
 
 
@@ -340,10 +182,10 @@ $("#wisper").click(function() {
 
 			<!-- 관리자 해당 회원 행 클릭 시 방 바꿔주자  -->
 			<tr>
-				<td name="member_id" width="75px"><%=vo.getMember_id()%><br><%=vo.getMember_id()%></td>
-				<td name="roomName"><%=vo.getChat_room()%><%=vo.getChat_room()%><%=vo.getChat_room()%></td>
-				<td align="right" width="75px"><a href="MoveChatRoom.do?roomName=<%=vo.getChat_room()%>"><button
-							type="button">들어가기</button></a><br><%=vo.getChat_room()%></td>
+				<td width="75px"><img src="./resources/img/chat_img/customer.png" width="65px"></td>
+				<td><%=vo.getMember_id()%><br><h7>마지막대화 ^^</h7></td>
+				<td align="right" width="75px"><a href="MoveChatRoom.do?roomName=<%=vo.getChat_room()%>">
+					<button type="button">들어가기</button></a><br><h7>날짜^^</h7></td>
 			</tr>
 			<%
 				}
@@ -359,7 +201,7 @@ $("#wisper").click(function() {
 
 				<div
 					style="width: 100%; height: 550px; overflow-y: scroll; overflow-x: inherit;"
-					class="ui message" id="output"></div>
+					class="ui message" id="output" align="right"></div>
 			</td>
 			<!-- 채팅방 목록 -->
 			
@@ -384,76 +226,184 @@ $("#wisper").click(function() {
 	</table>
 
 	<div id="container">
-	<!-- 	<script type="text/javascript">
-	var chat_room = '${room}';
 	
-  	$.ajax({//ajax 호출 JQuery.ajax== 
-		url:'/goodluxe/chatroomlistcount.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
-		type:'GET',  //데이터 보낼 때 방식 사용
-		data: {
-			chat_room : chat_room
-		}, //서버로 보낼 데이터 타입
-		contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-		dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
-		cache : false,
-		success : function(jsonData){	
-
-			var jsondata = JSON.stringify(jsonData);
+	
+	<script type="text/javascript">
+var sock = null;
+var id = '${member_id}';
+var member_isadmin = '${member_isadmin}';
+var chat_room = '${room}';
+$(document).ready(function() {
+   $("#textID").focus(); // 처음 접속시, 메세지 입력창에 focus 시킴
+   
+   
+   //서버로 접속할때는 localhost로 설정해줘야됨 (관리자)
+   // 본인의 서버로 접속할경우, admin으로 들어가야만 채팅이 가능하다.
+   if(member_isadmin=='Y'){
+      ws = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");
+   }
+   
+   // 그 외 회원은 admin을 제외한 다른 아이디로 접속 시, 채팅참여가 가능하다.
+   else{
+      ws = new WebSocket("ws://localhost:8080/goodluxe/broadcasting.do");   
+   }
+   
+   
+   //서버로 메세지 보낼때
+   ws.onopen = function() {
+	//처음 접속 시에만 채팅방에 추가함(현재 방정보도 같이 출력)	   
+	<%-- 	var list = new list();
+			list.add(<%=chatrecord %>);
 			
-			chatroomlist
+		for(var i=0; i < list.size(); i++){
+			$("#output").append("<b style='color:blue'>["+list.get(i).member_id()+"]</b> : "+list.get(i).chat_message()+"<br>");
 			
-			$("#chatroomlist").html(""); // div를 일단 공백으로 초기화해줌 , 왜냐면 버튼 여러번 눌리면 중첩되니깐
+		} --%>
+		/* 
+      	$.ajax({//ajax 호출 JQuery.ajax== 
+			url:'/goodluxe/chat_room.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
+			type:'GET',  //데이터 보낼 때 방식 사용
+			data: {
+				chat_room : chat_room
+			}, //서버로 보낼 데이터 타입
+			contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+			dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
+			success : function(data){	
 
-			$("<table/>").css({
-
-				backgroundColor : "#E4F7BA",
-
-				border : "solid 3px #E4F7BA",
-
-			}).appendTo("#chatroomlist"); // 테이블을 생성하고 그 테이블을 div에 추가함
-
-			var key = Object.keys(data["chatmembervo"]); // id , pw , addr , tel 의 키값을 가져옴
-
-			$("<tr>" , {
-
-				html : "<td>" + "순번" + "</td>"+  // 컬럼명들
-						"<td>" + "번호 "+ "</td>"+
-						"<td>" + "아이디" + "</td>"+
-						"<td>" + "방이름" + "</td>"
-						
-
-			}).appendTo("table") // 이것을 테이블에붙임
-
-			$.each(data, function(index, jsonObject) { // 이치를 써서 모든 데이터들을 배열에 넣음
-
-				var items = [];
-				items.push("<td>" + index+1 + "</td>"); // 여기에 id pw addr tel의 값을 배열에 넣은뒤
-				items.push("<td>" + jsonObject.chat_num + "</td>");
-				items.push("<td>" + jsonObject.member_id + "</td>");
-				items.push("<td>" + jsonObject.chat_room + "</td>");
-
-				$("<tr/>", {
-
-					html : items // 티알에 붙임,
-
-				}).appendTo("table"); // 그리고 그 tr을 테이블에 붙임
-
-			});//each끝 
+				var jsondata = JSON.stringify(data);
+				
+				
+				$.each(data.chatlist, function(i,chatlist){
+					$("#output").append("<b style='color:blue'>["+chatlist[i].member_id+"]</b> : "+chatlist[i].chat_message+"<br>");
+				})
+				
+				alert(jsondata);
+				},
+				  error: function (request, status, error){  
+				      var msg = "ERROR<br><br>"
+				      msg += request.status + "<br>" + request.responseText + "<br>" + error;
+				      console.log(msg);                    
+				    }
+				
+		}); */
+      	
 		
+      	//보내기 버튼 눌렀을때
+      	$("#buttonMessage").click(function() {
+         	var msg = $('input[name=chatInput]').val().trim("!%/"); //메시지
+         
+         	var room = $("#room").val().trim("!%/"); //방이름(전체단톡방이면 all)
+         
+         	//메시지 보낼때
+         	if(msg !=""){
+         		//소켓으로 메세지 전달
+            	ws.send(msg+"!%/"+room);
+            	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' >[${member_id}] : "+msg+"</div><br><br>");
+            
+            	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
+            	$("#textID").val(""); //입력창 내용지우기
+            	$("#textID").focus(); //입력창 포커스 획득
+         	}
+         	//귓속말
+         	else if(wisper !="" && msg !=""){
+         		//본인에게 보낼경우
+            	if($("#userId").val()==wisper){
+               	alert("본인에게는 보낼 수 없습니다.");
+               	$("#wisper").focus();
+            	}
+         	}
+      	});
+      	//엔터키 입력처리
+      	$("#textID").keypress(function(event) {
+         	if(event.which == "13"){
+            	event.preventDefault();
+            	
+            	var msg = $('input[name=chatInput]').val().trim("!%/"); //메시지
+                
+             	var room = $("#room").val().trim("!%/"); //방이름
+             
+             	
+             	//메시지 보낼때
+             	if(msg !=""){
+             		//소켓으로 메세지 전달
+             		
+                	ws.send(msg+"!%/"+room);
+                	//$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
+                	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' >[${member_id}] : "+msg+"</div><br><br>");
+  //									"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>"
+                	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
+                	$("#textID").val(""); //입력창 내용지우기
+                	$("#textID").focus(); //입력창 포커스 획득
+             	}
+         	}
+      	}); 
+   	}
+	//서버로 부터 받은 메세지 보내주기
+   	ws.onmessage = function(message) {
+		var member_id = '${member_id}';
+		var room = '${room}';
+		var el = document.getElementById('output');
+		var ml = document.getElementById('<%=member_id %>');
+		var list_1 = "";
+		var list_2 = "";
+    	//메세지 
+      	var jsonData = JSON.parse(message.data);
+    	list_1 = message.data.split(']');
+    	
+    	list_2 = list_1[0].split('[');
+    	//alert(list_2[1]);
+      	if(jsonData.message !=null){
+          		$("#output").append(jsonData.message+"<br><br>");
+            	$("#output").scrollTop(99999999);
+      	}
+      	
+      	//접속자리스트
+      	var jsonData2 = JSON.parse(message.data);
+      	if(jsonData2.list !=null){
+         	$("#listPeople").html(jsonData2.list);
+      	}
+      	
+      	//방 정보
+      	var jsonData3 = JSON.parse(message.data);
+      	if(jsonData3.room !=null){
+      		//alert(jsonData3.room);
+			var roomSplit = jsonData3.room.split(',');
+      		
+			var str = "<div class='item'><div class='content'>"+
+			"<b title='전체채팅방입니다' class= 'chatRoom' "+
+			"onclick=\"moveRoom('all',0,10000,'null')\">"+
+			"전체 채팅방</b> (총 "+roomSplit[0]+"명 참여)</div></div>";
 			
-			alert(jsondata);
-			},
-			  error: function (request, status, error){  
-			      var msg = "ERROR<br><br>"
-			      msg += request.status + "<br>" + request.responseText + "<br>" + error;
-			      console.log(msg);                    
-			    }
-			
-	});
-	
-	</script>
-		 -->
-		<!-- 	</form> -->
+			for( i=1; i<roomSplit.length; i++){
+				var spl = roomSplit[i].split("/");
+				
+				if(spl[0] =='방이 존재하지 않습니다.'){
+					str += "<div class='item'><div class='content'><b title='방이존재하지않습니다'>"+spl[0]+"</b></div></div>";
+				}
+				else{
+					//방이름 : spl[0] , 남은인원수 : spl[1] , 전체인원수:spl[2], 방내용:spl[3]
+					str += "<div class='item'><div class='content'><b title='"+spl[3]+"' class='chatRoom' "+
+					"onclick=\"moveRoom('"+spl[0]+"','"+spl[1]+"','"+spl[2]+"','"+spl[4]+"')\"> "
+					+spl[0]+"</b> ("+spl[1]+"/"+spl[2]+")</div></div>";
+				}
+			}
+			$("#getRoomList").html(str);
+      	}
+	};   
+   	//닫힐때
+   	ws.onclose = function(event) {};
+});
+</script>
+<style type="text/css">
+	#<%=member_id %>{
+	algin : left;
+	float : left;
+	}
+	#<%=member_id %> img{
+	algin : left;
+	float : left;
+	}
+</style>
 
 
 	</div>
