@@ -116,6 +116,7 @@ $(document).ready(function () {
 	// checkbox의 name값이 이름이면서 체크되어 있는 함수를 체크하여 호출함.
 	$("input[name=likedcate]:checked").each(function() {
 		var likedCate = $(this).val();
-		
 	});
+	
+	
 });
