@@ -7,6 +7,7 @@
 <%@ page import = "com.spring.goodluxe.voes.PointVO" %>
 <%@ page import = "com.spring.goodluxe.voes.MemberVO" %>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.text.DecimalFormat"%>
 
     
 <%
@@ -22,16 +23,27 @@
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	int used_point = 0;
+	int minus_point = 0;
 	int accumulated_point = 0;
 	
 	for(int i=0; i<point_list.size(); i++){
 		PointVO pvo = (PointVO)point_list.get(i);
 		if(pvo.getPoint_status().equals("상품구매 사용")){
 			used_point += pvo.getPoint_amount();
+		}else if(pvo.getPoint_status().equals("관리자 차감")){
+			minus_point += pvo.getPoint_amount();
 		}else{
 			accumulated_point += pvo.getPoint_amount();
 		}
 	}
+	
+	// 컴마
+	DecimalFormat df3 = new DecimalFormat("###,###");
+	
+	String total_form = df3.format(mvo.getMember_point());
+	String used_point_form = df3.format(used_point);
+	String minus_point_form = df3.format(minus_point);
+	String accumulated_point_form = df3.format(accumulated_point);
 %>
 
 <!DOCTYPE html>
@@ -86,18 +98,25 @@ $(document).ready(function() {
             <article class = "arti_menu" id="mypage_menu"></article>
             <article id = "recent_point">
                 <div class = "recent_point_box">
-                    <div> <h3 class = "recent_point_title">나의 마일리지 현황</h3></div>
+                    <div> <h3 class = "recent_point_title">나의 적립금 현황</h3></div>
                     <div class = "recent_point_one">
                         <div class = "recent_point_half">
-                            <div class = "point_detail_title"><p class = "point_detail_letter">사용가능 적립금</p></div><br/>
+                            <div class = "point_detail_title">
+                            	<p class = "point_detail_letter">사용가능 적립금</p>
+                            </div>
+                            
+                            <br/>
                             <!-- <p class = "recent_point_p">P</p> -->
-                            <div class = "point_detail"><h1><%=mvo.getMember_point() %>&nbsp;&nbsp;<span class = "span_black">P</span></h1></div>
+                            <div class = "point_detail">
+	                            <h1><%=total_form %><span class="span_black">P</span></h1>
+                            </div>
                         </div>
                         <div class = "recent_point_half">
                             <div class = "point_chart_center">
                                 <ul class = "point_chart">
-                                    <li class = "point_chart_li1"> &nbsp;&nbsp;적립 마일리지  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   <%=accumulated_point %> P</li>
-                                    <li class = "point_chart_li1"> &nbsp;&nbsp;사용 마일리지  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=used_point %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;누적 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   <%=accumulated_point_form %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;사용 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=used_point_form %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;차감 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=minus_point_form %> P</li>
                                 </ul>
                             </div>
                         </div>
@@ -135,7 +154,7 @@ $(document).ready(function() {
                                 <td><%=pvo.getPoint_status() %></td>
                                 <td>
                                 <%
-                                if(pvo.getPoint_status().equals("상품구매 사용")){
+                                if(pvo.getPoint_status().equals("상품구매 사용")||pvo.getPoint_status().equals("관리자 차감")){
                                 %>
                                 -
                                 <%=pvo.getPoint_amount() %>

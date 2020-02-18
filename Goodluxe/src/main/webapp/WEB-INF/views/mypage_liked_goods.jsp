@@ -56,7 +56,7 @@
 <script>
 		$(document).ready(function(){
 			$("#mypage_menu").load("mypageMenu.do", function(){
-				$('.menu_container').children('a').eq(1).children().children('.icon').addClass('selected_menu');
+				$('.menu_container').children('a').eq(6).children().children('.icon').addClass('selected_menu');
 			});
 		});
 </script>
