@@ -1,0 +1,445 @@
+/* 초기화 */  
+* {margin:0px; padding:0px;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+  
+  /* 버튼 */
+  .apply_addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .apply_mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  .order_done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .order_done_cover{
+    position: relative;
+    width: 1000px;
+    height: 500px;
+  }
+
+  .order_num_p{
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .payment_info_table{
+    border: 0.9px solid black;
+    font-size: 13px;
+    width: 600px;
+  }
+
+  .order_done_td{
+    padding: 5px 10px 5px 10px;
+    font-size: 12px;
+    color: #555555;
+  }
+
+  .order_done_title_td{
+    background-color: #F9E7E5;
+    padding: 5px 10px 5px 10px;
+  }
+
+  .order_done_td > p{
+    font-weight: bold;
+    color: red;
+  }
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+  #section_container {
+    width: 700px;
+    margin: 0 auto;
+  }
+  .mypage_app_box_container{
+    position: relative;
+  }
+  .mypage_app_box {
+    display: inline-block;
+    width: 700px;
+  }
+
+  .p_announce{
+    /* display: block; */
+    width: 700px;
+    line-height: 170%;
+    font-size: 14px;
+    /* background-color: aqua; */
+  }
+
+  .apply_fontpart{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .apply_selectbc{
+    position: relative;
+    width: 700px;
+    /* border: 1px solid black;  */
+    display: inline-block; 
+    font-size: 13px;
+  }
+
+  section > .mypage_app_box_container > p{
+    font-size: 15px;
+  }
+
+  .apply_multi{
+    width: 160px;
+    height: 250px;
+    /* z-index: 30; */
+  }
+
+  .selecttable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 330px;
+    width: 890px;
+    font-size: 13px;
+  }
+
+  .applytable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 250px;
+    width: 330px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 35px;
+  }
+
+  .titletd{
+    width: 70px;
+  }
+
+  .photoarticle{
+    font-size: 11px;
+    color: darkgray;
+  }
+
+  .apply_inputarea{
+    width: 200px;
+  }
+
+  .apply_listtable{
+    position: relative;
+    width: 700px;
+    /* border: 0.9px solid black; */
+    font-size: 13px;
+    /* padding: 5px 5px 5px 5px; */
+    /* height: 250px; */
+    border-collapse: collapse;
+  }
+
+  .apply_listtable > thead > tr > td{
+    text-align: center;
+    padding: 5px;
+    background-color: #F9E7E5;
+  }
+
+  .apply_listtable > tbody > tr > td{
+    text-align: center;
+    font-size: 11px;
+    padding: 5px;
+  }
+
+  .apply_select{
+    position: relative;
+    float: left;
+    padding-left: 15px;
+  }
+
+  .apply_selectcate{
+    padding-right: 15px;
+  }
+
+  .apply_middle_btnpart{
+    float: right;
+    margin-right: 3px;
+    margin-top: 10px;
+    /* width: 900px; */
+  }
+
+  .apply_bottom_btnpart{
+/*     width: 900px; */
+    width:200px;
+/*     margin-top: 10px; */
+    margin: 10px auto 0 auto;
+    position: relative;
+/*     left: 50%;
+    margin-left: -450px; */
+    text-align: center;
+  }
+
+  .apply_total{
+    float: right;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+/* 
+  .applyform{
+    position: relative;
+    margin-top: 20px;
+  } */
+  
+  /* 버튼 */
+  .apply_addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .apply_deletebtn{
+    width: 50px;
+  }
+
+  .apply_addbtn2{
+    margin-right: 22px;
+  }
+
+  .apply_mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  .apply_label{
+    position: relative;
+    top: 0px;
+    font-size: 13px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  .apply_done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .apply_done_cover{
+    position: relative;
+    width: 700px;
+    height: 500px;
+  }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+  #section_container {
+    width: 900px;
+    margin: 0 auto;
+  }
+  .mypage_app_box_container{
+    position: relative;
+  }
+  .mypage_app_box {
+    display: inline-block;
+    width: 900px;
+  }
+
+  .p_announce{
+    /* display: block; */
+    width: 900px;
+    line-height: 170%;
+    /* font-size: 14px; */
+    /* background-color: aqua; */
+  }
+
+  .apply_fontpart{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .apply_selectbc{
+    position: relative;
+    width: 900px;
+    /* border: 1px solid black;  */
+    display: inline-block; 
+    font-size: 13px;
+  }
+
+  section > .mypage_app_box_container > p{
+    font-size: 15px;
+  }
+
+  .apply_multi{
+    width: 250px;
+    height: 250px;
+    /* z-index: 30; */
+  }
+
+  .selecttable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 330px;
+    width: 890px;
+    font-size: 13px;
+  }
+
+  .applytable{
+    position: relative;
+    border: 0.9px solid black;
+    height: 250px;
+    width: 330px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 35px;
+  }
+
+  .titletd{
+    width: 70px;
+  }
+
+  .photoarticle{
+    font-size: 11px;
+    color: darkgray;
+  }
+
+  .apply_inputarea{
+    width: 200px;
+  }
+
+  .apply_listtable{
+    position: relative;
+    width: 900px;
+    /* border: 0.9px solid black; */
+    font-size: 14px;
+    /* padding: 5px 5px 5px 5px; */
+    /* height: 250px; */
+    border-collapse: collapse;
+  }
+
+  .apply_listtable > thead > tr > td{
+    text-align: center;
+    padding: 5px;
+    background-color: #F9E7E5;
+  }
+
+  .apply_listtable > tbody > tr > td{
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .apply_select{
+    position: relative;
+    float: left;
+    padding-left: 15px;
+  }
+
+  .apply_selectcate{
+    padding-right: 15px;
+  }
+
+  .apply_middle_btnpart{
+    float: right;
+    margin-right: 3px;
+    margin-top: 10px;
+    /* width: 900px; */
+  }
+
+  .apply_bottom_btnpart{
+/*     width: 900px; */
+    width:200px;
+/*     margin-top: 10px; */
+    margin: 10px auto 0 auto;
+    position: relative;
+/*     left: 50%;
+    margin-left: -450px; */
+    text-align: center;
+  }
+
+  .apply_total{
+    float: right;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+/* 
+  .applyform{
+    position: relative;
+    margin-top: 20px;
+  } */
+  
+  /* 버튼 */
+  .apply_addbtn{
+    width: 80px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    /* margin-top: 30px; */
+  }
+
+  .apply_deletebtn{
+    width: 50px;
+  }
+
+  .apply_addbtn2{
+    margin-right: 22px;
+  }
+
+  .apply_mainbtn{
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 13px; */
+  }
+  
+  .apply_label{
+    position: relative;
+    top: 0px;
+    font-size: 13px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  .apply_done{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%)
+  }
+
+  .apply_done_cover{
+    position: relative;
+    width: 900px;
+    height: 500px;
+  }
+}
+

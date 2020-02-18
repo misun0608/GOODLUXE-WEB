@@ -315,7 +315,7 @@
 						<center>
 			          	<div class="pagination" id="pagination">
 			         	</center> 
-					
+						<br />
 				</section>
 			</div>
 
