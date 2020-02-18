@@ -12,7 +12,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+ <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <!--
+        viewport meta 태그
+        * user-scalable=no : 화면확대, 축소 불가능
+        * width=device-width : 화면 너비=장치 너비
+        * initial-scale=1.0 : 초기 확대 비율
+    -->
+    <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
+    <title> 기본 페이지 </title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
+    <link rel="stylesheet" href="./resources/css/chat_view_customer.css" />
+	<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="./resources/js/jquery.easing.1.3.js"></script> 
+
 <title>Insert title here</title>
 </head>
 <%
@@ -29,8 +42,10 @@
 	String chat_room = (String) request.getAttribute("chat_room");
 
 	ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) request.getAttribute("chatlist");
+	
 	ChatMemberVO chatmembervo = new ChatMemberVO();
 	ArrayList<Chat_recordVO> chatrecord = (ArrayList<Chat_recordVO>) request.getAttribute("chatrecord");
+	ArrayList<Chat_recordVO> chatrecordcountlist = (ArrayList<Chat_recordVO>) request.getAttribute("chatrecordcountlist");
 
 	long sessionstarttime = session.getCreationTime();
 	long sessionendtime = session.getLastAccessedTime();
@@ -50,11 +65,11 @@ div #output {
 	
 }
 	
-	
+	table{border-spacing:0px;border-style:none;padding:0px;}
+	td{border-spacing:0px; border-style:none; padding:0px;}
 
 </style>
 <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="./resources/js/jquery-3.4.1.js"></script>
 
 
 
@@ -128,43 +143,46 @@ $("#wisper").click(function() {
 
 	<!-- 방 이름 / 방 만들기 / 방 나가기  -->
 	<table
-		style="width: 1000px;">
+		style="width: 800px;">
 
 		<tr>
 			
-
-			<td align="center" style="width: 400px; " >
+<%if(member_isadmin.equals("Y")){ %>
+			<td align="center" style="width: 413px; height:75px;"  >
 			<h2>검색을 하자	</h2>
 			</td>
+			<%}else{ %>
+			<td align="center" style="width:0px; " >
+			</td>
+			<%} %>
 			
-			
-			<td align="center" style="width: 600px; background-color:#b8e1d4;">
+			<td align="center" style="width: 500px; height:50px; background-color:#b8e1d4; ">
 				<!-- 방이름 출력 -->
-				<h2 >
 					<!-- 방이름 :<b>${room}</b> -->
-					<p>GOODLUXE 고객센터</p>
-					<p>${room} 고객님</p>
-				</h2>
+					<p class="chatting_title">GOODLUXE 고객센터</p>
+				<%if(member_isadmin.equals("Y")){ %>	
+					<p class="customer_id_info">${room} 고객님</p>
+					<%} %>
 			</td>
 		</tr>
 	</table>
 	<!-- 채팅방 구현하기위한 테이블 -->
 	<table align="center"
-		style="height: 600px; width: 1000px; margin:0; padding: 0;"
+		style="height: 600px; width: 800px; margin:0; padding: 0;"
 		class="ui blue table">
 		<!-- 왼쪽 채팅창 출력 -->
-		<col width="400px">
+		<col width="350px">
 		<!-- 귓속말 영역 -->
-		<col width="400px">
+		<col width="450px">
 		<!-- 메세지 입력 영역 -->
 		<!-- 오른쪽 리스트 출력영역 -->
-		<col width="200px">
+		<col width="50px">
 		<!-- 보내기 영역 -->
 
 		<tr height="600px">
 			
 			
-			
+			<%if(member_isadmin.equals("Y")){ %>
 			<td style="width: 400px; ">
 				<!-- 채팅 참여자 출력 -->
 				<div style="width: 100%; height: 100%; overflow-y: scroll;"
@@ -173,41 +191,67 @@ $("#wisper").click(function() {
 
 
 			<!-- <form action="MoveChatRoom.do" method="post" id="moveChatForm"> -->
-
+			<script type="text/javascript">
+			
+				
+			
+			</script>
 			<%
 				int i = 0;
-				for (i = 0; i < chatlist.size(); i++) {
-					ChatMemberVO vo = chatlist.get(i);
+				for (i = 0; i < chatrecordcountlist.size(); i++) {
+					Chat_recordVO vo = chatrecordcountlist.get(i);
+				String[] timeList_1 = vo.getChat_timestamp().toString().split("-");
+				String[] timeList_2 = timeList_1[2].split(" ");	
+				String[] timeList_3 = timeList_2[1].split(":");
+				String[] timeList_4 = timeList_3[2].split(".");
+					
+					
 			%>
 
 			<!-- 관리자 해당 회원 행 클릭 시 방 바꿔주자  -->
-			<tr>
-				<td width="75px"><img src="./resources/img/chat_img/customer.png" width="65px"></td>
-				<td><%=vo.getMember_id()%><br><h7>마지막대화 ^^</h7></td>
-				<td align="right" width="75px"><a href="MoveChatRoom.do?roomName=<%=vo.getChat_room()%>">
-					<button type="button">들어가기</button></a><br><h7>날짜^^</h7></td>
+			<tr ondblclick="location.href='MoveChatRoom.do?roomName=<%=vo.getChat_room() %>'" style="cursor:pointer">
+				<td width="65px"><img src="./resources/img/chat_img/customer.png" width="65px"></td>
+				<td><%=vo.getChat_room() %><br><p><%=vo.getChat_message() %></p></td>
+				<td align="right" width="100px"><font size= "1px">
+	<%=timeList_1[1] %>월<%=timeList_2[0] %>일<br>
+	<%=timeList_3[0] %>시<%=timeList_3[1] %>분</font>
+		<br>
+				
+	
+	</td>
 			</tr>
+			
 			<%
 				}
 			%>
 		</table>
 					</div>
 			</td>
-			
+			<% }else{ %>
+			<td style="width: 400px; ">
+				<!-- 채팅 참여자 출력 -->
+				<div style="width: 100%; height: 100%;"
+					class="ui message" id="chatroomlist">
+					<table id=""  width="">
+					
+					</table>
+					</div>
+					</td>
+					<%} %>
 			
 		
 			<!-- 채팅내용 출력 -->
-			<td style="width: 550px; background-color:#b8e1d4;" colspan="2">
+			<td style="width: 560px; background-color:#b8e1d4;" colspan="2" >
 
 				<div
 					style="width: 100%; height: 550px; overflow-y: scroll; overflow-x: inherit;"
-					class="ui message" id="output" align="right"></div>
+					class="ui message" id="output" align="right" margin-tip="4px"></div>
 			</td>
 			<!-- 채팅방 목록 -->
 			
 			</tr>
 		<!-- 입력 창 -->
-		<tr height="100px;">
+		<tr height="70px;">
 			
 			<td>
 			</td>
@@ -218,8 +262,8 @@ $("#wisper").click(function() {
 			</td>
 
 			<!-- 보내기 버튼 -->
-			<td><input type="button" value="보내기" id="buttonMessage"
-				style="width: 100%; height: 100%" class="ui primary button">
+			<td><input type="button" value="전송" id="buttonMessage"
+				style="width: 100%; height: 100%; background:#f5d2cf;" class="ui primary button">
 			</td>
 			
 		</tr>
@@ -259,7 +303,7 @@ $(document).ready(function() {
 			$("#output").append("<b style='color:blue'>["+list.get(i).member_id()+"]</b> : "+list.get(i).chat_message()+"<br>");
 			
 		} --%>
-		/* 
+		<%-- 
       	$.ajax({//ajax 호출 JQuery.ajax== 
 			url:'/goodluxe/chat_room.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
 			type:'GET',  //데이터 보낼 때 방식 사용
@@ -285,7 +329,7 @@ $(document).ready(function() {
 				      console.log(msg);                    
 				    }
 				
-		}); */
+		}); --%>
       	
 		
       	//보내기 버튼 눌렀을때
@@ -298,7 +342,7 @@ $(document).ready(function() {
          	if(msg !=""){
          		//소켓으로 메세지 전달
             	ws.send(msg+"!%/"+room);
-            	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' >[${member_id}] : "+msg+"</div><br><br>");
+            	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' >[${member_id}] : "+msg+"</div><br><br>");
             
             	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
             	$("#textID").val(""); //입력창 내용지우기
@@ -329,7 +373,8 @@ $(document).ready(function() {
              		
                 	ws.send(msg+"!%/"+room);
                 	//$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
-                	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' >[${member_id}] : "+msg+"</div><br><br>");
+                	
+                	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' >[${member_id}] : "+msg+"</div><br><br>");
   //									"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>"
                 	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
                 	$("#textID").val(""); //입력창 내용지우기
@@ -395,14 +440,43 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
+
 	#<%=member_id %>{
-	algin : left;
 	float : left;
 	}
 	#<%=member_id %> img{
-	algin : left;
 	float : left;
 	}
+	
+	div p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  height: 20px;
+}
+
+	.speech-bubble {
+	position: relative;
+	background: #ffffff;
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 24px solid transparent;
+	border-right-color: #ffffff;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -12px;
+	margin-left: -24px;
+}
+	
 </style>
 
 
