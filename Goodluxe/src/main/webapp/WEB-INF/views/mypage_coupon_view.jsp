@@ -96,7 +96,7 @@ $(document).ready(function() {
                             if(coupon_list == null||coupon_list.size()==0){
                             %>
                             <tr>
-                            	<td colspan="5">조회 가능한 쿠폰 내역이 없습니다.</td>
+                            	<td colspan="5" style="text-align:center; height:200px;" >조회 가능한 쿠폰 내역이 없습니다.</td>
                             </tr>
                             <%
                             }else{

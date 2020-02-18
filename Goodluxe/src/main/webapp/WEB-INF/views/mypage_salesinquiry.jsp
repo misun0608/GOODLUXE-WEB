@@ -84,9 +84,9 @@
 
 	  });
 
-	  $('.step').click(function () {
+	  $('.com_step').click(function () {
 	    var tab = $(this).attr('data-tab');
-	    $('.step').removeClass('show');
+	    $('.com_step').removeClass('show');
 	    $('.tab').removeClass('show');
 	    $(this).addClass('show');
 	    $("#" + tab).addClass('show');
@@ -127,7 +127,7 @@
                     </div>
                     <div id="tab-1" class="tab-content current">
                         <div class="steppart">
-                            <div class="step show" data-tab="tab1" id="before">
+                            <div class="com_step show" data-tab="tab1" id="before">
                                 <a href="#" name="#tab1">
                                     등록전<br>
                                     <% if(apply_list == null) { %> 0 <% } else { %>
@@ -135,10 +135,10 @@
                                     <% } %>
                                 </a>
                             </div>
-                            <div class="step next">
+                            <div class="com_step next">
                                 &gt;
                             </div>
-                            <div class="step" data-tab="tab2" id="selling">
+                            <div class="com_step" data-tab="tab2" id="selling">
                                 <a href="#" name="#tab2">
                                     판매중<br>
                                     <% if(selling_list == null) { %> 0 <% } else { %>
@@ -146,10 +146,10 @@
                                     <% } %>
                                 </a>
                             </div>
-                            <div class="step next">
+                            <div class="com_step next">
                                 &gt;
                             </div>
-                            <div class="step" data-tab="tab3" id="trading">
+                            <div class="com_step" data-tab="tab3" id="trading">
                                 <a href="#" name="#tab3">
                                     거래진행중<br>
                                     <% if(trading_list == null) { %> 0 <% } else { %>
@@ -157,10 +157,10 @@
                                     <% } %>
                                 </a>
                             </div>
-                            <div class="step next">
+                            <div class="com_step next">
                                 &gt;
                             </div>
-                            <div class="step" data-tab="tab4" id="done">
+                            <div class="com_step" data-tab="tab4" id="done">
                                 <a href="#" name="#tab4">
                                     판매완료<br>
                                     <% if(finish_list == null) { %> 0 <% } else { %>

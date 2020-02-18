@@ -282,4 +282,12 @@ public class AdminController {
 		}
 		return "admin_point";
 	}
+	
+	// 포인트 관리자 페이지 입력폼 띄우기(모달 test)
+	@RequestMapping(value = "pointUpdateModal.do")
+	public String pointUpdateModal() throws Exception {
+
+		return "admin_point_modal";
+	}
+	
 }

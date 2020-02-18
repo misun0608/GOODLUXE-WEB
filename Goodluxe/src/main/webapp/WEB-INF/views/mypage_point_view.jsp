@@ -30,7 +30,7 @@
 		PointVO pvo = (PointVO)point_list.get(i);
 		if(pvo.getPoint_status().equals("상품구매 사용")){
 			used_point += pvo.getPoint_amount();
-		}else if(pvo.getPoint_status().equals("관리자 차감")){
+		}else if(pvo.getPoint_status().equals("관리자 회수")){
 			minus_point += pvo.getPoint_amount();
 		}else{
 			accumulated_point += pvo.getPoint_amount();
@@ -154,7 +154,7 @@ $(document).ready(function() {
                                 <td><%=pvo.getPoint_status() %></td>
                                 <td>
                                 <%
-                                if(pvo.getPoint_status().equals("상품구매 사용")||pvo.getPoint_status().equals("관리자 차감")){
+                                if(pvo.getPoint_status().equals("상품구매 사용")||pvo.getPoint_status().equals("관리자 회수")){
                                 %>
                                 -
                                 <%=pvo.getPoint_amount() %>

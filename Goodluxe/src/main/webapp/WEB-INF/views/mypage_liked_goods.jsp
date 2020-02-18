@@ -150,9 +150,10 @@
 									%>
 									<tbody>
 										<tr>
-											<td><input type="checkbox" class="chk" value = "<%=entity_number%>" id = "chk_one" name = "chk_one" ></td>
-											<td class="liked_goods_img_td"><img
-												src="/Goodluxe/image/<%=img_name %>" alt="샤넬 장지갑" width="150px">
+											<td>
+												<input type="checkbox" class="chk" value = "<%=entity_number%>" id = "chk_one" name = "chk_one" ></td>
+											<td class="liked_goods_img_td">
+												<img src="/Goodluxe/image/<%=img_name %>" alt="샤넬 장지갑" width="150px">
 											</td>
 											<td><%= product_name %></td>
 											<td><%= product_price_shaped %> 원</td>
@@ -161,10 +162,20 @@
 												<input type="button" class="liked_goods_btn" value="주문" onClick = "location.href='orderForm.do?entity_number=<%=entity_number%>'"><br /> 
 												<input type="button" class="liked_goods_btn" value="삭제" id = "delete" onClick = "location.href='deleteLikedGoods.do?entity_number=<%=entity_number%>'"></td><!-- onClick = "location.href=''" -->
 										</tr>
-									</tbody>
+									
 									<%
-										} } else { %> 관심 상품이 없습니다. <% }
+										} } else { 
+									%> 
+										<tr>
+											<td class="null_td" colspan="6">
+											관심 상품이 없습니다.
+											</td>
+										</tr>
+									 
+									<% 
+									}
 									%>
+									</tbody>
 								</table>
 								<div class="liked_goods_btnpart">
 									<input type="button"
@@ -221,6 +232,6 @@
 		</div>
 	</section>
 
-	<footer id="footer"> </footer>
+	<footer id="footer"></footer>
 </body>
 </html>
