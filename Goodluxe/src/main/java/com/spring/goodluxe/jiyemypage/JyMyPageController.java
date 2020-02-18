@@ -70,8 +70,8 @@ public class JyMyPageController {
 			
 			jyMyPageService.myInfoAction(memberVO);
 			
-			// return "my_info";
-			return "redirect:myInfo.do?member_id=mjmj";
+			// return "my_info mjmj";
+			return "redirect:myInfo.do";
 		}
 		@RequestMapping(value = "myLikedGoods.do")
 		public String likedGoods(HttpSession session, Model model, MemberVO memberVO, HttpServletRequest request 
@@ -85,7 +85,7 @@ public class JyMyPageController {
 			if(pageNum>pageCount) {
 				pageNum = pageCount;
 			}
-			int pageSize = 3;
+			int pageSize = 10;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -120,19 +120,21 @@ public class JyMyPageController {
 			
 			return "mypage_liked_goods";
 		}
-		@RequestMapping(value = "deleteLikedGoods")
-		public String deleteLikedGoods(Model model, @RequestParam(value = "entity_number", required = false ,defaultValue = "40") String entity_number)throws Exception {                   
+		@RequestMapping(value = "deleteLikedGoods.do")
+		public String deleteLikedGoods(Model model,HttpSession session, @RequestParam(value = "entity_number", required = false ,defaultValue = "40") String entity_number)throws Exception {                   
 			
-			jyMyPageService.deleteLikedGoods(entity_number);
+			String member_id = (String) session.getAttribute("member_id");
 			
+			jyMyPageService.deleteLikedGoods(entity_number, member_id);
 			
 			return "redirect:myLikedGoods.do";
 		}
-		@RequestMapping(value = "deleteCheckedGoods")
-		public String deleteCheckedGoods(Model model, HttpServletRequest request)throws Exception {                   
+		@RequestMapping(value = "deleteCheckedGoods.do")
+		public String deleteCheckedGoods(Model model, HttpServletRequest request,HttpSession session)throws Exception {                   
 			
 			//jyMyPageService.deleteLikedGoods(entity_number);
-			System.out.println("랄랄라라");
+			//System.out.println("랄랄라라");
+			String member_id = (String) session.getAttribute("member_id");
 			String[] checked = request.getParameterValues("chk_one");
 			
 //			System.out.println("check" + checked);
@@ -140,7 +142,7 @@ public class JyMyPageController {
 //				System.out.println(checked[i]);
 //			}
 			
-			jyMyPageService.deleteCheckedGoods(checked);
+			jyMyPageService.deleteCheckedGoods(checked ,member_id);
 			
 			return "redirect:myLikedGoods.do";
 		}

@@ -10,6 +10,6 @@ public interface JyMyPageService {
 	void myInfoAction(MemberVO memberVO)throws Exception;
 	ArrayList<HashMap<String, Object>> myLikedGoods(int startRow, int endRow,String member_id)throws Exception;
 	int myLikedGoodsCount(int startRow, int endRow,String member_id)throws Exception;
-	void deleteLikedGoods(String entity_number)throws Exception;
-	void deleteCheckedGoods(String[] checked);
+	void deleteLikedGoods(String entity_number, String member_id)throws Exception;
+	void deleteCheckedGoods(String[] checked, String member_id)throws Exception;
 }
