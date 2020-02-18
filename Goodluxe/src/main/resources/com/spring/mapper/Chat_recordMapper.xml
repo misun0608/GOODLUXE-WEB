@@ -12,6 +12,26 @@
 		<result property="chat_room" column="chat_room" />
 	</resultMap>
 	
+<resultMap type="com.spring.goodluxe.voes.Chat_recordVO" id="resultChatrecordcountVO">
+		<result property="member_id" column="member_id" />
+		<result property="chat_message" column="chat_message" />
+		<result property="chat_timestamp" column="chat_timestamp" />
+		<result property="chat_room" column="chat_room" />
+		<result property="chat_room_rank" column="chat_room_rank" />
+	</resultMap>
+	
+	
+	
+	<select id="selectListChatRecordcountdown" resultMap="" >
+		  select *
+            from(
+                select member_id, chat_message, chat_timestamp,chat_room,
+                    rank() over(partition by chat_room order by chat_timestamp desc) chat_room_rank
+                from gl_chat_record 
+                order by chat_room_rank asc)glcr
+                where glcr.chat_room_rank =1;
+	</select>
+	
 	<select id="selectListchatRecord" parameterType="String" resultMap="resultChatrecordVO" >
 		select *
 		from gl_chat_record
