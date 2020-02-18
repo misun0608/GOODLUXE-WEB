@@ -302,6 +302,12 @@
 		)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
 	</select>
 	
+	<select id = "findEnNum" parameterType="int" resultType="String">
+		select entity_number
+		from gl_ProductBoard
+		where entity_number = #{entity_number}
+	</select>
+	
 	<select id = "getTheProduct" parameterType = "hashmap" resultMap = "TheProductmapVO">
 		select * from(
 			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, gl_productboard.entity_number

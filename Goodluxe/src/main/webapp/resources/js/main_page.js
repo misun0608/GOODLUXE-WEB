@@ -1,8 +1,9 @@
 $(document).ready(function(){
     $('.main_image_left').on('mouseenter',function(){
-        var img_path = $(this).children().children().attr('src');
-        console.log(img_path);
-        $('.main_image_link_right>img').attr('src',img_path);
+        var mouse_img_src = $(this).children().children().attr('src');
+        var mouse_link_src = $(this).children().attr('href');
+        $('.main_image_link_right>img').attr('src',mouse_img_src);
+        $('.main_image_link_right').attr('href',mouse_link_src);
     });
 
     var posArr = [];

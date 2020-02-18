@@ -92,7 +92,7 @@
 						    </tr>
 						    <tr class="service_center_middle_tr">
 						        <td>2</td>
-						        <td><a href="board_notice.html">나눔클릭 캠페인 기부금 전달 공지</a></td>
+						        <td><a href="zNotice2.do">나눔클릭 캠페인 기부금 전달 공지</a></td>
 						        <td>2019.12.30</td>
 						    </tr>
 						    <tr class="service_center_middle_tr">
