@@ -38,11 +38,18 @@ img {vertical-align:top;}
         background :#D1DFE8;
     }
     .recent_point_half h1{
-        width:50px; 
-        color:red;
-        float:left;
+        
+        color:#e0513e;
+        float:right;
+        font-size : 30px;
+        position : relative;
+       	top : 16px;
+       	left : 20px;
     }
-
+    .span_black{
+    	color :grey;
+    	font-weight : lighter;	
+    }
     .point_detail_title{
         position: relative;
         left : 50%;
@@ -50,7 +57,13 @@ img {vertical-align:top;}
         margin-left: -65px;
         height : 22px;
         top : 30%;
-        
+    }
+    .point_detail_letter{
+    	position : relative;
+    	top : 0px;
+    	width: 180px;
+    	font-size : 18px;
+    	
     }
     .point_detail{
         position: relative;
@@ -59,9 +72,13 @@ img {vertical-align:top;}
         margin-left: -35px;
         top : 20%;
     }
-    .recent_point_p{   
+    /*.recent_point_p{   
         font-size :1.4em;
-    }
+        position : relative;
+        top : 35px;
+        left: 30px;
+        float:right;
+    }*/
     .point_chart_center{
         width: 380px;
         height : 63px;
@@ -72,15 +89,12 @@ img {vertical-align:top;}
 
     }
     .point_chart_li1{
-        width: 150px;
+        width: 400px;
         height : 30px;
         float:left;
+        margin : 10px;
     }
-    .point_chart_li2{
-        width: 230px;
-        height : 30px;
-        float:left;
-    }
+   
 
     .history_point_box{
         clear: both;
@@ -249,7 +263,7 @@ img {vertical-align:top;}
         top : 20%;
     }
     .recent_point_p{   
-        font-size :1.4em;
+        font-size :20px;
     }
     .point_chart_center{
         width: 320px;
@@ -261,6 +275,9 @@ img {vertical-align:top;}
 
     }
     .point_chart_li1{
+    	position : relative;
+    	top :20px;
+    	left : 30px;
         width: 130px;
         height : 30px;
         float:left;
@@ -268,6 +285,9 @@ img {vertical-align:top;}
         margin-left: 20px;
     }
     .point_chart_li2{
+    	position : relative;
+    	top :20px;
+    	left : 30px;
         width: 160px;
         height : 30px;
         float:left;

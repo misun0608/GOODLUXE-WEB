@@ -32,6 +32,7 @@ public class HelpAjaxController {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		try {
 			int res = 0;
+			commVO.setComment_content(commVO.getComment_content().replace("\r\n", "<br/>"));
 			if(commVO.getComment_ref() == 0) {
 				res = gls.insertComment(commVO);
 			} else {

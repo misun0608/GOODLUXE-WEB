@@ -44,7 +44,7 @@
 	<script>
 		$(document).ready(function(){
 			$("#mypage_menu").load("mypageMenu.do", function(){
-				$('.menu_container').children('a').eq(0).children().children('.icon').addClass('selected_menu');
+				$('.menu_container').children('a').eq(7).children().children('.icon').addClass('selected_menu');
 			});
 		});
 	</script>

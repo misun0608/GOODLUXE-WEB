@@ -501,13 +501,13 @@ $(document).ready(function() {
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
-
-			<h1 id="container_title">관리자 상품등록 검색(전후)</h1>
+			<h1 id="container_title">상품상태 관리</h1>
 			<div class="container_wr">
 				<section>
-
-
-					<br>
+				
+					<br />
+					<br />
+					
 					<h3>| 배송관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
@@ -577,7 +577,8 @@ $(document).ready(function() {
 					<br>
 					<center>
 			        	<div class="pagination" id="pagination">
-			        </center> 
+			        </center>
+			        <br />
 				</section>
 			</div>
 

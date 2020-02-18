@@ -95,6 +95,11 @@
 
 	
 </script>
+<script>
+
+
+
+</script>
 
 </head>
 <body>
@@ -105,10 +110,15 @@
 
 			<h1 id="container_title">관리자 판매 페이지</h1>
 			<div class="container_wr">
-
+			<!-- 	<table > 
+					<tr><td>개체번호</td><td>매입/위탁</td><td>상품명</td><td>브랜드</td><td>카테고리</td></tr>
+					<tbody id = "output">
+					여기에 추가로 상품리스트 보는곳을 만드시오
+					</tbody>
+				</table> -->
 				<form name="input_form" action="./postUploadAction.do" method="post" enctype ="multipart/form-data" onsubmit = "return submitCheck()">
 					<br> <br>
-					<h3>▶ 기본 정보 입력</h3>
+					<h3>| 기본 정보 입력</h3>
 					<br>
 					<table class="information">
 						<tr>
@@ -161,7 +171,7 @@
 					</table>
 					<br> <br>
 	
-					<h3>▶ 이미지 등록</h3>
+					<h3>| 이미지 등록</h3>
 					<br>
 					<table class="information">
 						<tr>
@@ -217,7 +227,7 @@
 						
 					</table>
 	
-					<br> <br> <br>
+					<br> <br>
 	
 					<div align="center">
 						<input type="reset" class="bottom_btn cancel_btn" value ="취소">

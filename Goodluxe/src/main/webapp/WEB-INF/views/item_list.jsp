@@ -263,7 +263,7 @@
 								int startPage = 1;
 								int i;
 								
-								if(currentPage%10!=0)
+								if(currentPage%5!=0)
 										startPage = (int)(currentPage/5)*5+1;
 								else
 									startPage = currentPage-4;
