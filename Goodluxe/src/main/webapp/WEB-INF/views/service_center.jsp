@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +33,7 @@
 		$(".scmt").load("scMenu.do", function(){
 			$('.scmt').children('a').eq(0).addClass('current');
 		});
-		
-		/* $("#center_tab-1").load("scFAQ.do"); */
-/* 		$("#center_tab-2").load("scQBoard.do");
-		$("#center_tab-3").load("scChat.do");
-		$("#center_tab-4").load("scMethod.do");
-		$("#center_tab-5").load("scNotice.do");
-		$("#center_tab-6").load("scLocation.do"); */
+
 	});
 </script>
 
@@ -116,24 +111,6 @@
 						    </tr>
 						</table>
                     </div>
-                    <!-- 
-                    고객센터 탭 2번 문의 게시판
-                    <div id="center_tab-2" class="center_tab-content">
-                    </div>
-                    고객센터 탭 3번 채팅 문의
-                    <div id="center_tab-3" class="center_tab-content">
-                    </div>
-                    고객센터 탭 4번 쇼핑 절차
-                    <br />
-                    <div id="center_tab-4" class="center_tab-content">
-                    </div>
-                    고객센터 탭 5번 공지사항
-                    <div id="center_tab-5" class="center_tab-content">
-                    </div>
-                    고객센터 탭 6번 매장 위치
-                    <div id="center_tab-6" class="center_tab-content">
-                    </div>
-                     -->
                 <br/><br/><br/>
                 </div>
             </section>

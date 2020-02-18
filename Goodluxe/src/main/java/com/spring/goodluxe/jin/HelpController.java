@@ -40,8 +40,8 @@ public class HelpController {
 		
 		if(pageNum<=0) { pageNum = 1; }
 		if(pageNum>pageCount) { pageNum = pageCount; }
-		// int pageSize = 10;
-		int pageSize = 5;
+		int pageSize = 10;
+//		int pageSize = 5;
 		int currentPage = pageNum;
 		int startRow = (currentPage-1) * pageSize +1;
 		int endRow = startRow + pageSize - 1;
@@ -134,6 +134,7 @@ public class HelpController {
 				writer.write("<script>alert('로그인 후 이용해주세요.');" + "location.href=history.go(-1);</script>");
 				return null;
 			}
+			inVO.setInquire_content(inVO.getInquire_content().replace("\r\n", "<br/>"));
 			inVO.setMember_id((String)session.getAttribute("member_id"));
 			gls.inquireInsert(inVO);
 		} catch(Exception e) {

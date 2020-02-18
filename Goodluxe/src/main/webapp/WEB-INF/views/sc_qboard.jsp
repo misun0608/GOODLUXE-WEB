@@ -6,12 +6,7 @@
 	ArrayList<InquireVO> qbList = (ArrayList<InquireVO>) request.getAttribute("qbList");
 	String member_id = (String)session.getAttribute("member_id");
 	String member_isadmin = (String)session.getAttribute("member_isadmin");
-	/* 
-	int currentPage = 1;
-	int count = 1;
-	int number = 1;
-	int pageSize = 1;
-	 */
+
  	int currentPage = (int)request.getAttribute("currentPage");
 	int count = (int)request.getAttribute("count");
 	int number = (int)request.getAttribute("number");
@@ -141,7 +136,7 @@
 						        <td>
 							         	<a href="scQBoardDetail.do?inquire_number=<%=inVO.getInquire_number()%>" class="qb_title" writer_id="<%=inVO.getMember_id()%>" qb_public="<%=inVO.getInquire_public()%>">
 						        		<% if(inVO.getInquire_public().equals("private")) { %>
-						        		<img src="" alt="[비밀글]">
+						        		<img src="${pageContext.request.contextPath}/resources/img/icons/lock.png" alt="[비밀글]" style="width:10px; vertical-align: middle;">
 						        		<% } %>
 						        		<%=inVO.getInquire_title() %>
 						        		&nbsp;&nbsp;
@@ -165,7 +160,7 @@
 									int startPage = 1;
 									int i;
 									
-									if(currentPage%10!=0)
+									if(currentPage%5!=0)
 											startPage = (int)(currentPage/5)*5+1;
 									else
 										startPage = currentPage-4;
