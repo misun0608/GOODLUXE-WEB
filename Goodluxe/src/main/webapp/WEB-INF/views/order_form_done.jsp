@@ -103,7 +103,7 @@
                         	}
                         %>
                         <p>
-                            주문내역 및 배송에 대한 상세안내는 <a href="#">주문조회</a> 를 통하여 확인 가능합니다</p><br />
+                            주문내역 및 배송에 대한 상세안내는 <a href="mypageOAS.do">주문조회</a> 를 통하여 확인 가능합니다</p><br />
                             <p class="order_num_p">주문번호: <%=ovo.getOrder_number() %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             주문일자: <%=order_date %><br />
                         </p>
@@ -156,7 +156,7 @@
                               </table>
                         </div>
                         <br />
-                        <button class="apply_addbtn apply_mainbtn">메인화면으로</button>
+                        <button class="apply_addbtn apply_mainbtn" onClick="location.href='mainPage.do'; return false;">메인화면으로</button>
                     </div>
                 </div>
             </div>

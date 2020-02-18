@@ -6,6 +6,7 @@ img {vertical-align:top;}
 
 /* 데스크톱 */
 @media screen and (min-width: 960px) {
+	a { color: #000; }
 
     .service_center_sm_select {
         display: none;

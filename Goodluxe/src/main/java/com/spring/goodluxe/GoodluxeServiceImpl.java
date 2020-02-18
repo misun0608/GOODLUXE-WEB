@@ -308,6 +308,19 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 		}
 	}
 	
+	// Find Entity Number
+	public String findEnNum(int pb_number) throws Exception {
+		String enNum = null;
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			
+			enNum = productlistMapper.findEnNum(pb_number);
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/findEnNum) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/findEnNum)");
+		}
+		return enNum;
+	}
 	// MD Detail Information
 	public HashMap<String, Object> getTheProduct(String entity_number)throws Exception {
 		try {

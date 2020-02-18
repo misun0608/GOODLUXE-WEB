@@ -59,7 +59,6 @@ public class HelpController {
 				qbList = gls.loadQBList(startRow, endRow);
 				number = count - (currentPage - 1) * pageSize;
 			}		
-			
 			mav.addObject("qbList", qbList);
 			mav.addObject("currentPage", currentPage);
 			mav.addObject("count", count);
@@ -162,6 +161,58 @@ public class HelpController {
 			System.out.println("ERROR(HeplController/scQBoardDetail) : " + e.getMessage());
 			mav.setViewName("redirect:scQBoard.do");
 		}
+		return mav; 
+	}
+	// Load Question Board Post Data for Update
+	@RequestMapping(value = "inquireUpdateForm.do", method = RequestMethod.GET)
+	public ModelAndView inquireUpdateForm(int inquire_number) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			InquireVO qPost = gls.loadQPost(inquire_number);
+			if(qPost == null) {
+				mav.setViewName("redirect:scQBoard.do");
+			} else {
+				qPost.setInquire_content(qPost.getInquire_content().replace("<br/>", "\r\n"));
+				mav.addObject("qPost", qPost);
+				mav.setViewName("sc_qboard_update");
+			}
+		} catch(Exception e) {
+			System.out.println("ERROR(HeplController/inquireUpdateForm) : " + e.getMessage());
+			mav.setViewName("redirect:scQBoard.do");
+		}
+		return mav; 
+	}
+	// Update Question Board Post Data
+	@RequestMapping(value = "inquireUpdate.do", method = RequestMethod.GET)
+	public ModelAndView inquireUpdate(InquireVO inVO) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			inVO.setInquire_content(inVO.getInquire_content().replace("\r\n", "<br/>"));
+			gls.inquireUpdate(inVO);
+		} catch(Exception e) {
+			System.out.println("ERROR(HeplController/inquireUpdate) : " + e.getMessage());
+		}
+		String url = "redirect:scQBoardDetail.do?inquire_number=" + inVO.getInquire_number();
+		mav.setViewName(url);
+		return mav; 
+	}
+	// Delete Question Board Post Data
+	@RequestMapping(value = "inquireDelete.do", method = RequestMethod.GET)
+	public ModelAndView inquireDelete(int inquire_number) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			gls.inquireDelete(inquire_number);
+		} catch(Exception e) {
+			System.out.println("ERROR(HeplController/inquireDelete) : " + e.getMessage());
+		}
+		mav.setViewName("redirect:scQBoard.do");
+		return mav; 
+	}
+	
+	@RequestMapping(value = "zNotice2.do", method = RequestMethod.GET)
+	public ModelAndView zNotice2() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("z_notice2");
 		return mav; 
 	}
 	

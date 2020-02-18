@@ -121,10 +121,11 @@ public class GLPageController {
 	/* MyPage */
 	// order_and_shipping
 	@RequestMapping(value = "mypageOAS.do", method = RequestMethod.GET)
-	public ModelAndView mypageOAS(String member_id, HttpSession session) {
+	public ModelAndView mypageOAS(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		String online_id = (String)session.getAttribute("member_id");
 		
-		if(session.getAttribute("member_id") == null) {
+		if(online_id == null) {
 			mav.setViewName("redirect:/mainPage.do");
 			return mav;
 		}
@@ -132,7 +133,6 @@ public class GLPageController {
 		try {
 			ArrayList<HashMap<String, Object>> oaslist = null;
 			ArrayList<HashMap<String, Object>> cancellist = null;
-			String online_id = member_id;
 			oaslist = gls.getOasData(online_id);
 			cancellist = gls.getCancelData(online_id);
 			mav.addObject("oaslist", oaslist);
@@ -140,7 +140,7 @@ public class GLPageController {
 			mav.setViewName("order_and_shipping");
 		} catch(Exception e) {
 			System.out.println("ERROR(GLPageController/mypageOAS) : " + e.getMessage());
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:/mainPage.do");
 		}
 		return mav;
 	}
@@ -330,6 +330,18 @@ public class GLPageController {
 		return "search_result";
 	}
 	
+	@RequestMapping(value = "findEnNum.do")
+	public String findEnNum(int pb_number) {
+		String enNum = null;
+		try {
+			enNum = gls.findEnNum(pb_number);
+		} catch(Exception e) {
+			System.out.println("ERROR(GLPageController/findEnNum) : " + e.getMessage());
+		}
+		String url = "redirect:mdDetail.do?entity_number=" + enNum;
+		return url;
+	}
+	
 	// MD Detail Information
 	@RequestMapping(value = "mdDetail.do")
 	public String mdDetail( Model model, String entity_number, HttpServletResponse response ) throws Exception {
@@ -362,7 +374,7 @@ public class GLPageController {
 	// Order Part
 	// Move to Order Form
 	@RequestMapping(value = "orderForm.do")
-	public String orderForm(String entity_nuber, Model model, String entity_number, HttpServletResponse response, HttpSession session) throws Exception{
+	public String orderForm(Model model, String entity_number, HttpServletResponse response, HttpSession session) throws Exception{
 		String member_id = (String) session.getAttribute("member_id");
 		if(member_id == null) {
 			response.setCharacterEncoding("UTF-8");

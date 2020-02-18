@@ -3,7 +3,7 @@ package com.spring.goodluxe.voes;
 import java.sql.Timestamp;
 
 /*
- create table notice(
+ create table gl_notice(
 	alarm_number varchar2(20),
 	member_id varchar2(30),
     alarm_date timestamp(6),

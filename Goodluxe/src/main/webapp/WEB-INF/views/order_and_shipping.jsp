@@ -119,7 +119,7 @@
 								<tr>
                                     <td><%=order_date %><br/><a href="orderDetail.do?order_number=<%=oasData.get("order_number") %>">[<%=oasData.get("order_number") %>]</a></td>
                                     <td><img src="/Goodluxe/image/<%=oasData.get("pb_main_img_stored") %>" class = "order_shipping_img"></td>
-                                    <td><a href="mdDetail.do"><%=oasData.get("pb_md_name") %></a></td>
+                                    <td><a href="findEnNum.do?pb_number=<%=oasData.get("pb_number")%>"><%=oasData.get("pb_md_name") %></a></td>
                                     <td><%=order_price %></td>
                                     <td><%=oasData.get("order_status") %></td>
                                     <%
@@ -176,7 +176,7 @@
 								<tr>
                                     <td><%=order_date %><br/><a href="orderDetail.do?order_number=<%=cancelData.get("order_number") %>">[<%=cancelData.get("order_number") %>]</a></td>
                                     <td><img src='/Goodluxe/image/<%=cancelData.get("pb_main_img_stored") %>' class = "order_shipping_img"></td>
-                                    <td><a href="mdDetail.do"><%=cancelData.get("pb_md_name") %></a></td>
+                                    <td><a href="findEnNum.do?pb_number=<%=cancelData.get("pb_number")%>"><%=cancelData.get("pb_md_name") %></a></td>
                                     <td><%=order_price %></td>
                                     <td><%=cancelData.get("order_status") %></td>
                                     <td><button onClick="location.href='orderDetail.do?order_number=<%=cancelData.get("order_number") %>'; return false;">상세보기</button></td>

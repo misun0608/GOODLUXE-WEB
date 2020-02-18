@@ -135,9 +135,6 @@
             			fivecontent++;
             			var hidden_alarm_box = '';
 						if(item.alarm_number == "isNULL"){
-							hidden_alarm_box += '<li>';
-							hidden_alarm_box += '더이상 알람이 없습니다 :D';
-							hidden_alarm_box += '</li>';
 							
 							$('#more_alarm').hide();
 						}else{
