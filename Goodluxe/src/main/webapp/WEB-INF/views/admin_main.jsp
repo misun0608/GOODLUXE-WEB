@@ -711,7 +711,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">관리자메인</h1>
+			<h1 id="container_title">매출현황</h1>
 			<div class="container_wr">
 			<br />
 				<section>
@@ -869,6 +869,8 @@
 							</span>
 						</div>
 					</section>
+					
+					<br />
 					
 					<!-- 월간 끝 -->
 

@@ -60,16 +60,50 @@
          });
       });
    </script>
+   
+
    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_onlymenu.css" />
    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage_salesinquiry.css" />
-   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_salesinquiry.js"></script>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage_salesinquiry.js"></script>
+ --%>
+   <script>
+   $(document).ready(function () {
+	  $('ul.inquiry_tabs li').click(function () {
+
+	    var tab_id = $(this).attr('data-tab');
+	    console.log(tab_id);
+
+	    $('ul.inquiry_tabs li').removeClass('current');
+	    $('.tab-content').removeClass('current');
+	    // 탭추가
+	    $('a').removeClass('current');
+
+	    $(this).addClass('current');
+	    $("#" + tab_id).addClass('current');
+	    // 탭추가
+
+	  });
+
+	  $('.step').click(function () {
+	    var tab = $(this).attr('data-tab');
+	    $('.step').removeClass('show');
+	    $('.tab').removeClass('show');
+	    $(this).addClass('show');
+	    $("#" + tab).addClass('show');
+	  });
+
+	  $('.inquiry_tabs>li>a').on('click',function(){
+	    $('.inquiry_tabs>li>a').removeClass('on');
+	    $(this).addClass('on');
+	  })
+	});
+
+   </script>
 
 </head>
 <body class="">
     <header id="header"></header>
-
     <nav id="nav_bar"></nav>
-
     <div class="login_bg" id="login_box"></div>
 	
 	<section id="container">
@@ -83,13 +117,13 @@
                     <div id="inquiry_container">
                         <!--판매조회_위탁판매-->
                         <ul class="inquiry_tabs">
-                            <li class="tab-link current" data-tab="tab-1"><a href="#" class="anchor current"
-                                    name="#tab-1">위탁 상품</a></li>
-                            <li class="tab-link" data-tab="tab-2"><a href="#" class="anchor" name="#tab-2">매입</a>
+                            <li class="tab-link current" data-tab="tab-1">
+                            	<a href="#" class="anchor current" name="#tab-1">위탁 상품</a></li>
+                            <li class="tab-link" data-tab="tab-2">
+                            	<a href="#" class="anchor" name="#tab-2">매입</a>
                             </li>
                         </ul>
                         <hr id="tab-line" class="tab-line">
-                        </hr>
                     </div>
                     <div id="tab-1" class="tab-content current">
                         <div class="steppart">
@@ -110,7 +144,6 @@
                                     <% if(selling_list == null) { %> 0 <% } else { %>
                                     <%=selling_list.size() %>
                                     <% } %>
-                                </a>
                                 </a>
                             </div>
                             <div class="step next">

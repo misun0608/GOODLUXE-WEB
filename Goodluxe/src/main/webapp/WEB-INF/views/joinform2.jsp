@@ -33,21 +33,21 @@
 			$("#footer").load("footer.do");
 			
 		    // 체크박스 전체선택 및 전체해제
-		    $('#chk_all').on('click', function () {
-		        if ($("#chk_all").is(":checked")) {
-		            $(".chk").prop("checked", true);
+		    $("#email_chk_all").click(function () {
+		        if ($("#email_chk_all").is(":checked")) {
+		            $(".email_chk").prop("checked", true);
 		        }
 		        else {
-		            $(".chk").prop("checked", false);
+		            $(".email_chk").prop("checked", false);
 		        }
 		    });
 
 		    // 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
-		    $(".chk").click(function () {
-		        if ($("input[name='chk']:checked").length == 3) {
-		            $("#chk_all").prop("checked", true);
+		    $("input[name='email_chk']").click(function () {
+		        if ($("input[name='email_chk']:checked").length == 3) {
+		            $("#email_chk_all").prop("checked", true);
 		        } else {
-		            $("#chk_all").prop("checked", false);
+		            $("#email_chk_all").prop("checked", false);
 		        }
 		    });
 		});
@@ -74,7 +74,7 @@
                 <br /><br /><br />
 		<form action="joinform3.do" name="join_form" method="POST">
                 <div class="join_agreement">
-                    <div class="agr"><input type="checkbox" class="email_chk" id="email_chk_all" name="email_chk_all"><label for="email_chk_all"
+                    <div class="agr"><input type="checkbox" class="email_chk" name="email_chk_all" id="email_chk_all"><label for="email_chk_all"
                             class="join_label">전체
                             동의</label></input></div>
                     <div class="agr_title">[필수] 이용약관 동의</div>
@@ -145,7 +145,7 @@
 
 </textarea><br />
                     <div class="agr">
-                        <input type="checkbox" class="email_chk" id="email_chk2" name="email_chk2" required><label for="chk2"
+                        <input type="checkbox" class="email_chk" id="email_chk2" name="email_chk" required><label for="chk2"
                             class="join_label">동의함</label></input></div><br /><br />
 
 
@@ -186,7 +186,7 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
 정보주체는 개인정보 수집에 동의를 거부할 권리가 있습니다. 다만, 필수 항목에 대한 동의를 거부할 시 저희가 제공하는 서비스를 이용할 수 없습니다.
 
 </textarea><br />
-                    <div class="agr"><input type="checkbox" class="email_chk" id="email_chk3" name="email_chk3" required><label for="chk3"
+                    <div class="agr"><input type="checkbox" class="email_chk" id="email_chk3" name="email_chk" required><label for="chk3"
                             class="join_label">동의함</label></input></div><br /><br />
 
 <!--                     <div class="agr_title">[선택] 마케팅 정보 활용 동의</div><br />

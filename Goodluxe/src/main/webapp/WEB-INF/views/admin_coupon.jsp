@@ -298,7 +298,7 @@ $(document).ready(function() {
 
   <div id="wrapper">
     <div id="container" class="container-small">
-      <h1 id="container_title">관리자 쿠폰관리 페이지</h1>
+      <h1 id="container_title">쿠폰관리 페이지</h1>
       <div class="container_wr">
         <section>
           <br><br>	
@@ -408,7 +408,8 @@ $(document).ready(function() {
           <br/>
          <center>
           <div class="pagination" id="pagination">
-         </center> 
+         </center>
+         <br />
         </section>
       </div>
     </div>
