@@ -182,19 +182,16 @@ public class jaejinuController {
 		if(member_id.equals(null)) {
 			return "redirect:/loginForm.do";
 		}
-		
+		int res=0;
 		
 		ChatMemberVO chatmembervo = new ChatMemberVO();
 		
 		
 		chatmembervo.setChat_num(0);
 		chatmembervo.setMember_id(member_id);
-		chatmembervo.setChat_room("");
+		chatmembervo.setChat_room(member_id);
 		
 		chatmembervo = chatmemberService.getRoomMember(chatmembervo);
-		String chat_room = chatmembervo.getChat_room();
-		System.out.println("-----------");
-		System.out.println("chat_room="+chat_room);
 		
 		
 		//DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
@@ -207,9 +204,13 @@ public class jaejinuController {
 			chatmembervo_add.setChat_num(0);
 			chatmembervo_add.setMember_id(member_id); 
 			chatmembervo_add.setChat_room(member_id);
-			chatmemberService.addRoomMember(chatmembervo_add);
+			res = chatmemberService.addRoomMember(chatmembervo_add);
 			
-
+			chatmembervo.setChat_num(0);
+			chatmembervo.setMember_id(member_id);
+			chatmembervo.setChat_room(member_id);
+			res = chatmemberService.addRoomMember(chatmembervo);
+			
 			//추가를 한다음 chatM을 다시 받아오도록한다.
 			//추가할 때 vo에 set으로 추가해서 넣어주자 저거 안되더라 
 			ChatMemberVO chatmembervo_get = new ChatMemberVO();
@@ -218,8 +219,12 @@ public class jaejinuController {
 			if(!member_id.equals("admin")) {
 			chatmembervo_get.setChat_room(member_id);
 			}else {
+				String chat_room = chatmembervo_get.getChat_room();
+				System.out.println("-----------");
+				System.out.println("chat_room="+chat_room);
 			chatmembervo_get.setChat_room(chat_room);
 			}
+			res = chatmemberService.addRoomMember(chatmembervo_get);
 			chatM = chatmemberService.getRoomMember(chatmembervo_get);
 		}
 		//존재한다면 그 방으로 이동 
@@ -227,12 +232,9 @@ public class jaejinuController {
 			System.out.println("관리자");
 		}
 		}
-		
+		chatmembervo = chatmemberService.getRoomMember(chatmembervo);
 		//현재 방이름 넣기(전체채팅방이니 all)
 		//해당 이름으로 넣쟈 
-		System.out.println("--------");
-		System.out.println(member_id);
-		System.out.println(chatmembervo.getChat_room());
 		if(member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
 		model.addAttribute("room", "all");
 		}else {
@@ -244,8 +246,7 @@ public class jaejinuController {
 		
 		ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
 		 
-		 System.out.println(chat_room);
-		 chatrecord=chat_recordService.selectListchatRecord(chat_room);
+		 chatrecord=chat_recordService.selectListchatRecord(member_id);
 		 model.addAttribute("chatrecord",chatrecord);
 		 
 		
@@ -253,20 +254,20 @@ public class jaejinuController {
 		return "chat";
 		}
 	
-//	  // 채팅 list count 뽑기 	  
-//	  @RequestMapping(value="chatroomlistcount.do", method = { RequestMethod.GET, RequestMethod.POST },produces="application/json;charset=UTF-8")
-//	  @ResponseBody 
-//	  public ArrayList<Chat_recordVO> chatroomlistcount(HttpServletRequest req, Model model) throws Exception{
-//	  
-//	  ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
-//	  
-//	  ArrayList<ChatMemberVO> chatmembervo = new ArrayList<ChatMemberVO>();
-//	  chatmembervo = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
-//	  String chat_room = req.getParameter("chat_room");
-//	  System.out.println(chat_room); 
-//	  try { 
-//		  chatrecord = chat_recordService.selectListchatRecord(chat_room);
-//		  int count =0;
+	  // 채팅 list count 뽑기 	  
+	  @RequestMapping(value="chatroomlistcount.do", method = { RequestMethod.GET, RequestMethod.POST },produces="application/json;charset=UTF-8")
+	  @ResponseBody 
+	  public ArrayList<ChatMemberVO> chatroomlistcount(HttpServletRequest req, Model model) throws Exception{
+	  
+	  ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
+	  
+	  ArrayList<ChatMemberVO> chatmembervo = new ArrayList<ChatMemberVO>();
+	  chatmembervo = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
+	  String chat_room = req.getParameter("chat_room");
+	  System.out.println(chat_room); 
+	  try {
+		  chatrecord = chat_recordService.selectListchatRecord(chat_room);
+		  int count =0;
 //		 for(int i = 0; i<chatmembervo.size(); i++) {
 //			  ArrayList<Chat_recordVO> chatcount = chat_recordService.selectListchatRecordCount(chatmembervo.get(i).getChat_room());
 //			  
@@ -278,14 +279,14 @@ public class jaejinuController {
 //				  }
 //			  }
 //		  }
-//		  
-//		  model.addAttribute("chatrecord",chatrecord); 
-//			  
-//		  
-//	  }catch(Exception e){
-//	  System.out.println("chat_room 실패 +"+e.getMessage()); }
-//	 
-//	  return chatrecord; }
+		  
+		  model.addAttribute("chatrecord",chatrecord); 
+			  
+		  
+	  }catch(Exception e){
+	  System.out.println("chat_room 실패 +"+e.getMessage()); }
+	 
+	  return chatmembervo; }
 	 
 	
 	
