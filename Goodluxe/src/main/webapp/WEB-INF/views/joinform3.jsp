@@ -64,6 +64,8 @@
 	}
 
 	function join_check() {
+		
+		
 
 		var phone1 = join_input_form.telinput1.value;
 		var phone2 = join_input_form.telinput2.value;
@@ -78,6 +80,7 @@
 		var email = email1 + "@" + email2;
 		document.getElementById('member_email').value = email;
 
+		
 	}
 </script>
 
@@ -94,27 +97,6 @@
 		<br>
 		<div id="main">
 			<center>
-				<!-- <br /><br />
-            <h1>회원가입</h1>
-            <br /><br />
-            <div class="joinstep">
-                <div class="circle" id="one">
-                    <div class="circir">1</div>
-                </div>
-                <hr class="menu_line">
-                <div class="circle" id="two">
-                    2
-                </div>
-                <hr class="menu_line">
-                <div class="circle" id="three">
-                    <div class="circir">3</div>
-                </div>
-                <div class="jointitle">
-                    <div class="num_title" id="onetitle">약관동의</div>
-                    <div class="num_title" id="twotitle">정보입력</div>
-                    <div class="num_title" id="threetitle">가입완료</div>
-                </div>
-            </div> -->
 				<br /> <br />
 				<div class="jointstep_image">
 					<img
@@ -228,10 +210,8 @@
 											<option value="gmail.com">gmail.com</option>
 											<option value="etc">직접입력</option>
 									</select>
-									<input type="hidden" id="member_email" name="member_email"
-										value="">
-									<input type="hidden" id="member_phone" name="member_phone"
-										value=member_phone>
+									<input type="hidden" id="member_email" name="member_email" value="">
+									<input type="hidden" id="member_phone" name="member_phone" value=member_phone>
 									<input type="hidden" name="member_class" value="N">
 									<input type="hidden" name="member_isadmin" value="N">
 									</td>
@@ -477,7 +457,7 @@
 											<p>Maje</p>
 											<br />
 											<!-- <input type="checkbox" class="join_prefer_brand">
-                                    <p>Marc by Marc Jacobs</p><br /> -->
+                                    <p>Marc by Marc Jacobs</p><br /> -->	
 											<input type="checkbox" class="join_prefer_brand"
 												name="member_like_brand" value="Marc Jacobs">
 											<p>Marc Jacobs</p>

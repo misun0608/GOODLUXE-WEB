@@ -64,7 +64,8 @@ img {vertical-align:top;}
     
     .agr{
         font-size: 13px;
-        margin-right: 15px;
+        float: right;
+        margin: 5px 5px 0 0;
     }
 
     .agree_textarea{
@@ -101,6 +102,10 @@ img {vertical-align:top;}
         background-color: white;
         color: #2F87C9;
         border: 0.8px solid #2F87C9;
+    }
+    
+    .email_chk{
+    	podding-top : 3px;
     }
     
     /*

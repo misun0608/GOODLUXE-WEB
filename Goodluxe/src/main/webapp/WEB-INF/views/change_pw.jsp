@@ -40,8 +40,10 @@
 		function change_pw_btn() {
 			if ((document.getElementById("change_pw1").value == "") || (document.getElementById("change_pw2").value == "")){
 				alert("모두 입력하였는지 확인해주세요");
-			} else if(document.getElementById("change_pw1").value.length <= 3){
-				alert("3자리 이상 입력하십시오");
+			} else if(document.getElementById("change_pw1").value.length < 10){
+				alert("10자리 이상 입력하십시오");
+			} else if((document.getElementById("change_pw1").value)!=(document.getElementById("change_pw2").value)){
+				alert("동일한 비밀번호를 입력하십시오");
 			} else {
 				document.getElementById('change_pw_form').submit();
 			}
@@ -85,19 +87,19 @@
 										<input type="hidden" id="member_id" name="member_id" value="<%=memberVO.getMember_id() %>">
 									</td>
 								<tr>
-									<td></td>
+<!-- 									<td class="alert alert-pw2" id="alert-pw"></td> -->
 									<td class="alert alert-success_pw2" id="alert-success_pw"
-										style="font-size: 12px; color: #0084c9; padding: 4px 0 0 5px">비밀번호가
+										style="font-size: 12px; color: #0084c9; padding: 4px 0 0 5px" colspan="2">비밀번호가
 										일치합니다.</td>
 									<td class="alert alert-danger_pw" id="alert-danger_pw"
-										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호가
+										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px" colspan="2">비밀번호가
 										일치하지 않습니다.</td>
-									<td class="alert alert-danger_pw1" id="alert-danger_pw"
-										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호는
+									<td class="alert alert-danger_pw1" id="alert-danger_pw1"
+										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px" colspan="2">비밀번호는
 										10자 이상 입력해주세요.</td>
 								</tr>
 								<tr class="jointablerow">
-									<td colspan="2">
+									<td colspan="2" style="margin-bottom:15px">
 									<input type="button" onclick="change_pw_btn();" class="change_pw_button" value="비밀번호 변경">
 									</td>
 								</tr>
