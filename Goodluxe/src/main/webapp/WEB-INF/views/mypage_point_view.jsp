@@ -89,15 +89,15 @@ $(document).ready(function() {
                     <div> <h3 class = "recent_point_title">나의 마일리지 현황</h3></div>
                     <div class = "recent_point_one">
                         <div class = "recent_point_half">
-                            <div class = "point_detail_title"><p >사용가능 적립금</p></div><br/>
-                            
-                            <div class = "point_detail"><h1><%=mvo.getMember_point() %></h1><p class = "recent_point_p">P</p></div>
+                            <div class = "point_detail_title"><p class = "point_detail_letter">사용가능 적립금</p></div><br/>
+                            <!-- <p class = "recent_point_p">P</p> -->
+                            <div class = "point_detail"><h1><%=mvo.getMember_point() %>&nbsp;&nbsp;<span class = "span_black">P</span></h1></div>
                         </div>
                         <div class = "recent_point_half">
                             <div class = "point_chart_center">
                                 <ul class = "point_chart">
-                                    <li class = "point_chart_li1">적립 마일리지 </li><li  class = "point_chart_li2">: <%=accumulated_point %> P</li>
-                                    <li class = "point_chart_li1">사용 마일리지 </li><li  class = "point_chart_li2">: -<%=used_point %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;적립 마일리지  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   <%=accumulated_point %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;사용 마일리지  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=used_point %> P</li>
                                 </ul>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ $(document).ready(function() {
                         if(point_list == null||point_list.size()==0){
                         %>
                         	<tr>
-                        		<td colspan="4">조회 가능한 적립금 내역이 없습니다.</td>
+                        		<td colspan="5">조회 가능한 적립금 내역이 없습니다.</td>
                         	</tr>
                         <%
                         }else{
@@ -166,7 +166,7 @@ $(document).ready(function() {
                         int startPage = 1;
                         int i;
                         
-                        if(currentPage%10!=0)
+                        if(currentPage%5!=0)
                               startPage = (int)(currentPage/5)*5+1;
                         else
                            startPage = currentPage-4;

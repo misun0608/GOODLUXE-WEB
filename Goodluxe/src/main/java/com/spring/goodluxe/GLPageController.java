@@ -242,7 +242,7 @@ public class GLPageController {
 			if(pageNum<=0) { pageNum = 1; }
 			if(pageNum>pageCount) { pageNum = pageCount; }
 			// int pageSize = 16;
-			int pageSize = 4;
+			int pageSize = 16;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -293,7 +293,7 @@ public class GLPageController {
 			if(pageNum<=0) { pageNum = 1; }
 			if(pageNum>pageCount) { pageNum = pageCount; }
 			// int pageSize = 12;
-			int pageSize = 3;
+			int pageSize = 12;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -491,7 +491,7 @@ public class GLPageController {
 			pageNum = pageCount;
 		}
 
-		int pageSize = 3;
+		int pageSize = 2;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
@@ -543,7 +543,7 @@ public class GLPageController {
 			pageNum = pageCount;
 		}
 
-		int pageSize = 3;
+		int pageSize = 10;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
