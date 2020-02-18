@@ -51,6 +51,9 @@
 		$("#nav_bar").load("navBar.do");
 		$("#login_box").load("loginBox.do");
 		$("#footer").load("footer.do");
+		
+		
+		document.getElementById("join_button").onclick = join_check;
 	});
 
 	function emailAddr() {
@@ -65,27 +68,33 @@
 
 
 	function join_check() {
+		if (join_input_form.join_pw1.value.length < 10) {
+			alert("비밀번호는 10자리 이상 입력해주세요");
+			join_input_form.join_pw1.focus();
 
-		var forms = document.getElementById("join_input_form");
-
-		if (join_input_form.join_id.value == "") {
-			alert("아이디를 확인해 주십시오.");
-			join_input_form.join_id.focus();
-
-			return false;
-
-// 		} else if ((forms.MEMBER_JUMIN1.value == "")
-// 				|| (forms.MEMBER_JUMIN1.value.length < 6)) {
-// 			alert("주민등록번호를 정확히 입력해 주십시오.");
-// 			forms.MEMBER_JUMIN1.focus();
-// 			return false;
-// 		} "src/main/webapp/WEB-INF/views/mypage_restriction_view.jsp"else if ((forms.MEMBER_JUMIN2.value == "")
-// 				|| (forms.MEMBER_JUMIN2.value.length < 7)) {
-// 			alert("주민등록번호를 정확히 입력해 주십시오.");
-// 			forms.MEMBER_JUMIN2.focus();
-// 			return false;
+		} else if(join_input_form.join_pw1.value != join_input_form.join_pw2.value){
+			alert("비밀번호를 확인해 주십시오.");
+			join_input_form.member_pw1.focus();
+			
+		} else if(isNaN(join_input_form.member_name.value) == false){
+			alert("이름을 확인해 주십시오.");
+			join_input_form.member_name.focus();
+			
+		} else if((join_input_form.telinput1.value.length != 3) || (join_input_form.telinput2.value.length != 4) || (join_input_form.telinput3.value.length != 4)){
+			alert("휴대전화를 확인해 주십시오.");
+			join_input_form.telinput1.focus();
+			
 		} else {
-
+			
+				if(($('input:checkbox[name="member_like_category"]:checked').length == 0) && ($('input:checkbox[name="member_like_brand"]:checked').length == 0)){
+					$("input[id=member_like_category_N]:checkbox").prop("checked", true);
+					$("input[id=member_like_brand_N]:checkbox").prop("checked", true);
+				} else if(($('input:checkbox[name="member_like_category"]:checked').length == 0) && ($('input:checkbox[name="member_like_brand"]:checked').length != 0)){
+					$("input[id=member_like_category_N]:checkbox").prop("checked", true);
+				} else if(($('input:checkbox[name="member_like_category"]:checked').length != 0) && ($('input:checkbox[name="member_like_brand"]:checked').length == 0)){
+					$("input[id=member_like_brand_N]:checkbox").prop("checked", true);
+				}
+					
 			var phone1 = join_input_form.telinput1.value;
 			var phone2 = join_input_form.telinput2.value;
 			var phone3 = join_input_form.telinput3.value;
@@ -99,9 +108,9 @@
 			var email = email1 + "@" + email2;
 			document.getElementById('member_email').value = email;
 
-		return true;
+			join_input_form.submit();
 		}
-	}
+	};
 </script>
 
 </head>
@@ -126,15 +135,12 @@
 
 				<br /> <br /> <br />
 				<!-- <hr class="join_underline"><br /> -->
-				<!-- 기본 정보와 브랜드/취향 정보 나눠서 form 만들어야 하나? 그럴 필요 없지 않나? submit은 하나인데? 큰 form 안에 작은 form 두 개 이런식으로 만드나>??? -->
-				<form action="joinform3_2.do" method="post" name="join_input_form" onSubmit="return join_check();">
-					<!-- 				<form method="post" name="join_input_form" onsubmit="return joinform3"> -->
+				<form action="joinform3_2.do" method="post" id="join_input_form">
 					<div class="joinall">
 						<h3>기본 정보</h3>
 						<br />
 						<div class="joinform1">
 							<table class="jointable">
-								<!-- <form name="input_form"> -->
 								<tr class="jointablerow">
 									<td class="jttitle">아이디</td>
 									<td class="jointd">
@@ -214,8 +220,8 @@
 									<td class="jttitle">이메일</td>
 									<td class="jointd">
 										<input type="text" class="join_inputarea emailinput" id="email1" name="email1"
-										size="10" STYLE="ime-mode: inactive"> @ <!-- 										<input type="text"  -->
-										<!-- 										class="join_inputarea emailinput" id="email2" size="15" style="ime-mod: inactive"> -->
+										size="10" STYLE="ime-mode: inactive"> @ 
+<!-- 										<input type="text" class="join_inputarea emailinput" id="email2" size="15" style="ime-mod: inactive"> -->
 										<input type="text" class="join_inputarea emailinput" id="email2" name="email2" size="10" 
 										STYLE="ime-mode: inactive" readonly> 
 										<select id="email_select" class="join_inputarea" name="email_select" onChange="emailAddr();">
@@ -311,6 +317,8 @@
 												name="member_like_category" value="안경">
 											<p>안경</p>
 										</div>
+										<div><input type="checkbox" class="likedcate"
+												name="member_like_category" id = "member_like_category_N" value="없음" style="display: none;"></div>
 									</td>
 
 								</tr>
@@ -588,6 +596,8 @@
 											<br />
 
 										</div>
+										<div><input type="checkbox" class="join_prefer_brand"
+												name="member_like_brand" id = "member_like_brand_N" value="없음" style="display: none;"></div>
 									</td>
 								</tr>
 								<tr>
@@ -595,7 +605,7 @@
 										<center>
 											<br /> <br /> 
 											<input type="button" class="join_btn join_btn1" value="이전"> 
-											<input type="submit" class="join_btn join_btn2" value="회원가입">
+											<input type="button" class="join_btn join_btn2" id="join_button" value="회원가입">
 									</td>
 								</tr>
 							</table>
