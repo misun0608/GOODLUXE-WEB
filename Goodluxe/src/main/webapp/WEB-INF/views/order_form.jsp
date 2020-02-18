@@ -184,7 +184,7 @@
 				return;
 			}
 
-			if(used_pint >= 5000){
+			if(used_point >= 5000){
 				$('#using_point').val(used_point);
 				pay_money = (order_product_price + delivery - used_point - used_coupon);
 				$('#final_price').val(pay_money);
