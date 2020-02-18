@@ -177,7 +177,7 @@ public class ProductlistController {
 			pageNum = pageCount;
 		}
 		// int pageSize = 16;
-		int pageSize = 4;
+		int pageSize = 1;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
