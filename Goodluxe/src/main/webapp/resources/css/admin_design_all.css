@@ -1378,4 +1378,15 @@ tr .td3{
 .footer_context>ul:last-child {
     margin: 10px 0;
 } */
-
+.scrolledTable{
+	overflow-x:hidden;
+	overflow-y:auto;
+	width : 989px;
+	height : 500px; 
+}
+.auctionList{
+	overflow-x:hidden;
+	overflow-y:auto;
+	width : 989px;
+	height : 500px; 
+}

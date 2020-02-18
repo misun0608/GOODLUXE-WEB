@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -598,6 +599,39 @@ try {
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/afterLoginCheckAlarm) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/afterLoginCheckAlarm)");
+		}
+	}
+	@Override
+	public ArrayList<AuctionVO> admingetAuctionInfo() throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			ArrayList<AuctionVO> AuctionList = new ArrayList<AuctionVO>();
+	
+			AuctionList = ajaxMapper.admingetAuctionInfo();
+			
+			return AuctionList;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/admingetAuctionInfo) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/admingetAuctionInfo)");
+		}
+	
+	}
+	@Override
+	public ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
+			System.out.println("adf;lkasdf;lskserivce"+aUCTION_POST_NUMBER);
+			AucHisList = ajaxMapper.adminGetAutionDetail(aUCTION_POST_NUMBER);
+			
+			return AucHisList;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/adminGetAutionDetail) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/adminGetAutionDetail)");
 		}
 	}
 

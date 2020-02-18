@@ -230,13 +230,13 @@
 		select gl_purchase.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
 			sale_price, buying_price, purc_date, member_id, pb_sale_status, pb_post_status 
 		from gl_purchase, gl_productboard
-		where gl_purchase.entity_number = gl_productboard.entity_number
+		where gl_purchase.entity_number = gl_productboard.entity_number order by entity_number desc
 	</select>
 	<select id = "adminAllProductListConsign" resultMap = "adminConsProductMap">
 		select gl_consignment.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
 			sale_price, commission, start_date, end_date, member_id, pb_sale_status, pb_post_status
 		from gl_consignment, gl_productboard
-		where gl_consignment.entity_number = gl_productboard.entity_number
+		where gl_consignment.entity_number = gl_productboard.entity_number order by entity_number desc
 	</select>
  	<select id = "adminProductListPurc" parameterType = "hashMap" resultMap = "adminPurcProductMap" >
 		select *
@@ -251,6 +251,7 @@
 			<if test = "pb_sale_status!='all'">
 				and pb_sale_status = #{pb_sale_status}
 			</if>
+			order by entity_number desc
 			
 	</select>
 	<select id = "adminProductListCons" parameterType = "hashMap" resultMap = "adminConsProductMap" >
@@ -265,13 +266,14 @@
 			<if test = "pb_sale_status!='all'">
 				and pb_sale_status = #{pb_sale_status}
 			</if>
+			order by entity_number desc
 	</select>
 	<select id = "adminProductListPurcEnNo" parameterType = "hashMap" resultMap = "adminPurcProductMap" >
 		select * from (select gl_purchase.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
 						sale_price, buying_price, purc_date, member_id, pb_sale_status, pb_post_status
 					from gl_purchase, gl_productboard
 					where gl_purchase.entity_number = gl_productboard.entity_number)
-			where entity_number=#{entity_number}
+			where entity_number=#{entity_number} order by entity_number desc
 	</select>
 	<select id = "adminProductListConsEnNo" parameterType = "hashMap" resultMap = "adminConsProductMap" >
 		select * 
@@ -279,7 +281,7 @@
 						sale_price, commission, start_date, end_date, member_id, pb_sale_status, pb_post_status
 					from gl_consignment, gl_productboard
 					where gl_consignment.entity_number = gl_productboard.entity_number)
-			where entity_number=#{entity_number}
+			where entity_number=#{entity_number} order by entity_number desc
 			
 			
 	</select>
@@ -389,5 +391,34 @@
 		)
 	</select>
 	
-
+	<resultMap id = "adminAuctionlistMap" type = "com.spring.goodluxe.voes.AuctionVO">
+		<result property = "AUCTION_POST_NUMBER" column = "AUCTION_POST_NUMBER"/>
+		<result property = "AUCTION_MD_NAME" column = "AUCTION_MD_NAME"/>
+		<result property = "AUCTION_START_PRICE" column = "AUCTION_START_PRICE"/>
+		<result property = "AUCTION_NOW_PRICE" column = "AUCTION_NOW_PRICE"/>
+		<result property = "AUCTION_PRICE_TIME" column = "AUCTION_PRICE_TIME"/>
+		<result property = "AUCTION_BID_PRICE" column = "AUCTION_BID_PRICE"/>
+		<result property = "AUCTION_POST_DATE" column = "AUCTION_POST_DATE"/>
+		<result property = "AUCTION_START_TIME" column = "AUCTION_START_TIME"/>
+		<result property = "AUCTION_END_TIME" column = "AUCTION_END_TIME"/>
+		<result property = "AUCTION_DETAIL" column = "AUCTION_DETAIL"/>
+		<result property = "AUCTION_LIKE" column = "AUCTION_LIKE"/>
+		<result property = "AUCTION_POST_STATUS" column = "AUCTION_POST_STATUS"/>
+		<result property = "ENTITY_NUMBER" column = "ENTITY_NUMBER"/>
+	</resultMap>
+	<select id = "admingetAuctionInfo" resultMap = "adminAuctionlistMap">
+		select * from gl_Auction order by auction_post_number desc
+	</select>
+	
+	<resultMap id = "adminAutionHistory" type = "com.spring.goodluxe.voes.AuctionVO">
+		<result property = "AUCTION_POST_NUMBER" column = "AUCTION_POST_NUMBER"/>
+		<result property = "AUHIS_NUMBER" column = "AUHIS_NUMBER"/>
+		<result property = "MEMBER_ID" column = "MEMBER_ID"/>
+		<result property = "AUHIS_BID_TIME" column = "AUHIS_BID_TIME"/>
+		<result property = "AUHIS_BETTING_PRICE" column = "AUHIS_BETTING_PRICE"/>
+	</resultMap>
+	<select id = "adminGetAutionDetail" parameterType = "Integer" resultMap = "adminAutionHistory">
+		select * from gl_auction_history where auction_post_number = #{aUCTION_POST_NUMBER} order by auhis_number;
+	</select>
+	
 </mapper>

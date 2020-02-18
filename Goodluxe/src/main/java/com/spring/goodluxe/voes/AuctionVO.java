@@ -8,24 +8,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuctionVO {
 	
-	private int AUCTION_POST_NUMBER; /* ��ŰԽñ۹�ȣ */
-	private String AUCTION_MD_NAME; /* ��ǰ�̸� */
-	private int AUCTION_START_PRICE;/* ���۰� */
-	private int AUCTION_NOW_PRICE; /* ���簡 */
-	private Timestamp AUCTION_PRICE_TIME; /* �ְ�sysdate yy-mm-dd hh:mm */
-	private int AUCTION_BID_PRICE;/* ��ǰ������ */
-	private Date AUCTION_POST_DATE; /* �Խ��� */
-	private Timestamp AUCTION_START_TIME; /* ��Ž��۽ð� */
-	private Timestamp AUCTION_END_TIME; /* ��Ÿ����ð� */
+	private int AUCTION_POST_NUMBER; /* 경매게시글번호 */
+	private String AUCTION_MD_NAME; /* 제품이름 */
+	private int AUCTION_START_PRICE;/* 시작가 */
+	private int AUCTION_NOW_PRICE; /* 현재가 */
+	private Timestamp AUCTION_PRICE_TIME; /* 최고가sysdate yy-mm-dd hh:mm */
+	private int AUCTION_BID_PRICE;/* 제품낙찰가 */
+	private Date AUCTION_POST_DATE;  /* 게시일 */
+	private Timestamp AUCTION_START_TIME; /* 경매시작시간 */
+	private Timestamp AUCTION_END_TIME; /* 경매마감시간 */
 	private String AUCTION_PHOTO1_STORED;
 	private String AUCTION_PHOTO2_STORED;
 	private String AUCTION_PHOTO3_STORED;
 	private String AUCTION_PHOTO4_STORED;
 	private String AUCTION_PHOTO5_STORED;
-	private String AUCTION_DETAIL; /* ��ǰ����� */
-	private int AUCTION_LIKE; /* ���ƿ� */
-	private String AUCTION_POST_STATUS; /* �Խû��� */
-	private String ENTITY_NUMBER; /* ��ǰ��ü��ȣ */
+	private String AUCTION_DETAIL; /* 제품설명상세 */
+	private int AUCTION_LIKE; /* 좋아용 */
+	private String AUCTION_POST_STATUS; /* 게시상태 */
+	private String ENTITY_NUMBER;/* 상품개체번호 */
 	public int getAUCTION_POST_NUMBER() {
 		return AUCTION_POST_NUMBER;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -428,10 +429,34 @@ public class AjaxController {
 			}
 			return data;
 		}
+		
+		//경매감독
+		@RequestMapping(value="/admingetAuctionInfo.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<AuctionVO> admingetAuctionInfo() throws Exception {
+			
+			ArrayList<AuctionVO> AuctionList = new ArrayList<AuctionVO>();
+			
+			AuctionList = gls.admingetAuctionInfo();
+			
+			return AuctionList;
+		}
 	
-	
-	
-	
+		
+		//경매감독
+		@RequestMapping(value="/adminGetAutionDetail.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<AuctionVO> adminGetAutionDetail(
+				@RequestParam(value="AUCTION_POST_NUMBER", required = false)int AUCTION_POST_NUMBER
+				) throws Exception {
+			
+			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
+			
+			
+			System.out.println("ㅁautindf" + AUCTION_POST_NUMBER);
+			AucHisList = gls.adminGetAutionDetail(AUCTION_POST_NUMBER);
+			
+			return AucHisList;
+		}
+			
 		
 	
 	

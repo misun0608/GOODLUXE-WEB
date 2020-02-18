@@ -3,6 +3,7 @@ package com.spring.goodluxe.jy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -41,6 +42,8 @@ public interface AjaxService {
 	ArrayList<NoticeVO> getAlarmContent(String member_id) throws Exception;
 	ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map)throws Exception;
 	int afterLoginCheckAlarm(String member_id)throws Exception;
+	ArrayList<AuctionVO> admingetAuctionInfo()throws Exception;
+	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER)throws Exception;;
 
 	
 	
