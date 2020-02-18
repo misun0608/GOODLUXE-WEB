@@ -542,6 +542,7 @@
 					 <center>
 			          	<div class="pagination" id="pagination">
 			         </center> 
+			         <br />
 		<!-- 	<p align="center">◁&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;▷</p>
 					<div class = "dark" id = "dark"></div>
 					<div class = "modal_win">

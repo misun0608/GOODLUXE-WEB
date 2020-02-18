@@ -192,11 +192,9 @@
 							</tr>
 							<tr>
 								<td class="td1">브랜드</td>
-								<td class="td2" colspan="3"><input type="text" id="pd_brand" name="pd_brand" style="pointer-events:none;" class="text1"></td>
-							</tr>
-							<tr>
+								<td class="td2"><input type="text" id="pd_brand" name="pd_brand" style="pointer-events:none;" class="text1"></td>
 								<td class="td1">카테고리</td>
-								<td class="td2" colspan="3"><input type="text" id="pd_category" style="pointer-events:none;" name="pd_category" class="text1"></td>
+								<td class="td2"><input type="text" id="pd_category" style="pointer-events:none;" name="pd_category" class="text1"></td>
 							</tr>
 							<tr>
 								<td class="td1">상품 등급</td>
@@ -223,13 +221,13 @@
 							</tr>
 
 							<tr>
-								<td class="td1">상품 상세 설명</td>
+								<td class="td1">상세 설명</td>
 								<td class="td2" colspan="3">
 									<textarea name="AUCTION_DETAIL" id="AUCTION_DETAIL"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td class="td1">경매 게시 상태</td>
+								<td class="td1">게시 상태</td>
 								<td class="td2" colspan="3">&nbsp; 
 									<input type="radio" id="auction_post1" name="AUCTION_POST_STATUS" />
 									<label for="auction_post1">게시중</label>

@@ -108,7 +108,7 @@
 
 				<form name="input_form" action="./postUploadAction.do" method="post" enctype ="multipart/form-data" onsubmit = "return submitCheck()">
 					<br> <br>
-					<h3>▶ 기본 정보 입력</h3>
+					<h3>| 기본 정보 입력</h3>
 					<br>
 					<table class="information">
 						<tr>
