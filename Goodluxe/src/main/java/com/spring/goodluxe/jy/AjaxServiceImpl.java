@@ -435,7 +435,7 @@ try {
 			}else if(entity_chk.equals("거래진행중")) {
 				ajaxMapper.chgSaleStatOndeal(entity_number);
 				ajaxMapper.changeOffBoard(entity_number);
-			}else {//판매완료일때
+			}else {//배송완료일때
 				ajaxMapper.chgSaleStatSoldout(entity_number);
 				ajaxMapper.changeOnBoard(entity_number);
 			}

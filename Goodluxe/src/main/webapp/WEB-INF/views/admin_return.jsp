@@ -142,7 +142,7 @@
 		$(document).on('click','#return_confirm',function(event) { //얘가 바로 동적 버튼!!!
 			 
 			var return_confirm = $(this);
-		 	//alert(select_btn.attr("value"));
+		 	
 			var data = return_confirm.attr("value");
 			
 			var params = {
@@ -173,13 +173,13 @@
 		
 		
 		w.onopen = function(){ //클라이언트와 서버간의 웹소켓이 정상적으로 생성되었다.(연결되었다)
-			alert("WebSocket Conneted!!!");
+			//alert("WebSocket Conneted!!!");
 		}
 		w.onclose = function(e){ //웹소켓 연결이 종료되면 호출됨.
-			alert("WebSocket closed!!!");
+			//alert("WebSocket closed!!!");
 		}
 		w.onerror = function(e){ //연결 실패시 호출됨.
-			alert("WebSocket error!!!");
+			//alert("WebSocket error!!!");
 		}
 		
 		$(document).on('click','#return_finished',function(event) { //얘가 바로 동적 버튼!!!
