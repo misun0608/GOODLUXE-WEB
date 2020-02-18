@@ -44,12 +44,12 @@ public class MemberJoinController {
       ModelAndView mav = new ModelAndView();
       /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-       System.out.println("네이버:" + naverAuthUrl);
+//       System.out.println("네이버:" + naverAuthUrl);
        model.addAttribute("naver_url", naverAuthUrl);
       
        //카카오 인증 url을 view로 전달
        String kakaoUrI = KakaoController.getAuthorizationUri(session);
-       System.out.println("카카오: "+ kakaoUrI);
+//       System.out.println("카카오: "+ kakaoUrI);
        model.addAttribute("kakao_url", kakaoUrI);
 
         //네이버 
@@ -74,31 +74,31 @@ public class MemberJoinController {
     public String joinform3(MemberVO membervo, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) throws Exception {
 		
 		int res = gls.insertMember(membervo);
-		System.out.println("res : " + res);
+//		System.out.println("res : " + res);
 		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		System.out.println("1");
+//		System.out.println("1");
 		PrintWriter writer;
 		try {
-			System.out.println("2");
+//			System.out.println("2");
 			writer = response.getWriter();
 			if(res == 1) {
-				System.out.println("2-0");
+//				System.out.println("2-0");
 				redirect.addAttribute("member_email", request.getParameter("member_email")); 
 				redirect.addAttribute("member_id", request.getParameter("member_id"));
 	           
 //				writer.write("<script>alert('회원 가입 성공'); location.href='./mailSending.do';</script>");
-				System.out.println("2-1"); 
+//				System.out.println("2-1"); 
 				return "redirect:/mailSendingJoin.do";
 			} else {
 				writer.write("<script>alert('회원 가입 실패'); location.href='./joinform3.do';</script>");
-				System.out.println("2-2");
+//				System.out.println("2-2");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("3");
+//		System.out.println("3");
 		return null;
 	}
 	
