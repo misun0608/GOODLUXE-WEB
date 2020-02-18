@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.spring.mapper.Chat_recordcountMapper">
+
+	<resultMap type="com.spring.goodluxe.voes.Chat_recordcountVO" id="resultChatrecordcountVO">
+		<result property="member_id" column="member_id" />
+		<result property="chat_message" column="chat_message" />
+		<result property="chat_timestamp" column="chat_timestamp" />
+		<result property="chat_room" column="chat_room" />
+		<result property="chat_room_rank" column="chat_room_rank" />
+	</resultMap>
+	
+	
+	
+	<select id="selectListChatRecordcountdown" resultMap="resultChatrecordcountVO" >
+		  select *
+            from(
+                select member_id, chat_message, chat_timestamp,chat_room,
+                    rank() over(partition by chat_room order by chat_timestamp desc)chat_room_rank
+                from gl_chat_record 
+                order by chat_room_rank asc )
+                where chat_room_rank =1;
+	</select>
+	
+
+</mapper>

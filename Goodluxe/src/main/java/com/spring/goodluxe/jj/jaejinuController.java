@@ -31,6 +31,7 @@ import com.spring.goodluxe.voes.Auction_HistoryVO;
 import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.goodluxe.voes.ChatVO;
 import com.spring.goodluxe.voes.Chat_recordVO;
+import com.spring.goodluxe.voes.Chat_recordcountVO;
 import com.spring.goodluxe.voes.Member2VO;
 import com.spring.goodluxe.voes.Order2VO;
 import com.spring.goodluxe.voes.Purchase2VO;
@@ -61,7 +62,8 @@ public class jaejinuController {
 	private ChatMemberService chatmemberService;
 	@Autowired
 	private Chat_recordService chat_recordService;
-	
+	@Autowired
+	private Chat_recordcountService chat_recordcountService;
 	
 	// 만든 페이지들 있는 곳으로 이동 
 	@RequestMapping("/jaejinupage.do")
@@ -196,19 +198,9 @@ public class jaejinuController {
 		
 		//DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
 		if(!member_id.equals("admin")) {
-		ChatMemberVO chatM = chatmemberService.getRoomMember(chatmembervo);
-		System.out.println("관리자야 왔다 갔니");
-		//만약 채팅방을 처음 입장하는 것이라면 방에대한 아이디정보를 생성
-		if(chatM == null) {
-			ChatMemberVO chatmembervo_add = new ChatMemberVO();
-			chatmembervo_add.setChat_num(0);
-			chatmembervo_add.setMember_id(member_id); 
-			chatmembervo_add.setChat_room(member_id);
-			res = chatmemberService.addRoomMember(chatmembervo_add);
-			
-			chatmembervo.setChat_num(0);
-			chatmembervo.setMember_id(member_id);
-			chatmembervo.setChat_room(member_id);
+		int count = chatmemberService.countRoomMember(member_id);
+		ChatMemberVO chatM = new ChatMemberVO();
+		if(count==0) {
 			res = chatmemberService.addRoomMember(chatmembervo);
 			
 			//추가를 한다음 chatM을 다시 받아오도록한다.
@@ -216,31 +208,28 @@ public class jaejinuController {
 			ChatMemberVO chatmembervo_get = new ChatMemberVO();
 			chatmembervo_get.setChat_num(0);
 			chatmembervo_get.setMember_id(member_id);
-			if(!member_id.equals("admin")) {
 			chatmembervo_get.setChat_room(member_id);
-			}else {
 				String chat_room = chatmembervo_get.getChat_room();
 				System.out.println("-----------");
 				System.out.println("chat_room="+chat_room);
-			chatmembervo_get.setChat_room(chat_room);
-			}
 			res = chatmemberService.addRoomMember(chatmembervo_get);
 			chatM = chatmemberService.getRoomMember(chatmembervo_get);
 		}
 		//존재한다면 그 방으로 이동 
 		else {
 			System.out.println("관리자");
+			
+			if(member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
+				model.addAttribute("room", "all");
+				}else {
+				model.addAttribute("room", chatmembervo.getChat_room());
+				}
+				System.out.println("chatmembervo.getChat_room()="+chatmembervo.getChat_room());
 		}
 		}
-		chatmembervo = chatmemberService.getRoomMember(chatmembervo);
 		//현재 방이름 넣기(전체채팅방이니 all)
 		//해당 이름으로 넣쟈 
-		if(member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
-		model.addAttribute("room", "all");
-		}else {
-		model.addAttribute("room", chatmembervo.getChat_room());
-		}
-		System.out.println("chatmembervo.getChat_room()="+chatmembervo.getChat_room());
+		
 		ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
 		model.addAttribute("chatlist", chatlist);
 		
@@ -248,7 +237,9 @@ public class jaejinuController {
 		 
 		 chatrecord=chat_recordService.selectListchatRecord(member_id);
 		 model.addAttribute("chatrecord",chatrecord);
-		 
+		 ArrayList<Chat_recordVO> chatrecordcountlist = new ArrayList<Chat_recordVO>();
+		 chatrecordcountlist = chat_recordService.selectListChatRecordcountdo();
+		 model.addAttribute("chatrecordcountlist",chatrecordcountlist);
 		
 		
 		return "chat";
@@ -336,7 +327,11 @@ public class jaejinuController {
 			//방이동 처리
 			ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
 			model.addAttribute("chatlist", chatlist);
+			
 			model.addAttribute("room", roomName);
+			ArrayList<Chat_recordVO> chatrecordcountlist = new ArrayList<Chat_recordVO>();
+			 chatrecordcountlist = chat_recordService.selectListChatRecordcountdo();
+			 model.addAttribute("chatrecordcountlist",chatrecordcountlist);
 			
 			return "chat";
 		}

@@ -50,4 +50,18 @@ public class Chat_recordServiceImpl implements Chat_recordService{
 		}
 		return chatlistcount;
 	}
+	
+	@Override
+	public ArrayList<Chat_recordVO> selectListChatRecordcountdo()throws Exception{
+		ArrayList<Chat_recordVO> chatlistcountdo = null;
+		try {
+			Chat_recordMapper chat_recordMapper = sqlSession.getMapper(Chat_recordMapper.class);
+			chatlistcountdo = chat_recordMapper.selectListChatRecordcountdo();
+		}catch(Exception e) {
+			System.out.println("chat list count dd +"+e.getMessage());
+		}
+		
+		
+	return chatlistcountdo;	
+	}
 }

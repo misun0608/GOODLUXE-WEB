@@ -356,7 +356,7 @@ public void afterConnectionClosed(WebSocketSession session, CloseStatus status) 
 public String JsonData(String id, Object msg) {
 	
 	JsonObject jsonObject = Json.createObjectBuilder().add("message", 
-	"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>").build();
+	"<div id="+id+" ><img src='./resources/img/chat_img/customer.png' width='35px' ><br><b>["+id+"]</b> : <div class='speech-bubble'>"+msg+"</div></div><br><br><br>").build();
 	
 	StringWriter write = new StringWriter();
 	
