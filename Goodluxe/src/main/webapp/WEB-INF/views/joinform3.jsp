@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.spring.goodluxe.voes.MemberVO" %>
+<%@ page import = "com.spring.goodluxe.voes.*" %>
 <%
 	MemberVO vo = (MemberVO) request.getAttribute("MemberVO");
 %>
@@ -63,24 +63,44 @@
 		}
 	}
 
+
 	function join_check() {
-		
-		
 
-		var phone1 = join_input_form.telinput1.value;
-		var phone2 = join_input_form.telinput2.value;
-		var phone3 = join_input_form.telinput3.value;
+		var forms = document.getElementById("join_input_form");
 
-		var member_phone = phone1 + phone2 + phone3;
-		document.getElementById('member_phone').value = member_phone;
+		if (join_input_form.join_id.value == "") {
+			alert("아이디를 확인해 주십시오.");
+			join_input_form.join_id.focus();
 
-		var email1 = join_input_form.email1.value;
-		var email2 = join_input_form.email2.value;
+			return false;
 
-		var email = email1 + "@" + email2;
-		document.getElementById('member_email').value = email;
+// 		} else if ((forms.MEMBER_JUMIN1.value == "")
+// 				|| (forms.MEMBER_JUMIN1.value.length < 6)) {
+// 			alert("주민등록번호를 정확히 입력해 주십시오.");
+// 			forms.MEMBER_JUMIN1.focus();
+// 			return false;
+// 		} "src/main/webapp/WEB-INF/views/mypage_restriction_view.jsp"else if ((forms.MEMBER_JUMIN2.value == "")
+// 				|| (forms.MEMBER_JUMIN2.value.length < 7)) {
+// 			alert("주민등록번호를 정확히 입력해 주십시오.");
+// 			forms.MEMBER_JUMIN2.focus();
+// 			return false;
+		} else {
 
-		
+			var phone1 = join_input_form.telinput1.value;
+			var phone2 = join_input_form.telinput2.value;
+			var phone3 = join_input_form.telinput3.value;
+	
+			var member_phone = phone1 + phone2 + phone3;
+			document.getElementById('member_phone').value = member_phone;
+	
+			var email1 = join_input_form.email1.value;
+			var email2 = join_input_form.email2.value;
+	
+			var email = email1 + "@" + email2;
+			document.getElementById('member_email').value = email;
+
+		return true;
+		}
 	}
 </script>
 
@@ -107,7 +127,7 @@
 				<br /> <br /> <br />
 				<!-- <hr class="join_underline"><br /> -->
 				<!-- 기본 정보와 브랜드/취향 정보 나눠서 form 만들어야 하나? 그럴 필요 없지 않나? submit은 하나인데? 큰 form 안에 작은 form 두 개 이런식으로 만드나>??? -->
-				<form action="joinform3_2.do" method="post" name="join_input_form">
+				<form action="joinform3_2.do" method="post" name="join_input_form" onSubmit="return join_check();">
 					<!-- 				<form method="post" name="join_input_form" onsubmit="return joinform3"> -->
 					<div class="joinall">
 						<h3>기본 정보</h3>
@@ -117,11 +137,11 @@
 								<!-- <form name="input_form"> -->
 								<tr class="jointablerow">
 									<td class="jttitle">아이디</td>
-									<td class="jointd"><input type="text"
-										class="username_input" id="join_id" check_result="fail"
-										ime-mode="disabled" maxlength="10" name="member_id"
-										placeholder="10자 이내로 입력해주세요" style="padding-left: 5px"
-										required> <!-- <div id="id_overlap_msg"></div> <button type="button" class="id_overlap_btn" onclick="id_overlap_check()">중복확인</button> -->
+									<td class="jointd">
+										<input type="text" class="username_input" id="join_id" check_result="fail"
+										ime-mode="disabled" maxlength="10" name="member_id" placeholder="10자 이내로 입력해주세요" 
+										style="padding-left: 5px" required> 
+										<!-- <div id="id_overlap_msg"></div> <button type="button" class="id_overlap_btn" onclick="id_overlap_check()">중복확인</button> -->
 										<!-- <input type="hidden" name="idDuplication" value="idUncheck"> -->
 									</td>
 								<tr>
@@ -143,15 +163,17 @@
 								</tr>
 								<tr class="jointablerow">
 									<td class="jttitle">비밀번호</td>
-									<td class="jointd"><input type="password"
-										class="join_inputarea passwd" id="join_pw1" maxlength="16"
-										name="member_pw" placeholder="10~16자 이내로 입력해주세요"></td>
+									<td class="jointd">
+										<input type="password" class="join_inputarea passwd" id="join_pw1" 
+										maxlength="16" name="member_pw" placeholder="10~16자 이내로 입력해주세요" required>
+									</td>
 								</tr>
 								<tr class="jointablerow">
 									<td class="jttitle">비밀번호 확인</td>
-									<td class="jointd"><input type="password"
-										class="join_inputarea passwd" id="join_pw2" maxlength="16"
-										placeholder="비밀번호를 다시 입력해주세요"></td>
+									<td class="jointd">
+										<input type="password" class="join_inputarea passwd" id="join_pw2" 
+										maxlength="16" placeholder="비밀번호를 다시 입력해주세요" required>
+									</td>
 								<tr>
 									<td></td>
 									<td class="alert alert-success_pw" id="alert-success_pw"
@@ -168,40 +190,35 @@
 								<tr class="jointablerow">
 									<td class="jttitle">이름</td>
 									<td class="jointd"><input type="text" name="member_name"
-										class="join_inputarea"></td>
+										class="join_inputarea" required></td>
 								</tr>
 								<tr class="jointablerow">
 									<td class="jttitle">주소</td>
-									<td class="jointd"><input type="button" value="우편번호"
-										class="zipcode_button" onclick="openZipSearch()"
+									<td class="jointd">
+										<input type="button" value="우편번호" class="zipcode_button" onclick="openZipSearch()"
 										style="width: 70px; height: 27px; background-color: #1e86da; color: white; margin-top: 5px; border: 0px">
-										<input type="text" id="order_zipcode" name="member_zipcode"
-										readonly="readonly" class="zipcode"><br /> <input
-										type="text" id="order_addr1" name="member_addr1"
-										placeholder=" 기본주소" class="addr" readonly><br /> <input
-										type="text" id="order_addr2" name="member_addr2"
-										placeholder=" 상세주소" class="addr"></td>
+										<input type="text" id="order_zipcode" name="member_zipcode" readonly="readonly" class="zipcode"><br /> 
+										<input type="text" id="order_addr1" name="member_addr1" placeholder=" 기본주소" class="addr" readonly><br /> 
+										<input type="text" id="order_addr2" name="member_addr2" placeholder=" 상세주소" class="addr"></td>
 								</tr>
 								<tr class="jointablerow">
 									<td class="jttitle">휴대전화</td>
-									<td class="jointd"><input type="tel" name="telinput1"
-										id="telinput1" class="join_inputarea telinput1" maxlength="3">
-										&nbsp;-&nbsp;<input type="tel" name="telinput2" id="telinput2"
-										class="join_inputarea telinput2" maxlength="4">&nbsp;-&nbsp;<input
-										name="telinput3" id="telinput3" type="tel"
-										class="join_inputarea telinput3" maxlength="4"></td>
+									<td class="jointd">
+										<input type="tel" name="telinput1" id="telinput1" class="join_inputarea telinput1" maxlength="3" required>
+										&nbsp;-&nbsp;
+										<input type="tel" name="telinput2" id="telinput2" class="join_inputarea telinput2" maxlength="4" required>
+										&nbsp;-&nbsp;
+										<input name="telinput3" id="telinput3" type="tel" class="join_inputarea telinput3" maxlength="4" required></td>
 								</tr>
 								<tr>
 									<td class="jttitle">이메일</td>
-									<td class="jointd"><input type="text"
-										class="join_inputarea emailinput" id="email1" name="email1"
+									<td class="jointd">
+										<input type="text" class="join_inputarea emailinput" id="email1" name="email1"
 										size="10" STYLE="ime-mode: inactive"> @ <!-- 										<input type="text"  -->
 										<!-- 										class="join_inputarea emailinput" id="email2" size="15" style="ime-mod: inactive"> -->
-										<input type="text" class="join_inputarea emailinput"
-										id="email2" name="email2" size="10" STYLE="ime-mode: inactive"
-										readonly> <select id="email_select"
-										class="join_inputarea" name="email_select"
-										onChange="emailAddr();">
+										<input type="text" class="join_inputarea emailinput" id="email2" name="email2" size="10" 
+										STYLE="ime-mode: inactive" readonly> 
+										<select id="email_select" class="join_inputarea" name="email_select" onChange="emailAddr();">
 											<option value="" selected disabled>-이메일 선택-</option>
 											<option value="naver.com">naver.com</option>
 											<option value="hanmail.net">hanmail.net</option>
@@ -209,7 +226,7 @@
 											<option value="empas.com">empas.com</option>
 											<option value="gmail.com">gmail.com</option>
 											<option value="etc">직접입력</option>
-									</select>
+										</select>
 									<input type="hidden" id="member_email" name="member_email" value="">
 									<input type="hidden" id="member_phone" name="member_phone" value=member_phone>
 									<input type="hidden" name="member_class" value="N">
@@ -238,9 +255,8 @@
 								</tr>
 								<tr>
 									<td></td>
-									<td class="jtitle"
-										style="padding: 7px 0 5px 0; font-size: 12px; color: gray;">해당
-										주소로 발송된 메일을 통해 인증 후 사이트 이용이 가능하니 정확한 주소를 기입해주십시오.</td>
+									<td class="jtitle" style="padding: 7px 0 5px 0; font-size: 12px; color: gray;">
+									해당 주소로 발송된 메일을 통해 인증 후 사이트 이용이 가능하니 정확한 주소를 기입해주십시오.</td>
 								</tr>
 								<tr>
 									<td class="jtitle">이메일 수신동의</td>
@@ -579,7 +595,7 @@
 										<center>
 											<br /> <br /> 
 											<input type="button" class="join_btn join_btn1" value="이전"> 
-											<input type="submit" onclick="join_check()" class="join_btn join_btn2" value="회원가입">
+											<input type="submit" class="join_btn join_btn2" value="회원가입">
 									</td>
 								</tr>
 							</table>
