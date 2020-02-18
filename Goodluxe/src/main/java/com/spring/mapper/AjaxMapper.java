@@ -3,6 +3,7 @@ package com.spring.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -72,6 +73,9 @@ public interface AjaxMapper {
 	ArrayList<NoticeVO> getAlarmContent(String member_id);
 	ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map);
 	int afterLoginCheckAlarm(String member_id);
+	ArrayList<AuctionVO> admingetAuctionInfo();
+	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER);
+	
 	
 
    
