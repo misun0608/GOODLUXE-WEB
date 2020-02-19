@@ -267,7 +267,8 @@ public class AdminController {
 	@RequestMapping(value = "admin_point_insert.do")
 	public String insertPointStatus(PointVO pvo, @RequestParam(value = "btn_value", required = false) String btn_value,
 			HttpServletResponse response) throws Exception {
-		System.out.println("버튼" + btn_value);
+//		System.out.println("관리자 포인트 입력 컨트롤러");
+//		System.out.println("버튼" + btn_value);
 		try {
 			if (btn_value.equals("적립")) {
 				pvo.setPoint_status("관리자 적립");
@@ -284,10 +285,10 @@ public class AdminController {
 	}
 	
 	// 포인트 관리자 페이지 입력폼 띄우기(모달 test)
-	@RequestMapping(value = "pointUpdateModal.do")
-	public String pointUpdateModal() throws Exception {
-
-		return "admin_point_modal";
-	}
+//	@RequestMapping(value = "pointUpdateModal.do")
+//	public String pointUpdateModal() throws Exception {
+//
+//		return "admin_point_modal";
+//	}
 	
 }

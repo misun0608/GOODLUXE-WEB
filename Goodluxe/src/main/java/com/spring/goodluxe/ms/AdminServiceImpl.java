@@ -15,6 +15,7 @@ import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 import com.spring.mapper.AdminPointMapper;
 import com.spring.mapper.MemberMapper;
+import com.spring.mapper.ProductlistMapper;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -76,6 +77,19 @@ public class AdminServiceImpl implements AdminService {
 					int result = memberMapper.updateMemberPoint(map);
 
 					if (result != 0) {
+						// 테스트
+						String originalStr = "Å×½ºÆ®"; // 테스트 
+						String [] charSet = {"utf-8","euc-kr","ksc5601","iso-8859-1","x-windows-949"};
+						  
+						for (int i=0; i<charSet.length; i++) {
+						 for (int j=0; j<charSet.length; j++) {
+						  try {
+						   System.out.println("[" + charSet[i] +"," + charSet[j] +"] = " + new String(originalStr.getBytes(charSet[i]), charSet[j]));
+						  } catch (Exception e) {
+						   e.printStackTrace();
+						  }
+						 }
+						}
 						System.out.println("포인트 적립 업데이트 성공!");
 					} else {
 						System.out.println("포인트 적립 업데이트 실패!");
@@ -358,5 +372,27 @@ public class AdminServiceImpl implements AdminService {
 		return refund_list;
 	}
 	
+	// 관리자 아이디 검색
+	public MemberVO adminSearchID(String string, String member_id) throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			HashMap<String, String> map = new HashMap<String, String>();
+			MemberVO memberVO = new MemberVO();
+			map.put("member_id", member_id);
+			
+			int nullChk = productlistMapper.countOneMember(map);
+			if(nullChk==0) {
+				return null;
+			}else {
+				memberVO = productlistMapper.adminSearchId(map);
+				//System.out.println("memberVO는??"+memberVO.getMember_name());
+				return memberVO;
+			}
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/adminSearchId) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/adminSearchId)");
+		}
+	}
 	
 }

@@ -94,6 +94,8 @@ $(document).ready(function() {
 							+'</tr>';
 							//+'<tbody>';
 						$.each(data, function(index, item) {
+							console.log("아이템은????????????"+item);
+							
 							var purc_date1 = new Date(item.purc_date);
 							var purc_date_shaped = date_format(purc_date1);
 							output += '<tr class="tr2">';

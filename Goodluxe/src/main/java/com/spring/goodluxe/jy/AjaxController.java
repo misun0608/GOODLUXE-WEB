@@ -266,6 +266,8 @@ public class AjaxController {
 			ArrayList<HashMap<String,Object>> productList = null; 
 
 			productList = gls.adminAllProductList(pb_division);
+			
+			System.out.println("member_ID : "+productList.get(0).get("member_id"));
 		
 			return productList;
 		}
@@ -450,13 +452,18 @@ public class AjaxController {
 			
 			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
 			
-			
-			System.out.println("ㅁautindf" + AUCTION_POST_NUMBER);
 			AucHisList = gls.adminGetAutionDetail(AUCTION_POST_NUMBER);
 			
 			return AucHisList;
 		}
-			
+		//경매감독
+		
+		@RequestMapping(value="/adminAuctionStatChange.do", produces= "application/json;charset=UTF-8")
+		public void adminAuctionStatChange(
+				@RequestParam(value="AUCTION_POST_NUMBER", required = false)int AUCTION_POST_NUMBER
+				) throws Exception {
+			gls.adminAuctionStatChange(AUCTION_POST_NUMBER);
+		}	
 		
 	
 	

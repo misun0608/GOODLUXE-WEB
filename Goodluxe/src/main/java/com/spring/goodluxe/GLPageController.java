@@ -95,8 +95,11 @@ public class GLPageController {
 		return mav; 
 	}
 	@RequestMapping(value = "mypageMenu.do", method = RequestMethod.GET)
-	public ModelAndView mypageMenu() {
+	public ModelAndView mypageMenu(HttpSession session) {
+		String member_id = (String)session.getAttribute("member_id");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("member_id", member_id);
+		
 		mav.setViewName("mypage_menu");
 		return mav; 
 	}

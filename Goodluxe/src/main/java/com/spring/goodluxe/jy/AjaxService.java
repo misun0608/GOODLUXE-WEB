@@ -43,7 +43,8 @@ public interface AjaxService {
 	ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map)throws Exception;
 	int afterLoginCheckAlarm(String member_id)throws Exception;
 	ArrayList<AuctionVO> admingetAuctionInfo()throws Exception;
-	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER)throws Exception;;
+	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER)throws Exception;
+	int adminAuctionStatChange(int aUCTION_POST_NUMBER)throws Exception;
 
 	
 	

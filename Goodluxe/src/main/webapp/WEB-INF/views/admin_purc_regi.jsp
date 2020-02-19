@@ -205,9 +205,9 @@
 							<td class="td1">감정서 유무</td>
 							<td class="td2">
 								&nbsp;
-								<input type="radio" name="appraise_exist" id="appraise_exist1" value = "O" checked>
+								<input type="radio" name="appraise_exist" id="appraise_exist1" value = "Y" checked>
 								<label for="appraise_exist1">유</label>
-								<input type="radio" name="appraise_exist" id="appraise_exist2" value = "X">
+								<input type="radio" name="appraise_exist" id="appraise_exist2" value = "N">
 								<label for="appraise_exist2">무</label>
 							</td>
 						</tr>

@@ -47,7 +47,7 @@
                 <!--채팅패턴1시작-->
                 <div class = "received_chats">
                     <div class = "received_chats_img">
-                        <img src = "img/chat_user/chat_customer.png">
+                        <img src = "./resources/img/chat_img/customer.png">
                     </div>
                     <div class = "received_chats_msg">
                         <p>안녕안녕 잘지내?안녕안녕 잘지내?안녕안녕 잘지내?안녕안녕 잘지내?안녕안녕 잘지내?안녕안녕 잘지내?안녕안녕 잘지내?</p>
@@ -55,7 +55,7 @@
                 </div>
                 <div class = "outgoing_chats">
                     <div class = "outgoing_chats_img">
-                        <img src = "img/chat_user/chat_admin.png">
+                        <img src = "./resources/img/chat_img/admin.png">
                     </div>
                     <div class = "outgoing_chats_msg">
                         <p>안녕안녕</p>
