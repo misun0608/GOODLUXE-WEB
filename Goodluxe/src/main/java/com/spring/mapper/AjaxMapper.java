@@ -75,6 +75,10 @@ public interface AjaxMapper {
 	int afterLoginCheckAlarm(String member_id);
 	ArrayList<AuctionVO> admingetAuctionInfo();
 	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER);
+	AuctionVO adminAuctionFindStat(int aUCTION_POST_NUMBER);
+	int adminAuctionStatChangeOFF(int aUCTION_POST_NUMBER);
+	int adminAuctionStatChangeON(int aUCTION_POST_NUMBER);
+
 	
 	
 

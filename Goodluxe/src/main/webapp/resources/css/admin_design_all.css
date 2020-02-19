@@ -1426,4 +1426,30 @@ tr .td3{
 } */
 
 
+.scrolledTable thead tr{ 
+    display:block;
+}
 
+.scrolledTable tbody{
+    display: block;
+    border : 1px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	width : 1008px;
+	height : 300px; 
+}
+.scrolledTd{
+	text-align: center;
+	font-size: 13px;
+	width : 123px;
+	height: 40px;
+	background-color: whitesmoke;
+}
+.td4{
+	width:123px;
+	height : 45px;
+	text-align : center;
+}
+.auctistable{
+	width : 710px;
+}

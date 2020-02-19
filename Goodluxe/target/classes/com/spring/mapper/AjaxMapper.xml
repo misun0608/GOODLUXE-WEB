@@ -410,7 +410,7 @@
 		select * from gl_Auction order by auction_post_number desc
 	</select>
 	
-	<resultMap id = "adminAutionHistory" type = "com.spring.goodluxe.voes.AuctionVO">
+	<resultMap id = "adminAutionHistory" type = "com.spring.goodluxe.voes.Auction_HistoryVO">
 		<result property = "AUCTION_POST_NUMBER" column = "AUCTION_POST_NUMBER"/>
 		<result property = "AUHIS_NUMBER" column = "AUHIS_NUMBER"/>
 		<result property = "MEMBER_ID" column = "MEMBER_ID"/>
@@ -418,7 +418,15 @@
 		<result property = "AUHIS_BETTING_PRICE" column = "AUHIS_BETTING_PRICE"/>
 	</resultMap>
 	<select id = "adminGetAutionDetail" parameterType = "Integer" resultMap = "adminAutionHistory">
-		select * from gl_auction_history where auction_post_number = #{aUCTION_POST_NUMBER} order by auhis_number;
+		select * from gl_auction_history where auction_post_number = #{aUCTION_POST_NUMBER} order by auhis_number
 	</select>
-	
+	<select id = "adminAuctionFindStat" parameterType = "Integer" resultMap = "adminAuctionlistMap">
+		select AUCTION_POST_STATUS from gl_auction where auction_post_number = #{aUCTION_POST_NUMBER}
+	</select>
+	<update id = "adminAuctionStatChangeOFF" parameterType = "Integer">
+		update gl_auction set AUCTION_POST_STATUS = '게시안함' where auction_post_number = #{aUCTION_POST_NUMBER}
+	</update>
+	<update id = "adminAuctionStatChangeON" parameterType = "Integer">
+		update gl_auction set AUCTION_POST_STATUS = '게시중' where auction_post_number = #{aUCTION_POST_NUMBER}
+	</update>
 </mapper>

@@ -64,7 +64,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 			sellboVO.setPb_like(0);
 			if(sellboVO.getPb_division().equals("purchase")) {
 				productlistMapper.setPurcSaleStatus(sellboVO);
-				System.out.println("if문 들어옴");
 			}else if(sellboVO.getPb_division().equals("consign")) {
 				productlistMapper.setConsSaleStatus(sellboVO);
 			}
