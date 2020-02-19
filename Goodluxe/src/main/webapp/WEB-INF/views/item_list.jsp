@@ -223,7 +223,7 @@
 					<a href="./mdDetail.do?entity_number=<%=entity_number%>">
 						<div class="il_card">
 							<div class="il_md_img">
-								<img src="/goodluxe/image/<%= img_name%>" alt="md_img"
+								<img src="/Goodluxe/image/<%= img_name%>" alt="md_img"
 									class="il_md_img_path">
 							</div>
 							<div class="md_info">
