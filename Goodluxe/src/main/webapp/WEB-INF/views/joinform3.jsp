@@ -73,15 +73,15 @@
 			join_input_form.join_pw1.focus();
 
 		} else if(join_input_form.join_pw1.value != join_input_form.join_pw2.value){
-			alert("비밀번호를 확인해 주십시오.");
+			alert("비밀번호를 확인해 주세요.");
 			join_input_form.member_pw1.focus();
 			
 		} else if(isNaN(join_input_form.member_name.value) == false){
-			alert("이름을 확인해 주십시오.");
+			alert("이름을 확인해 주세요.");
 			join_input_form.member_name.focus();
 			
 		} else if((join_input_form.telinput1.value.length != 3) || (join_input_form.telinput2.value.length != 4) || (join_input_form.telinput3.value.length != 4)){
-			alert("휴대전화를 확인해 주십시오.");
+			alert("휴대전화를 확인해 주세요.");
 			join_input_form.telinput1.focus();
 			
 		} else {
@@ -165,7 +165,6 @@
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">영문자와
 										숫자만 사용해주세요.</td>
 								</tr>
-								<!--                                        <td class="chk_font" id="chk_id"></td> -->
 								</tr>
 								<tr class="jointablerow">
 									<td class="jttitle">비밀번호</td>
@@ -191,6 +190,9 @@
 									<td class="alert alert-danger_pw1" id="alert-danger_pw1"
 										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호는
 										10자 이상 입력해주세요.</td>
+									<td class="alert alert-danger_pw2" id="alert-danger_pw2"
+										style="font-size: 12px; color: #f9341a; padding: 4px 0 0 5px">비밀번호를 
+										입력해주세요.</td>
 								</tr>
 								</tr>
 								<tr class="jointablerow">
