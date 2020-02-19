@@ -1,7 +1,6 @@
-<%@page import="com.spring.goodluxe.voes.InquireVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,java.sql.Timestamp,com.spring.goodluxe.*" %>
+<%@ page import="java.util.*,java.sql.Timestamp,com.spring.goodluxe.voes.*" %>
 <%
 	InquireVO qPost = (InquireVO) request.getAttribute("qPost");
 	String member_id = (String)session.getAttribute("member_id");
@@ -217,7 +216,7 @@
     						}
     						output += '<td class="td_comment_write">';
     						output += '<input type="hidden" name="comment_number" value=' + comment.comment_number + ' >';
-    						output += '<textarea class="td_detail_comment_text updated_content" name="updated_content" cols="90" rows="2">'+ comment.comment_content +'</textarea>';
+    						output += '<textarea class="td_detail_comment_text updated_content" name="updated_content" cols="90" rows="2">'+ comment.comment_content.replace(/<br\/>/gi, "\r\n") +'</textarea>';
     						output += '</td><td>';
     						output += '<input type="button" class="td_detail_comment_btn reply_update_btn" form_index=' + index + ' value="댓글 수정">';
     						output += '</td></form></tr>';
@@ -285,8 +284,8 @@
 		                        </td>
 		                        <td style="text-align: right;">
 		                        <% if( member_id != null && member_id.equals(qPost.getMember_id()) ) { %>
-		                        	<button class="center_detail_btn" style="background-color: white;">삭제</button>
-		                            <button class="center_detail_btn" style="background-color: white;">수정</button>
+		                        	<input type="button" onClick="location.href='inquireDelete.do?inquire_number=<%=qPost.getInquire_number() %>'" class="center_detail_btn" style="background-color: white;" value="삭제">
+		                            <input type="button" onClick="location.href='inquireUpdateForm.do?inquire_number=<%=qPost.getInquire_number() %>'" class="center_detail_btn" style="background-color: white;" value="수정">
 		                        <% } else if( member_id !=null && member_isadmin.equals("Y") ) { %>
 		                        	<button class="center_detail_btn" style="background-color: white;">삭제</button>
 		                        <% } %>

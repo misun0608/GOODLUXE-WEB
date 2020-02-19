@@ -106,6 +106,9 @@
 								<li>
 									<a href="./admin_main.do" class="gnb_2da">매출현황</a>
 								</li>
+								<li>
+									<a href="./adminAutionManager.do" class="gnb_2da">경매감독</a>
+								</li>
 							</ul>
 						</div>
 					</div>

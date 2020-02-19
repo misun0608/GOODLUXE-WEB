@@ -40,8 +40,6 @@
 <!-- order_and_shipping -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/service_center.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/how_to.css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/sc_faq.js"></script>
 </head>

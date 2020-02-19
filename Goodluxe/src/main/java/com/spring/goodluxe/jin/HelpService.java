@@ -7,6 +7,8 @@ import com.spring.goodluxe.voes.InquireVO;
 
 public interface HelpService {
 	public void inquireInsert(InquireVO inVO) throws Exception;
+	public void inquireUpdate(InquireVO inVO) throws Exception;
+	public void inquireDelete(int inquire_number) throws Exception;
 	public ArrayList<InquireVO> loadQBList(int startRow, int endRow) throws Exception;
 	public InquireVO loadQPost(int inquire_number) throws Exception;
 	public ArrayList<InquireCommentVO> commList(int inquire_number) throws Exception;

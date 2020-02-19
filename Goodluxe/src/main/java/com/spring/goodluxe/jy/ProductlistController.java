@@ -406,4 +406,12 @@ public class ProductlistController {
 		}
 		return "redirect:mdDetail.do?entity_number="+entity_number;
 	}
+	
+	
+		
+	@RequestMapping(value = "adminAutionManager.do")
+	public String adminAutionManager() {
+
+		return "admin_aution_manager";
+	}
 }

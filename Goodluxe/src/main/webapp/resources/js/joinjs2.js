@@ -21,29 +21,21 @@ $(document).ready(function () {
 
 				success : function(retVal) {
 					if (retVal.res == "Fail") { 
-						// 이 안에 if문 넣어서 각 상황에 맞도록 경고?글 띄우려고 했는데 입력받은 아이디를 뭘로 가져와야 할 지 모르겠어요........
-						
-						if(document.getElementById('member_id').value == "") {
-	//						$(".id_overlap_btn").attr("value", "Y");
+						// db에 동일한 아이디 존재하기 때문에 가입 실패
+						$("#alert-success_id").hide(); // 사용할 수 있는 아이디
+						$("#alert-danger_id").hide(); // 아이디를 입력해주세요
+						$("#alert-danger_id1").show(); // 동일한 아이디 존재
+						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
+					} else {
+						if (join_id == ""){
 							$("#alert-success_id").hide(); // 사용할 수 있는 아이디
 							$("#alert-danger_id").show(); // 아이디를 입력해주세요
 							$("#alert-danger_id1").hide(); // 동일한 아이디 존재
-							$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-							$("#alert-danger_id3").hide(); // 중복 확인 X
 						} else {
-							$("#alert-success_id").hide(); // 사용할 수 있는 아이디
-							$("#alert-danger_id").hide(); // 아이디를 입력해주세요
-							$("#alert-danger_id1").show(); // 동일한 아이디 존재
-							$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-							$("#alert-danger_id3").hide(); // 중복 확인 X
+							$("#alert-success_id").show();
+							$("#alert-danger_id").hide(); // 아이디를 확인해주세요
+							$("#alert-danger_id1").hide(); // 동일한 아이디 존재
 						}
-						
-					} else {
-						$("#alert-success_id").show();
-						$("#alert-danger_id").hide(); // 아이디를 확인해주세요
-						$("#alert-danger_id1").hide(); // 동일한 아이디 존재
-						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-						$("#alert-danger_id3").hide(); // 중복 확인 X
 					}
 				},
 				error : function() {

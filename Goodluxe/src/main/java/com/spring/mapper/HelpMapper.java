@@ -10,6 +10,9 @@ import com.spring.goodluxe.voes.InquireVO;
 
 public interface HelpMapper {
 	public int inquireInsert(InquireVO inVO);
+	public int inquireUpdate(InquireVO inVO);
+	public int inquireDelete(int inquire_number);
+	public int inquireCommentDelete(int inquire_number);
 	public ArrayList<InquireVO> loadQBList(@Param("startRow")int startRow, @Param("endRow")int endRow);
 	public InquireVO loadQPost(int inquire_number);
 	public int countComment();

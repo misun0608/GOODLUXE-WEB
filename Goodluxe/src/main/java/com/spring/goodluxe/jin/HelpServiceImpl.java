@@ -29,6 +29,39 @@ public class HelpServiceImpl implements HelpService {
 			throw new Exception("ERROR(HelpService/inquireInsert)", e);
 		}
 	}
+	
+	@Override
+	public void inquireUpdate(InquireVO inVO) throws Exception {
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			System.out.println("service : " + inVO.getInquire_number() + " " + inVO.getInquire_content());
+			int res = helpMapper.inquireUpdate(inVO);
+			
+			if(res == 0) {
+				System.out.println("ERROR(HelpService/inquireUpdate) : 게시글 수정 실패");
+			}
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpService/inquireUpdate) : " + e.getMessage());
+			throw new Exception("ERROR(HelpService/inquireUpdate)", e);
+		}
+	}
+	
+	@Override
+	public void inquireDelete(int inquire_number) throws Exception {
+		try {
+			HelpMapper helpMapper = sqlSession.getMapper(HelpMapper.class);
+			int res = helpMapper.inquireDelete(inquire_number);
+			
+			if(res == 0) {
+				System.out.println("ERROR(HelpService/inquireDelete) : 게시글 삭제 실패");
+			} else {
+				helpMapper.inquireCommentDelete(inquire_number);
+			}
+		} catch(Exception e) {
+			System.out.println("ERROR(HelpService/inquireDelete) : " + e.getMessage());
+			throw new Exception("ERROR(HelpService/inquireDelete)", e);
+		}
+	}
 
 	@Override
 	public ArrayList<InquireVO> loadQBList(int startRow, int endRow) throws Exception {

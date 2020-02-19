@@ -12,6 +12,8 @@
 		<result property="chat_room" column="chat_room" />
 	</resultMap>
 	
+
+	
 	<select id="selectListchatRecord" parameterType="String" resultMap="resultChatrecordVO" >
 		select *
 		from gl_chat_record
@@ -34,6 +36,15 @@
 		)
 	</insert>
 	
+	<select id="selectListChatRecordcountdo" resultMap="resultChatrecordVO">
+		 select member_id, chat_message, chat_timestamp ,chat_room
+            from(
+                select member_id, chat_message, chat_timestamp ,chat_room,
+                    rank() over(partition by chat_room order by chat_timestamp desc) chat_room_rank
+                from gl_chat_record 
+                order by chat_room_rank asc, chat_timestamp desc)
+                where chat_room_rank =1
+	</select>
 	
 
 </mapper>

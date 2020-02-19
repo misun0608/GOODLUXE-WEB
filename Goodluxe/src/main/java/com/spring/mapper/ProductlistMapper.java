@@ -27,6 +27,7 @@ public interface ProductlistMapper {
 	int getSearchBoardCount(HashMap<String,String> map);
 	ArrayList<HashMap<String, Object>> getSearchBoardList(HashMap<String, Object> map);
 	
+	String findEnNum(int pb_number);
 	HashMap<String,Object>getTheProduct(HashMap<String,String>map);
 	int viewCountPlus(HashMap<String, String>map);
 	HashMap<String, String> getRecommandtheme(HashMap<String,String> map);

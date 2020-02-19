@@ -75,7 +75,8 @@ $(document).ready(function() {
 				success:function(data) { 
 					if(division_chk=="purchase"){
 						var output = "";
-						var outputth = '<tr class="tr1">'
+						var outputth = "";
+						outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
 							+'<td class="title_td">상품번호</td>'
 							+'<td class="title_td">상품이름</td>'
@@ -120,7 +121,8 @@ $(document).ready(function() {
 						$('#output').append(output);//뒤에 이어붙이기
 					}else{
 						var output = "";
-						var outputth = '<tr class="tr1">'
+						var outputth = "";
+						outputth = '<tr class="tr1">'
 							+'<td class="td3"></td>'
 							+'<td class="title_td">상품번호</td>'
 							+'<td class="title_td">상품이름</td>'
@@ -185,7 +187,7 @@ $(document).ready(function() {
 	$('#search_btn').click(function(event){
 		var division_chk = $(':radio[name="pb_division"]:checked').val();
 		var params = $('#filteringform').serialize();
-		
+		$('#outputth').empty();
 		$('#output').empty();
 		jQuery.ajax({
 			url : '/goodluxe/adminProductList.do',
@@ -196,7 +198,8 @@ $(document).ready(function() {
 			success:function(data) { 
 				if(division_chk=="purchase"){
 					var output = "";
-					var outputth = '<tr class="tr1">'
+					var outputth = "";
+					outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"  id = "chk_all"></td>'
 						+'<td class="title_td">상품번호</td>'
 						+'<td class="title_td">상품이름</td>'
@@ -240,7 +243,8 @@ $(document).ready(function() {
 					$('#output').append(output);//뒤에 이어붙이기
 				}else{
 					var output  = "";
-					var outputth = '<tr class="tr1">'
+					var outputth = "";
+					outputth = '<tr class="tr1">'
 						+'<td class="td3"><input type="checkbox"name="delivermanagement" id = "chk_all"></td>'
 						+'<td class="title_td">상품번호</td>'
 						+'<td class="title_td">상품이름</td>'
