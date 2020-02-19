@@ -92,6 +92,10 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 			member_chk = memberMapper.userSnsChk(memberVO);
+			System.out.println(member_chk.getMember_email());
+			System.out.println(member_chk.getMember_id());
+			System.out.println(member_chk.getMember_isadmin());
+			System.out.println(member_chk.getMember_class());
 			System.out.println("0-3. MemberServiceImpl 캐스트 오류:" + member_chk);
 
 			get_mapper_member_email = member_chk.getMember_email();

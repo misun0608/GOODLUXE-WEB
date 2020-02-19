@@ -182,7 +182,7 @@ public class MemberLoginController {
             result = gls.insertSnsMember(memberVO);
 
         } else if(user_check.equals("Y")) {   //등록된 회원
-           session.setAttribute("member_id", memberVO.getMember_id());
+           session.setAttribute("member_email", memberVO.getMember_email());
         }
         // 여기 else if 말고 else로 써야되나????? 어차피 Y아니면 N만 들어오나?? 뭔상관..
 
