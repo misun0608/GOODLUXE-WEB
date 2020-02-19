@@ -622,9 +622,9 @@ try {
 	public ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER) throws Exception {
 		try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
-			
+		
 			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
-			System.out.println("adf;lkasdf;lskserivce"+aUCTION_POST_NUMBER);
+			
 			AucHisList = ajaxMapper.adminGetAutionDetail(aUCTION_POST_NUMBER);
 			
 			return AucHisList;
@@ -632,6 +632,26 @@ try {
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/adminGetAutionDetail) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/adminGetAutionDetail)");
+		}
+	}
+	@Override
+	public int adminAuctionStatChange(int aUCTION_POST_NUMBER) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			AuctionVO AucInfo = new AuctionVO();
+			AucInfo = ajaxMapper.adminAuctionFindStat(aUCTION_POST_NUMBER);
+			int res = 0;
+			if(AucInfo.getAUCTION_POST_STATUS().equals("게시중")) {
+				res = ajaxMapper.adminAuctionStatChangeOFF(aUCTION_POST_NUMBER);
+			}else {
+				res = ajaxMapper.adminAuctionStatChangeON(aUCTION_POST_NUMBER);
+			}
+			return res;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/adminAuctionStatChange) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/adminAuctionStatChange)");
 		}
 	}
 

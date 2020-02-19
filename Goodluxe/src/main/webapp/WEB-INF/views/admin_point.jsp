@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
-	<title>관리자메인</title>
+	<title>관리자페이지</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_point_update.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_point_update.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -23,7 +23,7 @@
 <script>
 
 // 새창 띄우기
-function popupform(){
+/* function popupform(){
 	var popwidth = 460;
 	var popheight = 300;
 	
@@ -33,22 +33,25 @@ function popupform(){
 	var setting = "toolbar=no, status=no, menubar=no, location=no, resizable=no, scrollbars=no, height="+popheight+", width="+popwidth+",top="+TopPosition+",left="+LeftPosition+"";
 	var url = "./pointUpdateView.do"
 	window.open(url,'포인트 업데이트',setting);
-}
+} */
 
 // nullcheck
 function nullcheck(){
-    var member_id = document.getElementById("member_id").value;
+    var member_id = document.getElementById("member_id2").value;
     var point_amount = document.getElementById("point_amount").value;
     
     if(member_id==""){
        alert("아이디를 입력하세요");
+       $('#member_id2').val('');
        return false;
     }
     
     if(point_amount==""){
         alert("적립금을 입력하세요");
+        $('#point_amount').val('');
         return false;
     }
+    return true;
 }
 
 $(document).ready(function(){
@@ -113,11 +116,15 @@ $(document).ready(function(){
 
    function toggleModal() {
         modal.classList.toggle("show-modal");
+        $('#member_id2').val('');
+        $('#point_amount').val('');
     }
 
    function windowOnClick(event) {
         if (event.target === modal) {
             toggleModal();
+            $('#member_id2').val('');
+            $('#point_amount').val('');
         }
     }
 
@@ -146,9 +153,12 @@ $(document).ready(function(){
 	});
 	
 	// 적립 / 회수 버튼 눌렀을 때
-	$('.point_btn').on('click', function(){
-		// 빈칸인지 확인
-		nullcheck();
+	$('.point_btn').on('click', function(e){
+		e.preventDefault();
+		// 빈칸인지 확인		
+		if(!nullcheck()){
+			return;
+		}
 		
 		//window.opener.name="parentPage";	// 부모창의 이름 설정
 		//document.point_form.target="parentPage";	// 타겟을 부모창으로 설정
@@ -383,8 +393,8 @@ $(document).ready(function(){
                     <br />
                     <div align="left">
                         <button type="button" id="selectAllbtn"  name="selectbutton" class="select_all_btn">전체보기</button>
-                        <button type="button" id="updatebtn" name="selectbutton" class="select_all_btn" onclick="popupform();">입력</button>
-                        <button type="button" id="updatebtn2" name="selectbutton" class="trigger select_all_btn">모달</button>
+                        <!-- <button type="button" id="updatebtn" name="selectbutton" class="select_all_btn" onclick="popupform();">입력</button> -->
+                        <button type="button" id="updatebtn2" name="selectbutton" class="trigger select_all_btn">입력</button>
                         &nbsp;&nbsp;&nbsp;
                     </div>
                     <br>
@@ -423,16 +433,17 @@ $(document).ready(function(){
     <!-- 모달 시작 -->
 	<div class="modal">
 		<div class="modal-content">
-			<span class="close-button">&times;</span>
+		<span class="close-button">&times;</span>
+			<!-- <div class="point_title">POINT UPDATE</div> -->
 			<form action="./admin_point_insert.do" id="point_form" name="point_form">
 				<div class="point_data">
 					<div class="group">
-						<input type="text" id="member_id" name="member_id" class="input_point"> <span
-							class="highlight"></span> <label>아이디</label>
+						<input type="text" id="member_id2" name="member_id" class="input_point" required="required">
+						<span class="highlight"></span><label>아이디</label>
 					</div>
 					<div class="group">
-						<input type="text" id="point_amount" name="point_amount" class="input_point">
-						<span class="highlight"></span> <label>적립금</label>
+						<input type="text" id="point_amount" name="point_amount" class="input_point" required="required">
+						<span class="highlight"></span><label>적립금</label>
 					</div>
 					<input type="hidden" id="btn_value" name="btn_value" value="">
 				</div>

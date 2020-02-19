@@ -213,6 +213,7 @@
 
 				<div class="md_detail_bottom">
 					<!-- 제품 상세설명 -->
+					<br/>
 					<div class="md_detail_explanation">
 						<h3 class="md_detail_explanation_title">상품상세</h3>
 						<br />
@@ -220,6 +221,7 @@
 							<%= pb_detail%>
 						</p>
 					</div>
+					<br/><br/>
 					<!-- 연관 제품 -->
 					<div class="related_item_area">
 						<h3 class="related_item_title">Related Items</h3>

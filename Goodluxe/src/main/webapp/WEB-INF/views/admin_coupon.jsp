@@ -92,6 +92,54 @@ $(document).ready(function() {
 		}
 		return year + "-" + month + "-" + date + " " + hour + ":" + min;
 	}
+	
+	function date_format2(format) {
+		var year = format.getFullYear();
+		var month = format.getMonth() + 1;
+		if(month<10) {
+		   month = '0' + month;
+		}
+		var date = format.getDate();
+		if(date<10) {
+		   date = '0' + date;
+		}
+		var hour = format.getHours();
+		if(hour<10) {
+		   hour = '0' + hour;
+		}
+		var min = format.getMinutes();
+		if(min<10) {
+		   min = '0' + min;
+		}
+		return year + "-" + month + "-" + date;
+	}
+	
+		// 모달...
+		var modal = document.querySelector(".modal");
+	    //var trigger = document.querySelector(".trigger");
+	    var closeButton = document.querySelector(".close-button");
+	    var useButton = document.querySelector(".use_btn");
+	    //var cancelButton = document.querySelector("#cancel");
+	
+	   //console.log(modal);
+	
+	   function toggleModal() {
+	        modal.classList.toggle("show-modal");
+	        //$('#member_id2').val('');
+	    }
+	
+	   function windowOnClick(event) {
+	        if (event.target === modal) {
+	            toggleModal();
+	            //$('#member_id2').val('');
+	        }
+	    }
+	
+	   //trigger.addEventListener("click", toggleModal);
+	   closeButton.addEventListener("click", toggleModal);
+	   useButton.addEventListener("click", toggleModal);
+	   //cancel.addEventListener("click", toggleModal);
+	   //window.addEventListener("click", windowOnClick);
 	 
 		function selectData() {
 		 $('#output').empty();
@@ -178,6 +226,61 @@ $(document).ready(function() {
 	      		});
 	     	   //event.preventDefault();
 			});
+		
+		// 아이디 검색  ver.Modal
+		$('.id_search_btn').on('click',function(event){
+			$('#id_search_table').empty();
+			var member_id = $('#member_id2').val();
+			
+			if($('#member_id2').val() == null){
+				alert('아이디를 입력해주세요!');
+				return;
+			}
+			
+			console.log(member_id);
+			
+			var params = $('#member_id2').serialize();
+			
+			console.log(params);
+	        jQuery.ajax({
+	        	url:'/goodluxe/adminCheckId.do',
+	        		type:'GET',
+	        		data : params,
+	 				dataType : "json",
+	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+	 				success: function(data){
+	 					//$.each(data, function(item){
+	 						console.log('data' + data);
+	 						console.log('test' + data.member_name);
+	 						
+	 						var output = '';
+		                     if(data == null){
+		                    	 output += '요청하신 아이디와 일치하는 회원이 없습니다.';
+		                    	 toggleModal();
+		                    	 return;
+		                    }
+	 						//$('#output').empty();
+	 						
+	 						var member_join_date = new Date(data.member_join_date);
+		                    var date = date_format2(member_join_date);
+	 						
+	 						output += '<thead><tr><td class="title_td"> 아이디 </td><td class="title_td"> 이 름 </td><td class="title_td">가입일</td><td class="title_td">등급</td></tr></thead>';
+	 						output += '<tbody><td class="context_td">'+data.member_id+'</td>';
+	 						output += '<td class="context_td">'+data.member_name+'</td>';
+	 						output += '<td class="context_td">'+date+'</td>';
+	 						output += '<td class="context_td">'+data.member_class+'</td></tr></tbody>';
+							//console.log("output:" + output);
+							$('#id_search_table').append(output);//뒤에 이어붙이기
+	 					//});
+	 					//page();
+	 					toggleModal();
+	 				},
+	 				error:function(){
+	 					alert("리스트 ajax통신 실패!!!");
+	 				}
+	      		});
+			
+		});
 		
 		
 		
@@ -320,7 +423,7 @@ $(document).ready(function() {
 	              <td class="td1">쿠폰 분류</td>
 	              <td class="td2">
 	                <select name= "coupon_type" class="search">
-						<option name = "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
+						<option name = "coupon_type" value="가입 무료배송 쿠폰">가입 무료배송 쿠폰</option>
 						<option name = "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
 						<option name = "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
 	                </select>
@@ -349,7 +452,8 @@ $(document).ready(function() {
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
 	                <input type="text" class="id_search_input" name = "member_id" id = "member_id2">
-	                <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button>
+	                <!-- <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button> -->
+	                <button type="button" class="id_search_btn">모달test</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
 	              </td>
 	            </tr>
@@ -358,7 +462,7 @@ $(document).ready(function() {
 	              <td class="td2">
 	                <select class="search" name = "coupon_type">
 	                	<option name= "coupon_type" value="전체">전체</option>
-		                <option name= "coupon_type" value="배송비 무료쿠폰">배송비 무료쿠폰</option>
+		                <option name= "coupon_type" value="가입 무료배송 쿠폰">가입 무료배송 쿠폰</option>
 						<option name= "coupon_type" value="명절맞이 5%할인(최대 100만원)">명절맞이 5%할인(최대 100만원)</option>
 						<option name= "coupon_type" value="2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)">2020쥐띠해 기념 10%할인 쿠폰(최대 50만원)</option>
 	                </select>
@@ -415,6 +519,34 @@ $(document).ready(function() {
     </div>
   </div>
   <br />
+
+	<!-- 모달 시작 -->
+		<div class="modal">
+		<div class="modal-content">
+		<span class="close-button">&times;</span>
+			<center>
+<%-- 			<%
+				if(nullChk.equals("none")){
+					%>
+					
+					<p>요청하신 아이디와 일치하는 회원이 없습니다.</p>
+					
+					<%
+				}else{
+			%> --%>
+		
+			<table id="id_search_table" class="id_search_table"></table>
+				
+				<button class="bottom_btn use_btn">사용하기</button>
+		
+		
+<%-- 			<%
+				}
+			%> --%>
+		</div>
+	</div>
+	<!-- 모달 끝 -->
+
 
   <footer id="admin_footer" class="container-fluid"></footer>
 
