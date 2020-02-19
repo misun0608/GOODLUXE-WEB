@@ -1,5 +1,5 @@
-
-/* 초기화 */
+		
+/* 珥덇린�솕 */
 * {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 ul,ol,li {list-style:none;}
 a {text-decoration:none; outline:0;}
@@ -19,7 +19,7 @@ img {vertical-align:top;}
 .screen_size_available{
     background-color:#B8E1D4;
 }
-/*영업시간이 아닐때*/
+/*�쁺�뾽�떆媛꾩씠 �븘�땺�븣*/
 .screen_size>img{
     position: relative;
     width : 50%;
@@ -50,7 +50,7 @@ img {vertical-align:top;}
 }
 
 
-/*영업시간일때*/
+/*�쁺�뾽�떆媛꾩씪�븣*/
 .chatting_header{
     width : 390px;
     height :63px;
@@ -216,7 +216,7 @@ img {vertical-align:top;}
     background: #D7EAE4	;
 }
 
-/* 스크롤설정 */
+/* �뒪�겕濡ㅼ꽕�젙 */
 .chatting_content::-webkit-scrollbar{
     width : 7px;
     background-color:  #B8E1D4;
