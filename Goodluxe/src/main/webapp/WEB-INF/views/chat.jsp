@@ -142,21 +142,29 @@ $("#wisper").click(function() {
 	<!-- 현재 유저가 접속한 방이름 -->
 
 	<!-- 방 이름 / 방 만들기 / 방 나가기  -->
+	<%if(member_isadmin.equals("Y")){ %>
 	<table
 		style="width: 800px;">
-
+<%}else{ %>
+<table
+		style="width: 400px;">
+<% } %>
 		<tr>
 			
 <%if(member_isadmin.equals("Y")){ %>
-			<td align="center" style="width: 413px; height:75px;"  >
+			<td align="center" style="width: 404px; height:75px;"  >
 			<h2>검색을 하자	</h2>
 			</td>
 			<%}else{ %>
-			<td align="center" style="width:0px; " >
-			</td>
-			<%} %>
 			
-			<td align="center" style="width: 500px; height:50px; background-color:#b8e1d4; ">
+			<%} %>
+			<%if(member_isadmin.equals("Y")){ %>
+			
+			<td align="center" style="width: 462px; height:50px; background-color:#b8e1d4; ">
+			
+			<%}else{ %>
+			<td align="center" style="width: 462px; height:50px; background-color:#b8e1d4; ">
+			<%} %>
 				<!-- 방이름 출력 -->
 					<!-- 방이름 :<b>${room}</b> -->
 					<p class="chatting_title">GOODLUXE 고객센터</p>
@@ -168,10 +176,20 @@ $("#wisper").click(function() {
 	</table>
 	<!-- 채팅방 구현하기위한 테이블 -->
 	<table align="center"
+	<%if(member_isadmin.equals("Y")){ %>
 		style="height: 600px; width: 800px; margin:0; padding: 0;"
 		class="ui blue table">
+		<%}else{ %>
+		
+		style="height: 600px; width: 400px; margin:0; padding: 0;"
+		class="ui blue table">
+		<%} %>
+		<%if(member_isadmin.equals("Y")){ %>
 		<!-- 왼쪽 채팅창 출력 -->
 		<col width="350px">
+		<%}else{ %>
+	
+		<%} %>
 		<!-- 귓속말 영역 -->
 		<col width="450px">
 		<!-- 메세지 입력 영역 -->
@@ -228,15 +246,7 @@ $("#wisper").click(function() {
 					</div>
 			</td>
 			<% }else{ %>
-			<td style="width: 400px; ">
-				<!-- 채팅 참여자 출력 -->
-				<div style="width: 100%; height: 100%;"
-					class="ui message" id="chatroomlist">
-					<table id=""  width="">
-					
-					</table>
-					</div>
-					</td>
+		
 					<%} %>
 			
 		
@@ -244,7 +254,7 @@ $("#wisper").click(function() {
 			<td style="width: 560px; background-color:#b8e1d4;" colspan="2" >
 
 				<div
-					style="width: 100%; height: 550px; overflow-y: scroll; overflow-x: inherit;"
+					style="width: 100%; height: 550px; overflow:auto; overflow-y: visibility; overflow-x: inherit;"
 					class="ui message" id="output" align="right" margin-tip="4px"></div>
 			</td>
 			<!-- 채팅방 목록 -->
@@ -252,9 +262,10 @@ $("#wisper").click(function() {
 			</tr>
 		<!-- 입력 창 -->
 		<tr height="70px;">
-			
+			<%if(member_isadmin.equals("Y")){ %>
 			<td>
 			</td>
+			<%} %>
 			<!-- 보낼 메세지 입력 -->
 			<td ><input type="text" id="textID" size="50"
 				value="" style="width: 100%; height: 100%; font-weight: bold;"
@@ -342,7 +353,16 @@ $(document).ready(function() {
          	if(msg !=""){
          		//소켓으로 메세지 전달
             	ws.send(msg+"!%/"+room);
-            	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' >[${member_id}] : "+msg+"</div><br><br>");
+            	$("#output").append("<div id="+id+" width='100%' >"
+            			+ "<span id='beforeevent' display='none'><img src='./resources/img/chat_img/customer.png' width='50px' >"
+    					+ "</span> "
+    					+ "<textarea class='speech-bubble' background='#F9E7E5' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+    	+msg+
+    	"</textarea>"
+    	+ "<span id='afterevent'>"
+    			+ "<img src='./resources/img/chat_img/customer.png' width='50px' display='' ></span>"
+    			+ "</div>"
+    			+ "<br>");
             
             	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
             	$("#textID").val(""); //입력창 내용지우기
@@ -374,7 +394,16 @@ $(document).ready(function() {
                 	ws.send(msg+"!%/"+room);
                 	//$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
                 	
-                	$("#output").append("<div id=${member_id}><img src='./resources/img/chat_img/customer.png' width='35px' >[${member_id}] : "+msg+"</div><br><br>");
+                	$("#output").append("<div id="+id+" width='100%' >"
+                			+ "<span id='beforeevent' display='none'><img src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px' >"
+        					+ "</span> "
+        					+ "<textarea class='speech-bubble' background='#F9E7E5' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+        	+msg+
+        	"</textarea>"
+        	+ "<span id='afterevent'>"
+        			+ "<img src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px' display='' ></span>"
+        			+ "</div>"
+        			+ "<br>");
   //									"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>"
                 	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
                 	$("#textID").val(""); //입력창 내용지우기
@@ -398,7 +427,7 @@ $(document).ready(function() {
     	list_2 = list_1[0].split('[');
     	//alert(list_2[1]);
       	if(jsonData.message !=null){
-          		$("#output").append(jsonData.message+"<br><br>");
+          		$("#output").append(jsonData.message+"<br>");
             	$("#output").scrollTop(99999999);
       	}
       	
@@ -441,12 +470,70 @@ $(document).ready(function() {
 </script>
 <style type="text/css">
 
+
+.speech-bubble {
+	position: relative;
+	
+	border-radius: .4em;
+}
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 24px solid transparent;
+	
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -12px;
+	margin-left: -24px;
+}
+	
+	textarea{
+	margin : 0px 5px 5px 5px; 
+	padding : 10px 5px 5px 10px;
+	}
+	textarea{
+	background : #F9E7E5;
+	overflow: hidden; 
+	overflow-wrap: break-word; 
+	resize: none; 
+	user-select: auto;
+	}
+	img{
+	margin: 0px 10px 0px 5px;
+	}
+	
+	#beforeevent img{
+	display:none;
+	margin: 0px 0px 0px 10px;
+	}
+	
 	#<%=member_id %>{
 	float : left;
 	}
-	#<%=member_id %> img{
-	float : left;
+	
+	#<%=member_id %> #beforeevent img{
+	display : inline;
 	}
+	
+	#<%=member_id %> #afterevent{
+	display : none;
+	}
+	
+	#<%=member_id %> #beforeevent{
+	display : inline;
+	}
+	#<%=member_id %> textarea {
+	background:#ffffff;
+	}
+	
+	::-webkit-scrollbar {
+	display:none;
+	} 
+
 	
 	div p {
   overflow: hidden;
@@ -456,30 +543,23 @@ $(document).ready(function() {
   height: 20px;
 }
 
-	.speech-bubble {
-	position: relative;
-	background: #ffffff;
-	border-radius: .4em;
+
+	img {
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
 }
 
-.speech-bubble:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 24px solid transparent;
-	border-right-color: #ffffff;
-	border-left: 0;
-	border-bottom: 0;
-	margin-top: -12px;
-	margin-left: -24px;
-}
-	
+<style>
+textarea.autosize { min-height: 50px; }
 </style>
 
-
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script>
+$("textarea.autosize").on('keydown keyup', function () {
+  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+});
+</script>
 	</div>
 </body>
 </html>
