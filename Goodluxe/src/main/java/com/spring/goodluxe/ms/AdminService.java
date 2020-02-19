@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 
@@ -26,5 +27,7 @@ public interface AdminService {
 	public ArrayList<HashMap<String,Object>> getBrandCntData() throws Exception;
 	public ArrayList<HashMap<String,Object>> getCateSalesData() throws Exception;
 	public ArrayList<HashMap<String,Object>> getBrandSalesData() throws Exception;
+	//관리자 아이디검사
+	MemberVO adminSearchID(String string, String member_id) throws Exception;
 	
 }

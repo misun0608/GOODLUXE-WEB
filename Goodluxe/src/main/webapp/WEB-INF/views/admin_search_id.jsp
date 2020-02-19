@@ -17,40 +17,45 @@
 
 </head>
 <body>
-	<%
-		if(nullChk.equals("none")){
-			%>
-			
-			<p>요청하신 아이디와 일치하는 회원이 없습니다.</p>
-			
+	<div class="modal">
+		<div class="modal-content">
+			<center>
 			<%
-		}else{
-	%>
-	<center>
-	<table class="id_search_table">
-		<thead>
-			<tr>
-				<td class="title_td"> 아이디 </td>
-				<td class="title_td"> 이 름 </td>
-				<td class="title_td">가입일</td>
-				<td class="title_td">등급</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="context_td"> <%=memberVO.getMember_id() %> </td>
-				<td class="context_td"> <%=memberVO.getMember_name() %> </td>
-				<td class="context_td"> <%=memberVO.getMember_join_date() %></td>
-				<td class="context_td"> <%=memberVO.getMember_class() %></td>
-			</tr>
-		</tbody>
-	</table>
+				if(nullChk.equals("none")){
+					%>
+					
+					<p>요청하신 아이디와 일치하는 회원이 없습니다.</p>
+					
+					<%
+				}else{
+			%>
 		
-		<button class="bottom_btn" onclick = "window.close();"> 사용하기 </button>
-
-
-	<%
-		}
-	%>
+			<table class="id_search_table">
+				<thead>
+					<tr>
+						<td class="title_td"> 아이디 </td>
+						<td class="title_td"> 이 름 </td>
+						<td class="title_td">가입일</td>
+						<td class="title_td">등급</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="context_td"> <%=memberVO.getMember_id() %> </td>
+						<td class="context_td"> <%=memberVO.getMember_name() %> </td>
+						<td class="context_td"> <%=memberVO.getMember_join_date() %></td>
+						<td class="context_td"> <%=memberVO.getMember_class() %></td>
+					</tr>
+				</tbody>
+			</table>
+				
+				<button class="bottom_btn" onclick = "window.close();"> 사용하기 </button>
+		
+		
+			<%
+				}
+			%>
+		</div>
+	</div>
 </body>
 </html>

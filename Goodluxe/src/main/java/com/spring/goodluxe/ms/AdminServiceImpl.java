@@ -15,6 +15,7 @@ import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 import com.spring.mapper.AdminPointMapper;
 import com.spring.mapper.MemberMapper;
+import com.spring.mapper.ProductlistMapper;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -371,5 +372,27 @@ public class AdminServiceImpl implements AdminService {
 		return refund_list;
 	}
 	
+	// 관리자 아이디 검색
+	public MemberVO adminSearchID(String string, String member_id) throws Exception {
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			HashMap<String, String> map = new HashMap<String, String>();
+			MemberVO memberVO = new MemberVO();
+			map.put("member_id", member_id);
+			
+			int nullChk = productlistMapper.countOneMember(map);
+			if(nullChk==0) {
+				return null;
+			}else {
+				memberVO = productlistMapper.adminSearchId(map);
+				//System.out.println("memberVO는??"+memberVO.getMember_name());
+				return memberVO;
+			}
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/adminSearchId) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/adminSearchId)");
+		}
+	}
 	
 }
