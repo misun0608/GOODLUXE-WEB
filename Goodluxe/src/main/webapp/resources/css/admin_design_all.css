@@ -1376,8 +1376,8 @@ tr .td3{
          transform: translate(-50%, -50%);
          background-color: white;
          padding: 1rem 1.5rem;
-         width: 500px;
-         height: 350px;
+         width: 400px;
+         height: 270px;
          border-radius: 0.5rem;
      }
      .close-button {
@@ -1387,7 +1387,8 @@ tr .td3{
          text-align: center;
          cursor: pointer;
          border-radius: 0.25rem;
-         background-color: lightgray;
+         color: white;
+    	 background-color: #BBCDDB;
      }
      .close-button:hover {
          background-color: darkgray;
