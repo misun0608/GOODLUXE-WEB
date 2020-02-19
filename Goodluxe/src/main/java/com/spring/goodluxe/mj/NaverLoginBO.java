@@ -49,11 +49,18 @@ public class NaverLoginBO {
 
     /* 네이버아이디로 Callback 처리 및  AccessToken 획득 Method */
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
-
+    	System.out.println("NaverLoginBO.java _ session 잘 받아오나 : " + session);
+    	System.out.println("NaverLoginBO.java _ code 잘 받아오나 : " + code);
+    	System.out.println("NaverLoginBO.java _ state 잘 받아오나 : " + state);
+    	
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
+        System.out.println("NaverLoginBO.java _ 1 session : " + session);
+        System.out.println("NaverLoginBO.java _ 1 sessionState : " + sessionState);
+        System.out.println(StringUtils.pathEquals(sessionState, state));
         if(StringUtils.pathEquals(sessionState, state)){
-
+        System.out.println("NaverLoginBO.java _ 2");
+        	
             OAuth20Service oauthService = new ServiceBuilder()
                     .apiKey(CLIENT_ID)
                     .apiSecret(CLIENT_SECRET)
@@ -62,7 +69,11 @@ public class NaverLoginBO {
                     .build(NaverLoginApi.instance());
 
             /* Scribe에서 제공하는 AccessToken 획득 기능으로 네아로 Access Token을 획득 */
+            System.out.println("NaverLoginBO.java _ 3 code : " + code);
+            System.out.println("NaverLoginBO.java _ 3 state : " + state);
+            
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
+            System.out.println("NaverLoginBO.java _ 3 accessToken : " + accessToken);
             return accessToken;
         }
         return null;

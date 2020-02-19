@@ -84,8 +84,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String userSnsChk(MemberVO memberVO) throws Exception {
 		MemberVO member_chk, admin_chk = null;
-		String get_mapper_member_id, get_mapper_member_pass, get_mapper_member_class, get_mapper_member_isadmin = null;
-		String id = null, pass = null, m_class = null, isadmin = null;
+		String get_mapper_member_email, get_mapper_member_pass, get_mapper_member_class, get_mapper_member_isadmin = null;
+		String email = null, pass = null, m_class = null, isadmin = null;
 		String m_status_chk, a_status_chk = "";
 		String result = ""; // 이메일 비번이 틀렸을 경우 결과값
 
@@ -94,22 +94,22 @@ public class MemberServiceImpl implements MemberService {
 			member_chk = memberMapper.userSnsChk(memberVO);
 			System.out.println("0-3. MemberServiceImpl 캐스트 오류:" + member_chk);
 
-			get_mapper_member_id = member_chk.getMember_id();
-			id = memberVO.getMember_id();
+			get_mapper_member_email = member_chk.getMember_email();
+			email = memberVO.getMember_email();
 
-//			System.out.println("1. MemberServiceImpl" + id);
-//			System.out.println("2. MemberServiceImpl" + pass);
-//			System.out.println("3. MemberServiceImpl" + m_class);
-//			System.out.println("4. MemberServiceImpl" + isadmin);
+			System.out.println("1. MemberServiceImpl" + email);
+			System.out.println("2. MemberServiceImpl" + pass);
+			System.out.println("3. MemberServiceImpl" + m_class);
+			System.out.println("4. MemberServiceImpl" + isadmin);
 
-			// 동일한 아이디 있을 경우
-			if (get_mapper_member_id.equals(id)) {
+			// 동일한 이메일 있을 경우
+			if (get_mapper_member_email.equals(email)) {
 				result = "Y";
-			} else { // 아이디 없을 경우
+			} else { // 이메일 없을 경우
 				result = "N";
 			}
 
-			memberVO.setMember_id(id);
+			memberVO.setMember_email(email);
 			memberVO.setMember_class(m_class);
 			memberVO.setMember_isadmin(isadmin);
 

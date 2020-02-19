@@ -1,6 +1,7 @@
 package com.spring.goodluxe.mj;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -119,10 +119,12 @@ public class MemberLoginController {
    	   return "redirect:/loginform.do";
       }
        System.out.println("여기는 callback");
-       	
+       System.out.println("session : " + session);
+       System.out.println("code : " + code);
+       System.out.println("state : " + state);
        OAuth2AccessToken oauthToken;
        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-       
+       System.out.println(oauthToken);
        //로그인 사용자 정보를 읽어온다.
        apiResult = naverLoginBO.getUserProfile(oauthToken);
        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
@@ -155,25 +157,40 @@ public class MemberLoginController {
         
         user_check = gls.userSnsChk(memberVO);
         
-        if(user_check.equals("Y") ) {   //아이디 중복이 없을 때 
-           result = gls.insertSnsMember(memberVO);
-           
-           if(result != 1) {   //성공
-               session.setAttribute("member_id", memberVO.getMember_id());
-               session.setAttribute("member_class", memberVO.getMember_class());
-               session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
-           } else {
-              System.out.println("sns 회원가입 컨트롤러 실패");
-           }
-        } else if(user_check.equals("N")) {   //등록된 회원
+        if(user_check.equals("N") ) {   //아이디 중복이 없을 때 
+//           result = gls.insertSnsMember(memberVO);
+//           
+//           if(result != 1) {   //성공
+//               session.setAttribute("member_id", memberVO.getMember_id());
+//               session.setAttribute("member_class", memberVO.getMember_class());
+//               session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
+//           } else {
+//              System.out.println("sns 회원가입 컨트롤러 실패");
+//           }
+//        	ArrayList<MemberVO> memberList = gls.getMemberlist();
+//            
+//            for(int i=0; i<memberList.size(); i++) {
+//               if(member_id.equals(memberList.get(i).getMember_id())) {
+//                  //닉네임 중복
+//                  double random =  Math.random() * 10000;
+//                  member_id += (int)random;
+//                  
+//                  memberVO.setMember_id(member_id);
+//               }
+//               break;
+//            }
+            result = gls.insertSnsMember(memberVO);
+
+        } else if(user_check.equals("Y")) {   //등록된 회원
            session.setAttribute("member_id", memberVO.getMember_id());
         }
+        // 여기 else if 말고 else로 써야되나????? 어차피 Y아니면 N만 들어오나?? 뭔상관..
 
      } catch(Exception e) {
         e.printStackTrace();
      }
      
-     return "/mainPage.do";
+     return "redirect:/mainPage.do";
    }
    
    //카카오 로그인 성공
