@@ -250,12 +250,12 @@ $(document).ready(function() {
 	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 	 				success: function(data){
 	 					//$.each(data, function(item){
-	 						console.log('data' + data);
 	 						console.log('test' + data.member_name);
 	 						
 	 						var output = '';
-		                     if(data == null){
+		                     if(data.member_name == null & data.member_id == null){
 		                    	 output += '요청하신 아이디와 일치하는 회원이 없습니다.';
+		                    	 $('#id_search_table').append(output);
 		                    	 toggleModal();
 		                    	 return;
 		                    }
@@ -263,7 +263,6 @@ $(document).ready(function() {
 	 						
 	 						var member_join_date = new Date(data.member_join_date);
 		                    var date = date_format2(member_join_date);
-	 						
 	 						output += '<thead><tr><td class="title_td"> 아이디 </td><td class="title_td"> 이 름 </td><td class="title_td">가입일</td><td class="title_td">등급</td></tr></thead>';
 	 						output += '<tbody><td class="context_td">'+data.member_id+'</td>';
 	 						output += '<td class="context_td">'+data.member_name+'</td>';
@@ -522,8 +521,9 @@ $(document).ready(function() {
 
 	<!-- 모달 시작 -->
 		<div class="modal">
-		<div class="modal-content">
+		<div id="modal-content" class="modal-content">
 		<span class="close-button">&times;</span>
+
 			<center>
 <%-- 			<%
 				if(nullChk.equals("none")){
@@ -535,14 +535,10 @@ $(document).ready(function() {
 				}else{
 			%> --%>
 		
-			<table id="id_search_table" class="id_search_table"></table>
+ 			<table id="id_search_table" class="id_search_table"></table>
 				
-				<button class="bottom_btn use_btn">사용하기</button>
-		
-		
-<%-- 			<%
-				}
-			%> --%>
+				<button class="bottom_btn use_btn">사용하기</button> 
+
 		</div>
 	</div>
 	<!-- 모달 끝 -->
