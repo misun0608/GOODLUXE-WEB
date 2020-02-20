@@ -232,7 +232,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY PB_DATE DESC)
-				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+				WHERE pb_sale_status = '판매중' and pb_post_status = '게시중'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 	
