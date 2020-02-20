@@ -1453,3 +1453,18 @@ tr .td3{
 .auctistable{
 	width : 710px;
 }
+
+/* 관리자 쿠폰페이지 테이블 */
+#id_search_table{
+	width: 88%;
+	text-align: center;
+	border: 0px;
+}
+
+#id_search_table .title_td{
+	background: #D1DFE8;
+}
+
+#id_search_table .context_td{
+	background: whitesmoke;
+}
