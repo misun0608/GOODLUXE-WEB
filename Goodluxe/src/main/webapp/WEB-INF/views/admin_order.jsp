@@ -298,7 +298,7 @@
 							output += '<tr><td class="order_ti_td">'+'받는사람'+'</td>';
 							output += '<td class="order_co_td">'+data.member_name+'</td></tr>';
 							output += '<tr><td class="order_ti_td">'+'주 소'+'</td>';
-							output += '<td class="order_co_td">'+data.order_addr1+data.order_addr2+'&nbsp;&nbsp;우)'+data.order_zipcode+'</td></tr>';
+							output += '<td class="order_co_td">'+data.order_addr1+data.order_addr2+'<br />우)'+data.order_zipcode+'</td></tr>';
 							output += '<tr><td class="order_ti_td">'+'핸드폰'+'</td>';
 							output += '<td class="order_co_td">'+data.order_phone+'</td></tr>';
 							
@@ -572,7 +572,7 @@
 							</tr>
 						</table>
 						<div class="btn12" align="center">
-							<button type="button" class="bottom_btn cancel_btn" id="init_btn">전체보기</button>
+							<button type="button" class="order_select_all_btn" id="init_btn">전체보기</button>
 							<button type="button" class="bottom_btn" id="search_btn">검색</button>
 						</div>
 					</form>
