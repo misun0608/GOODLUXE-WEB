@@ -12,7 +12,7 @@ public interface MemberService{
 	int emailChk(MemberVO memberVO) throws Exception; // 
 	String userClassChk(MemberVO memberVO) throws Exception; //
 	int idCheck(MemberVO memberVO) throws Exception; // 가입 시 아이디 중복체크
-	int emailCheck(MemberVO memberVO) throws Exception; // 가입 시 이메일 중복체크 < 꼭 필요한가 - sns 가입시 이메일로 회원 체크할 것 같으니., 필요함
+//	int emailCheck(MemberVO memberVO) throws Exception; // 가입 시 이메일 중복체크 < 꼭 필요한가 - sns 가입시 이메일로 회원 체크할 것 같으니., 필요함
 	int verifyEmail(MemberVO memberVO); // 메일 인증 관련
 	int insertSnsMember(MemberVO memberVO); // SNS 간편 가입(DB)
 	ArrayList<MemberVO> getMemberlist() throws Exception;
