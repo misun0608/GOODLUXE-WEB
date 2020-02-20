@@ -2,6 +2,8 @@ package com.spring.goodluxe.mj;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,23 +119,15 @@ public class MemberLoginController {
       
       //정보동의 취소시 이전페이지로 이동
       if(code.equals("0")) {
-         return "mainPage.do";
+         return "redirect:/mainPage.do";
       }
-       System.out.println("여기는 MemberLoginController callback");
-
-       System.out.println("callback session : " + session);
-       System.out.println("callback code : " + code);
-       System.out.println("callback state : " + state);
        
        OAuth2AccessToken oauthToken;
        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-       System.out.println("토큰 잘 저장 되니? 여긱가 문제인 것 같은데? oauthToken : " + oauthToken);
        //로그인 사용자 정보를 읽어온다.
        apiResult = naverLoginBO.getUserProfile(oauthToken);
-       System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
        
        model.addAttribute("result", apiResult);
-       System.out.println("result"+apiResult);
        /* 네이버 로그인 성공 페이지 View 호출 */
        
        //2. String형식인 apiResult를 json형태로 바꿈
@@ -143,73 +138,60 @@ public class MemberLoginController {
      // 3. 데이터 파싱
      // Top레벨 단계 _response 파싱
      JSONObject response_obj = (JSONObject) jsonObj.get("response");
-     // response의 nickname값 파싱
-//     String nickname = (String) response_obj.get("nickname");
-//     String img = (String) response_obj.get("profile_image");
      String email = (String) response_obj.get("email");
      String name = (String) response_obj.get("name");
+     String id = (String) response_obj.get("id");
      
      System.out.println("3. 데이터 파싱");
      System.out.println(email+" "+name);
      
      try {
-//        memberVO.setMEMBER_NICK(nickname);
         memberVO.setMember_email(email);
+        email_check = gls.emailAddr_chk(memberVO);
         
-        email_check = gls.emailChk(memberVO);
-        // emailChk랑 emailCheck랑 있던데 이게 뭐야..? 왜 나눠져있어..? (같은거인듯)
-        
-        if(email_check == 0 ) {   //이메일 중복이 없을 때 
-//           ArrayList<MemberVO> memberList = gls.get_nick_list();
-           
-//           for(int i=0; i<memberList.size(); i++) {
-//              if(nickname.equals(memberList.get(i).getMEMBER_NICK())) {
-//                 //닉네임 중복
-//                 double random =  Math.random() * 10000;
-//                 nickname += (int)random;
-//                 
-//                 memberVO.setMEMBER_NICK(nickname);
-//              }
-//              break;
-//           }
-           
-//           memberVO.setMEMBER_PICTURE(img);
-           memberVO.setMember_name(name);
-           memberVO.setMember_pw("naver_pw");
-           memberVO.setMember_class("Y");
-           memberVO.setMember_isadmin("N");
-           result = gls.insertSnsMember(memberVO);
-           
-           if(result != 0) {   //성공
-              session.setAttribute("member_email", memberVO.getMember_email());
-              session.setAttribute("member_pw", memberVO.getMember_pw());
-//              session.setAttribute("MEMBER_NICK", memberVO.getMEMBER_NICK());
-              session.setAttribute("member_name", memberVO.getMember_name());
-//              session.setAttribute("MEMBER_NUM", memberVO.getMEMBER_NUM());
-              session.setAttribute("member_class", memberVO.getMember_class());
-              session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
-           } else {
-              System.out.println("sns 회원가입 컨트롤러 실패");
-           }
-        } else {   //등록된 회원
-           session.setAttribute("member_email", memberVO.getMember_email());
-           
+        if(email_check == 0 ) {   // 신규 회원 가입
+
+			memberVO.setMember_id(id);
+			memberVO.setMember_name(name);
+			memberVO.setMember_class("Y");
+			memberVO.setMember_isadmin("N");
+			result = gls.insertSnsMember(memberVO);
+
+			if(result == 0) {
+				System.out.println("ERROR(MemberLoginController/callback) : 간편 로그인 회원 등록 실패(네이버)");
+			}
         }
-        
-        
      } catch(Exception e) {
-        e.printStackTrace();
-     }
-     
-       return "redirect:/mainPage.do";
+        System.out.println("ERROR(MemberLoginController/callback) : " + e.getMessage());
+     }   
+     	String url = "redirect:/sLogin.do?member_id=" + id;
+       return url;
    }
+   
+	// Social Media Login
+	@RequestMapping(value = "/sLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String sLogin(MemberVO memberVO, HttpSession session) throws Exception {
+		try {
+			MemberVO member_db =  gls.getUserInfo(memberVO);
+			
+        	if(member_db != null) {
+        		session.setAttribute("member_id", member_db.getMember_id());
+        		session.setAttribute("member_class", member_db.getMember_class());
+        		session.setAttribute("member_isadmin", member_db.getMember_isadmin());        		
+        	}
+        	
+		} catch (Exception e) {
+			System.out.println("ERROR(GLAjaxController/userChk) : " + e.getMessage());
+		}
+		return "redirect:/mainPage.do";
+	};
 
    
    //카카오 로그인 성공
    @RequestMapping(value = "/kakaologin.do", method = { RequestMethod.GET, RequestMethod.POST })
    public String kakaoLogin(Model model, @RequestParam String code, HttpSession session, HttpServletRequest request)
            throws Exception {
-      String email_check = null;
+      int email_check = 0;
       int result = 0;
       MemberVO memberVO = new MemberVO();
       //결과값을 node에 담아줌
@@ -226,54 +208,41 @@ public class MemberLoginController {
       //유저정보 카카오에서 가져오기 Get properties
       JsonNode properties = userInfo.path("properties");
      JsonNode kakao_account = userInfo.path("kakao_account");
-     id = kakao_account.path("email").asText();
-     name = kakao_account.path("nickname").asText();
-     System.out.println(name+" "+id);
-  
+     
+     System.out.println("Controller : " + kakao_account);
+     
+     email = kakao_account.path("email").asText();
+     id = email.split("@")[0];
+     id = "kakao_" + id;
+     
+     JsonNode profile = kakao_account.path("profile");
+     name = profile.path("nickname").asText();
+     
      try {
-        memberVO.setMember_name(name);
-        memberVO.setMember_id(id);
+        memberVO.setMember_email(email);
+        email_check = gls.emailAddr_chk(memberVO);
         
-        email_check = gls.userSnsChk(memberVO);
-        
-        if(email_check == null) {   //아이디 중복이 없을 때 
-//           ArrayList<MemberVO> memberList = gls.get_nick_list();
-//           
-//           for(int i=0; i<memberList.size(); i++) {
-//              if(nickname.equals(memberList.get(i).getMember_name())) {
-//                 //닉네임 중복
-//                 double random =  Math.random() * 10000;
-//                 nickname += (int)random;
-//                 
-//                 memberVO.setMember_name(nickname);
-//                 break;
-//              }
-//           }
-           
+        if(email_check == 0) {   // 신규 회원 가입
+
+
+			memberVO.setMember_id(id);
+			memberVO.setMember_name(name);
            memberVO.setMember_class("Y");
-           memberVO.setMember_point(0);
            memberVO.setMember_isadmin("N");
 
            result = gls.insertSnsMember(memberVO);
            
-           if(result != 0) {   //성공
-              session.setAttribute("member_id", memberVO.getMember_id());
-              session.setAttribute("member_class", memberVO.getMember_class());
-              session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
-           } else { // 실패 
-        	  session.setAttribute("member_id", "null");
-              System.out.println("sns 회원가입 컨트롤러 실패");
-           }
-        } else {   //등록된 회원
-           session.setAttribute("member_id", memberVO.getMember_id());
-           session.setAttribute("member_class", memberVO.getMember_class());
-           session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
+           if(result == 0) {
+				System.out.println("ERROR(MemberLoginController/kakaoLogin) : 간편 로그인 회원 등록 실패(카카오)");
+			}
+
         }
         
      } catch(Exception e) {
-        e.printStackTrace();
+    	 System.out.println("ERROR(MemberLoginController/kakaoLogin) : " + e.getMessage());
      }
      
-     return "redirect:/mainPage.do";
+     String url = "redirect:/sLogin.do?member_id=" + id;
+     return url;
   }
 }

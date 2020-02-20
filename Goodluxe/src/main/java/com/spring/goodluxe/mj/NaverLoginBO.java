@@ -32,10 +32,8 @@ public class NaverLoginBO {
     public String getAuthorizationUrl(HttpSession session) {
         /* 세션 유효성 검증을 위하여 난수를 생성 */
         String state = generateRandomString();
-    	System.out.println("세션 유효성 검증을 위해 생성한 난수 : " + state);
         /* 생성한 난수 값을 session에 저장 */
         setSession(session,state);        
-    	System.out.println("세션에 난수값 잘 저장됐나 " + session);
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
         OAuth20Service oauthService = new ServiceBuilder()                                                   
@@ -45,7 +43,6 @@ public class NaverLoginBO {
                 .state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
                 .build(NaverLoginApi.instance());
 
-        System.out.println("네이버 인증 URL 생성 잘 됐나 " + oauthService);
         return oauthService.getAuthorizationUrl();
     }
 
@@ -54,8 +51,6 @@ public class NaverLoginBO {
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
-    	System.out.println("세션 검증용 난수값 : " + sessionState);
-    	System.out.println("세션에 저장된 값 : " + state);
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()
