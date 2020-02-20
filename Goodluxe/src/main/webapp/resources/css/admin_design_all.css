@@ -1468,3 +1468,29 @@ tr .td3{
 #id_search_table .context_td{
 	background: whitesmoke;
 }
+
+/* 관리자 주문관리페이지 테이블 */
+#order_detail_table{
+	width: 95%;
+	text-align: center;
+	border: 0px;
+	font-size: 13px;
+	margin-top: 30px;
+}
+
+.top_td{
+	padding-bottom: 15px;
+}
+
+.order_ti_td{
+	background-color: #8FB0CA;
+	color: white;
+	height: 25px;
+}
+
+.order_co_td{
+	background-color: white;
+	text-align: left;
+	height: 25px;
+	padding-left: 5px;
+}

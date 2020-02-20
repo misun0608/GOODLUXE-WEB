@@ -390,9 +390,21 @@ public class AdminServiceImpl implements AdminService {
 			}
 			
 		}catch(Exception e) {
-			System.out.println("ERROR(ProductlistService/adminSearchId) : " + e.getMessage());
-			throw new Exception("ERROR(ProductlistService/adminSearchId)");
+			System.out.println("ERROR(AdminService/adminSearchId) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/adminSearchId)");
 		}
 	}
 	
+	// 관리자 주문관리 주문디테일 모달
+	public HashMap<String,String> getShippingInfo(String order_number)throws Exception{
+		HashMap<String,String> shipping_info = null;
+		try {
+			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+			shipping_info = productlistMapper.getShippingInfo(order_number);
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminService/getShippingInfo) : " + e.getMessage());
+			throw new Exception("ERROR(AdminService/getShippingInfo)");
+		}
+		return shipping_info;
+	}
 }

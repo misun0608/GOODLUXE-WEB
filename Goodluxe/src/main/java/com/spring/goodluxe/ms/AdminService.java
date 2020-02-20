@@ -29,5 +29,6 @@ public interface AdminService {
 	public ArrayList<HashMap<String,Object>> getBrandSalesData() throws Exception;
 	//관리자 아이디검사
 	MemberVO adminSearchID(String string, String member_id) throws Exception;
-	
+	// 관리자 주문관리 주문디테일
+	public HashMap<String,String> getShippingInfo(String order_number)throws Exception;
 }
