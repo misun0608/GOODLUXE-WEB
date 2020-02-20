@@ -110,21 +110,23 @@ public class MemberLoginController {
    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, HttpServletRequest request)
            throws IOException, ParseException {
       
-      String user_check = null;
+      int email_check = 0;
       int result = 0;
       MemberVO memberVO = new MemberVO();
       
       //정보동의 취소시 이전페이지로 이동
       if(code.equals("0")) {
-   	   return "redirect:/loginform.do";
+         return "mainPage.do";
       }
-       System.out.println("여기는 callback");
-       System.out.println("session : " + session);
-       System.out.println("code : " + code);
-       System.out.println("state : " + state);
+       System.out.println("여기는 MemberLoginController callback");
+
+       System.out.println("callback session : " + session);
+       System.out.println("callback code : " + code);
+       System.out.println("callback state : " + state);
+       
        OAuth2AccessToken oauthToken;
        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-       System.out.println(oauthToken);
+       System.out.println("토큰 잘 저장 되니? 여긱가 문제인 것 같은데? oauthToken : " + oauthToken);
        //로그인 사용자 정보를 읽어온다.
        apiResult = naverLoginBO.getUserProfile(oauthToken);
        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
@@ -142,56 +144,66 @@ public class MemberLoginController {
      // Top레벨 단계 _response 파싱
      JSONObject response_obj = (JSONObject) jsonObj.get("response");
      // response의 nickname값 파싱
-     String member_id = (String) response_obj.get("id");
-     String member_name = (String) response_obj.get("name");
-     String member_email = (String) response_obj.get("email");
+//     String nickname = (String) response_obj.get("nickname");
+//     String img = (String) response_obj.get("profile_image");
+     String email = (String) response_obj.get("email");
+     String name = (String) response_obj.get("name");
      
-     System.out.println(member_id+" "+member_name+" "+member_email);
+     System.out.println("3. 데이터 파싱");
+     System.out.println(email+" "+name);
      
      try {
-        memberVO.setMember_id(member_id);
-        memberVO.setMember_name(member_name);
-        memberVO.setMember_email(member_email);
-        memberVO.setMember_class("Y");
-        memberVO.setMember_isadmin("N");
+//        memberVO.setMEMBER_NICK(nickname);
+        memberVO.setMember_email(email);
         
-        user_check = gls.userSnsChk(memberVO);
+        email_check = gls.emailChk(memberVO);
+        // emailChk랑 emailCheck랑 있던데 이게 뭐야..? 왜 나눠져있어..? (같은거인듯)
         
-        if(user_check.equals("N") ) {   //아이디 중복이 없을 때 
-//           result = gls.insertSnsMember(memberVO);
-//           
-//           if(result != 1) {   //성공
-//               session.setAttribute("member_id", memberVO.getMember_id());
-//               session.setAttribute("member_class", memberVO.getMember_class());
-//               session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
-//           } else {
-//              System.out.println("sns 회원가입 컨트롤러 실패");
+        if(email_check == 0 ) {   //이메일 중복이 없을 때 
+//           ArrayList<MemberVO> memberList = gls.get_nick_list();
+           
+//           for(int i=0; i<memberList.size(); i++) {
+//              if(nickname.equals(memberList.get(i).getMEMBER_NICK())) {
+//                 //닉네임 중복
+//                 double random =  Math.random() * 10000;
+//                 nickname += (int)random;
+//                 
+//                 memberVO.setMEMBER_NICK(nickname);
+//              }
+//              break;
 //           }
-//        	ArrayList<MemberVO> memberList = gls.getMemberlist();
-//            
-//            for(int i=0; i<memberList.size(); i++) {
-//               if(member_id.equals(memberList.get(i).getMember_id())) {
-//                  //닉네임 중복
-//                  double random =  Math.random() * 10000;
-//                  member_id += (int)random;
-//                  
-//                  memberVO.setMember_id(member_id);
-//               }
-//               break;
-//            }
-            result = gls.insertSnsMember(memberVO);
-
-        } else if(user_check.equals("Y")) {   //등록된 회원
+           
+//           memberVO.setMEMBER_PICTURE(img);
+           memberVO.setMember_name(name);
+           memberVO.setMember_pw("naver_pw");
+           memberVO.setMember_class("Y");
+           memberVO.setMember_isadmin("N");
+           result = gls.insertSnsMember(memberVO);
+           
+           if(result != 0) {   //성공
+              session.setAttribute("member_email", memberVO.getMember_email());
+              session.setAttribute("member_pw", memberVO.getMember_pw());
+//              session.setAttribute("MEMBER_NICK", memberVO.getMEMBER_NICK());
+              session.setAttribute("member_name", memberVO.getMember_name());
+//              session.setAttribute("MEMBER_NUM", memberVO.getMEMBER_NUM());
+              session.setAttribute("member_class", memberVO.getMember_class());
+              session.setAttribute("member_isadmin", memberVO.getMember_isadmin());
+           } else {
+              System.out.println("sns 회원가입 컨트롤러 실패");
+           }
+        } else {   //등록된 회원
            session.setAttribute("member_email", memberVO.getMember_email());
+           
         }
-        // 여기 else if 말고 else로 써야되나????? 어차피 Y아니면 N만 들어오나?? 뭔상관..
-
+        
+        
      } catch(Exception e) {
         e.printStackTrace();
      }
      
-     return "redirect:/mainPage.do";
+       return "redirect:/mainPage.do";
    }
+
    
    //카카오 로그인 성공
    @RequestMapping(value = "/kakaologin.do", method = { RequestMethod.GET, RequestMethod.POST })

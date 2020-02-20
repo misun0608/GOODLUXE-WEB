@@ -214,26 +214,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 이메일 중복 체크
-	@Override
-	public int emailCheck(MemberVO memberVO) throws Exception {
-		String dbemail = "";
-		int res = -1;
-
-		try {
-			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
-			dbemail = membermapper.emailLink_chk(memberVO);
-
-			if (dbemail.equals(memberVO.getMember_email())) {
-				System.out.println(dbemail);
-				System.out.println(memberVO.getMember_email());
-				res = 0; // db에 동일한 이메일 존재
-			} else {
-				res = 1; // 존재 X
-			}
-		} catch (Exception e) {
-		}
-		return res;
-	}
+//	@Override
+//	public int emailCheck(MemberVO memberVO) throws Exception {
+//		String dbemail = "";
+//		int res = -1;
+//
+//		try {
+//			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+//			dbemail = membermapper.emailLink_chk(memberVO);
+//
+//			if (dbemail.equals(memberVO.getMember_email())) {
+//				System.out.println(dbemail);
+//				System.out.println(memberVO.getMember_email());
+//				res = 0; // db에 동일한 이메일 존재
+//			} else {
+//				res = 1; // 존재 X
+//			}
+//		} catch (Exception e) {
+//		}
+//		return res;
+//	}
 
 	// 회원 가입
 	@Override
