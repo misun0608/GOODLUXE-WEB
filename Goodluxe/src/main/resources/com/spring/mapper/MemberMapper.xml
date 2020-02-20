@@ -120,6 +120,13 @@
 		VALUES(#{member_id}, #{member_name}, #{member_email}, sysdate, 'N', 0, 'N')
 	</insert>
 	
+	<!-- sns 유저 체크 -->
+	<select id="userSnsChk" parameterType="com.spring.goodluxe.voes.MemberVO" resultMap="memberRM">
+		SELECT *
+		FROM gl_member
+		WHERE member_email=#{member_email}
+	</select>
+	
 	<!-- 아이디 찾기 -->
 	<select id="findMemberId" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
 		SELECT member_id 
