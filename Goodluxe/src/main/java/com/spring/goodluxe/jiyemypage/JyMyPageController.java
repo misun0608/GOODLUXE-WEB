@@ -43,10 +43,10 @@ public class JyMyPageController {
 		@RequestMapping(value = "myInfoAction.do")
 		public String myInfoAction(Model model, MemberVO memberVO, HttpServletRequest request )throws Exception {                   
 			
-			String member_phone=(String)request.getParameter("tel1")+"-"+(String)request.getParameter("tel2")+"-"+(String)request.getParameter("tel3");
+			String member_phone=(String)request.getParameter("tel1")+(String)request.getParameter("tel2")+(String)request.getParameter("tel3");
 			memberVO.setMember_phone(member_phone);
 			
-			String member_email = (String)request.getParameter("email1") + "@" + (String)request.getParameter("email_select");
+			String member_email = (String)request.getParameter("email1") + "@" + (String)request.getParameter("email2");
 			memberVO.setMember_email(member_email);
 			
 			String cate[] = request.getParameterValues("prefer_category");
