@@ -14,6 +14,7 @@
 	String quality_grade = (String)theProduct.get("quality_grade");
 	String pb_detail = (String)theProduct.get("pb_detail");
 	String entity_number=(String)theProduct.get("entity_number");
+	String saleStatus = (String)theProduct.get("pb_sale_status");
 	
 	int product_price = Integer.parseInt((theProduct.get("sale_price")).toString());
 	DecimalFormat df = new DecimalFormat(",###");
@@ -188,9 +189,13 @@
 								<hr id="name_line">
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
+								<%if(!saleStatus.equals("거래진행중")){ %>
 								<a href = "orderForm.do?entity_number=<%=entity_number%>">
 									<div class="buybtn buybtn2"><p class = "buybtn_letter">구매하기</p></div>
 								</a>
+								<%}else{%>
+									<div class="cantbuybtn"><p class = "cantbuyletter">거래진행중인 상품입니다.</p></div>
+								<%}%>
 								<a href = "#">
 									<div class="notibtn">
 										<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px" class = "notice_Img">

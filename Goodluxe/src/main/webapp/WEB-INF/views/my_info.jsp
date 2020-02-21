@@ -56,6 +56,7 @@
 			txtpw1 = document.member_my_info_form.member_pw.value;
 			txtpw2 = document.member_my_info_form.password2.value;
 			
+			
 			if(!(txtpw1.length>9 && txtpw1.length<17)){
 				alert("비밀번호를 10~16글자로 입력하세요.");	
 				return false;
@@ -120,7 +121,7 @@
                 <h3 class = "my_info_title">▶기본정보</h3>
                 <br/>
                 <div class = "cancel_member_container"><a href = "#" class = "cancel_member" ><p>회원탈퇴</p></a></div>
-                <form name = "member_my_info_form" action = "./myInfoAction.do" method = "post" onsubmit ="retun submitCheck();">
+                <form name = "member_my_info_form" action = "./myInfoAction.do" method = "post" onsubmit ="return submitCheck();">
                     <table class = "personal_info_table">
                         <tr>
                             <td>아이디</td>
