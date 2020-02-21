@@ -136,10 +136,10 @@
 			 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
 			 			success: function (data) {
 			 				if (data==1){
-		 						//좋아요 눌러짐
+		 						//알람 눌러짐
 		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell2.png");		
 		 					} else if(data==0){
-		 						//좋아요 취소됨
+		 						//알람 취소됨
 		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell.png");
 		 					} else if(data==-1) {
 		 						alert('로그인 후 이용해주세요!');

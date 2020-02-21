@@ -73,11 +73,11 @@ public class AjaxServiceImpl implements AjaxService{
 			HashMap<String,String>map = new HashMap<String,String>();
 			map.put("id", member_id);
 			map.put("entity",entity_number);
-			
+			System.out.println("service ==>"+member_id);
 			res = ajaxMapper.isAlreadySetAlarm(map);
 		}catch(Exception e) {
-			System.out.println("ERRPR(AjaxService/isMemberLiked) : " + e.getMessage());
-			throw new Exception("ERRPR(AjaxService/isMemberLiked)");
+			System.out.println("ERRPR(AjaxService/checkAlreadySetAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/checkAlreadySetAlarm)");
 		}
 		return res;
 		
@@ -104,8 +104,8 @@ public class AjaxServiceImpl implements AjaxService{
 				data=0;
 			}
 		}catch(Exception e) {
-			System.out.println("ERRPR(AjaxService/setLike) : " + e.getMessage());
-			throw new Exception("ERRPR(AjaxService/setLike)");
+			System.out.println("ERRPR(AjaxService/mdDetailSetAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/mdDetailSetAlarm)");
 		}
 		return data;
 	}
