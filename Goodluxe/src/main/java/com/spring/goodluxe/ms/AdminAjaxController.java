@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.goodluxe.voes.MemberVO;
+import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 
 @RestController
@@ -72,5 +73,19 @@ public class AdminAjaxController {
 			System.out.println("ERROR(AdminAjaxController/adminCheckId) : " + e.getMessage());
 		}
 		return memberVO;
+	}
+	
+	// 관리자 주문 디테일
+	@GetMapping(value="getShippingDetail.do", produces="application/json;charset=UTF-8")
+	HashMap<String,String> getShippingDetail(@RequestParam(value = "order_number", required = false) String order_number) throws Exception{
+		HashMap<String,String> shipping_info = null;
+		try {
+			System.out.println("order" + order_number);
+			shipping_info = gls.getShippingInfo(order_number);
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(AdminAjaxController/getShippingDetail) : " + e.getMessage());
+		}
+		return shipping_info;
 	}
 }
