@@ -31,19 +31,6 @@
          $("#login_box").load("loginBox.do");
          $("#footer").load("footer.do");
       });
-      
-//        Kakao.init('dc50a646222a7303868e2fc1557ba996');
-//        function loginWithKakao() {
-//          // 로그인 창을 띄웁니다.
-//          Kakao.Auth.login({
-//            success: function(authObj) {
-//              alert(JSON.stringify(authObj));
-//            },
-//            fail: function(err) {
-//              alert(JSON.stringify(err));
-//            }
-//          });
-//        }; 
      
     </script>
 
@@ -63,10 +50,9 @@
             <br /><br />
             <h1>회원가입</h1>
             <br /><br />
-            <a href="login.do"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" width="20" height="20">&nbsp;&nbsp;구글로 가입</span></a><br />
-<%--             <a href="javascript:loginWithKakao()"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" width="20" height="20">&nbsp;&nbsp;카카오로 가입</span></a><br /> --%>
-            <a href="${kakao_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" width="20" height="20">&nbsp;&nbsp;카카오로 가입</span></a><br />
             <a href="${naver_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" width="20" height="20">&nbsp;&nbsp;네이버로 가입</span></a><br />
+            <a href="${kakao_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" width="20" height="20">&nbsp;&nbsp;카카오로 가입</span></a><br />
+            <a href="login.do"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" width="20" height="20">&nbsp;&nbsp;구글로 가입</span></a><br />
             <hr class="join_line">&nbsp;&nbsp;<span class="join_linefont">or</span>&nbsp;&nbsp;<hr class="join_line">
             <br />
             <a href="joinform2.do"><span class="joinbox" id="emailbox"><img src="${pageContext.request.contextPath}/resources/img/icons/email_icon.png" width="20" height="20">&nbsp;&nbsp;이메일로 가입</span></a><br />

@@ -158,8 +158,6 @@
 										<input type="text" class="username_input" id="join_id" check_result="fail"
 										ime-mode="disabled" maxlength="10" name="member_id" placeholder="10자 이내로 입력해주세요" 
 										style="padding-left: 5px" required> 
-										<!-- <div id="id_overlap_msg"></div> <button type="button" class="id_overlap_btn" onclick="id_overlap_check()">중복확인</button> -->
-										<!-- <input type="hidden" name="idDuplication" value="idUncheck"> -->
 									</td>
 								<tr>
 									<td></td>
