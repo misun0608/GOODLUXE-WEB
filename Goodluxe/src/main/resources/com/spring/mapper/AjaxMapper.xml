@@ -78,7 +78,7 @@
 	</resultMap>
 
 	<select id = "getAllMemberinfo" resultMap = "adminMemberMapVO">
-		select member_id, member_name, member_phone, member_email , member_class from gl_member
+		select member_id, member_name, member_phone, member_email , member_class from gl_member where member_isadmin not in ('Y') 
 	</select>
 	
 	

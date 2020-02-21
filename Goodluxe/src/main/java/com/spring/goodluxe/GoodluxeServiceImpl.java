@@ -344,11 +344,16 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 			ArrayList<HashMap<String, Object>> recommandList = null;
+			
+			System.out.println("엔티티 = "+entity_number);
+			
 			HashMap<String, String> map = new HashMap<String, String>();
-			HashMap<String, String> theme = null;
+			HashMap<String, String> theme = new HashMap<String, String>();
 			map.put("entity", entity_number);	
 			theme = productlistMapper.getRecommandtheme(map);
 			
+			System.out.println("테마 = " + theme.get("pb_category"));
+			theme.put("entity_number", entity_number);
 			recommandList = productlistMapper.getRecommandList(theme);
 			
 			return recommandList;

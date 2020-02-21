@@ -356,7 +356,7 @@
 								where gl_consignment.entity_number = gl_productboard.entity_number
 							)
 						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중' order by pb_view_count desc
-				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category} 
+				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category} and entity_number not in (#{entity_number})
 			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
 	</select>
 
