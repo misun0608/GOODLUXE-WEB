@@ -189,24 +189,6 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
                     <div class="agr"><input type="checkbox" class="email_chk" id="email_chk3" name="email_chk" required><label for="chk3"
                             class="join_label">동의함</label></input></div><br /><br />
 
-<!--                     <div class="agr_title">[선택] 마케팅 정보 활용 동의</div><br />
-                    <center><textarea readonly="readonly" rows="10" class="agree_textarea">
-마케팅/홍보의 수집의 이용 동의
-1. 개인정보의 수집 및 이용 목적
-신규 서비스 개발 및 마케팅ㆍ광고에의 활용
-- 신규 서비스 개발, 이벤트 및 광고성 정보 제공 및 참여기회 제공, 접속 빈도 등 회원의 서비스 이용에 대한 통계
-2. 수집하는 개인정보의 항목
-필수항목 : 이름
-선택항목 : 이메일, 연락처(휴대전화번호, 유선전화번호 중 1개 선택)
-3. 개인정보의 보유 및 이용기간
-이용목적의 달성 후 지체없이 파기
-4. 동의거부권 및 불이익
-개인정보의 마케팅/홍보의 수집 및 이용 동의를 거부하시더라도 회원 가입 시 제한은 없습니다. 다만, 마케팅 활용 서비스 안내 및 참여에 제한이 있을 수 있습니다.
-
-</textarea><br />
-                    <div class="agr"><input type="checkbox" class="chk" id="chk4" name="member_email_receive"><label for="chk4"
-                            class="join_label">동의함</label></input></div><br /><br /> -->
-
                 </div>
                 <hr class="join_underline"><br>
                 <input type="button" class="join_btn join_before_btn" id="cancel" value="이전">

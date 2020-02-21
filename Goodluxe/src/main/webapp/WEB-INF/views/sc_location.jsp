@@ -45,7 +45,7 @@
 		var container = document.getElementById('sc_map');
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(37.502995, 127.024209), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
+			level: 2 //지도의 레벨(확대, 축소 정도)
 		};
 		
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
@@ -99,7 +99,7 @@
 						        <td>발렛파킹(주차대행) 이용</td>
 						    </tr>
 						</table>
-						<div id="sc_map" style="width:500px;height:400px; position:relative; left:50%; margin-left:-250px; top:20px;"></div>
+						<div id="sc_map" style="width:840px;height:400px; position:relative; left:50%; margin-left:-420px; top:20px;"></div>
                     </div>
 
                 <br/><br/><br/>

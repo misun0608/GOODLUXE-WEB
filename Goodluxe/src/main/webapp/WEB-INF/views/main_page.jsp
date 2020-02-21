@@ -179,6 +179,9 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 						}
 					%>
 				</article>
+				<article class="mp_4th">
+					<a href="http://localhost:8080/goodluxe/itemList.do?il_search_brand=all&il_search_category=all&il_search_grade=all&il_search_price=all" class="more_btn">MORE</a>
+				</article>
 			</div>
 		</div>
     </section>
