@@ -16,6 +16,14 @@ public interface AjaxMapper {
    	int deleteLikedUser(HashMap<String, String> map);
    	int increaseLike(HashMap<String, String>map);
    	int decreaseLike(HashMap<String, String>map);
+   	
+   	//mdDetail알람
+   	int isAlreadySetAlarm(HashMap<String, String> map);
+   	void insertSetAlarmUser(HashMap<String, String> map);
+   	void deleteSetAlarmUser(HashMap<String, String> map);
+	
+   	
+   	
    	//쿠폰관리
    	ArrayList<CouponVO> defaultCouponList();
    	ArrayList<CouponVO> allmemberCouponList(CouponVO couponVO);
@@ -91,6 +99,8 @@ public interface AjaxMapper {
 	AuctionVO adminAuctionFindStat(int aUCTION_POST_NUMBER);
 	int adminAuctionStatChangeOFF(int aUCTION_POST_NUMBER);
 	int adminAuctionStatChangeON(int aUCTION_POST_NUMBER);
+	
+	
 	
 	
 	

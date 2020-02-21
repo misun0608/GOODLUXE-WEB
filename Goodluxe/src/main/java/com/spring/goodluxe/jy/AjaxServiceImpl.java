@@ -65,6 +65,52 @@ public class AjaxServiceImpl implements AjaxService{
 		}
 		return data;
 	}
+	public int checkAlreadySetAlarm(String member_id, String entity_number)throws Exception {
+		int res = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			
+			res = ajaxMapper.isAlreadySetAlarm(map);
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/isMemberLiked) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/isMemberLiked)");
+		}
+		return res;
+		
+	}
+	@Override
+	public int mdDetailSetAlarm(String member_id, String entity_number) throws Exception {
+		int data = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			
+			int res = ajaxMapper.isAlreadySetAlarm(map);
+			
+			if(res==0) {
+				//알람 추가
+				ajaxMapper.insertSetAlarmUser(map);
+				data=1;
+			}
+			else {
+				//알람 삭제
+				ajaxMapper.deleteSetAlarmUser(map);
+				data=0;
+			}
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/setLike) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/setLike)");
+		}
+		return data;
+	}
+	
+	
 	
 	
 	@Override
@@ -658,7 +704,7 @@ try {
 			throw new Exception("ERRPR(AjaxService/adminAuctionStatChange)");
 		}
 	}
-	
+
 	
 	
 	
