@@ -364,7 +364,7 @@
 		update gl_member set member_point = member_point-#{point_amount} where member_id = #{member_id}
 	</update>
 	<insert id = "insertReturnPointInfo" parameterType = "com.spring.goodluxe.voes.PointVO"> 
-		insert into gl_point values(gl_point_seq.nextval, sysdate,'반품/환불에 따른 회수',-#{point_amount},#{member_id},#{order_number})
+		insert into gl_point values(gl_point_seq.nextval, sysdate,'상품구매 취소',-#{point_amount},#{member_id},#{order_number})
 	</insert>	
 	
 	
