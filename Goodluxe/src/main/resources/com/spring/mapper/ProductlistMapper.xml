@@ -347,16 +347,16 @@
 				 FROM (
 						select * from(
 							SELECT * FROM (
-								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
 								from gl_purchase, gl_productboard
 								where gl_purchase.entity_number = gl_productboard.entity_number
 								UNION
-								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
 								from gl_consignment, gl_productboard
 								where gl_consignment.entity_number = gl_productboard.entity_number
 							)
-						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
-				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category}
+						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중' order by pb_view_count desc
+				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category} 
 			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
 	</select>
 

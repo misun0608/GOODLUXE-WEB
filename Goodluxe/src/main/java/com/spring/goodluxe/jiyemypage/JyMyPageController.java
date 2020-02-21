@@ -53,7 +53,7 @@ public class JyMyPageController {
 			String member_like_category = "";
 			member_like_category += cate[0];
 			for(int i = 1; i<cate.length; i++) {
-				member_like_category += ",";
+				member_like_category += ",";	
 				member_like_category += cate[i];
 			}
 			System.out.println(member_like_category);

@@ -7,6 +7,7 @@ import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
+import com.spring.goodluxe.voes.PointVO;
 
 public interface AjaxMapper {
 	//좋아요
@@ -35,7 +36,12 @@ public interface AjaxMapper {
    	int orderChangeStatusStartShipping(String chekd);
    	int adminOrderSetStartShipping(HashMap<String, String> map);
    	int adminOrderSetEndShipping(String order_number);
-   
+   	int adminOrderMoneyGetShipping(String order_number);
+	HashMap<String, Object> getPayedPrice(String order_number);
+	int afterOrderGivePoint(HashMap<String, Object> map);
+	int afterOrderGivePointonglPoint(HashMap<String, Object> map);
+	
+
    //상품관리
    	ArrayList<HashMap<String, Object>> adminAllProductListPurchase();
    	ArrayList<HashMap<String, Object>> adminAllProductListConsign();
@@ -62,6 +68,13 @@ public interface AjaxMapper {
    	ArrayList<OrderVO> getReturnList();
    	ArrayList<OrderVO> getDetailReturndList(String orderstatus);
    	void setReturnConfirm(String order_number);
+   	PointVO getGivenPointInfo(String order_number);
+   	int returnPointFromMember(PointVO pointVO);
+   	int insertReturnPointInfo(PointVO pointVO);
+   	
+   	
+   	
+   	
    	void setReturnFinished(String order_number);
    	int setPostStatusBackToSale(String order_number);
 	String getEntityNumberForLiked(String order_number);
@@ -78,6 +91,14 @@ public interface AjaxMapper {
 	AuctionVO adminAuctionFindStat(int aUCTION_POST_NUMBER);
 	int adminAuctionStatChangeOFF(int aUCTION_POST_NUMBER);
 	int adminAuctionStatChangeON(int aUCTION_POST_NUMBER);
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	

@@ -27,7 +27,7 @@ public interface AjaxService {
 	int orderChangeStatusStartShipping(String[] chked_change_me)throws Exception;
 	int adminOrderSetStartShipping(HashMap<String, String> map)throws Exception;
 	int adminOrderSetEndShipping(String order_number)throws Exception;
-	
+	int adminOrderMoneyGetShipping(String order_number)throws Exception;
 	
 	ArrayList<HashMap<String, Object>> adminAllProductList(String pb_division)throws Exception;
 	ArrayList<HashMap<String, Object>> adminProductList(HashMap<String, String> map)throws Exception;
@@ -45,6 +45,8 @@ public interface AjaxService {
 	ArrayList<AuctionVO> admingetAuctionInfo()throws Exception;
 	ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER)throws Exception;
 	int adminAuctionStatChange(int aUCTION_POST_NUMBER)throws Exception;
+	
+	
 
 	
 	

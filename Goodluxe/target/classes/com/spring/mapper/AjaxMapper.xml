@@ -190,8 +190,24 @@
 		set order_status = '배송중' , order_ship_date = sysdate , order_invoice_number = #{order_invoice_number}
 		where order_number = #{order_number}
 	</update>
+	<update id = "adminOrderMoneyGetShipping" parameterType = "String">
+		update gl_order set order_status = '배송준비중', order_pay_date = sysdate
+		where order_number = #{order_number}
+	</update>
 	
-	
+	<resultMap id = "orderMoneyGetMap" type = "java.util.HashMap">
+		<result property = "order_pay_price" column = "order_pay_price"/>
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	<select id = "getPayedPrice" parameterType = "String" resultMap = "orderMoneyGetMap">
+		select order_pay_price, member_id from gl_order where order_number = #{order_number}
+	</select>
+	<update id = "afterOrderGivePoint" parameterType = "hashMap">
+		update gl_member set member_point = member_point + #{order_pay_price}*0.005 where member_id = #{member_id}
+	</update>
+	<insert id = "afterOrderGivePointonglPoint" parameterType = "hashMap">
+		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.005, #{member_id}, #{order_number})
+	</insert>
 	
 	
 	<!-- 상품관리-->
@@ -323,9 +339,17 @@
 	<resultMap id = "likedMemberListMap" type = "java.util.HashMap">
 		<result property = "member_id" column = "member_id"/>
 	</resultMap>
+	<resultMap id = "forreturnPointInfoMap" type = "com.spring.goodluxe.voes.PointVO">
+		<result property = "point_number" column = "point_number"/>
+		<result property = "point_date" column = "point_date"/>
+		<result property = "point_status" column = "point_status"/>
+		<result property = "point_amount" column = "point_amount"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "order_number" column = "order_number"/>
+	</resultMap>
 	
 	<select id = "getReturnList" resultMap = "adminOrderMap">
-		select * from gl_order where order_status = '환불신청' or order_status = '반품확인' or order_status = '환불완료'
+		select * from gl_order where order_status = '환불신청' or order_status = '반품확인' or order_status = '환불완료' order by order_number desc
 	</select>
 	<select id = "getDetailReturndList" parameterType = "String" resultMap = "adminOrderMap">
 		select * from gl_order where order_status = #{orderstatus}
@@ -333,6 +357,22 @@
 	<update id = "setReturnConfirm" parameterType = "String">
 		update gl_order set order_status = '반품확인' where order_number = #{order_number}
 	</update>
+	<select id = "getGivenPointInfo" parameterType = "String" resultMap = "forreturnPointInfoMap">
+		select * from gl_point where  order_number = #{order_number}
+	</select>
+	<update id = "returnPointFromMember" parameterType = "com.spring.goodluxe.voes.PointVO">
+		update gl_member set member_point = member_point-#{point_amount} where member_id = #{member_id}
+	</update>
+	<insert id = "insertReturnPointInfo" parameterType = "com.spring.goodluxe.voes.PointVO"> 
+		insert into gl_point values(gl_point_seq.nextval, sysdate,'반품/환불에 따른 회수',-#{point_amount},#{member_id},#{order_number})
+	</insert>	
+	
+	
+	
+	
+	
+	
+	
 	<update id = "setReturnFinished" parameterType = "String">
 		update gl_order set order_status = '환불완료' where order_number = #{order_number}
 	</update>
