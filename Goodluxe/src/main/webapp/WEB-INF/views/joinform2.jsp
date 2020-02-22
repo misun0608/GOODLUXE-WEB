@@ -16,7 +16,6 @@
     <!-- <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff" rel="stylesheet"> -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/joinstyle2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/joinstyle.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
@@ -191,8 +190,8 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
 
                 </div>
                 <hr class="join_underline"><br>
-                <input type="button" class="join_btn join_before_btn" id="cancel" value="이전">
-                <input type="submit" class="join_btn" id="submit" value="다음">
+                <input type="button" class="join_btn join_btn1" id="cancel" value="이전" onclick="history.back()">
+                <input type="submit" class="join_btn join_btn2" id="submit" value="다음">
                 </form>
                 <br /><br /><br />
 

@@ -77,32 +77,36 @@ img {vertical-align:top;}
     }
     
     .join_btn{
-        background-color: #2F87C9;
-        border: none;
-        color: white;
-        padding: 8px 60px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        margin: 10px 2px;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-        cursor: pointer;
-        border-radius: 8px;
-    }
+	    font-size: 13px;
+	    width: 150px;
+	    height: 35px;
+	    border-radius: 5px;
+	    border: 1px solid white; 
+	    margin: 3px 0 4px 0;
+	    color: white; 
+	    outline: 0;
+	    /* 파란 계열 */
+	    /* background-color: #8FB0CA;  */
+	    /* background-color: #7eb5de; */
+	    background-color: #76aed6;
+	    /* 분홍 계열 */
+	    /* background-color: #DFB1AB;  */
+	    -webkit-transition-duration: 0.2s; /* Safari */
+	    transition-duration: 0.2s;
+	    cursor: pointer;
+	}
 
-    .join_before_btn{
-        background-color: white;
-        color: #555555;
-        border: 0.8px solid #555555;
-    }
-    
     .join_btn1{
         background-color: white;
+	    color: #555555;
+	    border: 1px solid #555555;
+	}
+    
+/*     .join_btn1{
+        background-color: white;
         color: #2F87C9;
-        border: 0.8px solid #2F87C9;
-    }
+        border: 1px solid #2F87C9;
+    } */
     
     .email_chk{
     	podding-top : 3px;
@@ -115,19 +119,18 @@ img {vertical-align:top;}
     }
     */
     
-    .join_btn2{
-        background-color: #2F87C9; 
-        color: white; 
-        border: 0.8px solid #2F87C9;
-    }
-    
-    /*
-    .btn2:hover{
-        background-color: #0e073f;
-        color: #080424; 
-        border: 1px solid #080424;
-    }
-    */
+	.join_btn2{
+	/*    background-color: #2F87C9; */
+	    background-color: #76aed6;
+	    color: white; 
+	/*    border: 1px solid #2F87C9;*/
+		border: 1px solid #76aed6;
+	}
+	
+	.join_btn2:hover{
+	    background-color: #99c2e0;
+		border: 1px solid #99c2e0;
+	}
     
     .menu_line{
         width: 120px;

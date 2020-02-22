@@ -65,14 +65,14 @@
                 <br />
                 <br />
 
-                <input type="button" class="join_btn join_btn1" value="메인화면">
-                <input type="button" class="join_btn join_btn2" value="로그인">
+                <input type="button" class="join_btn" value="메인화면" onClick="location.href='mainPage.do'">
+            </center>
+        </div>
 
                 <br />
                 <br />
                 <br />
-            </center>
-        </div>
+                <br />
     </section>
 
     <footer id="footer">

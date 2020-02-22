@@ -64,8 +64,9 @@
                 <br />
                 <br />
 
-                <input type="button" class="join_btn join_btn2" value="메인화면" onClick="location.href='mainPage.do';">
+                <input type="button" class="join_btn" value="메인화면" onClick="location.href='mainPage.do'">
 
+                <br />
                 <br />
                 <br />
                 <br />

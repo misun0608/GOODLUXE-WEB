@@ -55,9 +55,9 @@
 			$("#footer").load("footer.do");
 		});
 		
-		function re_confirmed_email() {
+/* 		function re_confirmed_email() {
 			not_confirmed_form.submit();
-		}
+		} */
 		
 	</script>
 </head>
@@ -94,11 +94,10 @@
 							</td>
 						</tr>
 						<tr>
- 							<td><input type="button" onclick="re_confirmed_email();"
-							<%-- <td><input type="button" onclick="javascript:location.href='reConfirmedMail.do?member_id=<%=member_id%>'" --%>
+ 							<td><input type="submit" 
+							<%-- <td><input type="button" onclick="javascript:location.href='reconfirmedMail.do?member_id=<%=member_id%>'" --%>
 
 								class="not_confirmed_button" value="인증 메일 재전송">
-								<!-- <input type="hidden" id="member_email" name="member_email" value=""> -->
 								<input type="hidden" id="member_id" name="member_id" value="<%=member_id%>">
 								</td>
 						</tr>
@@ -107,6 +106,7 @@
 					<div class="not_confirmed_table2">인증 메일 미전송시 스팸 메일함 확인 후
 						고객센터로 문의 바랍니다.</div>
 				</form>
+				<br />
 				<br />
 				<br />
 				<br />

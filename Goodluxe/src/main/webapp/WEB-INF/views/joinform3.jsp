@@ -287,7 +287,6 @@
 						<br /> <br /> <br />
 
 						<h3>추가 정보</h3>
-						<br />
 						<div class="joinform2">
 							<table class="jointable2">
 								<tr>
@@ -613,8 +612,8 @@
 								<tr>
 									<td colspan="2">
 										<center>
-											<br /> <br /> 
-											<input type="button" class="join_btn join_btn1" value="이전"> 
+											<br /> <br />
+											<input type="button" class="join_btn join_btn1" value="이전" onclick="history.back()"> 
 											<input type="button" class="join_btn join_btn2" id="join_button" value="회원가입">
 									</td>
 								</tr>
@@ -623,7 +622,9 @@
 				</form>
 		</div>
 		<br />
-		</div>
+		<br />
+		<br />
+		<br />
 	</section>
 
 	<footer id="footer">
