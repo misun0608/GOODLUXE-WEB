@@ -148,7 +148,7 @@ img {vertical-align:top;}
 .jointable input[type=text]{
     position: relative;
     width: 69%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
     /* font-size: 13px; */
@@ -157,7 +157,7 @@ img {vertical-align:top;}
 .jointable input[type=password]{
     position: relative;
     width:95%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
 }
@@ -165,7 +165,7 @@ img {vertical-align:top;}
 .jointable input[type=tel]{
     position: relative;
     width:25%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
 }

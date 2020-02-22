@@ -154,9 +154,9 @@
 								<tr class="jointablerow">
 									<td class="jttitle">아이디</td>
 									<td class="jointd">
-										<input type="text" class="username_input" id="join_id" check_result="fail"
+										<input type="text" class="join_inputarea" id="join_id" check_result="fail"
 										ime-mode="disabled" maxlength="10" name="member_id" placeholder="10자 이내로 입력해주세요" 
-										style="padding-left: 5px" required> 
+										required> 
 									</td>
 								<tr>
 									<td></td>
