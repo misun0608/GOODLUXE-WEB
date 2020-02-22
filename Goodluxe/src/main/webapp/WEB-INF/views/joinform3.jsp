@@ -145,7 +145,6 @@
 				</div>
 
 				<br /> <br /> <br />
-				<!-- <hr class="join_underline"><br /> -->
 				<form action="joinform3_2.do" method="post" id="join_input_form">
 					<div class="joinall">
 						<h3>기본 정보</h3>

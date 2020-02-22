@@ -61,7 +61,6 @@
     <section id="container">
         <br>
         <div id="main">
-    <!-- <section class="content"> -->
         <div class="find_content">
             <br />
             <p style="margin: 18px 0 16px 14px; font-size: 24px;">
@@ -70,9 +69,6 @@
         </div>
 	<form id="change_pw_form" action="changeMemberPw.do" method="post">
     <table class="change_pw_table">
-<!--         <tr> -->
-<!--             <td class="find_idpw_text1">비밀번호 찾기</td> -->
-<!--         </tr> -->
 								<tr class="jointablerow">
 									<td class="jttitle" style="padding-top:15px;">비밀번호</td>
 									<td class="change_pw_td"><input type="password"
@@ -105,12 +101,6 @@
 								</tr>
     </table>
     </form>
-<!--     <table class="find_login_join_table"> -->
-<!--         <tr> -->
-<!--             <td style="text-align: left;" ><a class="find_login_join" href="#">로그인</a></td> -->
-<!--             <td style="text-align: right;"><a class="find_login_join" href="joinform.do">회원가입</a></td> -->
-<!--        </tr> -->
-<!--     </table> -->
     <br /><br /><br />
 </div>
     </section>

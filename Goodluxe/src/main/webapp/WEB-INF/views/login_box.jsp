@@ -24,7 +24,7 @@
 				} else if (retVal.result == "wrong_pw") {
 					alert("아이디 또는 비밀번호가 틀립니다.");
 				} else if (retVal.result == "email_N") {
-					alert("이메일 인증이 완료되어야 사이트 이용이 가능합니다.");
+					location.href = "./join_email_not_confirmed.do";
 				} else if (retVal.result == "ok") {
 					location.href = "./mainPage.do";
 				}
