@@ -7,13 +7,13 @@
 	
 	/* Click login button */
  	function onclick_login() {
-		var params = $('#login_form').serialize(); // serialize로 문자열형태로? 만듦
+		var params = $('#login_form').serialize();
 		$.ajax({
 			url : '/goodluxe/login.do',
 			type : 'POST',
-			data : params, // 서버로 전달할 데이터
+			data : params,
 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-			dataType : "json", // 서버로 보내줄 타입  //응답할 타입은 json으로 하겠다
+			dataType : "json",
 
 			success : function(retVal) {
 				if (retVal.result == "error_accur") {
@@ -24,7 +24,7 @@
 				} else if (retVal.result == "wrong_pw") {
 					alert("아이디 또는 비밀번호가 틀립니다.");
 				} else if (retVal.result == "email_N") {
-					location.href = "./join_email_not_confirmed.do";
+					location.href = "./join_email_not_confirmed.do?member_id="+login_form.member_id.value;
 				} else if (retVal.result == "ok") {
 					location.href = "./mainPage.do";
 				}

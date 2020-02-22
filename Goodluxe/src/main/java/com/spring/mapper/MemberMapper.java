@@ -23,6 +23,7 @@ public interface MemberMapper {
 	String findMemberId(MemberVO memberVO);
 	String findMemberPw(MemberVO memberVO);	    
 	int updateMemberPw(MemberVO memberVO);
+	String reconfirmedEmailChk(MemberVO memberVO);
 	
 	// 주문시 적립금 차감
 	int updateMemberpoint(MemberVO mvo);

@@ -12,7 +12,7 @@
 		<result property="member_addr2" column="member_addr2"/>
 		<result property="member_phone" column="member_phone"/>
 		<result property="member_email" column="member_email"/>
-		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의입니다...크흠 -->
+		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의 여부 -->
 		<result property="member_like_brand" column="member_like_brand"/>
 		<result property="member_like_category" column="member_like_category"/>
 		<result property="member_join_date" column="member_join_date"/>
@@ -112,6 +112,13 @@
 		SET member_class = 'Y'
 		WHERE member_id=#{member_id}
 	</update>
+	
+	<!-- 인증 이메일 재발송(이메일 정보 가져오기) -->
+	<select id="reconfirmedEmailChk" resultType="String"> <!-- resultType 안쓰면 기본이 int랬나? -->
+		select member_email
+		from gl_member
+		where member_id=#{member_id}
+	</select>
 		
 	<!-- sns 간편 회원가입 -->
 	<insert id="insertSnsMember" parameterType="com.spring.goodluxe.voes.MemberVO">

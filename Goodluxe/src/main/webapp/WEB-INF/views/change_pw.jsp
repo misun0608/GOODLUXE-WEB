@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.goodluxe.voes.*"%>
-<% MemberVO memberVO = (MemberVO)request.getAttribute("memberVO"); %>
+<% 
+	MemberVO memberVO = (MemberVO)request.getAttribute("memberVO"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>

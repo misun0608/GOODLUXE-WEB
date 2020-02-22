@@ -3,6 +3,7 @@
 <%@ page import="com.spring.goodluxe.voes.*"%>
 <% 
 	MemberVO memberVO = (MemberVO)request.getAttribute("memberVO"); 
+	String member_id = (String)request.getParameter("member_id"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,8 @@
 	src="${pageContext.request.contextPath}/resources/js/goodluxe-footer.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-
+		var member_id = document.getElementById('member_id');
+		
 		$(document).ready(function(){
 			$("#header").load("header.do");
 			$("#nav_bar").load("navBar.do");
@@ -53,8 +55,7 @@
 			$("#footer").load("footer.do");
 		});
 		
-		function re_confirmed_mail() {
-			
+		function re_confirmed_email() {
 			not_confirmed_form.submit();
 		}
 		
@@ -83,8 +84,9 @@
 				<h1>이메일 인증</h1>
 				<br />
 				<br />
-				<form id="not_confirmed_form" action="reConfirmedMail.do"
-					method="post">
+ 				<form id="not_confirmed_form" action="reconfirmedEmail.do" method="post">
+<!--				<form id="not_confirmed_form" method="post"> -->
+				
 					<table class="not_confirmed_table">
 						<tr>
 							<td class="notConfirmedTitle">이메일 인증이 정상적으로 완료되지 않았습니다.<br />
@@ -92,10 +94,12 @@
 							</td>
 						</tr>
 						<tr>
-							<td><input type="button" onclick="re_confirmed_mail();"
+ 							<td><input type="button" onclick="re_confirmed_email();"
+							<%-- <td><input type="button" onclick="javascript:location.href='reConfirmedMail.do?member_id=<%=member_id%>'" --%>
+
 								class="not_confirmed_button" value="인증 메일 재전송">
-								<input type="hidden" id="member_email" name="member_email" value="">
-								<input type="hidden" id="member_id" name="member_id" value="">
+								<!-- <input type="hidden" id="member_email" name="member_email" value=""> -->
+								<input type="hidden" id="member_id" name="member_id" value="<%=member_id%>">
 								</td>
 						</tr>
 

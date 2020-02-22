@@ -218,12 +218,8 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("2 MemberServiceImpl 비밀번호 찾기 :" + dbid);
 
 			if(dbid != null) {
-//				System.out.println(dbid);
-//				System.out.println(memberVO.getMember_email());
-//				System.out.println(memberVO.getMember_name());
 				res = 1;
 			} else {
-//				System.out.println("아이디 없음");
 				res = -1;
 			}
 		} catch (Exception e) {
@@ -246,4 +242,18 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return res;
 	}
+	
+	// 인증 이메일 재발송
+		@Override
+		public String reconfirmedEmailChk(MemberVO memberVO) throws Exception {
+			String member_email = null;
+
+			try {
+				MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
+				member_email = membermapper.reconfirmedEmailChk(memberVO);
+			} catch (Exception e) {
+				System.out.println("ERROR(MemberService/reconfirmedEmailChk) : " + e.getMessage());
+			}
+			return member_email;
+		}
 }
