@@ -116,7 +116,7 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 						</div>
 						<div class="main_image_area4 main_image_left">
 							<a href="#" class="main_image_link4"><img
-								src="" alt="img3" class="main_image"></a>
+								src="${pageContext.request.contextPath}/resources/img/event_img/event3_mini.png" alt="img3" class="main_image"></a>
 						</div>
 						<div class="main_image_area5 main_image_left">
 							<a href="./mdDetail.do?entity_number=<%=entity3%>" class="main_image_link5"><img
@@ -124,7 +124,7 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 						</div>
 						<div class="main_image_area6 main_image_left">
 							<a href="#" class="main_image_link6"><img
-								src="" alt="img5" class="main_image"></a>
+								src="${pageContext.request.contextPath}/resources/img/event_img/event3_mini.png" alt="img5" class="main_image"></a>
 						</div>
 						<div class="main_image_area7">
 							<a href="#" class="main_image_link7"><img

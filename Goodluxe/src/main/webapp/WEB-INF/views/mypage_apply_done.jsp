@@ -60,7 +60,7 @@
                             고객님의 연락처로 검토후 3일 이내로 연락드리겠습니다.
                         </p>
                         <br />
-                        <button class="apply_addbtn apply_mainbtn">메인화면으로</button>
+                        <button class="apply_addbtn apply_mainbtn" onClick="location.href='get_salesinquiry_form.do'; return false;">판매조회</button>
                     </div>
                 </div>
             </div>

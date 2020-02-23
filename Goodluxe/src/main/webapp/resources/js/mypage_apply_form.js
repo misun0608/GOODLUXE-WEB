@@ -23,10 +23,10 @@ function check_brand(){
     if(document.write_form.ap_selected_brand.value == "") {
         alert("브랜드를 선택해주세요.");
         return false;
-    } else if(document.write_form.selected_brand.length != 1) {
+    } else if(document.write_form.ap_selected_brand.length != 1) {
         var cnt = 0;
-        for(i = 0; i <document.write_form.selected_brand.length; i++ ){
-            if(document.write_form.selected_brand.options[i].selected) {
+        for(i = 0; i <document.write_form.ap_selected_brand.length; i++ ){
+            if(document.write_form.ap_selected_brand.options[i].selected) {
                 cnt++;
             }
         }
@@ -39,13 +39,13 @@ function check_brand(){
 }
 
 function check_category(){
-    if(document.write_form.selected_category.value == "") {
+    if(document.write_form.ap_selected_category.value == "") {
         alert("카테고리를 선택해주세요.");
         return false;
-    } else if(document.write_form.selected_category.length != 1) {
+    } else if(document.write_form.ap_selected_category.length != 1) {
         var cnt = 0;
-        for(i = 0; i <document.write_form.selected_category.length; i++ ){
-            if(document.write_form.selected_category.options[i].selected) {
+        for(i = 0; i <document.write_form.ap_selected_category.length; i++ ){
+            if(document.write_form.ap_selected_category.options[i].selected) {
                 cnt++;
             }
         }
@@ -106,7 +106,7 @@ function check_amp(){
 }
 
 function check_smethod(){
-    if(document.write_form.smethod.value == "") {
+    if(document.write_form.ap_smethod.value == "") {
         alert("판매방법을 선택해주세요.");
         return false;
     }
@@ -114,7 +114,7 @@ function check_smethod(){
 }
 
 function check_dmethod(){
-    if(document.write_form.dmethod.value == "") {
+    if(document.write_form.ap_dmethod.value == "") {
         alert("배송방법을 선택해주세요.");
         return false;
     }
@@ -122,15 +122,15 @@ function check_dmethod(){
 }
 
 function check_info(){
-    var info = "브랜드 : " + document.write_form.selected_brand.value
-                + "\n카테고리 : " + document.write_form.selected_category.value
+    var info = "브랜드 : " + document.write_form.ap_selected_brand.value
+                + "\n카테고리 : " + document.write_form.ap_selected_category.value
                 + "\n상품명 : " + document.write_form.ap_buy_store.value
                 + "\n판매희망가 : " + document.write_form.ap_hope_price.value
                 + "\n구매연도 : " + document.write_form.ap_buy_year.value
                 + "\n구매가격 : " + document.write_form.ap_buy_price.value
                 + "\n구매매장 : " + document.write_form.ap_buy_store.value
-                + "\n판매방법 : " + document.write_form.smethod.value
-                + "\n배송방법 : " + document.write_form.dmethod.value
+                + "\n판매방법 : " + document.write_form.ap_smethod.value
+                + "\n배송방법 : " + document.write_form.ap_dmethod.value
                 + "\n\n위의 정보로 판매신청을 하시겠습니까?"
     var c = confirm(info);
     return c;

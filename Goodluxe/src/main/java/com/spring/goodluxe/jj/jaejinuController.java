@@ -441,7 +441,7 @@ public class jaejinuController {
 	public String rudaodetail(@RequestParam("file_1")List<MultipartFile> fileList_1,@RequestParam("file_2")List<MultipartFile> fileList_2 ,MultipartHttpServletRequest request, AuctionVO auctionvo, Request2Model model,
 			Model model_t) throws IllegalStateException, IOException {
 		
-		String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";
+		String uploadPath = "C:\\Project138\\upload\\";
 	      File fileDir = new File(uploadPath); 
 	      if (!fileDir.exists()) { 
 	         fileDir.mkdirs(); 
