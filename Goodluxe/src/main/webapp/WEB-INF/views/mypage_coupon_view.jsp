@@ -104,13 +104,13 @@ $(document).ready(function() {
                             		CouponVO cvo = (CouponVO)coupon_list.get(i);
                             %>
                             <tr>
-                                <td data-title="NO."><%=cvo.getCoupon_number() %></td>
+                                <td data-title="NO."><%=number %></td><%--=cvo.getCoupon_number() --%>
                                 <td data-title="쿠폰명"><%=cvo.getCoupon_type() %></td>
                                 <td data-title="혜택">
                                 <%
                                 	if(cvo.getCoupon_type().equals("가입 무료배송 쿠폰")){
                                 %>
-                                무료배송
+                              		  무료배송
                                 <%
                                 	}else if(cvo.getCoupon_type().equals("2020 쥐띠해 기념 1품목 20% 할인 쿠폰")){
                                 %>
@@ -122,7 +122,7 @@ $(document).ready(function() {
                                 <%
                                 	}else{
                                 %>
-                                없음
+                               		 무료배송
                                 <%
                                 	}
                                 %>
@@ -142,6 +142,7 @@ $(document).ready(function() {
                                 </td>
                             </tr>
                         <%
+                        		number--;
                             	}
                             }
                         %>

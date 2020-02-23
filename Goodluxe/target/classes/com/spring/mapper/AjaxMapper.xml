@@ -217,10 +217,10 @@
 		select order_pay_price, member_id from gl_order where order_number = #{order_number}
 	</select>
 	<update id = "afterOrderGivePoint" parameterType = "hashMap">
-		update gl_member set member_point = member_point + #{order_pay_price}*0.005 where member_id = #{member_id}
+		update gl_member set member_point = member_point + #{order_pay_price}*0.001 where member_id = #{member_id}
 	</update>
 	<insert id = "afterOrderGivePointonglPoint" parameterType = "hashMap">
-		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.005, #{member_id}, #{order_number})
+		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.001, #{member_id}, #{order_number})
 	</insert>
 	
 	
