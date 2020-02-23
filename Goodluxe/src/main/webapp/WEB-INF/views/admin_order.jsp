@@ -215,7 +215,7 @@
 		$('#search_btn').click(function(event){
 			 $('#output').empty();
 			var params = $('#search_filter_form').serialize();
-			alert(params);
+			
 	        jQuery.ajax({
 	        	url:'/goodluxe/getOrderList.do',
 	        		type:'POST',
@@ -324,7 +324,7 @@
 			var invoice = invoice_txt.attr("value");
 			var order_invoice_number =start_btn.prev().val();
 			
-			alert('alert'+order_invoice_number);
+			//alert('alert'+order_invoice_number);
 			if(order_invoice_number==""){
 				alert('송장번호를 입력하세요');//왜 안뜨나요....???
 				return false;
