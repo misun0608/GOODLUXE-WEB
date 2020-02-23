@@ -30,6 +30,20 @@
 	</update>
 	
 	
+	<select id = "isAlreadySetAlarm" parameterType = "hashmap" resultType = "int">
+		select count(*) from gl_product_Alarm
+		 where member_id=#{id} and entity_number=#{entity}
+	</select>
+	
+	<insert id = "insertSetAlarmUser" parameterType = "hashmap">
+		insert into gl_product_Alarm(member_id, entity_number) values(#{id}, #{entity})
+	</insert>
+	<delete id = "deleteSetAlarmUser" parameterType = "hashmap">
+		delete from gl_product_Alarm  where member_id=#{id} and entity_number=#{entity}
+	</delete>
+	
+	
+
 	<!-- 쿠폰 -->
 	<resultMap id = "CouponVOMap" type = "com.spring.goodluxe.voes.CouponVO">
 		<result property = "coupon_number" column = "coupon_number"/>
@@ -203,10 +217,10 @@
 		select order_pay_price, member_id from gl_order where order_number = #{order_number}
 	</select>
 	<update id = "afterOrderGivePoint" parameterType = "hashMap">
-		update gl_member set member_point = member_point + #{order_pay_price}*0.005 where member_id = #{member_id}
+		update gl_member set member_point = member_point + #{order_pay_price}*0.001 where member_id = #{member_id}
 	</update>
 	<insert id = "afterOrderGivePointonglPoint" parameterType = "hashMap">
-		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.005, #{member_id}, #{order_number})
+		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.001, #{member_id}, #{order_number})
 	</insert>
 	
 	
@@ -398,7 +412,7 @@
 
 
 	<select id = "getorderNumberLikedMember" parameterType = "String" resultMap = "likedMemberListMap">
-		select member_id from gl_liked where entity_number = #{likedEntity}
+		select member_id from gl_product_Alarm where entity_number = #{likedEntity}
 	</select>
 	<insert id = "setAlarmInfo" parameterType = "hashMap" >
 		insert into gl_notice(alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number) 

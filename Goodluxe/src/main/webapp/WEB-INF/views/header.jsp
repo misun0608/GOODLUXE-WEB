@@ -18,15 +18,18 @@
 		w = new WebSocket("ws://localhost:8080/goodluxe/broadcasting2.do");
 
 		w.onopen = function(){
+			//alert("WebSocket Conneted!!!");
 		}
 		w.onmessage = function(e){       
-			alarm_number = e.data.toString();
+			//alarm_number = e.data.toString();
 			console.log("알람 수신");
 			alarm_arrived();
 		}
 		w.onclose = function(e){
+			//alert("WebSocket closed!!!");
 		}
 		w.onerror = function(e){ 
+			//alert("WebSocket error!!!");
 		}
 	}
 	window.onload = function(){

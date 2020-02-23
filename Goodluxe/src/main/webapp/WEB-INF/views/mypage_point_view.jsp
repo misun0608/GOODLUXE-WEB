@@ -148,7 +148,7 @@ $(document).ready(function() {
 								PointVO pvo = (PointVO)point_list.get(i);
                         %>
                             <tr>
-                                <td class="hidecol"><%=pvo.getPoint_number() %></td>
+                                <td class="hidecol"><%= number %></td><%--=pvo.getPoint_number() --%>
                                 <td><%=pvo.getOrder_number() %></td>
                                 <td class="hidecol"><%=format1.format(pvo.getPoint_date()) %></td>
                                 <td><%=pvo.getPoint_status() %></td>
@@ -170,6 +170,7 @@ $(document).ready(function() {
                                 </td>
                             </tr>
                         <%
+                        		number--;
 							}
                         }
                         %>

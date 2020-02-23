@@ -82,6 +82,26 @@
 		 				}
 		 			});
 		 		}
+		 		function setBellBtnColor(){
+		 			$.ajax({   
+		 				url:'/goodluxe/checkAlreadySetAlarm.do?entity_number=<%=entity_number%>',
+		 				type:'POST',
+		 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+		 				success:function(data){
+		 					if (data==1){
+		 						//이미 좋아요를 누른사람
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell2.png");		
+		 					}
+		 					else{
+		 						//좋아요를 누른적이 없는사람
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell.png");
+		 					}
+		 				},
+		 				error:function(){
+		 					alert("서버와 통신에 실패하였습니다.");
+		 				}
+		 			});
+		 		}
 		 		
 		 		$('#likebtn').on('click',function(event){
 		 			jQuery.ajax({
@@ -106,6 +126,32 @@
 		 			event.preventDefault(); //디폴트 이벤트 해제
 		 		});
 		 		setBtnColor();
+		 		
+		 		
+
+		 		$('#alarmbtn').on('click',function(event){
+		 			jQuery.ajax({
+			 			url:$(this).attr("href"),
+			 			type:'GET',
+			 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			 			success: function (data) {
+			 				if (data==1){
+		 						//알람 눌러짐
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell2.png");		
+		 					} else if(data==0){
+		 						//알람 취소됨
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell.png");
+		 					} else if(data==-1) {
+		 						alert('로그인 후 이용해주세요!');
+		 					}
+			 			},
+			 			error:function() {
+	  	                 	alert("리스트 ajax통신 실패!!!");
+	 	                }
+		 			});
+		 			event.preventDefault(); //디폴트 이벤트 해제
+		 		});
+		 		setBellBtnColor();
 		 });
 		</script>
 </head>
@@ -196,9 +242,9 @@
 								<%}else{%>
 									<div class="cantbuybtn"><p class = "cantbuyletter">거래진행중인 상품입니다.</p></div>
 								<%}%>
-								<a href = "#">
+								<a href = "mdDetailSetAlarm.do?entity_number=<%=entity_number%>" id = "alarmbtn">
 									<div class="notibtn">
-										<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px" class = "notice_Img">
+										<img id = "bellImg" alt="알림" width="16px" class = "notice_Img">
 										<p class = "notice_letter">알림</p>
 									</div>
 								</a>
