@@ -113,7 +113,6 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			MemberMapper membermapper = sqlSession.getMapper(MemberMapper.class);
 			res = membermapper.insertMember(memberVO);
-			System.out.println("1 res = " + res);
 
 			return res;
 		} catch (Exception e) {

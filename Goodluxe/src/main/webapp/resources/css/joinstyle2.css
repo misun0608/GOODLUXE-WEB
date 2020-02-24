@@ -78,7 +78,8 @@ img {vertical-align:top;}
     /* 파란 계열 */
     /* background-color: #8FB0CA;  */
     /* background-color: #7eb5de; */
-    background-color: #76aed6;
+    /* background-color: #76aed6; */
+    background-color: #589fd5;
     /* 분홍 계열 */
     /* background-color: #DFB1AB;  */
     -webkit-transition-duration: 0.2s; /* Safari */
@@ -101,15 +102,17 @@ img {vertical-align:top;}
 
 .join_btn2{
 /*    background-color: #2F87C9; */
-    background-color: #76aed6;
+    /* background-color: #76aed6; */
+    background-color: #589fd5;
     color: white; 
 /*    border: 1px solid #2F87C9;*/
-	border: 1px solid #76aed6;
+	border: 1px solid #589fd5;
 }
 
 .join_btn2:hover{
-    background-color: #99c2e0;
-	border: 1px solid #99c2e0;
+    /* background-color: #99c2e0; */
+	    background-color: #90c0e3;
+		border: 1px solid #90c0e3;
 }
 
 /* .menu_line{

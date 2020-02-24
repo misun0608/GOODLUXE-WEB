@@ -276,10 +276,10 @@
 								</tr>
 								<tr>
 									<td class="jtitle">이메일 수신동의</td>
-									<td class="jointd"><input type="radio"
+									<td class="jointd">&nbsp;<input type="radio"
 										class="join_inputarea" name="member_email_receive" value="Y"
-										checked>동의 &nbsp;&nbsp;&nbsp; <input type="radio"
-										class="join_inputarea" name="member_email_receive" value="N">미동의</td>
+										checked>&nbsp;동의 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+										class="join_inputarea" name="member_email_receive" value="N">&nbsp;미동의</td>
 								</tr>
 
 							</table>

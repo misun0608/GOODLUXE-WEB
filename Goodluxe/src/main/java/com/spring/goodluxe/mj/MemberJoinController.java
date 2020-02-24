@@ -69,12 +69,12 @@ public class MemberJoinController {
 
 	@RequestMapping(value = "/joinform3_2.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String joinform3(MemberVO membervo, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) throws Exception {
-		
 		int res = gls.insertMember(membervo);
 		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer;
+		
 		try {
 			writer = response.getWriter();
 			if(res == 1) {
@@ -129,9 +129,10 @@ public class MemberJoinController {
 	public String reconfirmedEmail(HttpServletRequest request, HttpServletResponse response,
 			 @RequestParam("member_id") String member_id, MemberVO membervo) throws Exception {
 		String member_email = gls.reconfirmedEmailChk(membervo);
-		System.out.println("reconfirmedEmail.do member_email = " + member_email);
-		System.out.println("member_id = " + member_id);
-		System.out.println(membervo);
+		/*
+		 * System.out.println("reconfirmedEmail.do member_email = " + member_email);
+		 * System.out.println("member_id = " + member_id); System.out.println(membervo);
+		 */
 		String setfrom = "bit.goodluxe@gmail.com"; // host 메일 주소
 //      String member_email  = request.getParameter("email");     // 받는 사람 이메일
 		String title = "[재발송] GOODLUXE 인증메일입니다"; // 제목
