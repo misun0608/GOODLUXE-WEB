@@ -91,5 +91,7 @@
                 	where chat_room_rank =1)
 	</update>
 	
+	
+	
 
 </mapper>

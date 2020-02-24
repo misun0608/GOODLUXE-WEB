@@ -19,7 +19,17 @@
 	moveTo(500,500);
 	resizeTo(350,620);
 </script>
-
+<style>  
+.mytable {
+	border-collapse: collapse;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+}  
+.mytable th, .mytable td {
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+</style>
 <% 
 ArrayList<Auction_HistoryVO> list = (ArrayList<Auction_HistoryVO>)request.getAttribute("list");
 int i=0;
@@ -28,8 +38,8 @@ int i=0;
 
 </HEAD>
 <BODY>
-<div id="container">
-	<table  border="1" >
+<div id="container" >
+	<table class="mytable">
 	
 	<tr>
 		<th>순위</th>

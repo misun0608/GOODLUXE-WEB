@@ -84,7 +84,9 @@ String member_id = (String) session.getAttribute("member_id");
 	/* 		Auction_HistoryVO historyvo= (Auction_HistoryVO)request.getAttribute("historyvo"); */
 	String path = "/Goodluxe/image/";
 %>
-<body id="body_press">
+
+
+<body id="body_press" oncontextmenu="return false">
 
 	  <header id="header"></header>
 
@@ -99,16 +101,15 @@ String member_id = (String) session.getAttribute("member_id");
 		 var obj = document.getElementById("unit");  
 			
 		   var number = Number(obj.value);
-		if(number==<%=auctionvo.getAUCTION_NOW_PRICE()%>){
+		if(number>=<%=auctionvo.getAUCTION_NOW_PRICE()%>){
 			   alert("입찰값이 현재가격과 같습니다. ");
 			   return false;
 		   }
 		
-		
 		return true;
 	}
 	</script>
-		<form action="./history.do" name="auction_detail" method="GET" onsubmit="return checkz()" >
+		<form action="./history.do" name="auction_detail" method="GET" onsubmit="checkz()" >
 
 
 			<br>
@@ -236,7 +237,7 @@ String member_id = (String) session.getAttribute("member_id");
 											
 											if(distance <= 0){
 												
-												
+												//alert('${ordercount}');
 												if('${ordercount}' > 0){
 													return false;
 												}else{
@@ -378,6 +379,9 @@ String member_id = (String) session.getAttribute("member_id");
 		   var number = Number(obj.value);
 		if(number==<%=auctionvo.getAUCTION_NOW_PRICE()%>){
 			   alert("입찰값이 현재가격과 같습니다. ");
+			   return false;
+		   }else if(number < <%=auctionvo.getAUCTION_NOW_PRICE()%>){
+			   alert("입찰값이 현재가격보다 낮습니다.. ");
 			   return false;
 		   }
 		

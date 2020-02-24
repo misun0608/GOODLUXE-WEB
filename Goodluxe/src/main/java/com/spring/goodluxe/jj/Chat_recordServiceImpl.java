@@ -99,4 +99,6 @@ public class Chat_recordServiceImpl implements Chat_recordService{
 		}
 		return res;
 	}
+	
+	
 }
