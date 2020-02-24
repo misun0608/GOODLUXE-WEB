@@ -517,7 +517,7 @@ $(document).ready(function() {
 					<h3>| 배송관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
-						<table class="information">
+						<table class="information2">
 							<tr>
 								<td class="td1">분류</td>
 								<td class="td2">&nbsp;&nbsp;
@@ -554,7 +554,7 @@ $(document).ready(function() {
 							
 						</table>
 						<br/>
-						<table class="information" id ="output_table">
+						<table class="information2" id ="output_table">
 							<tr>
 								<td class="td1">상품번호</td>
 								<td class="td2">
