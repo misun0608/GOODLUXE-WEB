@@ -153,6 +153,17 @@
 		 		});
 		 		setBellBtnColor();
 		 });
+		 	
+ 		 function buy_action(){
+			 if('<%=session.getAttribute("member_id")%>' == '') {
+				 alert("로그인 후 이용해주세요.");
+				 return;
+			 } else if('<%=session.getAttribute("member_class")%>' == 'B') {
+				 alert("블랙리스트 등급 회원은 제품을 구매하실 수 없습니다.");
+				 return;
+			 }
+			 location.href="orderForm.do?entity_number=<%=entity_number%>";
+		 }
 		</script>
 </head>
 <body>
@@ -236,9 +247,10 @@
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
 								<%if(!saleStatus.equals("거래진행중")){ %>
-								<a href = "orderForm.do?entity_number=<%=entity_number%>">
+								<input type="button" class="buybtn buybtn2" value="구매하기" onClick="buy_action();">
+<%-- 								<a href = "orderForm.do?entity_number=<%=entity_number%>">
 									<div class="buybtn buybtn2"><p class = "buybtn_letter">구매하기</p></div>
-								</a>
+								</a> --%>
 								<%}else{%>
 									<div class="cantbuybtn"><p class = "cantbuyletter">거래진행중인 상품입니다.</p></div>
 								<%}%>
