@@ -371,13 +371,13 @@
 										<%=sales[6]%>
 											],
 									backgroundColor : [ // 각 날짜의 맨앞! (매출액)
-									'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)',
-											'rgba(255, 99, 132, 0.4)' ],
+									'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 99, 132, 0.2)' ],
 									borderColor : [ 'rgba(255, 99, 132, 1)',
 											'rgba(255, 99, 132, 1)',
 											'rgba(255, 99, 132, 1)',
@@ -405,13 +405,13 @@
 										<%=real_sales[6]%>
 											],
 									backgroundColor : [
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)',
-											'rgba(54, 162, 235, 0.4)' ],
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(54, 162, 235, 0.2)' ],
 									borderColor : [ 'rgba(54, 162, 235, 1)',
 											'rgba(54, 162, 235, 1)',
 											'rgba(54, 162, 235, 1)',
@@ -440,13 +440,13 @@
 											<%=cnt[6]%>
 												],
 									backgroundColor : [
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)',
-											'rgba(75, 192, 192, 0.4)' ],
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(75, 192, 192, 0.2)' ],
 									borderColor : [ 'rgba(75, 192, 192, 1)',
 											'rgba(75, 192, 192, 1)',
 											'rgba(75, 192, 192, 1)',
@@ -517,11 +517,11 @@
 						datasets : [ {
 							data : [ <%=cnt_data %>],
 							backgroundColor : [
-							'rgba(255, 99, 132, 0.4)',
-							'rgba(54, 162, 235, 0.4)',
-							'rgba(255, 206, 86, 0.4)',
-							'rgba(190, 190, 190, 0.4)',	// 회색
-							'rgba(75, 192, 192, 0.4)'
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(190, 190, 190, 0.2)',	// 회색
+							'rgba(75, 192, 192, 0.2)'
 							],
 						} ],
 						labels : [ <%=cnt_label %> ]
@@ -557,12 +557,12 @@
 						datasets : [ {
 							data : [ <%=brand_cnt_data %> ],
 							backgroundColor : [
-							'rgba(255, 99, 132, 0.4)',
-							'rgba(54, 162, 235, 0.4)',
-							'rgba(255, 206, 86, 0.4)',
-							'rgba(75, 192, 192, 0.4)',
-							'rgba(153, 102, 255, 0.4)',
-							'rgba(190, 190, 190, 0.4)'	// 회색
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(190, 190, 190, 0.2)'	// 회색
 							],
 						} ],
 						labels : [ <%=brand_cnt_label %> ]
@@ -598,12 +598,12 @@
 						datasets : [ {
 							data : [ <%=cate_sales_data %> ],
 							backgroundColor : [
-							'rgba(255, 99, 132, 0.4)',
-							'rgba(54, 162, 235, 0.4)',
-							'rgba(255, 206, 86, 0.4)',
-							'rgba(190, 190, 190, 0.4)',	// 회색
-							'rgba(75, 192, 192, 0.4)',
-							'rgba(153, 102, 255, 0.4)'
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(190, 190, 190, 0.2)',	// 회색
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)'
 							],
 						} ],
 						labels : [ <%=cate_sales_label %>]
@@ -652,12 +652,12 @@
 						datasets : [ {
 							data : [ <%=brand_sales_data %> ],
 							backgroundColor : [
-							'rgba(255, 99, 132, 0.4)',
-							'rgba(54, 162, 235, 0.4)',
-							'rgba(255, 206, 86, 0.4)',
-							'rgba(75, 192, 192, 0.4)',
-							'rgba(153, 102, 255, 0.4)',
-							'rgba(190, 190, 190, 0.4)'	// 회색
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(190, 190, 190, 0.2)'	// 회색
 							],
 						} ],
 						labels : [ <%=brand_sales_label %> ]
@@ -718,17 +718,17 @@
 						<div class="local_desc02 local_desc">일간 데이터</div>
 						<div>
 							<h2>오늘 매출 현황</h2>
-							<button type="button" class="btn00_1" id="today_order_btn" onclick="location.href='./adminOrder.do'">
+							<button type="button" class="btn00_1" onclick = "location.href='adminOrder.do?adminperiod=today'">
 								<span class="wkrdma">주문(<%=vo.get("order_count")%>건)
 								</span><br><span class="zma"><b><%=order_sales%></b></span>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1" id="today_paid_btn">
+							<button type="button" class="btn00_1" onclick = "location.href='adminOrder.do?adminperiod=today&adminstatus=afterP'">
 								<span class="wkrdma">결제(<%=vo.get("paid_order_count")%>건)
 								</span><br> <b><span class="zma"><%=paid_sales%></span></b>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1" id="today_refund_btn">
+							<button type="button" class="btn00_1">
 								<span class="wkrdma">환불(<%=vo.get("refund_order_count")%>건)
 								</span><br> <b><span class="zma"><%=refund_sales%></span></b>
 								<span>원</span>
@@ -738,7 +738,7 @@
 						
 						<div>
 							<h2>주문 현황 (최근 30일 기준)</h2>
-							<button type="button" class="btn00_2">
+							<button type="button" class="btn00_2" onclick = "location.href='adminOrder.do?adminperiod=month&adminstatus=beforeP'">
 								<span class="wkrdma">결제전</span><br>
 								<b><span class="zma"><%=vo.get("paid_before_count")%></span></b>
 							</button>

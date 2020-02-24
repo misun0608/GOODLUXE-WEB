@@ -132,7 +132,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class = "mobile_row1" ><div class = "img_size_div"><img src = "${pageContext.request.contextPath}/resources/<%=orderdata.get("pb_photo1") %>" class = "product_img"></div></td>
+                                    <td class = "mobile_row1" ><div class = "img_size_div"><img src = "/Goodluxe/image/<%=orderdata.get("pb_main_img_stored") %>" class = "product_img"></div></td>
                                     <td class = "mobile_row2" data-title = "상품정보" ><%=orderdata.get("pb_md_name") %></td>
                                     <td class = "mobile_row3" data-title = "판매가"><%=st_md_price %></td>
                                     <td class = "mobile_row4" data-title = "주문 처리상태"><%=orderdata.get("order_status") %></td>
