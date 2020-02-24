@@ -82,7 +82,6 @@ String member_id = (String) session.getAttribute("member_id");
 	int ordercount = (int) request.getAttribute("ordercount"); 
 	
 	/* 		Auction_HistoryVO historyvo= (Auction_HistoryVO)request.getAttribute("historyvo"); */
-	// String path = "./resources/img/auction_img/";
 	String path = "/Goodluxe/image/";
 %>
 <body id="body_press">
@@ -94,7 +93,22 @@ String member_id = (String) session.getAttribute("member_id");
     <div class="login_bg" id="login_box"></div>
 
 	<section id="container">
-		<form action="./history.do" name="auction_detail" method="GET">
+	<script>
+	function checkz() {
+	
+		 var obj = document.getElementById("unit");  
+			
+		   var number = Number(obj.value);
+		if(number==<%=auctionvo.getAUCTION_NOW_PRICE()%>){
+			   alert("입찰값이 현재가격과 같습니다. ");
+			   return false;
+		   }
+		
+		
+		return true;
+	}
+	</script>
+		<form action="./history.do" name="auction_detail" method="GET" onsubmit="return checkz()" >
 
 
 			<br>
@@ -103,11 +117,12 @@ String member_id = (String) session.getAttribute("member_id");
 			<div id="main">
 				<div class="cover">
 					<div id="photoarea">
-						<div class="detail_main_image_right">
+						<div class="detail_main_image_right" >
 
 							<a class="detail_main_image_link_right"> <img
 								src="<%=path%><%=auctionvo.getAUCTION_PHOTO1_STORED()%>"
-								alt="가방" name="AUCTION_PHOTO1_STORED" class="main_image">
+								alt="가방" name="AUCTION_PHOTO1_STORED" class="main_image"
+								style="width:500px; height:350px;">
 							</a>
 
 						</div>
@@ -115,25 +130,29 @@ String member_id = (String) session.getAttribute("member_id");
 							<div class="detail_main_image_area1 detail_main_image_left">
 								<a class="main_image_link1"> <img
 									src="<%=path%><%=auctionvo.getAUCTION_PHOTO1_STORED()%>"
-									alt="가방" name="AUCTION_PHOTO1_STORED" class="thumbnail_image">
+									alt="가방" name="AUCTION_PHOTO1_STORED" class="thumbnail_image"
+									style="width:122px; height:120px;">
 								</a>
 							</div>
 							<div class="detail_main_image_area2 detail_main_image_left">
 								<a class="main_image_link2"> <img
 									src="<%=path%><%=auctionvo.getAUCTION_PHOTO2_STORED()%>"
-									name="AUCTION_PHOTO2_STORED" alt="가방" class="thumbnail_image">
+									name="AUCTION_PHOTO2_STORED" alt="가방" class="thumbnail_image"
+									style="width:122px; height:120px">
 								</a>
 							</div>
 							<div class="detail_main_image_area3 detail_main_image_left">
 								<a class="main_image_link3"> <img
 									src="<%=path%><%=auctionvo.getAUCTION_PHOTO3_STORED()%>"
-									alt="가방" name="AUCTION_PHOTO3_STORED" class="thumbnail_image">
+									alt="가방" name="AUCTION_PHOTO3_STORED" class="thumbnail_image"
+									style="width:122px; height:120px">
 								</a>
 							</div>
 							<div class="detail_main_image_area4 detail_main_image_left">
 								<a class="main_image_link4"> <img
 									src="<%=path%><%=auctionvo.getAUCTION_PHOTO4_STORED()%>"
-									alt="가방" name="AUCTION_PHOTO4_STORED" class="thumbnail_image">
+									alt="가방" name="AUCTION_PHOTO4_STORED" class="thumbnail_image"
+									style="width:122px; height:120px">
 								</a>
 							</div>
 						</div>
@@ -185,22 +204,35 @@ String member_id = (String) session.getAttribute("member_id");
 									</button>
 
 									<script>
+									
+									
 									CountDownTimer('<%=auctionvo.getAUCTION_END_TIME()%>','newcountdown');
-
+									
+									
+								
+									
+									
 									function CountDownTimer(dt, id) {
 										var end = new Date(dt);
-
+										var starttime = '<%=auctionvo.getAUCTION_START_TIME() %>';
+										var start = new Date(starttime);
+										
 										var _second = 1000;
 										var _minute = _second * 60;
 										var _hour = _minute * 60;
 										var _day = _hour * 24;
 										var timer;
-
+										
+										
 										function showRemaining() {
 											var now = new Date();
 											var distance = end - now;
-											
-											
+											var startauction = now - start;
+											//alert(end);
+											//alert(now);
+											//alert(distance);
+											//alert(starttime);
+											//alert(startauction);
 											
 											if(distance <= 0){
 												
@@ -236,6 +268,8 @@ String member_id = (String) session.getAttribute("member_id");
 											}
 											}
 											
+											
+											
 											if (distance < 0) {
 												alert("경매가 마감되었습니다.")
 												clearInterval(timer);
@@ -247,6 +281,19 @@ String member_id = (String) session.getAttribute("member_id");
 												
 												return;
 											}
+											//alert(startauction);
+											if(startauction < 0){
+												document.getElementById("newcountdown").innerHTML="경매가 준비중에 있습니다.";
+												$button_joinus = $('#auction_history_button').attr('disabled', true);
+												$button_joinus = $('.auction_plus').attr('disabled', true);
+												$button_joinus = $('.auction_minus').attr('disabled', true);
+												return;
+												}else{
+													$button_joinus = $('#auction_history_button').attr('disabled', false);
+													$button_joinus = $('.auction_plus').attr('disabled', false);
+													$button_joinus = $('.auction_minus').attr('disabled', false);
+													}
+											
 											var days = Math.floor(distance
 													/ _day);
 											var hours = Math
@@ -396,7 +443,7 @@ String member_id = (String) session.getAttribute("member_id");
 							String img_5 = auctionvo.getAUCTION_PHOTO5_STORED();
 							String[] str = img_5.split(",");
 							for (int i = 0; i < str.length; i++) {
-						%><img src="<%=path%><%=str[i]%>" width="600px"
+						%><img src="<%=path%><%=str[i]%>" width="1000px"
 							name="AUCTION_PHOTO5_STORED">
 
 						<%

@@ -37,7 +37,7 @@
                     from (
                         select rownum as rnum,chat_timestamp, chat_count
                         from gl_chat_record
-                         where chat_room = #{chat_room}
+                         where chat_room = #{chat_room} 
                         order by chat_timestamp desc
                        )
                        where rownum=1
@@ -51,7 +51,11 @@
 			#{member_id}, #{chat_message}, SYSTIMESTAMP, #{chat_room},0
 			)
 	</insert>
-	
+	<select id="selectlistcount" parameterType="com.spring.goodluxe.voes.Chat_recordVO" resultType="int" >
+		select count(*)
+		from gl_chat_record
+		where chat_room = #{chat_room}
+	</select>
 	
 	
 	<select id="selectListChatRecordcountdo" resultMap="resultChatrecordVO">

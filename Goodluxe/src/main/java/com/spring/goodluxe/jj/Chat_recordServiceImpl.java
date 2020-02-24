@@ -87,4 +87,16 @@ public class Chat_recordServiceImpl implements Chat_recordService{
 		}
 		return res;
 	}
+	
+	@Override
+	public int selectlistcount(Chat_recordVO chatrecordvo)throws Exception{
+		int res=0;
+		try {
+			Chat_recordMapper chat_recordMapper = sqlSession.getMapper(Chat_recordMapper.class);
+			res = chat_recordMapper.selectlistcount(chatrecordvo);
+		}catch(Exception e) {
+			System.out.println("count select fail + "+e.getMessage());
+		}
+		return res;
+	}
 }

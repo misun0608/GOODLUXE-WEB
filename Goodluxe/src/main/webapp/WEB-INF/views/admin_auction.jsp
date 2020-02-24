@@ -76,14 +76,14 @@
 				
 				 var fileInput = document.getElementById("real_input");
 				 var files = fileInput.files;
-				alert(files.length);
+				//alert(files.length);
 				if (files.length > 4 || files.length < 4) {
 					alert("이미지 4개를 골라주세요.");
 					return false;
 				}
 				 var fileInput_2 = document.getElementById("gdsImg_2");
 				 var files_2 = fileInput_2.files;
-				alert(files_2.length);
+				//alert(files_2.length);
 				if (files_2.length < 1) {
 					alert("이미지를 1개 이상 골라주세요.");
 					return false;
