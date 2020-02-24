@@ -372,18 +372,21 @@ $(document).ready(function(){
                     <h3>| 회원 검색 </h3>
                     <br>
                     <form name="searchform" id="searchform" method="post">
-                    <table class="id_table">
+                    <table class=information>
                         <tr>
                             <td class="td1">아이디</td>
-                            <td class="id_search_td">
+                            <td class="td2">
                                 &nbsp;&nbsp;
                                 <input type="text" id="member_id" name="member_id" class="id_search_input" onkeyup="enterkey();">
-                                <button type="button" id="idsearchbtn" class="id_search_btn">검색</button>
+                       			<button type="button" id="idsearchbtn" class="id_search_btn">검색</button>
                             </td>
                         </tr>
 
                     </table>
                     </form>
+                    
+                    <div class="btn12" align="center">
+					</div>
 
 
                     <br>

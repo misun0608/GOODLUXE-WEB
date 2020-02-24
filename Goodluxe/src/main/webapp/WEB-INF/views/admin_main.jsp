@@ -718,17 +718,17 @@
 						<div class="local_desc02 local_desc">일간 데이터</div>
 						<div>
 							<h2>오늘 매출 현황</h2>
-							<button type="button" class="btn00_1">
+							<button type="button" class="btn00_1" id="today_order_btn" onclick="location.href='./adminOrder.do'">
 								<span class="wkrdma">주문(<%=vo.get("order_count")%>건)
 								</span><br><span class="zma"><b><%=order_sales%></b></span>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1">
+							<button type="button" class="btn00_1" id="today_paid_btn">
 								<span class="wkrdma">결제(<%=vo.get("paid_order_count")%>건)
 								</span><br> <b><span class="zma"><%=paid_sales%></span></b>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1">
+							<button type="button" class="btn00_1" id="today_refund_btn">
 								<span class="wkrdma">환불(<%=vo.get("refund_order_count")%>건)
 								</span><br> <b><span class="zma"><%=refund_sales%></span></b>
 								<span>원</span>
