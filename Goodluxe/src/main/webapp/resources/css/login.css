@@ -170,9 +170,9 @@ img {vertical-align:top;}
 }
 .login_line>hr {
     position: relative;
-    width:145px;
-    border: 0.4px solid #999;
-    top: 50%
+    width: 136px;
+    border: 0.8px solid #999;
+    top: 50%;
 }
 .login_icons {
     position: relative;
@@ -206,12 +206,14 @@ img {vertical-align:top;}
     top: 125px;
     text-align: center;
 }
+
 .anonymous>span {
     font-size: 12px;
 }
+
 .anonymous>a {
     font-size: 14px;
     font-weight: bolder;
     /* color: #DFB1AB; */
-    collor: #e69187;
-}s
+    color: #e69187;
+}

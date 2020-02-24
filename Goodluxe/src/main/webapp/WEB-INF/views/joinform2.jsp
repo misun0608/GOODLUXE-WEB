@@ -74,7 +74,7 @@
 		<form action="joinform3.do" name="join_form" method="POST">
                 <div class="join_agreement">
                     <div class="agr"><input type="checkbox" class="email_chk" name="email_chk_all" id="email_chk_all"><label for="email_chk_all"
-                            class="join_label">전체
+                            class="join_label">&nbsp;전체
                             동의</label></input></div>
                     <div class="agr_title">[필수] 이용약관 동의</div>
                     <br />
@@ -145,7 +145,7 @@
 </textarea><br />
                     <div class="agr">
                         <input type="checkbox" class="email_chk" id="email_chk2" name="email_chk" required><label for="chk2"
-                            class="join_label">동의함</label></input></div><br /><br />
+                            class="join_label">&nbsp;동의함</label></input></div><br /><br />
 
 
                     <div class="agr_title">[필수] 개인정보 수집 및 이용 동의</div><br />
@@ -186,7 +186,7 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
 
 </textarea><br />
                     <div class="agr"><input type="checkbox" class="email_chk" id="email_chk3" name="email_chk" required><label for="chk3"
-                            class="join_label">동의함</label></input></div><br /><br />
+                            class="join_label">&nbsp;동의함</label></input></div><br /><br />
 
                 </div>
                 <hr class="join_underline"><br>
