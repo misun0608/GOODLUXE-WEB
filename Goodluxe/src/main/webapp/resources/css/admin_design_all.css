@@ -1224,6 +1224,20 @@ tr .td3{
     border: 0.8px solid #555555;
 }
 
+.order_select_all_btn{
+	background-color: white;
+    color: #555555;
+    border: 0.8px solid #555555;
+    border-radius: 8px;
+    padding: 8px 47px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    
+}
+
 .one_btn{
 	border-radius: 3px 3px 3px 3px;
 }
@@ -1452,4 +1466,46 @@ tr .td3{
 }
 .auctistable{
 	width : 710px;
+}
+
+/* 관리자 쿠폰페이지 테이블 */
+#id_search_table{
+	width: 88%;
+	text-align: center;
+	border: 0px;
+}
+
+#id_search_table .title_td{
+	background: #D1DFE8;
+}
+
+#id_search_table .context_td{
+	background: whitesmoke;
+}
+
+/* 관리자 주문관리페이지 테이블 */
+#order_detail_table{
+	width: 95%;
+	text-align: center;
+	border: 0px;
+	font-size: 13px;
+	margin-top: 20px;
+}
+
+.top_td{
+	padding-bottom: 15px;
+}
+
+.order_ti_td{
+	background-color: #8FB0CA;
+	color: white;
+	height: 25px;
+}
+
+.order_co_td{
+	background-color: white;
+	text-align: left;
+	height: 25px;
+	padding-left: 5px;
+	line-height: 160%;
 }

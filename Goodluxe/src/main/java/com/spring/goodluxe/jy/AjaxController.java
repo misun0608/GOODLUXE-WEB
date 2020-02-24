@@ -259,6 +259,22 @@ public class AjaxController {
 		return retVal;
 	}
 	
+	@RequestMapping(value="/adminOrderMoneyGetShipping.do", produces= "application/json;charset=UTF-8")
+	public Map<String, Object> adminOrderMoneyGetShipping(
+			@RequestParam(value="order_number", required = false)String order_number) throws Exception {
+		Map<String,Object> retVal = new HashMap<String, Object>();
+		String result = "변경실패";
+		int res = gls.adminOrderMoneyGetShipping(order_number);
+		
+		if(res == 1) {
+			result = "변경 성공";
+		}
+		retVal.put("res", result);
+		return retVal;
+	}
+	
+	
+	
 	//상품관리
 		@RequestMapping(value="/adminAllProductList.do", produces= "application/json;charset=UTF-8")
 		public ArrayList<HashMap<String,Object>> adminAllProductList(
@@ -464,6 +480,7 @@ public class AjaxController {
 				) throws Exception {
 			gls.adminAuctionStatChange(AUCTION_POST_NUMBER);
 		}	
+		
 		
 	
 	

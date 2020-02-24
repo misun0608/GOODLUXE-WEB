@@ -227,12 +227,68 @@ $(document).ready(function() {
 	     	   //event.preventDefault();
 			});
 		
-		// 아이디 검색  ver.Modal
-		$('.id_search_btn').on('click',function(event){
+		// 아이디 검색  ver.Modal 첫번째
+		$('#id_search_btn1').on('click',function(event){
+			$('#id_search_table').empty();
+			var member_id = $('#member_id').val();
+			
+			if($('#member_id').val() == ''){
+				alert('아이디를 입력해주세요!');
+				return;
+			}
+			
+			console.log(member_id);
+			
+			var params = $('#member_id').serialize();
+			
+			console.log(params);
+	        jQuery.ajax({
+	        	url:'/goodluxe/adminCheckId.do',
+	        		type:'GET',
+	        		data : params,
+	 				dataType : "json",
+	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+	 				success: function(data){
+	 					//$.each(data, function(item){
+	 						console.log('test' + data.member_name);
+	 						
+	 						var output = '';
+		                     if(data.member_name == null & data.member_id == null){
+		                    	 output += '요청하신 아이디와 일치하는 회원이 없습니다.';
+		                    	 $('#id_search_table').append(output);
+		                    	 $('#member_id').val('');
+		                    	 toggleModal();
+		                    	 return;
+		                    }
+	 						//$('#output').empty();
+	 						
+	 						var member_join_date = new Date(data.member_join_date);
+		                    var date = date_format2(member_join_date);
+	 						output += '<thead><tr><td class="title_td"> 아이디 </td><td class="title_td"> 이 름 </td><td class="title_td">가입일</td><td class="title_td">등급</td></tr></thead>';
+	 						output += '<tbody><td class="context_td">'+data.member_id+'</td>';
+	 						output += '<td class="context_td">'+data.member_name+'</td>';
+	 						output += '<td class="context_td">'+date+'</td>';
+	 						output += '<td class="context_td">'+data.member_class+'</td></tr></tbody>';
+							//console.log("output:" + output);
+							$('#id_search_table').append(output);//뒤에 이어붙이기
+	 					//});
+	 					//page();
+	 					toggleModal();
+	 				},
+	 				error:function(){
+	 					alert("리스트 ajax통신 실패!!!");
+	 				}
+	      		});
+			
+		});
+		
+		
+		// 아이디 검색  ver.Modal 두번째
+		$('#id_search_btn2').on('click',function(event){
 			$('#id_search_table').empty();
 			var member_id = $('#member_id2').val();
 			
-			if($('#member_id2').val() == null){
+			if($('#member_id2').val() == ''){
 				alert('아이디를 입력해주세요!');
 				return;
 			}
@@ -250,12 +306,13 @@ $(document).ready(function() {
 	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 	 				success: function(data){
 	 					//$.each(data, function(item){
-	 						console.log('data' + data);
 	 						console.log('test' + data.member_name);
 	 						
 	 						var output = '';
-		                     if(data == null){
+		                     if(data.member_name == null & data.member_id == null){
 		                    	 output += '요청하신 아이디와 일치하는 회원이 없습니다.';
+		                    	 $('#id_search_table').append(output);
+		                    	 $('#member_id2').val('');
 		                    	 toggleModal();
 		                    	 return;
 		                    }
@@ -263,7 +320,6 @@ $(document).ready(function() {
 	 						
 	 						var member_join_date = new Date(data.member_join_date);
 		                    var date = date_format2(member_join_date);
-	 						
 	 						output += '<thead><tr><td class="title_td"> 아이디 </td><td class="title_td"> 이 름 </td><td class="title_td">가입일</td><td class="title_td">등급</td></tr></thead>';
 	 						output += '<tbody><td class="context_td">'+data.member_id+'</td>';
 	 						output += '<td class="context_td">'+data.member_name+'</td>';
@@ -414,7 +470,7 @@ $(document).ready(function() {
 	              <td class="td1">발급 대상</td>
 	              <td class="td2">
 	                <input type = text class="id_search_input" id = "member_id" name = "member_id">
-	                <button type="button" class="id_search_btn" onclick = "newWin();">아이디 검색</button>
+	                <button type="button" id="id_search_btn1" class="id_search_btn">아이디 검색</button>
 	                <!-- "window.open('adminSearchId.do','아이디검색','resizable=no width=600 height=700')" -->
 	                <input type="checkbox" class="allselect" name = "allselect" value = "all_member"> 전원 지급
 	              </td>
@@ -453,7 +509,7 @@ $(document).ready(function() {
 	              <td class="td2">
 	                <input type="text" class="id_search_input" name = "member_id" id = "member_id2">
 	                <!-- <button type="button" class="id_search_btn" onclick = "newWin2();">아이디 검색</button> -->
-	                <button type="button" class="id_search_btn">모달test</button>
+	                <button type="button" id="id_search_btn2" class="id_search_btn">아이디 검색</button>
 	                <input type="checkbox" class="allselect"name = "allselect" value = "all_member"> 전체 보기
 	              </td>
 	            </tr>
@@ -522,9 +578,11 @@ $(document).ready(function() {
 
 	<!-- 모달 시작 -->
 		<div class="modal">
-		<div class="modal-content">
+		<div id="modal-content" class="modal-content">
 		<span class="close-button">&times;</span>
+
 			<center>
+			<br />
 <%-- 			<%
 				if(nullChk.equals("none")){
 					%>
@@ -535,14 +593,10 @@ $(document).ready(function() {
 				}else{
 			%> --%>
 		
-			<table id="id_search_table" class="id_search_table"></table>
-				
-				<button class="bottom_btn use_btn">사용하기</button>
-		
-		
-<%-- 			<%
-				}
-			%> --%>
+ 			<table id="id_search_table" class="id_search_table"></table>
+				<br />
+				<button class="bottom_btn use_btn">확인</button> 
+
 		</div>
 	</div>
 	<!-- 모달 끝 -->

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -168,13 +169,14 @@ public class jaejinuController {
 		}
 		int res = 0;
 
+		ChatMemberVO chatmembervo_set = new ChatMemberVO();
+
+		chatmembervo_set.setChat_num(0);
+		chatmembervo_set.setMember_id(member_id);
+		chatmembervo_set.setChat_room(member_id);
+		
 		ChatMemberVO chatmembervo = new ChatMemberVO();
-
-		chatmembervo.setChat_num(0);
-		chatmembervo.setMember_id(member_id);
-		chatmembervo.setChat_room(member_id);
-
-		chatmembervo = chatmemberService.getRoomMember(chatmembervo);
+		chatmembervo = chatmemberService.getRoomMember(chatmembervo_set);
 
 		// DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
 		if (!member_id.equals("admin")) {
@@ -194,6 +196,7 @@ public class jaejinuController {
 				System.out.println("chat_room=" + chat_room);
 				res = chatmemberService.addRoomMember(chatmembervo_get);
 				chatM = chatmemberService.getRoomMember(chatmembervo_get);
+				model.addAttribute("room", member_id);
 			}
 			// 존재한다면 그 방으로 이동
 			else {
@@ -202,6 +205,7 @@ public class jaejinuController {
 				if (member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
 					model.addAttribute("room", "all");
 				} else {
+					System.out.println("chatmembervo.getChat_room()chatmembervo.getChat_room()="+chatmembervo.getChat_room());
 					model.addAttribute("room", chatmembervo.getChat_room());
 				}
 				System.out.println("chatmembervo.getChat_room()=" + chatmembervo.getChat_room());
@@ -209,12 +213,10 @@ public class jaejinuController {
 		}
 		// 현재 방이름 넣기(전체채팅방이니 all)
 		// 해당 이름으로 넣쟈
-		//System.out.println("chatmembervo.getChat_room()=" + chatmembervo.getChat_room());
-		model.addAttribute("room", chatmembervo.getChat_room());
+		
 		ArrayList<ChatMemberVO> chatlist = (ArrayList<ChatMemberVO>) chatmemberService.selectChatList();
 		
 		model.addAttribute("chatlist", chatlist);
-
 		ArrayList<Chat_recordVO> chatrecord = new ArrayList<Chat_recordVO>();
 		System.out.println("selectchatrecord");
 		chatrecord = chat_recordService.selectListchatRecord(member_id);
@@ -383,9 +385,9 @@ public class jaejinuController {
 	@RequestMapping(value = "/auction_detail.do")
 	public String auction_detail(@RequestParam("file_1") List<MultipartFile> fileList_1,
 			@RequestParam("file_2") List<MultipartFile> fileList_2, MultipartHttpServletRequest request,
-			AuctionVO auctionvo, Request2Model model, Model model_t) throws IllegalStateException, IOException {
+			AuctionVO auctionvo, Request2Model model, Model model_t, SessionStatus status) throws IllegalStateException, IOException {
 
-		String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";
+		String uploadPath = "C:\\Project138\\upload\\";
 		File fileDir = new File(uploadPath);
 		if (!fileDir.exists()) {
 			fileDir.mkdirs();
@@ -462,15 +464,20 @@ public class jaejinuController {
 			
 			model_t.addAttribute("ordercount", ordercount);
 			model_t.addAttribute("auctionnumber", count);
+			
+			 status.setComplete();
 		} catch (Exception e) {
 			e.getMessage();
+			
 		}
+	           
+	    
 		return "auction_detail";
 	}
 
 	// 입찰하기
 	@RequestMapping(value = "/history.do", method = RequestMethod.GET)
-	public String historyinsert(Model model_t, HttpServletRequest request) {
+	public String historyinsert(Model model_t, HttpServletRequest request,  SessionStatus status) {
 		int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
 		System.out.println("auction_post_number="+auction_post_number);
 		String member_id = request.getParameter("member_id");
@@ -510,6 +517,7 @@ public class jaejinuController {
 			int ordercount = orderService.selectordercount(AUCTION_POST_NUMBER);
 			
 			model_t.addAttribute("ordercount", ordercount);
+			 status.setComplete();
 		} catch (Exception e) {
 			System.out.println("입찰 실패 +" + e.getMessage());
 		}
@@ -605,7 +613,7 @@ public class jaejinuController {
 
 	// 회원에서 경매 들어갈 때
 	@RequestMapping(value = "/member_auction_history.do")
-	public String member_auction_history(HttpServletRequest request, Model model_t) {
+	public String member_auction_history(HttpServletRequest request, Model model_t, SessionStatus status) {
 		int auction_post_number = 0;
 		auction_post_number = Integer.parseInt(request.getParameter("AUCTION_POST_NUMBER"));
 		System.out.println(auction_post_number);
@@ -627,6 +635,8 @@ public class jaejinuController {
 			int ordercount = orderService.selectordercount(auction_post_number);
 			
 			model_t.addAttribute("ordercount", ordercount);
+			
+			 status.setComplete();
 		} catch (Exception e) {
 			System.out.println("멤버로 경매 들어가기 실패+" + e.getMessage());
 		}

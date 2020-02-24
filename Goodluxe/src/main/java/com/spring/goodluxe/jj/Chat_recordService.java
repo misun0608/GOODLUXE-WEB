@@ -11,4 +11,5 @@ public interface Chat_recordService {
 	public int insertadminchatRecord(Chat_recordVO chatrecordvo)throws Exception;
 	public ArrayList<Chat_recordVO> selectListChatRecordcountdo()throws Exception;
 	public int updateListChatRecordCountdo(String chat_room)throws Exception;
+	public int selectlistcount(Chat_recordVO chatrecordvo)throws Exception;
 }

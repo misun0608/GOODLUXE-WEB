@@ -22,6 +22,7 @@
 	String il_search_category = (String)request.getAttribute("il_search_category");
 	String il_search_grade = (String)request.getAttribute("il_search_grade");
 	String il_search_price = (String)request.getAttribute("il_search_price");
+	
 %>
 
 
@@ -219,8 +220,16 @@
 						DecimalFormat df = new DecimalFormat(",###");
 						String product_price_shaped = df.format(product_price_nonshaped);
 						
+						String saleStatus = (String)productHM.get("pb_sale_status");
+						
 					%>
 					<a href="./mdDetail.do?entity_number=<%=entity_number%>">
+						<%
+						if(saleStatus.equals("거래진행중")){ %>
+							<div  class = "dealing_now">
+								<span>거래 진행중인 <br/> 상품입니다.</span>
+							</div>	
+						<% } %>
 						<div class="il_card">
 							<div class="il_md_img">
 								<img src="/Goodluxe/image/<%= img_name%>" alt="md_img"
@@ -232,6 +241,7 @@
 								<div class="il_md_price"><%= product_price_shaped %> 원</div>
 							</div>
 						</div>
+						
 					</a> 
 					
 				<!--<a href="#">

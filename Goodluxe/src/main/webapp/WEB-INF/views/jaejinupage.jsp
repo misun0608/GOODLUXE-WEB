@@ -12,7 +12,7 @@
 <a href="adminrudao.do">adminrudao.do</a>
 <br>
 <p>"회원 -> 경매 상세 페이지로 이동"</p>
-<a href="member_auction_history.do?AUCTION_POST_NUMBER=14">member_auction_history.do?14</a>
+<a href="member_auction_history.do?AUCTION_POST_NUMBER=124">member_auction_history.do?124</a>
 <br><br>
 <p>"채팅방 -> </p>
 <a href="loginForm.do">채팅하러갑니당.</a>

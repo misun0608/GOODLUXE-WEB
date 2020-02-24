@@ -78,7 +78,7 @@
 		
 	}
 </script>
-<script>
+<!-- <script>
 	$(function(){
 		$(document).on('click','#modal_open',function(event) {
 			event.preventDefault();
@@ -101,10 +101,29 @@
 	
 
 
-</script>
+</script> -->
 <script>
 	$(document).ready(function(){
-		
+		// 모달...
+		var modal = document.querySelector(".modal");
+	    var closeButton = document.querySelector(".close-button");
+
+	
+	    function toggleModal() {
+	        modal.classList.toggle("show-modal");
+	        //$('#member_id2').val('');
+	     }
+	    
+	    // 모달바깥창 눌렀을 때 꺼지게
+	    function windowOnClick(event) {
+	        if (event.target === modal) {
+	            toggleModal();
+	        }
+	    }
+	   
+	    closeButton.addEventListener("click", toggleModal);
+	    window.addEventListener("click", windowOnClick);
+	   
 		function date_format(format) {
 			var year = format.getFullYear();
 			var month = format.getMonth() + 1;
@@ -162,17 +181,19 @@
 								//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me" value = "'+item.order_number+'"></td>';
 								output += '<td class="context_td">'+pay_date+'</td>';
 								output += '<td class="context_td">'+item.order_number+'</td>';
-								output += '<td class="context_td"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
+								output += '<td class="context_td"><span id = "show_member_info" style="cursor: pointer;">'+item.member_id+'</span></td>';
+								
 								output += '<td class="context_td">'+item.pb_number+'</td>';
 								output += '<td class="context_td">'+item.order_pay_price+'</td>';
 								output += '<td class="context_td">'+item.order_pay_system+'</td>';
 								output += '<td class="context_td">'+item.order_status;
+									if(item.order_status=='입금전'){
+										output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+									}
 									if(item.order_status=='배송준비중'){
-			
 										output +='<br /><button class="delivery_btn" id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 										output +='<p id ="inv_p" style="display:none">송장번호 :</p><input type ="text" id ="order_invoice_number" style="display:none">';
 										output +='<button class="delivery_btn confirm_btn" value ="'+item.order_number+'" id ="btn_start_shipping" style="display:none">확인</button>';
-								
 									}
 									if(item.order_status=='배송중'){
 										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">배송완료</button>';
@@ -217,15 +238,18 @@
 									var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
 									
 									var output = ''; 
-									output += '<tr class="tr2">';
+									output += '<tr>';
 									//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me"  value = "'+item.order_number+'"></td>';
 									output += '<td class="context_td">'+pay_date+'</td>';
 									output += '<td class="context_td">'+item.order_number+'</td>';
-									output += '<td class="context_td"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
+									output += '<td class="context_td"><span id = "show_member_info" style="cursor: pointer;">'+item.member_id+'</span></td>';
 									output += '<td class="context_td">'+item.pb_number+'</td>';
 									output += '<td class="context_td">'+item.order_pay_price+'</td>';
 									output += '<td class="context_td">'+item.order_pay_system+'</td>';
 									output += '<td class="context_td">'+item.order_status;
+										if(item.order_status=='입금전'){
+											output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+										}
 										if(item.order_status=='배송준비중'){
 											output +='<br /><button class="delivery_btn" id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
@@ -250,6 +274,48 @@
 	      		});
 	     	   //event.preventDefault();
 			});
+		
+		
+		// a태그 모달(a태그 안되서 span으로 변경)
+		$(document).on('click','#show_member_info',function(event) { 
+			//alert(" gkgkgkgkgkg ");
+			var memberlink = $(this);
+			var orderNum = memberlink.parent().prev().text();
+			//alert("orderNum" + orderNum);
+			$('#order_detail_table').empty();
+			//var params = $('#order_number').serialize();
+			//alert('ajax들어옴');
+			var params = { "order_number" : orderNum };
+	        jQuery.ajax({
+	        	url:'/goodluxe/getShippingDetail.do',
+	        		type:'GET',
+	        		data : params,
+	 				dataType : "json",
+	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+	 				traditional:true,
+	 				success: function(data){
+							var output = ''; 
+							output += '<tr>';
+							output += '<td colspan="2" class="top_td"><b>'+data.member_id + '</b>&nbsp;님의 배송 정보'+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'주문번호'+'</td>';
+							output += '<td class="order_co_td">'+data.order_number+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'받는사람'+'</td>';
+							output += '<td class="order_co_td">'+data.member_name+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'주 소'+'</td>';
+							output += '<td class="order_co_td">'+data.order_addr1+data.order_addr2+'<br />우)'+data.order_zipcode+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'핸드폰'+'</td>';
+							output += '<td class="order_co_td">'+data.order_phone+'</td></tr>';
+							
+							$('#order_detail_table').append(output);//뒤에 이어붙이기	
+							toggleModal();
+	 				},
+	 				error:function(){
+	 					alert("리스트 ajax통신 실패!!!");
+	 				}
+	      		});
+	     	   event.preventDefault();
+			});
+		
 		
 		$(document).on('click','#btn_start_shipping',function(event) { 
 			var start_btn = $(this);
@@ -291,6 +357,32 @@
 			}
 			jQuery.ajax({
 				url : '/goodluxe/adminOrderSetEndShipping.do',
+                type : 'POST',
+                data : params, // 서버로 보낼 데이터
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
+                dataType : "json", // 서버에서 보내줄 타입
+                success: function (retVal) {
+                	
+                	var result = retVal.res;
+                	
+                	alert(result);
+                },
+                error:function() {
+                   alert("insert ajax통신 실패!!!");
+                }
+             });
+		
+		});
+		
+		$(document).on('click','#btn_money_get',function(event) { 
+			var money_get_btn = $(this);
+			var data = money_get_btn.attr("value");
+	
+			var params = {
+				"order_number" : data
+			}
+			jQuery.ajax({
+				url : '/goodluxe/adminOrderMoneyGetShipping.do',
                 type : 'POST',
                 data : params, // 서버로 보낼 데이터
                 contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
@@ -510,7 +602,7 @@
 							</tr>
 						</table>
 						<div class="btn12" align="center">
-							<button type="button" class="bottom_btn cancel_btn" id="init_btn">전체보기</button>
+							<button type="button" class="order_select_all_btn" id="init_btn">전체보기</button>
 							<button type="button" class="bottom_btn" id="search_btn">검색</button>
 						</div>
 					</form>
@@ -558,7 +650,14 @@
 
 		</div>
 	</div>
-	
+	<!-- Modal -->
+	<div class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<br />
+			<table id="order_detail_table"></table>
+		</div>
+	</div>
 	
 
 	<footer id="admin_footer" class="container-fluid"></footer>
