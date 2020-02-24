@@ -37,7 +37,7 @@
                     from (
                         select rownum as rnum,chat_timestamp, chat_count
                         from gl_chat_record
-                         where chat_room = 'skyjaejin' 
+                         where chat_room = #{chat_room}
                         order by chat_timestamp desc
                        )
                        where rownum=1

@@ -194,12 +194,17 @@ public class jaejinuController {
 				System.out.println("chat_room=" + chat_room);
 				res = chatmemberService.addRoomMember(chatmembervo_get);
 				chatM = chatmemberService.getRoomMember(chatmembervo_get);
+				Chat_recordVO chat_record = new Chat_recordVO();
+				chat_record.setMember_id(member_id);
+				chat_record.setChat_message(" ");
+				chat_record.setChat_room(member_id);
+				chat_recordService.insertadminchatRecord(chat_record);
 			}
 			// 존재한다면 그 방으로 이동
 			else {
 				System.out.println("관리자");
 
-				if (member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
+				if (member_id.equals("admin")) {
 					model.addAttribute("room", "all");
 				} else {
 					model.addAttribute("room", chatmembervo.getChat_room());
@@ -225,6 +230,7 @@ public class jaejinuController {
 		chatrecordcountlist = chat_recordService.selectListChatRecordcountdo();
 		System.out.println("selectchatrecord find!");
 		model.addAttribute("chatrecordcountlist", chatrecordcountlist);
+		
 
 		return "chat";
 	}
@@ -385,7 +391,8 @@ public class jaejinuController {
 			@RequestParam("file_2") List<MultipartFile> fileList_2, MultipartHttpServletRequest request,
 			AuctionVO auctionvo, Request2Model model, Model model_t) throws IllegalStateException, IOException {
 
-		String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";
+		//String uploadPath = "C:\\Project138\\GOODLUXE-WEB\\Goodluxe\\src\\main\\webapp\\resources\\img\\auction_img\\";
+		String uploadPath = "C:\\Project138\\upload\\";
 		File fileDir = new File(uploadPath);
 		if (!fileDir.exists()) {
 			fileDir.mkdirs();

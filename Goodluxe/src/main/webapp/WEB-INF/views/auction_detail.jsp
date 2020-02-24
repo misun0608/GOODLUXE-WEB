@@ -82,7 +82,8 @@ String member_id = (String) session.getAttribute("member_id");
 	int ordercount = (int) request.getAttribute("ordercount"); 
 	
 	/* 		Auction_HistoryVO historyvo= (Auction_HistoryVO)request.getAttribute("historyvo"); */
-	String path = "./resources/img/auction_img/";
+	// String path = "./resources/img/auction_img/";
+	String path = "/Goodluxe/image/";
 %>
 <body id="body_press">
 
