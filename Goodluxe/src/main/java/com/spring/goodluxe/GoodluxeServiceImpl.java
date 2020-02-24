@@ -208,7 +208,7 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("startRow", 1); 
-			map.put("endRow", 6); 
+			map.put("endRow", 9); 
 			
 			mainbolist_view = productlistMapper.getMainPageItemView(map);
 			
