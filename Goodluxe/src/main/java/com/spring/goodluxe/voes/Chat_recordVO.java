@@ -8,6 +8,7 @@ public class Chat_recordVO {
     private String chat_message;
     private Timestamp chat_timestamp;
     private String chat_room;
+    private int chat_count;
     
     
 	public String getMember_id() {
@@ -33,6 +34,12 @@ public class Chat_recordVO {
 	}
 	public void setChat_room(String chat_room) {
 		this.chat_room = chat_room;
+	}
+	public int getChat_count() {
+		return chat_count;
+	}
+	public void setChat_count(int chat_count) {
+		this.chat_count = chat_count;
 	}
     
     

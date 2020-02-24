@@ -35,7 +35,7 @@
 		<![CDATA[
 			SELECT * 
 			FROM gl_purchase 
-			WHERE entity_number like '%'|| #{entity_number} || '%'
+			WHERE entity_number like '%'||#{entity_number}||'%'
 			order by entity_number desc
 		]]>
 	</select>
@@ -44,7 +44,7 @@
 		<![CDATA[
 			select entity_number 
 			from gl_purchase
-			where entity_number '%'||#{entity_number} || '%'
+			where entity_number like '%'||#{entity_number}||'%'
 			order by entity_number desc
 		]]>	
 	</select>

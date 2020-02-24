@@ -39,15 +39,15 @@
 			#{order_number,jdbcType=VARCHAR},
 			#{order_receipt,jdbcType=VARCHAR},
 			SYSTIMESTAMP,
-			,
+			#{order_order_date, jdbcType=TIMESTAMP},
 			#{order_status,jdbcType=VARCHAR},
 			#{order_addr1,jdbcType=VARCHAR},
 			#{order_addr2,jdbcType=VARCHAR},
 			#{order_zipcode,jdbcType=VARCHAR},
 			#{order_phone,jdbcType=VARCHAR},
 			#{order_invoice_number,jdbcType=VARCHAR},
-			,
-			,
+			#{order_ship_date, jdbcType=TIMESTAMP},
+			#{order_cancel_date, jdbcType=TIMESTAMP},
 			#{order_product_price},
 			#{order_ship_fee},
 			#{order_used_point},
@@ -61,7 +61,11 @@
 			#{order_pay_price}
 			)
 	</insert>
-   
+   	<select id="selectordercount" parameterType="int" resultType="int" >
+   		        select count(*)
+                from gl_order
+                where pb_number=#{pb_number};
+   	</select>
    
    
    

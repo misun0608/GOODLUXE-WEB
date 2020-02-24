@@ -12,6 +12,8 @@ public class Auction_HistoryVO {
     private String MEMBER_ID;
     private Timestamp AUHIS_BID_TIME;
     private int AUHIS_BETTING_PRICE;
+    
+    
 	public int getAUCTION_POST_NUMBER() {
 		return AUCTION_POST_NUMBER;
 	}
