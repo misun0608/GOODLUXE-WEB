@@ -130,19 +130,25 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 		System.out.println("현재방에 참석중인사람수:"+userList.size());
 		ChatUtil chatUtil = new ChatUtil(); //f.project.util소속 클래스 선언
 		String userListMessage = chatUtil.split(userList); // 받아온 list에 대해서 문자열로 바인딩해서 날려줌
-		sessionList.get(i).sendMessage(new TextMessage(JsonUser(userListMessage)));
+		//sessionList.get(i).sendMessage(new TextMessage(JsonUser(userListMessage)));
 		
 		ArrayList<Chat_recordVO> recordlist = chat_recordService.selectListchatRecord(roomName);
 		
+		
+		for (WebSocketSession webSocketSession : sessionList) {
+			//자신한테만 보내도록 함
+			if(session.getId().equals(webSocketSession.getId())) {
 		//대화 내용 뿌리기 
 		for(int j =0; j< recordlist.size(); j++) {
 		
-		sessionList.get(i).sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
+			webSocketSession.sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
+		}
+			}
 		}
 		
 		//12. 방리스트를 모든 사람들에게 보내줌
 		String roomNames = roomName;
-		sessionList.get(i).sendMessage(new TextMessage(JsonRoom(roomNames)));
+		//sessionList.get(i).sendMessage(new TextMessage(JsonRoom(roomNames)));
 		
 		
 	}
@@ -217,10 +223,14 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 			chat_recordvo.setChat_message(msgArr[0]);
 			chat_recordvo.setChat_timestamp(null);
 			chat_recordvo.setChat_room(roomName);
+			
+			
 			if(member_id.equals("admin")) {
 				chat_recordService.insertadminchatRecord(chat_recordvo);
+			}else if(chat_recordService.selectlistcount(chat_recordvo)==0){
+				chat_recordService.insertadminchatRecord(chat_recordvo);
 			}else {
-		 	chat_recordService.insertchatRecord(chat_recordvo);
+				chat_recordService.insertchatRecord(chat_recordvo);
 			}
 		 	System.out.println(chat_recordvo.getMember_id());
 		 	System.out.println(chat_recordvo.getChat_message());

@@ -53,10 +53,10 @@
 	if (time < 0)
 		time = 0;
 
-	if (member_isadmin.equals("Y")) {
+	if(member_id.equals("admin")){
 		session.setMaxInactiveInterval(-1);
-		
 	}
+	
 %>
 <script language='javascript'>
 

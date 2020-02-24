@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.spring.goodluxe.voes.ChatMemberVO;
 import com.spring.mapper.ChatMapper;
 import com.spring.mapper.ChatMemberMapper;
+import com.spring.mapper.Chat_recordMapper;
 
 
 @Service("chatmemberService")
@@ -129,5 +130,17 @@ public class ChatMemberServiceImpl implements ChatMemberService {
 		System.out.println("리스트 뽑기 실패+"+e.getMessage());
 	}
 	return chatlist;
+	}
+	
+	@Override
+	public String whereisthechatroom(String member_id)throws Exception{
+		String memid=null;
+		try {
+			ChatMemberMapper chatmemberMapper = sqlSession.getMapper(ChatMemberMapper.class);
+			memid = chatmemberMapper.whereisthechatroom(member_id);
+		}catch(Exception e) {
+			System.out.println("whereisthechatroom+"+e.getMessage());
+		}
+		return memid;
 	}
 }
