@@ -12,7 +12,7 @@
 		<result property="member_addr2" column="member_addr2"/>
 		<result property="member_phone" column="member_phone"/>
 		<result property="member_email" column="member_email"/>
-		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의입니다...크흠 -->
+		<result property="member_email_receive" column="member_email_receive"/> <!-- 이메일 수신 동의 여부 -->
 		<result property="member_like_brand" column="member_like_brand"/>
 		<result property="member_like_category" column="member_like_category"/>
 		<result property="member_join_date" column="member_join_date"/>
@@ -86,8 +86,8 @@
 	</select>
 
 	<!-- 이메일 중복 체크 -->
-	<select id="emailLink_chk" resultType="String">
-		select member_email
+	<select id="emailAddr_chk" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="int">
+		select count(*)
 		from gl_member 
 		where member_email=#{member_email}
 	</select>
@@ -112,12 +112,19 @@
 		SET member_class = 'Y'
 		WHERE member_id=#{member_id}
 	</update>
+	
+	<!-- 인증 이메일 재발송(이메일 정보 가져오기) -->
+	<select id="reconfirmedEmailChk" resultType="String"> <!-- resultType 안쓰면 기본이 int랬나? -->
+		select member_email
+		from gl_member
+		where member_id=#{member_id}
+	</select>
 		
 	<!-- sns 간편 회원가입 -->
 	<insert id="insertSnsMember" parameterType="com.spring.goodluxe.voes.MemberVO">
 		INSERT
-		INTO gl_member (member_id, member_name, member_email, member_join_date, member_class, member_point, member_isadmin) 
-		VALUES(#{member_id}, #{member_name}, #{member_email}, sysdate, 'N', 0, 'N')
+		INTO gl_member (member_id, member_pw, member_name, member_email, member_join_date, member_class, member_point, member_isadmin) 
+		VALUES(#{member_id}, 'sns_login', #{member_name}, #{member_email}, sysdate, #{member_class}, 0, #{member_isadmin})
 	</insert>
 	
 	<!-- 아이디 찾기 -->
@@ -131,13 +138,15 @@
 	<select id="findMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO" resultType="String">
 		SELECT member_id
 		FROM gl_member
-		WHERE member_id=#{member_id} AND member_email=#{member_email}
+		WHERE member_id=#{member_id} AND member_name=#{member_name} AND member_email=#{member_email}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="changeMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
+	<update id="updateMemberPw" parameterType="com.spring.goodluxe.voes.MemberVO">
 		UPDATE gl_member
 		SET member_pw=#{member_pw}
 		WHERE member_id=#{member_id} 
 	</update>
+	
+	
 </mapper>

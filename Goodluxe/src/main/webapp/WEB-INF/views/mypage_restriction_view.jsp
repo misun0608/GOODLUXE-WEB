@@ -204,11 +204,11 @@ $(document).ready(function() {
                         <table class="how_to_table">
                             <tbody>
                                 <tr>
-                                    <td><img src="${pageContext.request.contextPath}/resources/img/icons/sad_face.png" class = "how_to_img"></td>
+                                    <td><img src="${pageContext.request.contextPath}/resources/img/icons/sad_face.png" class ="how_to_img"></td>
                                     <td> 
-                                        <p>허수 구매율을 높지 않으려면?</p>
+                                        <p>허수 구매율을 높히지 않으려면?</p>
                                         <ul>
-                                            <li>GOODSLUXE에는 매력있는 상품이 많습니다. 그러니 구입 의사가 있는 상품만 신중하게 구입해주세요.</li>
+                                            <li>GOODLUXE에는 매력있는 상품이 많습니다. 그러니 구입 의사가 있는 상품만 신중하게 구입해주세요.</li>
                                             <li>무통장 주문 하였으나 변심으로 구매의사가 없을 경우 자동 취소가 되기 전 미리 취소요청을 해주세요.</li>
                                         </ul>
                                     </td>
@@ -216,7 +216,7 @@ $(document).ready(function() {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan = "2"> GOODSLUXE는 모든 고객에게 동등한 구매 기회를 보장하기 위하여 허수구매제한 정책을 시행하고 있습니다.</td>
+                                    <td colspan="2"> GOODLUXE는 모든 고객에게 동등한 구매 기회를 보장하기 위하여 허수구매제한 정책을 시행하고 있습니다.</td>
                                 </tr>
                             </tfoot>
                             

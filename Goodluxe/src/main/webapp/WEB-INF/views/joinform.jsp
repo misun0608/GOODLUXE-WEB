@@ -3,54 +3,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <!--
+        viewport meta 태그
+        * user-scalable=no : 화면확대, 축소 불가능
+        * width=device-width : 화면 너비=장치 너비
+        * initial-scale=1.0 : 초기 확대 비율
+    -->
+    <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
+    <title> 기본 페이지 </title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff" rel="stylesheet"> -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/goodluxe-footer.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/joinstyle.css">
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script> 
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goodluxe-header.js"></script> 
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script> 
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goodluxe-footer.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> 
+      <script>
+      $(document).ready(function(){
+         $("#header").load("header.do");
+         $("#nav_bar").load("navBar.do");
+         $("#login_box").load("loginBox.do");
+         $("#footer").load("footer.do");
+      });
+     
+    </script>
+
 </head>
-<body>
-	<form action="memberinsert.do" name="joinform" method="post">
-		<center>
-			<table border=1>
-				<tr>
-					<td colspan="2" align=center>
-						<b><font size=5>회원가입 페이지</font></b>
-					</td>
-				</tr>
-				<tr>
-					<td>아이디 : </td>
-					<td><input type="text" name="member_id" /></td>
-				</tr>
-				<tr>
-					<td>비밀번호 : </td>
-					<td><input type="password" name="member_pw" /></td>
-				</tr>
-				<tr>
-					<td>이름 : </td>
-					<td><input type="text" name="member_name" /></td>
-				</tr>
-				<tr>
-					<td>이름 : </td>
-					<td><input type="text" name="member_zipcode" value="28343"/></td>
-					<td><input type="text" name="member_addr1" value="서울시 온수동" /></td>
-					<td><input type="text" name="member_addr2" value="경리단길" /></td>
-					<td><input type="text" name="member_phone" value="01050432060" /></td>
-					<td><input type="text" name="member_email" value="dbwowls12345@naver.com"/></td>
-					<td><input type="text" name="member_email_receive" value="Y"/></td>
-					<td><input type="text" name="member_like_brand" value="etc"/></td>
-					<td><input type="text" name="member_like_category" value="etc"/></td>
-					<td><input type="text" name="member_class" value="Y"/></td>
-					<td><input type="text" name="member_point" value="0"/></td>
-					<td><input type="text" name="member_isadmin" value="Y"/></td>
-				</tr>
-				
-				
-				<tr>
-					<td colspan="2" align=center>
-						<a href="javascript:joinform.submit()">회원가입</a>&nbsp;&nbsp;
-						<a href="javascript:joinform.reset()">다시작성</a>
-					</td>
-				</tr>
-			</table>
-		</center>
-	</form>
+<body class="">
+    <header id="header"></header>
+
+    <nav id="nav_bar"></nav>
+
+    <div class="login_bg" id="login_box"></div>
+
+    <!-- <section style="height: 800px;"> -->
+    <section id="container">
+        <br>
+        <div id="main">
+            <center>
+            <br /><br />
+            <h1>회원가입</h1>
+            <br /><br />
+            <a href="${naver_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" width="20" height="20">&nbsp;&nbsp;네이버로 가입</span></a><br />
+            <a href="${kakao_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" width="20" height="20">&nbsp;&nbsp;카카오로 가입</span></a><br />
+            <a href="login.do"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" width="20" height="20">&nbsp;&nbsp;구글로 가입</span></a><br />
+            <hr class="join_line">&nbsp;&nbsp;<span class="join_linefont">or</span>&nbsp;&nbsp;<hr class="join_line">
+            <br />
+            <a href="joinform2.do"><span class="joinbox" id="emailbox"><img src="${pageContext.request.contextPath}/resources/img/icons/email_icon.png" width="20" height="20">&nbsp;&nbsp;이메일로 가입</span></a><br />
+            <br /> 
+            <br />  
+        </div>
+    </section>
+
+    <footer id="footer">
+    </footer>
 </body>
 </html>

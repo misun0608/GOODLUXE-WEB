@@ -44,12 +44,10 @@ public class MemberJoinController {
       ModelAndView mav = new ModelAndView();
       /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-       System.out.println("네이버:" + naverAuthUrl);
        model.addAttribute("naver_url", naverAuthUrl);
       
        //카카오 인증 url을 view로 전달
        String kakaoUrI = KakaoController.getAuthorizationUri(session);
-       System.out.println("카카오: "+ kakaoUrI);
        model.addAttribute("kakao_url", kakaoUrI);
 
         //네이버 
@@ -70,41 +68,32 @@ public class MemberJoinController {
 	}
 
 	@RequestMapping(value = "/joinform3_2.do", method = {RequestMethod.GET, RequestMethod.POST})
-//   @RequestMapping(value = "/joinform3_2.do", method = RequestMethod.GET)	   
     public String joinform3(MemberVO membervo, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) throws Exception {
-		
 		int res = gls.insertMember(membervo);
-		System.out.println("res : " + res);
 		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		System.out.println("1");
 		PrintWriter writer;
+		
 		try {
-			System.out.println("2");
 			writer = response.getWriter();
 			if(res == 1) {
-				System.out.println("2-0");
 				redirect.addAttribute("member_email", request.getParameter("member_email")); 
 				redirect.addAttribute("member_id", request.getParameter("member_id"));
 	           
-//				writer.write("<script>alert('회원 가입 성공'); location.href='./mailSending.do';</script>");
-				System.out.println("2-1"); 
-				return "redirect:/mailSending.do";
+				return "redirect:/mailSendingJoin.do";
 			} else {
 				writer.write("<script>alert('회원 가입 실패'); location.href='./joinform3.do';</script>");
-				System.out.println("2-2");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("3");
 		return null;
 	}
 	
 	/* mailSending 코드 */
-	@RequestMapping(value = "/mailSending.do")
-	public String mailSending(HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "/mailSendingJoin.do")
+	public String mailSendingJoin(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("member_email") String member_email, @RequestParam("member_id") String member_id) throws Exception {
 
 		String setfrom = "bit.goodluxe@gmail.com"; // host 메일 주소
@@ -135,6 +124,43 @@ public class MemberJoinController {
 		return null;
 	}
 
+	/* mailSending 코드(재발송) */
+	@RequestMapping(value = "/reconfirmedEmail.do")
+	public String reconfirmedEmail(HttpServletRequest request, HttpServletResponse response,
+			 @RequestParam("member_id") String member_id, MemberVO membervo) throws Exception {
+		String member_email = gls.reconfirmedEmailChk(membervo);
+		/*
+		 * System.out.println("reconfirmedEmail.do member_email = " + member_email);
+		 * System.out.println("member_id = " + member_id); System.out.println(membervo);
+		 */
+		String setfrom = "bit.goodluxe@gmail.com"; // host 메일 주소
+//      String member_email  = request.getParameter("email");     // 받는 사람 이메일
+		String title = "[재발송] GOODLUXE 인증메일입니다"; // 제목
+		String content = "http://localhost:8080/goodluxe/verifyEmail.do?member_id="+member_id; // 메일 내용
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는 사람 생략하면 정상작동 안함
+			messageHelper.setTo(member_email); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일 제목은 생략 가능
+			messageHelper.setText(content); // 메일 내용
+			
+			mailSender.send(message);
+
+			return "redirect:/mainPage.do";
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
+	
 	/* 메일 인증 url */
 	@RequestMapping(value = "/verifyEmail.do", method = RequestMethod.GET)
 	public String verifyEmail(HttpServletRequest request, HttpServletResponse response, MemberVO memberVO) {
@@ -152,9 +178,7 @@ public class MemberJoinController {
 			writer = response.getWriter();
 
 			if (res == 1) {
-//				writer.write("<script>alert('회원 가입 성공!!'); location.href='login_page.do';</script>");
-				
-				return "redirect:/mainPage.do"; // 여기서 페이지 하나 더 만들어서 인증이 완료되었습니다 웅앵 하기
+				return "redirect:/join_email_confirmed.do";
 			}
 
 		} catch (Exception e) {
@@ -164,18 +188,25 @@ public class MemberJoinController {
 		return null;
 	}
 
-//	@RequestMapping(value = "/join_agreement.do", method = RequestMethod.POST)
-//	public String join_agreement() {
-////		model.addAttribute("membervo", membervo.getMember_email_receive());
-//		
-//		return "joinform4";
-//	}
-
+	
 	@RequestMapping(value = "/joinform4.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String joinform4(MemberVO membervo, Model model) { // 회원가입 완료 페이지. 이 때 이메일 발송해줘야
 		model.addAttribute("membervo", membervo.getMember_email());
-//		model.addAttribute("membervo", membervo.getMember_email_receive());
 
 		return "joinform4";
+	}
+
+	
+	@RequestMapping(value = "/join_email_confirmed.do")
+	public String join_email_confirmed() {
+		return "join_email_confirmed";
+	}
+	
+	
+	@RequestMapping(value = "/join_email_not_confirmed.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String join_email_not_confirmed(MemberVO membervo, Model model) {
+		model.addAttribute("membervo", membervo.getMember_email());
+		
+		return "join_email_not_confirmed";
 	}
 }

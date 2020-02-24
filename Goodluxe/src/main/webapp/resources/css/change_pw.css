@@ -1,0 +1,74 @@
+/* 초기화 */
+* {margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 아이디/비밀번호 찾기 */
+.find_content{
+    margin: auto;
+    text-align: center;
+}
+
+.change_pw_table td{
+    padding: 5px 10px 7px 10px;
+}
+/* .jointd{ */
+/*     BORDER-BOTTOM: 1PX SOLID #444444; */
+/* } */
+
+.change_pw_table{
+    text-align: center;
+    font-size: 13px;
+    margin: auto;
+    width: 430px;
+    border: 1px solid #aaaaaa;
+    border-collapse: collapse;
+}
+
+.change_pw_textbox{
+    margin: 7px 5px -5px 5px;
+    padding-left: 5px;
+    width: 285px;
+    height: 30px;
+    border: 1px solid #aaaaaa;
+}
+
+.jttitle{
+    width: 130px;
+    vertical-align: middle;
+    line-height: 200%;
+}
+
+.find_idpw_text1{
+    vertical-align: bottom;
+    margin: 15px 2px 0px 2px;
+    /* background-color: #EEEEEE; */
+    /* 분홍 계열 */
+    background-color: rgb(253, 246, 245);
+    /* 하늘 계열 */
+    /* background-color: rgb(237, 245, 250); */
+    height: 30px;
+    font-size: 13px;
+}
+
+.change_pw_button{
+    font-size: 13px;
+    width: 290px;
+    height: 45px;
+    border-radius: 3px;
+    border: 1px solid white; 
+    margin: 3px 0 4px 0;
+    /* 파란 계열 */
+    /* background-color: #8FB0CA;  */
+    /* 분홍 계열 */
+    background-color: #DFB1AB; 
+    color: white; 
+    outline: 0;
+}
+
+.change_pw_button:hover{
+    background-color: #F0D2CF; 
+}

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String adminperiod = (String)request.getAttribute("adminperiod");
+	String adminstatus = (String)request.getAttribute("adminstatus");
+	
+%>
 <!DOCTYPE html>
 <html>
 
@@ -20,6 +25,7 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 <script>
@@ -62,12 +68,13 @@
 		var the_btn = $(this);
 		event.preventDefault();
 		//$(this).css("display","none");
-		//$(this).parent().children("#order_invoice_number").show();
-		//$(this).parent().children("#inv_p").show();
-		//$(this).parent().children("#btn_start_shipping").show();
-		the_btn.parent().children().eq(2).show();
-		the_btn.parent().children().eq(3).show();
-		the_btn.parent().children().eq(4).show();
+		$(this).parent().children("#order_invoice_number").show();
+		$(this).parent().children("#inv_p").show();
+		$(this).parent().children("#btn_start_shipping").show();
+		//the_btn.parent().children().eq(2).show();
+		//the_btn.parent().children().eq(3).show();
+		//the_btn.parent().children().eq(4).show();
+		//the_btn.parent().children().eq(5).show();
 		//$("#order_invoice_number").show();
 		//$("#inv_p").show();
 		//$("#btn_start_shipping").show();
@@ -76,7 +83,7 @@
 		
 	}
 </script>
-<script>
+<!-- <script>
 	$(function(){
 		$(document).on('click','#modal_open',function(event) {
 			event.preventDefault();
@@ -99,10 +106,29 @@
 	
 
 
-</script>
+</script> -->
 <script>
 	$(document).ready(function(){
-		
+		// 모달...
+		var modal = document.querySelector(".modal");
+	    var closeButton = document.querySelector(".close-button");
+
+	
+	    function toggleModal() {
+	        modal.classList.toggle("show-modal");
+	        //$('#member_id2').val('');
+	     }
+	    
+	    // 모달바깥창 눌렀을 때 꺼지게
+	    function windowOnClick(event) {
+	        if (event.target === modal) {
+	            toggleModal();
+	        }
+	    }
+	   
+	    closeButton.addEventListener("click", toggleModal);
+	    window.addEventListener("click", windowOnClick);
+	   
 		function date_format(format) {
 			var year = format.getFullYear();
 			var month = format.getMonth() + 1;
@@ -122,6 +148,25 @@
 			   min = '0' + min;
 			}
 			return year + "-" + month + "-" + date + " " + hour + ":" + min;
+		}
+		
+		function onpageDefaultAction(){
+			if('<%=adminperiod%>'=='none'){
+				selectData();
+			}else if('<%=adminperiod%>'=='today'){
+				document.getElementById("period").value = 'today';
+				if('<%=adminstatus%>'=='afterP'){
+					document.getElementsByName("is_payed").value='afterP';
+				}
+				$("#search_btn").trigger("click");
+			}else if('<%=adminperiod%>'=='month'){
+				document.getElementById("period").value = 'month';
+				if('<%=adminstatus%>' == 'beforeP'){
+					document.getElementsByName("is_payed").value='beforeP';
+				}
+				$("#search_btn").trigger("click");
+			}
+			
 		}
 		
 		$('input[name=is_payed]:eq(1)').click(function(event){
@@ -158,22 +203,24 @@
 								var output = ''; 
 								output += '<tr class="tr2">';
 								//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me" value = "'+item.order_number+'"></td>';
-								output += '<td class="td3">'+pay_date+'</td>';
-								output += '<td class="td3">'+item.order_number+'</td>';
-								output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'"id = "show_member_info" onclick = '+wintxt+'>'+item.member_id+'</a></td>';
-								output += '<td class="td3">'+item.pb_number+'</td>';
-								output += '<td class="td3">'+item.order_pay_price+'</td>';
-								output += '<td class="td3">'+item.order_pay_system+'</td>';
-								output += '<td class="td3">'+item.order_status;
-									if(item.order_status=='배송준비중'){
-			
-										output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
-										output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-										output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+								output += '<td class="context_td">'+pay_date+'</td>';
+								output += '<td class="context_td">'+item.order_number+'</td>';
+								output += '<td class="context_td"><span id = "show_member_info" style="cursor: pointer;">'+item.member_id+'</span></td>';
 								
+								output += '<td class="context_td">'+item.pb_number+'</td>';
+								output += '<td class="context_td">'+item.order_pay_price+'</td>';
+								output += '<td class="context_td">'+item.order_pay_system+'</td>';
+								output += '<td class="context_td">'+item.order_status;
+									if(item.order_status=='입금전'){
+										output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+									}
+									if(item.order_status=='배송준비중'){
+										output +='<br /><button class="delivery_btn" id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+										output +='<p id ="inv_p" style="display:none">송장번호 :</p><input type ="text" id ="order_invoice_number" style="display:none">';
+										output +='<button class="delivery_btn confirm_btn" value ="'+item.order_number+'" id ="btn_start_shipping" style="display:none">확인</button>';
 									}
 									if(item.order_status=='배송중'){
-										output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">배송완료</button>';
 									}
 								output +='</td>';
 								output += '</tr>';
@@ -181,6 +228,7 @@
 								$('#output').append(output);//뒤에 이어붙이기
 							}
 						});
+						page();
 					},
 		         error:function() {
 		            alert("리스트 ajax통신 실패!!!");
@@ -191,7 +239,7 @@
 		$('#search_btn').click(function(event){
 			 $('#output').empty();
 			var params = $('#search_filter_form').serialize();
-			alert(params);
+			
 	        jQuery.ajax({
 	        	url:'/goodluxe/getOrderList.do',
 	        		type:'POST',
@@ -214,22 +262,25 @@
 									var wintxt = "window.open('this.href','배송정보','resizable=no width=600 height=700');";
 									
 									var output = ''; 
-									output += '<tr class="tr2">';
+									output += '<tr>';
 									//output += '<td class="td3"><input type="checkbox" id = "chk_one" name="change_me"  value = "'+item.order_number+'"></td>';
-									output += '<td class="td3">'+pay_date+'</td>';
-									output += '<td class="td3">'+item.order_number+'</td>';
-									output += '<td class="td3"><a href = "./getShippingInfo.do?order_number='+item.order_number+'" id = "show_member_info" onclick='+wintxt+'>'+item.member_id+'</a></td>';
-									output += '<td class="td3">'+item.pb_number+'</td>';
-									output += '<td class="td3">'+item.order_pay_price+'</td>';
-									output += '<td class="td3">'+item.order_pay_system+'</td>';
-									output += '<td class="td3">'+item.order_status;
+									output += '<td class="context_td">'+pay_date+'</td>';
+									output += '<td class="context_td">'+item.order_number+'</td>';
+									output += '<td class="context_td"><span id = "show_member_info" style="cursor: pointer;">'+item.member_id+'</span></td>';
+									output += '<td class="context_td">'+item.pb_number+'</td>';
+									output += '<td class="context_td">'+item.order_pay_price+'</td>';
+									output += '<td class="context_td">'+item.order_pay_system+'</td>';
+									output += '<td class="context_td">'+item.order_status;
+										if(item.order_status=='입금전'){
+											output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+										}
 										if(item.order_status=='배송준비중'){
-											output +='<button id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
+											output +='<br /><button class="delivery_btn" id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
-											output +='<button value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
+											output +='<button class="delivery_btn confirm_btn" value = "'+item.order_number+'" id = "btn_start_shipping" style = "display:none">확인</button>';
 										}
 										if(item.order_status=='배송중'){
-											output +='<button value = "'+item.order_number+'" id = "btn_end_shipping">판매완료</button>';
+											output +='<br /><button class="delivery_btn finish_btn" value="'+item.order_number+'" id ="btn_end_shipping">배송완료</button>';
 										} 
 									output +='</td>';
 									output += '</tr>';
@@ -239,6 +290,7 @@
 								}	
 							}
 	 					});
+	 					page();
 	 				},
 	 				error:function(){
 	 					alert("리스트 ajax통신 실패!!!");
@@ -247,6 +299,48 @@
 	     	   //event.preventDefault();
 			});
 		
+		
+		// a태그 모달(a태그 안되서 span으로 변경)
+		$(document).on('click','#show_member_info',function(event) { 
+			//alert(" gkgkgkgkgkg ");
+			var memberlink = $(this);
+			var orderNum = memberlink.parent().prev().text();
+			//alert("orderNum" + orderNum);
+			$('#order_detail_table').empty();
+			//var params = $('#order_number').serialize();
+			//alert('ajax들어옴');
+			var params = { "order_number" : orderNum };
+	        jQuery.ajax({
+	        	url:'/goodluxe/getShippingDetail.do',
+	        		type:'GET',
+	        		data : params,
+	 				dataType : "json",
+	 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+	 				traditional:true,
+	 				success: function(data){
+							var output = ''; 
+							output += '<tr>';
+							output += '<td colspan="2" class="top_td"><b>'+data.member_id + '</b>&nbsp;님의 배송 정보'+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'주문번호'+'</td>';
+							output += '<td class="order_co_td">'+data.order_number+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'받는사람'+'</td>';
+							output += '<td class="order_co_td">'+data.member_name+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'주 소'+'</td>';
+							output += '<td class="order_co_td">'+data.order_addr1+data.order_addr2+'<br />우)'+data.order_zipcode+'</td></tr>';
+							output += '<tr><td class="order_ti_td">'+'핸드폰'+'</td>';
+							output += '<td class="order_co_td">'+data.order_phone+'</td></tr>';
+							
+							$('#order_detail_table').append(output);//뒤에 이어붙이기	
+							toggleModal();
+	 				},
+	 				error:function(){
+	 					alert("리스트 ajax통신 실패!!!");
+	 				}
+	      		});
+	     	   event.preventDefault();
+			});
+		
+		
 		$(document).on('click','#btn_start_shipping',function(event) { 
 			var start_btn = $(this);
 			var orderNo = start_btn.attr("value");
@@ -254,7 +348,7 @@
 			var invoice = invoice_txt.attr("value");
 			var order_invoice_number =start_btn.prev().val();
 			
-			alert('alert'+order_invoice_number);
+			//alert('alert'+order_invoice_number);
 			if(order_invoice_number==""){
 				alert('송장번호를 입력하세요');//왜 안뜨나요....???
 				return false;
@@ -303,6 +397,32 @@
              });
 		
 		});
+		
+		$(document).on('click','#btn_money_get',function(event) { 
+			var money_get_btn = $(this);
+			var data = money_get_btn.attr("value");
+	
+			var params = {
+				"order_number" : data
+			}
+			jQuery.ajax({
+				url : '/goodluxe/adminOrderMoneyGetShipping.do',
+                type : 'POST',
+                data : params, // 서버로 보낼 데이터
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
+                dataType : "json", // 서버에서 보내줄 타입
+                success: function (retVal) {
+                	
+                	var result = retVal.res;
+                	
+                	alert(result);
+                },
+                error:function() {
+                   alert("insert ajax통신 실패!!!");
+                }
+             });
+		
+		});
 			
 		$('#init_btn').click(function(event){
 		//$(document).on('click','#init_btn',function(event) { 
@@ -320,39 +440,142 @@
 			selectData();
 		});
 		
-		selectData();
+		function page(){ 
+			$('#output').each(function() {
+				var pagesu = 10;  //페이지 번호 갯수
+				var currentPage = 0;
+				var numPerPage = 10;  //목록의 수
+				var $table = $(this);   
+				var tr = $('#output_table tbody tr');
+				var pagination = $("#pagination");
+				   
+				//length로 원래 리스트의 전체길이구함
+				var numRows = tr.length;
+				console.log(numRows);
+				
+				//Math.ceil를 이용하여 반올림
+				var numPages = Math.ceil(numRows / numPerPage);
+				
+				//리스트가 없으면 종료
+				if (numPages==0) 
+					return;
+				//pager라는 클래스의 div엘리먼트 작성
+				var $pager = $('<div class="pager"></div>');
+				var nowp = currentPage;
+				var endp = nowp+10;
+				
+				//페이지를 클릭하면 다시 셋팅
+				$table.bind('repaginate', function() {
+					//기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+					// 테이블 하위 요소 중 tbody tr 요소 선택
+					$table.find('tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+					$("#pagination").html("");
+					
+					if (numPages > 1) {     // 한페이지 이상이면
+					if (currentPage < 5 && numPages-currentPage >= 5) {   // 현재 5p 이하이면
+						nowp = 0;     // 1부터 
+						endp = pagesu;    // 10까지
+					}else{
+						nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+						endp = nowp+pagesu;   // 10까지
+						pi = 1;
+					}
+					if (numPages < endp) {   // 10페이지가 안되면
+						endp = numPages;   // 마지막페이지를 갯수 만큼
+						nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+					}
+					if (nowp < 1) {     // 시작이 음수 or 0 이면
+						nowp = 0;     // 1페이지부터 시작
+					}
+					}else{       // 한페이지 이하이면
+						nowp = 0;      // 한번만 페이징 생성
+						endp = numPages;
+					}
+		
+					// [처음]
+					$('<span class="pageNum first" style="cursor: pointer">처음</span>').bind('click', {newPage: page},function(event) {
+						currentPage = 0;   
+						$table.trigger('repaginate');  
+						$($(".pageNum")[2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+					
+					// [이전]
+					$('<span class="pageNum back" style="cursor: pointer">&nbsp < &nbsp</span>').bind('click', {newPage: page},function(event) {
+						if(currentPage == 0) return;
+						currentPage = currentPage-1;
+						$table.trigger('repaginate');
+						$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+					
+					// [1,2,3,4,5,6,7,8]
+					for (var page = nowp ; page < endp; page++) {
+						$('<span class="pageNum" style = "cursor: pointer"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+							currentPage = event.data['newPage'];
+							$table.trigger('repaginate');
+							$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+							$("html, body").animate({ scrollTop : 0 }, 500);
+						}).appendTo(pagination).addClass('clickable');
+					} 
+					
+					// [다음]
+					$('<span class="pageNum next" style = "cursor: pointer">&nbsp > &nbsp</span>').bind('click', {newPage: page},function(event) {
+						if(currentPage == numPages-1) return;
+						currentPage = currentPage+1;
+						$table.trigger('repaginate'); 
+						$($(".pageNum")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0 }, 500);
+					}).appendTo(pagination).addClass('clickable');
+		
+					// [끝]
+					$('<span class="pageNum last" style = "cursor: pointer">끝</span>').bind('click', {newPage: page},function(event) {
+						currentPage = numPages-1;
+						$table.trigger('repaginate');
+						$($(".pageNum")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+						$("html, body").animate({ scrollTop : 0}, 500);
+					}).appendTo(pagination).addClass('clickable');
+		
+					$($(".pageNum")[2]).addClass('active');
+				});
+				
+				$pager.insertAfter($table).find('span.pageNum:first').next().next().addClass('active');   
+				$pager.appendTo(pagination);
+				$table.trigger('repaginate');
+				
+			});
+		}
+		onpageDefaultAction();
+		//selectData();
 	});
 </script>
 </head>
 <body>
 
 	<header id="hd"></header>
-
 	
-
-
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">주문 관리 > 전체 주문 목록</h1>
+			<h1 id="container_title">| 주문 관리 > 전체 주문 목록</h1>
 			<div class="container_wr">
 				<section>
 					<br><br>
 					<form id = "search_filter_form">
-						<table class="impormation" border="1">
+						<table class="information" >
 							<tr>
 								<td class="td1">주문번호</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp;<input type="text"
+								<td class="td2">&nbsp;&nbsp;<input type="text"
 									class="text3" name="order_number"id = "order_number_txt"></td>
 							</tr>
 						</table>
 						<br/>
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">기간</td>
 								<td class="td2">
-									<select class="search"name = "period" id = "period" onchange= "dateSelect();">
+									<select class="search" name = "period" id = "period" onchange= "dateSelect();">
 										<option name = "period" value="none">선택안함</option>
 										<option name = "period" value="write">직접입력</option>
 										<option name = "period" value="today">오늘</option>
@@ -368,7 +591,7 @@
 							</tr>
 							<tr>
 								<td class="td1">주문상태</td>
-								<td class="td2">&nbsp;&nbsp; &nbsp;
+								<td class="td2">&nbsp;&nbsp;
 									<input type="checkbox"name="check_order_status" value = "입금전" id = "is_checked3" checked> 입금대기 &nbsp;
 									<input type="checkbox"name="check_order_status" value = "배송준비중" id = "is_checked4" checked> 배송 준비중 &nbsp;
 									<input type="checkbox"name="check_order_status" value = "배송중" id = "is_checked5" checked> 배송중 &nbsp;
@@ -377,50 +600,54 @@
 							</tr>
 							
 							<tr>
-								<td class="td1">입금 / 결제상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
-									<input type="radio"name="is_payed" id = "is_checked2" value = "all" checked> 전체 &nbsp;
-									<input type="radio"name="is_payed" value = "beforeP"> 입금 전 &nbsp;
-									<input type="radio"name="is_payed" value = "afterP" > 결제 완료
+								<td class="td1">입금 /결제상태</td>
+								<td class="td2">&nbsp;&nbsp;
+									<input type="radio" name="is_payed" id ="is_checked2" value="all" checked> 
+									<label for="is_checked2">전체</label>
+									<input type="radio" id="is_payed1" name="is_payed" value="beforeP">
+									<label for="is_payed1">입금전</label>
+									<input type="radio" id="is_payed2" name="is_payed" value="afterP">
+									<label for="is_payed2">결제완료</label>
 								</td>
 							</tr>
 	
 						</table>
 						<br/>
-						<table class="impormation" border="1">
+						<table class="information">
 							<tr>
 								<td class="td1">cs 주문상태</td>
-								<td class="td2">&nbsp;&nbsp;&nbsp; 
+								<td class="td2">&nbsp;&nbsp;
 									<!-- <input type="radio"name="is_canceled" id = "is_checked" value = "all" checked> 전체 &nbsp; -->
-									<input type="radio"name="is_canceled" value = "cancelY" id = "cancelY"checked> 취소제외 &nbsp;
-									<input type="radio"name="is_canceled" value = "cancelN"> 취소내역
+									<input type="radio" name="is_canceled" value = "cancelY" id ="cancelY" checked>
+									<label for="cancelY">취소제외</label>
+									<input type="radio" id="cancelN" name="is_canceled" value = "cancelN">
+									<label for="cancelN">취소내역</label>
 								</td>
 							</tr>
 						</table>
 						<div class="btn12" align="center">
-							<button type="button" class="btn1_2" id = "init_btn" >전체보기</button>
-							<button type="button" class="btn1" id = "search_btn">검색</button>
+							<button type="button" class="order_select_all_btn" id="init_btn">전체보기</button>
+							<button type="button" class="bottom_btn" id="search_btn">검색</button>
 						</div>
 					</form>
 					<br> <br>
 					<form id = "order_status_form" method = "post" class = "table_behind">
 					
 						<!--  <input type = "submit" class="btn4" id="btn_start_shipping" value = "배송상태변경-발송완료">
-						<input type = "submit" class="btn4" id="modal_open" value = "배송상태변경-판매완료">
+						<input type = "submit" class="btn4" id="modal_open" value = "배송상태변경-배송완료">
 						<button id = "modal_open">fasdfasd</button>-->
 						
 						
-						<table border="1" >
-	
+						<table class="information" id ="output_table">
 							<tr class="tr1">
 								<!--  <td class="td3"><input type="checkbox"id="chk_all" onclick = "checkAll();"></td> -->
-								<td class="td4">주문일(결제일)</td>
-								<td class="td4">주문번호</td>
-								<td class="td4">주문자</td>
-								<td class="td4">상품번호[상품명]</td>
-								<td class="td4">결제금액</td>
-								<td class="td4">결제수단</td>
-								<td class="td4">배송상태</td>
+								<td class="title_td">주문일(결제일)</td>
+								<td class="title_td">주문번호</td>
+								<td class="title_td">주문자</td>
+								<td class="title_td">상품번호[상품명]</td>
+								<td class="title_td">결제금액</td>
+								<td class="title_td">결제수단</td>
+								<td class="title_td">배송상태</td>
 							</tr>
 							<tbody id = "output">
 								
@@ -428,6 +655,10 @@
 						</table>
 					</form>
 					<br>
+					 <center>
+			          	<div class="pagination" id="pagination">
+			         </center> 
+			         <br />
 		<!-- 	<p align="center">◁&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;▷</p>
 					<div class = "dark" id = "dark"></div>
 					<div class = "modal_win">
@@ -443,12 +674,17 @@
 
 		</div>
 	</div>
-	
+	<!-- Modal -->
+	<div class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<br />
+			<table id="order_detail_table"></table>
+		</div>
+	</div>
 	
 
-	<footer class="container-fluid">
-		<p>Footer Text</p>
-	</footer>
+	<footer id="admin_footer" class="container-fluid"></footer>
 </body>
 
 </html>

@@ -27,9 +27,9 @@ img {vertical-align:top;}
     width : 280px;
     padding : 3px 10px;
     border-width: 0px;
-    font-size: 15px;
+    font-size: 13px;
     background: #fff;
-    border-bottom: 0.8px solid #999;
+    border-bottom: 1px solid #999;
 }
 .input_point:focus {
     /* border: 0px; */
@@ -41,7 +41,7 @@ img {vertical-align:top;}
  /* �� Highlight */
 .group>label {
     color: #999; 
-    font-size: 15px;
+    font-size: 13px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
@@ -71,6 +71,7 @@ img {vertical-align:top;}
     border-width: 0px;
     color:#fff;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .point_btn_back{
@@ -79,6 +80,10 @@ img {vertical-align:top;}
 	border: 0.9px solid #BBCDDB;
 }
 
+.point_data{
+	margin-top: 25px;
+}
+
 #point_btn1{
-	margin-left: 83px;
+	margin-left: 33px;
 }

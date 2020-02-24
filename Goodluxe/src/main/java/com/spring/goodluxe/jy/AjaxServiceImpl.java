@@ -7,8 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
+import com.spring.goodluxe.voes.PointVO;
 import com.spring.mapper.AjaxMapper;
 
 @Service("ajaxService")
@@ -62,6 +65,52 @@ public class AjaxServiceImpl implements AjaxService{
 		}
 		return data;
 	}
+	public int checkAlreadySetAlarm(String member_id, String entity_number)throws Exception {
+		int res = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			System.out.println("service ==>"+member_id);
+			res = ajaxMapper.isAlreadySetAlarm(map);
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/checkAlreadySetAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/checkAlreadySetAlarm)");
+		}
+		return res;
+		
+	}
+	@Override
+	public int mdDetailSetAlarm(String member_id, String entity_number) throws Exception {
+		int data = 0;
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			HashMap<String,String>map = new HashMap<String,String>();
+			map.put("id", member_id);
+			map.put("entity",entity_number);
+			
+			int res = ajaxMapper.isAlreadySetAlarm(map);
+			
+			if(res==0) {
+				//알람 추가
+				ajaxMapper.insertSetAlarmUser(map);
+				data=1;
+			}
+			else {
+				//알람 삭제
+				ajaxMapper.deleteSetAlarmUser(map);
+				data=0;
+			}
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/mdDetailSetAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/mdDetailSetAlarm)");
+		}
+		return data;
+	}
+	
+	
 	
 	
 	@Override
@@ -124,7 +173,6 @@ try {
 				map.put("coupon_number", deletethis[i]);
 				ajaxMapper.deleteCouponList(map);
 			}
-			
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/deleteCouponList) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/deleteCouponList)");
@@ -217,59 +265,35 @@ try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
 			String str = (String) map.get("order_number");
 			String str2 = (String)map.get("is_canceled");
-			System.out.println("str"+str);
-			System.out.println("str2"+str2);
+			//System.out.println("str"+str);
+			//System.out.println("str2"+str2);
 			
 			
 			if( str!=null ) {
-				System.out.println("SSSSSSSSSSS");
 				if( !str.equals("")) {
-					System.out.println("하하하하하하하하하하하");
 					orderList = ajaxMapper.getOrderListOrdernumber(map);
 				}else {
 					if(str2.equals("cancelN")) {
-						System.out.println("NNNNNNN");
 						orderList = ajaxMapper.getOrderListCanceled(map);
 					}
 					else if(str2.equals("cancelY")){
-						System.out.println("YYYYYYYYYYYYYY");
 						orderList = ajaxMapper.getOrderList(map);
 					}
 				}
 			}else{
-				System.out.println("EEEEEEEE");
 				if(str2.equals("cancelN")) {
-					System.out.println("NNNNNNN");
 					orderList = ajaxMapper.getOrderListCanceled(map);
 				}
 				else if(str2.equals("cancelY")){
-					System.out.println("YYYYYYYYYYYYYY");
 					orderList = ajaxMapper.getOrderList(map);
 				}
 			}
-			
-		
-			
-			
 			return orderList;
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/getOrderList) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/getOrderList)");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public int orderChangeStatusStartShipping(String[] chked_change_me)throws Exception {
@@ -323,8 +347,28 @@ try {
 		}
 	}
 	
-	
-	
+	@Override
+	public int adminOrderMoneyGetShipping(String order_number) throws Exception {
+		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			HashMap<String, Object>map  = null;
+			int res = ajaxMapper.adminOrderMoneyGetShipping(order_number);
+			map = ajaxMapper.getPayedPrice(order_number);			
+			map.put("order_number", order_number);
+			int giveWell = ajaxMapper.afterOrderGivePoint(map);
+			//if(giveWell == 1 ) {System.out.println("memberTable에 포인트 등록이 잘됨");}
+			int recordwell = ajaxMapper.afterOrderGivePointonglPoint(map);
+			//if(recordwell == 1 ) {System.out.println("PointTable에 포인트 등록이 잘됨");}
+			
+			return res;
+			
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/adminOrderMoneyGetShipping) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/adminOrderMoneyGetShipping)");
+		}
+	}
 	
 	@Override
 	public ArrayList<HashMap<String, Object>> adminAllProductList(String pb_division)throws Exception {
@@ -338,11 +382,11 @@ try {
 			}
 			else { //(pb_division.equals("consign")
 				productList = ajaxMapper.adminAllProductListConsign();
-				System.out.println(productList.get(0).get("pd_name"));
+				//System.out.println(productList.get(0).get("pd_name"));
 			}
 			
-			System.out.println("entity는?"+productList.get(0).get("entity_number"));
-			System.out.println("프라이스"+productList.get(0).get("sale_price"));
+			//System.out.println("entity는?"+productList.get(0).get("entity_number"));
+			//System.out.println("프라이스"+productList.get(0).get("sale_price"));
 			return productList;
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/adminAllProductList) : " + e.getMessage());
@@ -354,7 +398,7 @@ try {
 		try {
 			ArrayList<HashMap<String,Object>> productList = null;
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
-			System.out.println("맵"+map.get("entity_number"));
+			//System.out.println("맵"+map.get("entity_number"));
 			
 			
 			if(map.get("entity_number").equals("")) {
@@ -364,7 +408,7 @@ try {
 					productList = ajaxMapper.adminProductListCons(map);
 				}
 			}else {
-				System.out.println("entity_Not_null");
+				//System.out.println("entity_Not_null");
 				if(map.get("pb_division").equals("purchase")) {
 					productList = ajaxMapper.adminProductListPurcEnNo(map);
 				}else {
@@ -388,7 +432,7 @@ try {
 			for(int i = 0; i<chked_post_status.length; i++) {
 				chked = chked_post_status[i];
 				oneStatus = ajaxMapper.checkNowPostStatus(chked);
-				System.out.println("ontStatus"+oneStatus);
+				//System.out.println("ontStatus"+oneStatus);
 				if(oneStatus.equals("게시중")) {
 					res = ajaxMapper.changeOffBoard(chked);
 				}else {
@@ -409,7 +453,7 @@ try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
 			
 			String entity_chk = ajaxMapper.checkNowPostStatus(entity_number);
-			System.out.println("엔티티췍~~"+entity_chk);
+			//System.out.println("엔티티췍~~"+entity_chk);
 			if(entity_chk.equals("게시중")) {
 				ajaxMapper.changeOffBoard(entity_number);
 			}else {
@@ -434,7 +478,7 @@ try {
 			}else if(entity_chk.equals("거래진행중")) {
 				ajaxMapper.chgSaleStatOndeal(entity_number);
 				ajaxMapper.changeOffBoard(entity_number);
-			}else {//판매완료일때
+			}else {//배송완료일때
 				ajaxMapper.chgSaleStatSoldout(entity_number);
 				ajaxMapper.changeOnBoard(entity_number);
 			}
@@ -506,7 +550,15 @@ try {
 		
 		try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			PointVO pointVO = null;
 			ajaxMapper.setReturnConfirm(order_number);
+			
+			pointVO = ajaxMapper.getGivenPointInfo(order_number);
+			int memberpointwell = ajaxMapper.returnPointFromMember(pointVO);
+			//if(memberpointwell==1) {System.out.println("멤버테이블 회수가 잘되었음");}
+			int pointtablewell = ajaxMapper.insertReturnPointInfo(pointVO);
+			//if(pointtablewell==1) {System.out.println("포인트테이블 회수가 잘되었음");}
+			
 			
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
@@ -514,24 +566,145 @@ try {
 		}
 	}
 	@Override
-	public void setReturnFinished(String order_number) throws Exception {
+	public ArrayList<HashMap<String,String>> setReturnFinished(String order_number) throws Exception {
 		try {
 			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			ArrayList<HashMap<String, String>> likedMember = null;
+			HashMap<String, String>map = new HashMap<String, String>();
+			
 			ajaxMapper.setReturnFinished(order_number);
 			int res = ajaxMapper.setPostStatusBackToSale(order_number);
-			if( res == 1) {// 알람 테이블 추가
-				
-			}
 			
+			String likedEntity;
+			if( res == 1) {// 알람 테이블 추가
+				//오더넘버에 좋아요 누른사람 먼저 데려오기
+				likedEntity = ajaxMapper.getEntityNumberForLiked(order_number);
+				map.put("entity_number", likedEntity);
+				
+				String pdMdName = ajaxMapper.getEntitysPdname(likedEntity);
+				String mdnameMsg = "["+pdMdName+"] 제품을 구매할 수 있습니다 :D 이 기회를 놓치지 마세요!";
+				map.put("alarm_content",mdnameMsg);
+				
+				likedMember =  ajaxMapper.getorderNumberLikedMember(likedEntity);
+				for(int i = 0; i<likedMember.size(); i++) {
+					map.put("member_id", likedMember.get(i).get("member_id"));
+					//System.out.println("확인"+i+" : "+map.get("member_id"));
+					ajaxMapper.setAlarmInfo(map);
+					
+				}
+			}
+			return likedMember;
 		}catch(Exception e) {
 			System.out.println("ERRPR(AjaxService/setReturnConfirm) : " + e.getMessage());
 			throw new Exception("ERRPR(AjaxService/setReturnConfirm)");
 		}
+	}
+	
+	
+	//header-alarm
+	@Override
+	public  ArrayList<NoticeVO> getAlarmContent(String member_id)throws Exception{
 		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			ArrayList<NoticeVO> noticeList = null;
+			noticeList = ajaxMapper.getAlarmContent(member_id);
+			
+			return noticeList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getAlarmContent) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getAlarmContent)");
+		}
+	
+	}
+	@Override
+	public ArrayList<NoticeVO> getMoreAlarmContent(HashMap<String, Object> map) throws Exception {
+		
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			//System.out.println("start"+map.get("start"));
+			//System.out.println("end"+map.get("end"));
+			
+			
+			ArrayList<NoticeVO> noticeList = null;
+			noticeList = ajaxMapper.getMoreAlarmContent(map);
+			
+			return noticeList;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/getAlarmContent) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/getAlarmContent)");
+		}
+	}
+	@Override
+	public int afterLoginCheckAlarm(String member_id) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+	
+			int res = ajaxMapper.afterLoginCheckAlarm(member_id);
+			
+			return res;
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/afterLoginCheckAlarm) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/afterLoginCheckAlarm)");
+		}
+	}
+	@Override
+	public ArrayList<AuctionVO> admingetAuctionInfo() throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			ArrayList<AuctionVO> AuctionList = new ArrayList<AuctionVO>();
+	
+			AuctionList = ajaxMapper.admingetAuctionInfo();
+			
+			return AuctionList;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/admingetAuctionInfo) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/admingetAuctionInfo)");
+		}
+	
+	}
+	@Override
+	public ArrayList<AuctionVO> adminGetAutionDetail(int aUCTION_POST_NUMBER) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+		
+			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
+			
+			AucHisList = ajaxMapper.adminGetAutionDetail(aUCTION_POST_NUMBER);
+			
+			return AucHisList;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/adminGetAutionDetail) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/adminGetAutionDetail)");
+		}
+	}
+	@Override
+	public int adminAuctionStatChange(int aUCTION_POST_NUMBER) throws Exception {
+		try {
+			AjaxMapper ajaxMapper = sqlSession.getMapper(AjaxMapper.class);
+			
+			AuctionVO AucInfo = new AuctionVO();
+			AucInfo = ajaxMapper.adminAuctionFindStat(aUCTION_POST_NUMBER);
+			int res = 0;
+			if(AucInfo.getAUCTION_POST_STATUS().equals("게시중")) {
+				res = ajaxMapper.adminAuctionStatChangeOFF(aUCTION_POST_NUMBER);
+			}else {
+				res = ajaxMapper.adminAuctionStatChangeON(aUCTION_POST_NUMBER);
+			}
+			return res;
+			
+		}catch(Exception e) {
+			System.out.println("ERRPR(AjaxService/adminAuctionStatChange) : " + e.getMessage());
+			throw new Exception("ERRPR(AjaxService/adminAuctionStatChange)");
+		}
 	}
 
-
-	
 	
 	
 	

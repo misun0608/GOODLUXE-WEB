@@ -1,0 +1,18 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+
+.mypage_id{
+	font-size: 17px;
+	font-weight: bold;
+	}
+	
+.mypage_menu{
+	font-size: 15px;
+}
+}

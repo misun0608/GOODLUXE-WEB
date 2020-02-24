@@ -29,7 +29,7 @@
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="465" />
       <property name="username" value="va9360@gmail.com" />
-      <property name="password" value="rasvdcuwqluyylze" />
+      <property name="password" value="fdlgmgtrxvzswicl" />
       <property name="javaMailProperties">
          <props>
             <prop key="mail.smtp.ssl.enable">true</prop>

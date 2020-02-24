@@ -43,6 +43,7 @@
 		$("#nav_bar").load("navBar.do");
 		$("#login_box").load("loginBox.do");
 		$("#footer").load("footer.do");
+
 	});
 </script>
 
@@ -55,7 +56,7 @@
 <script>
 		$(document).ready(function(){
 			$("#mypage_menu").load("mypageMenu.do", function(){
-				$('.menu_container').children('a').eq(1).children().children('.icon').addClass('selected_menu');
+				$('.menu_container').children('a').eq(6).children().children('.icon').addClass('selected_menu');
 			});
 		});
 </script>
@@ -82,11 +83,13 @@
 	}
 
 	
-	function deleteGoods(){
-		
-		
-		
-		
+	function deleteGoods(form){
+		if($("input[type=checkbox][name=chk_one]:checked").length==0){
+			alert("삭제할 목록이 없습니다.");
+			return;
+		}else{
+			form.submit();
+		}
 	}
 
 
@@ -119,7 +122,7 @@
 							</div>
 							<br />
 							
-							<form name = "deleteForm" onsubmit = "return deleteGoods();" action="./deleteCheckedGoods" >
+							<form name = "deleteForm" action="./deleteCheckedGoods.do" >
 								<table id="liked_goodslist" border="1">
 									<thead>
 										<tr class="liked_goods_top_tr">
@@ -147,25 +150,36 @@
 									%>
 									<tbody>
 										<tr>
-											<td><input type="checkbox" class="chk" value = "<%=entity_number%>" id = "chk_one" name = "chk_one" ></td>
-											<td class="liked_goods_img_td"><img
-												src="/Goodluxe/image/<%=img_name %>" alt="샤넬 장지갑" width="150px">
+											<td>
+												<input type="checkbox" class="chk" value = "<%=entity_number%>" id = "chk_one" name = "chk_one" ></td>
+											<td class="liked_goods_img_td">
+												<img src="/Goodluxe/image/<%=img_name %>" alt="샤넬 장지갑" width="150px">
 											</td>
 											<td><%= product_name %></td>
 											<td><%= product_price_shaped %> 원</td>
 											<td><%= product_grade %></td>
-											<td class="liked_goods_btn_td"><input type="button"
-												class="liked_goods_btn" value="주문"><br /> <input
-												type="button" class="liked_goods_btn" value="삭제" id = "delete" onClick = "location.href='deleteLikedGoods?entity_number=<%=entity_number%>'"></td><!-- onClick = "location.href=''" -->
+											<td class="liked_goods_btn_td">
+												<input type="button" class="liked_goods_btn" value="주문" onClick = "location.href='orderForm.do?entity_number=<%=entity_number%>'"><br /> 
+												<input type="button" class="liked_goods_btn" value="삭제" id = "delete" onClick = "location.href='deleteLikedGoods.do?entity_number=<%=entity_number%>'"></td><!-- onClick = "location.href=''" -->
 										</tr>
-									</tbody>
+									
 									<%
-										} } else { %> 관심 상품이 없습니다. <% }
+										} } else { 
+									%> 
+										<tr>
+											<td class="null_td" colspan="6">
+											관심 상품이 없습니다.
+											</td>
+										</tr>
+									 
+									<% 
+									}
 									%>
+									</tbody>
 								</table>
 								<div class="liked_goods_btnpart">
-									<input type="submit"
-										class="liked_goods_btn liked_goods_deletebtn" value="선택 상품 삭제">
+									<input type="button"
+										class="liked_goods_btn liked_goods_deletebtn" value="선택 상품 삭제" onclick = "deleteGoods(this.form);">
 								</div>
 							</form>
 							
@@ -180,7 +194,7 @@
 								int startPage = 1;
 								int i;
 								
-								if(currentPage%10!=0)
+								if(currentPage%5!=0)
 										startPage = (int)(currentPage/5)*5+1;
 								else
 									startPage = currentPage-4;
@@ -218,6 +232,6 @@
 		</div>
 	</section>
 
-	<footer id="footer"> </footer>
+	<footer id="footer"></footer>
 </body>
 </html>

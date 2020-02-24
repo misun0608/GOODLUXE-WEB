@@ -43,17 +43,17 @@ public class JyMyPageController {
 		@RequestMapping(value = "myInfoAction.do")
 		public String myInfoAction(Model model, MemberVO memberVO, HttpServletRequest request )throws Exception {                   
 			
-			String member_phone=(String)request.getParameter("tel1")+"-"+(String)request.getParameter("tel2")+"-"+(String)request.getParameter("tel3");
+			String member_phone=(String)request.getParameter("tel1")+(String)request.getParameter("tel2")+(String)request.getParameter("tel3");
 			memberVO.setMember_phone(member_phone);
 			
-			String member_email = (String)request.getParameter("email1") + "@" + (String)request.getParameter("email_select");
+			String member_email = (String)request.getParameter("email1") + "@" + (String)request.getParameter("email2");
 			memberVO.setMember_email(member_email);
 			
 			String cate[] = request.getParameterValues("prefer_category");
 			String member_like_category = "";
 			member_like_category += cate[0];
 			for(int i = 1; i<cate.length; i++) {
-				member_like_category += ",";
+				member_like_category += ",";	
 				member_like_category += cate[i];
 			}
 			System.out.println(member_like_category);
@@ -70,8 +70,8 @@ public class JyMyPageController {
 			
 			jyMyPageService.myInfoAction(memberVO);
 			
-			// return "my_info";
-			return "redirect:myInfo.do?member_id=mjmj";
+			// return "my_info mjmj";
+			return "redirect:myInfo.do";
 		}
 		@RequestMapping(value = "myLikedGoods.do")
 		public String likedGoods(HttpSession session, Model model, MemberVO memberVO, HttpServletRequest request 
@@ -85,7 +85,7 @@ public class JyMyPageController {
 			if(pageNum>pageCount) {
 				pageNum = pageCount;
 			}
-			int pageSize = 3;
+			int pageSize = 10;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -120,27 +120,32 @@ public class JyMyPageController {
 			
 			return "mypage_liked_goods";
 		}
-		@RequestMapping(value = "deleteLikedGoods")
-		public String deleteLikedGoods(Model model, @RequestParam(value = "entity_number", required = false ,defaultValue = "40") String entity_number)throws Exception {                   
+		@RequestMapping(value = "deleteLikedGoods.do")
+		public String deleteLikedGoods(Model model,HttpSession session, @RequestParam(value = "entity_number", required = false ,defaultValue = "40") String entity_number)throws Exception {                   
 			
-			jyMyPageService.deleteLikedGoods(entity_number);
+			String member_id = (String) session.getAttribute("member_id");
 			
+			jyMyPageService.deleteLikedGoods(entity_number, member_id);
 			
 			return "redirect:myLikedGoods.do";
 		}
-		@RequestMapping(value = "deleteCheckedGoods")
-		public String deleteCheckedGoods(Model model, HttpServletRequest request)throws Exception {                   
+		@RequestMapping(value = "deleteCheckedGoods.do")
+		public String deleteCheckedGoods(Model model, HttpServletRequest request,HttpSession session)throws Exception {                   
+			
 			
 			//jyMyPageService.deleteLikedGoods(entity_number);
-			System.out.println("랄랄라라");
+			
+			String member_id = (String) session.getAttribute("member_id");
 			String[] checked = request.getParameterValues("chk_one");
+			System.out.println("멤버아이디: "+ member_id);
+			System.out.println("checked: "+ checked[0]);
 			
 //			System.out.println("check" + checked);
 //			for(int i = 0; i<checked.length; i++) {
 //				System.out.println(checked[i]);
 //			}
 			
-			jyMyPageService.deleteCheckedGoods(checked);
+			jyMyPageService.deleteCheckedGoods(checked ,member_id);
 			
 			return "redirect:myLikedGoods.do";
 		}

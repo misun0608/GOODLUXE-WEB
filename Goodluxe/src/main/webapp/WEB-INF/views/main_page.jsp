@@ -17,6 +17,9 @@
 	String entity4 = (String)productList_view.get(3).get("entity_number");
 	String entity5 = (String)productList_view.get(4).get("entity_number");
 	String entity6 = (String)productList_view.get(5).get("entity_number");
+	String entity7 = (String)productList_view.get(6).get("entity_number");
+	String entity8 = (String)productList_view.get(7).get("entity_number");
+	String entity9 = (String)productList_view.get(8).get("entity_number");
 
 	String fancy_img1 = (String)productList_view.get(0).get("pb_main_img_stored");
 	String fancy_img2 = (String)productList_view.get(1).get("pb_main_img_stored");
@@ -24,6 +27,9 @@
 	String fancy_img4 = (String)productList_view.get(3).get("pb_main_img_stored");
 	String fancy_img5 = (String)productList_view.get(4).get("pb_main_img_stored");
 	String fancy_img6 = (String)productList_view.get(5).get("pb_main_img_stored");
+	String fancy_img7 = (String)productList_view.get(6).get("pb_main_img_stored");
+	String fancy_img8 = (String)productList_view.get(7).get("pb_main_img_stored");
+	String fancy_img9 = (String)productList_view.get(8).get("pb_main_img_stored");
 	
 /* 	
 String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
@@ -99,8 +105,8 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 				<article class="mp_2nd">
 					<div class="main_images">
 						<div class="main_image_right">
-							<a href="./mdDetail.do?entity_number=<%=entity1%>" class="main_image_link_right"><img
-								src="/Goodluxe/image/<%= fancy_img1%>" alt="img1" class="main_image"></a>
+							<a href="./mdDetail.do?entity_number=<%=entity2%>" class="main_image_link_right"><img
+								src="/Goodluxe/image/<%= fancy_img2%>" alt="img2" class="main_image"></a>
 						</div>
 						<div class="main_image_area1 main_image_left">
 							<a href="./mdDetail.do?entity_number=<%=entity1%>" class="main_image_link1"><img
@@ -110,41 +116,41 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 							<a href="./mdDetail.do?entity_number=<%=entity2%>" class="main_image_link2"><img
 								src="/Goodluxe/image/<%= fancy_img2%>" alt="img2" class="main_image"></a>
 						</div>
-						<div class="main_image_area3">
-							<a href="#" class="main_image_link3"><img
-								src="${pageContext.request.contextPath}/resources/img/md_img/md_black.png" alt="" class="main_image"></a>
+						<div class="main_image_area3 main_image_left">
+							<a href="./mdDetail.do?entity_number=<%=entity3%>" class="main_image_link3"><img
+								src="/Goodluxe/image/<%= fancy_img3%>" alt="" class="main_image"></a>
 						</div>
 						<div class="main_image_area4 main_image_left">
 							<a href="#" class="main_image_link4"><img
-								src="" alt="img3" class="main_image"></a>
+								src="${pageContext.request.contextPath}/resources/img/event_img/event1_mini.jpg" alt="img3" class="main_image"></a>
 						</div>
 						<div class="main_image_area5 main_image_left">
-							<a href="./mdDetail.do?entity_number=<%=entity3%>" class="main_image_link5"><img
-								src="/Goodluxe/image/<%= fancy_img3%>" alt="img4" class="main_image"></a>
+							<a href="./mdDetail.do?entity_number=<%=entity4%>" class="main_image_link5"><img
+								src="/Goodluxe/image/<%= fancy_img4%>" alt="img4" class="main_image"></a>
 						</div>
 						<div class="main_image_area6 main_image_left">
 							<a href="#" class="main_image_link6"><img
-								src="" alt="img5" class="main_image"></a>
+								src="${pageContext.request.contextPath}/resources/img/event_img/event3_mini.png" alt="img5" class="main_image"></a>
 						</div>
-						<div class="main_image_area7">
-							<a href="#" class="main_image_link7"><img
-								src="${pageContext.request.contextPath}/resources/img/md_img/md_black.png" alt="" class="main_image"></a>
+						<div class="main_image_area7 main_image_left">
+							<a href="./mdDetail.do?entity_number=<%=entity5%>" class="main_image_link7"><img
+								src="/Goodluxe/image/<%= fancy_img5%>" alt="" class="main_image"></a>
 						</div>
 						<div class="main_image_area8 main_image_left">
-							<a href="./mdDetail.do?entity_number=<%=entity4%>" class="main_image_link8"><img
-								src="/Goodluxe/image/<%= fancy_img4%>" alt="img6" class="main_image"></a>
+							<a href="./mdDetail.do?entity_number=<%=entity6%>" class="main_image_link8"><img
+								src="/Goodluxe/image/<%= fancy_img6%>" alt="img6" class="main_image"></a>
 						</div>
 						<div class="main_image_area9 main_image_left">
-							<a href="./mdDetail.do?entity_number=<%=entity5%>" class="main_image_link9"><img
-								src="/Goodluxe/image/<%= fancy_img5%>" alt="img7" class="main_image"></a>
+							<a href="./mdDetail.do?entity_number=<%=entity7%>" class="main_image_link9"><img
+								src="/Goodluxe/image/<%= fancy_img7%>" alt="img7" class="main_image"></a>
 						</div>
 						<div class="main_image_area10 main_image_left">
-							<a href="./mdDetail.do?entity_number=<%=entity6%>" class="main_image_link10"><img
-								src="/Goodluxe/image/<%= fancy_img6%>" alt="img8" class="main_image"></a>
+							<a href="./mdDetail.do?entity_number=<%=entity8%>" class="main_image_link10"><img
+								src="/Goodluxe/image/<%= fancy_img8%>" alt="img8" class="main_image"></a>
 						</div>
-						<div class="main_image_area11">
-							<a href="#" class="main_image_link11"><img
-								src="${pageContext.request.contextPath}/resources/img/md_img/md_black.png" alt="" class="main_image"></a>
+						<div class="main_image_area11 main_image_left">
+							<a href="./mdDetail.do?entity_number=<%=entity9%>" class="main_image_link11"><img
+								src="/Goodluxe/image/<%= fancy_img9%>" alt="img9" class="main_image"></a>
 						</div>
 					</div>
 				</article>
@@ -178,6 +184,9 @@ String entity1,entity2,entity3,entity4,entity5,entity6,entity7,entity8;
 					<%
 						}
 					%>
+				</article>
+				<article class="mp_4th">
+					<a href="http://localhost:8080/goodluxe/itemList.do?il_search_brand=all&il_search_category=all&il_search_grade=all&il_search_price=all" class="more_btn">MORE</a>
 				</article>
 			</div>
 		</div>

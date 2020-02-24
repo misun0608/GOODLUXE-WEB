@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0" />
-	<title>관리자메인</title>
+	<title>관리자페이지</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_point_update.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_design_all.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
@@ -15,13 +16,14 @@
 <script>
    $(document).ready(function(){
       $("#hd").load("admin_header.do");
+      $("#admin_footer").load("admin_footer.do");
    });
 </script>
 
 <script>
 
 // 새창 띄우기
-function popupform(){
+/* function popupform(){
 	var popwidth = 460;
 	var popheight = 300;
 	
@@ -31,6 +33,25 @@ function popupform(){
 	var setting = "toolbar=no, status=no, menubar=no, location=no, resizable=no, scrollbars=no, height="+popheight+", width="+popwidth+",top="+TopPosition+",left="+LeftPosition+"";
 	var url = "./pointUpdateView.do"
 	window.open(url,'포인트 업데이트',setting);
+} */
+
+// nullcheck
+function nullcheck(){
+    var member_id = document.getElementById("member_id2").value;
+    var point_amount = document.getElementById("point_amount").value;
+    
+    if(member_id==""){
+       alert("아이디를 입력하세요");
+       $('#member_id2').val('');
+       return false;
+    }
+    
+    if(point_amount==""){
+        alert("적립금을 입력하세요");
+        $('#point_amount').val('');
+        return false;
+    }
+    return true;
 }
 
 $(document).ready(function(){
@@ -83,6 +104,72 @@ $(document).ready(function(){
 	$("#member_id").on("keyup", function() { 
     	$(this).val($(this).val().replace(/[^0-9a-z]/g,"")); 
     });
+	
+	
+	// 모달...
+	var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
+    //var cancelButton = document.querySelector("#cancel");
+
+   //console.log(modal);
+
+   function toggleModal() {
+        modal.classList.toggle("show-modal");
+        $('#member_id2').val('');
+        $('#point_amount').val('');
+    }
+
+   function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+            $('#member_id2').val('');
+            $('#point_amount').val('');
+        }
+    }
+
+   trigger.addEventListener("click", toggleModal);
+   closeButton.addEventListener("click", toggleModal);
+   //cancel.addEventListener("click", toggleModal);
+   window.addEventListener("click", windowOnClick);
+	
+	// 포인트 입력창
+   $('.input_point').on('focusout',function(){
+       if($(this).val() != '') {
+           $(this).siblings('label').addClass('color');
+       } else {
+           $(this).siblings('label').removeClass('color');
+       }
+   });
+	
+	// 한글 특수문자 입력 금지
+	$("#member_id").on("keyup", function() { 
+   	$(this).val($(this).val().replace(/[^0-9a-z]/g,"")); 
+   });
+	
+	// 숫자만 입력
+	$("#point_amount").on("keyup", function() {
+   	$(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+	
+	// 적립 / 회수 버튼 눌렀을 때
+	$('.point_btn').on('click', function(e){
+		e.preventDefault();
+		// 빈칸인지 확인		
+		if(!nullcheck()){
+			return;
+		}
+		
+		//window.opener.name="parentPage";	// 부모창의 이름 설정
+		//document.point_form.target="parentPage";	// 타겟을 부모창으로 설정
+		
+		var btnvalue = $(this).val();
+		
+		$('#btn_value').val(btnvalue);
+		document.getElementById('point_form').submit();
+		self.close();
+	});
+   
 
 	// 페이징
 	function page(){ 
@@ -207,12 +294,15 @@ $(document).ready(function(){
 					$.each(data,function(index,item){
 		              var ex_date = new Date(item.point_date);
 		              var date = date_format(ex_date);
+		              var num = index + 1;
+		              
 		               var output= '';
 		               output += '<tr class="tr2">';
-		               output += '<td class="td3">'+date+'</td>';
-		               output += '<td class="td3">'+item.member_id+'</td>';
-		               output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
-		               output += '<td class="td3">'+item.point_status+'</td></tr>';
+		               output += '<td class="context_td">'+num+'</td>';
+		               output += '<td class="context_td">'+date+'</td>';
+		               output += '<td class="context_td">'+item.member_id+'</td>';
+		               output += '<td class="context_td">'+numberFormat(item.point_amount)+'</td>';
+		               output += '<td class="context_td">'+item.point_status+'</td></tr>';
 		               $('#pointtable-tbody').append(output);
 		               });
 					page();	// 페이징
@@ -243,15 +333,18 @@ $(document).ready(function(){
             	$.each(data,function(index,item){
 	                var ex_date = new Date(item.point_date);
                     var date = date_format(ex_date);
+                    var num = index + 1;
 					
 					var output = '';
 					output += '<tr class="tr2">';
-					output += '<td class="td3">'+date+'</td>';
-					output += '<td class="td3">'+item.member_id+'</td>';
-					output += '<td class="td3">'+numberFormat(item.point_amount)+'</td>';
-					output += '<td class="td3">'+item.point_status+'</td></tr>';
+					output += '<td class="context_td">'+num+'</td>';
+					output += '<td class="context_td">'+date+'</td>';
+					output += '<td class="context_td">'+item.member_id+'</td>';
+					output += '<td class="context_td">'+numberFormat(item.point_amount)+'</td>';
+					output += '<td class="context_td">'+item.point_status+'</td></tr>';
 					$('#pointtable-tbody').append(output);
             	});
+            	$('#member_id').val('');
             	page();
             },
             error:function(){
@@ -269,47 +362,54 @@ $(document).ready(function(){
 
 <div id="wrapper">
         <div id="container" class="container-small">
-            <h1 id="container_title">관리자 적립금관리 페이지</h1>
+            <h1 id="container_title">적립금관리 페이지</h1>
             <div class="container_wr">
                 <section>
 
                     <br>
 
                     <br>
-                    <h3>▶ 회원 검색 </h3>
+                    <h3>| 회원 검색 </h3>
                     <br>
                     <form name="searchform" id="searchform" method="post">
-                    <table class="impormation" border="1">
+                    <table class=information>
                         <tr>
                             <td class="td1">아이디</td>
                             <td class="td2">
-                                &nbsp;&nbsp;<input id="member_id" name="member_id" class="text3" onkeyup="enterkey();">
-                                <button type="button" id="idsearchbtn" class="btn22">아이디 검색</button>
+                                &nbsp;&nbsp;
+                                <input type="text" id="member_id" name="member_id" class="id_search_input" onkeyup="enterkey();">
+                       			<button type="button" id="idsearchbtn" class="id_search_btn">검색</button>
                             </td>
                         </tr>
 
                     </table>
                     </form>
+                    
+                    <div class="btn12" align="center">
+					</div>
 
 
                     <br>
                     <br>
 
-                    <h3>▶회원 적립금 내역</h3>
-                    <div align="right">
-                        <button type="button" id="selectAllbtn"  name="selectbutton" class="btn23">전체 보기</button>
-                        <button type="button" id="updatebtn" name="selectbutton" class="btn23" onclick="popupform();">입력</button>
+                    <h3>| 회원 적립금 내역</h3>
+                    <br />
+                    <div align="left">
+                        <button type="button" id="selectAllbtn"  name="selectbutton" class="select_all_btn">전체보기</button>
+                        <!-- <button type="button" id="updatebtn" name="selectbutton" class="select_all_btn" onclick="popupform();">입력</button> -->
+                        <button type="button" id="updatebtn2" name="selectbutton" class="trigger select_all_btn">입력</button>
                         &nbsp;&nbsp;&nbsp;
                     </div>
                     <br>
                     <%-- 테이블 --%>
-                    <table border="1" id="pointtable" class="pointtable paginated">
+                    <table id="pointtable" class="point_table">
                     	<thead>
-                    		<tr class="tr1">
-                    			<td class="td4">날짜</td>
-                    			<td class="td4">아이디</td>
-                    			<td class="td4">금액</td>
-                    			<td class="td4">내용</td>
+                    		<tr class="tr_title">
+                    			<td class="title_td">번호</td>
+                    			<td class="title_td">날짜</td>
+                    			<td class="title_td">아이디</td>
+                    			<td class="title_td">금액</td>
+                    			<td class="title_td">내용</td>
                     		</tr>
                     	</thead>
                     	<%--ajax 내용 들어갈 tbody 부분--%>
@@ -332,10 +432,33 @@ $(document).ready(function(){
         </div>
 
     </div>
+    
+    <!-- 모달 시작 -->
+	<div class="modal">
+		<div class="modal-content">
+		<span class="close-button">&times;</span>
+			<!-- <div class="point_title">POINT UPDATE</div> -->
+			<form action="./admin_point_insert.do" id="point_form" name="point_form">
+				<div class="point_data">
+					<div class="group">
+						<input type="text" id="member_id2" name="member_id" class="input_point" required="required">
+						<span class="highlight"></span><label>아이디</label>
+					</div>
+					<div class="group">
+						<input type="text" id="point_amount" name="point_amount" class="input_point" required="required">
+						<span class="highlight"></span><label>적립금</label>
+					</div>
+					<input type="hidden" id="btn_value" name="btn_value" value="">
+				</div>
+	
+				<input type="button" id="point_btn1" class="point_btn" value="적립">
+				<input type="button" id="point_btn2" class="point_btn point_btn_back" value="회수">
+			</form>
+		</div>
+	</div>
+	<!-- 모달 끝 -->
 
-  <footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
+  <footer id="admin_footer" class="container-fluid"></footer>
 
 </body>
 

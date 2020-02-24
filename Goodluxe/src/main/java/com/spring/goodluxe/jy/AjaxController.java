@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.goodluxe.voes.AuctionVO;
 import com.spring.goodluxe.voes.CouponVO;
+import com.spring.goodluxe.voes.NoticeVO;
 import com.spring.goodluxe.voes.OrderVO;
 
 @RestController 
@@ -44,6 +46,30 @@ public class AjaxController {
 		int data = gls.setLike(member_id, entity_number);
 		return data;
 	}
+	
+	@RequestMapping(value = "/checkAlreadySetAlarm.do" ,produces="application/json;charset=UTF-8")
+		public int checkAlreadySetAlarm(@RequestParam(value="entity_number")String entity_number, HttpSession session)throws Exception{
+			int data = 0;
+			String member_id = (String) session.getAttribute("member_id");
+			if(member_id == null) return data;
+			
+			data = gls.checkAlreadySetAlarm(member_id, entity_number);
+
+			return data;
+		}
+		
+	//mdDetail 알람버튼
+	@RequestMapping(value="/mdDetailSetAlarm.do", produces= "application/json;charset=UTF-8")
+	public int mdDetailSetAlarm( HttpSession session,
+			@RequestParam(value="entity_number", required = false)String entity_number
+			) throws Exception {
+		String member_id = (String) session.getAttribute("member_id");
+		if(member_id == null) {return -1;}
+		int data = gls.mdDetailSetAlarm(member_id, entity_number);
+		
+		return data;
+	}	
+	
 	
 	//쿠폰관리-기본(모든쿠폰)
 	@RequestMapping(value="/CoupondefaultList.do", produces= "application/json;charset=UTF-8")
@@ -82,10 +108,12 @@ public class AjaxController {
 		
 	}
 	@RequestMapping(value="/deleteCouponList.do", produces= "application/json;charset=UTF-8")
-	public String deleteCouponList(HttpServletRequest request,
+	public void deleteCouponList(HttpServletRequest request,
 			@RequestParam(value="delete_this")String[] deletethis) throws Exception {
+		
+		String result = "성공";		
 		gls.deleteCouponList(deletethis);
-		return null;
+		
 	}
 	
 	//회원리스트
@@ -255,6 +283,22 @@ public class AjaxController {
 		return retVal;
 	}
 	
+	@RequestMapping(value="/adminOrderMoneyGetShipping.do", produces= "application/json;charset=UTF-8")
+	public Map<String, Object> adminOrderMoneyGetShipping(
+			@RequestParam(value="order_number", required = false)String order_number) throws Exception {
+		Map<String,Object> retVal = new HashMap<String, Object>();
+		String result = "변경실패";
+		int res = gls.adminOrderMoneyGetShipping(order_number);
+		
+		if(res == 1) {
+			result = "변경 성공";
+		}
+		retVal.put("res", result);
+		return retVal;
+	}
+	
+	
+	
 	//상품관리
 		@RequestMapping(value="/adminAllProductList.do", produces= "application/json;charset=UTF-8")
 		public ArrayList<HashMap<String,Object>> adminAllProductList(
@@ -262,6 +306,8 @@ public class AjaxController {
 			ArrayList<HashMap<String,Object>> productList = null; 
 
 			productList = gls.adminAllProductList(pb_division);
+			
+			System.out.println("member_ID : "+productList.get(0).get("member_id"));
 		
 			return productList;
 		}
@@ -355,23 +401,111 @@ public class AjaxController {
 			gls.setReturnConfirm(order_number);
 		}
 		@RequestMapping(value="/setReturnFinished.do", produces= "application/json;charset=UTF-8")
-		public void setReturnFinished(
+		public ArrayList<HashMap<String,String>> setReturnFinished(
 				@RequestParam(value="order_number", required = false)String order_number) throws Exception {
 			
 			ArrayList<OrderVO> returnList = null;
-			gls.setReturnFinished(order_number);
+			ArrayList<HashMap<String,String>> likedMember = null;
+			
+			likedMember = gls.setReturnFinished(order_number);
+			
+			return likedMember;
 		}
 	
+		@RequestMapping(value="/getAlarmContent.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<NoticeVO> getAlarmContent(HttpSession session) throws Exception {
+			
+			String member_id = (String) session.getAttribute("member_id");
+			ArrayList<NoticeVO> noticeList = null;
+			
+			noticeList = gls.getAlarmContent(member_id);
+			
+			if(noticeList.isEmpty()) {
+				System.out.println("isNULL");
+				NoticeVO noticeVO = new NoticeVO();
+				noticeVO.setAlarm_number("isNULL");
+				noticeList.add(noticeVO);
+			}
+			return noticeList;
+		}
 	
+		@RequestMapping(value="/getMoreAlarmContent.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<NoticeVO> getMoreAlarmContent(HttpSession session,
+				@RequestParam(value="count", required = false) int count) throws Exception {
+			
+			String member_id = (String) session.getAttribute("member_id");
+			ArrayList<NoticeVO> noticeList = null;
+			HashMap<String,Object>map = new HashMap<String,Object>();
+			
+			int start = 5*(count-1)+1;
+			int end = 5*count;
+			
+			map.put("member_id", member_id);
+			map.put("start",start);
+			map.put("end",end);
+			
+			noticeList = gls.getMoreAlarmContent(map);
+			
+			if(noticeList.isEmpty()) {
+				System.out.println("isNULL");
+				NoticeVO noticeVO = new NoticeVO();
+				noticeVO.setAlarm_number("isNULL");
+				noticeList.add(noticeVO);
+			}
+			return noticeList;
+		}
+		
+		@RequestMapping(value="/afterLoginCheckAlarm.do", produces= "application/json;charset=UTF-8")
+		public HashMap<String,String> afterLoginCheckAlarm(HttpSession session) throws Exception {
+			String member_id = (String) session.getAttribute("member_id");
+			HashMap<String,String> data = new HashMap<String,String>();
+			
+			int res = gls.afterLoginCheckAlarm(member_id);
+			
+			if(res != 0 ) {
+				data.put("result", "notzero");
+			}else {
+				data.put("result", "iszero");
+			}
+			return data;
+		}
+		
+		//경매감독
+		@RequestMapping(value="/admingetAuctionInfo.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<AuctionVO> admingetAuctionInfo() throws Exception {
+			
+			ArrayList<AuctionVO> AuctionList = new ArrayList<AuctionVO>();
+			
+			AuctionList = gls.admingetAuctionInfo();
+			
+			return AuctionList;
+		}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		//경매감독
+		@RequestMapping(value="/adminGetAutionDetail.do", produces= "application/json;charset=UTF-8")
+		public ArrayList<AuctionVO> adminGetAutionDetail(
+				@RequestParam(value="AUCTION_POST_NUMBER", required = false)int AUCTION_POST_NUMBER
+				) throws Exception {
+			
+			ArrayList<AuctionVO> AucHisList = new ArrayList<AuctionVO>();
+			
+			AucHisList = gls.adminGetAutionDetail(AUCTION_POST_NUMBER);
+			
+			return AucHisList;
+		}
+		//경매감독
+		
+		@RequestMapping(value="/adminAuctionStatChange.do", produces= "application/json;charset=UTF-8")
+		public void adminAuctionStatChange(
+				@RequestParam(value="AUCTION_POST_NUMBER", required = false)int AUCTION_POST_NUMBER
+				) throws Exception {
+			gls.adminAuctionStatChange(AUCTION_POST_NUMBER);
+		}	
+		
+		
+		
+		
 	
 	
 	

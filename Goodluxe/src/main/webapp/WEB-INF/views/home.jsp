@@ -14,6 +14,7 @@
 
 <br /><br /><a href="admin_main.do">미선_관리자_메인</a>
 <br /><br /><a href="pointView.do">미선_관리자_포인트</a>
+<br /><br /><a href="pointUpdateModal.do">미선_관리자_모달</a>
 
 <br /><br /><a href="adminProductRegisterPurchase.do">지예_매입 등록</a>
 <br /><br /><a href="adminProductRegisterConsign.do">지예_위탁등록</a>

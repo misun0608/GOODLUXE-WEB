@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
 import com.spring.goodluxe.voes.PointVO;
 
@@ -21,5 +22,13 @@ public interface AdminService {
 	public HashMap<String,Object> getTodayOrderCount() throws Exception;
 	public ArrayList<HashMap<String,Object>> getAdminDefaultData() throws Exception;
 	public ArrayList<HashMap<String,Object>> getRefundData() throws Exception;
-	
+	// 도넛그래프
+	public ArrayList<HashMap<String,Object>> getCateCntData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getBrandCntData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getCateSalesData() throws Exception;
+	public ArrayList<HashMap<String,Object>> getBrandSalesData() throws Exception;
+	//관리자 아이디검사
+	MemberVO adminSearchID(String string, String member_id) throws Exception;
+	// 관리자 주문관리 주문디테일
+	public HashMap<String,String> getShippingInfo(String order_number)throws Exception;
 }

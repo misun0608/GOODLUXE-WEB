@@ -14,6 +14,7 @@
 	String quality_grade = (String)theProduct.get("quality_grade");
 	String pb_detail = (String)theProduct.get("pb_detail");
 	String entity_number=(String)theProduct.get("entity_number");
+	String saleStatus = (String)theProduct.get("pb_sale_status");
 	
 	int product_price = Integer.parseInt((theProduct.get("sale_price")).toString());
 	DecimalFormat df = new DecimalFormat(",###");
@@ -81,6 +82,26 @@
 		 				}
 		 			});
 		 		}
+		 		function setBellBtnColor(){
+		 			$.ajax({   
+		 				url:'/goodluxe/checkAlreadySetAlarm.do?entity_number=<%=entity_number%>',
+		 				type:'POST',
+		 				contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+		 				success:function(data){
+		 					if (data==1){
+		 						//이미 좋아요를 누른사람
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell2.png");		
+		 					}
+		 					else{
+		 						//좋아요를 누른적이 없는사람
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell.png");
+		 					}
+		 				},
+		 				error:function(){
+		 					alert("서버와 통신에 실패하였습니다.");
+		 				}
+		 			});
+		 		}
 		 		
 		 		$('#likebtn').on('click',function(event){
 		 			jQuery.ajax({
@@ -105,6 +126,32 @@
 		 			event.preventDefault(); //디폴트 이벤트 해제
 		 		});
 		 		setBtnColor();
+		 		
+		 		
+
+		 		$('#alarmbtn').on('click',function(event){
+		 			jQuery.ajax({
+			 			url:$(this).attr("href"),
+			 			type:'GET',
+			 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			 			success: function (data) {
+			 				if (data==1){
+		 						//알람 눌러짐
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell2.png");		
+		 					} else if(data==0){
+		 						//알람 취소됨
+		 						$('#bellImg').attr("src","${pageContext.request.contextPath}/resources/img/icons/bell.png");
+		 					} else if(data==-1) {
+		 						alert('로그인 후 이용해주세요!');
+		 					}
+			 			},
+			 			error:function() {
+	  	                 	alert("리스트 ajax통신 실패!!!");
+	 	                }
+		 			});
+		 			event.preventDefault(); //디폴트 이벤트 해제
+		 		});
+		 		setBellBtnColor();
 		 });
 		</script>
 </head>
@@ -188,15 +235,27 @@
 								<hr id="name_line">
 							</div>
 							<div class="md_detail_textarea2 md_detail_btnpart">
-								<a href = "orderForm.do?entity_number=<%=entity_number%>"><div class="buybtn buybtn2">구매하기</div></a>
-								<a href = "#"><div class="notibtn">
-									<img src="${pageContext.request.contextPath}/resources/img/icons/bell.png" alt="알림" width="16px">&nbsp;&nbsp;알림
-								</div></a>
-								<a href="mdDetailLike.do?entity_number=<%=entity_number%>" id="likebtn" >
-									<div class="likebtn" >
-										<img id="heartImg"  alt="좋아요" width="16px">&nbsp;&nbsp;좋아요
+								<%if(!saleStatus.equals("거래진행중")){ %>
+								<a href = "orderForm.do?entity_number=<%=entity_number%>">
+									<div class="buybtn buybtn2"><p class = "buybtn_letter">구매하기</p></div>
+								</a>
+								<%}else{%>
+									<div class="cantbuybtn"><p class = "cantbuyletter">거래진행중인 상품입니다.</p></div>
+								<%}%>
+								<a href = "mdDetailSetAlarm.do?entity_number=<%=entity_number%>" id = "alarmbtn">
+									<div class="notibtn">
+										<img id = "bellImg" alt="알림" width="16px" class = "notice_Img">
+										<p class = "notice_letter">알림</p>
 									</div>
 								</a>
+								<a href="mdDetailLike.do?entity_number=<%=entity_number%>" id="likebtn" >
+									<div class="likebtn" >
+										<img id="heartImg"  alt="좋아요" width="16px" class = "like_Img">
+										<p class = "like_letters">좋아요</p>
+									</div>
+								</a>
+								 
+								
 							</div>
 						</div>
 					</div>
@@ -205,6 +264,7 @@
 
 				<div class="md_detail_bottom">
 					<!-- 제품 상세설명 -->
+					<br/>
 					<div class="md_detail_explanation">
 						<h3 class="md_detail_explanation_title">상품상세</h3>
 						<br />
@@ -212,6 +272,7 @@
 							<%= pb_detail%>
 						</p>
 					</div>
+					<br/><br/>
 					<!-- 연관 제품 -->
 					<div class="related_item_area">
 						<h3 class="related_item_title">Related Items</h3>

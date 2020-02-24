@@ -136,6 +136,11 @@
         border-bottom: 10px solid transparent;
         border-right: 10px solid blue;
     }
+    
+    .null_td{
+    	font-size: 13px;
+    	padding: 10px 0px 10px 0px;
+    }
 
 }
 

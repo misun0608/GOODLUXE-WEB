@@ -64,7 +64,6 @@ public class ProductlistServiceImpl implements ProductlistService{
 			sellboVO.setPb_like(0);
 			if(sellboVO.getPb_division().equals("purchase")) {
 				productlistMapper.setPurcSaleStatus(sellboVO);
-				System.out.println("if문 들어옴");
 			}else if(sellboVO.getPb_division().equals("consign")) {
 				productlistMapper.setConsSaleStatus(sellboVO);
 			}
@@ -274,11 +273,16 @@ public class ProductlistServiceImpl implements ProductlistService{
 		try {
 			ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
 			ArrayList<HashMap<String, Object>> recommandList = null;
+			
+			System.out.println("엔티티 = "+entity_number);
+			
 			HashMap<String, String> map = new HashMap<String, String>();
-			HashMap<String, String> theme = null;
+			HashMap<String, String> theme = new HashMap<String, String>();
 			map.put("entity", entity_number);	
 			theme = productlistMapper.getRecommandtheme(map);
 			
+			System.out.println("테마 = " + theme.get("pb_category"));
+			//theme.put("entity_number", entity_number);
 			recommandList = productlistMapper.getRecommandList(theme);
 			
 			return recommandList;
@@ -361,7 +365,19 @@ public class ProductlistServiceImpl implements ProductlistService{
 			System.out.println("ERROR(ProductlistService/getShippingInfo) : " + e.getMessage());
 			throw new Exception("ERROR(ProductlistService/ getShippingInfo)");
 		}
-		
+	}
+
+	public void preChgReadStatus(String alarm_number) throws Exception{
+		ProductlistMapper productlistMapper = sqlSession.getMapper(ProductlistMapper.class);
+		try {
+			System.out.println("알람넘버 "+alarm_number);
+			System.out.println("안들어왔니???");
+			productlistMapper.preChgReadStatus(alarm_number);
+			
+		}catch(Exception e) {
+			System.out.println("ERROR(ProductlistService/preChgReadStatus) : " + e.getMessage());
+			throw new Exception("ERROR(ProductlistService/ preChgReadStatus)");
+		}
 		
 	}
 	

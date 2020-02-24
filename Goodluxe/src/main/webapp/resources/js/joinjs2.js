@@ -6,8 +6,8 @@ $(document).ready(function () {
 		$("#alert-danger_id").hide(); // 아이디를 입력해주세요
 		$("#alert-danger_id1").hide(); // 동일한 아이디 존재
 		$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-		$("#alert-danger_id3").hide();
-		$("input").keyup(function() {
+		
+		$("#join_id").keyup(function() {
 			var join_id = $("#join_id").val();
 			$.ajax({
 				url : '/goodluxe/idCheck.do',
@@ -19,22 +19,22 @@ $(document).ready(function () {
 				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 
 				success : function(retVal) {
-					if (retVal.res == "Fail") { // 이 안에 if문 넣어서
-												// 각 상황에 맞도록 경고?글 띄우려고
-												// 했는데 입력받은 아이디를 뭘로
-												// 가져와야 할 지 모르겠어요........
-						$(".id_overlap_btn").attr("value", "Y");
+					if (retVal.res == "Fail") { 
+						// db에 동일한 아이디 존재하기 때문에 가입 실패
 						$("#alert-success_id").hide(); // 사용할 수 있는 아이디
 						$("#alert-danger_id").hide(); // 아이디를 입력해주세요
 						$("#alert-danger_id1").show(); // 동일한 아이디 존재
 						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-						$("#alert-danger_id3").hide(); // 중복 확인 X
 					} else {
-						$("#alert-success_id").show();
-						$("#alert-danger_id").hide(); // 아이디를 확인해주세요
-						$("#alert-danger_id1").hide(); // 동일한 아이디 존재
-						$("#alert-danger_id2").hide(); // 영문자/숫자만 사용
-						$("#alert-danger_id3").hide(); // 중복 확인 X
+						if (join_id == ""){
+							$("#alert-success_id").hide(); // 사용할 수 있는 아이디
+							$("#alert-danger_id").show(); // 아이디를 입력해주세요
+							$("#alert-danger_id1").hide(); // 동일한 아이디 존재
+						} else {
+							$("#alert-success_id").show();
+							$("#alert-danger_id").hide(); // 아이디를 확인해주세요
+							$("#alert-danger_id1").hide(); // 동일한 아이디 존재
+						}
 					}
 				},
 				error : function() {
@@ -48,19 +48,72 @@ $(document).ready(function () {
 	$(function() {
 		$("#alert-success_pw").hide();
 		$("#alert-danger_pw").hide();
-		$("input").keyup(function() {
+		$("#alert-danger_pw1").hide();
+		$("#alert-danger_pw2").hide();
+		
+		$("#join_pw1").keyup(function() {
 			var join_pw1 = $("#join_pw1").val();
 			var join_pw2 = $("#join_pw2").val();
+			
 			if (join_pw1 != "" || join_pw2 != "") {
-				if (join_pw1 == join_pw2) {
+				if(join_pw1 == join_pw2) {
 					$("#alert-success_pw").show();
 					$("#alert-danger_pw").hide();
+					$("#alert-danger_pw1").hide();
+					$("#alert-danger_pw2").hide();
+					$("#submit").removeAttr("disabled");
+				} else if((join_pw1.length < 10) || (join_pw2.length < 10)){
+					$("#alert-success_pw").hide();
+					$("#alert-danger_pw").hide();
+					$("#alert-danger_pw1").show();
+					$("#alert-danger_pw2").hide	();
 					$("#submit").removeAttr("disabled");
 				} else {
 					$("#alert-success_pw").hide();
-					$("#alert-danger_pw").show();
+					$("#alert-danger_pw").show(); // 일치 x
+					$("#alert-danger_pw1").hide(); // 10자 이상 입력
+					$("#alert-danger_pw2").hide(); // 입력 X
 					$("#submit").attr("disabled", "disabled");
 				}
+			} else if((join_pw1 == "") && (join_pw2 == "")) {
+				$("#alert-success_pw").hide();
+				$("#alert-danger_pw").hide();
+				$("#alert-danger_pw1").hide();
+				$("#alert-danger_pw2").show();
+				$("#submit").removeAttr("disabled");
+			}
+		});
+		
+		$("#join_pw2").keyup(function() {
+			var join_pw1 = $("#join_pw1").val();
+			var join_pw2 = $("#join_pw2").val();
+			
+			if (join_pw1 != "" || join_pw2 != "") {
+				if(join_pw1 == join_pw2) {
+					$("#alert-success_pw").show();
+					$("#alert-danger_pw").hide();
+					$("#alert-danger_pw1").hide();
+					$("#alert-danger_pw2").hide();
+					$("#submit").removeAttr("disabled");
+				} else if((join_pw1.length < 10) || (join_pw2.length < 10)){
+					$("#alert-success_pw").hide();
+					$("#alert-danger_pw").hide();
+					$("#alert-danger_pw1").show();
+					$("#alert-danger_pw2").hide();
+					$("#submit").removeAttr("disabled");
+				} else {
+					$("#alert-success_pw").hide();
+					$("#alert-danger_pw").show(); // 일치 x
+					$("#alert-danger_pw1").hide(); // 10자 이상 입력
+					$("#alert-danger_pw2").hide(); // 입력 X
+					$("#submit").attr("disabled", "disabled");
+				}
+			} else if((join_pw1 == "") && (join_pw2 == "")) {
+				$("#alert-success_pw").hide();
+				$("#alert-danger_pw").hide();
+				$("#alert-danger_pw1").hide();
+				$("#alert-danger_pw2").show();
+				$("#submit").removeAttr("disabled");
 			}
 		});
 	});
@@ -86,4 +139,6 @@ $(document).ready(function () {
 	$("input[name=likedcate]:checked").each(function() {
 		var likedCate = $(this).val();
 	});
+	
+	
 });

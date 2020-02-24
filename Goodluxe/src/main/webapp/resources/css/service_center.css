@@ -6,6 +6,7 @@ img {vertical-align:top;}
 
 /* 데스크톱 */
 @media screen and (min-width: 960px) {
+	a { color: #000; }
 
     .service_center_sm_select {
         display: none;
@@ -40,6 +41,7 @@ img {vertical-align:top;}
         list-style: none; */
     }
 
+/* 나중에 지울 것 */
     ul.service_center_menu_tabs li{
         text-align: left;
         /* float: left; */
@@ -48,8 +50,15 @@ img {vertical-align:top;}
         color: #222;
         cursor: pointer;
     }
+    ul.service_center_menu_tabs a{
+        text-align: left;
+        margin: 0 -15px 0 0;
+        display: inline-block;
+        color: #222;
+        cursor: pointer;
+    }
+    
       /* 올렸을때 */
-
       .service_center_menu_tabs .service_center_tab-link{
         float: left;
         position: relative;

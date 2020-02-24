@@ -44,7 +44,7 @@
 	<script>
 		$(document).ready(function(){
 			$("#mypage_menu").load("mypageMenu.do", function(){
-				$('.menu_container').children('a').eq(0).children().children('.icon').addClass('selected_menu');
+				$('.menu_container').children('a').eq(7).children().children('.icon').addClass('selected_menu');
 			});
 		});
 	</script>
@@ -55,6 +55,7 @@
 			var txtpw2;
 			txtpw1 = document.member_my_info_form.member_pw.value;
 			txtpw2 = document.member_my_info_form.password2.value;
+			
 			
 			if(!(txtpw1.length>9 && txtpw1.length<17)){
 				alert("비밀번호를 10~16글자로 입력하세요.");	
@@ -120,7 +121,7 @@
                 <h3 class = "my_info_title">▶기본정보</h3>
                 <br/>
                 <div class = "cancel_member_container"><a href = "#" class = "cancel_member" ><p>회원탈퇴</p></a></div>
-                <form name = "member_my_info_form" action = "./myInfoAction.do" method = "post" onsubmit ="retun submitCheck();">
+                <form name = "member_my_info_form" action = "./myInfoAction.do" method = "post" onsubmit ="return submitCheck();">
                     <table class = "personal_info_table">
                         <tr>
                             <td>아이디</td>
@@ -279,7 +280,7 @@
                                    
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Coach</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Colombo</label><br/>
-                                    <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Comme des Garcons</label><br/>
+                           <!--     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Comme des Garcons</label><br/> -->
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Damiani</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">DELVAUX</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Dior Homme</label><br/>
@@ -311,7 +312,7 @@
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Louis Vuitton</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Manolo Blahnik</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Maje</label><br/>
-                                    <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc by Marc Jacobs</label><br/>
+                          		<!--<input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc by Marc Jacobs</label><br/> -->
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marc Jacobs</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Marni</label><br/>
                                     <input type = "checkbox" name = "prefer_brand"><label for = "prefer_brand">Martin Margiella</label><br/>

@@ -4,38 +4,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script>
 
 <script>
-	// 카카오 팝업 로그인
-	Kakao.init('dc50a646222a7303868e2fc1557ba996');
-	function loginWithKakao() {
-		// 로그인 창을 띄웁니다.
-		Kakao.Auth.login({
-			success : function(authObj) {
-				alert(JSON.stringify(authObj));
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
-	};
-	
-// 		// 네이버 팝업 로그인
-// 		var naverLogin = new naver.LoginWithNaverId({
-// 			clientId : "{qEGPL5Id8n1rsr7QzFiv}",
-// 			callbackUrl : "{http://localhost:8080/goodluxe/mainPage.do/}",
-// 			isPopup : true, /* 팝업을 통한 연동처리 여부 */
-// 			});
-// 		/* 설정정보를 초기화하고 연동을 준비 */
-// 		naverLogin.init();
 	
 	/* Click login button */
  	function onclick_login() {
-		var params = $('#login_form').serialize(); // serialize로 문자열형태로? 만듦
+		var params = $('#login_form').serialize();
 		$.ajax({
 			url : '/goodluxe/login.do',
 			type : 'POST',
-			data : params, // 서버로 전달할 데이터
+			data : params,
 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-			dataType : "json", // 서버로 보내줄 타입  //응답할 타입은 json으로 하겠다
+			dataType : "json",
 
 			success : function(retVal) {
 				if (retVal.result == "error_accur") {
@@ -46,7 +24,7 @@
 				} else if (retVal.result == "wrong_pw") {
 					alert("아이디 또는 비밀번호가 틀립니다.");
 				} else if (retVal.result == "email_N") {
-					alert("이메일 인증이 완료되어야 사이트 이용이 가능합니다.");
+					location.href = "./join_email_not_confirmed.do?member_id="+login_form.member_id.value;
 				} else if (retVal.result == "ok") {
 					location.href = "./mainPage.do";
 				}
@@ -91,7 +69,7 @@
         <div class="login_icons">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" class="login_icon"></a>
 <%--             <a href="${kakao_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a> --%>
-            <a href="javascript:loginWithKakao()"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a>
+            <a href="${kakao_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a>
             <a href="${naver_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" class="login_icon"></a>
         </div>
         <div class="anonymous">

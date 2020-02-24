@@ -58,8 +58,8 @@
 	
 	<!-- 리스트 반환용 HashMap -->
 	<resultMap id = "listHashmapVO" type = "java.util.HashMap" >
-		<result property = "sale_status" column = "sale_status"/>
-		<result property = "post_status" column = "post_status"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "pb_post_status" column = "pb_post_status"/>
 		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
 		<result property = "pb_md_name" column = "pb_md_name"/>
 		<result property = "pd_brand" column = "pd_brand"/>
@@ -78,6 +78,7 @@
 		<result property = "sale_price" column = "sale_price"/>
 		<result property = "quality_grade" column = "quality_grade"/>
 		<result property = "pb_detail" column = "pb_detail"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
 		<result property = "entity_number" column = "entity_number"/>	
 	</resultMap>
 	
@@ -249,7 +250,7 @@
 						from gl_consignment, gl_productboard
 						where gl_consignment.entity_number = gl_productboard.entity_number)
 					ORDER BY pb_view_count desc)
-				WHERE pb_sale_status = '판매중' and pb_post_status = '게시중'	
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
 			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
 	</select>
 
@@ -302,13 +303,19 @@
 		)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
 	</select>
 	
+	<select id = "findEnNum" parameterType="int" resultType="String">
+		select entity_number
+		from gl_ProductBoard
+		where entity_number = #{entity_number}
+	</select>
+	
 	<select id = "getTheProduct" parameterType = "hashmap" resultMap = "TheProductmapVO">
 		select * from(
-			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, gl_productboard.entity_number
+			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, pb_sale_status, gl_productboard.entity_number
 			from gl_purchase, gl_productboard
 			where gl_purchase.entity_number = gl_productboard.entity_number
 			UNION
-			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, gl_productboard.entity_number
+			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, pb_sale_status, gl_productboard.entity_number
 			from gl_consignment, gl_productboard
 			where gl_consignment.entity_number = gl_productboard.entity_number
 		)where entity_number = #{entityNo}
@@ -340,16 +347,16 @@
 				 FROM (
 						select * from(
 							SELECT * FROM (
-								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
 								from gl_purchase, gl_productboard
 								where gl_purchase.entity_number = gl_productboard.entity_number
 								UNION
-								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
 								from gl_consignment, gl_productboard
 								where gl_consignment.entity_number = gl_productboard.entity_number
 							)
-						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
-				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category}
+						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중' order by pb_view_count desc
+				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category} and entity_number not in (#{entity_number})
 			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
 	</select>
 
@@ -420,5 +427,9 @@
     	where order_number = #{order_number}
 	
 	</select>
+	
+	<update id = "preChgReadStatus" parameterType = "String">
+		update gl_notice set alarm_read = 'Y' where alarm_number = #{alarm_number}
+	</update>
 	
 </mapper>

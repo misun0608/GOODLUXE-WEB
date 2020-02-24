@@ -23,8 +23,8 @@ maxvalue 10000000;
 		<result property="member_id" column="member_id" />
 		<result property="inquire_title" column="inquire_title" />
 		<result property="inquire_content" column="inquire_content" />
-		<result property="inquire_date" column="inquire_date" />
 		<result property="inquire_comment" column="inquire_comment" />
+		<result property="inquire_date" column="inquire_date" />
 		<result property="inquire_public" column="inquire_public" />
 	</resultMap>
 	<resultMap type="com.spring.goodluxe.voes.InquireCommentVO" id="commRM">
@@ -36,6 +36,7 @@ maxvalue 10000000;
 		<result property="comment_ref" column="comment_ref" />
 		<result property="comment_ref_step" column="comment_ref_step" />
 		<result property="comment_ref_level" column="comment_ref_level" />
+		<result property="comment_ref_writer" column="comment_ref_writer" />
 	</resultMap>
 	
 	<insert id="inquireInsert" parameterType="com.spring.goodluxe.voes.InquireVO">
@@ -43,10 +44,25 @@ maxvalue 10000000;
 		values(gl_inquire_seq.NEXTVAL, #{member_id}, #{inquire_title}, #{inquire_content}, systimestamp, 0, #{inquire_public})
 	</insert>
 	
-	<select id="loadQBList" resultMap="inquireRM">
+	<update id="inquireUpdate" parameterType="com.spring.goodluxe.voes.InquireVO">
+		update gl_inquire
+		set inquire_content = #{inquire_content}, inquire_title = #{inquire_title}, inquire_public = #{inquire_public}
+		where inquire_number = #{inquire_number}
+	</update>
+	
+	<delete id="inquireDelete" parameterType="int">
+		delete from gl_inquire where inquire_number = #{inquire_number}
+	</delete>
+	
+	<delete id="inquireCommentDelete" parameterType="int">
+		delete from gl_inquire_comment where inquire_number = #{inquire_number}
+	</delete>
+	
+	<select id="loadQBList" parameterType="int" resultMap="inquireRM">
 		select *
-		from gl_inquire
-		order by inquire_number desc
+		from ( select rownum rnum, inquire_number, member_id, inquire_title, inquire_content, inquire_comment, inquire_date, inquire_public
+			from ( select * from gl_inquire order by inquire_number desc ) )
+		where rnum >= #{startRow} and rnum <![CDATA[ <= ]]> #{endRow}
 	</select>
 	
 	<select id="loadQPost" parameterType="int" resultMap="inquireRM">
@@ -64,7 +80,7 @@ maxvalue 10000000;
 	
 	<insert id="insertComment" parameterType="com.spring.goodluxe.voes.InquireCommentVO">
 		insert into gl_inquire_comment
-		values(#{comment_number}, #{inquire_number}, #{member_id}, #{comment_content}, systimestamp, #{comment_ref}, #{comment_ref_step}, #{comment_ref_level})
+		values(#{comment_number}, #{inquire_number}, #{member_id}, #{comment_content}, systimestamp, #{comment_ref}, #{comment_ref_step}, #{comment_ref_level}, #{comment_ref_writer,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="addCommentNum" parameterType="int">
@@ -83,6 +99,42 @@ maxvalue 10000000;
 		from gl_inquire_comment
 		where inquire_number = #{inquire_number}
 		order by comment_ref, comment_ref_step
+	</select>
+	
+	<select id="countRefStep" parameterType="int" resultType="int">
+		select count(*)
+		from gl_inquire_comment
+		where comment_ref = #{ref} and comment_ref_level <![CDATA[ <= ]]> #{ref_level} and comment_ref_step > #{ref_step}
+	</select>
+	<select id="maxRefStep" parameterType="int" resultType="int">
+		select max(comment_ref_step)
+		from gl_inquire_comment
+		where comment_ref = #{ref}
+	</select>
+	<select id="calRefStep" parameterType="int" resultType="int">
+		select comment_ref_step
+		from gl_inquire_comment
+		where comment_ref = #{ref} and comment_ref_level <![CDATA[ <= ]]> #{ref_level} and comment_ref_step > #{ref_step} and rownum = 1
+	</select>
+	<update id="updateRefStep" parameterType="int">
+		update gl_inquire_comment
+		set comment_ref_step = comment_ref_step + 1
+		where comment_ref = #{ref} and comment_ref_step >= #{ref_step}
+	</update>
+	
+	<update id="updateComment" parameterType="com.spring.goodluxe.voes.InquireCommentVO">
+		update gl_inquire_comment
+		set comment_content = #{comment_content}
+		where comment_number = #{comment_number}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from gl_inquire_comment
+		where comment_number = #{comment_number}
+	</delete>
+	
+	<select id="getQBoardCount" resultType="int">
+		select count(*) from gl_inquire
 	</select>
 
 </mapper>

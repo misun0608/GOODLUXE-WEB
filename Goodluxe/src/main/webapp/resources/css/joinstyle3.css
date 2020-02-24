@@ -16,7 +16,7 @@ img {vertical-align:top;}
 }
 
 .joinbox {
-    font-size: 15px;
+    font-size: 14px;
     display: inline-block; 
     border: 1px solid lightgray;
     margin: 20px;
@@ -73,8 +73,13 @@ img {vertical-align:top;}
     font-size: 13px;
 }
 
+.joinok_image{
+	width:80px;
+	padding-top:20px;
+}
+
 .join_btn{
-    background-color: #2F87C9;
+/*     background-color: #2F87C9;
     border: none;
     color: white;
     padding: 8px 60px;
@@ -83,38 +88,35 @@ img {vertical-align:top;}
     display: inline-block;
     font-size: 12px;
     margin: 10px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s; Safari
     transition-duration: 0.4s;
     cursor: pointer;
-    border-radius: 8px;
-}
-
-.join_btn1{
-    background-color: white;
-    color: #555555;
-    border: 0.8px solid #555555;
-}
-
-/*
-.btn1:hover{
-    background-color: #707070;
-    color: #080424;
-}
-*/
-
-.join_btn2{
-    background-color: #2F87C9; 
+    border-radius: 8px; */
+    width: 310px;
+    font-size: 14px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid white; 
+    margin: 3px 0 4px 0;
     color: white; 
-    border: 0.8px solid #2F87C9;
+    outline: 0;
+    /* 파란 계열 */
+    /* background-color: #8FB0CA;  */
+    /* background-color: #7eb5de; */
+    /* background-color: #76aed6; */
+    background-color: #589fd5;
+    /* 분홍 계열 */
+    /* background-color: #DFB1AB;  */
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
 }
 
-/*
-.btn2:hover{
-    background-color: #0e073f;
-    color: #080424; 
-    border: 1px solid #080424;
+.join_btn:hover{
+    /* background-color: #a1cded; */
+/*     background-color: #99c2e0; */
+    background-color: #90c0e3;
 }
-*/
 
 .menu_line{
     width: 120px;

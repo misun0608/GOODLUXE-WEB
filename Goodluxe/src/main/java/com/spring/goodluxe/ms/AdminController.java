@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,16 @@ public class AdminController {
 
 	/* Page Components */
 	@RequestMapping(value = "admin_header.do", method = RequestMethod.GET)
-	public ModelAndView header() {
+	public ModelAndView admin_header() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin_header");
+		return mav; 
+	}
+	
+	@RequestMapping(value = "admin_footer.do", method = RequestMethod.GET)
+	public ModelAndView admin_footer() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin_footer");
 		return mav; 
 	}
 	
@@ -41,9 +49,20 @@ public class AdminController {
 
 	// 관리자 메인페이지
 	@RequestMapping(value = "admin_main.do")
-	public String MainView(Model model) throws Exception {
+	public String MainView(Model model, HttpSession session) throws Exception {
 		System.out.println("관리자 메인 일반 컨트롤러");
+		
+		if(session.getAttribute("member_id") == null) {
+			return "redirect:/mainPage.do";
+		}
+		
 		HashMap<String, Object> map = null;
+		
+		// 도넛 그래프
+		ArrayList<HashMap<String, Object>> cate_cnt_list = null;
+		ArrayList<HashMap<String, Object>> brand_cnt_list = null;
+		ArrayList<HashMap<String, Object>> cate_sales_list = null;
+		ArrayList<HashMap<String, Object>> brand_sales_list = null;
 
 		// 추가
 		ArrayList<HashMap<String, Object>> data_list = null;
@@ -200,7 +219,27 @@ public class AdminController {
 				model.addAttribute("real_sales" + j, real_sales[j]);
 				cal.add(Calendar.DATE, -1); // 날짜 하루 빼주기
 			}
+			
+			// 도넛 그래프 데이터
+			// 카테고리별 주문수
+			cate_cnt_list = gls.getCateCntData();
+			// 브랜드별 주문수
+			brand_cnt_list = gls.getBrandCntData();
+			// 카테고리별 매출액
+			cate_sales_list = gls.getCateSalesData();
+			// 브랜드별 매출액
+			brand_sales_list = gls.getBrandSalesData();
+			
+//			System.out.println(cate_cnt_list);
+//			System.out.println(brand_cnt_list);
+//			System.out.println(cate_sales_list);
+//			System.out.println(brand_sales_list);
+			
 			model.addAttribute("map", map);
+			model.addAttribute("cate_cnt_list", cate_cnt_list);
+			model.addAttribute("brand_cnt_list", brand_cnt_list);
+			model.addAttribute("cate_sales_list", cate_sales_list);
+			model.addAttribute("brand_sales_list", brand_sales_list);
 
 		} catch (Exception e) {
 			System.out.println("ERROR(AdminController/MainView) : " + e.getMessage());
@@ -210,13 +249,17 @@ public class AdminController {
 
 	// 포인트 관리자페이지로 이동
 	@RequestMapping(value = "pointView.do")
-	public String pointView() throws Exception {
+	public String pointView(HttpSession session) throws Exception {
+		if(session.getAttribute("member_id") == null) {
+			return "redirect:/mainPage.do";
+		}
 		return "admin_point";
 	}
 
 	// 포인트 관리자 페이지 입력폼 띄우기
 	@RequestMapping(value = "pointUpdateView.do")
 	public String pointUpdateView() throws Exception {
+
 		return "admin_point_update";
 	}
 
@@ -224,7 +267,8 @@ public class AdminController {
 	@RequestMapping(value = "admin_point_insert.do")
 	public String insertPointStatus(PointVO pvo, @RequestParam(value = "btn_value", required = false) String btn_value,
 			HttpServletResponse response) throws Exception {
-		System.out.println("버튼" + btn_value);
+//		System.out.println("관리자 포인트 입력 컨트롤러");
+//		System.out.println("버튼" + btn_value);
 		try {
 			if (btn_value.equals("적립")) {
 				pvo.setPoint_status("관리자 적립");
@@ -239,4 +283,12 @@ public class AdminController {
 		}
 		return "admin_point";
 	}
+	
+	// 포인트 관리자 페이지 입력폼 띄우기(모달 test)
+//	@RequestMapping(value = "pointUpdateModal.do")
+//	public String pointUpdateModal() throws Exception {
+//
+//		return "admin_point_modal";
+//	}
+	
 }

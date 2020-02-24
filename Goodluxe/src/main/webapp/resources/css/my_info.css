@@ -116,7 +116,6 @@ img {vertical-align:top;}
     position: relative;
     top:0;
     font-size: 14px;
-    margin-left: -10px;
     padding-right: 20px;
 }
 .personal_info_table input[type=radio] {
@@ -156,13 +155,11 @@ img {vertical-align:top;}
     position: relative;
     top : 0;
     font-size: 13px;
-    margin-left: -10px;
     padding-right: 20px;
     margin-right: 30px;
     color : black;
 }
 .additional_info_table1 input[type=checkbox]{
-    margin-left: 20px;
     outline: none;
 }
 
@@ -193,12 +190,11 @@ img {vertical-align:top;}
     top : 0;
     min-width: 80px;
     font-size: 13px;
-    margin-left: -10px;
     margin-right: 30px;
     color : black;
 }
 .additional_info_table2 input[type=checkbox]{
-    margin-left: 10px;
+    margin: 0 5px 0 10px;
     outline: none;
 }
 .td_brandbox{
@@ -337,10 +333,11 @@ img {vertical-align:top;}
         position: relative;
         top:0;
         font-size: 14px;
-        margin-left: -10px;
+        margin: 0 5px;
         padding-right: 20px;
     }
     .personal_info_table input[type=radio] {
+        left : 8px;
         margin: 5px;
         color : #F0D2CF;
         outline: none;
@@ -414,12 +411,12 @@ img {vertical-align:top;}
         top : 0;
         min-width: 80px;
         font-size: 13px;
-        margin-left: -10px;
+        margin : 5px;
         margin-right: 30px;
         color : black;
     }
     .additional_info_table2 input[type=checkbox]{
-        margin-left: 10px;
+        margin: 5px;
         outline: none;
     }
     .td_brandbox{

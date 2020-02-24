@@ -3,6 +3,8 @@ package com.spring.goodluxe.jiyemypage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,13 +83,10 @@ public class JyMyPageServiceImpl implements JyMyPageService {
 		return count;
 	}
 	
-	public void deleteLikedGoods(String entity_number)throws Exception {
+	public void deleteLikedGoods(String entity_number, String member_id)throws Exception {
 		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
-		
-		//session
-		String member_id = "mjmj";
 		
 		map.put("entity_number", entity_number);
 		map.put("member_id",member_id);
@@ -98,13 +97,14 @@ public class JyMyPageServiceImpl implements JyMyPageService {
 	}
 
 
-	public void deleteCheckedGoods(String[] checked) {
+	public void deleteCheckedGoods(String[] checked, String member_id) {
 		JyMyPageMapper jymypageMapper = sqlSession.getMapper(JyMyPageMapper.class);
-		
+		System.out.println("서비스 : "+ member_id);
 		HashMap<String,String> map = new HashMap<String,String>();
-		String member_id  = "mjmj";//session
+		
 		map.put("member_id", member_id);
 		for(int i=0; i<checked.length;i++) {
+			System.out.println(checked[i]);
 			map.put("entity_number",checked[i]);
 			jymypageMapper.deleteLikedGoods(map);
 		}

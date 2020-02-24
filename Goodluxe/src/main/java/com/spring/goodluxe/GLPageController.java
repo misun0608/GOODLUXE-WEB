@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.goodluxe.mj.KakaoController;
+import com.spring.goodluxe.mj.NaverLoginBO;
 import com.spring.goodluxe.voes.ApplyVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
@@ -35,24 +37,50 @@ import com.spring.goodluxe.voes.RequestModel;
 @Controller
 public class GLPageController {
 	
+	/* NaverLoginBO */
+    private NaverLoginBO naverLoginBO;
+    private String apiResult = null;
+	
 	@Autowired
 	private GoodluxeService gls;
 	
+	@Autowired(required = false)
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
+		
 		return "redirect:mainPage.do";
 	}
 	
 	/* Page Components */
 	@RequestMapping(value = "header.do", method = RequestMethod.GET)
-	public ModelAndView header() {
+	public ModelAndView header(HttpSession session, Model model) {
 		ModelAndView mav = new ModelAndView();
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		model.addAttribute("naver_url", naverAuthUrl);
+	      
+		//카카오 인증 url을 view로 전달
+		String kakaoUrI = KakaoController.getAuthorizationUri(session);
+		model.addAttribute("kakao_url", kakaoUrI);
+	       
 		mav.setViewName("header");
 		return mav; 
 	}
 	@RequestMapping(value = "loginBox.do", method = RequestMethod.GET)
-	public ModelAndView loginBox() {
+	public ModelAndView loginBox(HttpSession session, Model model) {
 		ModelAndView mav = new ModelAndView();
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+	       String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+	       model.addAttribute("naver_url", naverAuthUrl);
+	      
+	       //카카오 인증 url을 view로 전달
+	       String kakaoUrI = KakaoController.getAuthorizationUri(session);
+	       model.addAttribute("kakao_url", kakaoUrI);
+		
 		mav.setViewName("login_box");
 		return mav; 
 	}
@@ -63,8 +91,11 @@ public class GLPageController {
 		return mav; 
 	}
 	@RequestMapping(value = "mypageMenu.do", method = RequestMethod.GET)
-	public ModelAndView mypageMenu() {
+	public ModelAndView mypageMenu(HttpSession session) {
+		String member_id = (String)session.getAttribute("member_id");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("member_id", member_id);
+		
 		mav.setViewName("mypage_menu");
 		return mav; 
 	}
@@ -89,10 +120,11 @@ public class GLPageController {
 	/* MyPage */
 	// order_and_shipping
 	@RequestMapping(value = "mypageOAS.do", method = RequestMethod.GET)
-	public ModelAndView mypageOAS(String member_id, HttpSession session) {
+	public ModelAndView mypageOAS(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		String online_id = (String)session.getAttribute("member_id");
 		
-		if(session.getAttribute("member_id") == null) {
+		if(online_id == null) {
 			mav.setViewName("redirect:/mainPage.do");
 			return mav;
 		}
@@ -100,7 +132,6 @@ public class GLPageController {
 		try {
 			ArrayList<HashMap<String, Object>> oaslist = null;
 			ArrayList<HashMap<String, Object>> cancellist = null;
-			String online_id = member_id;
 			oaslist = gls.getOasData(online_id);
 			cancellist = gls.getCancelData(online_id);
 			mav.addObject("oaslist", oaslist);
@@ -108,7 +139,7 @@ public class GLPageController {
 			mav.setViewName("order_and_shipping");
 		} catch(Exception e) {
 			System.out.println("ERROR(GLPageController/mypageOAS) : " + e.getMessage());
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:/mainPage.do");
 		}
 		return mav;
 	}
@@ -210,7 +241,7 @@ public class GLPageController {
 			if(pageNum<=0) { pageNum = 1; }
 			if(pageNum>pageCount) { pageNum = pageCount; }
 			// int pageSize = 16;
-			int pageSize = 4;
+			int pageSize = 16;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -261,7 +292,7 @@ public class GLPageController {
 			if(pageNum<=0) { pageNum = 1; }
 			if(pageNum>pageCount) { pageNum = pageCount; }
 			// int pageSize = 12;
-			int pageSize = 3;
+			int pageSize = 12;
 			int currentPage = pageNum;
 			int startRow = (currentPage-1) * pageSize +1;
 			int endRow = startRow + pageSize - 1;
@@ -298,6 +329,18 @@ public class GLPageController {
 		return "search_result";
 	}
 	
+	@RequestMapping(value = "findEnNum.do")
+	public String findEnNum(int pb_number) {
+		String enNum = null;
+		try {
+			enNum = gls.findEnNum(pb_number);
+		} catch(Exception e) {
+			System.out.println("ERROR(GLPageController/findEnNum) : " + e.getMessage());
+		}
+		String url = "redirect:mdDetail.do?entity_number=" + enNum;
+		return url;
+	}
+	
 	// MD Detail Information
 	@RequestMapping(value = "mdDetail.do")
 	public String mdDetail( Model model, String entity_number, HttpServletResponse response ) throws Exception {
@@ -327,14 +370,10 @@ public class GLPageController {
 		return "md_detail";
 	}
 	
-	
-	
-	
-	
 	// Order Part
 	// Move to Order Form
 	@RequestMapping(value = "orderForm.do")
-	public String orderForm(String entity_nuber, Model model, String entity_number, HttpServletResponse response, HttpSession session) throws Exception{
+	public String orderForm(Model model, String entity_number, HttpServletResponse response, HttpSession session) throws Exception{
 		String member_id = (String) session.getAttribute("member_id");
 		if(member_id == null) {
 			response.setCharacterEncoding("UTF-8");
@@ -463,7 +502,7 @@ public class GLPageController {
 			pageNum = pageCount;
 		}
 
-		int pageSize = 3;
+		int pageSize = 10;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
@@ -515,7 +554,7 @@ public class GLPageController {
 			pageNum = pageCount;
 		}
 
-		int pageSize = 3;
+		int pageSize = 10;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;

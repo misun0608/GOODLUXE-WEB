@@ -32,71 +32,72 @@ img {vertical-align:top;}
     }
     .main_images {
         width: 100%; height: 100%;
+        background: #c3a599c7;
     }
     .main_images>div {
         float: left;
     }
     .main_image_right {
         position: absolute;
-        top: 0px; left: 540px;
-        width: 540px; height: 540px;
+        top: 4px; left: 541px;
+        width: 535px; height: 532px;
     }
     .main_image_area1 {
         position: absolute;
-        top: 0px; left: 0px;
-        width: 270px; height: 270px;
+        top: 4px; left: 4px;
+        width: 265px; height: 265px;
     }
     .main_image_area2 {
         position: absolute;
-        top: 0px; left: 270px;
-        width: 135px; height: 135px;
+        top: 4px; left: 271px;
+        width: 133px; height: 130px;
     }
     .main_image_area3 {
         position: absolute;
-        top: 0px; left: 405px;
-        width: 135px; height: 135px;
+        top: 4px; left: 406px;
+        width: 133px; height: 130px;
     }
     .main_image_area4{
         position: absolute;
-        top: 135px; left: 270px;
-        width: 270px; height: 135px;
+        top: 136px; left: 271px;
+        width: 268px; height: 133px;
         overflow: hidden;
     }
     .main_image_area5{
         position: absolute;
-        top: 270px; left: 0px;
-        width: 135px; height: 135px;
+        top: 271px; left: 4px;
+        width: 130px; height: 133px;
     }
     .main_image_area6{
         position: absolute;
-        top: 270px; left: 135px;
-        width: 135px; height: 270px;
+        top: 271px; left: 136px;
+        width: 133px; height: 265px;
         overflow: hidden;
     }
     .main_image_area7{
         position: absolute;
-        top: 270px; left: 270px;
-        width: 135px; height: 135px;
+        top: 271px; left: 271px;
+        width: 133px; height: 133px;
     }
     .main_image_area8{
         position: absolute;
-        top: 270px; left: 405px;
-        width: 135px; height: 135px;
+        top: 271px; left: 406px;
+        width: 133px; height: 133px;
     }
     .main_image_area9{
         position: absolute;
-        top: 405px; left: 0px;
-        width: 135px; height: 135px;
+        top: 406px; left: 4px;
+        width: 130px; height: 130px;
     }
     .main_image_area10{
         position: absolute;
-        top: 405px; left: 270px;
-        width: 135px; height: 135px;
+        top: 406px; left: 271px;
+        width: 133px; height: 130px;
     }
     .main_image_area11{
         position: absolute;
-        top: 405px; left: 405px;
-        width: 135px; height: 135px;
+        top: 406px; left: 406px;
+        width: 133px; height: 130px;
     }
     .main_image {
         width: 100%; height: 100%;
@@ -106,7 +107,6 @@ img {vertical-align:top;}
     }
     .main_image_area4>a>img {
         width: 100%; height: 200%;
-        top: 20%;
     }
     .main_image_area6>a>img {
         width: 200%; height: 100%;
@@ -124,7 +124,6 @@ img {vertical-align:top;}
         /* background: orange; */
         margin-left: 56px;
         margin-bottom: 50px;
-        box-shadow: 1px 1px 5px gray;
         opacity: 0;
         transition: 1s;
         transform: translateY(100px);
@@ -174,7 +173,19 @@ img {vertical-align:top;}
         margin: 4px auto;
         font: 14px/1.2 arial ;
     }
-    
+    .mp_4th {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0 60px 0;
+
+    }
+    .more_btn {
+        background: #000;
+        border: 3px solid #000;
+        color: #fff;
+        opacity: 0.3;
+        padding: 1px 5px;
+    }
 }
 
 /* 태블릿 PC */

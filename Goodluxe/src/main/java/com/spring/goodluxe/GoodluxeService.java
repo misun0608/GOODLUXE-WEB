@@ -33,6 +33,7 @@ public interface GoodluxeService {
 	public int getSearchBoardCount(String search_content,String orderbywhat)throws Exception;
 	public ArrayList<HashMap<String, Object>> getSearchBoardProduct(int startRow, int endRow, String search_content ,String orderbywhat)throws Exception;
 
+	public String findEnNum(int pb_number) throws Exception;
 	public HashMap<String, Object> getTheProduct(String entity_number) throws Exception;
 	public ArrayList<HashMap<String, Object>> getRecommand(String entity_number)throws Exception;
 	

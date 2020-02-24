@@ -16,7 +16,7 @@ img {vertical-align:top;}
 }
 
 .joinbox {
-    font-size: 15px;
+    font-size: 14px;
     display: inline-block; 
     border: 1px solid lightgray;
     margin: 20px;
@@ -44,6 +44,7 @@ img {vertical-align:top;}
 #email_select{
     width: 120px;
 }
+
 .joinstep{
     width: 480px;
 }
@@ -53,7 +54,7 @@ img {vertical-align:top;}
 }
 
 .join_btn{
-    background-color: #C97D73;
+/*     background-color: #C97D73;
     border: none;
     color: white;
     padding: 8px 60px;
@@ -62,16 +63,34 @@ img {vertical-align:top;}
     display: inline-block;
     font-size: 12px;
     margin: 10px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s; Safari
     transition-duration: 0.4s;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 8px; */
+    font-size: 13px;
+    width: 150px;
+    height: 35px;
+    border-radius: 6px;
+    border: 1px solid white; 
+    margin: 3px 0 4px 0;
+    color: white; 
+    outline: 0;
+    /* 파란 계열 */
+    /* background-color: #8FB0CA;  */
+    /* background-color: #7eb5de; */
+    /* background-color: #76aed6; */
+    background-color: #589fd5;
+    /* 분홍 계열 */
+    /* background-color: #DFB1AB;  */
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
 }
 
 .join_btn1{
     background-color: white;
     color: #555555;
-    border: 0.8px solid #555555;
+    border: 1px solid #555555;
 }
 
 /*
@@ -82,18 +101,19 @@ img {vertical-align:top;}
 */
 
 .join_btn2{
-    background-color: #2F87C9; 
+/*    background-color: #2F87C9; */
+    /* background-color: #76aed6; */
+    background-color: #589fd5;
     color: white; 
-    border: 0.8px solid #2F87C9;
+/*    border: 1px solid #2F87C9;*/
+	border: 1px solid #589fd5;
 }
 
-/*
-.btn2:hover{
-    background-color: #0e073f;
-    color: #080424; 
-    border: 1px solid #080424;
+.join_btn2:hover{
+    /* background-color: #99c2e0; */
+	    background-color: #90c0e3;
+		border: 1px solid #90c0e3;
 }
-*/
 
 /* .menu_line{
     width: 120px;
@@ -131,7 +151,7 @@ img {vertical-align:top;}
 .jointable input[type=text]{
     position: relative;
     width: 69%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
     /* font-size: 13px; */
@@ -140,7 +160,7 @@ img {vertical-align:top;}
 .jointable input[type=password]{
     position: relative;
     width:95%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
 }
@@ -148,7 +168,7 @@ img {vertical-align:top;}
 .jointable input[type=tel]{
     position: relative;
     width:25%;
-    height : 30px;
+    height : 27px;
     border: none;
     outline: none;
 }

@@ -109,8 +109,15 @@
 							DecimalFormat df = new DecimalFormat(",###");
 							String product_price_shaped = df.format(product_price_nonshaped);
 							String entity_number = (String)productHM.get("entity_number");
+							String saleStatus = (String)productHM.get("pb_sale_status");
 					%>
 					<a href="./mdDetail.do?entity_number=<%=entity_number%>">
+						<%
+						if(saleStatus.equals("거래진행중")){ %>
+							<div  class = "dealing_now">
+								<span>거래 진행중인 <br/> 상품입니다.</span>
+							</div>	
+						<% } %>
 						<div class="card">
 							<div class="md_img">
 								<img src="/Goodluxe/image/<%= img_name%>" alt="md_img"
@@ -143,7 +150,7 @@
 									int startPage = 1;
 									int i;
 												
-									if(currentPage%10!=0)
+									if(currentPage%5!=0)
 										startPage = (int)(currentPage/5)*5+1;
 									else
 										startPage = currentPage-4;
