@@ -96,7 +96,7 @@
 	
 </script>
 <script>
-
+	
 
 
 </script>
@@ -181,8 +181,9 @@
 								&nbsp;
 									<label for="exampleInputFile">업로드</label> 
 									<input type="file" name ="pb_main_img" class="form-control-file"
-										id="exampleInputFile" aria-describedby="fileHelp">
-									<input class="upload-name" value="파일선택">
+										id="exampleInputFile" aria-describedby="fileHelp" 
+										onchange = "$('#upload-name').val(this.value.replace(/c:\\fakepath\\/i,''))" >
+									<input class="upload-name" name = "upload-name" id ="upload-name" value="파일선택">
 								</div>
 							</td>
 	

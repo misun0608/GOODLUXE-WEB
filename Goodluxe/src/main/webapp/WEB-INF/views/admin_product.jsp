@@ -514,7 +514,7 @@ $(document).ready(function() {
 					<br />
 					<br />
 					
-					<h3>| 배송관리</h3>
+					<h3>| 상품관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
 						<table class="information">

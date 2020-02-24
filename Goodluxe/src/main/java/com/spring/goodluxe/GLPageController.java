@@ -502,7 +502,7 @@ public class GLPageController {
 			pageNum = pageCount;
 		}
 
-		int pageSize = 2;
+		int pageSize = 10;
 		int currentPage = pageNum;
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
