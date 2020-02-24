@@ -40,5 +40,6 @@
     </tr>
 </table>
 <!-- 공지사항 테이블 끝 -->
+
 <br>
 <p style="text-align: center; margin-bottom: 2em;">◁ 1 ▷</p>
