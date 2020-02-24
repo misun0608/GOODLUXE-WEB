@@ -151,24 +151,18 @@
 		}
 		
 		function onpageDefaultAction(){
-			alert("onpageDefaultAction");
 			if('<%=adminperiod%>'=='none'){
-				alert("selectData");
 				selectData();
 			}else if('<%=adminperiod%>'=='today'){
 				document.getElementById("period").value = 'today';
-				alert("today");
 				if('<%=adminstatus%>'=='afterP'){
 					document.getElementsByName("is_payed").value='afterP';
-					alert("afterP");
 				}
 				$("#search_btn").trigger("click");
 			}else if('<%=adminperiod%>'=='month'){
 				document.getElementById("period").value = 'month';
-				alert("month");
 				if('<%=adminstatus%>' == 'beforeP'){
 					document.getElementsByName("is_payed").value='beforeP';
-					alert("boforeP")
 				}
 				$("#search_btn").trigger("click");
 			}
