@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String adminperiod = (String)request.getAttribute("adminperiod");
+	String adminstatus = (String)request.getAttribute("adminstatus");
+	
+%>
 <!DOCTYPE html>
 <html>
 
@@ -143,6 +148,31 @@
 			   min = '0' + min;
 			}
 			return year + "-" + month + "-" + date + " " + hour + ":" + min;
+		}
+		
+		function onpageDefaultAction(){
+			alert("onpageDefaultAction");
+			if('<%=adminperiod%>'=='none'){
+				alert("selectData");
+				selectData();
+			}else if('<%=adminperiod%>'=='today'){
+				document.getElementById("period").value = 'today';
+				alert("today");
+				if('<%=adminstatus%>'=='afterP'){
+					document.getElementsByName("is_payed").value='afterP';
+					alert("afterP");
+				}
+				$("#search_btn").trigger("click");
+			}else if('<%=adminperiod%>'=='month'){
+				document.getElementById("period").value = 'month';
+				alert("month");
+				if('<%=adminstatus%>' == 'beforeP'){
+					document.getElementsByName("is_payed").value='beforeP';
+					alert("boforeP")
+				}
+				$("#search_btn").trigger("click");
+			}
+			
 		}
 		
 		$('input[name=is_payed]:eq(1)').click(function(event){
@@ -521,8 +551,8 @@
 				
 			});
 		}
-		
-		selectData();
+		onpageDefaultAction();
+		//selectData();
 	});
 </script>
 </head>

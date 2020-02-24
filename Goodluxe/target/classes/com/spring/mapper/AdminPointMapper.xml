@@ -83,6 +83,7 @@
 	<select id="getTodayOrderCount" resultType="int">
 	<![CDATA[
 		select count(*) from GL_ORDER where ORDER_ORDER_DATE > sysdate -1 and ORDER_ORDER_DATE < sysdate +1
+		
 	]]>
 	</select>
 	

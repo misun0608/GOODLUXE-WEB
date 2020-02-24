@@ -362,11 +362,28 @@ public class ProductlistController {
 
 	// 관리자 주문관리
 	@RequestMapping(value = "/adminOrder.do", produces = "application/json;charset=UTF-8")
-	public String adminOrder() throws Exception {
+	public String adminOrder(Model model,
+			@RequestParam(value = "adminperiod", required = false, defaultValue = "none")String adminperiod,
+			@RequestParam(value = "adminstatus", required = false, defaultValue = "none")String adminstatus
+			) throws Exception {
+		
+		model.addAttribute("adminperiod",adminperiod);
+		model.addAttribute("adminstatus",adminstatus);
+		
+		return "admin_order";
+	}
+	
+	// 관리자 주문관리-오늘의 그것....
+	@RequestMapping(value = "/adminOrderToday.do", produces = "application/json;charset=UTF-8")
+	public String adminOrder(
+			@RequestParam(value="order_number", required = false)String order_number,
+			@RequestParam(value="check_order_status", required = false)String check_order_status,
+			@RequestParam(value="is_payed", required = false)String is_payed ) throws Exception {
+		
+		
 
 		return "admin_order";
 	}
-
 	// 관리자 상품관리
 	@RequestMapping(value = "/adminProduct.do", produces = "application/json;charset=UTF-8")
 	public String adminProduct() throws Exception {
