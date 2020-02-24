@@ -12,4 +12,5 @@ public interface Chat_recordMapper {
 	public ArrayList<Chat_recordVO> selectListChatRecordcountdo()throws Exception;
 	public int updateListChatRecordCountdo(String chat_room)throws Exception;
 	public int selectlistcount(Chat_recordVO chatrecordvo)throws Exception;
+	
 }

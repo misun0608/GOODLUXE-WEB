@@ -198,18 +198,16 @@ public class jaejinuController {
 				chatM = chatmemberService.getRoomMember(chatmembervo_get);
 				model.addAttribute("room", member_id);
 			}
+			model.addAttribute("room", member_id);
+		}
 			// 존재한다면 그 방으로 이동
 			else {
 				System.out.println("관리자");
 
-				if (member_id.equals("admin") && chatmembervo.getChat_room().equals("all")) {
-					model.addAttribute("room", "all");
-				} else {
-					System.out.println("chatmembervo.getChat_room()chatmembervo.getChat_room()="+chatmembervo.getChat_room());
-					model.addAttribute("room", chatmembervo.getChat_room());
-				}
-				System.out.println("chatmembervo.getChat_room()=" + chatmembervo.getChat_room());
-			}
+				
+					String chatroom = chatmemberService.whereisthechatroom(member_id);
+					model.addAttribute("room", chatroom);
+			
 		}
 		// 현재 방이름 넣기(전체채팅방이니 all)
 		// 해당 이름으로 넣쟈
@@ -227,14 +225,15 @@ public class jaejinuController {
 		chatrecordcountlist = chat_recordService.selectListChatRecordcountdo();
 		System.out.println("selectchatrecord find!");
 		model.addAttribute("chatrecordcountlist", chatrecordcountlist);
-
+		
 		return "chat";
-	}
+}
+		
 
 
 
 	// 중복확인
-	@RequestMapping(value = "checkRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "checkRoom.do", method = { RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public int checkRoom(Model model, String name) throws Exception {
 		System.out.println("name=" + name);

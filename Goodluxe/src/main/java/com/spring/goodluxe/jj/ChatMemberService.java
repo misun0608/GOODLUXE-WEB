@@ -21,4 +21,6 @@ public interface ChatMemberService {
 	public int countRoomMember(String member_id)throws Exception;
 	
 	public List<ChatMemberVO> selectChatroomList(String member_id)throws Exception;
+
+	public String whereisthechatroom(String member_id)throws Exception;
 }
