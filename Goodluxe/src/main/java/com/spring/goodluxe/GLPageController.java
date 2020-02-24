@@ -59,14 +59,14 @@ public class GLPageController {
 	@RequestMapping(value = "header.do", method = RequestMethod.GET)
 	public ModelAndView header(HttpSession session, Model model) {
 		ModelAndView mav = new ModelAndView();
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		model.addAttribute("naver_url", naverAuthUrl);
-	      
-		//카카오 인증 url을 view로 전달
-		String kakaoUrI = KakaoController.getAuthorizationUri(session);
-		model.addAttribute("kakao_url", kakaoUrI);
-	       
+//		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+//		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+//		model.addAttribute("naver_url", naverAuthUrl);
+//	      
+//		//카카오 인증 url을 view로 전달
+//		String kakaoUrI = KakaoController.getAuthorizationUri(session);
+//		model.addAttribute("kakao_url", kakaoUrI);
+//	       
 		mav.setViewName("header");
 		return mav; 
 	}

@@ -123,7 +123,12 @@ public class MemberLoginController {
       }
        
        OAuth2AccessToken oauthToken;
+       System.out.println("Controller");
+       System.out.println(session);
+       System.out.println(code);
+       System.out.println(state);
        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+       System.out.println(oauthToken == null);
        //로그인 사용자 정보를 읽어온다.
        apiResult = naverLoginBO.getUserProfile(oauthToken);
        

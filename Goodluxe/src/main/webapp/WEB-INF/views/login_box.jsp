@@ -70,7 +70,7 @@
             <a href="#"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" class="login_icon"></a>
 <%--             <a href="${kakao_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a> --%>
             <a href="${kakao_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" class="login_icon"></a>
-            <a href="${naver_url}"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" class="login_icon"></a>
+            <a href="${naver_url}" class="login_naver_url"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" class="login_icon"></a>
         </div>
         <div class="anonymous">
             <span>계정이 없으신가요?</span>

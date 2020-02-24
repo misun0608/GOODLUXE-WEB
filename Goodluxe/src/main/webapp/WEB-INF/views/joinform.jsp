@@ -28,8 +28,14 @@
       $(document).ready(function(){
          $("#header").load("header.do");
          $("#nav_bar").load("navBar.do");
-         $("#login_box").load("loginBox.do");
+         // $("#login_box").load("loginBox.do");
          $("#footer").load("footer.do");
+         
+         $("#login_box").load("loginBox.do", function(){
+        	 var lnu = $('.login_naver_url').attr('href');
+        	 $('.join_naver_url').attr('href',lnu);
+ 		});
+        
       });
      
     </script>
@@ -50,7 +56,7 @@
             <br /><br />
             <h1>회원가입</h1>
             <br /><br />
-            <a href="${naver_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" width="20" height="20">&nbsp;&nbsp;네이버로 가입</span></a><br />
+            <a href="${naver_url}" class="join_naver_url"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/naver.png" alt="naver" width="20" height="20">&nbsp;&nbsp;네이버로 가입</span></a><br />
             <a href="${kakao_url}"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/kakao.png" alt="kakao" width="20" height="20">&nbsp;&nbsp;카카오로 가입</span></a><br />
             <a href="login.do"><span class="joinbox"><img src="${pageContext.request.contextPath}/resources/img/icons/google.png" alt="google" width="20" height="20">&nbsp;&nbsp;구글로 가입</span></a><br />
             <hr class="join_line">&nbsp;&nbsp;<span class="join_linefont">or</span>&nbsp;&nbsp;<hr class="join_line">
