@@ -140,7 +140,7 @@ $(document).ready(function() {
                         if(point_list == null||point_list.size()==0){
                         %>
                         	<tr>
-                        		<td colspan="5">조회 가능한 적립금 내역이 없습니다.</td>
+                        		<td colspan="5" style="text-align:center;">조회 가능한 적립금 내역이 없습니다.</td>
                         	</tr>
                         <%
                         }else{
