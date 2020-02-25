@@ -56,7 +56,6 @@ img {vertical-align:top;}
         position: absolute;
         top: 4px; left: 406px;
         width: 133px; height: 130px;
-        display:none;
     }
     .main_image_area4{
         position: absolute;
@@ -79,7 +78,6 @@ img {vertical-align:top;}
         position: absolute;
         top: 271px; left: 271px;
         width: 133px; height: 133px;
-        display:none;
     }
     .main_image_area8{
         position: absolute;
@@ -100,7 +98,6 @@ img {vertical-align:top;}
         position: absolute;
         top: 406px; left: 406px;
         width: 133px; height: 130px;
-        display:none;
     }
     .main_image {
         width: 100%; height: 100%;

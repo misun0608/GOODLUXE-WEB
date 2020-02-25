@@ -64,7 +64,7 @@
    	<select id="selectordercount" parameterType="int" resultType="int" >
    		        select count(*)
                 from gl_order
-                where pb_number=#{pb_number};
+                where pb_number=#{pb_number}
    	</select>
    
    
