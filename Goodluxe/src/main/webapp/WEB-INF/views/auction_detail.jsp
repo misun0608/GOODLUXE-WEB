@@ -43,6 +43,9 @@
 
 	
 <script type="text/javascript">
+
+
+
 			$('.detail_main_image_left>a>img').on({ 
 
 			"click" : function(){ //->썸네일이미지를 클릭했을때 
@@ -86,6 +89,8 @@ String member_id = (String) session.getAttribute("member_id");
 %>
 
 
+
+
 <body id="body_press" oncontextmenu="return false">
 
 	  <header id="header"></header>
@@ -101,8 +106,8 @@ String member_id = (String) session.getAttribute("member_id");
 		 var obj = document.getElementById("unit");  
 			
 		   var number = Number(obj.value);
-		if(number>=<%=auctionvo.getAUCTION_NOW_PRICE()%>){
-			   alert("입찰값이 현재가격과 같습니다. ");
+		if(number <= <%=auctionvo.getAUCTION_NOW_PRICE()%>){
+			   alert("입찰값이 현재가격과 같거나 적습니다. ");
 			   return false;
 		   }
 		
@@ -172,13 +177,13 @@ String member_id = (String) session.getAttribute("member_id");
 										id="unit_2" class="md_detail_cell md_auction_detail_price"
 										style="font-size: 21px;"> <!-- <span class="md_detail_cell md_detail_price" style="color: rgb(236, 27, 27); font-size: 23px;"> -->
 
-										<%=auctionvo.getAUCTION_NOW_PRICE()%>
+										
 									</span>
 								</div>
 								<div class="md_detail_row">
 									<span class="md_detail_cell md_detail_title"> 입찰 건수 </span> <span
-										id="container" class="md_detail_cell md_detail_d_period"
-										onclick="popup()"> <%=historynumber%>
+										id="historycount" class="md_detail_cell md_detail_d_period"
+										onclick="popup()"> 
 									</span>
 									<script type="text/javascript">
 	
@@ -191,6 +196,55 @@ String member_id = (String) session.getAttribute("member_id");
 									window.open(url,name,"width=1000,height=1000,toolbar=no,status=no,location=no,scrollbars=yes,menubar=no,resizable=yes,left=50,right=50");
  
 									}
+									playAlert_1 = setInterval(function() {
+									var params= <%=auctionvo.getAUCTION_POST_NUMBER()%>;
+										var url = jQuery(location).attr('href');
+
+
+									$.ajax({//ajax 호출 JQuery.ajax== 
+										url:'/goodluxe/selectauction.do?auction_post_number='+<%=auctionvo.getAUCTION_POST_NUMBER()%>, //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
+										type:'GET', //데이터 보낼 때 방식 사용
+										 //서버로 보낼 데이터 타입
+										contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+										dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
+										success : function(data){	
+											
+											$("#unit_2").html("");
+											 	var str = data;
+											 	$('#unit_2').append(str);
+										
+											
+											},
+											  error: function (request, status, error){  
+											      var msg = "ERROR<br><br>"
+											      msg += request.status + "<br>" + request.responseText + "<br>" + error;
+											      console.log(msg);                    
+											    }
+									});
+									
+									
+									
+									$.ajax({//ajax 호출 JQuery.ajax== 
+										url:'/goodluxe/selecthistory.do?auction_post_number='+<%=auctionvo.getAUCTION_POST_NUMBER()%>, //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
+										type:'GET', //데이터 보낼 때 방식 사용
+										 //서버로 보낼 데이터 타입
+										contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+										dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
+										success : function(data){	
+											$("#historycount").html("");
+											
+											 	var str = data;
+											 	$('#historycount').append(str);
+										
+											
+											},
+											  error: function (request, status, error){  
+											      var msg = "ERROR<br><br>"
+											      msg += request.status + "<br>" + request.responseText + "<br>" + error;
+											      console.log(msg);                    
+											    }
+									});
+									}, 1000);
 									</script>
 
 
@@ -202,15 +256,12 @@ String member_id = (String) session.getAttribute("member_id");
 										style="color: rgb(236, 27, 27);"> </span>
 									<!-- <button type="button" class="content">
 									 -->
-									</button>
+									<!-- </button> -->
 
 									<script>
 									
-									
 									CountDownTimer('<%=auctionvo.getAUCTION_END_TIME()%>','newcountdown');
 									
-									
-								
 									
 									
 									function CountDownTimer(dt, id) {
@@ -235,7 +286,7 @@ String member_id = (String) session.getAttribute("member_id");
 											//alert(starttime);
 											//alert(startauction);
 											
-											if(distance <= 0){
+											if(distance < 0){
 												
 												//alert('${ordercount}');
 												if('${ordercount}' > 0){
@@ -323,7 +374,6 @@ String member_id = (String) session.getAttribute("member_id");
 								</div>
 								<div class="md_detail_row">
 									<!-- <span class="md_detail_cell md_detail_title">
-                                
                                     배송구분
                                 </span>
                                 <span class="md_detail_cell md_detail_delivery_domestic">
@@ -352,8 +402,9 @@ String member_id = (String) session.getAttribute("member_id");
 									   }  
 								
 								</script>
-										<a href="#" onclick="addCount(-50000); return false;"
-											class="downprice"><input type="button" value="-"
+								
+										<a href="#" 
+											class="downprice" ><input type="button" value="-" onclick="addCount(-50000); return false;"
 											class="auction_minus"></a> <input type="text" id="unit"
 											style="pointer-events: none;" class="auction_price_text"
 											name="AUHIS_BETTING_PRICE"
@@ -363,8 +414,8 @@ String member_id = (String) session.getAttribute("member_id");
 											type="hidden" name="member_id" value="<%=member_id %>">
 										<!-- <input type="hidden" name="AUHIS_BID_TIME" value="2020-01-29" > -->
 
-										<a href="#" onclick="addCount(50000); return false;"
-											class="upprice"><input type="button" value="+"
+										<a href="#" 
+											class="upprice"><input type="button" value="+" onclick="addCount(50000); return false;"
 											class="auction_plus"></a>
 									</div>
 									<div>
@@ -386,53 +437,23 @@ String member_id = (String) session.getAttribute("member_id");
 		   }
 		
     });
-		<%-- else{
-			   
-			   
-			   /*
-			   auction_post_number NUMBER,
-    auhis_number NUMBER,
-    member_id VARCHAR2(20),
-    auhis_bid_time TIMESTAMP,
-    auhis_betting_price NUMBER
-			   */
-			   var auction_post_number = <%=auctionvo.getAUCTION_POST_NUMBER()%>;
-			   var member_id = <%=member_id %>;
-			   var auhis_betting_price = parseInt(number);
-			  // alert("입찰값="+auhis_betting_price);
-			   
-			 /*   
-			   $.ajax({//ajax 호출 JQuery.ajax== 
-					url:'/goodluxe/history.do?auhis_betting_price='+number, //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
-					type:'GET',  //데이터 보낼 때 방식 사용
-					data: {
-						auction_post_number : auction_post_number,
-						member_id : member_id
-					}, //서버로 보낼 데이터 타입
-					contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-					dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
-					success : function(data){	
-
-						var jsondata = JSON.stringify(data);
-
-						alert(jsondata);
-
-						},
-						  error: function (request, status, error){  
-						      var msg = "ERROR<br><br>"
-						      msg += request.status + "<br>" + request.responseText + "<br>" + error;
-						      console.log(msg);                    
-						    }
-				}); */
-			   
-		   
-		 //  alert("입찰 되었씁니다.");
-		   
-		   
-		   
-		   
-		   }
-		}) --%>
+		
+    </script>
+    <script type="text/javascript">
+    var end = new Date('<%=auctionvo.getAUCTION_END_TIME()%>');
+    var now = new Date();	
+    var distance = end - now;
+    			
+    if (distance < 0) {
+    	alert("경매가 마감되었습니다.")
+    	//clearInterval(timer);
+    	//document.getElementById("body_press").innerHTML = '<EXPIRED!>';
+    	document.getElementById("newcountdown").innerHTML="경매가 종료되었습니다.";
+    	$button_joinus = $('#auction_history_button').attr('disabled', true);
+    	$button_joinus = $('.auction_plus').attr('disabled', true);
+    	$button_joinus = $('.auction_minus').attr('disabled', true);
+    	
+    }
     </script>
 									</div>
 								</div>
@@ -468,49 +489,6 @@ String member_id = (String) session.getAttribute("member_id");
 					</div>
 
 					<!-- 연관 제품 -->
-					<div class="related_item_area">
-						<h3 class="related_item_title">Related Items</h3>
-						<div class="related_item_list">
-							<div class="related_item">
-								<a href="#"> <img src="img/md_img/chanel_bag.jpg" alt="">
-									<div class="related_item_info">
-										<div class="related_item_brand">Chanel</div>
-										<div class="related_item_name">샤넬 캐비어 클래식 미듐</div>
-										<div class="related_item_price">4,900,000원</div>
-									</div>
-								</a>
-							</div>
-							<div class="related_item">
-								<a href="#"> <img src="img/md_img/chanel_bag.jpg" alt="">
-									<div class="related_item_info">
-										<div class="related_item_brand">Chanel</div>
-										<div class="related_item_name">샤넬 캐비어 클래식 미듐</div>
-										<div class="related_item_price">4,900,000원</div>
-									</div>
-								</a>
-							</div>
-							<div class="related_item">
-								<a href="#"> <img src="img/md_img/chanel_bag.jpg" alt="">
-									<div class="related_item_info">
-										<div class="related_item_brand">Chanel</div>
-										<div class="related_item_name">샤넬 캐비어 클래식 미듐</div>
-										<div class="related_item_price">4,900,000원</div>
-									</div>
-								</a>
-							</div>
-							<div class="related_item">
-								<a href="#"> <img src="img/md_img/chanel_bag.jpg" alt="">
-									<div class="related_item_info">
-										<div class="related_item_brand">Chanel</div>
-										<div class="related_item_name">샤넬 캐비어 클래식 미듐</div>
-										<div class="related_item_price">4,900,000원</div>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			</div>
 			</form>
 	</section>

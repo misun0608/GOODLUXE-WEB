@@ -66,6 +66,8 @@
                 from gl_order
                 where pb_number=#{pb_number}
    	</select>
+   	
+
    
    
    

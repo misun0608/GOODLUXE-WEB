@@ -351,6 +351,7 @@ $("#wisper").click(function() {
 			</td>
 			<%} %>
 			<!-- 보낼 메세지 입력 -->
+			
 			<td ><input type="text" id="textID" size="50"
 				value="" style="width: 100%; height: 100%; font-weight: bold;"
 				class="ui message blue" name="chatInput" placeholder="내용 입력">

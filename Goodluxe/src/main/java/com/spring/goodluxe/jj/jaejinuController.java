@@ -23,6 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.goodluxe.voes.AlamVO;
 import com.spring.goodluxe.voes.AuctionVO;
@@ -60,8 +61,6 @@ public class jaejinuController {
 	private ChatMemberService chatmemberService;
 	@Autowired
 	private Chat_recordService chat_recordService;
-	@Autowired
-	private Chat_recordcountService chat_recordcountService;
 
 	// 만든 페이지들 있는 곳으로 이동
 	@RequestMapping("/jaejinupage.do")
@@ -324,6 +323,16 @@ public class jaejinuController {
 			
 		}
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	// 멤버 가입 >> 다시 로그인 페이지로
 	@RequestMapping(value = "memberinsert.do")
 	public String memberinsert(Member2VO vo) {
@@ -380,6 +389,27 @@ public class jaejinuController {
 		return null;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 경매 상세페이지 만들 때
 	@RequestMapping(value = "/auction_detail.do")
 	public String auction_detail(@RequestParam("file_1") List<MultipartFile> fileList_1,
@@ -470,13 +500,63 @@ public class jaejinuController {
 			
 		}
 	           
-	    
-		return "auction_detail";
+		return "redirect:adminAutionManager.do";
+				
+		//return "auction_detail";
 	}
 
+	
+	// redirect
+		@RequestMapping(value = "/auction.do", method = RequestMethod.GET)
+		public String auction(@RequestParam("AUCTION_POST_NUMBER") int AUCTION_POST_NUMBER) {
+				System.out.println(AUCTION_POST_NUMBER);
+				
+			return "redirect:member_auction_history.do?AUCTION_POST_NUMBER="+AUCTION_POST_NUMBER;
+		}
+			
+	
+	//ajax로 auction 값 가져오기 
+		@RequestMapping(value = "/selectauction.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+		@ResponseBody // 이 이노테이션은 jsp와 같은 뷰를 전달 하는게 아닌 데이터를 전달하기 위해 사용
+		public int selectauction(HttpServletRequest request)throws Exception {
+			
+			int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
+			AuctionVO auctionvo = new AuctionVO();
+			try{
+				auctionvo = auctionService.selectAuction_PostNumber(auction_post_number);
+			}catch(Exception e) {
+				System.out.println("select auction fail! +"+e.getMessage());
+			}
+			return auctionvo.getAUCTION_NOW_PRICE();
+		}
+		
+		
+		//ajax로 history 값 가져오기 
+				@RequestMapping(value = "/selecthistory.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+				@ResponseBody // 이 이노테이션은 jsp와 같은 뷰를 전달 하는게 아닌 데이터를 전달하기 위해 사용
+				public int selecthistory(HttpServletRequest request)throws Exception {
+					
+					int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
+					int count = 0;
+					
+							
+					try{
+						count = historyService.selecthistorycount(auction_post_number);
+					}catch(Exception e) {
+						System.out.println("select auction fail! +"+e.getMessage());
+					}
+					return count;
+				}
+				
+				
+		
+		
+		
 	// 입찰하기
 	@RequestMapping(value = "/history.do", method = RequestMethod.GET)
-	public String historyinsert(Model model_t, HttpServletRequest request,  SessionStatus status) {
+	public String historyinsert(RedirectAttributes redirectAttributes, Model model_t, HttpServletRequest request,  SessionStatus status) {
+		
+		
 		int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
 		System.out.println("auction_post_number="+auction_post_number);
 		String member_id = request.getParameter("member_id");
@@ -516,12 +596,13 @@ public class jaejinuController {
 			int ordercount = orderService.selectordercount(AUCTION_POST_NUMBER);
 			
 			model_t.addAttribute("ordercount", ordercount);
+			redirectAttributes.addAttribute("AUCTION_POST_NUMBER", AUCTION_POST_NUMBER);
 			 status.setComplete();
 		} catch (Exception e) {
 			System.out.println("입찰 실패 +" + e.getMessage());
 		}
-		return "auction_detail";
-
+		//return "redirect:auction_detail.do";
+		return "redirect:auction.do";
 	}
 
 	/*
@@ -620,6 +701,10 @@ public class jaejinuController {
 
 		int count = 0;
 		try {
+			
+			
+			
+			
 			AuctionVO vo_1 = auctionService.selectAuction_PostNumber(auction_post_number);
 			System.out.println("1");
 			String entity_number = vo_1.getENTITY_NUMBER();
@@ -645,14 +730,26 @@ public class jaejinuController {
 
 	@RequestMapping(value = "/insertJSON.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody // 이 이노테이션은 jsp와 같은 뷰를 전달 하는게 아닌 데이터를 전달하기 위해 사용
-	public int insertJSON(HttpServletRequest request) {
+	public int insertJSON(HttpServletRequest request)throws Exception {
+		
+		
 		AuctionVO auctionvo = new AuctionVO();
 		Auction_HistoryVO historyvo = new Auction_HistoryVO();
 		Order2VO ordervo = new Order2VO();
 		AlamVO alamvo = new AlamVO();
 		Member2VO membervo = new Member2VO();
+		
+		
+		
+		
 		int res = 0;
 		int auction_post_number = Integer.parseInt(request.getParameter("auction_post_number"));
+		
+		int count = orderService.selectordercount(auction_post_number);
+			if( count > 0 ) {
+				res=1;
+				return res;
+			}
 		String link = request.getParameter("link");
 		try {
 			auctionvo = auctionService.selectAuction_PostNumber(auction_post_number);
