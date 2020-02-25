@@ -558,7 +558,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">| 주문 관리 > 전체 주문 목록</h1>
+			<h1 id="container_title">| 주문관리 > 주문관리</h1>
 			<div class="container_wr">
 				<section>
 					<br><br>

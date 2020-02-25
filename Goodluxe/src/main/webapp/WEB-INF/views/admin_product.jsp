@@ -507,7 +507,7 @@ $(document).ready(function() {
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
-			<h1 id="container_title">상품상태 관리</h1>
+			<h1 id="container_title">| 상품관리 > 상품관리</h1>
 			<div class="container_wr">
 				<section>
 				

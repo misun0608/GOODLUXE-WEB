@@ -229,7 +229,7 @@
 
 			<div id="container" class="container-small">
 
-				<h1 id="container_title">관리자 경매 페이지</h1>
+				<h1 id="container_title">| 게시판관리 > 경매글등록</h1>
 				<div class="container_wr">
 					<section>
 						<br> <br>

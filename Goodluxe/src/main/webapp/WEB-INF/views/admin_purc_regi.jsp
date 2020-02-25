@@ -107,7 +107,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">매입상품 등록 페이지</h1>
+			<h1 id="container_title">| 상품관리 > 매입상품등록</h1>
 			<div class="container_wr">
 				<form name="input_form" action="./purcRegiAction.do" method="post" onsubmit = "return submitCheck()">
 					<!-- onsubmit="메소드();" -->

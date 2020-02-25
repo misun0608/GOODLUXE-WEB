@@ -115,7 +115,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">위탁상품 등록 페이지</h1>
+			<h1 id="container_title">| 상품관리 > 위탁상품등록</h1>
 			<div class="container_wr">
 				<form name="input_form" action="./consRegiAction.do" method="post" onsubmit = "return submitCheck()">
 

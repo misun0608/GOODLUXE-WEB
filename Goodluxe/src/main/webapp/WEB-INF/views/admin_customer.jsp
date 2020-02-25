@@ -263,7 +263,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">관리자 고객관리 페이지</h1>
+			<h1 id="container_title">| 회원관리 > 블랙리스트관리 </h1>
 			<div class="container_wr">
 				<section>
 					<br><br>
