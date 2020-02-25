@@ -86,30 +86,23 @@ public class MemberFindController {
 	public String findMemberPw(MemberVO memberVO, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect) throws Exception {
 		int find_member_pw = 0;
 		String find_member_id = null;
-		
+		System.out.println(memberVO.getMember_id());
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		try {
-			find_member_id = gls.findMemberId(memberVO);
 			find_member_pw = gls.findMemberPw(memberVO);
-			System.out.println("MemberFindController 1 FIND_ID :" + find_member_id);
 			System.out.println("MemberFindController 1 FIND_PW :" + find_member_pw);
 			
 			if(find_member_pw != 0) {
 				System.out.println(find_member_pw);
 				
 				redirect.addAttribute("member_email", request.getParameter("member_email")); 
-				redirect.addAttribute("member_id", find_member_id);
+				redirect.addAttribute("member_id", request.getParameter("member_id"));
 				redirect.addAttribute("member_name", request.getParameter("member_name"));
 				
 				return "redirect:/mailSendingFindPw.do";
-			} else if (find_member_id == null){
-				out.println("<script>");
-				out.println("alert('입력하신 아이디로 가입 된 회원은 존재하지 않습니다.');");
-				out.println("location.href='./find_data.do';");
-				out.println("</script>");
 			} else {
 				out.println("<script>");
 				out.println("alert('입력하신 정보로 가입 된 회원은 존재하지 않습니다.');");
