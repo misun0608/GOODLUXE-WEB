@@ -10,7 +10,7 @@
 <title>GOODLUXE :: 굿럭스</title>
 
 <%
-	String member_isadmin = (String)session.getAttribute("member_isadmin()");
+	String member_isadmin = (String)session.getAttribute("member_isadmin");
 
 %>
 
@@ -76,7 +76,8 @@
 						     <script type="text/javascript">
 	
 									function popup(){
- 
+ 									
+										
 									var url = "chat.do";
  
 									var name = "chat";
@@ -86,7 +87,9 @@
 									}else{
 										window.open(url,name,"width=393,height=703,toolbar=no,status=no,location=no,scrollbars=no,menubar=no,resizable=no,left=50,right=50");	
 									}
-									}
+											
+										}
+									
 									</script>
 						</div>
                     </div>
