@@ -127,15 +127,16 @@ $(document).ready(function() {
                                 	}
                                 %>
                                 </td>
-                                <td data-title="사용기간">
+                                <td data-title="사용기간">	
                                 <%
                                 	cal.setTime(cvo.getCoupon_expire());
-                                	cal.add(Calendar.DATE, -365 );
+                                	cal.add(Calendar.DATE, -365);
                                 	expire_date = format1.format(cal.getTime());
                                 %>
                                 <%=expire_date %>
-                                 ~
+                                ~
                                 <%=format1.format(cvo.getCoupon_expire()) %>
+                                
                                 </td>
                                 <td data-title="사용여부">
                                 	<%=cvo.getCoupon_status() %>

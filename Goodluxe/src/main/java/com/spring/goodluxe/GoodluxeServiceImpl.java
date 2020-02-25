@@ -603,6 +603,7 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 			OrderMapper orderMapper =sqlSession.getMapper(OrderMapper.class);
 			order_list = orderMapper.getOrderList(member_id);
 			
+			System.out.println("어머나 : "+ order_list.get(0).get("order_number"));
 			if(order_list != null) {
 				return order_list;
 			}else {
