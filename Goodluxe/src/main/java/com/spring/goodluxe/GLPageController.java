@@ -698,9 +698,10 @@ public class GLPageController {
 		ArrayList<ApplyVO> applyList = null;
 		// 판매중
 		ArrayList<HashMap<String,Object>> sellingList = null;
-		// 거래진행중
+		
+		// 거래진행중(수정필요)
 		ArrayList<HashMap<String,Object>> tradingList = null;
-		// 판매완료
+		// 판매완료(수정필요)
 		ArrayList<HashMap<String,Object>> finishList = null;
 		// 매입상품
 		ArrayList<HashMap<String,Object>> purchasingList = null;

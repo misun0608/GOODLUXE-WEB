@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.goodluxe.voes.ApplyVO;
+import com.spring.goodluxe.voes.ConsignProductVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -336,16 +337,36 @@ public class OrderServiceImpl implements OrderService {
 		}
 	// 판매조회 거래진행중 리스트
 		public ArrayList<HashMap<String,Object>> getTradingList(String member_id) throws Exception{
+			HashMap<String,Object> tradingData = null;
 			ArrayList<HashMap<String,Object>> tradingList = null;
+			ArrayList<ConsignProductVO> entityList = null; // 추가
 			try {
-				
 				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
-				tradingList = applyMapper.getTradingList(member_id);
 				
-				if(tradingList != null) {
-					return tradingList;
-				}else {
+				// entityNum 받아와서...
+				entityList = applyMapper.getEntityNum(member_id);
+				
+				if(entityList.size() == 0) {
 					return null;
+				}
+				
+				else {
+				
+//				for(int i=0; i < entityList.size(); i++) {
+//					ConsignProductVO entity_number = entityList.get(i);
+//				}
+					for(int i=0; i < entityList.size(); i++) {
+						ConsignProductVO vo = (ConsignProductVO)entityList.get(i);
+						 String entity_number = vo.getEntity_number();
+						 tradingData = applyMapper.getTradingList(entity_number);
+						 tradingList.add(i, tradingData);
+					}
+					
+					if(tradingList != null) {
+						return tradingList;
+					}else {
+						return null;
+					}
 				}
 				
 			}catch(Exception e) {
@@ -354,15 +375,32 @@ public class OrderServiceImpl implements OrderService {
 		}
 	// 판매조회 판매완료 리스트
 		public ArrayList<HashMap<String,Object>> getFinishList(String member_id) throws Exception{
+			HashMap<String,Object> finishData = null;
 			ArrayList<HashMap<String,Object>> finishList = null;
+			ArrayList<ConsignProductVO> entityList = null; // 추가
+			
 			try {
 				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
-				finishList = applyMapper.getFinishList(member_id);
+				
+				// entityNum 받아와서...
+				entityList = applyMapper.getEntityNum(member_id);
+				
+				
+				if(entityList.size() == 0) {
+					return null;
+				}else {
+					for(int i=0; i < entityList.size(); i++) {
+						ConsignProductVO vo = (ConsignProductVO)entityList.get(i);
+						 String entity_number = vo.getEntity_number();
+						 finishData = applyMapper.getFinishList(entity_number);
+						 finishList.add(i, finishData);
+					}
 				
 				if(finishList != null) {
 					return finishList;
 				}else {
 					return null;
+				}
 				}
 				
 			}catch(Exception e) {
