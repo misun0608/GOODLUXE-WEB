@@ -53,6 +53,12 @@
 		<result property="ap_decision" column="ap_decision" />
 	</resultMap>
 	
+	<!-- 마지막 추가 끝 -->
+	<resultMap type="com.spring.goodluxe.voes.ConsignProductVO" id="ConsignVO">
+		<result property="entity_number" column="entity_number" />
+	</resultMap>
+	<!-- 추가 끝 -->
+	
 	<insert id="insertApplyGoods" parameterType="com.spring.goodluxe.voes.ApplyVO">
 		insert into GL_APPLYGOODS(member_id,ap_selected_brand,ap_selected_category,ap_md_name,ap_hope_price,ap_buy_year,
 		ap_buy_price,ap_buy_store,ap_img_stored,ap_smethod,ap_dmethod,ap_apply_date,ap_decision
@@ -79,14 +85,22 @@
 		)
 	</select>
 	
-	<select id="getTradingList" parameterType="String" resultMap="hashmapOrderBoardVO">
+	
+	<!-- 마지막 추가  -->
+	<select id="getEntityNum" parameterType="String" resultMap="ConsignVO">
+		select * from GL_CONSIGNMENT where member_id = #{member_id}
+	</select>
+	
+	<!-- 추가 끝 -->
+	
+	<select id="getTradingList" parameterType="java.util.ArrayList" resultMap="hashmapOrderBoardVO">
       select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status from
       (select * from (select rownum rnum, order_order_date,order_pay_date,pb_md_name,
 ORDER_PRODUCT_PRICE,order_status
       from(
       select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status
       from GL_ORDER glod, GL_PRODUCTBOARD glpb 
-      where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} 
+      where glod.pb_number = glpb.pb_number and glpb.entity_number = #{entity_number} 
 and glpb.pb_sale_status = '거래진행중')
       )
 union
@@ -95,19 +109,19 @@ ORDER_PRODUCT_PRICE,order_status
       from(
       select order_order_date,order_pay_date,pb_md_name,ORDER_PRODUCT_PRICE,order_status
       from GL_ORDER glod, GL_PRODUCTBOARD glpb 
-      where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} 
+      where glod.pb_number = glpb.pb_number and glpb.entity_number = #{entity_number} 
 and glpb.pb_sale_status = '판매완료' and order_pay_date > systimestamp - 14
 )
       )) order by order_order_date desc
 	</select>
 	
-	<select id="getFinishList" parameterType="String" resultMap="hashmapOrderBoardFVO">
+	<select id="getFinishList" parameterType="java.util.ArrayList" resultMap="hashmapOrderBoardFVO">
 	<![CDATA[
 		select * from (select rownum rnum, order_order_date,order_pay_date,order_ship_date,pb_md_name,ORDER_PRODUCT_PRICE
 		from(
 		select order_order_date,order_pay_date,order_ship_date,pb_md_name,ORDER_PRODUCT_PRICE
 		from GL_ORDER glod, GL_PRODUCTBOARD glpb 
-		where glod.pb_number = glpb.pb_number and glod.member_id = #{member_id} and glpb.pb_sale_status = '판매완료' and order_pay_date <= systimestamp -14
+		where glod.pb_number = glpb.pb_number and glpb.entity_number = #{entity_number} and glpb.pb_sale_status = '판매완료' and order_pay_date <= systimestamp -14
 		order by order_order_date desc))
 	]]>
 	</select>

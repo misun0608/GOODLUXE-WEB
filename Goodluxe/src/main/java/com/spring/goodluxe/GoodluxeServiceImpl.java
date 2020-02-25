@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.goodluxe.voes.ApplyVO;
+import com.spring.goodluxe.voes.ConsignProductVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -666,40 +667,77 @@ public class GoodluxeServiceImpl implements GoodluxeService {
 				throw new Exception("판매중 위탁상품 리스트 불러오기 실패.", e);
 			}
 		}
+		
 	// 판매조회 거래진행중 리스트
 		public ArrayList<HashMap<String,Object>> getTradingList(String member_id) throws Exception{
-			ArrayList<HashMap<String,Object>> tradingList = null;
+			HashMap<String,Object> tradingData = null;
+			ArrayList<HashMap<String,Object>> tradingList = new ArrayList<HashMap<String,Object>>();
+			ArrayList<ConsignProductVO> entityList = null; // 추가
 			try {
-				
 				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
-				tradingList = applyMapper.getTradingList(member_id);
 				
-				if(tradingList != null) {
-					return tradingList;
-				}else {
+				// entityNum 받아와서...
+				entityList = applyMapper.getEntityNum(member_id);
+				if(entityList.size() == 0) {
 					return null;
 				}
+
+//				for(int i=0; i < entityList.size(); i++) {
+//					ConsignProductVO entity_number = entityList.get(i);
+//				}
+					for(int i=0; i < entityList.size(); i++) {
+						ConsignProductVO vo = (ConsignProductVO)entityList.get(i);
+						 String entity_number = vo.getEntity_number();
+						 tradingData = applyMapper.getTradingList(entity_number);
+						 if(tradingData != null) {
+							 tradingList.add(tradingData);
+						 }
+					}
+					
+					if(tradingList.size() > 0) {
+						return tradingList;
+					}
 				
 			}catch(Exception e) {
+				System.out.println("ERROR(GoodluxeServiceImpl/getTradingList) : " + e.getMessage());
 				throw new Exception("거래진행중 위탁상품 리스트 불러오기 실패.", e);
 			}
+			return null;
 		}
 	// 판매조회 판매완료 리스트
 		public ArrayList<HashMap<String,Object>> getFinishList(String member_id) throws Exception{
-			ArrayList<HashMap<String,Object>> finishList = null;
+			HashMap<String,Object> finishData = null;
+			ArrayList<HashMap<String,Object>> finishList = new ArrayList<HashMap<String,Object>>();
+			ArrayList<ConsignProductVO> entityList = null; // 추가
 			try {
 				ApplyMapper applyMapper =sqlSession.getMapper(ApplyMapper.class);
-				finishList = applyMapper.getFinishList(member_id);
 				
-				if(finishList != null) {
-					return finishList;
-				}else {
+				// entityNum 받아와서...
+				entityList = applyMapper.getEntityNum(member_id);
+				
+				
+				if(entityList.size() == 0) {
 					return null;
+				}else {
+					for(int i=0; i < entityList.size(); i++) {
+						ConsignProductVO vo = (ConsignProductVO)entityList.get(i);
+						 String entity_number = vo.getEntity_number();
+						 finishData = applyMapper.getFinishList(entity_number);
+						 // finishList.add(i, finishData);
+						 if(finishData != null) {
+							 finishList.add(finishData);
+						 }
+					}
+				
+					if(finishList.size() > 0) {
+						return finishList;
+					}
 				}
 				
 			}catch(Exception e) {
 				throw new Exception("판매완료 위탁상품 리스트 불러오기 실패.", e);
 			}
+			return null;
 		}
 	
 	// 판매조회 매입상품 리스트

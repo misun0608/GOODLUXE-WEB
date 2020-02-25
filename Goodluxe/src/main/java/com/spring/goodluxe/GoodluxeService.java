@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.spring.goodluxe.voes.ApplyVO;
+import com.spring.goodluxe.voes.ConsignProductVO;
 import com.spring.goodluxe.voes.CouponVO;
 import com.spring.goodluxe.voes.MemberVO;
 import com.spring.goodluxe.voes.OrderVO;
@@ -60,4 +61,6 @@ public interface GoodluxeService {
 	public ArrayList<HashMap<String,Object>> getTradingList(String member_id) throws Exception;
 	public ArrayList<HashMap<String,Object>> getFinishList(String member_id) throws Exception;
 	public ArrayList<HashMap<String,Object>> getPurchasingList(String member_id) throws Exception;
+	
+//	public ArrayList<ConsignProductVO> getEntityNum(String member_id) throws Exception;
 }
