@@ -127,8 +127,7 @@ String member_id = (String) session.getAttribute("member_id");
 
 							<a class="detail_main_image_link_right"> <img
 								src="<%=path%><%=auctionvo.getAUCTION_PHOTO1_STORED()%>"
-								alt="가방" name="AUCTION_PHOTO1_STORED" class="main_image"
-								style="width:500px; height:350px;">
+								alt="가방" name="AUCTION_PHOTO1_STORED" class="main_image">
 							</a>
 
 						</div>
@@ -395,6 +394,9 @@ String member_id = (String) session.getAttribute("member_id");
 									      alert("더 이상 낮출 수 없습니다"); 
 									      
 									      return false; 
+									  } else if(number+num > <%=auctionvo.getAUCTION_NOW_PRICE()%> *2 ) {
+										  alert("현재 경매 참여 가능한 최대가 입니다.");
+										  return false;
 									  }
 									   
 									   
@@ -402,9 +404,13 @@ String member_id = (String) session.getAttribute("member_id");
 									   }  
 								
 								</script>
+										<%
+											int orig_val = (int)auctionvo.getAUCTION_NOW_PRICE();
+											int gab = (int)(orig_val * 0.1);
+										%>
 								
 										<a href="#" 
-											class="downprice" ><input type="button" value="-" onclick="addCount(-50000); return false;"
+											class="downprice" ><input type="button" value="-" onclick="addCount(-<%=gab %>); return false;"
 											class="auction_minus"></a> <input type="text" id="unit"
 											style="pointer-events: none;" class="auction_price_text"
 											name="AUHIS_BETTING_PRICE"
@@ -415,7 +421,7 @@ String member_id = (String) session.getAttribute("member_id");
 										<!-- <input type="hidden" name="AUHIS_BID_TIME" value="2020-01-29" > -->
 
 										<a href="#" 
-											class="upprice"><input type="button" value="+" onclick="addCount(50000); return false;"
+											class="upprice"><input type="button" value="+" onclick="addCount(<%=gab %>); return false;"
 											class="auction_plus"></a>
 									</div>
 									<div>
@@ -434,8 +440,7 @@ String member_id = (String) session.getAttribute("member_id");
 		   }else if(number < <%=auctionvo.getAUCTION_NOW_PRICE()%>){
 			   alert("입찰값이 현재가격보다 낮습니다.. ");
 			   return false;
-		   }
-		
+		   }		
     });
 		
     </script>

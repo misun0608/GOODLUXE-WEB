@@ -760,7 +760,7 @@ public class jaejinuController {
 			alamvo.setAlam_read(x);
 			alamvo.setAlam_linkpage(link);
 			alamvo.setAlam_number(0);
-			res = alamService.insertAlam(alamvo);
+			// res = alamService.insertAlam(alamvo);
 			System.out.println(member_id);
 			membervo = memberService.selectMember1(member_id);
 

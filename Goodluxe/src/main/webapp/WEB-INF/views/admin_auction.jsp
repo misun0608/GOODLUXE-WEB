@@ -291,9 +291,9 @@
 							<tr>
 								<td class="td1">게시 상태</td>
 								<td class="td2" colspan="3">&nbsp; <input type="radio"
-									id="auction_post1" name="AUCTION_POST_STATUS" checked/> <label
+									id="auction_post1" name="AUCTION_POST_STATUS" value="게시중" checked/> <label
 									for="auction_post1" >게시중</label> <input type="radio"
-									id="auction_post2" name="AUCTION_POST_STATUS" /> <label
+									id="auction_post2" name="AUCTION_POST_STATUS" value="게시안함" /> <label
 									for="auction_post2">게시안함</label>
 								</td>
 							</tr>
