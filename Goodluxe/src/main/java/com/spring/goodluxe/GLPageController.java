@@ -710,6 +710,7 @@ public class GLPageController {
 			applyList = gls.getApplyList(member_id);
 			sellingList = gls.getSellingList(member_id);
 			tradingList = gls.getTradingList(member_id);
+			System.out.println("Controller : " + tradingList.size());
 			finishList = gls.getFinishList(member_id);
 			purchasingList = gls.getPurchasingList(member_id);
 		}catch(Exception e) {
