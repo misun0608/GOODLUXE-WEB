@@ -113,7 +113,7 @@
 					<!-- onsubmit="메소드();" -->
 
 					<br> <br>
-					<h3>▶ 기본 정보 입력</h3>
+					<h3>| 기본 정보 입력</h3>
 					<br>
 					<table class="information">
 <!-- 					<tr>
