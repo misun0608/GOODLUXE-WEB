@@ -25,22 +25,38 @@
 	int used_point = 0;
 	int minus_point = 0;
 	int accumulated_point = 0;
+	int usable_point = 0;
 	
 	for(int i=0; i<point_list.size(); i++){
 		PointVO pvo = (PointVO)point_list.get(i);
-		if(pvo.getPoint_status().equals("상품구매 사용")){
-			used_point += pvo.getPoint_amount();
-		}else if(pvo.getPoint_status().equals("관리자 회수")){
-			minus_point += pvo.getPoint_amount();
+		//if(pvo.getPoint_status().equals("상품구매 사용")){
+		//	used_point += pvo.getPoint_amount();
+		//}else if(pvo.getPoint_status().equals("관리자 회수")){
+		//	minus_point += pvo.getPoint_amount();
+		//}else{
+		//	accumulated_point += pvo.getPoint_amount();
+		//}
+		if(pvo.getPoint_amount()<0){
+			System.out.println("회수");
+			if(pvo.getPoint_status().equals("관리자 회수")){
+				minus_point += pvo.getPoint_amount();
+			}else{
+				used_point += pvo.getPoint_amount();
+			}
+			
 		}else{
+			System.out.println("적립");
 			accumulated_point += pvo.getPoint_amount();
 		}
+		usable_point += pvo.getPoint_amount();
+		
 	}
 	
 	// 컴마
 	DecimalFormat df3 = new DecimalFormat("###,###");
 	
-	String total_form = df3.format(mvo.getMember_point());
+	//String total_form = df3.format(mvo.getMember_point());
+	String total_form = df3.format(usable_point);
 	String used_point_form = df3.format(used_point);
 	String minus_point_form = df3.format(minus_point);
 	String accumulated_point_form = df3.format(accumulated_point);
@@ -115,8 +131,8 @@ $(document).ready(function() {
                             <div class = "point_chart_center">
                                 <ul class = "point_chart">
                                     <li class = "point_chart_li1"> &nbsp;&nbsp;누적 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   <%=accumulated_point_form %> P</li>
-                                    <li class = "point_chart_li1"> &nbsp;&nbsp;사용 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=used_point_form %> P</li>
-                                    <li class = "point_chart_li1"> &nbsp;&nbsp;차감 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   -&nbsp;<%=minus_point_form %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;사용 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   <%=used_point_form %> P</li>
+                                    <li class = "point_chart_li1"> &nbsp;&nbsp;차감 적립금  &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;   &nbsp;<%=minus_point_form %> P</li>
                                 </ul>
                             </div>
                         </div>
@@ -148,28 +164,33 @@ $(document).ready(function() {
 								PointVO pvo = (PointVO)point_list.get(i);
                         %>
                             <tr>
-                                <td class="hidecol"><%=pvo.getPoint_number() %></td>
+                                <td class="hidecol"><%= number %></td><%--=pvo.getPoint_number() --%>
                                 <td><%=pvo.getOrder_number() %></td>
                                 <td class="hidecol"><%=format1.format(pvo.getPoint_date()) %></td>
                                 <td><%=pvo.getPoint_status() %></td>
                                 <td>
-                                <%
+                                <%--
                                 if(pvo.getPoint_status().equals("상품구매 사용")||pvo.getPoint_status().equals("관리자 회수")){
-                                %>
-                                -
-                                <%=pvo.getPoint_amount() %>
-                                <%
-                                }else{
-                                %>
-                                +
-                                <%=pvo.getPoint_amount() %>
-                                <%
-                                }
-                                %>
+                                --%>
                                 
+                                <%--=pvo.getPoint_amount() --%>
+                                <%--
+                                }else{
+                                --%>
+                                
+                                <%--=pvo.getPoint_amount() --%>
+                                <%--
+                                }
+                                --%>
+                                <% if(pvo.getPoint_amount()<=0){ %>
+                                	<%= pvo.getPoint_amount() %>
+                                <%} else if(pvo.getPoint_amount()>0){%>
+                                	+<%= pvo.getPoint_amount() %>
+                                <%} %>
                                 </td>
                             </tr>
                         <%
+                        		number--;
 							}
                         }
                         %>

@@ -23,9 +23,9 @@ public class Purchase2ServiceImpl implements Purchase2Service {
 			Purchase2Mapper purchaseMapper = sqlSession.getMapper(Purchase2Mapper.class);
 			purchasevo = purchaseMapper.selectPurchase(entity_number);
 			purchasevo.getEntity_number();
-			System.out.println("ã�ƶ�"+entity_number);
+			System.out.println("entitynumber="+entity_number);
 		}catch(Exception e) {
-			System.out.println("ã�ƶ� ���Զ�+"+e.getMessage());
+			System.out.println("entitynumber"+e.getMessage());
 		}
 		
 		return purchasevo;

@@ -120,6 +120,9 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 		
 		if(userRoom.getChat_room().equals(roomList.get(sessionList.get(i)))) {
 			sessionList.get(i).sendMessage(new TextMessage(JsonDataOpen(userId)));
+			if(userId.equals("admin")) {
+				chat_recordService.updateListChatRecordCountdo(roomName);
+			}
 		}
 		
 		//11. 같은 방에 있는사람에게만 접속자 리스트를 날려주도록한다.
@@ -127,19 +130,25 @@ public void afterConnectionEstablished(WebSocketSession session) throws Exceptio
 		System.out.println("현재방에 참석중인사람수:"+userList.size());
 		ChatUtil chatUtil = new ChatUtil(); //f.project.util소속 클래스 선언
 		String userListMessage = chatUtil.split(userList); // 받아온 list에 대해서 문자열로 바인딩해서 날려줌
-		sessionList.get(i).sendMessage(new TextMessage(JsonUser(userListMessage)));
+		//sessionList.get(i).sendMessage(new TextMessage(JsonUser(userListMessage)));
 		
 		ArrayList<Chat_recordVO> recordlist = chat_recordService.selectListchatRecord(roomName);
 		
+		
+		for (WebSocketSession webSocketSession : sessionList) {
+			//자신한테만 보내도록 함
+			if(session.getId().equals(webSocketSession.getId())) {
 		//대화 내용 뿌리기 
 		for(int j =0; j< recordlist.size(); j++) {
 		
-		sessionList.get(i).sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
+			webSocketSession.sendMessage(new TextMessage(JsonData(recordlist.get(j).getMember_id(),recordlist.get(j).getChat_message())));
+		}
+			}
 		}
 		
 		//12. 방리스트를 모든 사람들에게 보내줌
 		String roomNames = roomName;
-		sessionList.get(i).sendMessage(new TextMessage(JsonRoom(roomNames)));
+		//sessionList.get(i).sendMessage(new TextMessage(JsonRoom(roomNames)));
 		
 		
 	}
@@ -202,42 +211,48 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 		
 		//3. 배열선언(split을 이용해서 문자열을 자른다)
 		String msgArr[] = new String[2];
-		msgArr = message.getPayload().split("!%/"); // %!로 문자를 잘라서 배열에저장
 		
+		msgArr = message.getPayload().split("!%/"); // %!로 문자를 잘라서 배열에저장
+		System.out.println("0="+msgArr[0]);
+		System.out.println("1="+msgArr[1]);
 		//4. [0]: 유저가 보낸 메시지,  [1]:귓속말 대상자,  [2]:방의 이름
 		System.out.println("보낸메시지:"+msgArr[0]+", 방의이름:"+msgArr[1]);
-//		
-//		//5.귓속말이라면 해당아이디를 가진사람한테만 보내도록한다.
-//		if(!msgArr[1].equals("")) {
-//			Iterator<WebSocketSession> sessionIds = mapList.keySet().iterator(); //기존에 저장된 접속자명단을 가져옴
-//	    	while(sessionIds.hasNext()) {
-//	    		WebSocketSession sessionId = sessionIds.next();
-//	    		String value = mapList.get(sessionId);
-//	    		//while문을 돌면서 귓속말 대상자를 찾는다. 찾게되면 해당사람에게 귓속말로 문자를 보내도록한다.
-//	    		if(value.equals(msgArr[1])) {
-//	    			sessionId.sendMessage(new TextMessage(JsonWisper(userId, msgArr[0])));
-//	    		}
-//	    	}
-//		}
+
 			Chat_recordVO chat_recordvo = new Chat_recordVO();
 			chat_recordvo.setMember_id(member_id);
 			chat_recordvo.setChat_message(msgArr[0]);
 			chat_recordvo.setChat_timestamp(null);
 			chat_recordvo.setChat_room(roomName);
 			
-		 	chat_recordService.insertchatRecord(chat_recordvo);
+			
+			if(member_id.equals("admin")) {
+				chat_recordService.insertadminchatRecord(chat_recordvo);
+			}else if(chat_recordService.selectlistcount(chat_recordvo)==0){
+				chat_recordService.insertadminchatRecord(chat_recordvo);
+			}else {
+				chat_recordService.insertchatRecord(chat_recordvo);
+			}
 		 	System.out.println(chat_recordvo.getMember_id());
 		 	System.out.println(chat_recordvo.getChat_message());
 		 	
-		//6.귓속말로 하지않았을경우 해당 유저와 같은 방에 있는 사람에게만 메세지를 날리도록한다.
+		//6.해당 유저와 같은 방에 있는 사람에게만 메세지를 날리도록한다.
 //		else {
 			for (WebSocketSession webSocketSession : sessionList) {
 		   		
 				//같은방일때만 보냄
 				if(msgArr[1].equals(roomList.get(webSocketSession))) {
 					//만약 자신의 세션아이디와 다르다면 메세지를 아래와같이 전달(자기자신한테는 보낼필요가없기때문)
+					if(userId=="admin") {
+        				
+        			}else {
+        				//increase room count ( msgArr[1])
+        				//chat_recordService.updateListChatRecordCountdo(msgArr[1]);
+        				System.out.println("count update ~!! ");}
 	        		if(!session.getId().equals(webSocketSession.getId())) {
+	        			
 	        			webSocketSession.sendMessage(new TextMessage(JsonData(userId, msgArr[0])));
+	        			}
+	        			
 	        		}   
 				}  		
 		//	}
@@ -277,7 +292,7 @@ protected void handleTextMessage(WebSocketSession session, TextMessage message) 
 //			ws.sendMessage(new TextMessage(msg));
 //		}
 //	}
-}
+
 
 @Override
     //연결 해제 후 실행 메서드
@@ -355,18 +370,35 @@ public void afterConnectionClosed(WebSocketSession session, CloseStatus status) 
 //json형태로 메세지 변환(일반 메세지 보낼 때)
 public String JsonData(String id, Object msg) {
 	
-	JsonObject jsonObject = Json.createObjectBuilder().add("message", 
-			"<div id="+id+" width='100%' >"
-        			+ "<span id='beforeevent' display='none'><img id='imgadmin' src='./resources/img/chat_img/customer.png' width='50px'  >"
+	JsonObject jsonObject=null;
+	
+	if(id.equals("admin")) {
+	jsonObject = Json.createObjectBuilder().add("message",
+			
+			"<div id="+id+" width='100%'   "
+        			+ "<span id='beforeevent'><img id='imgadmin' src='./resources/img/chat_img/admin.png' width='50px'  >"
 					+ "</span> "
-					+ "<textarea class='speech-bubble' background='#F9E7E5' cols='30' wrap='virtual' or 'physical' or 'off' readonly>"
+					+ "<textarea class='speech-bubble' background='#ffffff' cols='30' wrap='virtual' or 'physical' or 'off' readonly>"
 	+msg+
 	"</textarea>"
-	+ "<span id='afterevent'>"
-			+ "<img id='imgadmin' src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px' display='' ></span>"
+	+ "<span id='afterevent' display='none'>"
+			+ "<img id='imgadmin' src='./resources/img/chat_img/admin.png' width='50px' padding='0px 5px 0px 5px'  ></span>"
 			+ "</div>"
 			+ "<br>").build();
-	
+	}else {
+		jsonObject = Json.createObjectBuilder().add("message",
+				
+				"<div id="+id+" width='100%'   "
+	        			+ "<span id='beforeevent'><img id='imgadmin' src='./resources/img/chat_img/customer.png' width='50px'  >"
+						+ "</span> "
+						+ "<textarea class='speech-bubble' background='#ffffff' cols='30' wrap='virtual' or 'physical' or 'off' readonly>"
+		+msg+
+		"</textarea>"
+		+ "<span id='afterevent' display='none'>"
+				+ "<img id='imgadmin' src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px'  ></span>"
+				+ "</div>"
+				+ "<br>").build();
+	}
 	StringWriter write = new StringWriter();
 	
 	try(JsonWriter jsonWriter = Json.createWriter(write)){
@@ -491,9 +523,9 @@ public class ChatUtil {
 	public String split(List<String> mem) {
 		String list = "";
 		for(int i=0; i<mem.size();i++) {
-			list +="<a href='#none' onclick=\"insertWisper('"+mem.get(i)+"')\">";
+			//list +="<a href='#none' onclick=\"insertWisper('"+mem.get(i)+"')\">";
 			list += mem.get(i);
-			list +="</p>";
+			list +=",";
 		}
 		return list;
 	}

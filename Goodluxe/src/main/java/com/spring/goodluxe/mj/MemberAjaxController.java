@@ -65,8 +65,8 @@ public class MemberAjaxController {
 
 	@PostMapping(value = "/idCheck.do", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> idCheck(MemberVO memberVO) {
-		Map<String, Object> retVal = new HashMap<String, Object>(); // 리턴값 저장
-		System.out.println("컨트롤러 idCheck = " + memberVO.getMember_id());
+		Map<String, Object> retVal = new HashMap<String, Object>();
+//		System.out.println("컨트롤러 idCheck = " + memberVO.getMember_id());
 		try {
 
 			int res = gls.idCheck(memberVO);

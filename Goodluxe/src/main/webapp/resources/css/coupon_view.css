@@ -29,7 +29,7 @@ img {vertical-align:top;}
         background-color: #F0D2CF;
         color : black;
         text-align: center;
-        font-weight: bold;
+        font-weight: bold;	
         border-top: 2px solid  #C97D73;
         border-bottom: 1px solid  #C97D73;
     }
@@ -41,6 +41,9 @@ img {vertical-align:top;}
     }
     .coupon_table th, .coupon_table td{
         padding:9px 12px;
+    }
+    .coupon_table tbody tr td{
+        text-align : center;
     }
     .coupon_table tbody tr:last-of-type{
         border-bottom: 2px solid  #C97D73;

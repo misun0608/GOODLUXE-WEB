@@ -82,42 +82,42 @@
 	<!-- 오늘 주문건수 -->
 	<select id="getTodayOrderCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where ORDER_ORDER_DATE > sysdate -1 and ORDER_ORDER_DATE < sysdate +1
+		select count(*) from gl_order where to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>
 	</select>
 	
 	<!-- 오늘 주문매출액 -->
 	<select id="getTodayOrderSales" resultMap="orderRM">
 	<![CDATA[
-		select ORDER_PAY_PRICE from GL_ORDER where ORDER_ORDER_DATE > sysdate -1 and ORDER_ORDER_DATE < sysdate +1
+		select ORDER_PAY_PRICE from GL_ORDER where to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>	
 	</select>
 	
 	<!-- 오늘 결제주문건수 -->
 	<select id="getTodayPaidOrderCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and ORDER_PAY_DATE > sysdate -1 and ORDER_PAY_DATE < sysdate +1
+		select count(*) from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>
 	</select>
 	
 	<!-- 오늘 결제매출액 -->
 	<select id="getTodayPaidOrderSales" resultMap="orderRM">
 	<![CDATA[
-		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and ORDER_PAY_DATE > sysdate -1 and ORDER_PAY_DATE < sysdate +1
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and to_char(ORDER_PAY_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>	
 	</select>
 	
 	<!-- 오늘 환불주문건수 -->
 	<select id="getTodayRefundOrderCount" resultType="int">
 	<![CDATA[
-		select count(*) from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -1 and ORDER_CANCEL_DATE < sysdate +1
+		select count(*) from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and to_char(ORDER_CANCEL_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>
 	</select>
 	
 	<!-- 오늘 주문매출액 -->
 	<select id="getTodayRefundOrderSales" resultMap="orderRM">
 	<![CDATA[
-		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -1 and ORDER_CANCEL_DATE < sysdate +1
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and to_char(ORDER_CANCEL_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
 	]]>	
 	</select>
 	

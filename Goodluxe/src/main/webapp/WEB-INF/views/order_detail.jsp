@@ -80,7 +80,8 @@
                 		int md_price = Integer.parseInt(orderdata.get("order_product_price").toString());
                 		int used_point = Integer.parseInt(orderdata.get("order_used_point").toString());
                 		int delivery_fee = Integer.parseInt(orderdata.get("order_ship_fee").toString());
-                		int payment_price = md_price - used_point + delivery_fee;
+                		int payment_price = Integer.parseInt(orderdata.get("order_pay_price").toString());
+                		//int payment_price = md_price - used_point + delivery_fee;
                 		String st_md_price = df3.format(md_price) + "원";
                 		String st_used_point = df3.format(used_point) + " P";
                 		String st_delivery_fee = df3.format(delivery_fee) + "원";
@@ -101,7 +102,11 @@
                             </tr>
                             <tr>
                                 <th>총 결제금액</th>
-                                <td><%=st_payment_price %></td>
+                                <%if(orderdata.get("order_used_coupon")==null){ %>
+                               		<td><%=st_payment_price %></td>
+                                <%}else{ %>
+                               		
+                               	<%} %>
                             </tr>
                             <tr>
                                 <th>결제수단</th>
@@ -132,7 +137,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class = "mobile_row1" ><div class = "img_size_div"><img src = "${pageContext.request.contextPath}/resources/<%=orderdata.get("pb_photo1") %>" class = "product_img"></div></td>
+                                    <td class = "mobile_row1" ><div class = "img_size_div"><img src = "/Goodluxe/image/<%=orderdata.get("pb_main_img_stored") %>" class = "product_img"></div></td>
                                     <td class = "mobile_row2" data-title = "상품정보" ><%=orderdata.get("pb_md_name") %></td>
                                     <td class = "mobile_row3" data-title = "판매가"><%=st_md_price %></td>
                                     <td class = "mobile_row4" data-title = "주문 처리상태"><%=orderdata.get("order_status") %></td>

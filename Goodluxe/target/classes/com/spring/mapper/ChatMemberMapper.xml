@@ -72,6 +72,12 @@
 		where member_id = #{member_id}
 	</select>
 	
+	<select id="whereisthechatroom" parameterType="String" resultType="String">
+		 select chat_room
+                from gl_chatmember
+                where member_id = #{member_id}
+	</select>
+	
 	
 		
 </mapper>

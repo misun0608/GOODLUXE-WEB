@@ -41,7 +41,12 @@
 							output += '<td class="context_td">'+isblack+'</td>';
 							output += '<td class="context_td">'+item.member_phone+'</td>';
 							output += '<td class="context_td">'+item.member_email+'</td>';
-							output += '<td class="context_td"><button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
+							output += '<td class="context_td">';
+							if(item.member_class != "B"){
+								output += '<button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
+							}else{
+								output += '<button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 해제</button> </td>';
+							}
 							output += '</tr>';
 							console.log("output:" + output);
 							$('#output').append(output);//뒤에 이어붙이기
@@ -78,7 +83,12 @@
 					output += '<td class="context_td">'+isblack+'</td>';
 					output += '<td class="context_td">'+data.member_phone+'</td>';
 					output += '<td class="context_td">'+data.member_email+'</td>';
-					output += '<td class="context_td"><button class="delete_btn" id="black_btn" value = "'+data.member_id+'">설정</button> </td>';
+					output += '<td class="context_td">';
+					if(item.member_class != "B"){
+						output += '<button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 설정</button> </td>';
+					}else{
+						output += '<button class="delete_btn black_btn" id="black_btn" value = "'+item.member_id+'">블랙리스트 해제</button> </td>';
+					}
 					output += '</tr>';
 					console.log("output:" + output);
 					$('#output').append(output);//뒤에 이어붙이기
@@ -253,7 +263,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">관리자 고객관리 페이지</h1>
+			<h1 id="container_title">| 회원관리 > 블랙리스트관리 </h1>
 			<div class="container_wr">
 				<section>
 					<br><br>

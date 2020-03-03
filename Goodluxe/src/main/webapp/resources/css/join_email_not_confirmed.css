@@ -1,0 +1,82 @@
+/* 초기화 */
+* {margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 아이디/비밀번호 찾기 */
+.confirmed_content{
+    margin: auto;
+    text-align: center;
+    margin: 18px 0 16px 14px; 
+    font-size: 24px;
+}
+
+.exclamation_image{
+	width:80px;
+	padding-top:20px;
+}
+
+.not_confirmed_table td{
+    padding: 5px 10px 7px 10px;
+}
+/* .jointd{ */
+/*     BORDER-BOTTOM: 1PX SOLID #444444; */
+/* } */
+
+.not_confirmed_table{
+    text-align: center;
+    font-size: 13px;
+    margin: auto;
+    width: 400px;
+    border-collapse: collapse;
+}
+
+.not_confirmed_table2{
+    text-align: center;
+    font-size: 11px;
+    margin: auto;
+    width: 400px;
+    border-collapse: collapse;
+    border: 0px;
+    color: rgb(156, 156, 156);
+}
+
+.notConfirmedTitle{
+    width: 130px;
+    vertical-align: middle;
+    line-height: 200%;
+}
+
+.not_confirmed_button{
+    font-size: 13px;
+    width: 310px;
+    height: 45px;
+    border-radius: 3px;
+    border: 1px solid white; 
+    margin: 3px 0 4px 0;
+    color: white; 
+    outline: 0;
+    /* 파란 계열 */
+    /* background-color: #8FB0CA;  */
+    /* background-color: #2F87C9; */
+    /* background-color: #7eb5de; */
+    background-color: #76aed6;
+    /* 분홍 계열 */
+    /* background-color: #DFB1AB;  */
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.not_confirmed_button:hover{
+    /* 파란 계열 */
+    /* background-color: rgb(187, 214, 235);  */
+    /* background-color: #65b4f0; */
+    /* background-color: #a1cded; */
+    background-color: #99c2e0;
+    /* 분홍 계열 */
+    /* background-color: #F0D2CF;  */
+}

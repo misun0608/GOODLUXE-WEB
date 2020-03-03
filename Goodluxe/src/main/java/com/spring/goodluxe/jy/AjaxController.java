@@ -47,6 +47,30 @@ public class AjaxController {
 		return data;
 	}
 	
+	@RequestMapping(value = "/checkAlreadySetAlarm.do" ,produces="application/json;charset=UTF-8")
+		public int checkAlreadySetAlarm(@RequestParam(value="entity_number")String entity_number, HttpSession session)throws Exception{
+			int data = 0;
+			String member_id = (String) session.getAttribute("member_id");
+			if(member_id == null) return data;
+			
+			data = gls.checkAlreadySetAlarm(member_id, entity_number);
+
+			return data;
+		}
+		
+	//mdDetail 알람버튼
+	@RequestMapping(value="/mdDetailSetAlarm.do", produces= "application/json;charset=UTF-8")
+	public int mdDetailSetAlarm( HttpSession session,
+			@RequestParam(value="entity_number", required = false)String entity_number
+			) throws Exception {
+		String member_id = (String) session.getAttribute("member_id");
+		if(member_id == null) {return -1;}
+		int data = gls.mdDetailSetAlarm(member_id, entity_number);
+		
+		return data;
+	}	
+	
+	
 	//쿠폰관리-기본(모든쿠폰)
 	@RequestMapping(value="/CoupondefaultList.do", produces= "application/json;charset=UTF-8")
 	public String CoupondefaultList(HttpServletRequest request) throws Exception {
@@ -259,6 +283,22 @@ public class AjaxController {
 		return retVal;
 	}
 	
+	@RequestMapping(value="/adminOrderMoneyGetShipping.do", produces= "application/json;charset=UTF-8")
+	public Map<String, Object> adminOrderMoneyGetShipping(
+			@RequestParam(value="order_number", required = false)String order_number) throws Exception {
+		Map<String,Object> retVal = new HashMap<String, Object>();
+		String result = "변경실패";
+		int res = gls.adminOrderMoneyGetShipping(order_number);
+		
+		if(res == 1) {
+			result = "변경 성공";
+		}
+		retVal.put("res", result);
+		return retVal;
+	}
+	
+	
+	
 	//상품관리
 		@RequestMapping(value="/adminAllProductList.do", produces= "application/json;charset=UTF-8")
 		public ArrayList<HashMap<String,Object>> adminAllProductList(
@@ -374,7 +414,6 @@ public class AjaxController {
 	
 		@RequestMapping(value="/getAlarmContent.do", produces= "application/json;charset=UTF-8")
 		public ArrayList<NoticeVO> getAlarmContent(HttpSession session) throws Exception {
-			System.out.println("왔니???getAlarmContent");
 			
 			String member_id = (String) session.getAttribute("member_id");
 			ArrayList<NoticeVO> noticeList = null;
@@ -394,7 +433,6 @@ public class AjaxController {
 		public ArrayList<NoticeVO> getMoreAlarmContent(HttpSession session,
 				@RequestParam(value="count", required = false) int count) throws Exception {
 			
-			System.out.println("파라미터가 ㅇ문제인건가???");
 			String member_id = (String) session.getAttribute("member_id");
 			ArrayList<NoticeVO> noticeList = null;
 			HashMap<String,Object>map = new HashMap<String,Object>();
@@ -465,7 +503,9 @@ public class AjaxController {
 			gls.adminAuctionStatChange(AUCTION_POST_NUMBER);
 		}	
 		
-	
+		
+		
+		
 	
 	
 	

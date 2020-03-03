@@ -20,6 +20,12 @@ public class HelpController {
 	@Autowired
 	private HelpServiceImpl gls;
 	
+	@RequestMapping(value = "Event.do", method = RequestMethod.GET)
+	public ModelAndView event() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_page");
+		return mav; 
+	}
 	@RequestMapping(value = "scMenu.do", method = RequestMethod.GET)
 	public ModelAndView scMenu() {
 		ModelAndView mav = new ModelAndView();

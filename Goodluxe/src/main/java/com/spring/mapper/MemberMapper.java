@@ -13,8 +13,8 @@ public interface MemberMapper {
 	MemberVO selectMember(String member_id);
 	String member_status_chk(MemberVO memberVO);
 	String admin_status_chk(MemberVO memberVO);
-	MemberVO userSnsChk(MemberVO memberVO);
-	String emailLink_chk(MemberVO memberVO);
+//	MemberVO userSnsChk(MemberVO memberVO);
+	int emailAddr_chk(MemberVO memberVO);
 	String idChk(MemberVO memberVO);
 	int insertMember(MemberVO memberVO);
 	int insertSnsMember(MemberVO memberVO);
@@ -23,6 +23,7 @@ public interface MemberMapper {
 	String findMemberId(MemberVO memberVO);
 	String findMemberPw(MemberVO memberVO);	    
 	int updateMemberPw(MemberVO memberVO);
+	String reconfirmedEmailChk(MemberVO memberVO);
 	
 	// 주문시 적립금 차감
 	int updateMemberpoint(MemberVO mvo);

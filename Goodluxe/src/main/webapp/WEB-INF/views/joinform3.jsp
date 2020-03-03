@@ -68,7 +68,18 @@
 
 
 	function join_check() {
-		if (join_input_form.join_pw1.value.length < 10) {
+		var phone1 = join_input_form.telinput1.value;
+		var phone2 = join_input_form.telinput2.value;
+		var phone3 = join_input_form.telinput3.value;
+		
+		var email1 = join_input_form.email1.value;
+		var email2 = join_input_form.email2.value;
+		
+		if (join_input_form.join_id.value.length == 0) {
+			alert("아이디를 입력해주세요");
+			join_input_form.join_id.focus();
+			
+		} else if (join_input_form.join_pw1.value.length < 10) {
 			alert("비밀번호는 10자리 이상 입력해주세요");
 			join_input_form.join_pw1.focus();
 
@@ -80,9 +91,16 @@
 			alert("이름을 확인해 주세요.");
 			join_input_form.member_name.focus();
 			
-		} else if((join_input_form.telinput1.value.length != 3) || (join_input_form.telinput2.value.length != 4) || (join_input_form.telinput3.value.length != 4)){
-			alert("휴대전화를 확인해 주세요.");
-			join_input_form.telinput1.focus();
+		} else if(join_input_form.order_zipcode.value.length == 0 || join_input_form.order_addr1.value.length == 0 || join_input_form.order_addr2.value.length == 0){
+			alert("주소를 확인해 주세요.");
+			join_input_form.order_addr2.focus();
+
+
+		} else if((phone1.length != 3) || (phone2.length != 4) || (phone3.length != 4)){
+			alert("연락처를 확인해 주세요.");
+			
+		} else if(email1.length == 0 || email2.length == 0){
+			alert("이메일을 확인해 주세요.");
 			
 		} else {
 			
@@ -94,16 +112,9 @@
 				} else if(($('input:checkbox[name="member_like_category"]:checked').length != 0) && ($('input:checkbox[name="member_like_brand"]:checked').length == 0)){
 					$("input[id=member_like_brand_N]:checkbox").prop("checked", true);
 				}
-					
-			var phone1 = join_input_form.telinput1.value;
-			var phone2 = join_input_form.telinput2.value;
-			var phone3 = join_input_form.telinput3.value;
-	
+
 			var member_phone = phone1 + phone2 + phone3;
 			document.getElementById('member_phone').value = member_phone;
-	
-			var email1 = join_input_form.email1.value;
-			var email2 = join_input_form.email2.value;
 	
 			var email = email1 + "@" + email2;
 			document.getElementById('member_email').value = email;
@@ -134,7 +145,6 @@
 				</div>
 
 				<br /> <br /> <br />
-				<!-- <hr class="join_underline"><br /> -->
 				<form action="joinform3_2.do" method="post" id="join_input_form">
 					<div class="joinall">
 						<h3>기본 정보</h3>
@@ -144,11 +154,9 @@
 								<tr class="jointablerow">
 									<td class="jttitle">아이디</td>
 									<td class="jointd">
-										<input type="text" class="username_input" id="join_id" check_result="fail"
+										<input type="text" class="join_inputarea" id="join_id" check_result="fail"
 										ime-mode="disabled" maxlength="10" name="member_id" placeholder="10자 이내로 입력해주세요" 
-										style="padding-left: 5px" required> 
-										<!-- <div id="id_overlap_msg"></div> <button type="button" class="id_overlap_btn" onclick="id_overlap_check()">중복확인</button> -->
-										<!-- <input type="hidden" name="idDuplication" value="idUncheck"> -->
+										required> 
 									</td>
 								<tr>
 									<td></td>
@@ -268,10 +276,10 @@
 								</tr>
 								<tr>
 									<td class="jtitle">이메일 수신동의</td>
-									<td class="jointd"><input type="radio"
+									<td class="jointd">&nbsp;<input type="radio"
 										class="join_inputarea" name="member_email_receive" value="Y"
-										checked>동의 &nbsp;&nbsp;&nbsp; <input type="radio"
-										class="join_inputarea" name="member_email_receive" value="N">미동의</td>
+										checked>&nbsp;동의 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+										class="join_inputarea" name="member_email_receive" value="N">&nbsp;미동의</td>
 								</tr>
 
 							</table>
@@ -279,7 +287,6 @@
 						<br /> <br /> <br />
 
 						<h3>추가 정보</h3>
-						<br />
 						<div class="joinform2">
 							<table class="jointable2">
 								<tr>
@@ -605,8 +612,8 @@
 								<tr>
 									<td colspan="2">
 										<center>
-											<br /> <br /> 
-											<input type="button" class="join_btn join_btn1" value="이전"> 
+											<br /> <br />
+											<input type="button" class="join_btn join_btn1" value="이전" onclick="history.back()"> 
 											<input type="button" class="join_btn join_btn2" id="join_button" value="회원가입">
 									</td>
 								</tr>
@@ -615,7 +622,9 @@
 				</form>
 		</div>
 		<br />
-		</div>
+		<br />
+		<br />
+		<br />
 	</section>
 
 	<footer id="footer">

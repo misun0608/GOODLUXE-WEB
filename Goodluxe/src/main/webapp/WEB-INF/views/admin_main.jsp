@@ -711,24 +711,24 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">매출현황</h1>
+			<h1 id="container_title">| 쇼핑몰현황/기타 > 매출현황</h1>
 			<div class="container_wr">
 			<br />
 				<section>
 						<div class="local_desc02 local_desc">일간 데이터</div>
 						<div>
 							<h2>오늘 매출 현황</h2>
-							<button type="button" class="btn00_1" id="today_order_btn" onclick="location.href='./adminOrder.do'">
+							<button type="button" class="btn00_1" onclick = "location.href='adminOrder.do?adminperiod=today'">
 								<span class="wkrdma">주문(<%=vo.get("order_count")%>건)
 								</span><br><span class="zma"><b><%=order_sales%></b></span>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1" id="today_paid_btn">
+							<button type="button" class="btn00_1" onclick = "location.href='adminOrder.do?adminperiod=today&adminstatus=afterP'">
 								<span class="wkrdma">결제(<%=vo.get("paid_order_count")%>건)
 								</span><br> <b><span class="zma"><%=paid_sales%></span></b>
 								<span>원</span>
 							</button>
-							<button type="button" class="btn00_1" id="today_refund_btn">
+							<button type="button" class="btn00_1">
 								<span class="wkrdma">환불(<%=vo.get("refund_order_count")%>건)
 								</span><br> <b><span class="zma"><%=refund_sales%></span></b>
 								<span>원</span>
@@ -738,7 +738,7 @@
 						
 						<div>
 							<h2>주문 현황 (최근 30일 기준)</h2>
-							<button type="button" class="btn00_2">
+							<button type="button" class="btn00_2" onclick = "location.href='adminOrder.do?adminperiod=month&adminstatus=beforeP'">
 								<span class="wkrdma">결제전</span><br>
 								<b><span class="zma"><%=vo.get("paid_before_count")%></span></b>
 							</button>

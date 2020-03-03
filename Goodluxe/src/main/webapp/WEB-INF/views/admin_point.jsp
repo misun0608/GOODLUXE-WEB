@@ -362,7 +362,7 @@ $(document).ready(function(){
 
 <div id="wrapper">
         <div id="container" class="container-small">
-            <h1 id="container_title">적립금관리 페이지</h1>
+            <h1 id="container_title">| 회원관리 > 적립금관리</h1>
             <div class="container_wr">
                 <section>
 

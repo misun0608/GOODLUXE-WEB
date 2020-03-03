@@ -53,27 +53,53 @@
 	if (time < 0)
 		time = 0;
 
-	if (member_isadmin.equals("Y")) {
+	if(member_id.equals("admin")){
 		session.setMaxInactiveInterval(-1);
 	}
+	
 %>
+<script language='javascript'>
+
+function noEvent() {
+if (event.keyCode == 116) {
+event.keyCode= 2;
+return false;
+}
+else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82))
+{
+return false;
+}
+}
+document.onkeydown = noEvent;
+
+</script>
 <style type="text/css">
 
 div #output {
-	float:right;
-	align:right;
+	float:left;
+	align:left;
 	
 }
 	
-	table{border-spacing:0px;border-style:none;padding:0px;}
-	td{border-spacing:0px; border-style:none; padding:0px;}
+	table{
+	border-spacing:0px;
+	border-style:none;
+	padding:0px;
+	}
+	
+	td{
+	border-spacing:0px; 
+	border-style:none; 
+	padding:0px;
+	}
 
 </style>
+
 <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
 
 
 
-<!-- 방이동 처리함수 -->
+<!-- 방이동 처리함수 
 <script type="text/javascript">
 
 function moveRoom(room,remaincount,totalcount,pwd) {
@@ -94,7 +120,7 @@ function moveRoom(room,remaincount,totalcount,pwd) {
 		}
 	   
 </script>
-
+-->
 
 <!-- 인원수 증가, 감소 버튼 클릭시, 실행되는 스크립트 -->
 <script type="text/javascript">
@@ -115,7 +141,7 @@ function count_next() {
 </script>
 
 
-<!-- 접속자 명단에서 아이디 클릭 시 귓속말에 바로 세팅 -->
+<!-- 접속자 명단에서 아이디 클릭 시 귓속말에 바로 세팅 
 <script type="text/javascript">
 function insertWisper(id) {
 	if($("#userId").val() == id){
@@ -124,8 +150,8 @@ function insertWisper(id) {
 	else{
 			$("#wisper").val(id);	
 		}
-}
-
+} 
+-->
 </script>
 <script type="text/javascript">
 $("#wisper").click(function() {
@@ -152,8 +178,8 @@ $("#wisper").click(function() {
 		<tr>
 			
 <%if(member_isadmin.equals("Y")){ %>
-			<td align="center" style="width: 404px; height:75px;"  >
-			<h2>검색을 하자	</h2>
+			<td align="center" style="width: 405px; height:75px;"  >
+			<h2>회원 리스트</h2>
 			</td>
 			<%}else{ %>
 			
@@ -167,7 +193,7 @@ $("#wisper").click(function() {
 			<%} %>
 				<!-- 방이름 출력 -->
 					<!-- 방이름 :<b>${room}</b> -->
-					<p class="chatting_title">GOODLUXE 고객센터</p>
+					<p class="chatting_title">GOODLUXE 고객센터</p><br>
 				<%if(member_isadmin.equals("Y")){ %>	
 					<p class="customer_id_info">${room} 고객님</p>
 					<%} %>
@@ -191,57 +217,115 @@ $("#wisper").click(function() {
 	
 		<%} %>
 		<!-- 귓속말 영역 -->
-		<col width="450px">
+		<col width="400px">
 		<!-- 메세지 입력 영역 -->
 		<!-- 오른쪽 리스트 출력영역 -->
-		<col width="50px">
+		<col width="100px">
 		<!-- 보내기 영역 -->
 
 		<tr height="600px">
 			
-			
 			<%if(member_isadmin.equals("Y")){ %>
 			<td style="width: 400px; ">
 				<!-- 채팅 참여자 출력 -->
-				<div style="width: 100%; height: 100%; overflow-y: scroll;"
+				<div style="width: 100%; height: 560px; overflow-y: scroll;"
 					class="ui message" id="chatroomlist">
 					<table id=""  width="100%">
-
+					
+					
+						<div id="ajaxchat_room">
+						
+						</div>
 
 			<!-- <form action="MoveChatRoom.do" method="post" id="moveChatForm"> -->
 			<script type="text/javascript">
+		
+			var ajaxchat_room =  document.getElementById('ajaxchat_room');
 			
-				
-			
-			</script>
-			<%
-				int i = 0;
-				for (i = 0; i < chatrecordcountlist.size(); i++) {
-					Chat_recordVO vo = chatrecordcountlist.get(i);
-				String[] timeList_1 = vo.getChat_timestamp().toString().split("-");
-				String[] timeList_2 = timeList_1[2].split(" ");	
-				String[] timeList_3 = timeList_2[1].split(":");
-				String[] timeList_4 = timeList_3[2].split(".");
-					
-					
-			%>
+			playAlert = setInterval(function() {	
+			// playAlert = setInterval(chatlist, 5000);
+	      	$.ajax({//ajax 호출 JQuery.ajax== 
+				url:'/goodluxe/ajaxchat_room.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
+				type:'GET',  //데이터 보낼 때 방식 사용
+				data: {
+				}, //서버로 보낼 데이터 타입
+				async : true,
+				contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+				dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
+				success : function(data) {
+					$("#ajaxchat_room").html(""); // div를 일단 공백으로 초기화해줌 , 왜냐면 버튼 여러번 눌리면 중첩되니깐
+					if(data==null){
+						var str ='<tr><td>등록된 사용자가 없습니다. </td>';
+									str += '</tr>'; 
+									
+							$('#ajaxchat_room').append(str); // 그리고 그 tr을 테이블에 붙임
+						
+					}else{
+					$.each(data, function(index, jsonObject) { // 이치를 써서 모든 데이터들을 배열에 넣음
+						
+						var timestamp = jsonObject.chat_timestamp;
+						var date = new Date(timestamp);
+						var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+						  var year = date.getFullYear();
+						  var month = months[date.getMonth()];
+						  var day = date.getDate();
+						  var hour = date.getHours();
+						  var min = date.getMinutes();
+						  var sec = date.getSeconds();
+						  
+						  var time = hour + ':' + min;
+						  var day = month + ' ' + day;
+						
+					/* 
+						alert(timeList_1[0]);
+						alert(timeList_1[1]);
+						alert(timeList_1[2]); */
+						
+						/* var timeList_2 = timeList_1[2].split(' ');	
+						var timeList_3 = timeList_2[1].split(':');
+						var timeList_4 = timeList_3[2].split('.');  */
+						
+					/* 	document.getElementById(jsonObject.chat_room).ondblclick = function() {myFunction()};
 
-			<!-- 관리자 해당 회원 행 클릭 시 방 바꿔주자  -->
-			<tr ondblclick="location.href='MoveChatRoom.do?roomName=<%=vo.getChat_room() %>'" style="cursor:pointer">
-				<td width="65px"><img src="./resources/img/chat_img/customer.png" width="65px"></td>
-				<td><%=vo.getChat_room() %><br><p><%=vo.getChat_message() %></p></td>
-				<td align="right" width="100px"><font size= "1px">
-	<%=timeList_1[1] %>월<%=timeList_2[0] %>일<br>
-	<%=timeList_3[0] %>시<%=timeList_3[1] %>분</font>
-		<br>
-				
-	
-	</td>
-			</tr>
+						function myFunction() {
+						  document.getElementById(jsonObject.chat_room).href("MoveChatRoom.do?roomName="+jsonObject.chat_room);
+						} */
+						
+						//location.href="MoveChatRoom.do?roomName='+jsonObject.chat_room";
+						// ondblclick='+location.href+'=MoveChatRoom.do?roomName='+jsonObject.chat_room+'"
+						var str = '<tr ondblclick="location.href=\'MoveChatRoom.do?roomName='+jsonObject.chat_room+'\'" style="cursor:pointer" ><td width="65px"><img src="./resources/img/chat_img/customer.png" width="65px"></td>';
+						str += '<td>'+jsonObject.chat_room+'<br><p>'+jsonObject.chat_message+'</p></td>';
+						str += '<td align="right" width="100px"><font size= "1px">'+
+							day+"일"+
+							hour+"시"+ min+"분</font><br>"
+							//alert(jsonObject.chat_count > 0);
+							if(jsonObject.chat_count == "0"){
+								
+							}else if(jsonObject.chat_count <10){str += '<div style=" padding-top:4px; padding-right:1px; margin-top:10px; margin-left: -13px; width:30px; height:20px; border:1pt solid #000000;background:#F9E7E5;border-radius:50%; "><span style=" margin-right:9px">'+jsonObject.chat_count+'</span></div>';}
+							else{str += '<div style=" padding-top:2px; padding-left:6px; margin-top:10px; margin-left: -13px; width:30px; height:20px; border:1pt solid #000000;background:#F9E7E5;border-radius:50%; "><span style=" margin-right:9px">'+jsonObject.chat_count+'</span></div>';}
+									
+
+									str += '</tr>'; 
+									
+							$('#ajaxchat_room').append(str); // 그리고 그 tr을 테이블에 붙임
+							
+					});//each끝 
+					
+					}
+					
+					},
+					  error: function (request, status, error){  
+					      var msg = "ERROR<br><br>"
+					      msg += request.status + "<br>" + request.responseText + "<br>" + error;
+					      console.log(msg);                    
+					    }
+					
+			});
+
+			}, 1000);
+			</script>
 			
-			<%
-				}
-			%>
+		
 		</table>
 					</div>
 			</td>
@@ -254,8 +338,8 @@ $("#wisper").click(function() {
 			<td style="width: 560px; background-color:#b8e1d4;" colspan="2" >
 
 				<div
-					style="width: 100%; height: 550px; overflow:auto; overflow-y: visibility; overflow-x: inherit;"
-					class="ui message" id="output" align="right" margin-tip="4px"></div>
+					style="width: 100%; height: 550px; overflow:auto; overflow-y: visibility; overflow-x: inherit; display:inline-block;"
+					class="ui message" id="output" align="left"  margin-tip="4px"></div>
 			</td>
 			<!-- 채팅방 목록 -->
 			
@@ -267,6 +351,7 @@ $("#wisper").click(function() {
 			</td>
 			<%} %>
 			<!-- 보낼 메세지 입력 -->
+			
 			<td ><input type="text" id="textID" size="50"
 				value="" style="width: 100%; height: 100%; font-weight: bold;"
 				class="ui message blue" name="chatInput" placeholder="내용 입력">
@@ -314,33 +399,7 @@ $(document).ready(function() {
 			$("#output").append("<b style='color:blue'>["+list.get(i).member_id()+"]</b> : "+list.get(i).chat_message()+"<br>");
 			
 		} --%>
-		<%-- 
-      	$.ajax({//ajax 호출 JQuery.ajax== 
-			url:'/goodluxe/chat_room.do', //수행하고자 하는 url 형식, port번호 다음부터 경로가 일치하도록 작성 (컨트롤러 참조)
-			type:'GET',  //데이터 보낼 때 방식 사용
-			data: {
-				chat_room : chat_room
-			}, //서버로 보낼 데이터 타입
-			contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-			dataType: 'json', //결과 값을 받아올 때 (응답받을 때 ) 서버에서 보내줄 데이터 타입
-			success : function(data){	
-
-				var jsondata = JSON.stringify(data);
-				
-				
-				$.each(data.chatlist, function(i,chatlist){
-					$("#output").append("<b style='color:blue'>["+chatlist[i].member_id+"]</b> : "+chatlist[i].chat_message+"<br>");
-				})
-				
-				alert(jsondata);
-				},
-				  error: function (request, status, error){  
-				      var msg = "ERROR<br><br>"
-				      msg += request.status + "<br>" + request.responseText + "<br>" + error;
-				      console.log(msg);                    
-				    }
-				
-		}); --%>
+		
       	
 		
       	//보내기 버튼 눌렀을때
@@ -353,30 +412,45 @@ $(document).ready(function() {
          	if(msg !=""){
          		//소켓으로 메세지 전달
             	ws.send(msg+"!%/"+room);
+         		
+         		if('${member_id}'=="admin" ){
             	$("#output").append("<div id="+id+" width='100%' >"
-            			+ "<span id='beforeevent' display='none'><img src='./resources/img/chat_img/customer.png' width='50px' >"
+            			+ "<span id='beforeevent' ><img src='./resources/img/chat_img/admin.png' width='50px' >"
     					+ "</span> "
-    					+ "<textarea class='speech-bubble' background='#F9E7E5' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+    					+ "<textarea class='speech-bubble' background='#ffffff' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
     	+msg+
     	"</textarea>"
-    	+ "<span id='afterevent'>"
-    			+ "<img src='./resources/img/chat_img/customer.png' width='50px' display='' ></span>"
+    	+ "<span id='afterevent' display='none'>"
+    			+ "<img src='./resources/img/chat_img/admin.png' width='50px' display='' ></span>"
     			+ "</div>"
     			+ "<br>");
+         		}else{
+         			$("#output").append("<div id="+id+" width='100%' >"
+                			+ "<span id='beforeevent' ><img src='./resources/img/chat_img/customer.png' width='50px' >"
+        					+ "</span> "
+        					+ "<textarea class='speech-bubble' background='#ffffff' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+        	+msg+
+        	"</textarea>"
+        	+ "<span id='afterevent' display='none'>"
+        			+ "<img src='./resources/img/chat_img/customer.png' width='50px' display='' ></span>"
+        			+ "</div>"
+        			+ "<br>");
+         			
+         		}
             
             	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
             	$("#textID").val(""); //입력창 내용지우기
             	$("#textID").focus(); //입력창 포커스 획득
          	}
-         	//귓속말
+         /* 	//귓속말
          	else if(wisper !="" && msg !=""){
          		//본인에게 보낼경우
             	if($("#userId").val()==wisper){
                	alert("본인에게는 보낼 수 없습니다.");
                	$("#wisper").focus();
             	}
-         	}
-      	});
+         	}*/
+      	}); 
       	//엔터키 입력처리
       	$("#textID").keypress(function(event) {
          	if(event.which == "13"){
@@ -393,17 +467,30 @@ $(document).ready(function() {
              		
                 	ws.send(msg+"!%/"+room);
                 	//$("#output").append("<i class='user icon'></i>"+"<b style='color:blue'>[${member_id}]</b> : "+msg+"<br>");
-                	
-                	$("#output").append("<div id="+id+" width='100%' >"
-                			+ "<span id='beforeevent' display='none'><img src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px' >"
-        					+ "</span> "
-        					+ "<textarea class='speech-bubble' background='#F9E7E5' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
-        	+msg+
-        	"</textarea>"
-        	+ "<span id='afterevent'>"
-        			+ "<img src='./resources/img/chat_img/customer.png' width='50px' padding='0px 5px 0px 5px' display='' ></span>"
-        			+ "</div>"
-        			+ "<br>");
+                	if(${member_id}=="admin" ){
+                    	$("#output").append("<div id="+id+" width='100%' >"
+                    			+ "<span id='beforeevent' ><img src='./resources/img/chat_img/admin.png' width='50px' >"
+            					+ "</span> "
+            					+ "<textarea class='speech-bubble' background='#ffffff' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+            	+msg+
+            	"</textarea>"
+            	+ "<span id='afterevent' display='none'>"
+            			+ "<img src='./resources/img/chat_img/admin.png' width='50px' display='' ></span>"
+            			+ "</div>"
+            			+ "<br>");
+                 		}else{
+                 			$("#output").append("<div id="+id+" width='100%' >"
+                        			+ "<span id='beforeevent' ><img src='./resources/img/chat_img/customer.png' width='50px' >"
+                					+ "</span> "
+                					+ "<textarea class='speech-bubble' background='#ffffff' cols='30' rows='4' wrap='virtual' or 'physical' or 'off' readonly>"
+                	+msg+
+                	"</textarea>"
+                	+ "<span id='afterevent' display='none'>"
+                			+ "<img src='./resources/img/chat_img/customer.png' width='50px' display='' ></span>"
+                			+ "</div>"
+                			+ "<br>");
+                 			
+                 		}
   //									"<div id="+id+"><img src='./resources/img/chat_img/customer.png' width='35px' radius='15' ><b>["+id+"]</b> : "+msg+"<span></div>"
                 	$("#output").scrollTop(99999999); //글 입력 시 무조건 하단으로 보냄
                 	$("#textID").val(""); //입력창 내용지우기
@@ -416,16 +503,8 @@ $(document).ready(function() {
    	ws.onmessage = function(message) {
 		var member_id = '${member_id}';
 		var room = '${room}';
-		var el = document.getElementById('output');
-		var ml = document.getElementById('<%=member_id %>');
-		var list_1 = "";
-		var list_2 = "";
     	//메세지 
       	var jsonData = JSON.parse(message.data);
-    	list_1 = message.data.split(']');
-    	
-    	list_2 = list_1[0].split('[');
-    	//alert(list_2[1]);
       	if(jsonData.message !=null){
           		$("#output").append(jsonData.message+"<br>");
             	$("#output").scrollTop(99999999);
@@ -434,8 +513,22 @@ $(document).ready(function() {
       	//접속자리스트
       	var jsonData2 = JSON.parse(message.data);
       	if(jsonData2.list !=null){
+      		
          	$("#listPeople").html(jsonData2.list);
-      	}
+         	var listsplit = jsonData2.list.split(',');
+         	for( i=0; i<listsplit.length; i++){
+         		//alert(listsplit[i]);
+         		if(listsplit.length==2){
+         			if('${member_id}'=="admin"){
+         			var count=0}
+         		}else if(listsplit.length==3){
+         			var count =0;
+         		}
+         			
+         		}
+         	}
+         	
+      	
       	
       	//방 정보
       	var jsonData3 = JSON.parse(message.data);
@@ -463,7 +556,7 @@ $(document).ready(function() {
 			}
 			$("#getRoomList").html(str);
       	}
-	};   
+	}
    	//닫힐때
    	ws.onclose = function(event) {};
 });
@@ -490,13 +583,15 @@ $(document).ready(function() {
 	margin-top: -12px;
 	margin-left: -24px;
 }
-	
+	div{
+	display:inline-block;
+	}
 	textarea{
 	margin : 0px 5px 5px 5px; 
 	padding : 10px 5px 5px 10px;
 	}
 	textarea{
-	background : #F9E7E5;
+	background : #ffffff;
 	overflow: hidden; 
 	overflow-wrap: break-word; 
 	resize: none; 
@@ -506,28 +601,31 @@ $(document).ready(function() {
 	margin: 0px 10px 0px 5px;
 	}
 	
-	#beforeevent img{
+	#<%=member_id %> img{
+	display : none;
+	}
+	
+	#afterevent img{
 	display:none;
 	margin: 0px 0px 0px 10px;
 	}
 	
-	#<%=member_id %>{
-	float : left;
+	#output #<%=member_id %>{
+	float : right;
 	}
 	
-	#<%=member_id %> #beforeevent img{
+	#<%=member_id %> #afterevent img{
 	display : inline;
 	}
-	
-	#<%=member_id %> #afterevent{
+	#<%=member_id %> #beforeevent{
 	display : none;
 	}
 	
-	#<%=member_id %> #beforeevent{
+	#<%=member_id %> #afterevent{
 	display : inline;
 	}
 	#<%=member_id %> textarea {
-	background:#ffffff;
+	background:#F9E7E5;
 	}
 	
 	::-webkit-scrollbar {
@@ -554,12 +652,6 @@ $(document).ready(function() {
 textarea.autosize { min-height: 50px; }
 </style>
 
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script>
-$("textarea.autosize").on('keydown keyup', function () {
-  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
-});
-</script>
 	</div>
 </body>
 </html>

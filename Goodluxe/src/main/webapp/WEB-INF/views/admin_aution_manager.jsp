@@ -207,7 +207,7 @@
 						output += '<td class="td4">'+endTimeShaped+'</td>';
 						output += '<td class="td4">'+item.auction_BID_PRICE+'</td>';
 						output += '<td class="td4">'+postDateShaped+'</td>';
-						output += '<td class="td4">'+item.auction_POST_STATUS+'<button id = "stat_change" value="'+item.auction_POST_NUMBER+'">상태변경</button></td>';
+						output += '<td class="td4">'+item.auction_POST_STATUS+'<br /><button id = "stat_change" class="delete_btn" value="'+item.auction_POST_NUMBER+'">상태변경</button></td>';
 						output += '</tr>';
 						console.log("output:" + output);
 						$('#output').append(output);
@@ -292,7 +292,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">| 주문 관리 목록 > 반품</h1>
+			<h1 id="container_title">| 쇼핑몰현황/기타 > 경매감독</h1>
 			<div class="container_wr">
 				<section>
 

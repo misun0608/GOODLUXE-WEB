@@ -9,6 +9,14 @@
 
 <title>GOODLUXE :: 굿럭스</title>
 
+<%
+	String member_isadmin = (String)session.getAttribute("member_isadmin");
+
+%>
+
+<script type="text/javascript">
+	//alert('${member_isadmin}')
+</script>
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean"
 	rel="stylesheet">
@@ -64,7 +72,25 @@
 						</div>
 						<div class="center_chat_content">
 						    1:1 채팅 상담 가능 시간은<br/><span style="font-weight: 600;">평일 AM 10:00 ~ PM 6:00</span> 입니다.<br/>
-						    <a href="chat_view_customer.html"><button class="center_chat_btn">1:1 상담 시작</button></a>
+						   <button onclick="popup()" class="center_chat_btn" >1:1 상담 시작</button>
+						     <script type="text/javascript">
+	
+									function popup(){
+ 									
+										
+									var url = "chat.do";
+ 
+									var name = "chat";
+ 									
+									if('${member_isadmin}'=='Y'){
+									window.open(url,name,"width=792,height=740,toolbar=no,status=no,location=no,scrollbars=no,menubar=no,resizable=no,left=50,right=50");
+									}else{
+										window.open(url,name,"width=393,height=703,toolbar=no,status=no,location=no,scrollbars=no,menubar=no,resizable=no,left=50,right=50");	
+									}
+											
+										}
+									
+									</script>
 						</div>
                     </div>
                 <br/><br/><br/>

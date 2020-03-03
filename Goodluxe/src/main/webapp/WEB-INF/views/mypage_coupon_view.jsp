@@ -104,13 +104,13 @@ $(document).ready(function() {
                             		CouponVO cvo = (CouponVO)coupon_list.get(i);
                             %>
                             <tr>
-                                <td data-title="NO."><%=cvo.getCoupon_number() %></td>
+                                <td data-title="NO."><%=number %></td><%--=cvo.getCoupon_number() --%>
                                 <td data-title="쿠폰명"><%=cvo.getCoupon_type() %></td>
                                 <td data-title="혜택">
                                 <%
                                 	if(cvo.getCoupon_type().equals("가입 무료배송 쿠폰")){
                                 %>
-                                무료배송
+                              		  무료배송
                                 <%
                                 	}else if(cvo.getCoupon_type().equals("2020 쥐띠해 기념 1품목 20% 할인 쿠폰")){
                                 %>
@@ -122,26 +122,28 @@ $(document).ready(function() {
                                 <%
                                 	}else{
                                 %>
-                                없음
+                               		 무료배송
                                 <%
                                 	}
                                 %>
                                 </td>
-                                <td data-title="사용기간">
+                                <td data-title="사용기간">	
                                 <%
                                 	cal.setTime(cvo.getCoupon_expire());
-                                	cal.add(Calendar.DATE, +14);
+                                	cal.add(Calendar.DATE, -365);
                                 	expire_date = format1.format(cal.getTime());
                                 %>
-                                <%=format1.format(cvo.getCoupon_expire()) %>
-                                ~
                                 <%=expire_date %>
+                                ~
+                                <%=format1.format(cvo.getCoupon_expire()) %>
+                                
                                 </td>
                                 <td data-title="사용여부">
                                 	<%=cvo.getCoupon_status() %>
                                 </td>
                             </tr>
                         <%
+                        		number--;
                             	}
                             }
                         %>

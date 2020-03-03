@@ -24,6 +24,7 @@
 		<result property="order_addr2" column="order_addr2" />
 		<result property="order_phone" column="order_phone" />
 		<result property="order_message" column="order_message" />
+		<result property="order_pay_price" column="order_pay_price" />
 	</resultMap>
 	
 	<select id="getOasData" parameterType="String" resultMap="oasHM">
@@ -48,7 +49,7 @@
 	</update>
 	
 	<select id="getOrderData" parameterType="String" resultMap="oasHM">
-		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number, od.member_id, member_name, order_used_point, order_used_coupon, order_ship_fee, order_pay_system, order_receipt, order_zipcode, order_addr1, order_addr2, order_phone, order_message
+		select order_number, order_order_date, order_pay_date, od.pb_number, pb_main_img_stored, pb_md_name, order_product_price, order_status, order_invoice_number, od.member_id, member_name, order_used_point, order_used_coupon, order_ship_fee, order_pay_system, order_receipt, order_zipcode, order_addr1, order_addr2, order_phone, order_message, order_pay_price
 		from gl_order od, gl_productboard pb, gl_member mem
 		where od.pb_number = pb.pb_number and od.member_id = mem.member_id and order_number=#{order_number}
 	</select>

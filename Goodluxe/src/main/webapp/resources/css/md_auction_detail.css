@@ -24,7 +24,7 @@ img {vertical-align:top;}
     }
 /* 큰 이미지 */
     .main_image{
-        width: 400px;
+        width: 500px;
         margin-bottom: 3px;
     }
 /* 작은 이미지 */
@@ -159,6 +159,7 @@ img {vertical-align:top;}
     .md_detail_bottom {
         display:table;
         width: 1080px;
+        padding-top: 100px;
         /* background: gray; */
     }
     /* 제품 상세 설명 */

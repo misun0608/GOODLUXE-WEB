@@ -98,7 +98,14 @@ $(document).ready(function() {
 			<article class ="arti_restriction">
                 <div class ="my_rate_box"> 
                     <p><%=mvo.getMember_name() %> 님의 최근 허수구매율은&nbsp;</p>
-                    <p class="yellow_letter"><%=restrict_rate %>%</p><p>&nbsp;로&nbsp;</p>
+            		<%
+            			String restrict_str = Float.toString(restrict_rate);
+            			System.out.println("restrict _str" + restrict_str);
+            	
+            			String str[] = restrict_str.split("\\.");
+            			String restric_a = str[0];
+            		%>
+                    <p class="yellow_letter"><%=restric_a %>%</p><p>&nbsp;로&nbsp;</p>
                     <p class="red_letter">
                     <%
                     	if(restrict_rate >= 60){

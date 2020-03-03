@@ -30,14 +30,13 @@ public class NaverLoginBO {
     
     /* 네이버 아이디로 인증  URL 생성  Method */
     public String getAuthorizationUrl(HttpSession session) {
-
         /* 세션 유효성 검증을 위하여 난수를 생성 */
         String state = generateRandomString();
         /* 생성한 난수 값을 session에 저장 */
         setSession(session,state);        
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
-        OAuth20Service oauthService = new ServiceBuilder()
+        OAuth20Service oauthService = new ServiceBuilder()                                                   
                 .apiKey(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
                 .callback(REDIRECT_URI)
@@ -49,18 +48,16 @@ public class NaverLoginBO {
 
     /* 네이버아이디로 Callback 처리 및  AccessToken 획득 Method */
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
-    	System.out.println("NaverLoginBO.java _ session 잘 받아오나 : " + session);
-    	System.out.println("NaverLoginBO.java _ code 잘 받아오나 : " + code);
-    	System.out.println("NaverLoginBO.java _ state 잘 받아오나 : " + state);
-    	
+
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
+    	System.out.println(session);
+    	System.out.println("String session state : " + (String) session.getAttribute(SESSION_STATE));
         String sessionState = getSession(session);
-        System.out.println("NaverLoginBO.java _ 1 session : " + session);
-        System.out.println("NaverLoginBO.java _ 1 sessionState : " + sessionState);
-        System.out.println(StringUtils.pathEquals(sessionState, state));
+        System.out.println("sessionState : " + sessionState);
+        System.out.println("state : " + state);
+        System.out.println("BO : " + StringUtils.pathEquals(sessionState, state));
         if(StringUtils.pathEquals(sessionState, state)){
-        System.out.println("NaverLoginBO.java _ 2");
-        	
+
             OAuth20Service oauthService = new ServiceBuilder()
                     .apiKey(CLIENT_ID)
                     .apiSecret(CLIENT_SECRET)
@@ -69,11 +66,9 @@ public class NaverLoginBO {
                     .build(NaverLoginApi.instance());
 
             /* Scribe에서 제공하는 AccessToken 획득 기능으로 네아로 Access Token을 획득 */
-            System.out.println("NaverLoginBO.java _ 3 code : " + code);
-            System.out.println("NaverLoginBO.java _ 3 state : " + state);
-            
+            System.out.println(code);
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
-            System.out.println("NaverLoginBO.java _ 3 accessToken : " + accessToken);
+            System.out.println("getAccessToken : " + (accessToken == null));
             return accessToken;
         }
         return null;
@@ -95,15 +90,17 @@ public class NaverLoginBO {
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
     public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
-
         OAuth20Service oauthService =new ServiceBuilder()
                 .apiKey(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
                 .callback(REDIRECT_URI).build(NaverLoginApi.instance());
-
-            OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
+        OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
+        System.out.println("bo3");
+        System.out.println((oauthToken == null) + " " + (request == null));
         oauthService.signRequest(oauthToken, request);
+        System.out.println("bo4");
         Response response = request.send();
+        System.out.println("bo5");
         return response.getBody();
     }
 

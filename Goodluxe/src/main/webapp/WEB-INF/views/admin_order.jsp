@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String adminperiod = (String)request.getAttribute("adminperiod");
+	String adminstatus = (String)request.getAttribute("adminstatus");
+	
+%>
 <!DOCTYPE html>
 <html>
 
@@ -145,6 +150,25 @@
 			return year + "-" + month + "-" + date + " " + hour + ":" + min;
 		}
 		
+		function onpageDefaultAction(){
+			if('<%=adminperiod%>'=='none'){
+				selectData();
+			}else if('<%=adminperiod%>'=='today'){
+				document.getElementById("period").value = 'today';
+				if('<%=adminstatus%>'=='afterP'){
+					document.getElementsByName("is_payed").value='afterP';
+				}
+				$("#search_btn").trigger("click");
+			}else if('<%=adminperiod%>'=='month'){
+				document.getElementById("period").value = 'month';
+				if('<%=adminstatus%>' == 'beforeP'){
+					document.getElementsByName("is_payed").value='beforeP';
+				}
+				$("#search_btn").trigger("click");
+			}
+			
+		}
+		
 		$('input[name=is_payed]:eq(1)').click(function(event){
 			document.getElementById("is_checked3").checked = true;
 			document.getElementById("is_checked4").checked = false;
@@ -187,12 +211,13 @@
 								output += '<td class="context_td">'+item.order_pay_price+'</td>';
 								output += '<td class="context_td">'+item.order_pay_system+'</td>';
 								output += '<td class="context_td">'+item.order_status;
+									if(item.order_status=='입금전'){
+										output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+									}
 									if(item.order_status=='배송준비중'){
-			
 										output +='<br /><button class="delivery_btn" id = "invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 										output +='<p id ="inv_p" style="display:none">송장번호 :</p><input type ="text" id ="order_invoice_number" style="display:none">';
 										output +='<button class="delivery_btn confirm_btn" value ="'+item.order_number+'" id ="btn_start_shipping" style="display:none">확인</button>';
-								
 									}
 									if(item.order_status=='배송중'){
 										output +='<br /><button class="delivery_btn finish_btn" value = "'+item.order_number+'" id = "btn_end_shipping">배송완료</button>';
@@ -214,7 +239,7 @@
 		$('#search_btn').click(function(event){
 			 $('#output').empty();
 			var params = $('#search_filter_form').serialize();
-			alert(params);
+			
 	        jQuery.ajax({
 	        	url:'/goodluxe/getOrderList.do',
 	        		type:'POST',
@@ -246,6 +271,9 @@
 									output += '<td class="context_td">'+item.order_pay_price+'</td>';
 									output += '<td class="context_td">'+item.order_pay_system+'</td>';
 									output += '<td class="context_td">'+item.order_status;
+										if(item.order_status=='입금전'){
+											output += '<br/><button class="delivery_btn" value="'+item.order_number+'" id ="btn_money_get">배송준비중</button>'
+										}
 										if(item.order_status=='배송준비중'){
 											output +='<br /><button class="delivery_btn" id="invoice_input" onclick = "invoice_show();">배송시작</button><br/>';
 											output +='<p id = "inv_p" style = "display:none">송장번호 :</p> <input type = "text" id = "order_invoice_number" style = "display:none">';
@@ -320,7 +348,7 @@
 			var invoice = invoice_txt.attr("value");
 			var order_invoice_number =start_btn.prev().val();
 			
-			alert('alert'+order_invoice_number);
+			//alert('alert'+order_invoice_number);
 			if(order_invoice_number==""){
 				alert('송장번호를 입력하세요');//왜 안뜨나요....???
 				return false;
@@ -353,6 +381,32 @@
 			}
 			jQuery.ajax({
 				url : '/goodluxe/adminOrderSetEndShipping.do',
+                type : 'POST',
+                data : params, // 서버로 보낼 데이터
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
+                dataType : "json", // 서버에서 보내줄 타입
+                success: function (retVal) {
+                	
+                	var result = retVal.res;
+                	
+                	alert(result);
+                },
+                error:function() {
+                   alert("insert ajax통신 실패!!!");
+                }
+             });
+		
+		});
+		
+		$(document).on('click','#btn_money_get',function(event) { 
+			var money_get_btn = $(this);
+			var data = money_get_btn.attr("value");
+	
+			var params = {
+				"order_number" : data
+			}
+			jQuery.ajax({
+				url : '/goodluxe/adminOrderMoneyGetShipping.do',
                 type : 'POST',
                 data : params, // 서버로 보낼 데이터
                 contentType : 'application/x-www-form-urlencoded; charset=UTF-8', //https://thiago6.tistory.com/11 참고 
@@ -491,8 +545,8 @@
 				
 			});
 		}
-		
-		selectData();
+		onpageDefaultAction();
+		//selectData();
 	});
 </script>
 </head>
@@ -504,7 +558,7 @@
 
 		<div id="container" class="container-small">
 
-			<h1 id="container_title">| 주문 관리 > 전체 주문 목록</h1>
+			<h1 id="container_title">| 주문관리 > 주문관리</h1>
 			<div class="container_wr">
 				<section>
 					<br><br>

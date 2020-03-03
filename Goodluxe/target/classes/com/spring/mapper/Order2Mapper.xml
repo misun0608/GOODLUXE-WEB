@@ -38,30 +38,36 @@
 		INSERT INTO gl_order VALUES(
 			#{order_number,jdbcType=VARCHAR},
 			#{order_receipt,jdbcType=VARCHAR},
-			SYSTIMESTAMP,
-			,
+			'',
+			sysdate,
 			#{order_status,jdbcType=VARCHAR},
 			#{order_addr1,jdbcType=VARCHAR},
 			#{order_addr2,jdbcType=VARCHAR},
 			#{order_zipcode,jdbcType=VARCHAR},
 			#{order_phone,jdbcType=VARCHAR},
-			#{order_invoice_number,jdbcType=VARCHAR},
-			,
-			,
+			'',
+			'',
+			'',
 			#{order_product_price},
 			#{order_ship_fee},
-			#{order_used_point},
-			#{order_used_coupon,jdbcType=VARCHAR},
-			#{order_pay_system,jdbcType=VARCHAR},
-			#{order_refund_account,jdbcType=VARCHAR},
-			#{order_refund_bank,jdbcType=VARCHAR},
+			'',
+			'',
+			'',
+			'',
+			'',
 			#{member_id,jdbcType=VARCHAR},
 			#{pb_number},
 			#{order_message,jdbcType=VARCHAR},
-			#{order_pay_price}
+			''
 			)
 	</insert>
-   
+   	<select id="selectordercount" parameterType="int" resultType="int" >
+   		        select count(*)
+                from gl_order
+                where pb_number=#{pb_number}
+   	</select>
+   	
+
    
    
    

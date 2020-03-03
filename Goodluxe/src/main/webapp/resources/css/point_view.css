@@ -116,6 +116,7 @@ img {vertical-align:top;}
         min-width:900px;
         border-radius: 2px 2px 2px 2px;
         overflow: hidden;
+        text-align : center;
     }
     .content_table thead tr{
         background-color: #F0D2CF;
@@ -125,6 +126,7 @@ img {vertical-align:top;}
     }
     .content_table th, .content_table td{
         padding:9px 12px;
+        text-align : center;
     }
     .content_table thead tr:first-of-type{
         border-top: 2px solid #C97D73;

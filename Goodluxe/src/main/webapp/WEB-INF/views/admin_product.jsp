@@ -507,14 +507,14 @@ $(document).ready(function() {
 	<div id="wrapper">
 
 		<div id="container" class="container-small">
-			<h1 id="container_title">상품상태 관리</h1>
+			<h1 id="container_title">| 상품관리 > 상품관리</h1>
 			<div class="container_wr">
 				<section>
 				
 					<br />
 					<br />
 					
-					<h3>| 배송관리</h3>
+					<h3>| 상품관리</h3>
 					<br>
 					<form id = "filteringform" method = "post">
 						<table class="information2">
