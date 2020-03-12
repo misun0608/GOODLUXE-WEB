@@ -150,12 +150,20 @@
 	
 	int j =0;
 	
+	
+	// 데이터 없을시 오류나는 부분
+	
+	if(list_size == 0){
+		cnt_label += "'none'";
+		cnt_data += 0;
+	}else{
 	for(j=0; j<list_size-1; j++){
 		cnt_label += "'"+ cate_cnt_name[j] + "'" + ",";
 		cnt_data += cate_cnt[j] + ",";
 	}
 	cnt_label += "'"+ cate_cnt_name[j] + "'";
 	cnt_data += cate_cnt[j];
+	}
 	
 	// System.out.println("카테라벨" + cnt_label);
 	// System.out.println("카테데이터" + cnt_data);
@@ -182,12 +190,19 @@
 	
 	int a =0;
 	
-	for(a=0; a<brand_list_size-1; a++){
-		brand_cnt_label += "'"+ brand_cnt_name[a] + "'" + ",";
-		brand_cnt_data += brand_cnt[j] + ",";
+	// 여기도 값없으면 오류
+	
+	if(brand_list_size == 0){
+		brand_cnt_label += "'none'";
+		brand_cnt_data += 0;
+	}else{
+		for(a=0; a<brand_list_size-1; a++){
+			brand_cnt_label += "'"+ brand_cnt_name[a] + "'" + ",";
+			brand_cnt_data += brand_cnt[j] + ",";
+		}
+		brand_cnt_label += "'"+ brand_cnt_name[a] + "'";
+		brand_cnt_data += brand_cnt[a];
 	}
-	brand_cnt_label += "'"+ brand_cnt_name[a] + "'";
-	brand_cnt_data += brand_cnt[a];
 	
 	// System.out.println("브랜드라벨" + brand_cnt_label);
 	// System.out.println("브랜드데이터" + brand_cnt_data);
@@ -213,13 +228,18 @@
 	
 	int b =0;
 	
-	for(b=0; b<cate_sales_list_size-1; b++){
-		cate_sales_label += "'"+ cate_sales_name[b] + "'" + ",";
-		cate_sales_data += cate_sales[b] + ",";
+	// 오류날 곳
+	if(cate_sales_list_size == 0){
+		cate_sales_label += "'none'";
+		cate_sales_data += 0;
+	}else{
+		for(b=0; b<cate_sales_list_size-1; b++){
+			cate_sales_label += "'"+ cate_sales_name[b] + "'" + ",";
+			cate_sales_data += cate_sales[b] + ",";
+		}
+		cate_sales_label += "'"+ cate_sales_name[b] + "'";
+		cate_sales_data += cate_sales[b];
 	}
-	cate_sales_label += "'"+ cate_sales_name[b] + "'";
-	cate_sales_data += cate_sales[b];
-	
 	// System.out.println("카테매출라벨" + cate_sales_label);
 	// System.out.println("카테매출데이터" + cate_sales_data);
 	
@@ -244,13 +264,18 @@
 	
 	int c =0;
 	
-	for(c=0; c<brand_sales_list_size-1; c++){
-		brand_sales_label += "'"+ brand_sales_name[c] + "'" + ",";
-		brand_sales_data += brand_sales[c] + ",";
+	// 오류각
+	if(brand_sales_list_size == 0){
+		brand_sales_label += "'none'";
+		brand_sales_data += 0;
+	}else{
+		for(c=0; c<brand_sales_list_size-1; c++){
+			brand_sales_label += "'"+ brand_sales_name[c] + "'" + ",";
+			brand_sales_data += brand_sales[c] + ",";
+		}
+		brand_sales_label += "'"+ brand_sales_name[c] + "'";
+		brand_sales_data += brand_sales[c];
 	}
-	brand_sales_label += "'"+ brand_sales_name[c] + "'";
-	brand_sales_data += brand_sales[c];
-	
 	// System.out.println("브랜드매출라벨" + brand_sales_label);
 	// System.out.println("브랜드매출데이터" + brand_sales_data);
 	
