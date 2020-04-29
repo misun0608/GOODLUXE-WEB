@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.spring.mapper.Chat_recordMapper">
+
+<resultMap type="com.spring.goodluxe.voes.Chat_recordVO" id="resultChatrecordVO">
+		<result property="member_id" column="member_id" />
+		<result property="chat_message" column="chat_message" />
+		<result property="chat_timestamp" column="chat_timestamp" />
+		<result property="chat_room" column="chat_room" />
+		<result property="chat_count" column="chat_count" />
+	</resultMap>
+	
+
+	
+	<select id="selectListchatRecord" parameterType="String" resultMap="resultChatrecordVO" >
+		select *
+		from gl_chat_record
+		where chat_room = #{chat_room}
+		order by chat_timestamp asc
+	</select>
+	
+	<select id="selectListchatRecordCount" parameterType="String" resultMap="resultChatrecordVO" >
+		select *
+		from gl_chat_record
+		where chat_room = #{chat_room}
+		order by chat_timestamp desc
+	</select>
+	
+	
+	
+	<insert id="insertchatRecord" parameterType="com.spring.goodluxe.voes.Chat_recordVO" >
+		<selectKey resultType="int" keyProperty="chat_count" order="BEFORE">
+        	         select  chat_count+1
+                    from (
+                        select rownum as rnum,chat_timestamp, chat_count
+                        from gl_chat_record
+                         where chat_room = #{chat_room} 
+                        order by chat_timestamp desc
+                       )
+                       where rownum=1
+   	 	</selectKey>
+			insert into gl_chat_record values(
+			#{member_id}, #{chat_message}, SYSTIMESTAMP, #{chat_room},#{chat_count}
+			)
+	</insert>
+	<insert id="insertadminchatRecord" parameterType="com.spring.goodluxe.voes.Chat_recordVO" >
+			insert into gl_chat_record values(
+			#{member_id}, #{chat_message}, SYSTIMESTAMP, #{chat_room},0
+			)
+	</insert>
+	<select id="selectlistcount" parameterType="com.spring.goodluxe.voes.Chat_recordVO" resultType="int" >
+		select count(*)
+		from gl_chat_record
+		where chat_room = #{chat_room}
+	</select>
+	
+	
+	<select id="selectListChatRecordcountdo" resultMap="resultChatrecordVO">
+		         select member_id, chat_message, chat_timestamp ,chat_room,chat_count
+            from(
+                select member_id, chat_message, chat_timestamp ,chat_room,chat_count,
+                    rank() over(partition by chat_room order by chat_timestamp desc) chat_room_rank
+                from gl_chat_record 
+                order by chat_room_rank asc, chat_timestamp asc)
+                where chat_room_rank =1 and chat_count  > 0
+                union all
+                select member_id, chat_message, chat_timestamp ,chat_room,chat_count
+            from(
+                select member_id, chat_message, chat_timestamp ,chat_room,chat_count,
+                    rank() over(partition by chat_room order by chat_timestamp desc) chat_room_rank
+                from gl_chat_record 
+                order by chat_room_rank asc, chat_timestamp desc)
+                where chat_room_rank =1 and chat_count  = 0
+	</select>
+	
+	<update id="updateListChatRecordCountdo" parameterType="String" >
+		   update gl_chat_record 
+                set chat_count =0
+                where chat_room=#{chat_room} 
+                and chat_timestamp=(  
+                select chat_timestamp
+            	from(
+                	select member_id, chat_message, chat_timestamp ,chat_room,chat_count,
+                    rank() over(partition by chat_room order by chat_timestamp desc) chat_room_rank
+                	from gl_chat_record 
+                   where chat_room = #{chat_room} 
+                	order by chat_room_rank asc, chat_timestamp desc)
+                	where chat_room_rank =1)
+	</update>
+	
+	
+	
+
+</mapper>

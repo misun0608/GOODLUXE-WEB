@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.spring.mapper.ProductlistMapper">
+
+	<resultMap id = "PurchaseProductMap" type = "com.spring.goodluxe.voes.PurchaseProductVO">
+		<result property = "entity_number" column = "entity_number" />
+		<result property = "pd_name" column = "pd_name" />
+		<result property = "pd_brand" column = "pd_brand" />
+		<result property = "pd_category" column = "pd_category" />
+		<result property = "quality_grade" column = "quality_grade" />
+		<result property = "sale_price" column = "sale_price" />
+		<result property = "buying_price" column = "buying_price" />
+		<result property = "purc_date" column = "purc_date" />
+		<result property = "appraise_exist" column = "appraise_exist" />
+		<result property = "pd_component" column = "pd_component" />
+		<result property = "member_id" column = "member_id" />
+	</resultMap>
+	
+	<resultMap id = "ConsignProductMap" type = "com.spring.goodluxe.voes.ConsignProductVO">
+		<result property = "entity_number" column = "entity_number" />
+		<result property = "pd_name" column = "pd_name" />
+		<result property = "pd_brand" column = "pd_brand" />
+		<result property = "pd_category" column = "pd_category" />
+		<result property = "quality_grade" column = "quality_grade" />
+		<result property = "sale_price" column = "sale_price" />
+		<result property = "commission" column = "commission" />
+		<result property = "start_date" column = "start_date" />
+		<result property = "end_date" column = "end_date" />
+		<result property = "sale_status" column = "sale_status"/>
+		<result property = "appraise_exist" column = "appraise_exist" />
+		<result property = "pd_component" column = "pd_component" />
+		<result property = "member_id" column = "member_id" />
+	</resultMap>
+	
+	<resultMap id = "SellingBoardVO" type = "com.spring.goodluxe.voes.ProductBoardVO">
+		<result property = "pb_number" column = "pb_number"/>
+		<result property = "pb_division" column = "pb_division"/>
+		<result property = "pb_md_name" column = "pb_md_name"/>
+		<result property = "pb_date" column = "pb_date"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "pb_post_status" column = "pb_post_status"/>
+		<result property = "pb_detail" column = "pb_detail"/>
+		<result property = "pb_main_img_original" column = "pb_main_img_original"/>
+		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
+		<result property = "pb_detail_img1_original" column = "pb_detail_img1_original"/>
+		<result property = "pb_detail_img1_stored" column = "pb_detail_img1_stored"/>
+		<result property = "pb_detail_img2_original" column = "pb_detail_img2_original"/>
+		<result property = "pb_detail_img2_stored" column = "pb_detail_img2_stored"/>
+		<result property = "pb_detail_img3_original" column = "pb_detail_img3_original"/>
+		<result property = "pb_detail_img3_stored" column = "pb_detail_img3_stored"/>
+		<result property = "pb_view_count" column = "pb_view_count"/>
+		<result property = "pb_like" column = "pb_like"/>
+		<result property = "entity_number" column = "entitiy_number"/>
+	</resultMap>
+	
+	<!-- 리스트 반환용 HashMap -->
+	<resultMap id = "listHashmapVO" type = "java.util.HashMap" >
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "pb_post_status" column = "pb_post_status"/>
+		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
+		<result property = "pb_md_name" column = "pb_md_name"/>
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "entity_number" column = "entity_number"/>
+	</resultMap>
+	
+	<!-- 상품(단일) 반환용 HashMap -->
+	<resultMap id = "TheProductmapVO" type = "java.util.HashMap">
+		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
+		<result property = "pb_detail_img1_stored" column = "pb_detail_img1_stored"/>
+		<result property = "pb_detail_img2_stored" column = "pb_detail_img2_stored"/>
+		<result property = "pb_detail_img3_stored" column = "pb_detail_img3_stored"/>
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "pb_md_name" column = "pb_md_name"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "quality_grade" column = "quality_grade"/>
+		<result property = "pb_detail" column = "pb_detail"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "entity_number" column = "entity_number"/>	
+	</resultMap>
+	
+	<!-- 추천 상품 주제 -->
+	<resultMap id = "RecommandthemeVO" type = "java.util.HashMap">
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "pd_category" column = "pd_category"/>
+	</resultMap>
+	   
+	<!-- 매입 상품 등록 -->
+	<insert id = "insertPurcProduct" parameterType = "com.spring.goodluxe.voes.PurchaseProductVO"> 
+		insert into gl_purchase(entity_number, pd_name, pd_brand, pd_category,
+			quality_grade, sale_price, buying_price, purc_date, sale_status,
+			appraise_exist, pd_component, member_id)	
+			values( gl_product_seq.nextval,#{pd_name},#{pd_brand},
+			#{pd_category},#{quality_grade},#{sale_price},#{buying_price},
+			#{purc_date},#{sale_status},#{appraise_exist},#{pd_component},#{member_id})
+	</insert>
+
+	<!-- 위탁상품 등록 -->
+	<insert id = "insertConsProduct" parameterType = "com.spring.goodluxe.voes.ConsignProductVO"> 
+		insert into gl_consignment(entity_number, pd_name, pd_brand, pd_category,
+			quality_grade, sale_price, commission, start_date, end_date,
+			sale_status, appraise_exist, pd_component, member_id)	
+			values( gl_product_seq.nextval,#{pd_name,jdbcType=VARCHAR},#{pd_brand},#{pd_category},
+			#{quality_grade},#{sale_price},#{commission}, #{start_date},#{end_date},
+			#{sale_status,jdbcType=VARCHAR},#{appraise_exist},#{pd_component},#{member_id})
+	</insert>
+
+	<!-- 게시글 등록 -->
+	
+	<insert id = "insertSellingBoard" parameterType = "com.spring.goodluxe.voes.ProductBoardVO">
+		insert into gl_productboard(pb_number,pb_division,pb_md_name,pb_date,
+			pb_sale_status,pb_post_status,pb_detail,pb_main_img_original,
+			pb_main_img_stored,pb_detail_img1_original,pb_detail_img1_stored,pb_detail_img2_original,pb_detail_img2_stored,pb_detail_img3_original,pb_detail_img3_stored,
+			pb_view_count,pb_like,entity_number)
+			values( sellingBoard_seq.nextval, #{pb_division},#{pb_md_name},sysdate,
+			#{pb_sale_status},#{pb_post_status},#{pb_detail},#{pb_main_img_original},
+			#{pb_main_img_stored},#{pb_detail_img1_original},#{pb_detail_img1_stored},#{pb_detail_img2_original},#{pb_detail_img2_stored},#{pb_detail_img3_original},#{pb_detail_img3_stored},
+			#{pb_view_count},#{pb_like},#{entity_number})
+			
+	</insert>
+	<update id = "setPurcSaleStatus" parameterType = "com.spring.goodluxe.voes.ProductBoardVO">
+		update gl_purchase set sale_status = '판매중' where entity_number = #{entity_number}	
+	</update>
+	<update id = "setConsSaleStatus" parameterType = "com.spring.goodluxe.voes.ProductBoardVO">
+		update gl_consignment set sale_status = '판매중' where entity_number = #{entity_number}	
+	</update>
+	
+
+	<!-- 게시물 갯수 확인 -->
+	<select id = "getSellingBoardCount" parameterType = "hashmap" resultType = "int">
+		
+		select count(*) from (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number , pd_category, quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY PB_DATE DESC)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+				
+					<if test = "il_search_brand !='all'"> and pd_brand = #{il_search_brand} </if>
+					<if test = "il_search_category !='all'"> and pd_category = #{il_search_category} </if>
+					<if test = "il_search_grade !='all'"> and quality_grade = #{il_search_grade} </if>
+					<if test = "il_search_price !='all'">
+						<if test = "il_search_price =='lt10'"> <![CDATA[and sale_price < 100000]]> </if> 
+						<if test = "il_search_price == '10to50' "> and sale_price between 100000 and 499999 </if> 
+						<if test = "il_search_price == '50to100' "> and sale_price between 500000 and 999999 </if> 
+						<if test = "il_search_price == '100to200' "> and sale_price between 1000000 and 1999999 </if> 
+						<if test = "il_search_price == '200to300' "> and sale_price between 2000000 and 2999999 </if> 
+						<if test = "il_search_price == '300to400' "> <![CDATA[and sale_price >= 3000000 and sale_price <= 3999999]]> </if> 
+						<if test = "il_search_price == '400to500' "> and sale_price between 4000000 and 4999999 </if> 
+						<if test = "il_search_price == 'gt500' "> and <![CDATA[ sale_price > 5000000]]> </if> 
+					</if>
+			)	
+	</select>
+
+	<!-- 게시물 리스트 가져오기 -->
+	<select id = "SellingBoardProduct" parameterType = "hashmap" resultMap = "listHashmapVO">
+		SELECT * FROM (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number , pd_category, quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY PB_DATE DESC)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+				
+					<if test = "il_search_brand !='all'">
+						and pd_brand = #{il_search_brand}
+					</if>
+					<if test = "il_search_category !='all'">
+						and pd_category = #{il_search_category}
+					</if>
+					<if test = "il_search_grade !='all'">
+						and quality_grade = #{il_search_grade}
+					</if>
+					
+					
+					<if test = "il_search_price !='all'">
+						<if test = "il_search_price =='lt10'">
+							<![CDATA[and sale_price < 100000]]>
+						</if> 
+						<if test = "il_search_price == '10to50' ">
+						 	and sale_price between 100000 and 499999
+						</if> 
+						<if test = "il_search_price == '50to100' ">
+							and sale_price between 500000 and 999999
+						</if> 
+						<if test = "il_search_price == '100to200' ">
+							and sale_price between 1000000 and 1999999
+						</if> 
+						<if test = "il_search_price == '200to300' ">
+							and sale_price between 2000000 and 2999999
+						</if> 
+						<if test = "il_search_price == '300to400' ">
+							<![CDATA[and sale_price >= 3000000 and sale_price <= 3999999]]>
+						</if> 
+						<if test = "il_search_price == '400to500' ">
+							and sale_price between 4000000 and 4999999
+						</if> 
+						<if test = "il_search_price == 'gt500' ">
+							and <![CDATA[ sale_price > 5000000]]>
+						</if> 
+					</if>
+				)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
+	</select>
+
+	<!-- 메인페이지 아이템 가져오기 -->
+	<select id = "getMainPageItem" parameterType = "hashmap" resultMap = "listHashmapVO">
+		SELECT * FROM (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number , pd_category, quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY PB_DATE DESC)
+				WHERE pb_sale_status = '판매중' and pb_post_status = '게시중'	
+			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
+	</select>
+	
+	<!-- 메인페이지의 그 Fancy한 부분 아이템 가져오기 -->
+	<select id = "getMainPageItemView" parameterType = "hashmap" resultMap = "listHashmapVO">
+		SELECT * FROM (
+			SELECT ROWNUM RNUM, pb_main_img_stored,pb_sale_status,pb_post_status, entity_number,pb_view_count
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pb_sale_status,pb_post_status,gl_productboard.entity_number,pb_view_count
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pb_sale_status,pb_post_status,gl_productboard.entity_number,pb_view_count
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY pb_view_count desc)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+			)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]><!-- 파라미터 두개일땐 해시맵 사용하기 -->
+	</select>
+
+	<select id = "getSearchBoardCount" parameterType = "hashmap" resultType = "int">
+		<!--  select count(*) from (select * from gl_productboard where pb_sale_status != 'sold' and pb_post_status = 'onboard')-->
+		
+		select count(*) from (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number , pd_category, quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY PB_DATE DESC)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'			
+			)where REGEXP_LIKE(pb_md_name,#{content},'i')
+	</select>
+	<select id = "getSearchBoardList" parameterType = "hashmap"  resultMap = "listHashmapVO">
+		select * from(
+		select * from (
+			SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status, entity_number , pd_category, quality_grade, pb_like FROM (
+					select * from(
+						SELECT * FROM (
+							select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade,pb_like
+							from gl_purchase, gl_productboard
+							where gl_purchase.entity_number = gl_productboard.entity_number
+							UNION
+							select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade,pb_like
+							from gl_consignment, gl_productboard
+							where gl_consignment.entity_number = gl_productboard.entity_number)
+					<if test = "orderbywhat == 'recently'">
+						ORDER BY PB_DATE DESC)
+					</if>	
+					<if test = "orderbywhat == 'popular'">
+						ORDER BY pb_like DESC)
+					</if>
+					<if test = "orderbywhat == 'highprice'">
+						ORDER BY sale_price DESC)
+					</if>
+					<if test = "orderbywhat == 'lowprice'">
+						ORDER BY sale_price ASC)
+					</if>
+					)where REGEXP_LIKE(pb_md_name,#{content},'i')
+			)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+				
+		)<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
+	</select>
+	
+	<select id = "findEnNum" parameterType="int" resultType="String">
+		select entity_number
+		from gl_ProductBoard
+		where entity_number = #{entity_number}
+	</select>
+	
+	<select id = "getTheProduct" parameterType = "hashmap" resultMap = "TheProductmapVO">
+		select * from(
+			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, pb_sale_status, gl_productboard.entity_number
+			from gl_purchase, gl_productboard
+			where gl_purchase.entity_number = gl_productboard.entity_number
+			UNION
+			select pb_main_img_stored,pb_detail_img1_stored,pb_detail_img2_stored,pb_detail_img3_stored, pd_brand, pb_md_name, sale_price, quality_grade, pb_detail, pb_sale_status, gl_productboard.entity_number
+			from gl_consignment, gl_productboard
+			where gl_consignment.entity_number = gl_productboard.entity_number
+		)where entity_number = #{entityNo}
+	</select>
+	<update id = "viewCountPlus">
+		update gl_productboard set pb_view_count = pb_view_count +1 where entity_number = #{entityNo}
+	</update>
+	
+	<select id = "getRecommandtheme" parameterType = "hashmap" resultMap ="RecommandthemeVO">
+	
+			select pd_brand, pd_category from(
+				SELECT * FROM (
+					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+					from gl_purchase, gl_productboard
+					where gl_purchase.entity_number = gl_productboard.entity_number
+					UNION
+					select pd_brand, pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category
+					from gl_consignment, gl_productboard
+					where gl_consignment.entity_number = gl_productboard.entity_number
+				)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	
+			)where entity_number = #{entity}
+	
+	</select>
+	<select id = "getRecommandList" parameterType = "hashmap" resultMap ="listHashmapVO">
+	
+		
+			select * from (
+				SELECT ROWNUM RNUM, pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date, entity_number , pd_category
+				 FROM (
+						select * from(
+							SELECT * FROM (
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
+								from gl_purchase, gl_productboard
+								where gl_purchase.entity_number = gl_productboard.entity_number
+								UNION
+								select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category,pb_view_count
+								from gl_consignment, gl_productboard
+								where gl_consignment.entity_number = gl_productboard.entity_number
+							)
+						)WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중' order by pb_view_count desc
+				)where <!-- pd_brand = #{pd_brand} and --> pd_category = #{pd_category} and entity_number not in (#{entity_number})
+			)<![CDATA[ WHERE RNUM >= 1 AND RNUM <= 4]]>
+	</select>
+
+	
+	
+ 	<!-- 관리자  -->
+ 	<resultMap id = "adminMemberVOMap" type = "com.spring.goodluxe.voes.MemberVO">
+ 		<result property = "member_id" column = "member_id"/>
+ 		<result property = "member_pw" column = "member_pw"/>
+ 		<result property = "member_name" column = "member_name"/>
+ 		<result property = "member_zipcode" column = "member_zipcode"/>
+ 		<result property = "member_addr1" column = "member_addr1"/>
+ 		<result property = "member_addr2" column = "member_addr2"/>
+ 		<result property = "member_phone" column = "member_phone"/>
+ 		<result property = "member_email" column = "member_email"/>
+ 		<result property = "member_email_receive" column = "member_email_receive"/>
+ 		<result property = "member_like_brand" column = "member_like_brand"/>
+ 		<result property = "member_like_category" column = "member_like_category"/>
+ 		<result property = "member_join_date" column = "member_join_date"/>
+ 		<result property = "member_class" column = "member_class"/>
+ 		<result property = "member_point" column = "member_point"/>
+ 		<result property = "member_isadmin" column = "member_isadmin"/>
+ 	</resultMap>
+ 	
+ 	<resultMap id = "pickMemberId" type = "java.util.HashMap">
+ 		<result property = "member_id" column = "member_id"/>
+ 	</resultMap>
+ 	
+ 
+ 	
+ 	<select id = "countOneMember" parameterType="hashmap" resultType = "Integer">
+ 		select count(*) from gl_member where member_id = #{member_id}
+ 	</select> 	
+ 	<select id = "adminSearchId" parameterType = "hashmap" resultMap = "adminMemberVOMap">
+ 		select * from gl_member
+ 		where member_id = #{member_id}
+ 	</select>
+ 	
+ 	
+ 	<select id = "selectAllMember" resultMap = "pickMemberId">
+ 		select member_id from gl_member
+ 	</select>
+	 <insert id = "issueAllmemberCoupon" parameterType = "com.spring.goodluxe.voes.CouponVO">
+ 		insert into gl_coupon(coupon_number, coupon_type, coupon_expire,coupon_status, member_id)
+ 		values(gl_coupon_seq.nextval, #{coupon_type,jdbcType=VARCHAR},sysdate+14,#{coupon_status}, #{member_id})
+ 		
+ 	</insert>
+	<insert id = "issueOnememberCoupon" parameterType = "com.spring.goodluxe.voes.CouponVO">
+ 		insert into gl_coupon
+ 		values(gl_coupon_seq.nextval, #{coupon_type},sysdate+14,#{coupon_status},#{member_id})
+ 	</insert>
+	
+	<resultMap type="java.util.HashMap" id="shippingMemberInfoMap">
+		<result property = "order_number" column = "order_number"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "member_name" column = "member_name"/>
+		<result property = "order_zipcode" column = "order_zipcode"/>
+		<result property = "order_addr1" column = "order_addr1"/>
+		<result property = "order_addr2" column = "order_addr2"/>
+		<result property = "order_phone" column = "order_phone"/>
+	</resultMap>
+	
+	<select id = "getShippingInfo" parameterType = "String" resultMap = "shippingMemberInfoMap">
+		select member_id, member_name, order_zipcode, order_addr1, order_addr2, order_phone, order_number from(
+	        select gl_order.member_id, gl_member.member_name, order_zipcode, order_addr1, order_addr2, order_phone, order_number
+			from gl_member, gl_order
+			where gl_order.member_id = gl_member.member_id)
+    	where order_number = #{order_number}
+	
+	</select>
+	
+	<update id = "preChgReadStatus" parameterType = "String">
+		update gl_notice set alarm_read = 'Y' where alarm_number = #{alarm_number}
+	</update>
+	
+</mapper>

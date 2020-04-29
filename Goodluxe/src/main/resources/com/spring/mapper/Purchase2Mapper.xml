@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+
+
+<mapper namespace="com.spring.mapper.Purchase2Mapper">
+
+   <resultMap type="com.spring.goodluxe.voes.Purchase2VO" id="ResultMapperchase">
+      <result property="entity_number" column="entity_number" />
+      <result property="pd_name" column="pd_name" />
+      <result property="pd_brand" column="pd_brand" />
+      <result property="pd_category" column="pd_category" />
+      <result property="quality_grade" column="quality_grade" />
+      <result property="sale_price" column="sale_price" />
+      <result property="buying_price" column="buying_price" />
+      <result property="purc_date" column="purc_date" />
+      <result property="appraise_exist" column="appraise_exist" />
+      <result property="pd_component" column="pd_component" />
+      <result property="member_id" column="member_id" />
+   </resultMap>
+   
+   <select id="selectPurchase" parameterType="String" resultMap="ResultMapperchase">
+		SELECT * FROM gl_purchase WHERE entity_number=#{entity_number}
+	</select>
+	
+	<select id="entitycheck" parameterType="String" resultType="int">
+    SELECT NVL(COUNT(*),0)
+    FROM gl_purchase WHERE entity_number=#{entity_number}
+</select>
+
+	<select id="selectEntitySearchWord" parameterType="String" resultMap="ResultMapperchase" >
+		<![CDATA[
+			SELECT * 
+			FROM gl_purchase 
+			WHERE entity_number like '%'||#{entity_number}||'%'
+			order by entity_number desc
+		]]>
+	</select>
+
+	<select id="selectKeywordSearch" parameterType="String" resultType="String"  >
+		<![CDATA[
+			select entity_number 
+			from gl_purchase
+			where entity_number like '%'||#{entity_number}||'%'
+			order by entity_number desc
+		]]>	
+	</select>
+
+   
+   </mapper>

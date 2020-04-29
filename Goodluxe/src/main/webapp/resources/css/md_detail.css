@@ -1,0 +1,471 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    .md_detail_cover{
+        position: relative;
+        width: 1080px;
+        margin: 0 auto;
+        /* background: red; */
+    }
+
+    /* 사진 부분 */
+    #md_detail_photoarea{
+        position: relative;
+        width: 400px;
+        float: left;
+        display: block;
+        padding: 0 50px;
+        /* background: orange; */
+    }
+/* 큰 이미지 */
+    .md_detail_main_image{
+        width: 400px;
+        height : 400px;
+        margin-bottom: 3px;
+    }
+/* 작은 이미지 */
+    .md_detail_thumbnail_images{
+        display: flex;
+        width: 400px;
+    }
+    .md_detail_thumbnail_image{
+        /* margin-left: 1px; */
+        width: 97px;
+        height : 97px;
+        margin-right: 4px;
+    }
+    .detail_main_image_left{
+        flex: 1;
+    }
+
+    /* 텍스트 부분 */
+    #md_detail_textarea{
+        float: right;
+        /* background-color: green; */
+        right: 0px;
+        display: block;
+        width: 580px;
+        height: 500px;
+        text-align: left;
+        line-height: 250%;
+    }
+    .textarea_align {
+        width: 400px;
+        margin: 0 auto;
+    }
+/*     .textarea2{
+        background-color: red;
+        border: 1px solid;
+    } */
+    .md_detail_brand {
+        font-size: 13px;
+        margin-top: 10px;
+    }
+    .md_detail_name {
+        font-size: 17px;
+        padding-bottom: 5px;
+        font-weight: bold;
+
+    }
+    .md_detail_price{
+        font-size: 13px;
+    }
+    #name_line{
+        width: 400px;
+        border: 1px solid #555;
+        margin: 15px 0;
+    }
+
+    /* div table */
+    .md_detail_table{
+        display: table;
+        width: 100%;
+    }
+    .md_detail_cell{
+        font-size: 14px;
+    }
+    .md_detail_cell.md_detail_title{
+        font-size: 13px;
+        color: #555555;
+        width: 20%;
+        /* span width 적용하기 위해 추가*/
+        display: inline-block;
+    }
+    /*버튼*/
+    .md_detail_btnpart{
+        margin-top: 30px;
+    }
+    .buybtn{
+    	position : relative;
+    	float:left;
+        width: 190px;
+        height: 62px;
+        font-size: 14px;
+        color: white;
+        border: 1px solid #C97D73;
+        /* border-radius: 5px; */
+        background-color: #C97D73;
+        border: 0px;
+        outline: none;
+    }
+    .buybtn_letter{
+    	position : relative;
+    	width : 53px;
+    	height : 40px;
+   	 	font-size: 14px;
+    	color: white;
+    	top : 50%;
+        left : 50%;
+        margin-top: -20px;
+    	margin-left : -27px;
+    }
+    .cantbuybtn{
+    	position : relative;
+    	float:left;
+        width: 190px;
+        height: 62px;
+        font-size: 14px;
+        color: white;
+        /* border-radius: 5px; */
+        background-color: #b9aeae;
+        border: 0px;
+        outline: none;
+       }
+    .cantbuyletter{
+    	position : relative;
+    	left : 18px;
+    	top :10px; 
+    }
+    /* 댓글 버튼 호버(하면 조잡해보이는 것 같기도한데 버튼이 많아서 어느 버튼 선택하는지 구분이 필요할 것 같기도 해서 일단 해둠) */
+    .buybtn:hover{ 
+        background-color: #DFB1AB;
+        border-color: #DFB1AB;
+    }
+     .notibtn{
+        position: relative;
+        float:left;
+        width: 90px;
+        height: 60px;
+        border: 1px solid #C97D73;
+        background-color: white;
+        color: #555555;
+        text-align: center;
+        margin : 0 11px;
+    }
+    .notice_Img{
+        position : relative;
+        width : 16px;
+        height : 16px;
+        top : 22px;
+        margin-left: -22px;
+    }
+    .notice_letter{
+        position : relative;
+    	width : 40px;
+    	height : 30px;
+   	 	font-size: 14px;
+        color: #555555;
+        left : 50%;
+        margin-top: -31px;
+    	margin-left : -8px;
+    }
+     .likebtn{
+        position : relative;
+        float:left;
+        text-align: center;
+        width: 90px;
+        height: 60px;
+        border: 1px solid #C97D73;
+        background-color: white;
+        color: #555555;
+    }
+    .like_Img{
+        position : relative;
+        width : 16px;
+        height : 16px;
+        top : 22px;
+        margin-left: -35px;
+    }
+    .like_letters{
+        position : relative;
+    	width : 40px;
+    	height : 30px;
+   	 	font-size: 14px;
+        color: #555555;
+        left : 50%;
+        margin-top: -31px;
+    	margin-left : -8px;
+    }
+
+    /* 하단부분 */
+    .md_detail_bottom {
+        display:table;
+        width: 1080px;
+        /* background: gray; */
+    }
+    /* 제품 상세 설명 */
+    .md_detail_explanation {
+        /* background: hotpink; */
+        width: 950px;
+        margin: 50px auto;
+    }
+    /* 연관 제품 */
+    .related_item_area {
+        position: relative;
+        /* background: lawngreen; */
+    }
+    .related_item_title {
+        text-align: center;
+        margin: 15px 0;
+    }
+    .related_item {
+        width: 234px;
+        float: left;
+        margin-right: 48px;
+        margin-bottom: 50px;
+        /* background: skyblue; */
+    }
+    .related_item:last-child {
+        margin-right: 0px;
+    }
+    .related_item>a>img {
+        position: relative;
+        width: 234px; height: 234px;
+        left: 50%; margin-left: -117px;
+    }
+    .related_item_info {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .md_detail_explanation_article{
+        line-height: 160%;
+    }
+
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    .sr_section_area {
+        width:700px;
+        margin : 0 auto;
+    }
+
+    /* 첫번째 article */
+    .sr_first>span {
+        margin: 0 5px;
+    }
+    .sr_first>span:first-child {
+        font: bold 18px/1.2 arial ;
+    }
+    .sr_first>span:last-child {
+        font: 13px/1.2 arial ;
+        color:gray;
+    }
+
+    /* 두번째 article */
+    .sr_second>ul {
+        display: inline-block;
+    }
+    .sr_second>ul>li {
+        float: left;
+        margin : 10px auto;
+        padding: 5px 10px;
+        background: rgb(246, 239, 210);
+    }
+    .sort>a {
+        margin : 0 10px;
+        font-size: 14px;
+    }
+    .sr_second>ul>li.on>a {
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .sort_split:hover>a {
+        cursor: default;
+    }
+
+    /* 세번째 article */
+    .sr_third {
+        width: 100%;
+        /* background: orange; */
+    }
+    .card {
+        position: relative;
+        display: inline-block;
+        width : 210px; height: 300px;
+        margin: 9px;
+        /* background: red; */
+    }
+    .md_img {
+        position: relative;
+        display: inline-block;
+        width: 200px; height: 200px;
+        top: 10px; left: 50%;
+        margin-left: -100px;
+        margin-bottom: 20px;
+    }
+    .md_img_path {
+        width: 90%; height: 90%;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        position: relative;
+    }
+    .md_brand {
+        text-align: center;
+        margin: 5px auto;
+        font: 17px/1.2 arial ;
+    }
+    .md_name {
+        text-align: center;
+        margin: 10px auto;
+        font: 12px/1.2 arial ;
+    }
+    .md_price {
+        text-align: center;
+        margin: 5px auto;
+        font: 14px/1.2 arial ;
+    }
+
+    .sr_forth {
+        position: relative;
+        width: 240px;
+        /* left: 50%; margin-left: -120px; */
+        /* background: red; */
+        margin : 50px auto;
+    }
+    .paging>tbody>tr>td {
+        width: 40px;
+    }
+    .now_page {
+        color: #E7CA63;
+        font-weight: bold;
+    }
+    .paging>tbody>tr>td>a:hover {
+        font-weight: bold;
+    }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    .sr_section_area {
+        width:320px;
+        margin : 0 auto;
+    }
+
+    /* 첫번째 article */
+    .sr_first>span {
+        display: block;
+        margin: 5px 5px;
+    }
+    .sr_first>span:first-child {
+        font: bold 15px/1.2 arial ;
+    }
+    .sr_first>span:last-child {
+        font: 10px/1.2 arial ;
+        color:gray;
+    }
+
+    /* 두번째 article */
+    .sr_second>ul {
+        display: inline-block;
+    }
+    .sr_second>ul>li {
+        float: left;
+        margin : 10px auto;
+        padding: 5px 5px;
+        background: rgb(246, 239, 210);
+    }
+    .sort>a {
+        margin : 0 5px;
+        font-size: 11px;
+    }
+    .sr_second>ul>li.on>a {
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .sort_split:hover>a {
+        cursor: default;
+    }
+
+    /* 세번째 article */
+    .sr_third {
+        width: 100%;
+        /* background: orange; */
+    }
+    .card {
+        position: relative;
+        display: inline-block;
+        width : 300px;
+        /* margin: 10px; */
+        padding-right: 10px;
+        /* background: rgba(190, 190, 190, 0.5); */
+        /* background: rgba(252, 239, 221, 0.3); */
+        /* border-top: 10px solid rgba(0, 0, 0, 0.05); */
+        border-bottom: 10px solid rgba(0, 0, 0, 0.05);
+        /* border-top: 1px solid rgba(0, 0, 0, 0.5); */
+        /* border-radius: 5px; */
+    }
+    .card>div {
+        float: left;
+    }
+    .md_img {
+        position: relative;
+        display: inline-block;
+        width: 150px; height: 150px;
+        left: 0;
+    }
+    .md_img_path {
+        width: 90%; height: 90%;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        position: relative;
+    }
+    .md_info {
+        width: 150px; height: 135px;
+        right: 0;
+        text-align: center;
+        padding-top: 15px;
+    }
+    .md_brand {
+        text-align: center;
+        margin: 5px auto;
+        font: 17px/1.2 arial ;
+        line-height: 40px;
+    }
+    .md_name {
+        text-align: center;
+        margin: 10px auto;
+        font: 12px/1.2 arial ;
+        line-height: 20px;
+    }
+    .md_price {
+        text-align: center;
+        margin: 5px auto;
+        font: 14px/1.2 arial ;
+    }
+
+    .sr_forth {
+        position: relative;
+        width: 240px;
+        /* left: 50%; margin-left: -120px; */
+        /* background: red; */
+        margin : 50px auto;
+    }
+    .paging>tbody>tr>td {
+        width: 40px;
+    }
+    .now_page {
+        color: #E7CA63;
+        font-weight: bold;
+    }
+    .paging>tbody>tr>td>a:hover {
+        font-weight: bold;
+    }
+    
+}

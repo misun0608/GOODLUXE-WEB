@@ -1,0 +1,219 @@
+/* PC�� �º��� ��� ����ϴ� css */
+/* ������� ��� �ش� �α��� ��ư Ŭ�� �Ұ� */
+
+/* ��Ʈ */
+@font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+/* �ʱ�ȭ */
+* {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* ��� �帮�� */
+.login_bg {
+    display: none;
+    top:0; left: 0;
+    position: fixed;
+    width:100%; height:100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 20;
+}
+
+/* �α��� ���� */
+.login_outline {
+    width: 400px; height: 430px;
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-top: -215px;
+    margin-left: -200px;
+    display: block;
+}
+/* �α��� Ŭ���� ��Ÿ���� �� */
+.login_top {
+    position: absolute;
+    top: 0; left: 0;
+    width:0%; height:3px;
+    background: #fff;
+}
+.login_right {
+    position: absolute;
+    top:0; right: 0;
+    width: 3px; height: 0%;
+    background: #fff;
+}
+.login_bottom {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 0%; height: 3px;
+    background: #fff;
+}
+.login_left {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 3px; height: 0%;
+    background: #fff;
+}
+/* �α��� ��� */
+.login_area {
+    width: 400px; height: 440px;
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-top: -215px;
+    margin-left: -200px;
+    background: #fff;
+    display: none;
+    z-index: 9;
+}
+.login_title {
+    text-align: center;
+    margin: 29px 0 13px 0;
+    font: 30px/1.2 'EBSHMJESaeronRA','Nanum Gothic', sans-serif;
+}
+/* �ݱ� ��ư */
+.login_close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 17px; height: 17px;
+    cursor: pointer;
+}
+
+.group { 
+    position: relative; 
+    width : 290px;
+    margin-bottom: 7px; 
+    left: 50%; margin-left: -148px;
+}
+/* �Է»��� css */
+.input_login {
+    height : 40px; 
+    width : 287px;
+    padding : 17px 6px 0;
+    border-width: 0px;
+    font-size: 18px;
+    background: #fff;
+    border-bottom: 0.8px solid #999;
+}
+.input_login:focus {
+    /* border: 0px; */
+    outline: none;
+}
+.input_login:focus ~ .highlight {
+    animation: inputHighlighter 0.3s ease;
+}
+ /* �� Highlight */
+.group>label {
+    color: #999; 
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 20px;
+    transition: all 0.2s ease;
+}
+.group>label.color {
+    top: 3px; left: 0px;
+    transform: scale(.75);
+    color: #DFB1AB;
+}
+
+.input_login:focus ~ label{
+    top: 3px; left: 0px;
+    transform: scale(.75);
+    color: #DFB1AB;
+}
+
+.find_login_data {
+    position: absolute;
+    right: 35px;
+    color: #999;
+    font-size: 12px;
+    margin: 2px 15px;
+}
+.login_btn {
+	position: absolute;
+    width: 300px;
+    height: 40px;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: 30px;
+    background: #f0bfb9;
+    border-radius: 5px;
+    border-width: 0px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.login_btn:hover {
+    background: #F0D2CF;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.login_line {
+	position: relative;
+    width: 323px; height: 20px;
+    left: 50%;
+    margin-left: -150px;
+    top: 85px;
+}
+.login_line>* {
+    float: left;
+}
+.login_line>span {
+    margin: 0 5px;
+    font-size: 15px;
+    color: #999;
+}
+.login_line>hr {
+    position: relative;
+    width: 136px;
+    border: 0.8px solid #999;
+    top: 50%;
+}
+.login_icons {
+    position: relative;
+    width: 170px; height: 25px;
+    left: 50%; margin-left: -85px;
+    top: 105px;
+}
+.login_icons>a:first-child {
+    position: absolute;
+    left: 0;
+    width: 25px; height: 25px;
+}
+.login_icons>a:nth-child(2) {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 25px; height: 25px;
+}
+.login_icons>a:last-child {
+    position: absolute;
+    right: 0;
+    width: 25px; height: 25px;
+}
+.login_icon {
+    width: 100%; height:100%;
+}
+
+.anonymous {
+    position: relative;
+    width: 323px; height: 20px;
+    left: 50%; margin-left: -161px;
+    top: 125px;
+    text-align: center;
+}
+
+.anonymous>span {
+    font-size: 12px;
+}
+
+.anonymous>a {
+    font-size: 14px;
+    font-weight: bolder;
+    /* color: #DFB1AB; */
+    color: #e69187;
+}

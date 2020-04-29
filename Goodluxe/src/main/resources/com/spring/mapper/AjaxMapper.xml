@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.AjaxMapper">
+	
+	<select id = "isAlreadyLiked" parameterType = "hashmap" resultType = "int">
+		select count(*) from gl_liked
+		 where member_id=#{id} and entity_number=#{entity}
+	</select>
+	
+	<insert id = "insertLikedUser" parameterType = "hashmap">
+		insert into gl_liked(member_id, entity_number) values(#{id}, #{entity})
+	</insert>
+	
+	<delete id = "deleteLikedUser" parameterType = "hashmap">
+		delete from gl_liked  where member_id=#{id} and entity_number=#{entity}
+	</delete>
+	
+	<update id = "increaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like+1
+		  where entity_number = #{entity}
+	</update>
+	
+	<update id = "decreaseLike" parameterType = "hashmap">
+		update gl_productboard
+		 set pb_like=pb_like-1
+		  where entity_number = #{entity}
+	</update>
+	
+	
+	<select id = "isAlreadySetAlarm" parameterType = "hashmap" resultType = "int">
+		select count(*) from gl_product_Alarm
+		 where member_id=#{id} and entity_number=#{entity}
+	</select>
+	
+	<insert id = "insertSetAlarmUser" parameterType = "hashmap">
+		insert into gl_product_Alarm(member_id, entity_number) values(#{id}, #{entity})
+	</insert>
+	<delete id = "deleteSetAlarmUser" parameterType = "hashmap">
+		delete from gl_product_Alarm  where member_id=#{id} and entity_number=#{entity}
+	</delete>
+	
+	
+
+	<!-- 쿠폰 -->
+	<resultMap id = "CouponVOMap" type = "com.spring.goodluxe.voes.CouponVO">
+		<result property = "coupon_number" column = "coupon_number"/>
+		<result property = "coupon_type" column = "coupon_type"/>
+		<result property = "coupon_expire" column = "coupon_expire"/>
+		<result property = "coupon_status" column = "coupon_status"/>
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	
+	
+	<select id = "defaultCouponList"  resultMap = "CouponVOMap">
+		select * from gl_coupon order by coupon_number desc
+	</select>
+	
+	<select id = "allmemberCouponList" parameterType = "com.spring.goodluxe.voes.CouponVO" resultMap = "CouponVOMap">
+		select * from gl_coupon where 1=1 
+		<if test = "coupon_type != '전체'">
+			and coupon_type = #{coupon_type}
+		</if>
+		<if test = "coupon_status =='사용전'"> and coupon_status = #{coupon_status} </if>
+		<if test = "coupon_status =='사용후'"> and coupon_status = #{coupon_status} </if>		
+		 order by coupon_number	desc
+	</select>
+	<select id = "onememberCouponList" parameterType = "com.spring.goodluxe.voes.CouponVO" resultMap = "CouponVOMap">
+		select * from gl_coupon where member_id = #{member_id}
+		<if test = "coupon_type != '전체'">
+			and coupon_type = #{coupon_type}
+		</if>
+		<if test = "coupon_status =='사용전'"> and coupon_status = #{coupon_status} </if>
+		<if test = "coupon_status =='사용후'"> and coupon_status = #{coupon_status} </if>		
+		 order by coupon_number	desc
+	</select>
+	
+	<delete id = "deleteCouponList" parameterType = "hashmap">
+		delete from gl_coupon where coupon_number = #{coupon_number}
+	</delete>
+	
+	
+	
+	<!-- 회원관리 -->
+	
+	<resultMap id = "adminMemberMapVO" type = "java.util.HashMap">
+		<result property = "member_id" column = "member_id"/>
+		<result property = "member_name" column = "member_name"/>
+		<result property = "member_phone" column = "member_phone"/>
+		<result property = "member_email" column = "member_email"/>
+		<result property = "member_class" column = "member_class"/>
+	</resultMap>
+
+	<select id = "getAllMemberinfo" resultMap = "adminMemberMapVO">
+		select member_id, member_name, member_phone, member_email , member_class from gl_member where member_isadmin not in ('Y') 
+	</select>
+	
+	
+	<select id = "getAMemberinfo" parameterType = "hashmap" resultMap = "adminMemberMapVO">
+		select * from gl_member where member_id = #{member_id}
+	</select>
+	<select id = "isBlack"  parameterType = "hashmap" resultType = "String"> 
+		select member_class from gl_member where member_id = #{member_id}
+	</select>
+	<update id = "setBlackClass" parameterType = "hashmap">
+		update gl_member set member_class ='B' where member_id = #{member_id}
+	</update>
+	<update id = "setWhiteClass" parameterType = "hashmap">
+		update gl_member set member_class ='Y' where member_id = #{member_id}
+	</update>
+
+	<!-- 주문관리 -->
+	<resultMap id = "adminOrderMap" type = "com.spring.goodluxe.voes.OrderVO">
+		<result property = "order_number" column = "order_number"/>
+		<result property = "order_receipt" column = "order_receipt"/>
+		<result property = "order_pay_date" column = "order_pay_date"/>
+		<result property = "order_order_date" column = "order_order_date"/>
+		<result property = "order_confirm" column = "order_confirm"/>
+		<result property = "order_status" column = "order_status"/>
+		<result property = "order_addr1" column = "order_addr1"/>
+		<result property = "order_addr2" column = "order_addr2"/>
+		<result property = "order_phone" column = "order_phone"/>
+		<result property = "order_zipcode" column = "order_zipcode"/>
+		<result property = "order_invoice_number" column = "order_invoice_number"/>
+		<result property = "order_ship_date" column = "order_ship_date"/>
+		<result property = "order_cancel_date" column = "order_cancel_date"/>
+		<result property = "order_product_price" column = "order_product_price"/>
+		<result property = "order_ship_fee" column = "order_ship_fee"/>
+		<result property = "order_used_point" column = "order_used_point"/>
+		<result property = "order_used_coupon" column = "order_used_coupon"/>
+		<result property = "order_pay_system" column = "order_pay_system"/>
+		<result property = "order_refund_account" column = "order_refund_account"/>
+		<result property = "order_message" column = "order_message"/>
+		<result property = "pb_number" column = "pb_number"/>
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	
+	<select id = "getAllOrderList" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order order by order_order_date desc
+	</select>
+	<select id = "getOrderListOrdernumber" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order where order_number = #{order_number}
+			 
+	</select>
+	<select id = "getOrderList" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order where 1=1
+		
+		
+		<if test = "period=='today'">
+			and order_order_date 
+				between to_timestamp(sysdate-1 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+				and to_timestamp( sysdate ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+		</if>
+		<if test = "period=='yesterday'">
+			and order_order_date 
+				between to_timestamp(sysdate-2 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+				and to_timestamp( sysdate-1 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+		</if>
+		<if test = "period=='week'">
+			and order_order_date 
+				between to_timestamp(sysdate-7 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+				and to_timestamp( sysdate ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+		</if>
+		<if test = "period=='month'">
+			and order_order_date 
+				between to_timestamp(sysdate-30 ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+				and to_timestamp( sysdate ||'14:00:00','YY/MM/DD HH24:MI:SS') 
+		</if>
+		<if test = "period =='write'">
+			and order_order_date between #{date_start} and #{date_end}
+		</if>
+		
+		<if test = "check_order_status!=null">
+			and order_status in
+			<foreach collection='check_order_status' index='index' item='item' open='(' close =')' separator=',' > 
+				#{item}
+			</foreach>
+		</if>
+		<if test = "is_payed == 'beforeP'">
+			and order_status = '입금전'
+		</if>
+		<if test = "is_payed != 'beforeP'">
+			and order_status != '입금전'
+		</if>
+		
+		<if test = "is_canceled=='cancelY' ">
+			and order_status != '취소완료'
+		</if> 
+
+	</select>
+	<select id = "getOrderListCanceled" parameterType = "hashmap" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = '취소완료'
+	</select>
+	
+	<update id = "orderChangeStatusStartShipping" parameterType = "String">
+		update gl_order set order_status = '배송중' where order_number = #{chekd}
+	</update>
+	
+	<update id = "adminOrderSetEndShipping" parameterType = "String">
+		update gl_order set order_status = '배송완료' where order_number = #{order_number}
+	</update>
+	<update id = "adminOrderSetStartShipping" parameterType = "hashMap">
+		update gl_order 
+		set order_status = '배송중' , order_ship_date = sysdate , order_invoice_number = #{order_invoice_number}
+		where order_number = #{order_number}
+	</update>
+	<update id = "adminOrderMoneyGetShipping" parameterType = "String">
+		update gl_order set order_status = '배송준비중', order_pay_date = sysdate
+		where order_number = #{order_number}
+	</update>
+	
+	<resultMap id = "orderMoneyGetMap" type = "java.util.HashMap">
+		<result property = "order_pay_price" column = "order_pay_price"/>
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	<select id = "getPayedPrice" parameterType = "String" resultMap = "orderMoneyGetMap">
+		select order_pay_price, member_id from gl_order where order_number = #{order_number}
+	</select>
+	<update id = "afterOrderGivePoint" parameterType = "hashMap">
+		update gl_member set member_point = member_point + #{order_pay_price}*0.001 where member_id = #{member_id}
+	</update>
+	<insert id = "afterOrderGivePointonglPoint" parameterType = "hashMap">
+		insert into gl_point values(gl_point_seq.nextval, sysdate, '상품구매 적립', #{order_pay_price}*0.001, #{member_id}, #{order_number})
+	</insert>
+	
+	
+	<!-- 상품관리-->
+	<resultMap id = "adminPurcProductMap" type = "java.util.HashMap">
+		<result property = "entity_number" column = "entity_number"/>
+		<result property = "pd_name" column = "pd_name"/>
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "pd_category" column = "pd_category"/>
+		<result property = "quality_grade" column = "quality_grade"/>
+		<result property = "appraise_exist" column = "appraise_exist"/>
+		<result property = "pd_component" column = "pd_component"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "buying_price" column = "buying_price"/>
+		<result property = "purc_date" column = "purc_date"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "pb_post_status" column = "pb_post_status"/>
+	</resultMap>
+	<resultMap id = "adminConsProductMap" type = "java.util.HashMap">
+		<result property = "entity_number" column = "entity_number"/>
+		<result property = "pd_name" column = "pd_name"/>
+		<result property = "pd_brand" column = "pd_brand"/>
+		<result property = "pd_category" column = "pd_category"/>
+		<result property = "quality_grade" column = "quality_grade"/>
+		<result property = "appraise_exist" column = "appraise_exist"/>
+		<result property = "pd_component" column = "pd_component"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "commission" column = "commission"/>
+		<result property = "start_date" column = "start_date"/>
+		<result property = "end_date" column = "end_date"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "pb_sale_status" column = "pb_sale_status"/>
+		<result property = "pb_post_status" column = "pb_post_status"/>
+	</resultMap>
+	<select id = "adminAllProductListPurchase" resultMap = "adminPurcProductMap">
+		select gl_purchase.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+			sale_price, buying_price, purc_date, member_id, pb_sale_status, pb_post_status 
+		from gl_purchase, gl_productboard
+		where gl_purchase.entity_number = gl_productboard.entity_number order by entity_number desc
+	</select>
+	<select id = "adminAllProductListConsign" resultMap = "adminConsProductMap">
+		select gl_consignment.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+			sale_price, commission, start_date, end_date, member_id, pb_sale_status, pb_post_status
+		from gl_consignment, gl_productboard
+		where gl_consignment.entity_number = gl_productboard.entity_number order by entity_number desc
+	</select>
+ 	<select id = "adminProductListPurc" parameterType = "hashMap" resultMap = "adminPurcProductMap" >
+		select *
+		from (select gl_purchase.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+						sale_price, buying_price, purc_date, member_id, pb_sale_status, pb_post_status
+					from gl_purchase, gl_productboard
+					where gl_purchase.entity_number = gl_productboard.entity_number)
+			where 1=1 
+			<if test = "pb_post_status!='all'">
+				and pb_post_status = #{pb_post_status}
+			</if>
+			<if test = "pb_sale_status!='all'">
+				and pb_sale_status = #{pb_sale_status}
+			</if>
+			order by entity_number desc
+			
+	</select>
+	<select id = "adminProductListCons" parameterType = "hashMap" resultMap = "adminConsProductMap" >
+		select * from (select gl_consignment.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+						sale_price, commission, start_date, end_date, member_id, pb_sale_status, pb_post_status
+					from gl_consignment, gl_productboard
+					where gl_consignment.entity_number = gl_productboard.entity_number)
+			where 1=1 
+			<if test = "pb_post_status!='all'">
+				and pb_post_status = #{pb_post_status}
+			</if>
+			<if test = "pb_sale_status!='all'">
+				and pb_sale_status = #{pb_sale_status}
+			</if>
+			order by entity_number desc
+	</select>
+	<select id = "adminProductListPurcEnNo" parameterType = "hashMap" resultMap = "adminPurcProductMap" >
+		select * from (select gl_purchase.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+						sale_price, buying_price, purc_date, member_id, pb_sale_status, pb_post_status
+					from gl_purchase, gl_productboard
+					where gl_purchase.entity_number = gl_productboard.entity_number)
+			where entity_number=#{entity_number} order by entity_number desc
+	</select>
+	<select id = "adminProductListConsEnNo" parameterType = "hashMap" resultMap = "adminConsProductMap" >
+		select * 
+			from (select gl_consignment.entity_number, pd_name, pd_brand, pd_category, quality_grade, appraise_exist, pd_component,
+						sale_price, commission, start_date, end_date, member_id, pb_sale_status, pb_post_status
+					from gl_consignment, gl_productboard
+					where gl_consignment.entity_number = gl_productboard.entity_number)
+			where entity_number=#{entity_number} order by entity_number desc
+			
+			
+	</select>
+	<select id = "checkNowPostStatus" parameterType = "String" resultType = "String">
+		select pb_post_status from gl_productboard where entity_number = #{entity_number}
+	</select>
+	<update id = "changeOffBoard" parameterType = "String">
+		update gl_productboard set pb_post_status = '게시안함' where entity_number=#{entity_number} 
+	</update>
+	<update id = "changeOnBoard" parameterType = "String">
+		update gl_productboard set pb_post_status = '게시중' where entity_number=#{entity_number} 
+	</update>
+	<select id = "checkNowSaleStatus" parameterType = "String" resultType = "String">
+		select pb_sale_status from gl_productboard where entity_number = #{entity_number}
+	</select>
+	<update id = "chgSaleStatOnsale" parameterType = "String">
+		update gl_productboard set pb_sale_status = '거래진행중' where entity_number = #{entity_number}
+	</update>
+	<update id = "chgSaleStatOndeal" parameterType = "String">
+		update gl_productboard set pb_sale_status = '판매완료' where entity_number = #{entity_number}
+	</update>
+	<update id = "chgSaleStatSoldout" parameterType = "String">
+		update gl_productboard set pb_sale_status = '판매중' where entity_number = #{entity_number}
+	</update>
+	<select id = "getDivision" parameterType = "hashMap" resultType = "String">
+		select pb_division from gl_productboard where entity_number = #{entity_number}
+	</select>
+	<delete id = "deletePurchaseInfo" parameterType = "hashMap">
+		delete from gl_purchase where entity_number = #{entity_number}
+	</delete>
+ 	<delete id = "deleteConsignmentInfo" parameterType = "hashMap">
+		delete from gl_consignment where entity_number = #{entity_number}
+	</delete> 
+	<delete id = "deleteProductList" parameterType = "hashMap">
+		delete from gl_productboard where entity_number = #{entity_number}	
+	</delete>
+	
+	<!-- 환불 -->
+	<resultMap id = "likedMemberListMap" type = "java.util.HashMap">
+		<result property = "member_id" column = "member_id"/>
+	</resultMap>
+	<resultMap id = "forreturnPointInfoMap" type = "com.spring.goodluxe.voes.PointVO">
+		<result property = "point_number" column = "point_number"/>
+		<result property = "point_date" column = "point_date"/>
+		<result property = "point_status" column = "point_status"/>
+		<result property = "point_amount" column = "point_amount"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "order_number" column = "order_number"/>
+	</resultMap>
+	
+	<select id = "getReturnList" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = '환불신청' or order_status = '반품확인' or order_status = '환불완료' order by order_number desc
+	</select>
+	<select id = "getDetailReturndList" parameterType = "String" resultMap = "adminOrderMap">
+		select * from gl_order where order_status = #{orderstatus}
+	</select>
+	<update id = "setReturnConfirm" parameterType = "String">
+		update gl_order set order_status = '반품확인' where order_number = #{order_number}
+	</update>
+	<select id = "getGivenPointInfo" parameterType = "String" resultMap = "forreturnPointInfoMap">
+		select * from gl_point where  order_number = #{order_number}
+	</select>
+	<update id = "returnPointFromMember" parameterType = "com.spring.goodluxe.voes.PointVO">
+		update gl_member set member_point = member_point-#{point_amount} where member_id = #{member_id}
+	</update>
+	<insert id = "insertReturnPointInfo" parameterType = "com.spring.goodluxe.voes.PointVO"> 
+		insert into gl_point values(gl_point_seq.nextval, sysdate,'상품구매 취소',-#{point_amount},#{member_id},#{order_number})
+	</insert>	
+	
+	
+	
+	
+	
+	
+	
+	<update id = "setReturnFinished" parameterType = "String">
+		update gl_order set order_status = '환불완료' where order_number = #{order_number}
+	</update>
+	<update id = "setPostStatusBackToSale" parameterType = "String">
+		update gl_productboard set pb_sale_status = '판매중' , pb_post_status = '게시중'
+		where pb_number in(select pb_number from gl_order where order_number = #{order_number} )
+	</update>
+	<select id = "getEntityNumberForLiked" parameterType = "String" resultType = "String">
+		select entity_number from gl_productboard
+		where pb_number = (select pb_number from gl_order where order_number = #{order_number})
+	</select>
+	<select id = "getEntitysPdname"  parameterType = "String" resultType = "String">
+		select pb_md_name from (
+			select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+			from gl_purchase, gl_productboard
+			where gl_purchase.entity_number = gl_productboard.entity_number
+			UNION
+			select pb_main_img_stored, pd_brand, pb_md_name, sale_price, pb_date,pb_sale_status,pb_post_status,gl_productboard.entity_number, pd_category, quality_grade
+			from gl_consignment, gl_productboard
+			where gl_consignment.entity_number = gl_productboard.entity_number
+		) where entity_number = #{likedEntity}
+	</select>
+
+
+	<select id = "getorderNumberLikedMember" parameterType = "String" resultMap = "likedMemberListMap">
+		select member_id from gl_product_Alarm where entity_number = #{likedEntity}
+	</select>
+	<insert id = "setAlarmInfo" parameterType = "hashMap" >
+		insert into gl_notice(alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number) 
+		values(gl_notice_seq.nextval,#{member_id},sysdate,'N',#{alarm_content},#{entity_number})
+	</insert>
+	
+	<!-- header-alarm -->
+	<resultMap id = "noticeAlarmMap" type = "com.spring.goodluxe.voes.NoticeVO">
+		<result property = "alarm_number" column = "alarm_number"/>
+		<result property = "member_id" column = "member_id"/>
+		<result property = "alarm_date" column = "alarm_date"/>
+		<result property = "alarm_read" column = "alarm_read"/>
+		<result property = "alarm_content" column = "alarm_content"/>
+		<result property = "entity_number" column = "entity_number"/>
+	</resultMap>
+	
+	<select id = "getAlarmContent" parameterType = "String" resultMap = "noticeAlarmMap">
+		select * from(select ROWNUM RNUM, alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number from (
+			select * from gl_notice where member_id = #{member_id} order by alarm_date desc
+		))where <![CDATA[RNUM>0 and RNUM<6 ]]>
+	</select>
+	<select id = "getMoreAlarmContent" parameterType = "hashMap" resultMap = "noticeAlarmMap">
+		select * from(select ROWNUM RNUM, alarm_number, member_id, alarm_date, alarm_read, alarm_content, entity_number from (
+			select * from gl_notice where member_id = #{member_id} order by alarm_date desc
+		))where <![CDATA[RNUM>=#{start} and RNUM<=#{end} ]]>
+	</select>
+	<select id ="afterLoginCheckAlarm" parameterType = "String" >
+	 	select count(*) from(
+			select * from gl_notice where member_id = #{member_id} and alarm_read = 'N'
+		)
+	</select>
+	
+	<resultMap id = "adminAuctionlistMap" type = "com.spring.goodluxe.voes.AuctionVO">
+		<result property = "AUCTION_POST_NUMBER" column = "AUCTION_POST_NUMBER"/>
+		<result property = "AUCTION_MD_NAME" column = "AUCTION_MD_NAME"/>
+		<result property = "AUCTION_START_PRICE" column = "AUCTION_START_PRICE"/>
+		<result property = "AUCTION_NOW_PRICE" column = "AUCTION_NOW_PRICE"/>
+		<result property = "AUCTION_PRICE_TIME" column = "AUCTION_PRICE_TIME"/>
+		<result property = "AUCTION_BID_PRICE" column = "AUCTION_BID_PRICE"/>
+		<result property = "AUCTION_POST_DATE" column = "AUCTION_POST_DATE"/>
+		<result property = "AUCTION_START_TIME" column = "AUCTION_START_TIME"/>
+		<result property = "AUCTION_END_TIME" column = "AUCTION_END_TIME"/>
+		<result property = "AUCTION_DETAIL" column = "AUCTION_DETAIL"/>
+		<result property = "AUCTION_LIKE" column = "AUCTION_LIKE"/>
+		<result property = "AUCTION_POST_STATUS" column = "AUCTION_POST_STATUS"/>
+		<result property = "ENTITY_NUMBER" column = "ENTITY_NUMBER"/>
+	</resultMap>
+	<select id = "admingetAuctionInfo" resultMap = "adminAuctionlistMap">
+		select * from gl_Auction order by auction_post_number desc
+	</select>
+	
+	<resultMap id = "adminAutionHistory" type = "com.spring.goodluxe.voes.Auction_HistoryVO">
+		<result property = "AUCTION_POST_NUMBER" column = "AUCTION_POST_NUMBER"/>
+		<result property = "AUHIS_NUMBER" column = "AUHIS_NUMBER"/>
+		<result property = "MEMBER_ID" column = "MEMBER_ID"/>
+		<result property = "AUHIS_BID_TIME" column = "AUHIS_BID_TIME"/>
+		<result property = "AUHIS_BETTING_PRICE" column = "AUHIS_BETTING_PRICE"/>
+	</resultMap>
+	<select id = "adminGetAutionDetail" parameterType = "Integer" resultMap = "adminAutionHistory">
+		select * from gl_auction_history where auction_post_number = #{aUCTION_POST_NUMBER} order by auhis_number
+	</select>
+	<select id = "adminAuctionFindStat" parameterType = "Integer" resultMap = "adminAuctionlistMap">
+		select AUCTION_POST_STATUS from gl_auction where auction_post_number = #{aUCTION_POST_NUMBER}
+	</select>
+	<update id = "adminAuctionStatChangeOFF" parameterType = "Integer">
+		update gl_auction set AUCTION_POST_STATUS = '게시안함' where auction_post_number = #{aUCTION_POST_NUMBER}
+	</update>
+	<update id = "adminAuctionStatChangeON" parameterType = "Integer">
+		update gl_auction set AUCTION_POST_STATUS = '게시중' where auction_post_number = #{aUCTION_POST_NUMBER}
+	</update>
+</mapper>

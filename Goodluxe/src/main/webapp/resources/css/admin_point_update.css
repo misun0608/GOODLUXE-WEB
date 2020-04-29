@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+@font-face { font-family: 'EBSHMJESaeronRA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/EBSHMJESaeronRA.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+* {margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+
+
+.group { 
+    position: relative; 
+    width : 280px;
+    margin-bottom: 10px; 
+    left: 50%; margin-left: -150px;
+}
+
+.input_point {
+    height : 50px; 
+    width : 280px;
+    padding : 3px 10px;
+    border-width: 0px;
+    font-size: 13px;
+    background: #fff;
+    border-bottom: 1px solid #999;
+}
+.input_point:focus {
+    /* border: 0px; */
+    outline: none;
+}
+.input_point:focus ~ .highlight {
+    animation: inputHighlighter 0.3s ease;
+}
+ /* �� Highlight */
+.group>label {
+    color: #999; 
+    font-size: 13px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 14px;
+    top: 14px;
+    transition: all 0.2s ease;
+}
+.group>label.color {
+    top: 2px;
+    transform: scale(.75); left: 2px;
+    color: #BBCDDB;
+}
+
+.input_point:focus ~ label{
+    top: 2px;
+    transform: scale(.75);
+    left: 2px;
+    color: #BBCDDB;
+}
+
+.point_btn {
+    position: relative;
+    width: 147px; height: 30px;
+    margin-top: 35px;
+    background: #BBCDDB;
+    border-radius: 5px;
+    border-width: 0px;
+    color:#fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.point_btn_back{
+	background: white;
+	color:#BBCDDB;
+	border: 0.9px solid #BBCDDB;
+}
+
+.point_data{
+	margin-top: 25px;
+}
+
+#point_btn1{
+	margin-left: 33px;
+}

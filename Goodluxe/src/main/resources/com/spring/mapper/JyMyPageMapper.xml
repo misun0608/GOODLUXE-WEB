@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.spring.mapper.JyMyPageMapper">
+
+	<resultMap id = "MemberResultMap" type = "com.spring.goodluxe.voes.MemberVO">
+		<result property = "member_id" column = "member_id"/>
+		<result property = "member_pw" column = "member_pw"/>
+		<result property = "member_name" column = "member_name"/>
+		<result property = "member_zipcode" column = "member_zipcode"/>
+		<result property = "member_addr1" column = "member_addr1"/>
+		<result property = "member_addr2" column = "member_addr2"/>
+		<result property = "member_phone" column = "member_phone"/>
+		<result property = "member_email" column = "member_email"/>
+		<result property = "member_email_receive" column = "member_email_receive"/>
+		<result property = "member_like_brand" column = "member_like_brand"/>
+		<result property = "member_like_category" column = "member_like_category"/>
+		<result property = "member_join_date" column = "member_join_date"/>
+		<result property = "member_class" column = "member_class"/>
+		<result property = "member_point" column = "member_point"/>
+		<result property = "member_isadmin" column = "member_isadmin"/>
+	</resultMap>
+	
+	<!-- resultMap id = "likedlistMap" type = "java.util.HashMap">
+		<result property = "member_id" column= "member_id"/>
+		<result property = "entity_number" column = "entity_number"/>
+	</resultMap>
+	-->
+	<resultMap id = "likedProduct" type = "java.util.HashMap">
+		<result property = "pb_main_img_stored" column = "pb_main_img_stored"/>
+		<result property = "pb_md_name" column = "pb_md_name"/>
+		<result property = "sale_price" column = "sale_price"/>
+		<result property = "entity_number" column = "entity_number"/>
+		<result property = "quality_grade" column = "quality_grade"/>
+	</resultMap>
+	<select id = "getMemberInfo" parameterType = "hashmap" resultMap = "MemberResultMap">
+		select * from gl_member where member_id = #{member_id}
+	</select>
+	
+	<update id = "myInfoAction" parameterType = "com.spring.goodluxe.voes.MemberVO">
+		update gl_member set member_pw = #{member_pw}, member_zipcode = #{member_zipcode},
+		member_addr1 = #{member_addr1}, member_addr2 = #{member_addr2}, member_phone = #{member_phone},
+		member_email = #{member_email}, member_email_recieve = #{member_email_receive},
+		member_like_category = #{member_like_category}, member_like_brand = #{member_like_brand}
+		where member_id = #{member_id}
+	</update>
+	
+	<!--  select id = "SearchlikedList" parameterType = "hashmap" resultMap = "likedlistMap">
+		select * from gl_liked where member_id = #{member_id}
+	</select>
+	-->
+	<select id = "getLikedProduct" parameterType = "hashmap" resultMap = "likedProduct">
+		select * from(
+		select  ROWNUM RNUM, pb_main_img_stored, pb_md_name, sale_price,pb_sale_status,pb_post_status, entity_number , quality_grade from(
+            SELECT ROWNUM RNUM, pb_main_img_stored, pb_md_name, sale_price,pb_sale_status,pb_post_status, entity_number , quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pb_md_name, sale_price, pb_sale_status,pb_post_status,gl_productboard.entity_number,quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pb_md_name, sale_price, pb_sale_status,pb_post_status,gl_productboard.entity_number, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY entity_number DESC)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	)
+            where entity_number in(select entity_number from gl_liked where member_id = #{member_id}))
+		<![CDATA[ WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}]]>
+		
+
+	</select>
+	<select id = "getLikedProductCount" parameterType = "hashmap" resultType = "Integer">
+		
+		 select count(*) from(
+            SELECT ROWNUM RNUM, pb_main_img_stored, pb_md_name, sale_price,pb_sale_status,pb_post_status, entity_number , quality_grade
+				FROM (
+					SELECT * FROM (
+						select pb_main_img_stored, pb_md_name, sale_price, pb_sale_status,pb_post_status,gl_productboard.entity_number,quality_grade
+						from gl_purchase, gl_productboard
+						where gl_purchase.entity_number = gl_productboard.entity_number
+						UNION
+						select pb_main_img_stored, pb_md_name, sale_price, pb_sale_status,pb_post_status,gl_productboard.entity_number, quality_grade
+						from gl_consignment, gl_productboard
+						where gl_consignment.entity_number = gl_productboard.entity_number)
+					ORDER BY entity_number DESC)
+				WHERE pb_sale_status != '판매완료' and pb_post_status = '게시중'	)
+                where entity_number in(select entity_number from gl_liked where member_id = #{member_id})
+			
+	</select>
+	<delete id = "deleteLikedGoods" parameterType = "hashmap">
+		delete from gl_liked where entity_number = #{entity_number}and member_id = #{member_id}
+	</delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

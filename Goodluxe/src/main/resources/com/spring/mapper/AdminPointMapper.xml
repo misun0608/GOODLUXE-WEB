@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.AdminPointMapper">
+	<resultMap type = "com.spring.goodluxe.voes.PointVO" id="AdminPointResultMap">
+		<result property = "point_number" column = "point_number" />
+		<result property = "point_date" column = "point_date" />
+		<result property = "point_status" column = "point_status" />
+		<result property = "point_amount" column = "point_amount" />
+		<result property = "member_id" column = "member_id" />
+		<result property = "order_number" column = "order_number" />
+	</resultMap>
+	
+	<resultMap type="com.spring.goodluxe.voes.OrderVO" id="orderRM">
+		<result property="order_number" column="order_number" />
+		<result property="order_receipt" column="order_receipt" />
+		<result property="order_pay_date" column="order_pay_date" />
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_status" column="order_status" />
+		<result property="order_addr1" column="order_addr1" />
+		<result property="order_addr2" column="order_addr2" />
+		<result property="order_zipcode" column="order_zipcode" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_invoice_number" column="order_invoice_number" />
+		<result property="order_ship_date" column="order_ship_date" />
+		<result property="order_cancel_date" column="order_cancel_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="order_pay_system" column="order_pay_system" />
+		<result property="order_refund_account" column="order_refund_account" />
+		<result property="order_refund_bank" column="order_refund_bank" />
+		<result property="member_id" column="member_id" />
+		<result property="pb_number" column="pb_number" />
+		<result property="order_message" column="order_message" />
+		<result property="order_pay_price" column="order_pay_price" />
+	</resultMap>
+
+	<!-- HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapAdminRM">
+		<result property="order_order_date" column="order_order_date" />
+		<result property="order_product_price" column="order_product_price" />
+		<result property="order_ship_fee" column="order_ship_fee" />
+		<result property="order_used_point" column="order_used_point" />
+		<result property="order_used_coupon" column="order_used_coupon" />
+		<result property="buying_price" column="buying_price" />
+		<result property="commission" column="commission" />
+	</resultMap>
+	
+	<!-- HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapRM">
+		<result property="order_cancel_date" column="order_cancel_date" />
+		<result property="order_pay_price" column="order_pay_price" />
+	</resultMap>
+	
+	<!-- 도넛만들떄 필요한 데이터 HashMap -->
+	<resultMap type="java.util.HashMap" id="HashMapDoughRM">
+		<result property="pd_category" column="pd_category" />
+		<result property="pd_brand" column="pd_brand" />
+		<result property="categorycount" column="categorycount" />
+		<result property="brandcount" column="brandcount" />
+		<result property="cate_sales_sum" column="cate_sales_sum" />
+		<result property="brand_sales_sum" column="brand_sales_sum" />
+	</resultMap>
+
+	<select id="getAdminPointList" resultMap="AdminPointResultMap">
+		select * from GL_POINT order by point_date desc
+	</select>
+	
+	<select id="getSearchPointList" parameterType="com.spring.goodluxe.voes.PointVO" resultMap="AdminPointResultMap">
+		select * from GL_POINT where member_id = #{member_id} order by point_date desc
+	</select>
+	
+	<insert id="insertPointStatus" parameterType="com.spring.goodluxe.voes.PointVO">
+		insert into GL_POINT(point_number, point_date, point_status, point_amount, member_id) 
+		values (GL_POINT_SEQ.NEXTVAL, systimestamp, #{point_status}, #{point_amount}, #{member_id})
+	</insert>
+	
+	<!-- 오늘 주문건수 -->
+	<select id="getTodayOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from gl_order where to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>
+	</select>
+	
+	<!-- 오늘 주문매출액 -->
+	<select id="getTodayOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>	
+	</select>
+	
+	<!-- 오늘 결제주문건수 -->
+	<select id="getTodayPaidOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and to_char(ORDER_ORDER_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>
+	</select>
+	
+	<!-- 오늘 결제매출액 -->
+	<select id="getTodayPaidOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '배송준비중'or ORDER_STATUS = '배송중' or ORDER_STATUS = '배송완료') and to_char(ORDER_PAY_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>	
+	</select>
+	
+	<!-- 오늘 환불주문건수 -->
+	<select id="getTodayRefundOrderCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and to_char(ORDER_CANCEL_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>
+	</select>
+	
+	<!-- 오늘 주문매출액 -->
+	<select id="getTodayRefundOrderSales" resultMap="orderRM">
+	<![CDATA[
+		select ORDER_PAY_PRICE from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and to_char(ORDER_CANCEL_DATE, 'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	]]>	
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(결제전) -->
+	<select id="getMonthlyPaidBeforeCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '결제전' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송준비중) -->
+	<select id="getMonthlyPreparedCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송준비중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송중) -->
+	<select id="getMonthlyShippingCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송중' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 주문 현황 건수(배송완료) -->
+	<select id="getMonthlyDoneCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '배송완료' and (ORDER_ORDER_DATE > sysdate -31 and ORDER_ORDER_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(취소) -->
+	<select id="getMonthlyCancelCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where (ORDER_STATUS = '취소완료' or ORDER_STATUS = '자동취소' or ORDER_STATUS = '환불신청') and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(반품) -->
+	<select id="getMonthlyItemBackCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '반품확인' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 최근 한달 취소 현황 건수(환불) -->
+	<select id="getMonthlyRefundCount" resultType="int">
+	<![CDATA[
+		select count(*) from GL_ORDER where ORDER_STATUS = '환불완료' and (ORDER_CANCEL_DATE > sysdate -31 and ORDER_CANCEL_DATE < sysdate +1)
+	]]>
+	</select>
+	
+	<!-- 관리자메인 디폴트 데이터 / 오늘부터 7일전까지 -->
+	<select id="getAdminDefaultData" resultMap="HashMapAdminRM">
+		         select *
+        from (select  glpr.order_order_date, glpr.order_product_price, glpr.order_ship_fee, glpr.order_used_point, glpr.order_used_coupon,glpr.pb_number, glpr.entity_number, glco.commission, glpr.buying_price
+        from  (select glor.order_order_date, glor.order_product_price, glor.order_ship_fee, glor.order_used_point, glor.order_used_coupon,glpr.pb_number, glpr.entity_number,glpu.buying_price
+        from gl_productboard glpr, gl_purchase glpu ,gl_order glor
+        where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number
+        ) glpr left outer join
+        gl_consignment glco
+        on glpr.entity_number = glco.entity_number
+        union
+        all
+          select glpr.order_order_date, glpr.order_product_price, glpr.order_ship_fee, glpr.order_used_point, glpr.order_used_coupon,glpr.pb_number, glpr.entity_number, glpr.commission, glpu.buying_price
+        from  (select glor.order_order_date, glor.order_product_price, glor.order_ship_fee, glor.order_used_point, glor.order_used_coupon,glpr.pb_number, glpr.entity_number,glco.commission
+        from gl_productboard glpr, gl_consignment glco,gl_order glor
+        where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number
+        ) glpr left outer join
+        gl_purchase glpu
+        on glpr.entity_number = glpu.entity_number)
+        order by pb_number asc
+	</select>
+	
+	<!-- 환불액 -->
+	<select id="getRefundData" resultMap="HashMapRM">
+	<![CDATA[
+		select order_cancel_date,order_pay_price from GL_ORDER where (ORDER_STATUS = '환불신청' or ORDER_STATUS = '반품확인' or ORDER_STATUS = '환불완료') and ORDER_CANCEL_DATE > sysdate -8 and ORDER_CANCEL_DATE < sysdate +1
+	]]>
+	</select>
+	
+	<!-- 카테고리별 판매완료 건수 -->
+	<select id="getCateCnt" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_category , count (*) categorycount
+from (
+select glpr.pb_number, glpu.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_category
+order by categorycount desc
+	]]>
+	</select>
+	<!-- 카테고리 매출액 -->
+	<select id="getCateSales" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_category , count (*) categorycount, sum(order_product_price) as cate_sales_sum
+from (
+select glpr.pb_number, glpu.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_category,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_category
+order by sum(order_product_price) desc
+	]]>
+	</select>
+	<!-- 브랜드 판매완료 건수 -->
+	<select id="getBrandCnt" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_brand , count (*) brandcount
+from (
+select glpr.pb_number, glpu.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_brand
+order by brandcount desc
+	]]>
+	</select>
+	
+	<!-- 브랜드 매출액 -->
+	<select id="getBrandSales" resultMap="HashMapDoughRM">
+	<![CDATA[
+	select pd_brand , count (*) brandcount,sum(order_product_price) as brand_sales_sum
+from (
+select glpr.pb_number, glpu.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_purchase glpu,gl_order glor
+where glpr.entity_number = glpu.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30
+union all
+select glpr.pb_number, glco.pd_brand,glor.order_product_price
+from gl_productboard glpr,  gl_consignment glco,gl_order glor
+where glpr.entity_number = glco.entity_number and glor.pb_number = glpr.pb_number and
+glor.order_status ='배송완료' and glor.order_pay_date < sysdate and glor.order_pay_date > sysdate-30)
+GROUP BY pd_brand
+order by sum(order_product_price) desc
+	]]>
+	</select>
+	
+</mapper>

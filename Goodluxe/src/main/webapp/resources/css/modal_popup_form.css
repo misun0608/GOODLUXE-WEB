@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.dark{
+	width : 100%;
+	height : 100%;
+	position: fixed;
+	background: rgba(0,0,0,0.7)repeat;
+	top:0;
+	left:0;
+	z-index:5;
+	display : none;
+}
+.modal_win{
+
+	postion:absolute;
+	top: 400px;
+	left:500px;
+	width:300px;
+	heigth : 160px;
+	margin-left : 20%;
+	margin-top: -20%;
+	
+	background: skyblue; 
+	border-radius: 1px;
+	z-index:10;
+}
+.modal_win>h3{
+	background :#D1DFE8; 
+	textj-align: center;
+	margin:0 auto;
+	border-top-right-radius:1px;
+	border-top-left-radius:1px;
+}
+.modal_win .modal_ok{
+	display:block; 
+	width: 135px;
+	height : 30px;
+	font-size : 12px;
+	background-color:#BBCDDB;
+	border-radius:3px;
+	outline:0;
+	margin:5px;
+	
+}

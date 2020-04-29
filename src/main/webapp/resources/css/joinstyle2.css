@@ -1,0 +1,297 @@
+/* 초기화 */
+* {margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+.line{
+    display: inline-block;
+    width: 95px;
+}
+
+.linefont{
+    color: gray;
+}
+
+.joinbox {
+    font-size: 15px;
+    display: inline-block; 
+    border: 1px solid lightgray;
+    margin: 20px;
+    padding: 15px 40px;
+    width: 150px;
+    color: darkgray
+}
+
+.joinbox:hover{
+    color: black;
+}
+
+#emailbox{
+    margin: 35px;
+}
+
+#email1{
+    width: 80px;
+}
+
+#email2{
+    width: 80px;
+}
+
+#email_select{
+    width: 120px;
+}
+.joinstep{
+    width: 480px;
+}
+
+.jointitle{
+    padding-top: 10px;
+}
+
+#twotitle{
+    padding-right: 128px;
+    font-weight: bold;
+}
+
+#onetitle{
+    padding-right: 128px;
+    font-size: 15px;
+}
+
+#threetitle{
+    font-size: 15px;
+}
+
+.num_title{
+    display: inline-block;
+}
+
+.agreement{
+    width: 480px;
+    text-align: right;
+}
+
+.agr_title{
+    text-align: left;
+    font-size: 14px;
+}
+
+.agr{
+    font-size: 13px;
+}
+
+.circle{
+    color: lightgray;
+    background-color: #080424;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 55px;
+    display: inline-block;
+}
+
+.circir{
+    background-color: rgb(255, 255, 255);
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    color: #080424;
+    margin: 4.9px auto;
+    font-size: 20px;
+    line-height: 50px;
+}
+
+.btn{
+    background-color: #080424;
+    border: none;
+    color: white;
+    padding: 8px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.btn1{
+    background-color: white;
+    color: #080424;
+    border: 0.8px solid #080424;
+}
+
+/*
+.btn1:hover{
+    background-color: #707070;
+    color: #080424;
+}
+*/
+
+.btn2{
+    background-color: #080424; 
+    color: white; 
+    border: 0.8px solid #080424;
+}
+
+/*
+.btn2:hover{
+    background-color: #0e073f;
+    color: #080424; 
+    border: 1px solid #080424;
+}
+*/
+
+.menu_line{
+    width: 120px;
+    height: 2px;
+    border: 0;
+    background: #080424;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.underline{
+    width: 490px;
+}
+
+#two{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 회원가입3 */
+.joinform1{
+    font-size: 14px;
+    text-align: left;
+}
+
+.joinform2{
+    font-size: 14px;
+    text-align: left;
+}
+
+.joinall{
+    width: 480px;
+    font-family: 나눔고딕;
+}
+
+table{
+    width: 100%;
+}
+
+.jttitle{
+    width: 20%;
+    vertical-align: middle;
+    line-height: 200%;
+}
+
+.likedcate{
+    margin-bottom: 10px;
+}
+
+.scheck{
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+}
+
+.inputarea{
+    padding: 3px;
+    margin: 3px;
+    width: 200px;
+}
+
+.addrinput{
+    width: 96px;
+}
+
+.telinput{
+    width: 60px;
+}
+
+.passwd{
+    width: 200px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+.likedcate{
+    font-size: 10px;
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px){
+    .joinstep{
+        width: 90%;
+    }
+
+    .menu_line{
+        width: 10%;
+        height: 2px;
+        border: 0;
+        background: #080424;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .jointitle{
+        width: 90%;
+    }
+
+    #onetitle{
+        padding-right: 13%;
+        font-weight: bold;
+    }
+    
+    #twotitle{
+        padding-right: 13%;
+        font-size: 15px;
+    }
+    
+    #threetitle{
+        font-size: 15px;
+    }
+
+    .underline{
+        width: 90%;
+    }
+
+    .agreement{
+        width: 90%;
+        text-align: right;
+    }
+
+    .join,
+    .join2{
+        display: block;
+        overflow: auto;
+    }
+
+    .joinform2{
+        width: 100%;
+    }
+
+    .joinform1{
+        width: 100%;
+    }
+}

@@ -1,0 +1,143 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+html, body {height: 100%;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0; color:#000;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+    .il_area {
+        width: 1080px;
+        margin: 0 auto;
+        /* background: slateblue; */
+    }
+
+    /* 검색 분류 선택창 */
+    .il_1st {
+        border: 0.5px solid #67B49C;
+        padding: 5px;
+    }
+    .il_search_select_box {
+        width: 220px; height: 30px;
+        margin-right: 30px;
+        border: 0px;
+        outline: none;
+    }
+    .il_search_btn {
+        width: 50px; height: 30px;
+        float: right;
+        background: #B8E1D4;
+        border: 0px;
+        border-radius: 2px;
+    }
+
+    /* 제품 리스트 */
+    .il_2nd {
+        width: 1080px;
+        /* background: red; */
+        margin: 40px auto;
+    }
+    .il_2nd>a {
+        float: left;
+        width: 228px; height: 330px;
+        /* background: orange; */
+        margin-left: 56px;
+        margin-bottom: 20px;
+    }
+    .il_2nd:after {
+        clear: both;
+        content:'';
+        display:block;
+    }
+    .il_2nd>a:nth-child(4n+1) {
+        margin-left: 0px;
+    }
+    .il_md_img {
+        position: relative;
+        display: inline-block;
+        width: 220px; height: 220px;
+        top: 10px; left: 50%;
+        margin-left: -110px;
+        margin-bottom: 10px;
+        z-index : 3;
+    }
+    .il_md_img_path {
+        width: 80%; height: 80%;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        position: relative;
+        
+    }
+    .il_md_brand {
+        text-align: center;
+        margin: 10px auto;
+        font: 17px/1.2 arial ;
+    }
+    .il_md_name {
+        text-align: center;
+        margin: 8px auto;
+        font: 12px/1.2 arial ;
+    }
+    .il_md_price {
+        text-align: center;
+        margin: 4px auto;
+        font: 14px/1.2 arial ;
+    }
+    .il_2nd>a:hover {
+        border: 2px solid #C6D7DF;
+        width: 224px; height: 326px;
+        border-radius: 3px;
+        background: #fff;
+    }
+    .il_2nd>a:hover>.il_card>.il_md_img>.il_md_img_path {
+        width: 100%; height: 100%;
+        transition: all 0.3s ease-out;
+    }
+    .dealing_now{
+    	position : absolute;
+    	width : 205px;
+    	height : 307px;
+		background-color: rgb(0, 0, 0, 0.3);
+		z-index : 7;
+		padding : 10px;
+		text-align : center;
+    }
+    .dealing_now span{
+    	position : relative;
+    	top : 100px;
+    	color : white;
+    	font-size : 18px;
+    	letter-spacing : 3px;
+    	line-height : 1.4em;
+    }
+    .il_3rd {
+        position: relative;
+        width: 600px;
+        left: 50%;
+        margin-bottom: 50px;
+        margin-left: -300px;
+        text-align: center;
+    }
+    .il_paging {
+        width: 100%;
+    }
+    .page_edge {
+        width: 100px;
+    }
+    .page_arrow {
+        width: 50px;
+    }
+
+
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    
+}

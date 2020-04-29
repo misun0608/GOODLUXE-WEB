@@ -1,0 +1,636 @@
+/* 초기화 */  
+* {margin:0px; padding:0px;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+  /* body{
+    font-size: 13px;
+  } */
+  
+  .select-content{
+    display: none;
+  }
+  
+  .inquiry_container{
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 13px;
+  }
+  
+  ul.inquiry_tabs{
+    text-align: center;
+    margin: 0 auto;
+    width: 900px;
+    overflow: hidden;
+  }
+  
+  ul.inquiry_tabs li{
+    text-align: center;
+    float: left;
+    margin: 0 -15px 0 0;
+    display: inline-block;
+    color: #BBCDDA;
+    cursor: pointer;
+  }
+
+  .inquiry_tabs a {
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0; 
+    line-height: 30px;
+    /* text-transform: uppercase; */
+    text-decoration: none;
+    color: black;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid rgb(187, 177, 177);
+    border-bottom-color: #BBCDDA;
+    opacity: .3;
+    filter: alpha(opacity=30);
+    font-size: 13px;  
+  }
+
+  /* test */
+  .inquiry_tabs a.current{
+    border-bottom-color: rgb(255, 15, 15);
+    opacity: .4;
+    filter: alpha(opacity=100);
+    outline: 0;
+    color: #fff;
+  }
+
+  /* #container{
+    height: 100px; width: 100px;
+    background: #eee;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid #3D3D3D;
+  } */
+
+  /* 올렸을때 */
+  .inquiry_tabs a:hover{
+    border-bottom-color: rgb(241, 215, 215);;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    color: black;
+  }
+
+  /* 탭을 누르면 색상 변화 */
+  .inquiry_tabs a.on {
+    border-bottom-color: rgb(255, 15, 15);
+    opacity: .4;
+    color: #fff;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+  
+  .com_step a{
+    color: #222;
+  }
+
+  /* .inquiry_tabs #current {
+    z-index: 3;
+    border-bottom-color: #3d3d3d;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  } */
+  
+/*    ul.inquiry_tabs li{
+    text-align: center;
+    border-color: rgb(255, 15, 15);
+    color: black;
+    font-weight: bold;
+    opacity: .5; 
+    
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+    z-index: 3; 
+  } */
+  
+  .tab-line{
+    text-align: center;
+    /* left: 10px; */
+    height: 1px;
+    width: 900px;
+    background: #9BA2BB;
+    border: 0px;
+  }
+
+
+  /* 단계 이미지로 바꿀 예정*/
+  .steppart{
+    background-color: #BBCDDA;
+    margin-top: 0px;
+    border: 0px;
+    width: 900px;
+    height: 115px;
+    text-align: center;
+    margin: 0px;
+  }
+
+  .com_step{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 150%;
+    margin: 30px 20px;
+    font-size: 15px;
+  }
+
+  .next{
+    color: grey;
+  }
+  
+  .tab-content{
+    display: none;
+    padding: 15px;
+  }
+
+  .tab-content.current{
+    display: inherit;
+  }
+
+  /* 버튼 */
+  .combtn{
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    margin-top: 30px;
+    /* float: left; */
+  }
+
+  .inquiry_btnpart{
+    /* float: left; */
+    width: 900px;
+  }
+
+  #inquiry_cancel{
+    width: 45px;
+    margin-top: 0px;
+  }
+
+  #inquiry_apply{
+    width: 70px;
+    margin-top: 0px;
+  }
+
+  /* 테이블 */
+  .salelist{
+    width: 900px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-collapse: collapse;
+    margin-top: 5px;
+    font-size: 13px;
+  }
+  
+  .inquiry_top_tr{
+    text-align: center;
+    background-color: #F2F2F2;
+    height: 30px;
+    padding: 10px 0px 10px 0px;
+    border: 1px solid darkgray;
+  }
+
+  .inquiry_middle_tr{
+    height: 30px;
+    border-top: 1px solid darkgray;
+  }
+
+  /* 추가 */
+  .com_content{
+    display: none;
+  }
+
+  .com_content.show{
+    display: inherit;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  .com_step.show{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+
+}
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+  body{
+    font-size: 13px;
+  }
+  
+  .select-content{
+    display: none;
+  }
+  
+  .container{
+    width: 700px;
+    margin: 0 auto;
+  }
+  
+  ul.inquiry_tabs{
+    text-align: center;
+    margin: 0 auto;
+    width: 700px;
+    overflow: hidden;
+  }
+  
+  ul.inquiry_tabs li{
+    text-align: center;
+    float: left;
+    margin: 0 -15px 0 0;
+    display: inline-block;
+    color: #222;
+    cursor: pointer;
+  }
+
+  .inquiry_tabs a {
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0; 
+    line-height: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid #3D3D3D;
+    border-bottom-color: darkgray;
+    opacity: .3;
+    filter: alpha(opacity=30);    
+  }
+
+  /* test */
+  .inquiry_tabs a.current{
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+
+  /* 올렸을때 */
+  .inquiry_tabs a:hover{
+    border-bottom-color: #D1DFE8;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+
+  /* 눌렀을때 */
+  .inquiry_tabs a.on {
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+  
+  .com_step a{
+    color: #222;
+  }
+  
+  ul.inquiry_tabs li.current{
+    text-align: center;
+    border-color: #9BA2BB;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .tab-line{
+    text-align: center;
+    /* left: 10px; */
+    height: 3px;
+    width: 700px;
+    background: black;
+    border: 0px;
+  }
+
+  .steppart{
+    background-color: #BBCDDA;
+    margin-top: 0px;
+    border: 0px;
+    width: 700px;
+    height: 115px;
+    text-align: center;
+    margin: 0px;
+  }
+
+  .com_step{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 150%;
+    margin: 30px 20px;
+    font-size: 15px;
+  }
+
+  .next{
+    color: grey;
+  }
+  
+  .tab-content{
+    display: none;
+    padding: 15px;
+  }
+
+  .tab-content.current{
+    display: inherit;
+  }
+
+  /* 버튼 */
+  .combtn{
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 12px;
+    padding: 2px;
+    border: 0.9px solid black;
+    margin-top: 30px;
+    /* float: left; */
+  }
+
+  .btnpart{
+    /* float: left; */
+    width: 700px;
+  }
+
+  #cancel{
+    width: 45px;
+    margin-top: 0px;
+  }
+
+  #apply{
+    width: 70px;
+    margin-top: 0px;
+  }
+
+  /* 테이블 */
+  .salelist{
+    width: 700px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-collapse: collapse;
+    margin-top: 5px;
+
+  }
+  
+  .top_tr{
+    text-align: center;
+    background-color: #F2F2F2;
+    height: 30px;
+    padding: 10px 0px 10px 0px;
+    border: 1px solid darkgray;
+  }
+
+  .middle_tr{
+    height: 30px;
+    border-top: 1px solid darkgray;
+  }
+
+  /* 추가 */
+  .content{
+    display: none;
+  }
+
+  .content.show{
+    display: inherit;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  .com_step.show{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+  body{
+    font-size: 0.8em;
+  }
+  
+  .select-content{
+    display: none;
+  }
+  
+  .container{
+    width: 360px;
+    margin: 0 auto;
+  }
+  
+  ul.tabs{
+    text-align: center;
+    margin: 0 auto;
+    width: 360px;
+    overflow: hidden;
+  }
+  
+  ul.tabs li{
+    text-align: center;
+    float: left;
+    margin: 0 -15px 0 0;
+    display: inline-block;
+    color: #222;
+    /* cursor: pointer; */
+  }
+
+  .tabs a {
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0;
+    line-height: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid #3D3D3D;
+    border-bottom-color: darkgray;
+    opacity: .3;
+    filter: alpha(opacity=30);    
+  }
+
+  /* test */
+  .tabs a.current{
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+
+  /* #container{
+    height: 100px; width: 100px;
+    background: #eee;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid #3D3D3D;
+  } */
+
+  /* 올렸을때 */
+  .tabs a:hover{
+    border-bottom-color: #D1DFE8;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+
+  /* 눌렀을때 */
+  .tabs a.on {
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+  
+  .step a{
+    color: #222;
+  }
+
+  /* .tabs #current {
+    z-index: 3;
+    border-bottom-color: #3d3d3d;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  } */
+  
+  ul.inquiry_tabs li.current{
+    text-align: center;
+    border-color: #9BA2BB;
+    color: black;
+    font-weight: bold;
+    
+    /* border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+    z-index: 3; */
+  }
+  
+  .tab-line{
+    text-align: center;
+    /* left: 10px; */
+    height: 3px;
+    width: 360px;
+    background: black;
+    border: 0px;
+  }
+
+  .steppart{
+    background-color: #BBCDDA;
+    margin-top: 0px;
+    border: 0px;
+    width: 360px;
+    height: 80px;
+    text-align: center;
+    margin: 0px;
+  }
+
+  .step{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 150%;
+    margin: 20px 10px;
+    font-size: 11px;
+  }
+
+  .next{
+    color: grey;
+  }
+  
+  .tab-content{
+    display: none;
+    padding: 15px;
+  }
+
+  .tab-content.current{
+    display: inherit;
+  }
+
+  /* 버튼 */
+  .combtn{
+    width: 70px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 0;
+    font-size: 0.8em;
+    padding: 2px;
+    border: 0.9px solid black;
+    margin-top: 30px;
+    /* float: left; */
+  }
+
+  .btnpart{
+    /* float: left; */
+    width: 360px;
+  }
+
+  #cancel{
+    width: 45px;
+    margin-top: 0px;
+  }
+
+  #apply{
+    width: 70px;
+    margin-top: 0px;
+  }
+
+  /* 테이블 */
+  .salelist{
+    min-width: 360px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-collapse: collapse;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+
+  .salelist tbody tr td[data-title]:before{
+    content: attr(data-title);
+    float: left;
+    font-size: .9em;
+    font-weight: 400;
+    color: #757575;
+  }
+  
+  .salelist tbody tr td{
+    display: block;
+    font-size: .9em;
+    padding-right: 1em;
+  }
+
+  .top_tr{
+    display: none;
+  }
+
+  /* 추가 */
+  .content{
+    display: none;
+  }
+
+  .content.show{
+    display: inherit;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  .step.show{
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+

@@ -1,0 +1,420 @@
+
+/* 초기화 */
+* {
+    margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+
+ /* 데스크톱 */	
+
+    .my_rate_box{
+        /* background : #DEDEE9; */
+        width : 880px;
+        height :60px;
+        padding : 20px 20px 40px 0 ;
+        margin : 0 10px 80px 0;
+        position : relative;
+        left : 50%;
+        margin-left: -450px;
+        border-top: 1px solid #B8A795;
+        border-bottom: 1px solid #B8A795;
+        
+    }
+    .my_rate_box p{
+        margin: 3px 0 3px 0 ;
+    }
+    .yellow_letter{
+        color : #CEB172;
+        float: left;
+    }
+    .my_rate_box p{
+        float:left;
+    }
+    .left_fin{
+        clear:both;
+    }
+    .red_letter{
+        color : #BB1D1D;
+        float: left;
+    }
+    .rate_explain_box{
+        width : 860px;
+        padding:20px;
+        margin: 10px 10px 50px 10px;
+        background : #F6EFE8	;
+        position : relative;
+        left : 50%;
+        margin-left: -450px;
+    }
+    .rate_explain_box li{
+        font-size: .9em;
+        margin: .3em;
+    }
+    .explain_par{
+        margin-top:10px;
+    }
+    .explain_par ul li{
+        margin-left : 5px;
+        font-size: .8em;
+      
+    }
+    .rate_explain_box p{
+        /* margin-top:.2em; */
+        float: left;
+        font-weight: bolder;
+    }
+    .rate_histoty{
+        width : 900px;
+        position : relative;
+        left : 50%;
+        
+        margin-left: -450px;
+    }
+    .rate_history_title h3{
+        float: left;
+    }
+    .rate_history_title p{
+        padding-top: .5em;
+        font-size: 0.8em;
+        color:grey;
+    }
+    .rate_history_title h3{
+        margin-left: 0.2em;
+        margin-bottom : 0.5em;
+    }
+    .history_table{
+        min-width : 900px;
+        border-collapse: collapse;
+        margin:10px 0;
+        border-radius: 2px 2px 2px 2px;
+        overflow: hidden;
+        /* box-shadow: 0 0 20px rgba(0,0,0,0.25); */
+      
+    }
+    .history_table thead tr{
+        background-color: #F0D2CF;
+        color : black;
+        text-align: center;
+        font-weight: bold;
+    }
+    .history_table th, .history_table td{
+        padding:6px 10px;
+    }
+    .history_table tbody tr:first-of-type td:last-of-type{
+        font-weight: bolder;
+        color : #BB1D1D;
+    }
+    .history_table tbody tr{
+        /* background-color : #F9E7E5; */
+        font-size: .8em;
+        text-align: center;
+    }
+    .history_table tbody tr:last-of-type{
+        border-bottom: 2px solid #F0D2CF;
+    }
+    .history_table thead tr{
+        border-top : 2px solid #C97D73;
+        border-bottom : 1px solid #C97D73;
+    }
+    .history_table tbody tr:last-of-type{
+        border-bottom : 2px solid #C97D73;
+    }
+
+    .grid_area{
+        grid-area: inherit;
+    }
+    .how_to_table{
+        background-color: #F6EFE8;
+        position : relative;
+        width : 900px;
+        left : 50%;
+        margin: 30px 0 0 -450px;
+    }
+    .how_to_img{
+        width:70px;
+        margin:20px;
+    }
+    .how_to_table tbody tr{
+        background-color: #F6EFE8;
+    }
+    
+    .how_to_table tfoot tr{
+        text-align: center;
+        padding-bottom: 12px ;
+        padding-top:12px;
+        background-color: #DDD3C9;
+    }
+    .how_to_table tfoot tr td{
+        padding-bottom: 6px ;
+        padding-top:6px;
+        font-size: .9em;
+    }
+    .how_to_table p {
+      
+        font-weight: bolder;
+        margin-bottom: 3px;
+    }
+    .space{
+        position : relative;
+        width : 100px;
+        height : 500px;
+        background: white;
+    }
+
+ @media screen and (min-width: 768px) and (max-width: 959px) {
+    
+    .my_rate_box{
+        /* background : #DEDEE9; */
+        width : 660px;
+        height : 80px;
+        padding : 20px;
+        margin: 10px 0 30px 0;
+        position : relative;
+        left : 50%;
+        margin-left: -350px;
+    }
+    .rate_explain_box{
+        width : 660px;
+        padding:20px;
+        margin: 30px;
+        background : #F6EFE8	;
+        position : relative;
+        left : 50%;
+        margin-left: -350px;
+    }
+    .rate_explain_box li{
+        font-size: .9em;
+        margin: .3em;
+    }
+    .explain_par{
+        margin-top:10px;
+    }
+    .explain_par ul li{
+        margin-left : 5px;
+        font-size: .8em;
+      
+    }
+    .table_area{
+        margin-top: 80px;
+    }
+    .rate_histoty{
+        width : 700px;
+        position : relative;
+        left : 50%;
+        margin-left: -350px;
+    }
+    .history_table{
+        min-width : 700px;
+        border-collapse: collapse;
+        margin:10px 0;
+        border-radius: 2px 2px 2px 2px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    }
+    .history_table thead tr{
+        background-color: #F0D2CF;
+        color : black;
+        text-align: center;
+        font-weight: bold;
+        font-size: .9em;
+    }
+    .history_table tbody tr{
+        font-size: .8em;
+    }
+    .how_to_table{
+        background-color: #F6EFE8;
+        position : relative;
+        width : 700px;
+        left : 50%;
+        margin-left: -350px;
+    }
+    .how_to_table tbody tr{
+        background-color:  #F6EFE8;
+        font-size: .9em;
+    }
+    .how_to_table tfoot tr td{
+        padding-bottom: 6px ;
+        padding-top:6px;
+        font-size: .8em;
+    }
+    .space{
+        position : relative;
+        width : 100px;
+        height : 500px;
+        background: white;
+    }
+
+ }
+
+    @media screen and (max-width: 767px) {
+
+        .my_rate_box{
+            /* background : #DEDEE9; */
+            width : 310px;
+            height :120px;
+            padding : 20px 20px 40px 0 ;
+            margin : 0 10px 30px 0;
+            position : relative;
+            left : 50%;
+            margin-left: -165px;
+            border-top: 1px solid #B8A795;
+            border-bottom: 1px solid #B8A795;
+            
+        }
+        .my_rate_box p{
+            margin: 3px 0 3px 0 ;
+        }
+        .yellow_letter{
+            color : #CEB172;
+            float: left;
+        }
+        .my_rate_box p{
+            float:left;
+        }
+        .left_fin{
+            clear:both;
+        }
+        .red_letter{
+            color : #BB1D1D;
+            float: left;
+        }
+        .rate_explain_box{
+            width : 310px;
+            height : 330px;
+            padding:10px;
+            margin: 10px 10px 20px 10px;
+            background : #F6EFE8	;
+            position : relative;
+            left : 50%;
+            margin-left: -165px;
+        }
+        .rate_explain_box li{
+            font-size: .9em;
+            /* margin: .3em; */
+            margin: 12px 0 10px 0 ;
+        }
+        .explain_par{
+            margin-top:10px;
+        }
+        .explain_par ul li{
+            margin-left : 5px;
+            font-size: .8em;
+        }
+        .rate_explain_box p{
+            /* margin-top:.2em; */
+            float: left;
+            font-weight: bolder;
+        }
+        .rate_histoty{
+            width : 330px;
+            padding:30px 0 30px 0;
+            position : relative;
+            left : 50%;
+            margin-left: -165px;
+        }
+        .rate_history_title h3{
+            float: left;
+        }
+        .rate_history_title p{
+            padding-top: .5em;
+            font-size: 0.8em;
+            color:grey;
+        }
+        .rate_history_title h3{
+            margin-left: 0.2em;
+            margin-bottom : 0.5em;
+        }
+        .history_table{
+            min-width : 330px;
+            border-collapse: collapse;
+            border-radius: 2px 2px 2px 2px;
+            overflow: hidden;
+            /* box-shadow: 0 0 20px rgba(0,0,0,0.25); */
+        }
+        .history_table thead tr{
+           display:none;
+        }
+        .history_table td{
+            padding:5px 10px;
+        }
+        .history_table tbody tr td[data-title]:before{
+            content:attr(data-title);
+            float: left;
+            font-size: .8em;
+            font-weight: 400;
+            color:#757575;
+        }
+        .history_table tbody tr:first-of-type td:last-of-type{
+            font-weight: bolder;
+            color : rgb(196, 0, 0);
+        }
+        .history_table tbody tr{
+            /* background-color : #F9E7E5; */
+            font-size: .8em;
+            text-align: center;
+        }  
+        .history_table tbody tr td{
+            display : block;
+            font-size: .9em;
+            padding-right: 1em;
+            /* border-bottom: 1px dotted #CDD1DF; */
+        }
+        .history_table tbody tr:first-of-type{
+            border-top: 2px solid#C97D73
+            ;
+        }
+        .history_table tbody tr:nth-of-type(even){
+            background-color : #F9E7E5;
+        }
+        .history_table tbody tr:last-of-type{
+            border-bottom: 2px solid #C97D73
+            ;
+        }
+        .how_to_table{
+            background-color: #F6EFE8;
+            position : relative;
+            width : 330px;
+            left : 50%;
+            margin: 30px 0 0 -165px;
+        }
+        .how_to_img{
+            width:40px;
+            margin:10px;
+        }
+        .how_to_table tbody tr{
+            background-color: #F6EFE8;
+        }
+        .how_to_table tbody tr td{
+           display: block;
+           font-size: .9em;
+           padding : 10px;
+        }
+        .how_to_table tbody tr td:first-of-type{
+            text-align: center;
+        }
+        .how_to_table tfoot tr{
+            text-align: left;
+            padding-bottom: 12px ;
+            padding-top:12px;
+            background-color: #DDD3C9;
+        }
+        .how_to_table tfoot tr td{
+            padding : 10px;
+            font-size: .8em;
+        }
+        .how_to_table p {
+            font-weight: bolder;
+            margin-bottom: 3px;
+        }
+        .space{
+            position : relative;
+            width : 100px;
+            height : 500px;
+            background: white;
+        }
+
+    }

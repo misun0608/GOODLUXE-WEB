@@ -1,0 +1,315 @@
+
+/* 초기화 */
+* {
+    margin:0px; padding:0px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+
+ /* 데스크톱 */	
+    .point_title_div{
+    height : 60px;
+    padding-top: 3em ;
+    }
+    .point_title{
+        text-align: center;
+    }
+    .recent_point_box{
+        width : 902px;
+        height : 230px;
+        position : relative;
+        left:50%;
+        margin-left: -451px;;
+    }
+    .recent_point_title{
+        margin-left: 1em;
+        margin-bottom : 0.5em;
+        font-weight: normal;
+    }
+    .recent_point_half{
+        width : 450px;
+        height : 180px; 
+        margin-right: 1px;
+        margin-top: 10px;
+        float:left;
+        background :#D1DFE8;
+    }
+    .recent_point_half h1{
+        width:50px; 
+        color:red;
+        float:left;
+    }
+
+    .point_detail_title{
+        position: relative;
+        left : 50%;
+        width : 130px;
+        margin-left: -65px;
+        height : 22px;
+        top : 30%;
+        
+    }
+    .point_detail{
+        position: relative;
+        left : 50%;
+        width : 70px;
+        margin-left: -35px;
+        top : 20%;
+    }
+    .recent_point_p{   
+        font-size :1.4em;
+    }
+    .point_chart_center{
+        width: 380px;
+        height : 63px;
+        position : relative;
+        top : 25%;
+        left : 50%;
+        margin-left: -190px;
+
+    }
+    .point_chart_li1{
+        width: 150px;
+        height : 30px;
+        float:left;
+    }
+    .point_chart_li2{
+        width: 230px;
+        height : 30px;
+        float:left;
+    }
+
+    .history_point_box{
+        clear: both;
+        width : 900px;
+        height : 473px;
+        position :relative;
+        left : 50%;
+        margin-left: -450px;
+    }
+    .history_point_title{
+        margin : 50px 0 1em 1em;
+        font-weight: normal;
+    }
+    .content_table{
+        border-collapse: collapse;
+        margin:10px 0;
+        font-size: 0.9em;
+        min-width:900px;
+        border-radius: 2px 2px 2px 2px;
+        overflow: hidden;
+    }
+    .content_table thead tr{
+        background-color: #F0D2CF;
+        color : black;
+        text-align: left;
+        font-weight: bold;
+    }
+    .content_table th, .content_table td{
+        padding:9px 12px;
+    }
+    .content_table thead tr:first-of-type{
+        border-top: 2px solid #C97D73;
+        border-bottom: 1px solid #C97D73;
+    }
+    .content_table tbody tr:last-of-type{
+        border-bottom: 2px solid #C97D73;
+    }
+    
+    .table_page{
+        position: relative;
+        left: 50%;
+        margin-left: -90px;
+    }
+    .table_page .icons{
+        width : 20px;
+        height : 20px;
+    }
+    .page_number{
+        color : black;
+    }
+    .table_page_element{
+        float:left;
+    }
+    .only_mobile{
+        display:none;
+    }
+
+	/* 태블릿 PC */
+ @media screen and (min-width: 768px) and (max-width: 959px) {
+
+    .point_title_div{
+    height : 60px;
+    padding-top: 2em ;
+    }
+    .point_title{
+        text-align: center;
+    }
+    .recent_point_box{
+        width : 700px;
+        height : 230px;
+        position : relative;
+        left:50%;
+        margin-left: -350px;
+    }
+    .recent_point_half{
+        width : 349px;
+        height : 180px; 
+        margin-right: 1px;
+        margin-top: 10px;
+        float:left;
+    }
+    .point_detail{
+        position: relative;
+        left : 50%;
+        width : 70px;
+        margin-left: -35px;
+        top : 20%;
+    }
+    .recent_point_p{   
+        font-size :1.4em;
+    }
+    .point_chart_center{
+        width: 320px;
+        height : 63px;
+        position : relative;
+        top : 25%;
+        left : 50%;
+        margin-left: -160px;
+
+    }
+    .point_chart_li1{
+        width: 145px;
+        height : 30px;
+        float:left;
+    }
+    .point_chart_li2{
+        width: 175px;
+        height : 30px;
+        float:left;
+    }
+
+    .history_point_box{
+        clear: both;
+        width : 700px;
+        height : 473px;
+        position : relative;
+        left : 50%;
+        margin-left: -350px;
+    }
+    .history_point_title{
+        margin : 50px 0 1.5em 1em;
+    }
+    .content_table{
+        border-collapse: collapse;
+        margin:10px 0;
+        font-size: 0.9em;
+        min-width:700px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+    }
+
+ }
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+
+    .point_title_div{
+    height : 60px;
+    padding-top: 2em ;
+    }
+    .point_title{
+        text-align: center;
+    }
+    .recent_point_box{
+        width : 330px;
+        height : 450px;
+        position : relative;
+        left:50%;
+        margin-left: -165px;
+    }
+    .recent_point_title{
+        margin-left: 0.2em;
+        margin-bottom : 0.1em;
+    }
+    .recent_point_half{
+        width : 329px;
+        height : 180px; 
+        margin-right: 1px;
+        margin-top: 10px;
+        float:left;
+    }
+    .point_detail{
+        position: relative;
+        left : 50%;
+        width : 70px;
+        margin-left: -35px;
+        top : 20%;
+    }
+    .recent_point_p{   
+        font-size :1.4em;
+    }
+    .point_chart_center{
+        width: 320px;
+        height : 63px;
+        position : relative;
+        top : 25%;
+        left : 50%;
+        margin-left: -160px;
+
+    }
+    .point_chart_li1{
+        width: 130px;
+        height : 30px;
+        float:left;
+        font-size: .9em;
+        margin-left: 20px;
+    }
+    .point_chart_li2{
+        width: 160px;
+        height : 30px;
+        float:left;
+        font-size: .9em;
+    }
+
+    .history_point_title{
+        margin : 0 0 -1em -1em;
+    }
+    .history_point_box{
+        clear: both;
+        width : 330px;
+        height : 473px;
+        position : relative;
+        left : 50%;
+        margin-left: -165px;
+    }
+    .history_point_title{
+        margin-left: 0.1em;
+        margin-bottom : -0.2em;
+    }
+    .content_table{
+        border-collapse: collapse;
+        margin:10px 0;
+        font-size: 0.9em;
+        min-width:330px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    }
+    .hidecol{
+        display:none;
+    }
+    .only_mobile{
+        display: inline;
+        margin-left: 1em;
+        margin-top: 1em;;
+        float : right;
+        font-size: 0.7em;
+        color : grey;
+        
+    }
+
+
+}

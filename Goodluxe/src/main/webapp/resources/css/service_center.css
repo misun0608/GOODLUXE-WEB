@@ -1,0 +1,475 @@
+/* 초기화 */
+* {margin:0px; padding:0px;}
+ul,ol,li {list-style:none;}
+a {text-decoration:none; outline:0;}
+img {vertical-align:top;}
+
+/* 데스크톱 */
+@media screen and (min-width: 960px) {
+	a { color: #000; }
+
+    .service_center_sm_select {
+        display: none;
+    }
+
+    .select-container {
+        display: none;
+    }
+
+    .service_center_container{
+        width: 1080px;
+        margin: 0 auto;
+        font-size: 13px;
+    }
+
+    .service_center_main{
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+    /*탭 메뉴*/
+    ul.service_center_menu_tabs{
+        text-align: left;
+        margin: 0 auto;
+        overflow: hidden;
+        width: 96.3%;
+
+        /* text-align: center;
+        margin: 0 auto;
+        width: 998px;
+        /* background: #CDD1DF;
+        list-style: none; */
+    }
+
+/* 나중에 지울 것 */
+    ul.service_center_menu_tabs li{
+        text-align: left;
+        /* float: left; */
+        margin: 0 -15px 0 0;
+        display: inline-block;
+        color: #222;
+        cursor: pointer;
+    }
+    ul.service_center_menu_tabs a{
+        text-align: left;
+        margin: 0 -15px 0 0;
+        display: inline-block;
+        color: #222;
+        cursor: pointer;
+    }
+    
+      /* 올렸을때 */
+      .service_center_menu_tabs .service_center_tab-link{
+        float: left;
+        position: relative;
+        padding: 0 35px;
+        height: 0; 
+        line-height: 30px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: black;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid #3D3D3D;
+        border-bottom-color: #b6cbda;
+        opacity: .5;
+        filter: alpha(opacity=30);    
+      }
+      
+      /* 마우스 올렸을 때*/
+  .service_center_menu_tabs .service_center_tab-link:hover{
+    border-bottom-color: rgb(241, 215, 215);
+    color: black;
+    opacity: .5;
+  }
+
+    /* 눌렀을 때 */
+  .service_center_menu_tabs .service_center_tab-link.on {
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+
+    /* 메뉴 선택 되었을 때 */
+
+    ul.service_center_menu_tabs .service_center_tab-link.current{
+        float: left;
+        position: relative;
+        padding: 0 40px;
+        height: 0; 
+        line-height: 30px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid rgb(255, 15, 15);
+        opacity: .4;
+        filter: alpha(opacity=30);    
+    }
+
+    .service_center_menu_tabs #current {
+        border-bottom-color: #3d3d3d;
+        opacity: 1;
+        filter: alpha(opacity=100);
+      }
+
+    .center_tab-line{
+        /*margin-left: 5.5px;
+         left: 10px; */
+        margin: 0 0 0 15.7px;
+        height: 1px;
+        width: 98%;
+        background: #9BA2BB;
+        border: 0px;
+    }
+
+    .service_center_menu_tabs .service_center_tab-link:focus {
+        outline:0;   
+    }
+
+    .center_tab-content{
+        display: none;
+        width: 98%;
+        align-content: right;
+        padding: 8px 0 0 14.9px;
+    }
+
+    .center_tab-content.current{
+        display: inherit; /*탭 선택하면 해당 내용이 탭 아래에 표시(상속)*/
+    }
+
+      .service_center_menu_tabs tabs-link {
+        height: 0; 
+        line-height: 30px;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid #3D3D3D;    
+      }
+
+      .center_search_btn{
+          border: 1px solid darkgray;
+          background-color: #fff;
+          outline: 0;
+      }
+
+    /*FAQ 테이블*/
+    .center_faq_table_mobile{
+        display: none;
+    }
+    
+    .service_center_table{
+        width: 100%;
+        text-align: center;
+        border: 1px solid f7f7f7;
+        border-collapse: collapse; /*테이블 기본 간격 없애기*/
+    }
+    .service_center_top_tr{
+        text-align: center;
+        background-color: #F8F8F8;
+        height: 30px;
+        padding: 10px 0px 10px 0px;
+        border-top: 2px solid rgb(216, 216, 216);
+        border-bottom: 2px solid rgb(216, 216, 216);
+
+    }
+    .service_center_middle_tr{
+        height: 30px;
+        border-top: 1px solid #e1e1e1;
+        border-bottom: 1px solid#e1e1e1;
+    }
+    .center_faq_hidden_content{
+        display: none;
+        background-color: #f2f2f2;
+        text-align: left;
+        margin: 10px 30px 10px 30px;
+        padding: 15px 15px 15px 15px;
+    }
+    .center_faq_hidden_detail{
+        padding: 15px 15px 15px 15px;
+    }
+    .center_faq{
+        cursor:pointer;
+    }
+
+    .center_chat_img{
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 63px;
+        padding-bottom: 30px;
+    }
+
+    .center_chat_content{
+        text-align: center;
+        font-size: 15px;
+        line-height: 23px;
+    }
+    .center_chat_btn{
+        color: white;
+        font-size: 17px;
+        width: 210px;
+        height: 45px;
+        background-color: #8FB0CA;
+        border: 1px solid #8FB0CA;
+        /* border: 1px solid #DFB1AB;*/
+        border-radius: 5px;
+        outline: 0px;
+        margin-top: 18px;
+    }
+    .center_chat_btn:hover{
+        background-color: rgb(170, 200, 223);
+        border: 1px solid rgb(170, 200, 223);
+    }
+
+    /* 매장 위치 테이블 */
+    .center_store_table{
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse;
+    }
+}
+
+
+/* 태블릿 PC */
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    body{
+        font-size: 13px;
+        }
+
+        
+    .sm_select {
+        display: none;
+    }
+
+    .select-content {
+        display: none;
+    }
+
+    .content{
+        width: 1080px;
+        float: center;
+        margin: 0 auto;
+    }
+
+    .container{
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+    /*탭 메뉴*/
+    ul.tabs{
+        text-align: left;
+        margin: 0 auto;
+        overflow: hidden;
+        width: 96%;
+
+        /* text-align: center;
+        margin: 0 auto;
+        width: 998px;
+        /* background: #CDD1DF;
+        list-style: none; */
+    }
+
+    ul.tabs li{
+        text-align: left;
+        /* float: left; */
+        margin: 0 -15px 0 0;
+        display: inline-block;
+        color: #222;
+        cursor: pointer;
+    }
+      /* 올렸을때 */
+
+      .tabs .tab-link{
+        float: left;
+        position: relative;
+        padding: 0 35px;
+        height: 0; 
+        line-height: 30px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid #3D3D3D;
+        border-bottom-color: #777799;
+        opacity: .3;
+        filter: alpha(opacity=30);    
+      }
+      
+  .tabs .tab-link:hover{
+    border-bottom-color: #D1DFE8;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+
+    /* 눌렀을때 */
+  .tabs .tab-link.on {
+    border-bottom-color: #BBCDDA;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    outline: 0;
+  }
+
+    /* 선택 되었을 때 */
+
+    ul.tabs .tab-link.current{
+        float: left;
+        position: relative;
+        padding: 0 40px;
+        height: 0; 
+        line-height: 30px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid red;
+        opacity: .3;
+        filter: alpha(opacity=30);    
+    }
+
+    .tabs #current {
+        border-bottom-color: #3d3d3d;
+        opacity: 1;
+        filter: alpha(opacity=100);
+      }
+
+    /* ul.tabs li{
+        text-align: center;
+        width: 131px;
+        background: #CDD1DF;
+        color: black;
+    }
+
+    ul.tabs a:hover,
+    ul.tabs a:focus {
+        border-bottom-color: #2ac7e1;
+        opacity: 1;
+        filter: alpha(opacity=100);
+} */
+
+    .tab-line{
+        /*margin-left: 5.5px;
+         left: 10px; */
+        margin: 0 0 0 17.5px;
+        height: 1px;
+        width: 98%;
+        background: #9BA2BB;
+        border: 0px;
+    }
+
+    .tab .tab-link:focus {
+        outline:0;   
+    }
+
+    .tab-content{
+        display: none;
+        width: 98%;
+        align-content: right;
+        padding: 15px 0 0 17.5px;
+    }
+
+    .tab-content.current{
+        display: inherit; /*탭 선택하면 해당 메뉴의 내용이 탭 아래에 표시(상속)*/
+    }
+
+      .tabs tabs-link {
+        height: 0; 
+        line-height: 30px;
+        border-right: 30px solid transparent;
+        border-bottom: 30px solid #3D3D3D;    
+      }
+
+    /*FAQ 테이블*/
+    .service_center_table{
+        width: 100%;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse; /*테이블 기본 간격 없애기*/
+    }
+    .service_center_top_tr{
+        text-align: center;
+        background-color: #f9fcfc;
+        height: 30px;
+        padding: 10px 0px 10px 0px;
+        border: 1px solid darkgray;
+    }
+    .service_center_middle_tr{
+        height: 30px;
+        border-top: 1px solid darkgray;
+    }
+    .hidden_content{
+        display: none;
+        background-color: #f9f9f9;
+        text-align: left;
+        margin: 10px 30px 10px 30px;
+    }
+    .hidden_detail{
+        padding: 15px 15px 15px 15px;
+    }
+    .faq{
+        cursor:pointer;
+    }
+
+    /* 매장 위치 테이블 */
+    .store_table{
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse;
+    }
+}
+
+/* 스마트폰 */
+@media screen and (max-width: 767px) {
+    .sm_select {display: block;}
+    .sm_select select {width:100%; height: 45px; margin-top: -30px; background-color: #CDD1DF;}
+
+        .container{
+            width: 700px;
+            margin: 0 auto;
+            display: none;
+        }
+    
+        /*FAQ 테이블*/
+        .service_center_table_mobile{
+            width: 100%;
+            text-align: center;
+            border: 1px solid darkgray;
+            border-collapse: collapse; /*테이블 기본 간격 없애기*/
+        }
+        .service_center_top_tr{
+            text-align: center;
+            background-color: #F2F2F2;
+            height: 30px;
+            padding: 10px 0px 10px 0px;
+            border: 1px solid darkgray;
+        }
+        .service_center_middle_tr{
+            height: 30px;
+            border-top: 1px solid darkgray;
+        }
+        .hidden_content{
+            display: none;
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .hidden_detail{
+            padding: 15px 15px 15px 15px;
+        }
+        .faq{
+            cursor:pointer;
+        }
+
+            /* 매장 위치 테이블 */
+    .store_table{
+        margin: 0 auto;
+        width: 90%;
+        text-align: center;
+        border: 1px solid darkgray;
+        border-collapse: collapse;
+    }
+    .store_tr{
+        border: 1px solid darkgray;
+    }
+   }
