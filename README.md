@@ -3,11 +3,11 @@
 명품중고사이트
 
 ### 사용기술
-- Frontend
+- Frontend<br />
 HTML, JS, CSS, jQuery, AJAX
-- Backend
+- Backend<br />
 Oracle, Mybatis, Java, Spring, JSP, Apache Tomcat
-- APIs
+- APIs<br />
 KakaoPay, kakaomap, naver login, kakao login, chart.js
-- Tools
+- Tools<br />
 EXERD, axure, git, github, sourceTree
