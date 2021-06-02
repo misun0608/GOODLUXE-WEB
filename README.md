@@ -18,20 +18,19 @@
   - MyBatis
   - Oracle(버전확인하기)
   - JSP
-  - Apache Tomcat
 #### `Front-end`
   - HTML
   - JavaScript
   - CSS
   - jQuery
   - Ajax
-#### 'APIs'
+#### `APIs`
   - KakaoPay
   - Kakaomap
   - Naver login
   - Kakao login
   - Chart.js
-#### 'Tools'
+#### `Tools`
   - EXERD
   - Axure
   - Git
