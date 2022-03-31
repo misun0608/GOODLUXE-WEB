@@ -39,9 +39,9 @@
 
 </br>
 
-## 3. DB 구조
+## 3. ERD 설계
 ![](https://lh3.googleusercontent.com/Ey1sbHEN6M4g07mnqcp0dAnAXI1BLJf7xWcJapMTgC78iiF34k24cfVZfbtsgUwufGybtSj8KA610PdB1Roih70U39fCMoTWXwOdCxHzJvCJ-bqpTLO6SYEfKf2snzM5fpuKWXMywxKNlX8A1Lz_U8iVWM4o6K3vvUve_23foxUoXxQImJhlu2DkdDuRLivz2gHS9Rx2sMfELigubXZRguMHhjoegUauqwRcAOeVukhEU2QwORC7D4iGVuzcYYvGUYjWDQz4QaLYXfXde2Ar3VnqLNImCyyZlID3NKW7RTwjhuwBNZdZRerOt3EQnsOGa2vupNxIlnWF7bRnBYG6LhY4JUKg-Gt8vLjfogjC6OJm76zPSGu3Wv9LDHtqMzoCFtbQyEZDO1D7Fq7T9mmvy1_18pzQ-UWRTI3YXEBKpN5om5iw04zuN0rKKayjxvvFq5mFA96faxYJhubfjv__-1NyXK-9YjHp_SspPdcuKLxwWYPGW7SBPlAMY-qBE8JaR45W6HuAwKEupRhcx_5DdCavow3Zos5wD6SrWqWTKrAf_ZnYZACifbxlXzkf6f-_yeX5tVTd4H5l068xE_90Zt_h6GAjvNeTnZhuVjxNM52uwJM-nEbWexrB2rZgZt-tVEB0i_V1rgBCOEKLv-LruCb1hj1FoGZqPWXXsynAqUkoG4bjWSYrMy1Auk7LCRBEKEyIEnfQ6RlgwUxccpF5OtxoB1vqLdIgHTgbttEywsv-U61UK8CMY575-MUNMJbni6Y45m8twkkhP0VX6b065Ay8DUV2qyHihw=w1638-h747-no?authuser=0)
-
+이 프로젝트의 18개의 테이블, 5개의 시퀀스, 2개의 트리거로 이루어져 있습니다.
 
 ## 4. 핵심 기능
 이 서비스의 핵심 기능은 컨텐츠 등록 기능입니다.  
